@@ -1,8 +1,20 @@
 ---
-title: Home
+layout: default
+title: {{ site.name }}
 ---
 
-<!--  the html tag and head tag can be removed -->
-<body>
-  <h1>Hello World!</h1>
-</body>
+
+<div id="home">
+<p>
+Formal verification is an established technology in tech firms such as
+Amazon, Apple, Intel, Microsoft and Nvidia. In recent years, researchers have started asking whether
+this technology could also benefit research mathematicians.
+Here we explore every aspect of doing logic on the computer:
+its foundations, its applications and the issues involved with formalising mathematics.</p>
+  <h1>Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
