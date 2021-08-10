@@ -31,7 +31,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl:      ""
 paginate:     1
 locale:       "en"
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://lawrencecpaulson.github.io/"
 
 
 # About/contact
