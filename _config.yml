@@ -23,7 +23,7 @@ tagline: Logic on the Computer and the Formalisation of Mathematics
 email: lp15@cam.ac.uk
 description: >- # this means to ignore newlines until "baseurl:"
         Formal verification is an established technology in tech firms such as
-        Amazon, Apple, Intel, Microsoft and Nvidia. In recent years, researchers have started asking whether
+        Amazon, Intel, Microsoft and Nvidia. In recent years, researchers have started asking whether
         this technology could also benefit research mathematicians.
         Here we explore every aspect of doing logic on the computer:
         its foundations, its applications and the issues involved with formalising mathematics.
