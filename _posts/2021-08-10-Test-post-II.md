@@ -18,62 +18,46 @@ But you can use inline equations too, with one dollar sign, like this: $ J(x) = 
 
 [prev post]({% post_url 2021-08-09-welcome %})
 
-```{.isabelle}
-lemma disj_wf: "disj_wf r ⟷ (∃T. ∃n::nat. (∀i<n. wf(T i)) ∧ r ⊆ (⋃i<n. T i))"
-proof -
-  have *: "⋀T n. ⟦∀i<n. wf (T i); r ⊆ ⋃ (T ` {..<n})⟧
-           ⟹ (∀i<n. wf (T i ∩ r)) ∧ r = (⋃i<n. T i ∩ r)"
-    by (force simp add: wf_Int1)
-  show ?thesis
-    unfolding disj_wf_def by auto (metis "*")
-qed
-```
 
-{% highlight isabelle %}
-theorem trans_disj_wf_implies_wf:
-  assumes "trans r"
-    and "disj_wf r"
-  shows "wf r"
-proof (simp only: wf_iff_no_infinite_down_chain, rule notI)
-  assume "\<exists>s. \<forall>i. (s (Suc i), s i) \<in> r"
-  then obtain s where sSuc: "\<forall>i. (s (Suc i), s i) \<in> r" ..
-  from \<open>disj_wf r\<close> obtain T and n :: nat where wfT: "\<forall>k<n. wf(T k)" and r: "r = (\<Union>k<n. T k)"
-    by (auto simp add: disj_wf_def)
-  have s_in_T: "\<exists>k. (s j, s i) \<in> T k \<and> k<n" if "i < j" for i j
-  proof -
-    from \<open>i < j\<close> have "(s j, s i) \<in> r"
-    proof (induct rule: less_Suc_induct)
-      case 1
-      then show ?case by (simp add: sSuc)
-    next
-      case 2
-      with \<open>trans r\<close> show ?case
-        unfolding trans_def by blast
-    qed
-    then show ?thesis by (auto simp add: r)
-  qed
-  have "i < j \<Longrightarrow> transition_idx s T {i, j} < n" for i j
-    using s_in_T transition_idx_less by blast
-  then have trless: "i \<noteq> j \<Longrightarrow> transition_idx s T {i, j} < n" for i j
-    by (metis doubleton_eq_iff less_linear)
-  have "\<exists>K k. K \<subseteq> UNIV \<and> infinite K \<and> k < n \<and>
-      (\<forall>i\<in>K. \<forall>j\<in>K. i \<noteq> j \<longrightarrow> transition_idx s T {i, j} = k)"
-    by (rule Ramsey2) (auto intro: trless infinite_UNIV_nat)
-  then obtain K and k where infK: "infinite K" and "k < n"
-    and allk: "\<forall>i\<in>K. \<forall>j\<in>K. i \<noteq> j \<longrightarrow> transition_idx s T {i, j} = k"
-    by auto
-  have "(s (enumerate K (Suc m)), s (enumerate K m)) \<in> T k" for m :: nat
-  proof -
-    let ?j = "enumerate K (Suc m)"
-    let ?i = "enumerate K m"
-    have ij: "?i < ?j" by (simp add: enumerate_step infK)
-    have "?j \<in> K" "?i \<in> K" by (simp_all add: enumerate_in_set infK)
-    with ij have k: "k = transition_idx s T {?i, ?j}" by (simp add: allk)
-    from s_in_T [OF ij] obtain k' where "(s ?j, s ?i) \<in> T k'" "k'<n" by blast
-    then show "(s ?j, s ?i) \<in> T k" by (simp add: k transition_idx_in ij)
-  qed
-  then have "\<not> wf (T k)"
-    unfolding wf_iff_no_infinite_down_chain by iprover
-  with wfT \<open>k < n\<close> show False by blast
-qed
-{% endhighlight %}
+<pre class="source">
+<span class="keyword1"><span class="command">text</span></span> <span class="quoted"><span class="plain_text">‹This is the most basic version in terms of cliques and independent
+  sets, i.e. the version for graphs and 2 colours.
+›</span></span>
+
+<span class="keyword1"><span class="command">definition</span></span> <span class="quoted"><span class="quoted">"<span class="free">clique</span> <span class="free"><span class="bound"><span class="entity">V</span></span></span> <span class="free"><span class="bound"><span class="entity">E</span></span></span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∀</span><span class="bound">v</span><span class="main">∈</span><span class="free"><span class="bound"><span class="entity">V</span></span></span><span class="main">.</span> <span class="main">∀</span><span class="bound">w</span><span class="main">∈</span><span class="free"><span class="bound"><span class="entity">V</span></span></span><span class="main">.</span> <span class="bound">v</span> <span class="main">≠</span> <span class="bound">w</span> <span class="main">⟶</span> <span class="main">{</span><span class="bound">v</span><span class="main">,</span> <span class="bound">w</span><span class="main">}</span> <span class="main">∈</span> <span class="free"><span class="bound"><span class="entity">E</span></span></span><span class="main">)</span>"</span></span>
+<span class="keyword1"><span class="command">definition</span></span> <span class="quoted"><span class="quoted">"<span class="free">indep</span> <span class="free"><span class="bound"><span class="entity">V</span></span></span> <span class="free"><span class="bound"><span class="entity">E</span></span></span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∀</span><span class="bound">v</span><span class="main">∈</span><span class="free"><span class="bound"><span class="entity">V</span></span></span><span class="main">.</span> <span class="main">∀</span><span class="bound">w</span><span class="main">∈</span><span class="free"><span class="bound"><span class="entity">V</span></span></span><span class="main">.</span> <span class="bound">v</span> <span class="main">≠</span> <span class="bound">w</span> <span class="main">⟶</span> <span class="main">{</span><span class="bound">v</span><span class="main">,</span> <span class="bound">w</span><span class="main">}</span> <span class="main">∉</span> <span class="free"><span class="bound"><span class="entity">E</span></span></span><span class="main">)</span>"</span></span>
+
+<span class="keyword1"><span class="command">lemma</span></span> ramsey2<span class="main">:</span>
+  <span class="quoted"><span class="quoted">"<span class="main">∃</span><span class="bound"><span class="bound">r</span></span><span class="main">≥</span><span class="main">1</span><span class="main">.</span> <span class="main">∀</span><span class="main">(</span><span class="bound">V</span><span class="main">::</span><span class="tfree">'a</span> set<span class="main">)</span> <span class="main">(</span><span class="bound">E</span><span class="main">::</span><span class="tfree">'a</span> set set<span class="main">)</span><span class="main">.</span> finite <span class="bound">V</span> <span class="main">∧</span> card <span class="bound">V</span> <span class="main">≥</span> <span class="bound">r</span> <span class="main">⟶</span>
+    <span class="main">(</span><span class="main">∃</span><span class="bound"><span class="bound">R</span></span> <span class="main">⊆</span> <span class="bound">V</span><span class="main">.</span> card <span class="bound">R</span> <span class="main">=</span> <span class="free">m</span> <span class="main">∧</span> clique <span class="bound">R</span> <span class="bound">E</span> <span class="main">∨</span> card <span class="bound">R</span> <span class="main">=</span> <span class="free">n</span> <span class="main">∧</span> indep <span class="bound">R</span> <span class="bound">E</span><span class="main">)</span>"</span></span>
+<span class="keyword1"><span class="command">proof</span></span> <span class="operator">-</span>
+  <span class="keyword3"><span class="command">obtain</span></span> <span class="skolem"><span class="skolem">N</span></span> <span class="keyword2"><span class="keyword">where</span></span> <span class="quoted"><span class="quoted">"<span class="skolem">N</span> <span class="main">≥</span> Suc <span class="main">0</span>"</span></span> <span class="keyword2"><span class="keyword">and</span></span> N<span class="main">:</span> <span class="quoted"><span class="quoted">"partn_lst <span class="main">{..&lt;</span><span class="skolem">N</span><span class="main">}</span> <span class="main">[</span><span class="free">m</span><span class="main">,</span><span class="free">n</span><span class="main">]</span> <span class="numeral">2</span>"</span></span>
+    <span class="keyword1"><span class="command">using</span></span> ramsey2_full nat_le_linear partn_lst_greater_resource <span class="keyword1"><span class="command">by</span></span> <span class="operator">blast</span>
+  <span class="keyword1"><span class="command">have</span></span> <span class="quoted"><span class="quoted">"<span class="main">∃</span><span class="bound"><span class="bound">R</span></span><span class="main">⊆</span><span class="skolem">V</span><span class="main">.</span> card <span class="bound">R</span> <span class="main">=</span> <span class="free">m</span> <span class="main">∧</span> clique <span class="bound">R</span> <span class="skolem">E</span> <span class="main">∨</span> card <span class="bound">R</span> <span class="main">=</span> <span class="free">n</span> <span class="main">∧</span> indep <span class="bound">R</span> <span class="skolem">E</span>"</span></span>
+    <span class="keyword2"><span class="keyword">if</span></span> <span class="quoted"><span class="quoted">"finite <span class="skolem">V</span>"</span></span> <span class="quoted"><span class="quoted">"<span class="skolem">N</span> <span class="main">≤</span> card <span class="skolem">V</span>"</span></span> <span class="keyword2"><span class="keyword">for</span></span> <span class="skolem">V</span> <span class="main">::</span> <span class="quoted"><span class="quoted">"<span class="tfree">'a</span> set"</span></span> <span class="keyword2"><span class="keyword">and</span></span> <span class="skolem">E</span> <span class="main">::</span> <span class="quoted"><span class="quoted">"<span class="tfree">'a</span> set set"</span></span>
+  <span class="keyword1"><span class="command">proof</span></span> <span class="operator">-</span>
+    <span class="keyword1"><span class="command">from</span></span> that
+    <span class="keyword3"><span class="command">obtain</span></span> <span class="skolem"><span class="skolem">v</span></span> <span class="keyword2"><span class="keyword">where</span></span> u<span class="main">:</span> <span class="quoted"><span class="quoted">"inj_on <span class="skolem">v</span> <span class="main">{..&lt;</span><span class="skolem">N</span><span class="main">}</span>"</span></span> <span class="quoted"><span class="quoted">"<span class="skolem">v</span> <span class="main">`</span> <span class="main">{..&lt;</span><span class="skolem">N</span><span class="main">}</span> <span class="main">⊆</span> <span class="skolem">V</span>"</span></span>
+      <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">metis</span> card_le_inj card_lessThan finite_lessThan<span class="main">)</span>
+    <span class="keyword3"><span class="command">define</span></span> <span class="skolem"><span class="skolem">f</span></span> <span class="keyword2"><span class="keyword">where</span></span> <span class="quoted"><span class="quoted">"<span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">e</span><span class="main">.</span> <span class="keyword1">if</span> <span class="skolem">v</span> <span class="main">`</span> <span class="bound">e</span> <span class="main">∈</span> <span class="skolem">E</span> <span class="keyword1">then</span> <span class="main">0</span> <span class="keyword1">else</span> Suc <span class="main">0</span>"</span></span>
+    <span class="keyword1"><span class="command">have</span></span> f<span class="main">:</span> <span class="quoted"><span class="quoted">"<span class="skolem">f</span> <span class="main">∈</span> nsets <span class="main">{..&lt;</span><span class="skolem">N</span><span class="main">}</span> <span class="numeral">2</span> <span class="main">→</span> <span class="main">{..&lt;</span>Suc <span class="main">(</span>Suc <span class="main">0</span><span class="main">)</span><span class="main">}</span>"</span></span>
+      <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main"><span class="main">:</span></span> f_def<span class="main">)</span>
+    <span class="keyword1"><span class="command">then</span></span> <span class="keyword3"><span class="command">obtain</span></span> <span class="skolem"><span class="skolem">i</span></span> <span class="skolem"><span class="skolem">U</span></span> <span class="keyword2"><span class="keyword">where</span></span> i<span class="main">:</span> <span class="quoted"><span class="quoted">"<span class="skolem">i</span> <span class="main">&lt;</span> <span class="numeral">2</span>"</span></span> <span class="keyword2"><span class="keyword">and</span></span> gi<span class="main">:</span> <span class="quoted"><span class="quoted">"<span class="skolem">f</span> <span class="main">`</span> nsets <span class="skolem">U</span> <span class="numeral">2</span> <span class="main">⊆</span> <span class="main">{</span><span class="skolem">i</span><span class="main">}</span>"</span></span>
+      <span class="keyword2"><span class="keyword">and</span></span> U<span class="main">:</span> <span class="quoted"><span class="quoted">"<span class="skolem">U</span> <span class="main">∈</span> nsets <span class="main">{..&lt;</span><span class="skolem">N</span><span class="main">}</span> <span class="main">(</span><span class="main">[</span><span class="free">m</span><span class="main">,</span><span class="free">n</span><span class="main">]</span> <span class="main">!</span> <span class="skolem">i</span><span class="main">)</span>"</span></span>
+      <span class="keyword1"><span class="command">using</span></span> N numeral_2_eq_2 <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main"><span class="main">:</span></span> partn_lst_def<span class="main">)</span>
+    <span class="keyword3"><span class="command">show</span></span> <span class="var"><span class="quoted"><span class="var">?thesis</span></span></span>
+    <span class="keyword1"><span class="command">proof</span></span> <span class="main">(</span><span class="operator">intro</span> exI conjI<span class="main">)</span>
+      <span class="keyword3"><span class="command">show</span></span> <span class="quoted"><span class="quoted">"<span class="skolem">v</span> <span class="main">`</span> <span class="skolem">U</span> <span class="main">⊆</span> <span class="skolem">V</span>"</span></span>
+        <span class="keyword1"><span class="command">using</span></span> U u <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main"><span class="main">:</span></span> image_subset_iff nsets_def<span class="main">)</span>
+      <span class="keyword3"><span class="command">show</span></span> <span class="quoted"><span class="quoted">"card <span class="main">(</span><span class="skolem">v</span> <span class="main">`</span> <span class="skolem">U</span><span class="main">)</span> <span class="main">=</span> <span class="free">m</span> <span class="main">∧</span> clique <span class="main">(</span><span class="skolem">v</span> <span class="main">`</span> <span class="skolem">U</span><span class="main">)</span> <span class="skolem">E</span> <span class="main">∨</span> card <span class="main">(</span><span class="skolem">v</span> <span class="main">`</span> <span class="skolem">U</span><span class="main">)</span> <span class="main">=</span> <span class="free">n</span> <span class="main">∧</span> indep <span class="main">(</span><span class="skolem">v</span> <span class="main">`</span> <span class="skolem">U</span><span class="main">)</span> <span class="skolem">E</span>"</span></span>
+        <span class="keyword1"><span class="command">using</span></span> i <span class="keyword1"><span class="command">unfolding</span></span> numeral_2_eq_2
+          <span class="keyword1"><span class="command">using</span></span> gi U u
+          <span class="keyword1"><span class="command"><span class="improper"><span class="command">apply</span></span></span></span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main"><span class="main">:</span></span> image_subset_iff nsets_2_eq clique_def indep_def less_Suc_eq<span class="main">)</span>
+          <span class="keyword1"><span class="command"><span class="improper"><span class="command">apply</span></span></span></span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main"><span class="main">:</span></span> f_def nsets_def card_image inj_on_subset <span class="quasi_keyword">split</span><span class="main"><span class="main">:</span></span> if_split_asm<span class="main">)</span>
+          <span class="keyword1"><span class="command"><span class="improper"><span class="command">done</span></span></span></span>
+    <span class="keyword1"><span class="command">qed</span></span>
+  <span class="keyword1"><span class="command">qed</span></span>
+  <span class="keyword1"><span class="command">then</span></span> <span class="keyword3"><span class="command">show</span></span> <span class="var"><span class="quoted"><span class="var">?thesis</span></span></span>
+    <span class="keyword1"><span class="command">using</span></span> <span class="quoted"><span class="quoted">‹Suc <span class="main">0</span> <span class="main">≤</span> <span class="skolem">N</span>›</span></span> <span class="keyword1"><span class="command">by</span></span> <span class="operator">auto</span>
+<span class="keyword1"><span class="command">qed</span></span>
+</pre>
