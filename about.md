@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Test about page
+Machine Logic is Lawrence Paulson's blog on Isabelle/HOL and related topics.
 
