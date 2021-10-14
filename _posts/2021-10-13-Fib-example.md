@@ -5,7 +5,7 @@ usemathjax: true
 tags: general, examples, Isabelle
 ---
 
-Let's see what mathematics looks like in Isabelle/HOL.  This post will not be a self-contained tutorial; the idea here is to show a simple recursive definition and a couple of proofs by induction. Some advantages (and drawbacks!) of machine proof should become obvious.
+Let's see what mathematics looks like in Isabelle/HOL.  This post is not a self-contained tutorial; it simply aims to show a simple recursive definition and a couple of proofs by induction. Some good (and bad) points about machine proof should become obvious. There are links to further reading at the end.
 
 So here is the definition of the familiar Fibonacci function:
 
@@ -45,6 +45,6 @@ The next example is different again, a claim that is plausible without an obviou
 <span class="keyword1"><span class="command">qed</span></span> <span class="operator">auto</span>
 </pre>
 
-This undoubtedly cryptic code already tells us what formal proofs can look like. We can see that it an induction and that the third case has been singled out for special treatment. The list of identifiers in the penultimate line are the names of known facts used to prove the induction step. The base cases are proved automatically (`qed auto`). Even the induction step was proved automatically. Isabelle has a subsystem, [sledgehammer](https://isabelle.in.tum.de/dist/doc/sledgehammer.pdf), that can analyse a statement to be proved and actually generate Isabelle proof text to prove it. The penultimate line, which contains the heart of the proof, was given to us for free.
+This undoubtedly cryptic code already tells us what formal proofs can look like. We can see that it's an induction and that the third case has been singled out for special treatment. The list of identifiers in the penultimate line are the names of known facts used to prove the induction step. The base cases are proved automatically (`qed auto`). Even the induction step was proved automatically. Isabelle has a subsystem, [sledgehammer](https://isabelle.in.tum.de/dist/doc/sledgehammer.pdf), that can analyse a statement to be proved and actually generate Isabelle proof text to prove it. The penultimate line, which contains the heart of the proof, was given to us for free. Sledgehammer can be called using a single mouse click.
 
 To run this example yourself, you need to install [Isabelle](https://isabelle.in.tum.de/) (it's easy!) and perhaps read some [introductory documentation](https://isabelle.in.tum.de/dist/Isabelle2021/doc/prog-prove.pdf). The file containing this example can be downloaded [here](https://lawrencecpaulson.github.io/Isabelle-Examples/Fibonacci.thy).
