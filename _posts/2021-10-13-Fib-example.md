@@ -2,7 +2,7 @@
 layout: post
 title:  "Introductory example: Fibonacci numbers"
 usemathjax: true 
-tags: general, examples, Isabelle
+tags: general, examples, Isabelle, Fibonacci
 ---
 
 Let's see what mathematics looks like in Isabelle/HOL.  This post is not a self-contained tutorial; it simply aims to show a simple recursive definition and a couple of proofs by induction. Some good (and bad) points about machine proof should become obvious. There are links to further reading at the end.
@@ -16,16 +16,16 @@ So here is the definition of the familiar Fibonacci function:
   <span class="main">|</span> <span class="quoted"><span class="quoted">"<span class="free">fib</span> <span class="main">(</span>Suc <span class="main">(</span>Suc <span class="free"><span class="bound"><span class="entity">n</span></span></span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> <span class="free">fib</span> <span class="free"><span class="bound"><span class="entity">n</span></span></span> <span class="main">+</span> <span class="free">fib</span> <span class="main">(</span>Suc <span class="free"><span class="bound"><span class="entity">n</span></span></span><span class="main">)</span>"</span></span>
 </pre>
 
-This looks natural enough except for the successor function, `Suc`, which is part of the definition of the natural numbers. Ugly perhaps but easy enough to get used to.
+This looks natural enough except for the successor function, *Suc*, which is part of the definition of the natural numbers. Ugly perhaps but easy enough to get used to.
 
-Facts about `fib` are typically proved by induction, and most of us know to match the induction principle to the form of the recursion: with two base cases (for 0 and 1) and an induction step that has induction hypotheses for each of the two recursive calls. We begin with a trivial example:
+Facts about *fib* are typically proved by induction, and most of us know to match the induction principle to the form of the recursion: with two base cases (for 0 and 1) and an induction step that has induction hypotheses for each of the two recursive calls. We begin with a trivial example:
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> fib_positive<span class="main">:</span> <span class="quoted"><span class="quoted">"fib <span class="main">(</span>Suc <span class="free">n</span><span class="main">)</span> <span class="main">&gt;</span> <span class="main">0</span>"</span></span>
   <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted"><span class="free">n</span></span> <span class="quasi_keyword">rule</span><span class="main"><span class="main">:</span></span> fib.induct<span class="main">)</span> <span class="operator">auto</span>
 </pre>
 
-The proof of `fib_positive` is by induction (a version tailored to `fib` as outlined above) followed by general automation. It's trivial and nobody should want to see more of the proof. But the next example is a distinctly nontrivial identity:
+The proof of `fib_positive` is by induction (a version tailored to *fib* as outlined above) followed by general automation. It's trivial and nobody should want to see more of the proof. But the next example is a distinctly nontrivial identity:
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> fib_add<span class="main">:</span> <span class="quoted"><span class="quoted">"fib <span class="main">(</span><span class="free">n</span> <span class="main">+</span> Suc <span class="free">k</span><span class="main">)</span> <span class="main">=</span> fib <span class="main">(</span>Suc <span class="free">k</span><span class="main">)</span> <span class="main">*</span> fib <span class="main">(</span>Suc <span class="free">n</span><span class="main">)</span> <span class="main">+</span> fib <span class="free">k</span> <span class="main">*</span> fib <span class="free">n</span>"</span></span>
