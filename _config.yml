@@ -38,6 +38,7 @@ author:
 
 # Build settings
 #### theme: jekyll-theme-cayman
+theme: jekyll-theme-hyde
 markdown: kramdown
 plugins:
   - jekyll-feed
