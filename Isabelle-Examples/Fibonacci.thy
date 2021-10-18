@@ -18,7 +18,7 @@ lemma fib_positive: "fib (Suc n) > 0"
 
 subsection \<open>Fib and gcd commute\<close>
 
-lemma fib_add: "fib (n + Suc k) = fib (Suc k) * fib (Suc n) + fib k * fib n"
+lemma fib_add: "fib (Suc (n + k)) = fib (Suc k) * fib (Suc n) + fib k * fib n"
   by (induction n rule: fib.induct) (auto simp: distrib_left)
 
 lemma coprime_fib_Suc: "coprime (fib n) (fib (Suc n))"
@@ -34,9 +34,9 @@ proof (cases m)
   then show ?thesis by simp
 next
   case (Suc k)
-  have "gcd (fib m) (fib (n + m))
+  then have "gcd (fib m) (fib (n + m))
            = gcd (fib k * fib n) (fib (Suc k))"
-    by (metis Suc fib_add gcd.commute gcd_add_mult mult.commute)
+    by (metis add_Suc_right fib_add gcd.commute gcd_add_mult mult.commute)
   also have "\<dots> = gcd (fib n) (fib (Suc k))"
     using coprime_commute coprime_fib_Suc gcd_mult_left_left_cancel by blast
   also have "\<dots> = gcd (fib m) (fib n)"

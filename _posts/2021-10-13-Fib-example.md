@@ -2,7 +2,7 @@
 layout: post
 title:  "Introductory example: Fibonacci numbers"
 usemathjax: true 
-tags: general, examples, Isabelle, Fibonacci
+tags: examples, Isabelle, Fibonacci
 ---
 
 Let's see what mathematics looks like in Isabelle/HOL.  This post is not a self-contained tutorial; it simply aims to show a simple recursive definition and a couple of proofs by induction. Some good (and bad) points about machine proof should become obvious. There are links to further reading at the end.
@@ -28,7 +28,7 @@ Facts about *fib* are typically proved by induction, and most of us know to matc
 The proof of `fib_positive` is by induction (a version tailored to *fib* as outlined above) followed by general automation. It's trivial and nobody should want to see more of the proof. But the next example is a distinctly nontrivial identity:
 
 <pre class="source">
-<span class="keyword1"><span class="command">lemma</span></span> fib_add<span class="main">:</span> <span class="quoted"><span class="quoted">"fib <span class="main">(</span><span class="free">n</span> <span class="main">+</span> Suc <span class="free">k</span><span class="main">)</span> <span class="main">=</span> fib <span class="main">(</span>Suc <span class="free">k</span><span class="main">)</span> <span class="main">*</span> fib <span class="main">(</span>Suc <span class="free">n</span><span class="main">)</span> <span class="main">+</span> fib <span class="free">k</span> <span class="main">*</span> fib <span class="free">n</span>"</span></span>
+<span class="keyword1"><span class="command">lemma</span></span> fib_add<span class="main">:</span> <span class="quoted"><span class="quoted">"fib <span class="main">(</span>Suc <span class="main">(</span><span class="free">n</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> fib <span class="main">(</span>Suc <span class="free">k</span><span class="main">)</span> <span class="main">*</span> fib <span class="main">(</span>Suc <span class="free">n</span><span class="main">)</span> <span class="main">+</span> fib <span class="free">k</span> <span class="main">*</span> fib <span class="free">n</span>"</span></span>
   <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted"><span class="free">n</span></span> <span class="quasi_keyword">rule</span><span class="main"><span class="main">:</span></span> fib.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main"><span class="main">:</span></span> distrib_left<span class="main">)</span>
 </pre>
 

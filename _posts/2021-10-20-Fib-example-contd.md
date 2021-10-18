@@ -2,7 +2,7 @@
 layout: post
 title:  "More on Fibonacci numbers, with equational reasoning"
 usemathjax: true 
-tags: general, examples, Isabelle, Fibonacci, gcd
+tags: examples, Isabelle, Fibonacci, gcd
 ---
 
 The [previous post]({% post_url 2021-10-13-Fib-example %}) introduced a definition of the Fibonacci function along with some simple proofs by induction. We continue our tour with examples of *equational reasoning*.
@@ -19,9 +19,9 @@ The lemma below is proved by cases on whether the natural number *m* equals zero
   <span class="keyword1"><span class="command">then</span></span> <span class="keyword3"><span class="command">show</span></span> <span class="var"><span class="quoted"><span class="var">?thesis</span></span></span> <span class="keyword1"><span class="command">by</span></span> <span class="operator">simp</span>
 <span class="keyword1"><span class="command">next</span></span>
   <span class="keyword3"><span class="command">case</span></span> <span class="main">(</span>Suc <span class="skolem">k</span><span class="main">)</span>
-  <span class="keyword1"><span class="command">have</span></span> <span class="quoted"><span class="quoted">"gcd <span class="main">(</span>fib <span class="free">m</span><span class="main">)</span> <span class="main">(</span>fib <span class="main">(</span><span class="free">n</span> <span class="main">+</span> <span class="free">m</span><span class="main">)</span><span class="main">)</span>
+  <span class="keyword1"><span class="command">then</span></span> <span class="keyword1"><span class="command">have</span></span> <span class="quoted"><span class="quoted">"gcd <span class="main">(</span>fib <span class="free">m</span><span class="main">)</span> <span class="main">(</span>fib <span class="main">(</span><span class="free">n</span> <span class="main">+</span> <span class="free">m</span><span class="main">)</span><span class="main">)</span>
            <span class="main">=</span> gcd <span class="main">(</span>fib <span class="skolem">k</span> <span class="main">*</span> fib <span class="free">n</span><span class="main">)</span> <span class="main">(</span>fib <span class="main">(</span>Suc <span class="skolem">k</span><span class="main">)</span><span class="main">)</span>"</span></span>
-    <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">metis</span> Suc fib_add gcd.commute gcd_add_mult mult.commute<span class="main">)</span>
+    <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">metis</span> add_Suc_right fib_add gcd.commute gcd_add_mult mult.commute<span class="main">)</span>
   <span class="keyword1"><span class="command">also</span></span> <span class="keyword1"><span class="command">have</span></span> <span class="quoted"><span class="quoted">"<span class="main">…</span> <span class="main">=</span> gcd <span class="main">(</span>fib <span class="free">n</span><span class="main">)</span> <span class="main">(</span>fib <span class="main">(</span>Suc <span class="skolem">k</span><span class="main">)</span><span class="main">)</span>"</span></span>
     <span class="keyword1"><span class="command">using</span></span> coprime_commute coprime_fib_Suc gcd_mult_left_left_cancel <span class="keyword1"><span class="command">by</span></span> <span class="operator">blast</span>
   <span class="keyword1"><span class="command">also</span></span> <span class="keyword1"><span class="command">have</span></span> <span class="quoted"><span class="quoted">"<span class="main">…</span> <span class="main">=</span> gcd <span class="main">(</span>fib <span class="free">m</span><span class="main">)</span> <span class="main">(</span>fib <span class="free">n</span><span class="main">)</span>"</span></span>
