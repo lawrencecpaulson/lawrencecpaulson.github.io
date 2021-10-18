@@ -37,10 +37,11 @@ author:
   url:  https://www.cl.cam.ac.uk/~lp15/
 
 # Build settings
-#### theme: jekyll-theme-cayman
+theme: jekyll-theme-cayman
 markdown: kramdown
 plugins:
   - jekyll-feed
+show_excerpts: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
