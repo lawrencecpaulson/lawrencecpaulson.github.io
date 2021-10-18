@@ -7,7 +7,7 @@ tags: examples, Isabelle, Fibonacci
 
 Let's see what mathematics looks like in Isabelle/HOL.  This post is not a self-contained tutorial; it simply aims to show a simple recursive definition and a couple of proofs by induction. Some good (and bad) points about machine proof should become obvious. There are links to further reading at the end.
 
-So here is the definition of the familiar Fibonacci function:
+So here is the definition of the Fibonacci function:
 
 <pre class="source">
 <span class="keyword1"><span class="command">fun</span></span> <span class="entity">fib</span> <span class="main">::</span> <span class="quoted"><span class="quoted">"nat <span class="main">⇒</span> nat"</span></span> <span class="keyword2"><span class="keyword">where</span></span>
@@ -16,7 +16,7 @@ So here is the definition of the familiar Fibonacci function:
   <span class="main">|</span> <span class="quoted"><span class="quoted">"<span class="free">fib</span> <span class="main">(</span>Suc <span class="main">(</span>Suc <span class="free"><span class="bound"><span class="entity">n</span></span></span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> <span class="free">fib</span> <span class="free"><span class="bound"><span class="entity">n</span></span></span> <span class="main">+</span> <span class="free">fib</span> <span class="main">(</span>Suc <span class="free"><span class="bound"><span class="entity">n</span></span></span><span class="main">)</span>"</span></span>
 </pre>
 
-This looks natural enough except for the successor function, *Suc*, which is part of the definition of the natural numbers. Ugly perhaps but easy enough to get used to.
+This looks familiar enough except for the successor function, `Suc`, which is part of the definition of the natural numbers. Ugly perhaps but easy enough to get used to. The successor of $n$ is simply $n+1$.
 
 Facts about *fib* are typically proved by induction, and most of us know to match the induction principle to the form of the recursion: with two base cases (for 0 and 1) and an induction step that has induction hypotheses for each of the two recursive calls. We begin with a trivial example:
 
