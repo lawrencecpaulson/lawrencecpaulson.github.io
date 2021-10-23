@@ -16,6 +16,8 @@ But most working mathematicians never imagine their work to have anything to do 
 > I believe that thinking in terms of *types* and *typed sets* is much more natural than appealing to untyped set theory. . . . In our mathematical culture we have learned to keep things apart. If we have a rational number and a set of points in the Euclidean plane, we cannot even imagine what it means to form the intersection. The idea that both might have been coded in ZF with a coding so crazy that the intersection is *not empty* seems to be ridiculous. If we think of a set of objects, we usually think of collecting things of a certain type, and set- theoretical operations are to be carried out inside that type. Some types might be considered as subtypes of some other types, but in other cases two different types have nothing to do with each other. That does not mean that their intersection is empty, but that it would be insane to even *talk* about the intersection. 
 > [In ["On the roles of types in mathematics"](https://research.tue.nl/en/publications/on-the-roles-of-types-in-mathematics)], 1995.
 
-Formalised mathematics is almost invariably done in the presence of types, but there are huge differences in the nature of those types and even in how logic itself behaves. Ultimately, confidence in an automated formalism can come only with use.
+Formalised mathematics is almost invariably done in the presence of types, but there are huge differences in the nature of those types and even in how logic itself behaves. 
+The relationship between any formalism and "real world mathematics" is inherently impossible to prove: the latter is not precisely defined. The introduction of computers and software can only muddy the waters further. Ultimately, confidence in an automated formalism can come only with use, as we observe what it lets us prove and what it forbids.
+
 
  
