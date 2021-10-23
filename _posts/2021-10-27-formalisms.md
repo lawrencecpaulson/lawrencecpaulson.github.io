@@ -17,7 +17,7 @@ But most working mathematicians never imagine their work to have anything to do 
 > [In ["On the roles of types in mathematics"](https://research.tue.nl/en/publications/on-the-roles-of-types-in-mathematics)], 1995.
 
 Formalised mathematics is almost invariably done in the presence of types, but there are huge differences in the nature of those types and even in how logic itself behaves. 
-The relationship between any formalism and "real world mathematics" is inherently impossible to prove: the latter is not precisely defined. The introduction of computers and software can only muddy the waters further. Ultimately, confidence in an automated formalism can come only with use, as we observe what it lets us prove and what it forbids.
+The relationship between any formalism and "actual mathematics" is inherently impossible to prove: the latter is not precisely defined. The introduction of computers and software can only muddy the waters further. Ultimately, confidence in an automated formalism can come only with use, as we observe what it lets us prove and what it forbids.
 
 
  
