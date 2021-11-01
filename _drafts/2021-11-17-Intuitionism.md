@@ -2,12 +2,13 @@
 layout: post
 title:  "Intuitionism and Constructive Logic"
 usemathjax: true 
-tags: logic, intuitionism, logic
+tags: logic, intuitionism, logic, axiom of choice
 ---
 
 ### Why Intuitionism?
 
-The best introduction to [intuitionism](https://plato-stanford-edu.ezp.lib.cam.ac.uk/entries/logic-intuitionistic/) is through an example.
+The best introduction to [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
+ and [intuitionic logic](https://plato.stanford.edu/entries/logic-intuitionistic/) is through an example.
 
 *Theorem*: There exist irrational numbers $x$ and $y$ such that $x^y$ is rational.
 
@@ -23,7 +24,7 @@ Unfortunately, this proof fails to deliver a specific value for $x$. To an intui
 
 - a proof of $\exists x. B(x)$ consists of a specific witnessing value $a$ paired with proof of $B(a)$. Refuting $\forall x. \neg B(x)$ does not yield such an $a$.
 
-Continuing the above table for [other connectives](https://plato-stanford-edu.ezp.lib.cam.ac.uk/entries/intuitionistic-logic-development/), we have
+Continuing the above table for [other connectives](https://plato.stanford.edu/entries/intuitionistic-logic-development/), we have
 
 - a proof of $A\land B$ consists of a proof of $A$ paired with a proof of $B$
 
@@ -38,32 +39,50 @@ Because of this, proofs of simple properties about computable objects such as in
 
 ### Intuitionistic type theory
 
-Intuitionistic mathematics is clearly linked with computation and this link strengthens once we notice that both $\exists$ and $\land$ involve ordered pairs and $\forall$ and $\to$ involve computable functions.
+Intuitionistic mathematics is clearly linked with computation and this link strengthens once we notice that both $\exists$ and $\land$ involve ordered pairs and $\forall$ and $\to$ involve computable functions. This suggests a system of types where standard structures also govern these collections of proofs: [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType).
 
- $(\exists x:A) B(x)$ and $A\land B$ 
+- The type $(\Sigma x:A) B(x)$ consists of pairs $\langle a,b \rangle$ where $a:A$ and $b:B(a)$, generalising the binary Cartesian product. It represents proofs of both $(\exists x:A) B(x)$ and $A\land B$.
  
- $(\forall x:A) B(x)$ and $A\to B$ 
+- The type $(\Pi x:A) B(x)$ consists of functions $f$ where $f(a):B(a)$ if $a:A$, generalising the function space. It represents proofs of both $(\forall x:A) B(x)$ and $A\to B$.
 
-Martin-Löf type theory; propositions as types
+- The type $A+B$, the binary disjoint sum, represents proofs of disjunctions.
 
-https://plato-stanford-edu.ezp.lib.cam.ac.uk/entries/type-theory-intuitionistic/
+Continuing in this vein yields Martin-Löf [intuitionistic type theory](https://plato.stanford.edu/entries/type-theory-intuitionistic/), which proved highly influential since its first versions appeared during the 1970s. Today, it is realised in the form of [Agda](https://wiki.portal.chalmers.se/agda/pmwiki.php), which is both a programming language and a proof assistant based on this type theory.
+
 
 ### The axiom of choice
 
+As we have seen in a [previous post]({% post_url 2021-11-10-Axiom_of_Choice%}), 
 the [axiom of choice](https://plato.stanford.edu/entries/mathematics-constructive/#AxioChoi)
+can be contentious.
+It was strongly opposed by a number of prominent mathematicians in the early days, but later gained acceptance even among intuitionists. Errett Bishop, who founded and developed the field of constructive analysis, wrote
 
-[constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
+> A choice function exists in constructive mathematics, because a choice is *implied by the very meaning of existence*
 
-AC: “A choice function exists in constructive mathematics, because a choice is implied by the very meaning of existence” (Erret Bishop)
+Michael Dummett, Professor of Logic at Oxford, wrote (continuing with extended examples) that
 
-Actually provable in Martin-Löf type theory 
+> It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.
 
-If $(\forall x:A) (\exists x:B) C(x,y)$ 
+Martin-Löf designed his type theory with the aim that AC should be provable and in his landmark [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448) presented a detailed derivation of it as his only example. Briefly, if $(\forall x:A) (\exists x:B) C(x,y)$ then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$.
 
-then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$ 
+Spoiling the party was [Diaconescu's proof](https://doi.org/10.2307/2039868) in 1975 that in a certain category-theoretic setting, the axiom of choice implied LEM and therefore classical logic.
+His proof is [reproducible](https://plato.stanford.edu/entries/axiom-choice/#AxiChoLog) in the setting of intuitionistic set theory and seems to have driven today's intuitionists to oppose AC.
 
-https://doi-org.ezp.lib.cam.ac.uk/10.1093/comjnl/bxh162
+It's striking that AC was seen not merely as acceptable but clear by the likes of Bishop, Bridges and Dummett. 
+Now it is being rejected and the arguments against it are not uniform. Of course, the alternative is perhaps to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all, but computer scientists. They are not shy at expressing their views.
 
-AC implies LEM!
+Sources for the quotations above:
 
-"Hence from the type theoretic point of view AC is a lie. A lie that implies excluded middle ie all propositions are decidable."
+1. Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
+
+2. Michael Dummett, *Elements of Intuitionism* (Oxford, 1977) 52–54.
+
+
+
+
+
+
+
+
+
+
