@@ -1,9 +1,10 @@
-session "Isabelle-Examples" = "HOL-Computational_Algebra" +
+session "Isabelle-Examples" = "HOL-Analysis" +
   description {* Simple Isabelle examples for Machine Logic.
         Run using "~/Applications/Isabelle2021.app/bin/isabelle build -v -o browser_info -d . Isabelle-Examples" *}
   options [document = pdf, document_output = "output"]
   theories
     "Fibonacci"
+    "CauchySchwarz"
   document_files
     "root.tex"
     "examples.bib"
