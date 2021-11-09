@@ -71,4 +71,16 @@ next
     by (simp add: pos_divide_le_eq True)
 qed
 
+lemma "\<exists>f'. ((\<lambda>x. x^3 + x\<^sup>2) has_real_derivative f' x) (at x) \<and> P (\<lambda>x. f' x)"
+  apply (rule exI conjI derivative_eq_intros | simp)+
+  oops
+
+lemma "x > 0 \<Longrightarrow> \<exists>f'. ((\<lambda>x. (x\<^sup>2 - 1) * ln x) has_real_derivative f' x) (at x) \<and> P (\<lambda>x. f' x)"
+  apply (rule exI conjI derivative_eq_intros | simp)+
+  oops
+
+lemma "\<exists>f'. ((\<lambda>x. (sin x)\<^sup>2 + (cos x)\<^sup>2) has_real_derivative f' x) (at x) \<and> P (\<lambda>x. f' x)"
+  apply (rule exI conjI derivative_eq_intros | simp)+
+  oops
+
 end

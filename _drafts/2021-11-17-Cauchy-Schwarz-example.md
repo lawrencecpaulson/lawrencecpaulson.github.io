@@ -5,8 +5,11 @@ usemathjax: true
 tags: examples, Isabelle, Cauchy-Schwarz inequality
 ---
 
-During discussions with colleagues, this well-known inequality came up, raising the question: is Cauchy-Schwarz available in the Isabelle/HOL libraries? I got a quick answer, thanks to the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/index.php?cat=1). I typed the phrase into the "concept" box and immediately got several close hits. (It helps that the theorem names actually match!)
+The [Cauchy-Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products: $|\langle \mathbf{u},\mathbf{v} \rangle|^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle$. It comes in various forms that any mathematician is expected to recognise. 
 
+### A successful search
+
+During discussions with colleagues, the question came up: is Cauchy-Schwarz available in the Isabelle/HOL libraries? I got a quick answer, thanks to the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/index.php?cat=1). I typed the phrase into the "concept" box and immediately got several close hits. (It helps that the theorem names actually match!)
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> Cauchy_Schwarz_ineq<span class="main">:</span>
@@ -34,6 +37,8 @@ During discussions with colleagues, this well-known inequality came up, raising 
 This version is a close match to the [Wikipedia description](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality). Unfortunately, this abstract version––for the Isabelle type class `real_inner`, real inner product spaces––is not easily related to the concrete version with explicit summations, which is what I wanted. Such special cases look quite different from the abstract version, and even Wikipedia enumerates them separately.
 Googling around for a simple concrete proof took me to [Hölder's inequality](https://en.wikipedia.org/wiki/Hölder%27s_inequality), which follows from [Young's inequality for products](https://en.wikipedia.org/wiki/Young%27s_inequality_for_products), which holds "because the logarithm function is concave", which is a special case of [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality).
 A rabbit hole of inequalities!
+
+### Concave and convex functions
 
 The following diagram ([borrowed from Wikipedia](https://commons.wikimedia.org/wiki/File:ConcaveDef.png)) shows what a concave function looks like.
  
@@ -79,7 +84,7 @@ Let's express these formulas in plain language:
 Proving these subgoals involves discovering the first derivative and then the second and finally proving the second to be nonnegative. One might imagine a lot of work to be necessary, but the magic line
 
 <pre class="source">
-   (</span><span class="operator">rule</span> <span class="dynamic"><span class="dynamic">derivative_eq_intros</span></span> <span class="main"><span class="keyword3">|</span></span> <span class="operator">simp</span><span class="main">)</span><span class="main"><span class="keyword3">+</span></span>
+   (<span class="operator">rule</span> <span class="dynamic"><span class="dynamic">derivative_eq_intros</span></span> <span class="main"><span class="keyword3">|</span></span> <span class="operator">simp</span><span class="main">)</span><span class="main"><span class="keyword3">+</span></span>
 </pre>
 
 is sufficient to calculate *and simplify* the derivative even of many complicated formulas.
@@ -150,6 +155,26 @@ But having got this far, I felt rather lazy (it was a Saturday) and instead of t
 
 That's the great thing about structured proofs: they can easily be modified to prove related results. There may well be a clever way to prove this fact from `Cauchy_Schwarz_ineq` by unfolding the function `inner`, which has multiple definitions (one for each instance of the `real_inner` type class). But sometimes, simplest is best.
 
-*Note*: all of the material above is scheduled for inclusion in the next Isabelle release, planned for December 2021.
+*Note*: all of the material above is scheduled for inclusion in the next Isabelle release, planned for December 2021. It can also be downloaded [here](/Isabelle-Examples/CauchySchwarz).
 
+### Exercises
+
+It's worth practising the derivative trick mentioned above. Here I have introduced the dummy predicate `P` in order that the proof will fail, allowing you to see what derivative was computed. You should be able to guess the derivative of the last example without running it. Note the use of the rules `exI` and `conjI` to strip off the outer connectives.
+
+<pre class="source">
+<span class="keyword1"><span class="command">lemma</span></span> <span class="quoted"><span class="quoted">"<span class="main">∃</span><span class="bound">f'</span><span class="main">.</span> <span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="bound">x</span><span class="main">^</span><span class="numeral">3</span> <span class="main">+</span> <span class="bound">x</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span><span class="main">)</span> <span class="keyword1">has_real_derivative</span> <span class="bound">f'</span> <span class="free">x</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="free">x</span><span class="main">)</span> <span class="main">∧</span> <span class="free">P</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="bound">f'</span> <span class="bound">x</span><span class="main">)</span>"</span></span>
+  <span class="keyword1"><span class="command"><span class="improper"><span class="command">apply</span></span></span></span> <span class="main">(</span><span class="operator">rule</span> exI conjI <span class="dynamic"><span class="dynamic">derivative_eq_intros</span></span> <span class="main"><span class="keyword3">|</span></span> <span class="operator">simp</span><span class="main">)</span><span class="main"><span class="keyword3">+</span></span>
+</pre>
+
+<pre class="source">
+<span class="keyword1"><span class="command">lemma</span></span> <span class="quoted"><span class="quoted">"<span class="free">x</span> <span class="main">&gt;</span> <span class="main">0</span> <span class="main">⟹</span> <span class="main">∃</span><span class="bound">f'</span><span class="main">.</span> <span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span><span class="bound">x</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span> <span class="main">-</span> <span class="main">1</span><span class="main">)</span> <span class="main">*</span> ln <span class="bound">x</span><span class="main">)</span> <span class="keyword1">has_real_derivative</span> <span class="bound">f'</span> <span class="free">x</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="free">x</span><span class="main">)</span> <span class="main">∧</span> <span class="free">P</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="bound">f'</span> <span class="bound">x</span><span class="main">)</span>"</span></span>
+  <span class="keyword1"><span class="command"><span class="improper"><span class="command">apply</span></span></span></span> <span class="main">(</span><span class="operator">rule</span> exI conjI <span class="dynamic"><span class="dynamic">derivative_eq_intros</span></span> <span class="main"><span class="keyword3">|</span></span> <span class="operator">simp</span><span class="main">)</span><span class="main"><span class="keyword3">+</span></span>
+</pre>
+
+<pre class="source">
+<span class="keyword1"><span class="command">lemma</span></span> <span class="quoted"><span class="quoted">"<span class="main">∃</span><span class="bound">f'</span><span class="main">.</span> <span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span>sin <span class="bound">x</span><span class="main">)</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span> <span class="main">+</span> <span class="main">(</span>cos <span class="bound">x</span><span class="main">)</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span><span class="main">)</span> <span class="keyword1">has_real_derivative</span> <span class="bound">f'</span> <span class="free">x</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="free">x</span><span class="main">)</span> <span class="main">∧</span> <span class="free">P</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="bound">f'</span> <span class="bound">x</span><span class="main">)</span>"</span></span>
+  <span class="keyword1"><span class="command"><span class="improper"><span class="command">apply</span></span></span></span> <span class="main">(</span><span class="operator">rule</span> exI conjI <span class="dynamic"><span class="dynamic">derivative_eq_intros</span></span> <span class="main"><span class="keyword3">|</span></span> <span class="operator">simp</span><span class="main">)</span><span class="main"><span class="keyword3">+</span></span>
+</pre>
+
+If you have ever written code in Prolog to calculate symbolic derivatives, you'll understand what's going on here.
 
