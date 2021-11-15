@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "An Experiment: The Cauchy-Schwarz Inequality"
+title:  "An Experiment: The Cauchy–Schwarz Inequality"
 usemathjax: true 
-tags: examples, Isabelle, Cauchy-Schwarz inequality
+tags: examples, Isabelle, Cauchy–Schwarz inequality
 ---
 
-The [Cauchy-Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products: $\mid\,\langle \mathbf{u},\mathbf{v} \rangle\,\mid^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle$. It comes in various forms that any mathematician is expected to recognise. 
+The [Cauchy–Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products. It comes in various forms that any mathematician is expected to recognise. 
 
 ### A successful search
 
-During discussions with colleagues, the question came up: is Cauchy-Schwarz available in the Isabelle/HOL libraries? I got a quick answer, thanks to the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/index.php?cat=1). I typed the phrase into the "concept" box and immediately got several close hits. (It helps that the theorem names actually match!)
+During discussions with colleagues, the question came up: is Cauchy–Schwarz available in the Isabelle/HOL libraries? I got a quick answer, thanks to the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/index.php?cat=1). I typed the phrase into the "concept" box and immediately got several close hits. (It helps that the theorem names actually match!)
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> Cauchy_Schwarz_ineq<span class="main">:</span>
@@ -34,7 +34,11 @@ During discussions with colleagues, the question came up: is Cauchy-Schwarz avai
 <span class="keyword1"><span class="command">qed</span></span>
 </pre>
 
-This version is a close match to the [Wikipedia description](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality). Unfortunately, this abstract version––for the Isabelle type class `real_inner`, real inner product spaces––is not easily related to the concrete version with explicit summations, which is what I wanted. Such special cases look quite different from the abstract version, and even Wikipedia enumerates them separately.
+This version is a close match to the [Wikipedia description](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) and to the abstract formulation, namely
+
+$$ \mid\langle \mathbf{u},\mathbf{v} \rangle\mid^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle. $$
+
+Unfortunately, this abstract version––for the Isabelle type class `real_inner` of real inner product spaces––is not easily related to the concrete version with explicit summations, which is what I wanted. Such special cases look quite different from the abstract version, and even Wikipedia enumerates them separately.
 Googling around for a simple concrete proof took me to [Hölder's inequality](https://en.wikipedia.org/wiki/Hölder%27s_inequality), which follows from [Young's inequality for products](https://en.wikipedia.org/wiki/Young%27s_inequality_for_products), which holds "because the logarithm function is concave", which is a special case of [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality).
 A rabbit hole of inequalities!
 
@@ -62,7 +66,7 @@ Their characteristic inequality follows by simply negating the inequality for co
   <span class="keyword1"><span class="command">by</span></span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main"><span class="main">:</span></span> concave_on_def convex_on_def <span class="dynamic"><span class="dynamic">algebra_simps</span></span><span class="main">)</span>
 </pre>
 
-Recall that Young's inequality requires proving that the logarithm function is concave. The Isabelle proof loois like this:
+Recall that Young's inequality requires proving that the logarithm function is concave (on the positive reals). The Isabelle proof loois like this:
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> ln_concave<span class="main">:</span> <span class="quoted"><span class="quoted">"concave_on <span class="main">{</span><span class="main">0</span><span class="main">&lt;..}</span> ln"</span></span>
@@ -77,9 +81,9 @@ A little magic is happening here. After we unfold the definition of concave, the
 Let's express these formulas in plain language:
 
 1. The set of positive real numbers (written as `{0<..}`) is a convex set. This will be proved automatically thanks to some library theorem about intervals.
-2. The negation of the logarithm ($\lambda x. - \ln x$) has some derivative, written as `?f' x`. The question mark indicates a unifiable variable or unknown, which needs to be replaced by the actual derivative. It can depend upon `x`, which is a positive real.
+2. The negation of the logarithm ($\lambda x. - {\ln x}$) has some derivative, written as `?f' x`. The question mark indicates a unifiable variable or unknown, which needs to be replaced by the actual derivative. It can depend upon `x`, which is a positive real.
 3. The function `?f'` has some derivative, written as `?f'' x`. This is the second derivative.
-4. This second derivative is nonnegative.
+4. This second derivative is nonnegative for all positive reals.
 
 Proving these subgoals involves discovering the first derivative and then the second and finally proving the second to be nonnegative. One might imagine a lot of work to be necessary, but the magic line
 
