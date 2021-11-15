@@ -5,7 +5,7 @@ usemathjax: true
 tags: examples, Isabelle, Cauchy-Schwarz inequality
 ---
 
-The [Cauchy-Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products: $|\langle \mathbf{u},\mathbf{v} \rangle|^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle$. It comes in various forms that any mathematician is expected to recognise. 
+The [Cauchy-Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products: $\mid\,\langle \mathbf{u},\mathbf{v} \rangle\,\mid^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle$. It comes in various forms that any mathematician is expected to recognise. 
 
 ### A successful search
 
