@@ -36,7 +36,7 @@ During discussions with colleagues, the question came up: is Cauchy–Schwarz av
 
 This version is a close match to the [Wikipedia description](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) and to the abstract formulation, namely
 
-$$ \mid\langle \mathbf{u},\mathbf{v} \rangle\mid^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle. $$
+$$ \mid\langle \mathbf{u},\mathbf{v} \rangle{\mid}^2 \le \langle \mathbf{u},\mathbf{u}\rangle \langle \mathbf{v},\mathbf{v}\rangle. $$
 
 Unfortunately, this abstract version––for the Isabelle type class `real_inner` of real inner product spaces––is not easily related to the concrete version with explicit summations, which is what I wanted. Such special cases look quite different from the abstract version, and even Wikipedia enumerates them separately.
 Googling around for a simple concrete proof took me to [Hölder's inequality](https://en.wikipedia.org/wiki/Hölder%27s_inequality), which follows from [Young's inequality for products](https://en.wikipedia.org/wiki/Young%27s_inequality_for_products), which holds "because the logarithm function is concave", which is a special case of [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality).
