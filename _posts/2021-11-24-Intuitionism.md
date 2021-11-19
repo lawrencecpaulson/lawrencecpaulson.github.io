@@ -5,7 +5,7 @@ usemathjax: true
 tags: logic, intuitionism, logic, axiom of choice
 ---
 
-Constructive mathematics, and intuitionism in particular, were for most of the 20th century recondite topics in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic (particularly those using Coq) strive to create constructive (as opposed to classical) proofs.
+Constructive mathematics was for most of the 20th century a recondite topic in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic (particularly those using Coq) strive to create constructive (as opposed to classical) proofs.
 
 ### Why Intuitionism?
 
@@ -61,7 +61,7 @@ It was strongly opposed by a number of prominent mathematicians in the early day
 
 > A choice function exists in constructive mathematics, because a choice is *implied by the very meaning of existence*
 
-Michael Dummett, Professor of Logic at Oxford, wrote (continuing with extended examples) that
+Michael Dummett, Professor of Logic at Oxford, wrote (continuing for pages with extended examples) that
 
 > It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.
 
@@ -71,7 +71,12 @@ Spoiling the party was [Diaconescu's proof](https://doi.org/10.2307/2039868) in 
 His proof is [reproducible](https://plato.stanford.edu/entries/axiom-choice/#AxiChoLog) in the setting of intuitionistic set theory and seems to have driven today's intuitionists to oppose AC.
 
 It's striking that AC was seen not merely as acceptable but clear by the likes of Bishop, Bridges and Dummett. 
-Now it is being rejected and the arguments against it are not uniform. Of course, the alternative is perhaps to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all, but computer scientists. They are not shy at expressing their views.
+Now it is being rejected and the various arguments against it have the look of post-hoc rationalisations. Of course, the alternative would be to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all, but computer scientists. They are not shy about declaring that the entire world of mathematics is a house of cards. 
+
+Fermat's last theorem is an interesting point for discussion. It has been proved: a giant proof using sophisticated methods, classical reasoning throughout. If a constructive mathematician rejects this proof (and they do), then they believe it is possible that a counterexample might exist. Such a counterexample would simply consist of 
+positive integers $a$, $b$, $c$ and $n>2$ such that $a^n+b^n = c^n$. Then a finite calculation would yield an outright contradiction to classical mathematics. 
+
+I think they will be waiting a long time.
 
 Sources for the quotations above:
 
