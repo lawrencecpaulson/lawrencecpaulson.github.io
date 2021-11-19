@@ -5,6 +5,8 @@ usemathjax: true
 tags: logic, intuitionism, logic, axiom of choice
 ---
 
+Constructive mathematics, and intuitionism in particular, were for most of the 20th century recondite topics in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic (particularly those using Coq) strive to create constructive (as opposed to classical) proofs.
+
 ### Why Intuitionism?
 
 The best introduction to [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
