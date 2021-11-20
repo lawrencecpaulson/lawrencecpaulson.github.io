@@ -44,8 +44,10 @@ plugins:
 show_excerpts: true
 html:
   comments:
+    provider: "utterances"
     utterances:
-      repo: "lawrencecpaulson.github.io"
+      repo: "lawrencecpaulson/lawrencecpaulson.github.io"
+repository: "lawrencecpaulson/lawrencecpaulson.github.io"
       
 # Exclude from processing.
 # The following items will not be processed, by default.
