@@ -83,7 +83,7 @@ I think they will be waiting a long time.
 
 1. Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
 
-2. Michael Dummett, *Elements of Intuitionism* (Oxford, 1977) 52–54.
+2. Michael Dummett, *Elements of Intuitionism* (Oxford, 1977), 52–54.
 
 
 
