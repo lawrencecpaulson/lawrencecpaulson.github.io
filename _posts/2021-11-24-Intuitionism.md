@@ -5,7 +5,7 @@ usemathjax: true
 tags: logic, intuitionism, logic, axiom of choice
 ---
 
-Constructive mathematics was for most of the 20th century a recondite topic in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic (particularly those using Coq) strive to create constructive (as opposed to classical) proofs.
+Intuitionism was for most of the 20th century a recondite topic in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic (particularly those using [Coq](https://coq.inria.fr)) strive to create constructive (as opposed to classical) proofs.
 
 ### Why Intuitionism?
 
@@ -24,7 +24,7 @@ Unfortunately, this proof fails to deliver a specific value for $x$. To an intui
 
 - a proof of $A\lor B$ consists of a proof of $A$ or a proof of $B$ along with an indication of which. So in particular it rejects the *law of the excluded middle* (LEM), which claims $A\lor \neg A$ while providing no proof.
 
-- a proof of $\exists x. B(x)$ consists of a specific witnessing value $a$ paired with proof of $B(a)$. Refuting $\forall x. \neg B(x)$ does not yield such an $a$.
+- a proof of $\exists x. B(x)$ consists of a specific witnessing value $a$ paired with proof of $B(a)$. The formula $\neg (\forall x. \neg B(x))$ is not equivalent: refuting $\forall x. \neg B(x)$ does not yield such an $a$.
 
 Continuing the above table for [other connectives](https://plato.stanford.edu/entries/intuitionistic-logic-development/), we have
 
@@ -34,10 +34,11 @@ Continuing the above table for [other connectives](https://plato.stanford.edu/en
 
 - a proof of $\forall x. B(x) $ consists of a construction that transforms every element $x$ into a proof of $B(a)$
 
-The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), while the interpretation of logical connectives sketched above is largely the work of Arend Heyting. Brouwer accepted LEM for finite constructions, e.g. $n$ is prime even for $n$ inconceivably large, because the decision can be calculated in principle. On the other hand, there is no effective test that our real number $z$ is rational. 
+The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), while the interpretation of logical connectives sketched above is largely the work of Arend Heyting. Brouwer accepted LEM for finite constructions, e.g. $n$ is prime or $n$ is not prime even for $n$ inconceivably large, because the decision can be calculated *in principle*, even if it's utterly unfeasible. On the other hand, there is no effective test of whether the real number $z$ above is rational. 
+
 The rejection of LEM implies the rejection of many other familiar laws of Boolean logic, such as $\neg \neg A \to A$ and $\neg(A\land B) \to \neg A \lor \neg B$.
 But for computable properties, LEM continues to hold along with those other Boolean laws.
-Because of this, proofs of simple properties about computable objects such as integers and lists are not impacted by intuitionism.
+Because of this, proofs of simple properties about computable objects such as integers and lists are not impacted by intuitionism. Coq users will be fully aware that type `bool`, which is the type of booleans, enjoys the LEM and must not be confused with the type `prop` of propositions.
 
 ### Intuitionistic type theory
 
@@ -71,14 +72,14 @@ Spoiling the party was [Diaconescu's proof](https://doi.org/10.2307/2039868) in 
 His proof is [reproducible](https://plato.stanford.edu/entries/axiom-choice/#AxiChoLog) in the setting of intuitionistic set theory and seems to have driven today's intuitionists to oppose AC.
 
 It's striking that AC was seen not merely as acceptable but clear by the likes of Bishop, Bridges and Dummett. 
-Now it is being rejected and the various arguments against it have the look of post-hoc rationalisations. Of course, the alternative would be to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all, but computer scientists. They are not shy about declaring that the entire world of mathematics is a house of cards. 
+Now it is being rejected and the various arguments against it have the look of post-hoc rationalisations. Of course, the alternative would be to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all. They are computer scientists. They are not shy about declaring that the entire world of mathematics is a house of cards. 
 
-Fermat's last theorem is an interesting point for discussion. It has been proved: a giant proof using sophisticated methods, classical reasoning throughout. If a constructive mathematician rejects this proof (and they do), then they believe it is possible that a counterexample might exist. Such a counterexample would simply consist of 
+Fermat's last theorem is an interesting point for discussion. It has a giant proof using sophisticated methods, classical reasoning throughout. If a constructive mathematician rejects this proof (and they do), then they believe it is possible that a counterexample might exist. Such a counterexample would simply consist of 
 positive integers $a$, $b$, $c$ and $n>2$ such that $a^n+b^n = c^n$. Then a finite calculation would yield an outright contradiction to classical mathematics. 
 
 I think they will be waiting a long time.
 
-Sources for the quotations above:
+### Sources for the quotations above
 
 1. Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
 
