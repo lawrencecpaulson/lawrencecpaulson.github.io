@@ -34,7 +34,7 @@ Continuing the above table for [other connectives](https://plato.stanford.edu/en
 
 - a proof of $\forall x. B(x) $ consists of a construction that transforms every element $x$ into a proof of $B(a)$
 
-The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), while the interpretation of logical connectives sketched above is largely the work of Arend Heyting. Brouwer accepted LEM for finite constructions, e.g. $n$ is prime or $n$ is not prime even for $n$ inconceivably large, because the decision can be calculated *in principle*, even if it's utterly unfeasible. On the other hand, there is no effective test of whether the real number $z$ above is rational. 
+The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), while the interpretation of logical connectives sketched above is largely the work of Arend Heyting. Brouwer accepted LEM for finite constructions, e.g. $n$ is prime or $n$ is not prime even for $n$ inconceivably large, because the decision can be calculated *in principle*, even if it's utterly unfeasible. On the other hand, there is no effective test of whether a given real number (like $z$ above) is rational. 
 
 The rejection of LEM implies the rejection of many other familiar laws of Boolean logic, such as $\neg \neg A \to A$ and $\neg(A\land B) \to \neg A \lor \neg B$.
 But for computable properties, LEM continues to hold along with those other Boolean laws.
