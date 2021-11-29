@@ -66,7 +66,7 @@ Michael Dummett, Professor of Logic at Oxford, wrote (continuing for pages with 
 
 > It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.
 
-Martin-Löf designed his type theory with the aim that AC should be provable and in his landmark [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448) presented a detailed derivation of it as his only example. Briefly, if $(\forall x:A) (\exists x:B) C(x,y)$ then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$.
+Martin-Löf designed his type theory with the aim that AC should be provable and in his landmark [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448) presented a detailed derivation of it as his only example. Briefly, if $(\forall x:A) (\exists y:B) C(x,y)$ then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$.
 
 Spoiling the party was [Diaconescu's proof](https://doi.org/10.2307/2039868) in 1975 that in a certain category-theoretic setting, the axiom of choice implied LEM and therefore classical logic.
 His proof is [reproducible](https://plato.stanford.edu/entries/axiom-choice/#AxiChoLog) in the setting of intuitionistic set theory and seems to have driven today's intuitionists to oppose AC.
