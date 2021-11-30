@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "An Experiment: The Cauchy–Schwarz Inequality"
+title:  "An Experiment: The Cauchy–Schwarz inequality"
 usemathjax: true 
 tags: examples, Isabelle, Cauchy–Schwarz inequality
 ---

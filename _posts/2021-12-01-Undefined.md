@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Undefined Values, or What Do We Get When We Divide by Zero?"
+title:  "Undefined values, or what do we get when we divide by zero?"
 usemathjax: true 
 tags: logic, descriptions
 ---

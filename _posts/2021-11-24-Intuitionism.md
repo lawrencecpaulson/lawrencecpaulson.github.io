@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Intuitionism and Constructive Logic"
+title:  "Intuitionism and constructive logic"
 usemathjax: true 
 tags: logic, intuitionism, logic, axiom of choice
 ---
