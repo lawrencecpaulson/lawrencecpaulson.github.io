@@ -5,6 +5,7 @@ session "Isabelle-Examples" = "HOL-Analysis" +
   theories
     "Fibonacci"
     "CauchySchwarz"
+    "Calculus"
   document_files
     "root.tex"
     "examples.bib"
