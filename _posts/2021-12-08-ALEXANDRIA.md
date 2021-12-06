@@ -19,7 +19,8 @@ Let's just say that this list of doubtful outcomes doesn't inspire confidence. H
  [A Replication Crisis in Mathematics?](https://doi.org/10.1007/s00283-020-10037-7), that has recently been published in the *Mathematical Intelligencer*. (Full disclosure: Anthony works for ALEXANDRIA.)
  
 By no means all mathematicians share these concerns. One remarkable thing I've noticed: the theorem statement tends to be correct (with the possible exception of degenerate cases) even when the proof is a mess.
-Mathematicians seem to have a deep understanding of the phenomena they work with, even if they don't always express their arguments accurately. (For now I will forego detailing my own struggles with careless proofs, while declaring publicly that [Jean Larson](https://people.clas.ufl.edu/jal/) is not guilty of this.)
+Mathematicians seem to have a deep understanding of the phenomena they work with, even if they don't always express their arguments accurately. 
+(For now I will forgo detailing my own struggles with careless proofs, while declaring publicly that [Jean Larson](https://people.clas.ufl.edu/jal/) is not guilty of this.)
  
 ### A brief history of formalised mathematics
 
