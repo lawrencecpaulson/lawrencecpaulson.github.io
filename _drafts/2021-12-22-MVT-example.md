@@ -5,17 +5,17 @@ usemathjax: true
 tags: examples, Isabelle, mean value theorem
 ---
 
-Doing mathematics requires a combination of intuition and rigour. Intuition is the source of ideas and conjectures. Proofs need to be rigorous, while at the same time avoiding excessive detail that would destroy readability. That is why we typically need intuition even to read a proof, let alone to conceive the theorem in the first place. How can we mechanise this awkward combination?
+Doing mathematics requires a combination of intuition and rigour. Intuition is the source of ideas and conjectures. Proofs need to be rigorous, while at the same time avoiding excessive detail, which would destroy readability. That is why we need intuition even to read a proof, let alone to conceive the theorem in the first place. How can we capture intuition in a formal proof?
 
 ### The mean value theorem
 
-Our example, the mean value theorem, is an elementary fact about the differential calculus:
+Our example, the *mean value theorem*, is an elementary fact about the differential calculus:
 
 * If $\phi(x)$ is continuous in the closed interval $[a,b]$, and differentiable in the open interval, then there is a value $\xi$ of $x$ between $a$ and $b$, such that $\phi(b)-\phi(a) = (b-a)\phi'(\xi)$.
 
-GH Hardy, in his legendary *Pure Mathematics* (cup, 1952), begins as follows (p. 242):
+GH Hardy, in his legendary *Pure Mathematics* (CUP, 1952), begins as follows (p. 242):
 
-> Before we give a strict proof of this theorem, which is one of the most important theorems in the differential calculus, it will be well to point out its obvious geometrical meaning. This is simply that, if the curve $APB$ has a tangent at all points of its length, then there must be a point, such as $P$, where the tangent is parallel to $AB$. For $\phi'(\xi)$ is the tangent of the angle which the tangent at $P$ makes with $OX$, and $(\phi(b) — \phi(a))/(b — a)$ the tangent of the angle which $AB$ makes with $OX$.
+> Before we give a strict proof of this theorem, which is one of the most important theorems in the differential calculus, it will be well to point out its obvious geometrical meaning. This is simply that, if the curve $APB$ has a tangent at all points of its length, then there must be a point, such as $P$, where the tangent is parallel to $AB$. For $\phi'(\xi)$ is the tangent of the angle which the tangent at $P$ makes with $OX$, and $(\phi(b) - \phi(a))/(b - a)$ the tangent of the angle which $AB$ makes with $OX$.
 
 Here is Hardy's accompanying diagram:
 
@@ -33,14 +33,14 @@ Hardy continues:
 
 > which proves the theorem.
 
-Our Isabelle/HOL proof is slightly different, defining a function `f` that does not actually vanish (no need for that) and its derivative has the opposite sign. Nevertheless, the formal proof contains essentially the same application of Rolle's theorem.
+The proof in the Isabelle/HOL library is slightly different, defining a function `f` that does not actually vanish (no need for that) and its derivative has the opposite sign. Nevertheless, the formal proof contains essentially the same application of Rolle's theorem.
 
 ### The MVT formalised in Isabelle/HOL
 
 
 The Isabelle proof rewards closer inspection. The theorem's assumptions
 include $a<b$ and the continuity and differentiability conditions on $\phi$. If you recall the earlier post on [undefined values]({% post_url 2021-12-01-Undefined %}), you'll understand why differentiability is expressed by a relation that actually names the derivative as $\phi'$. 
-The conclusion of the theorem asserts that we "obtain" some $\xi$ satisfying the required properties.
+The conclusion of the theorem asserts that we "obtain" some $\xi$ satisfying the required properties. The **obtains** keyword is one way to express an existential conclusion.
 
 <pre class="source"><span class="keyword1"></span><span class="keyword1"><span class="command"><span class="entity_def" id="offset_47..54">theorem</span></span></span><span> </span><span class="entity_def" id="Calculus.mvt|fact"><span class="entity_def" id="Calculus.mvt|thm"><span>mvt</span></span></span><span class="main"><span>:</span></span><span>
   </span><span class="keyword2"><span class="keyword"><span>fixes</span></span></span><span> </span><span class="free"><span>φ</span></span><span> </span><span class="main"><span>::</span></span><span> </span><span class="quoted"><span class="quoted"><span>"</span><span>real</span><span> </span><span class="main"><span>⇒</span></span><span> </span><span>real</span><span>"</span></span></span><span>
@@ -74,9 +74,6 @@ Looking closer at the proof justifications, we see multiple uses of the `intro` 
 
 ### Postscript
 
-GH Hardy's *Pure Mathematics* is a legendary textbook aimed at first-year mathematics undergraduates. It covers analysis up to "the general theory of the logarithmic, exponential, and circular functions". Hardy's Preface states "I regard the book as being really elementary."
+GH Hardy's textbook *Pure Mathematics* is aimed at first-year mathematics undergraduates. It covers analysis up to "the general theory of the logarithmic, exponential, and circular functions". Hardy's Preface states "I regard the book as being really elementary." First published in 1908, it has gone through ten editions and is still in print.
 
-First published in 1908, it has gone through ten editions and is still in print.
-
-
-The file containing this example can be downloaded [here](/Isabelle-Examples/MVT.thy).
+The file containing the MVT example is available to [download](/Isabelle-Examples/MVT.thy).
