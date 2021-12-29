@@ -1,0 +1,5 @@
+The point is that I have been trying to reconcile Zhao's definition of a regular pair in his notes (both versions of them) and his uses of those definitions, especially with the ambiguity about whether the subset relation is strict or not. Either you get a problem with the energy boost lemma (empty set in a partition) or with the triangle counting lemma (right at the beginning, you "obtain a pair of subsets witnessing the irregularity of (X,Y)" and one of these so-called subsets is Y itself). These issues are not subtle and trying to reconcile them has taken more time than the proofs themselves. 
+
+It seems to me that there is a difference in mentality between mathematics and computer science. In the former, you have good intuitions about what you are dealing with and if something doesn't exactly fit, you're prepared to squeeze it through somehow, where in computer science, if it's not exactly right, it's just wrong.
+
+For our development, the right approach was to use non-strict subsets for regular pairs. That required altering the statement of the energy boost lemma to remove the empty set from the partitions shown there.
