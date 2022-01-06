@@ -21,7 +21,7 @@ So here is a proper mathematical example, from a proof of Roth's theorem on arit
 
 ![tripartite graph](/images/tripartite graph.png)
 
-When a claim is really trivial, it can be difficult to come up with an explanation: how low do we have to go? Here we could reason as follows: look at one edge of the given triangle, which we can assume WLOG connects $X$ with $Y$. ([Without loss of generality](http://doi.org/10.1007/978-3-642-03359-9_3) is a problem for theorem provers, and although our graph is undirected, in a syntactic sense there are still six cases.) Because there are no edges within any of the vertex sets, the next edge must connect to either $X$ or $Z$, and if the former, we would be unable to find a third edge for our triangle. BFD. (BFD is Caltech slang for ending a trivial proof. *Hint*: The B stands for "big".)
+When a claim is really trivial, it can be difficult to come up with an explanation: how low do we have to go? Here we could reason as follows: look at one edge of the given triangle, which we can assume WLOG connects $X$ with $Y$. ([Without loss of generality](http://doi.org/10.1007/978-3-642-03359-9_3) is a problem for theorem provers, and although our graph is undirected, in a syntactic sense there are still six cases.) Because there are no edges within any of the vertex sets, the next edge must connect to either $X$ or $Z$, and if the former, we would be unable to find a third edge for our triangle. [BFD](https://www.urbandictionary.com/define.php?term=BFD). (BFD is preferred to QED when the proof is trivial.)
 
 The argument above is easy to supply to Isabelle/HOL, but it generates hundreds of cases. All of them are trivial enough to prove automatically, but the runtime is intolerable. A certain amount of creativity and perhaps programming skill is required simply to prove (efficiently!) that every triangle consists of a vertex from each of $X$, $Y$ and $Z$ in that order. And that tiresome work comes before we reach any of the serious reasoning in the proof. Ironically, sometimes the difficult calculations elaborately laid out by the author can be proved with less effort than the trivial claims.
 
@@ -91,4 +91,4 @@ The Isabelle/HOL proof is more than 100 lines long.
 
 The Isabelle/HOL proof is nearly 200 lines long.
 
-Each of these claims has a one-sentence proof, but their formal proofs are long and complicated, the work of several people. So either the proofs are trivial and proof assistants have a long way to go, or perhaps, Apostol simply could not be bothered to prove his claims. I am not qualified to judge. What do *you* think?
+Each of these claims has a one-sentence proof, but their formal proofs are long and complicated, the work of several highly talented people. So either the proofs are trivial and proof assistants have a long way to go, or perhaps, Apostol simply could not be bothered to prove his claims. I am not qualified to judge. What do *you* think?
