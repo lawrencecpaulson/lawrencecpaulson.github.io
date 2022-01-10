@@ -20,7 +20,7 @@ A key definition in extremal graph theory is that of an
 
 Here $\mathrm{d}(X,Y)$ is a measure of the density of the edges between the vertex sets $X$ and $Y$ and the definition is from the [lecture notes](https://yufeizhao.com/gtac/gtac.pdf)
 for Yufei Zhao's course "[Graph Theory and Additive Combinatorics](https://yufeizhao.com/gtac/)".
-(Tim Gowers uses the [same definition](https://www.dpmms.cam.ac.uk/~par31/notes/tic.pdf).)
+(Fields Medallist Tim Gowers, a leading expert on Szemerédi's regularity lemma, uses the same definition; see §3 of [his notes](https://www.dpmms.cam.ac.uk/~par31/notes/tic.pdf).)
 At issue is the use of the strict subset, as in $A \subset X$.
 
 It needs to be strict because we are dealing with partitions of the vertex set, and they will be created (in the *energy boost lemma*) from partitions of the form $\\{A,\, X\setminus A\\}$. By convention, the empty set does not belong to a partition, hence  $A \subset X$ is necessary. That's on page 51 of Zhao's notes. But a mere three pages later we reach the *triangle counting lemma* and at the start of the proof "obtain a pair of subsets witnessing the irregularity of $(X,Y)$" and one of these so-called subsets is $Y$ itself. Not a strict subset. These issues are not subtle and trying to reconcile them seemed to take as much time as the proofs themselves. 
@@ -28,19 +28,19 @@ It needs to be strict because we are dealing with partitions of the vertex set, 
 It didn't help that I was wholly unfamiliar with graph theory.
 I blame Caltech's Herbert Ryser, who hinted (ever so discreetly) that it was, well, vulgar.
 
-### Solutions
+### Solution attempts
 
 I was pleased to be able to prove that an $\epsilon$-regular pair (as defined above) implies its conclusion for all $A \subseteq X$, $B \subseteq Y$ (non-strict subsets) subject to the clearly necessary but trivial condition that $X$ and $Y$ have at least two elements.
 That shouldn't be a problem because we are working with huge graphs, right? Wrong: the vertex set gets partitioned into a huge number (an exponential tower) of parts.
 There's no guarantee that each part contains at least two elements. Nor could we complete the triangle counting lemma by finding another proof for the degenerate cases.
 
-The only way to complete the formalisation seemed to require using non-strict subsets in the definition of $\epsilon$-regular pairs. But then the energy boost lemma had to be changed to not always return a two-element partition, with corresponding changes to the construction of the overall partition in the main lemma (Lemma 3.11 in Zhao). Those changes were not hard; the difficulty lay in realising that they were necessary.
+The only way to complete the formalisation seemed to require using non-strict subsets in the definition of $\epsilon$-regular pairs. But then the energy boost lemma had to be changed to not always return a two-element partition, with corresponding changes throughout the construction and use of the overall partition in the main lemma (Lemma 3.11 in Zhao). Those changes were not hard; the difficulty lay in realising that they were necessary.
 
-### Attitudes
+### A matter of attitude
 
 It seems to me that there is a difference in mentality between mathematics and computer science. In the former, you have good intuitions about what you are dealing with, what must be done and what issues are safe to ignore. In computer science, it's not enough to adopt all the appropriate techniques; you have to get every detail right. If the solution is not exactly right, it's wrong. That rocket will explode. 
 
-This difference in the attitude to detail is a real issue in formalisation: if you can't rely on the supplied definitions, you are in big trouble.
+This difference in the attitude to detail is a real issue in formalisation: if you can't rely on the supplied definitions *exactly* as they appear, you will find yourself hacking your way through a jungle of possible alternatives.
 Formalisation forces mathematicians to behave more like computer scientists.
 
 Chelsea, Angeliki and I discussed these matters with mathematicians familiar with the material. One of their responses really sticks in my mind: that in combinatorics, people don't generally bother to distinguish between strict and non-struct subsets, so $A \subset X$ can mean either. Are you kidding me? 
