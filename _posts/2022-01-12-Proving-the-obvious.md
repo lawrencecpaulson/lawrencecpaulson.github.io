@@ -27,11 +27,11 @@ The argument above is easy to supply to Isabelle/HOL, but it generates hundreds 
 
 ### A trivial fact about derivatives
 
-The following example came up while finalising a bit of analytic number theory. Suppose that the function $f$ is differentiable at $z$ and that $\sigma_n$ is a series of nonzero reals with ￼$\sigma_n\to 0$. Then we have
+The following example came up while formalising a bit of analytic number theory. Suppose that the function $f$ is differentiable at $z$ and that $\sigma_n$ is a series of nonzero reals converging to 0. Then we have
 
 $$ f'(z) = \lim_{\sigma_n\to0} \frac{f(z+\sigma_n) - f(z)}{\sigma_n}. $$
 
-I still wonder why this needs to be proved. It looks exactly like the definition of the derivative, and certainly the text gave no hint that a proof was required. But a full $\epsilon$-$\delta$ argument is called for.
+I still wonder why this needs to be proved. It closely resembles the definition of the derivative, and certainly the text gave no hint that a proof was required. But a full $\epsilon$-$\delta$ argument is called for.
 
 <pre class="source">
 <span class="keyword1"><span class="command"><span>lemma</span></span></span><span> </span><span class="entity_def"><span class="entity_def"><span>field_derivative_lim_unique</span></span></span><span class="main"><span>:</span></span><span>
