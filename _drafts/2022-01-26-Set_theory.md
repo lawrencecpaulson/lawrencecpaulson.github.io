@@ -14,19 +14,34 @@ How do our various typed formalisms compare to set theory?
 Zermelo introduced his axioms for set theory in 1908 as his response to concerns about the foundations of mathematics. These included the notorious [*axiom of choice*]({% post_url 2021-11-10-Axiom_of_Choice %}),
 in addition to more mundane axioms asserting our ability to form finite sets, take unions and power sets and to specify subsets of an existing set. Finally, the *axiom of infinity* guarantees the existence of an infinite set.
 
-Remarkably, a slightly restricted version of Zermelo set theory turns out to be equal in expressiveness and strength to higher-order logic. Also notable is that the authors of Bourbaki chose Zermelo set theory , not ZF, as the foundation of their project (as indignantly [pointed out](http://dx.doi.org/10.1007/BF03025863) by A. R. D. Mathias). Upon this basis, the Bourbaki group wrote careful if not strictly formal developments of great swathes of mathematics.
-Therefore we can safely conclude that Zermelo set theory—thus also higher-order logic—is adequate for the vast bulk of "ordinary" mathematics. The huge variety of topics already formalised in Isabelle/HOL and HOL Light is further evidence for this view.
+Remarkably, a slightly restricted version of Zermelo set theory turns out to be equal in expressiveness and strength to higher-order logic. Also notable is that the authors of Bourbaki chose Zermelo set theory, not ZF, as the foundation of their project (as indignantly [pointed out](http://dx.doi.org/10.1007/BF03025863) by A. R. D. Mathias). Upon this basis, the Bourbaki group wrote careful if not strictly formal developments of great swathes of mathematics.
+Therefore we can safely conclude that Zermelo set theory—thus also higher-order logic—is adequate for the vast bulk of "ordinary" mathematics. The wide variety of topics already formalised in Isabelle/HOL and [HOL Light](https://www.cl.cam.ac.uk/~jrh13/hol-light/) is further evidence for this view.
 
 ### The remaining axioms of ZFC
 
-What sort of mathematics is the exception? Amusingly enough, the answer is *set theory itself*. Georg Cantor [created a paradise](https://plato.stanford.edu/entries/settheory-early/) of ordinal and cardinal arithmetic that goes well beyond the confines of Zermelo set theory. To reach his paradise, we need the *axiom of replacement*, a sort of set teleportation device that can "transport" any set to a "higher level". More precisely, it lets us form indexed families of sets $\\{A_\xi\\}$ for $\xi\in\alpha$
+What sort of mathematics is the exception? Amusingly enough, the answer is *set theory itself*. Georg Cantor [created a paradise](https://plato.stanford.edu/entries/settheory-early/) of ordinal and cardinal arithmetic that goes well beyond the confines of Zermelo set theory. To reach his paradise, we need the *axiom of replacement*, a sort of set teleportation device that can "transport" any set to a "higher level". More precisely, it lets us form indexed families of sets $\\{A_i\\}$ for $i\in I$ where $I$ is any existing set,
 and therefore indexed unions such as $\bigcup_{\xi\in\alpha} A_\xi$.
-From such limit constructions we obtain the transfinite ordinals, the cardinals (the famous series of alephs) and the levels of the cumulative hierarchy of sets.
+From such limit constructions we obtain transfinite recursion and the ordinal and cardinal numbers.
+And we obtain the $V_\xi$ for each ordinal $\xi$, the levels of the *cumulative hierarchy of sets*.
 Finally, the *axiom of foundation* asserts that there are no other sets, affirming the idea that the universe of sets is an iterative construction.
 
-Category theory goes beyond ZF simply because it adopts, as its starting point, the category Set of all ZF sets and functions. To my mind this is like a billionaire's son calling up his father the day after he arrives at university saying, "dad, I need more money." When his father asks what happened to the billion-dollar sum he had been given, the son replies "I spent it all on NFTs". When people demand stronger set theories to serve as a foundation for category theory I am tempted to ask, what is to stop you from forming the category of all sets in that extended set theory? Also odd is the sort of extension proposed: sometimes one or two levels of classes, sometimes an additional "universe" (meaning, a model of ZF) and is sometimes countably many such models. All of these extensions are trivial compared with what the axiom of replacement gave us over the Zermelo sets, namely transfinitely many additional levels.
+Already $V_\omega$ contains the set of natural numbers. 
+Progressing to $V_{\omega+1}$, $V_{\omega+2}$, $\ldots$, we reach 
+the reals and higher numbers as well as sets and functions involving them. (These are analogous to iterations of function types in simple type theory.)
+Only finitely many iterations are allowed, however; in Zermelo set theory we never reach $V_{\omega+\omega}$. 
+With ZFC we get all of the $V$-levels plus a vast menagerie of unimaginable monstrosities, such as fixedpoints of the aleph operator
+(solutions of $\kappa = \aleph_\kappa$).
+As [pointed out](https://doi.org/10.1017/CBO9780511570681.013) by George Boolos (p. 258):
 
-I'd be interested to hear of topics in mathematics that require beyond the Zermelo universe of sets without referring explicitly to topics connected with ZF set theory.
+> $\kappa$ seems sufficiently large that the claim that it exists might plausibly be regarded as dubious, $\kappa$ is no gnat; it is a lot to swallow.
+
+Boolos remarks that such a $\kappa$ is positively "teensy" compared with
+the large cardinals often assumed in order to extend ZFC, whose existence (he argues) must be even more dubious. 
+
+Category theory goes beyond Zermelo simply because it adopts, as its starting point, the category **Set** of all ZF sets and functions. To my mind this is like a billionaire's son calling up his father the day after he arrives at university saying, "Dad, I need more money." His father asks what happened to the billion-dollar sum he had been given and the son replies "I spent it all on NFTs". When people demand stronger set theories to serve as a foundation for category theory I am tempted to ask, what is to stop you from forming the category of all sets in that extended set theory? Also odd is the sort of extension proposed: sometimes just one or two levels of classes, sometimes an additional "universe" (a large cardinal, yielding a set model of ZF) and sometimes countably many such models. All of these extensions are trivial compared with what the axiom of replacement gave us over the Zermelo sets: *transfinitely many* additional levels.
+It's like the kid saying he'd be fine with just $10 extra.
+
+I'd be interested to hear of mathematical domains that require more than the Zermelo universe of sets without referring explicitly to topics connected with ZF set theory.
 
 ### Set theory and proof assistants
 
