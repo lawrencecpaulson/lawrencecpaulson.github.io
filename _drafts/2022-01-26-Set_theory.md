@@ -49,8 +49,15 @@ I'd be interested to hear of mathematical domains that require more than the Zer
 
 ### Set theory and proof assistants
 
+Here's one answer to my question: ZF set theory turns out to be surprisingly close to the calculus of inductive constructions (CIC), the type theory implemented by Coq and Lean.
 [Werner](https://link.springer.com/chapter/10.1007/BFb0014566)
-We present two mutual encodings, respectively of the Calculus of Inductive Constructions in Zermelo-Fraenkel set theory and the opposite way. 
+presented encodings of CIC within ZFC and *vice versa*. 
+There is a correspondence between the universes of CIC and the inaccessible cardinals that must be assumed in addition to ZFC.
+To encode ZFC in CIC it is necessary to assume the axiom of choice, and therefore classical logic.
+An outstanding application of Warner's correspondence was Han and van Doorn's [proof in Lean](https://doi.org/10.4230/LIPIcs.ITP.2019.19) of the independence of the continuum hypothesis using Cohen's forcing method.
+
+Isabelle/ZF and recent work on forcing
+
 
  Bernays-Gödel and resolution experiments?
  
@@ -60,12 +67,3 @@ We present two mutual encodings, respectively of the Calculus of Inductive Const
  
  ZF set theory
  
- 
- Isabelle/ZF and recent work on forcing
- 
- Encoding set theory in type theory for work in Lean and Coq
-
-
-> Gregory H. Moore, *Zermelo's Axiom of Choice* (Springer, 1982), 64--65.
-
-I
