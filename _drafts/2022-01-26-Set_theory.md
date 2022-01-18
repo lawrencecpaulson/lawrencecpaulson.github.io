@@ -2,12 +2,12 @@
 layout: post
 title:  "Is Zermelo-Fraenkel set theory the foundation of mathematics?"
 usemathjax: true 
-tags: logic, set theory, axiom of choice
+tags: Zermelo, set theory, axiom of choice, ZFC, Isabelle/ZF
 ---
 
 
-Set theory (specifically, ZFC) is said to be the foundation of mathematics. Who says so, and are they right? Why isn't it used to formalise mathematics?
-And finally, how do our various typed formalisms compare to set theory?
+[Set theory](https://plato.stanford.edu/entries/set-theory/) (specifically, ZFC) is said to be the foundation of mathematics. Who says so, and are they right? How do our various typed formalisms compare to set theory?
+What about set theory as a branch of mathematics to be mechanised?
 
 ### Zermelo set theory
 
