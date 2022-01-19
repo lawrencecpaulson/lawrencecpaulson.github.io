@@ -68,5 +68,16 @@ Note that ZF set theory goes nicely into Isabelle, where the syntactic basis is 
 
 ### Tarski–Grothendieck set theory
 
+1-inaccessible cardinal (relatively weak for large cardinal axioms)
 
-
+Tarski's axiom, which states that for each set there is a Grothendieck universe it belongs to (see below). 
+	
+Tarski's axiom (adapted from Tarski 1939[5]). For every set x, there exists a set y whose members include:
+-
+x itself;
+- every subset of every member of
+y;
+- the power set of every member of
+y;
+- every subset of
+y of cardinality less than that of y.
