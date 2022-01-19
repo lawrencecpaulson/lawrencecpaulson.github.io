@@ -9,7 +9,10 @@ tags: set theory, resolution, Mizar, Isabelle/ZF
 
 ### Early ambition on mechanising mathematics
 
-The idea that all mathematical knowledge could be reduced to calculation has been around for centuries. For example it is associated with the 17th-century mathematician/philosopher [Leibniz](https://plato.stanford.edu/entries/leibniz/).
+The idea that all mathematical knowledge could be reduced to calculation has been around for centuries. For example it is associated with the 17th-century mathematician/philosopher [Leibniz](https://plato.stanford.edu/entries/leibniz/), 
+who looked forward to a future where
+
+> when there are disputes among persons, we can simply say: Let us calculate, without further ado, and see who is right.
 
 In the 20th century, some researchers expressed strikingly bold visions.
 Here is Hao Wang in 1958: 
