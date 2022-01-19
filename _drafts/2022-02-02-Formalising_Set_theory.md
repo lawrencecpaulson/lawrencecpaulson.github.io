@@ -40,6 +40,21 @@ Such provers are fully automatic, but in practice, a human being needs to develo
 and Quaife correctly described his proofs as semiautomatic.
 He proved Cantor's theorem and a challenge of that era: that the composition of homomorphisms is a homomorphism. 
 
+The most ambitious proposal to emerge from this era was the [*QED manifesto*](https://www.cs.ru.nl/~freek/qed/qed.html) (anonymous, but was said to be driven by [Robert Boyer](https://www.cs.utexas.edu/people/faculty-researchers/robert-boyer)).
+
+> QED is the very tentative title of a project to build a computer system that effectively represents all important mathematical knowledge and techniques. The QED system will conform to the highest standards of mathematical rigor, including the use of strict formality in the internal representation of knowledge and the use of mechanical methods to check proofs of the correctness of all entries in the system.
+
 ### NGB set theory
 
 Quaife used von Neumann–Bernays–Gödel (NBG) set theory.
+
+> It is a surprising fact that ZF, which is widely studied by logicians, cannot be finitely axiomatized. (Cf. [8], p. 320.) Since it cannot be finitely axiomatized, it cannot be input to a resolution-based theorem prover. Fortunately, the vNBG set theory has a finite axiomatization, and is in fact strictly stronger than ZF. How does vNBG avoid the necessity of an infinite number of axioms, which seems inherent in any handling of a schematic notion such as (.x : p(x)), where p ranges over all first-order formulas? Metatheorems describing in detail how this is done occupy the first few pages of Chapter II of [3]. Briefly, here is the trick. We take as primitive a few theoretic operations such as intersection, complementation, extracting the domain of a rela- tion, and taking the converse of a relation. We also take as given the operation of taking the non-ordered pair of two ‘little’ sets, and posit that the pair is itself little. Finally, we take as given {(s, .v) :.YEy}. the set of all ordered pairs of little sets .Yand
+J’ such that .Kis in y. We then observe that in any given instance of {.u:p(.u)} the formula p must be built up out of ‘3’, ’ A ‘, ‘l’, and ‘E’. By a simple structural induction on the form ofp, we see how to eliminate the set-builder notation 
+                 
+
+Robert Boyer et al.: [Set theory in first-order logic: Clauses for Gödel's axioms](https://doi.org/10.1007/BF02328452)
+
+
+
+> It is crucial that a "root logic" be a logic that is agreeable to all practicing mathematicians. The logic will, by necessity, be sufficiently strong to check any explicit computation, but the logic surely must not prejudge any historically debated questions such as the law of the excluded middle or the existence of uncountable sets.
+
