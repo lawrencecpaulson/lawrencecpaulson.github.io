@@ -68,11 +68,15 @@ in the the Schröder-Bernstein theorem.
 
 Note that ZF set theory goes nicely into Isabelle, where the syntactic basis is higher-order and terms that contain formulas are not a problem.
 
-### Tarski–Grothendieck set theory
+### TG set theory
 
-<<<<<<< HEAD
+In order to discuss Tarski–Grothendieck set theory, we need the notion of a universe. The terminology is unfortunate, because the universe refers to everything there is, but here we are using it to refer to very large collections that are not everything there is, and nobody thought of calling them galaxies. 
+So, staying informal, a ZF universe is essentially a model of ZF set theory. It's natural to believe that such models exist, because otherwise (by the completeness theorem) ZF must be inconsistent, so why are you using it? Such a model could be a countable set, by the Löwenheim–Skolem theorem: see [Skolem’s Paradox](https://plato.stanford.edu/entries/paradox-skolem/).
+However, here we need large models, typically given by large cardinals.
 
-=======
+
+
+
 1-inaccessible cardinal (relatively weak for large cardinal axioms)
 
 Tarski's axiom, which states that for each set there is a Grothendieck universe it belongs to (see below). 
@@ -86,4 +90,5 @@ y;
 y;
 - every subset of
 y of cardinality less than that of y.
->>>>>>> 7e740b4b4131dd5f7152b0fb473ea4c5e577a825
+
+Mizar
