@@ -25,7 +25,7 @@ of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathem
 It's notable that the first book mentioned by Wang was Landau’s [Foundations of Analysis](https://homepages.math.uic.edu/~kauffman/Landau.pdf). 
 As [already described]({% post_url 2021-11-03-AUTOMATH %}), that book would soon be formalised, using
 [AUTOMATH](https://www.win.tue.nl/automath/).
-I formalised an example from "Hardy on the calculus" [not long ago]({% post_url 2021-12-22-MVT-example %}).
+I presented here an example from "Hardy on the calculus" [not long ago]({% post_url 2021-12-22-MVT-example %}).
 
 Here is Art Quaife in 1989:
 
@@ -35,7 +35,8 @@ Goldbach's conjecture will be fair game for automated reasoning programs. For th
 
 2030 isn't far off, so this was a little ambitious (and we didn't get [HAL 9000](https://youtu.be/Wy4EfdnMZ5g) in 2001 either.)
 However, in the expression "arrange to stick around", Quaife is referring to life extension technologies (a.k.a. putting the body in the freezer), so possibly we can add a couple of centuries to the deadline.
-With a complete proof procedure, a proof will definitely be found if one exists, but the time and space required could make it utterly infeasible, and Gödel incompleteness could also spoil the party.
+With a complete proof procedure, a proof will definitely be found if one exists, but the time and space required could make it utterly infeasible.
+The freezer will thaw first. Gödel incompleteness could also spoil the party.
 
 Quaife did achieve significant results however. He produced the first usable formalisation of axiomatic set theory in an automatic theorem prover.
 He used [Otter](https://www.cs.unm.edu/~mccune/otter/), the leading resolution theorem prover of that era.
@@ -70,25 +71,16 @@ Note that ZF set theory goes nicely into Isabelle, where the syntactic basis is 
 
 ### TG set theory
 
-In order to discuss Tarski–Grothendieck set theory, we need the notion of a universe. The terminology is unfortunate, because the universe refers to everything there is, but here we are using it to refer to very large collections that are not everything there is, and nobody thought of calling them galaxies. 
-So, staying informal, a ZF universe is essentially a model of ZF set theory. It's natural to believe that such models exist, because otherwise (by the completeness theorem) ZF must be inconsistent, so why are you using it? Such a model could be a countable set, by the Löwenheim–Skolem theorem: see [Skolem’s Paradox](https://plato.stanford.edu/entries/paradox-skolem/).
+In order to discuss [Tarski–Grothendieck set theory](https://en.wikipedia.org/wiki/Tarski–Grothendieck_set_theory), we need the notion of a *universe*. The terminology is unfortunate because "the universe" means everything there is. Here we are using it to refer to huge sets that are not everything there is, and nobody thought of calling them galaxies. 
+So, staying informal, a ZF universe is a set that is a model of ZF set theory.
+Such a set cannot be proved to exist, by the second incompleteness theorem.
+But it's natural to believe that such models exist, because otherwise (by the *completeness* theorem) ZF would be inconsistent, so why are you using it? Such a model could even be countable, by the Löwenheim–Skolem theorem: see [Skolem’s Paradox](https://plato.stanford.edu/entries/paradox-skolem/).
 However, here we need large models, typically given by large cardinals.
 
+TG set theory is ZF set theory plus Tarski's axiom, which basically states that every set belongs to some Grothendieck universe.
+This axiom may sound unreasonably strong, since even the members of these universes imply the existence of further universes.
+However, set theorists are used to such assumptions. Through the gateway drug of an inaccessible cardinal (which guarantees the existence of one universe), set theorists have become addicted to a [vast pharmacopoeia](http://cantorsattic.info/Upper_attic) of unimaginably stronger assumptions. Tarski's axiom turns out to be pretty tame, compared with the others.
+Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}).
 
+### The proof assistant Mizar
 
-
-1-inaccessible cardinal (relatively weak for large cardinal axioms)
-
-Tarski's axiom, which states that for each set there is a Grothendieck universe it belongs to (see below). 
-	
-Tarski's axiom (adapted from Tarski 1939[5]). For every set x, there exists a set y whose members include:
--
-x itself;
-- every subset of every member of
-y;
-- the power set of every member of
-y;
-- every subset of
-y of cardinality less than that of y.
-
-Mizar
