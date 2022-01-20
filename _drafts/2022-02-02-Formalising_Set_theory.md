@@ -54,11 +54,13 @@ Quaife used von Neumann–Bernays–Gödel (NBG) set theory, as recommended in 1
 > [ZF] cannot be input to a resolution-based theorem prover. Fortunately, the vNBG set theory has a finite axiomatization, and is in fact strictly stronger than ZF. 
 ([Set theory in first-order logic: Clauses for Gödel's axioms](https://doi.org/10.1007/BF02328452), page 288.)
 
-From a syntactic point of view, the problem is that ZF involves terms that contain first-order formulas. NBG instead provides certain set-theoretic primitives,
+From a syntactic point of view, the problem is that ZF involves terms that contain first-order formulas. 
+NBG uses variables ranging over proper classes as surrogates for formulas, bringing them within the mathematical domain of discourse. 
+(In ZF, classes are nothing but a convention for referring to collections––of all ordinals, say––that are too large to be sets.)
+NBG provides a selection of operations on these classes,
 including intersection, complementation and domain of a relation.
 From these it is possible to recover the effect of ZF's
 separation and replacement axioms.
-NBG is also notable for regarding classes as actually existing––with separate variables for sets and classes––while in ZF, classes are fictional.
 
 Unfortunately, rendering first-order formulas into this combinator language is difficult. Belinfante wrote code to automate the translation
 and performed a series of experiments, [culminating](https://doi.org/10.1007/978-3-540-45085-6_18)
@@ -67,6 +69,5 @@ in the the Schröder-Bernstein theorem.
 Note that ZF set theory goes nicely into Isabelle, where the syntactic basis is higher-order and terms that contain formulas are not a problem.
 
 ### Tarski–Grothendieck set theory
-
 
 
