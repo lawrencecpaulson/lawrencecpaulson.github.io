@@ -48,6 +48,8 @@ The most ambitious proposal to emerge from this era was the [*QED manifesto*](ht
 
 > QED is the very tentative title of a project to build a computer system that effectively represents all important mathematical knowledge and techniques. The QED system will conform to the highest standards of mathematical rigor, including the use of strict formality in the internal representation of knowledge and the use of mechanical methods to check proofs of the correctness of all entries in the system.
 
+So now the aim was to formalise *all important mathematical knowledge*.
+
 ### NGB set theory
 
 Quaife used von Neumann–Bernays–Gödel (NBG) set theory, as recommended in 1986 by Boyer et al., because ZF set theory cannot be finitely axiomatized. 
@@ -67,8 +69,6 @@ Unfortunately, rendering first-order formulas into this combinator language is d
 and performed a series of experiments, [culminating](https://doi.org/10.1007/978-3-540-45085-6_18)
 in the the Schröder-Bernstein theorem.
 
-Note that ZF set theory goes nicely into Isabelle, where the syntactic basis is higher-order and terms that contain formulas are not a problem.
-
 ### TG set theory
 
 In order to discuss [Tarski–Grothendieck set theory](https://en.wikipedia.org/wiki/Tarski–Grothendieck_set_theory), we need the notion of a *universe*. The terminology is unfortunate because "the universe" means everything there is. Here we are using it to refer to huge sets that are not everything there is, and nobody thought of calling them galaxies. 
@@ -83,4 +83,16 @@ However, set theorists are used to such assumptions. Through the gateway drug of
 Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}).
 
 ### The proof assistant Mizar
+
+Tarski–Grothendieck set theory
+
+[Mizar](http://mizar.org)
+
+"The system was created beginning in 1973 by Andrzej Trybulec
+
+Mizar articles are written in ordinary ASCII. The Mizar language is close enough to the mathematical vernacular that mathematicians can read and understand Mizar articles almost immediately; it is formal enough that proofs can be checked automatically. All steps in a proof have to be justified, and it has been estimated that a Mizar article is about four times as long as an equivalent mathematical paper written in ordinary style.
+
+[Mizar Mathematical Library](http://www.mizar.org/library/)
+
+[Historical outline](https://doi.org/10.1007/s10817-017-9440-6) by Grzegorz Bancerek et al.
 
