@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising mathematics in set theory"
 usemathjax: true 
-tags: set theory, resolution, QED, Mizar, Isabelle/ZF
+tags: set theory, resolution, QED, Mizar
 ---
 
 [Last week's post]({% post_url 2022-01-26-Set_theory %}) mentioned the mechanisation of some major results of ZF set theory in proof assistants. In fact, the use of automated theorem provers with various forms of set theory goes back a long way. Two stronger set theories have attracted interest: above all, von Neumann–Bernays–Gödel (NBG) and Tarski–Grothendieck (TG). All of this work was motivated by the goal of mechanising mathematics.
@@ -44,7 +44,7 @@ Such provers are fully automatic, but in practice, a human being needs to develo
 and Quaife correctly described his proofs as semiautomatic.
 He proved Cantor's theorem and a challenge of that era: that the composition of homomorphisms is a homomorphism. 
 
-The most ambitious proposal to emerge from this era was the [*QED manifesto*](https://www.cs.ru.nl/~freek/qed/qed.html) (anonymous, but was said to be driven by [Robert Boyer](https://www.cs.utexas.edu/people/faculty-researchers/robert-boyer)).
+The most ambitious proposal to emerge from this era (published in 1994) was the [*QED Manifesto*](https://www.cs.ru.nl/~freek/qed/qed.html) (anonymous, but was said to be driven by [Robert Boyer](https://www.cs.utexas.edu/people/faculty-researchers/robert-boyer)).
 
 > QED is the very tentative title of a project to build a computer system that effectively represents all important mathematical knowledge and techniques. The QED system will conform to the highest standards of mathematical rigor, including the use of strict formality in the internal representation of knowledge and the use of mechanical methods to check proofs of the correctness of all entries in the system.
 
@@ -84,15 +84,14 @@ Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_C
 
 ### The proof assistant Mizar
 
-Tarski–Grothendieck set theory
+During the Cold War, those of us working in the West seldom noticed what was going on in the East (other than things to do with missiles and tanks), so the advocates of the QED Manifesto were astonished to discover how much mathematics had already been formalised using a system that they had never heard of:
+[Mizar](http://mizar.org), from the University of Białystok in Poland.
+It was created in 1973 by Andrzej Trybulec, offering a highly flexible language for mathematical concepts based on Tarski–Grothendieck set theory.
 
-[Mizar](http://mizar.org)
+The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's Isar language borrows heavily from Mizar, and they are also pronounced similarly if you are German.
 
-"The system was created beginning in 1973 by Andrzej Trybulec
-
-Mizar articles are written in ordinary ASCII. The Mizar language is close enough to the mathematical vernacular that mathematicians can read and understand Mizar articles almost immediately; it is formal enough that proofs can be checked automatically. All steps in a proof have to be justified, and it has been estimated that a Mizar article is about four times as long as an equivalent mathematical paper written in ordinary style.
-
-[Mizar Mathematical Library](http://www.mizar.org/library/)
-
-[Historical outline](https://doi.org/10.1007/s10817-017-9440-6) by Grzegorz Bancerek et al.
+The [Mizar Mathematical Library](http://www.mizar.org/library/)
+accumulated contributions by a great many authors.
+Isabelle's Archive of Formal Proofs is one of several modern-day imitators of the MML.
+There's a [Historical outline](https://doi.org/10.1007/s10817-017-9440-6) by Bancerek.
 
