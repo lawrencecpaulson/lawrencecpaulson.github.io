@@ -13,16 +13,16 @@ What about set theory as a branch of mathematics to be mechanised?
 
 Zermelo introduced his [axioms for set theory](https://plato.stanford.edu/entries/zermelo-set-theory/) in 1908 as his response to concerns about the foundations of mathematics. He included the notorious [*axiom of choice*]({% post_url 2021-11-10-Axiom_of_Choice %})
 (AC) in addition to more mundane axioms asserting our ability to form finite sets and form unions and power sets. The *axiom of infinity* guaranteed the existence of an infinite set. 
-The crucial *axiom of separation* allowed the specification of subsets of an existing set while avoiding Russell's paradox.
+The crucial *axiom of separation* allowed the specification of a subset of an existing set while avoiding Russell's paradox.
 Remarkably, Zermelo proposed this axiom before we possessed any means to express the specification; *Principia Mathematica* would not appear until 1910, and first-order logic [arrived even later](https://plato.stanford.edu/entries/logic-firstorder-emergence/).
 
 A slightly restricted version of Zermelo set theory due to Mac Lane turns out to be [equal in expressiveness and strength](https://doi.org/10.1016/S0168-0072(00)00031-2) to higher-order logic. Also notable is that the authors of Bourbaki chose Zermelo set theory, not ZF, as the foundation of their project (as indignantly [pointed out](http://dx.doi.org/10.1007/BF03025863) by A. R. D. Mathias). Upon this basis, the Bourbaki group wrote careful if not strictly formal developments of great swathes of mathematics.
-Therefore we might conclude that something like Zermelo set theory—including higher-order logic—is adequate for the vast bulk of "ordinary" mathematics. The wide variety of topics [already formalised](https://www.cs.ru.nl/~freek/100/) in Isabelle/HOL and HOL Light is evidence for this view. See also under Mathematics and Logic in the [Archive of Formal Proofs](https://www.isa-afp.org/topics.html).
+Therefore, a formalism as strong as Zermelo set theory—such as higher-order logic—might just be adequate for the vast bulk of "ordinary" mathematics. The wide variety of topics [already formalised](https://www.cs.ru.nl/~freek/100/) in Isabelle/HOL and HOL Light is evidence for this view. See also under Mathematics and Logic in the [Archive of Formal Proofs](https://www.isa-afp.org/topics.html).
 
 ### The remaining axioms of ZFC
 
-What sort of mathematics is the exception? Amusingly enough, the answer is *set theory itself*. Georg Cantor [created a paradise](https://neugierde.github.io/cantors-attic/) of ordinal and cardinal arithmetic that goes well beyond the confines of Zermelo set theory. To reach his paradise, we need the *axiom of replacement*, a sort of set teleportation device that can "transport" any set to a "higher level". More precisely, it lets us form indexed families of sets $\\{A_i\\}$ for $i\in I$ where $I$ is any existing set,
-and therefore indexed unions such as $\bigcup_{\xi\in\alpha} A_\xi$.
+What sort of mathematics is the exception? Amusingly enough, the chief answer is *set theory itself*. Georg Cantor [created a paradise](https://neugierde.github.io/cantors-attic/) of ordinal and cardinal arithmetic that goes well beyond the confines of Zermelo set theory. To reach his paradise, we need the *axiom of replacement*, a sort of set teleportation device that can "transport" any set to a "higher level". More precisely, it lets us form indexed families of sets $\\{A_i\\}$ for $i\in I$ where $I$ is any existing set,
+and therefore indexed unions such as $\bigcup_{\xi<\alpha} A_\xi$.
 From such limit constructions we obtain transfinite recursion and the ordinal and cardinal numbers.
 And we obtain the $V_\xi$ for each ordinal $\xi$, the levels of the *cumulative hierarchy of sets*.
 Finally, the *axiom of foundation* asserts that there are no other sets, affirming the idea that the universe of sets is an iterative construction.
@@ -39,11 +39,11 @@ As pointed out by George Boolos (p. 258 of his [Must We Believe in Set Theory?](
 
 Recall that $\aleph_0$ is the cardinality of the natural numbers, 
 and the cardinality of the continuum is thought by many to be
-$\aleph_1$ or $\aleph_2$; already $\aleph_\omega$ is beyond our comprehension, let alone $\kappa = \aleph_{\aleph_{\aleph_\ddots}}$.
-And yet, as Boolos remarks, this first $\kappa$ is positively "teensy" compared with
+$\aleph_1$ or $\aleph_2$; already $\aleph_\omega$ is beyond our comprehension, let alone $\kappa$, which is the limit $\aleph_{\aleph_{\aleph_\ddots}}$.
+And yet, as Boolos remarks, this $\kappa$ is positively "teensy" compared with
 the large cardinals often assumed in order to extend ZFC; their existence (he argues) must be even more dubious. 
 
-Category theory goes beyond even ZF simply because it adopts, as its starting point, the category **Set** of all ZF sets and functions. To my mind this is like a billionaire's son calling up his father the day after he arrives at university saying, "Dad, I need more money." His father asks what happened to the billion-dollar sum he had been given and the son replies "I spent it all on NFTs". When people demand stronger set theories to serve as a foundation for category theory, we should ask "What is to stop you from forming the category of all sets in that extended set theory?" Also odd is the sort of extension proposed: sometimes just one or two levels of classes, sometimes an additional "universe" (a large cardinal, yielding a set model of ZF) and sometimes a countable series of such cardinals. All of these extensions are trivial compared with what the axiom of replacement gave us over the Zermelo sets: *transfinitely many* additional levels
+Category theory goes beyond even ZF simply because it adopts, as its starting point, the category **Set** of all ZF sets and functions. To my mind this is like a billionaire's son calling up his father the day after he arrives at university saying, "Dad, I need more money." His father asks what happened to the billion-dollar sum he had been given and the son replies "I spent it all on NFTs". When people demand stronger set theories to serve as a foundation for category theory, we should ask "What is to stop you from forming the category of all sets in that extended set theory?" Also odd is the sort of extension proposed: sometimes just one or two levels of superclasses, sometimes an additional "universe" (a large cardinal, yielding a set model of ZF), sometimes a countable series of such cardinals, sometimes more. All of these extensions are trivial compared with what the axiom of replacement gave us over the Zermelo sets: *transfinitely many* additional levels
 above the world of ordinary mathematics.
 It's like the kid saying he'd be fine with just $10 extra.
 
@@ -52,14 +52,14 @@ Also, I'd be interested to hear of mathematical domains that require more than t
 
 ### ZF and proof assistants
 
-Here's one answer to my question: ZF set theory turns out to be surprisingly close to the calculus of inductive constructions (CIC), the type theory implemented by Coq and Lean.
+Here's another answer to my question: ZF set theory turns out to be surprisingly close in strength to the calculus of inductive constructions (CIC), the type theory implemented by Coq and Lean.
 [Werner](https://link.springer.com/chapter/10.1007/BFb0014566)
 presented encodings of CIC within ZFC and *vice versa*. 
 There is a correspondence between the universes of CIC and the inaccessible cardinals that must be assumed in addition to ZFC.
 To encode ZFC in CIC it is necessary to assume the axiom of choice, and therefore classical logic.
 An outstanding application of Warner's correspondence was Han and van Doorn's [proof in Lean](https://doi.org/10.4230/LIPIcs.ITP.2019.19) of the independence of the continuum hypothesis using Cohen's forcing method.
 
-Isabelle has supported first-order logic and set theory as early as the 1990s. Isabelle/ZF is a separate instance from Isabelle/HOL sharing its interface, proof language, simplifier, etc. It is based on a formalisation of classical first-order logic, asserting the usual ZF axioms and with AC kept separate. Experiments done at Cambridge in the 1990s include formal proofs of many [equivalents of AC](https://arxiv.org/abs/cs/9612104).
+Isabelle has supported first-order logic and set theory as early as the 1990s. Isabelle/ZF is a separate instance from Isabelle/HOL sharing its interface, proof language, simplifier, etc. It is based on a formalisation of classical first-order logic, asserting the usual ZF axioms and with AC kept optional. Experiments done at Cambridge in the 1990s include formal proofs of many [equivalents of AC](https://arxiv.org/abs/cs/9612104).
 Later, I used Gödel's [constructible universe](https://plato.stanford.edu/entries/goedel/#GodWorSetThe) in an [Isabelle/ZF proof](http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=6560756&fulltextType=RA&fileId=S1461157000000449) of the consistency of the continuum hypothesis.
 Isabelle/ZF then languished for many years, but lately a group at the University of Argentina has formalised [a string of major results](https://cs.famaf.unc.edu.ar/~pedro/forcing/) based on forcing.
 An astounding feat.
