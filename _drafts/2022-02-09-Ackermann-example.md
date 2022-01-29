@@ -9,7 +9,7 @@ An undergraduate course on computation theory typically introduces some models o
 
 ### Ackermann's function
 
-In its modern form (having been simplified by Rózsa Péter and Raphael Robinson), Ackermann's function is defined as follows:
+In its modern form (having been simplified by Rózsa Péter and Raphael Robinson), [Ackermann's function](https://www-users.cs.york.ac.uk/susan/cyc/a/ackermnn.htm) is defined as follows:
 
 $$
 \begin{align*}
@@ -27,8 +27,9 @@ $$
 A(4,3)\approx 10^{10^{20000}}.
 \end{gather*} $$
 
+(Precisely, it's $2^{2^{65536}}-3$.)
 The first argument determines how rapidly it rises: note that $A(3,4)=125$, and don't even think about $A(125,4)$. 
-Oddly enough, physicists regard $10^{80}$ as a big number, greater than the number of neutrinos in the universe. Greater than the diameter of the universe. (In microns. Squared.)
+Oddly enough, physicists regard $10^{80}$ as a big number, greater than the number of neutrinos in the universe. Greater than the diameter of the universe. (In nanometres. Squared.)
 An astronomical number is, mathematically speaking, tiny.
 
 ### Expressing Ackermann's function
@@ -126,6 +127,9 @@ This function codifies what ackloop is designed to do.
 </pre>
 
 More interactive version of this document [available online](https://isabelle.in.tum.de/dist/library/HOL/HOL-Examples/Ackermann.html).
+
+And [proof](https://isabelle.in.tum.de/dist/library/HOL/HOL-ex/Primrec.html) that it's not primitive recursive
+
 
 Source file is `src/HOL/Examples/Ackermann.thy` in your downloaded copy of Isabelle.
 
