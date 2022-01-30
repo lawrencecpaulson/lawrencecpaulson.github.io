@@ -66,6 +66,9 @@ This question is an instance of the halting problem. Although it is undecidable 
 
 ### The Isabelle formalisation
 
+The definition of Ackermann's function can be typed into Isabelle/HOL more-or-less verbatim.
+That it's well-defined and terminating is detected automatically, and the recursion equations shown are *proved* from a low-level, non-recursive definition. All that happens automatically.
+
 <pre class="source">
 <span class="keyword1"><span class="command">fun</span> <span class="entity">ack</span></span><span> </span><span class="main">::</span><span> </span><span class="quoted quoted"><span>"</span><span class="main">[</span><span>nat</span><span class="main">,</span><span>nat</span><span class="main">]</span><span> </span><span class="main">⇒</span><span> </span><span>nat</span><span>"</span></span><span> </span><span class="keyword2 keyword">where</span><span>
   </span><span class="quoted quoted"><span>"</span><span class="free">ack</span><span> </span><span class="main">0</span><span> </span><span class="free bound entity">n</span><span>             </span><span class="main">=</span><span> </span><span>Suc</span><span> </span><span class="free bound entity">n</span><span>"</span></span><span>
@@ -73,10 +76,9 @@ This question is an instance of the halting problem. Although it is undecidable 
 </span><span class="main">|</span><span> </span><span class="quoted quoted"><span>"</span><span class="free">ack</span><span> </span><span class="main">(</span><span>Suc</span><span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="main">(</span><span>Suc</span><span> </span><span class="free bound entity">n</span><span class="main">)</span><span> </span><span class="main">=</span><span> </span><span class="free">ack</span><span> </span><span class="free bound entity">m</span><span> </span><span class="main">(</span><span class="free">ack</span><span> </span><span class="main">(</span><span>Suc</span><span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="free bound entity">n</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-Fortunately, the function definition package allows us to define a function and only later identify its domain of termination.
-Instead, it makes all the recursion equations conditional on satisfying
-the function's domain predicate. Here we shall eventually be able
-to show that the predicate is always satisfied.
+The rewrite rule system shown above can also be typed in verbatim.
+(The box symbols are unnecessary, since pattern matching inherently targets the start of the list.)
+But how does Isabelle/HOL handle the issue of termination?
 
 <pre class="source">
 <span class="keyword1 command">function</span><span> </span><span class="main">(</span><span>domintros</span><span class="main">)</span><span> </span><span class="entity">ackloop</span><span> </span><span class="main">::</span><span> </span><span class="quoted quoted"><span>"</span><span>nat</span><span> </span><span>list</span><span> </span><span class="main">⇒</span><span> </span><span>nat</span><span>"</span></span><span> </span><span class="keyword2 keyword">where</span><span>
@@ -88,8 +90,18 @@ to show that the predicate is always satisfied.
   </span><span class="keyword1 command">by</span><span> </span><span class="operator">pat_completeness</span><span> </span><span class="operator">auto</span>
 </pre>
 
-Termination is trivial if the length of the list is less then two.
+[Alex Krauss's](https://www21.in.tum.de/~krauss/) wonderful [function definition package](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/functions.pdf) handles such difficult cases too.
+It allows us to define function `f` first and deal with its termination later.
+It (when prompted by the keyword `domintros`) defines the predicate `f_dom` expressing the termination of `f` for a given argument. Then arbitrary recursion equations for `f` can be accepted, but the package makes them conditional: they will hold only if `f` terminates on the given argument.
+Then our task is to prove that `f_dom` holds on the arguments we are interested in
+and even partial recursive functions can be dealt with.
+Here we shall prove that `ackloop` is a total function by proving that `ackloop_dom` is always satisfied.
+
+It's obvious that `ackloop` terminates if the length of the list is less then two.
 The following lemma is the key to proving termination for longer lists.
+Note that the head of the list has the form <tt>ack<span> </span><span class="free">m</span><span> </span><span class="free">n</span></tt>
+
+
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span> </span><span>ackloop_dom_longer</span><span class="main">:</span><span>
