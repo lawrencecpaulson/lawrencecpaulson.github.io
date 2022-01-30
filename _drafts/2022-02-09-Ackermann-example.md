@@ -98,10 +98,10 @@ and even partial recursive functions can be dealt with.
 Here we shall prove that `ackloop` is a total function by proving that `ackloop_dom` is always satisfied.
 
 It's obvious that `ackloop` terminates if the length of the list is less then two.
-The following lemma is the key to proving termination for longer lists.
-Note that the head of the list has the form <tt>ack<span> </span><span class="free">m</span><span> </span><span class="free">n</span></tt>
-
-
+Close examination of the three recursive `ackloop` equations suggests
+the following lemma, which turns out to be the key to proving termination for longer lists.
+Note that the head of the list has the form <tt>ack<span> </span><span class="free">m</span><span> </span><span class="free">n</span></tt>.
+Also, note that the formal proof is one line long.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span> </span>ackloop_dom_longer<span class="main">:</span><span>
