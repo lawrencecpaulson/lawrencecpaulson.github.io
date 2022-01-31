@@ -5,11 +5,11 @@ usemathjax: true
 tags: examples, Isabelle, Ackermann's function
 ---
 
-An undergraduate course on computation theory typically introduces some models of computation: Turing machines, register machines, general recursive functions and possibly the λ-calculus. They learn about the principle of primitive recursion, which is easy to grasp, and the minimisation operator, which isn't. Ackermann's function is invariably mentioned as an example of a function that is obviously computable but not computable by primitive recursion alone. Unfortunately, it is not easily expressible in the familiar models of computation, although its definition is simplicity itself.
+An undergraduate course on recursion theory typically introduces Turing machines, register machines, general recursive functions and possibly the λ-calculus. They learn about the principle of primitive recursion, which is easy to grasp, and the minimisation operator, which is less so. Ackermann's function is invariably mentioned as an example of a function that is obviously computable but not computable by primitive recursion alone. Unfortunately, it is not easily expressible in the familiar models of computation, although its definition is simplicity itself.
 
 ### Ackermann's function
 
-In its modern form (having been simplified by Rózsa Péter and Raphael Robinson), Ackermann's function is defined as follows:
+In its modern form (simplified by Rózsa Péter and Raphael Robinson), Ackermann's function is defined as follows:
 
 $$
 \begin{align*}
@@ -19,7 +19,7 @@ $$
 \end{align*}
 $$
 
-It resembles the calculation of the Ramsey number as given by the [proof of Ramsey's theorem]({% post_url 2021-12-29-Ramsey-1 %}). Both can easily express unimaginably large numbers.
+It resembles the calculation of the upper bound of the Ramsey number from the [proof of Ramsey's theorem]({% post_url 2021-12-29-Ramsey-1 %}). Both can easily express unimaginably large numbers.
 I was taught this material at Caltech by [Frederick B Thompson](https://www.caltech.edu/about/news/frederick-b-thompson-43160), who as a homework exercise asked his students to write out in full the calculation $A(4,3)$. Nobody did, but one of the students managed to estimate that 
 
 $$ 
