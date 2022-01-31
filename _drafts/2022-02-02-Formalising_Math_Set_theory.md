@@ -5,7 +5,7 @@ usemathjax: true
 tags: set theory, resolution, QED, Mizar
 ---
 
-[Last week's post]({% post_url 2022-01-26-Set_theory %}) mentioned the mechanisation of some major results of ZF set theory in proof assistants. In fact, the use of automated theorem provers with various forms of set theory goes back a long way. Two stronger set theories have attracted interest: above all, von Neumann–Bernays–Gödel (NBG) and Tarski–Grothendieck (TG). All of this work was motivated by the goal of mechanising mathematics.
+[Last week's post]({% post_url 2022-01-26-Set_theory %}) mentioned the mechanisation of some major results of ZF set theory in proof assistants. In fact, the use of automated theorem provers with various forms of set theory goes back a long way. Two stronger set theories have attracted interest: von Neumann–Bernays–Gödel (NBG) and Tarski–Grothendieck (TG). All of this work was motivated by the goal of mechanising mathematics.
 
 ### Early ambition on mechanising mathematics
 
@@ -18,7 +18,7 @@ In the 20th century, some researchers expressed strikingly bold visions.
 Here is Hao Wang in 1958: 
 
 > The original aim of the writer was to take mathematical textbooks such as Landau on the number system, Hardy-Wright on number theory, Hardy on the calculus, Veblen-Young on projective geometry, the volumes by Bourbaki, as outlines and to make the machine formalize all the proofs (fill in the gaps).
-(In [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002), page 15)
+(In [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002), page 15.)
 
 What he actually accomplished was impressive enough. He implemented a proof procedure for first-order logic with equality, which he claimed to be complete. He demonstrated its power by proving nearly 400 of the purely logical theorems
 of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/). While thinking about that accomplishment, take a moment to examine the specifications of the computer used, an [IBM 704](https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP704.html).
@@ -31,10 +31,10 @@ Here is Art Quaife in 1989:
 
 > $1000 personal computers with the computational power of the human brain should be available by year 2030. The time will come when such crushers as Riemann's hypothesis and
 Goldbach's conjecture will be fair game for automated reasoning programs. For those of us who arrange to stick around, endless fun awaits us in the automated development and eventual enrichment of the corpus of mathematics.
-[Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://doi.org/10.1007/BF00263451), page 119--120
+(In [Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://doi.org/10.1007/BF00263451), page 119--120.)
 
 2030 isn't far off, so this was a little ambitious (and we didn't get [HAL 9000](https://youtu.be/Wy4EfdnMZ5g) in 2001 either.)
-However, in the expression "arrange to stick around", Quaife is referring to life extension technologies (a.k.a. putting the body in the freezer), so possibly we can add a couple of centuries to the deadline.
+However, in the expression "arrange to stick around", Quaife is referring to life extension technologies (a.k.a. putting your body in the freezer), so possibly we can add a couple of centuries to the deadline.
 With a complete proof procedure, a proof will definitely be found if one exists, but the time and space required could make it utterly infeasible.
 The freezer will thaw first. Gödel incompleteness could also spoil the party.
 
@@ -42,7 +42,7 @@ Quaife did achieve significant results however. He produced the first usable for
 He used [Otter](https://www.cs.unm.edu/~mccune/otter/), the leading resolution theorem prover of that era.
 Such provers are fully automatic, but in practice, a human being needs to develop the material by suggesting lemmas to be proved in the correct order,
 and Quaife correctly described his proofs as semiautomatic.
-He proved Cantor's theorem and a challenge of that era: that the composition of homomorphisms is a homomorphism. 
+He proved Cantor's theorem and a challenge that had been posed: that the composition of homomorphisms is a homomorphism. 
 
 The most ambitious proposal to emerge from this era (published in 1994) was the [*QED Manifesto*](https://www.cs.ru.nl/~freek/qed/qed.html) (anonymous, but was said to be driven by [Robert Boyer](https://www.cs.utexas.edu/people/faculty-researchers/robert-boyer)).
 
@@ -79,16 +79,19 @@ However, here we need large models, typically given by large cardinals.
 
 TG set theory is ZF set theory plus Tarski's axiom, which basically states that every set belongs to some Grothendieck universe.
 This axiom may sound unreasonably strong, since even the members of these universes imply the existence of further universes.
-However, set theorists are used to such assumptions. Through the gateway drug of an inaccessible cardinal (which guarantees the existence of one universe), set theorists have become addicted to a [vast pharmacopoeia](http://cantorsattic.info/Upper_attic) of unimaginably stronger assumptions. Tarski's axiom turns out to be pretty tame, compared with the others.
+However, set theorists are used to such assumptions. Through the gateway drug of an inaccessible cardinal (which guarantees the existence of one universe), set theorists have become addicted to a [vast pharmacopoeia](http://cantorsattic.info/Upper_attic) of unimaginably stronger assumptions. Tarski's axiom turns out to be pretty tame compared with the others.
 Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}).
 
 ### The proof assistant Mizar
 
-During the Cold War, those of us working in the West seldom noticed what was going on in the East (other than things to do with missiles and tanks), so the advocates of the QED Manifesto were astonished to discover how much mathematics had already been formalised using a system that they had never heard of:
+During the Cold War, those of us working in the West seldom noticed what was going on in the East not involving missiles and tanks, so the advocates of the QED Project were astonished to discover how much mathematics had already been formalised using a system that they had never heard of:
 [Mizar](http://mizar.org), from the University of Białystok in Poland.
-It was created in 1973 by Andrzej Trybulec, offering a highly flexible language for mathematical concepts based on Tarski–Grothendieck set theory.
+It had been created in 1973 by Andrzej Trybulec. 
+It offered a highly flexible language, based on Tarski–Grothendieck set theory,
+for mathematical concepts and proofs.
 
-The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's Isar language borrows heavily from Mizar, and they are also pronounced similarly if you are German.
+The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's Isar language borrows heavily from Mizar.
+They are also pronounced similarly (if you [are German](https://www.muenchen.de/int/en/culture-leisure/sport-fitness/lakes-munich/isar.html)).
 
 The [Mizar Mathematical Library](http://www.mizar.org/library/)
 accumulated contributions by a great many authors.
