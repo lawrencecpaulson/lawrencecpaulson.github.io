@@ -9,7 +9,7 @@ tags: set theory, resolution, QED, Mizar
 
 ### Early ambition on mechanising mathematics
 
-The idea that all mathematical knowledge could be reduced to calculation has been around for centuries. For example it is associated with the 17th-century mathematician/philosopher [Leibniz](https://plato.stanford.edu/entries/leibniz/), 
+The idea that all mathematical knowledge could be reduced to calculation has been around for centuries. It is associated with the 17th-century mathematician/philosopher [Leibniz](https://plato.stanford.edu/entries/leibniz/), 
 who looked forward to a future where
 
 > when there are disputes among persons, we can simply say: Let us calculate, without further ado, and see who is right.
@@ -40,7 +40,7 @@ The freezer will thaw first. Gödel incompleteness could also spoil the party.
 
 Quaife did achieve significant results however. He produced the first usable formalisation of axiomatic set theory in an automatic theorem prover.
 He used [Otter](https://www.cs.unm.edu/~mccune/otter/), the leading resolution theorem prover of that era.
-Such provers are fully automatic, but in practice, a human being needs to develop the material by suggesting lemmas to be proved in the correct order,
+Such provers are fully automatic, but in practice, somebody needs to lend a hand by suggesting lemmas to be proved in the correct order,
 and Quaife correctly described his proofs as semiautomatic.
 He proved Cantor's theorem and a challenge that had been posed: that the composition of homomorphisms is a homomorphism. 
 
