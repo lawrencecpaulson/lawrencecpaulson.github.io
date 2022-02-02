@@ -14,3 +14,5 @@ Here we look at an Isabelle/HOL proof that the exponential function yields irrat
 ### Statement of the problem
 
 Since $\exp(\ln x)=x$, we need to qualify that claim: $\exp r$ is irrational for all rational, nonzero $r$. And this will imply that $\ln r$ is irrational for every positive rational $r≠1$.
+
+The authors present a simple 19th-century proof that uses nothing other than differentiation and integration.
