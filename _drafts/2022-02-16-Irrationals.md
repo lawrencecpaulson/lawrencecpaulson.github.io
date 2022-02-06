@@ -155,19 +155,12 @@ We calculate the coefficients of the $k$th derivative precisely.
 </pre>
 
 <pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
 <span class="keyword1 command">lemma</span> deriv_n_hf_diffr <span class="main">[</span><span class="operator">iff</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="keyword1">field_differentiable</span> <span class="keyword1">at</span> <span class="free">x</span><span>"</span>
   <span class="keyword1 command">unfolding</span> field_differentiable_def hf_deriv_int_poly
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> exI <span class="main keyword3">|</span> <span class="operator">force</span><span class="main">)</span><span class="main keyword3">+</span>
+</pre>
 
+<pre class="source">
 <span class="keyword1 command">lemma</span> deriv_n_hf_minus<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span><span class="main">-</span><span class="main">1</span><span class="main">)</span><span class="main">^</span><span class="free">k</span> <span class="main">*</span> <span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">)</span><span>"</span>
 <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">k</span><span class="main">)</span>
   <span class="keyword3 command">case</span> 0
@@ -191,15 +184,28 @@ We calculate the coefficients of the $k$th derivative precisely.
     <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv <span class="main">^^</span> Suc <span class="skolem">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="skolem">x</span> <span class="main">=</span> <span class="main">(</span><span class="main">-</span><span class="main">1</span><span class="main">)</span> <span class="main">^</span> Suc <span class="skolem">k</span> <span class="main">*</span> <span class="main">(</span>deriv <span class="main">^^</span> Suc <span class="skolem">k</span><span class="main">)</span> <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="skolem">x</span><span class="main">)</span><span>"</span> <span class="keyword1 command">.</span>
   <span class="keyword1 command">qed</span>
 <span class="keyword1 command">qed</span>
+</pre>
 
-<span class="keyword1 command">subsection</span> <span class="quoted plain_text"><span>‹</span><span>Towards the main result</span><span>›</span></span>
+Finally we approach the main result, with two simple facts about $k$th derivatives.
 
+<pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_1<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">1</span> <span class="main">∈</span> <span class="main">ℤ</span><span>"</span>
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> best</span><span class="main main">)</span> Ints_1 Ints_minus Ints_mult Ints_power deriv_n_hf_minus hf_deriv_0<span class="main">)</span>
 
 <span class="keyword1 command">lemma</span> hf_deriv_eq_0<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">k</span> <span class="main">&gt;</span> <span class="numeral">2</span><span class="main">*</span><span class="free">n</span> <span class="main">⟹</span> <span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">0</span><span class="main">)</span><span>"</span>
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">force</span> <span class="quasi_keyword">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> cf_def hf_deriv_int_poly<span class="main">)</span>
+</pre>
 
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
 <span class="keyword1 command">text</span> <span class="quoted plain_text"><span>‹</span><span>The case for positive integers</span><span>›</span></span>
 <span class="keyword1 command entity_def" id="offset_6847..6852">lemma</span> exp_nat_irrational<span class="main">:</span>
   <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">s</span> <span class="main">&gt;</span> <span class="main">0</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span>exp <span class="main">(</span>real_of_int <span class="free">s</span><span class="main">)</span> <span class="main">∉</span> <span class="main">ℚ</span><span>"</span></span>
