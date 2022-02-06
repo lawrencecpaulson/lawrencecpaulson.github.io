@@ -96,28 +96,11 @@ The (omitted) manipulations resemble those we've just seen.
      <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free">n</span><span class="main">=</span><span class="main">0</span> <span class="keyword1">then</span> <span class="main">0</span> <span class="keyword1">else</span> <span class="main">(</span><span class="main">∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="free">n</span> <span class="main">-</span> Suc <span class="main">0</span><span class="main">.</span> real_of_int <span class="main">(</span><span class="main">(</span>int <span class="bound">i</span> <span class="main">+</span> <span class="main">1</span><span class="main">)</span> <span class="main">*</span> <span class="free">c</span> <span class="main">(</span>Suc <span class="bound">i</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="free">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-<pre class="source">
-</pre>
+We calculate the coefficients of the $k$th derivative precisely.
 
 <pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-<span class="keyword1 command">text</span> <span class="quoted plain_text"><span>‹</span><span>We calculate the coefficients of the $k$th derivative precisely.</span><span>›</span></span>
 <span class="keyword1 command">lemma</span> hf_deriv_int_poly<span class="main">:</span>
-   <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span><span class="main">1/</span>fact <span class="free">n</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="main">∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="numeral">2</span><span class="main">*</span><span class="free">n</span><span class="main">-</span><span class="free">k</span><span class="main">.</span> of_int <span class="main">(</span>int<span class="main">(</span><span class="main">∏</span><span class="main">{</span><span class="bound">i</span><span class="main">&lt;..</span><span class="bound">i</span><span class="main">+</span><span class="free">k</span><span class="main">}</span><span class="main">)</span> <span class="main">*</span> cf <span class="free">n</span> <span class="main">(</span><span class="bound">i</span><span class="main">+</span><span class="free">k</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="bound">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span><span class="main">)</span><span>"</span>
+   <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span><span class="main">1/</span>fact <span class="free">n</span><span class="main">)*(∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="numeral">2</span><span class="main">*</span><span class="free">n</span><span class="main">-</span><span class="free">k</span><span class="main">.</span> of_int<span class="main">(</span>int<span class="main">(</span><span class="main">∏</span><span class="main">{</span><span class="bound">i</span><span class="main">&lt;..</span><span class="bound">i</span><span class="main">+</span><span class="free">k</span><span class="main">}</span><span class="main">)</span> <span class="main">*</span> cf <span class="free">n</span> <span class="main">(</span><span class="bound">i</span><span class="main">+</span><span class="free">k</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="bound">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span><span class="main">)</span><span>"</span>
 <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">k</span><span class="main">)</span>
   <span class="keyword3 command">case</span> 0
   <span class="keyword3 command">show</span> <span class="var quoted var">?case</span>
@@ -137,13 +120,14 @@ The (omitted) manipulations resemble those we've just seen.
   <span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> Suc F_def<span class="main">)</span>
 <span class="keyword1 command">qed</span>
+</pre>
 
+<pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_0<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">0</span> <span class="main">∈</span> <span class="main">ℤ</span><span>"</span>
 <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted quoted"><span>"</span><span class="free">n</span> <span class="main">≤</span> <span class="free">k</span><span>"</span></span><span class="main">)</span>
   <span class="keyword3 command">case</span> True
   <span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">j</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>fact <span class="free">k</span><span class="main">::</span>real<span class="main">)</span> <span class="main">=</span> real_of_int <span class="skolem">j</span> <span class="main">*</span> fact <span class="free">n</span><span>"</span></span>
-    <span class="keyword1 command">using</span> fact_dvd
-    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> dvd_def fact_nonzero mult.commute nonzero_mult_div_cancel_left of_int_fact real_of_int_div<span class="main">)</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> fact_dvd dvd_def mult.commute of_int_fact of_int_mult<span class="main">)</span>
   <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>prod real <span class="main">{</span><span class="main">0</span><span class="main">&lt;..</span><span class="free">k</span><span class="main">}</span> <span class="main">=</span> fact <span class="free">k</span><span>"</span></span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> fact_prod atLeastSucAtMost_greaterThanAtMost<span class="main">)</span>
   <span class="keyword1 command">ultimately</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
@@ -153,7 +137,9 @@ The (omitted) manipulations resemble those we've just seen.
   <span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> hf_deriv_int_poly cf_def<span class="main">)</span>
 <span class="keyword1 command">qed</span>
+</pre>
 
+<pre class="source">
 <span class="keyword1 command">lemma</span> deriv_hf_minus<span class="main">:</span> <span class="quoted quoted"><span>"</span>deriv <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">-</span> deriv <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">)</span><span>"</span>
 <span class="keyword1 command">proof</span>
   <span class="keyword3 command">fix</span> <span class="skolem">x</span>
@@ -166,7 +152,18 @@ The (omitted) manipulations resemble those we've just seen.
   <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span>deriv <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="skolem">x</span> <span class="main">=</span> <span class="main">-</span> deriv <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="skolem">x</span><span class="main">)</span><span>"</span>
     <span class="keyword1 command">by</span> <span class="operator">simp</span>
 <span class="keyword1 command">qed</span>
+</pre>
 
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
 <span class="keyword1 command">lemma</span> deriv_n_hf_diffr <span class="main">[</span><span class="operator">iff</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="keyword1">field_differentiable</span> <span class="keyword1">at</span> <span class="free">x</span><span>"</span>
   <span class="keyword1 command">unfolding</span> field_differentiable_def hf_deriv_int_poly
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> exI <span class="main keyword3">|</span> <span class="operator">force</span><span class="main">)</span><span class="main keyword3">+</span>
