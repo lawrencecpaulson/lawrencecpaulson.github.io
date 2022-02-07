@@ -22,15 +22,15 @@ and we can look at some highlights here.
 
 The proof begines by defining the function
 
-$$ f(x) = \frac{x^n (1-x)^n}{n!}. $$
+$$ f(x) = \frac{x^n (1-x)^n}{n!}, $$
 
-It goes straightforwardly into Isabelle. (I refuse to reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
+which goes straightforwardly into Isabelle. (I refuse to reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
 
 <pre class="source">
 <span class="keyword1 command entity_def">definition</span> <span class="entity entity_def">hf</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">hf</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">n</span><span class="main">.</span> <span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> <span class="main">(</span><span class="bound">x</span><span class="main">^</span><span class="bound">n</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">^</span><span class="bound">n</span><span class="main">)</span> <span class="main">/</span> fact <span class="bound">n</span><span>"</span></span>
 </pre>
 
-The text notes that the coefficients of $f$ are integers, hinting that this fact is significant,
+The text notes that the coefficients of $f$ are integers, hinting that this fact is sufficient,
 although I could not see a way to carry the proof right to the end without calculating the coefficients exactly. So here they are.
 
 <pre class="source">
@@ -70,7 +70,7 @@ The authors did not give an explicit proof of this result (having not even state
 <span class="keyword1 command">qed</span>
 </pre>
 
-The text states the following fact about $f$ (for any given $n$) with strict inequalities. This non-strict version is easier to prove (one single line) and is sufficient.
+The text states the following fact about $f$ (for any given $n$) with strict inequalities. This non-strict version is easier to prove (one single line) and is all we need.
 <pre class="source">
 <span class="keyword1 command entity_def" id="offset_2207..2212">lemma</span>
   <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="main">0</span> <span class="main">≤</span> <span class="free">x</span><span>"</span></span> <span class="quoted quoted"><span>"</span><span class="free">x</span> <span class="main">≤</span> <span class="main">1</span><span>"</span></span>
@@ -79,7 +79,7 @@ The text states the following fact about $f$ (for any given $n$) with strict ine
 </pre>
 
 That $f$ is differentiable is proved by calculating and discarding its derivative.
-That task is trivial thanks to the trick of using <span class="dynamic dynamic">derivative_eq_intros</span>, which we have [seen before]({% post_url 2021-12-22-MVT-example %}).
+This task is trivial thanks to the trick of using built-in bundles of rules for derivatives, which we have [seen before]({% post_url 2021-12-22-MVT-example %}).
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> hf_differt <span class="main">[</span><span class="operator">iff</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span>hf</span> <span class="free">n</span> <span class="keyword1">differentiable</span> <span class="keyword1">at</span> <span class="free">x</span><span>"</span>
@@ -96,7 +96,8 @@ The (omitted) manipulations resemble those we've just seen.
      <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free">n</span><span class="main">=</span><span class="main">0</span> <span class="keyword1">then</span> <span class="main">0</span> <span class="keyword1">else</span> <span class="main">(</span><span class="main">∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="free">n</span> <span class="main">-</span> Suc <span class="main">0</span><span class="main">.</span> real_of_int <span class="main">(</span><span class="main">(</span>int <span class="bound">i</span> <span class="main">+</span> <span class="main">1</span><span class="main">)</span> <span class="main">*</span> <span class="free">c</span> <span class="main">(</span>Suc <span class="bound">i</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="free">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-We calculate the coefficients of the $k$th derivative precisely.
+We have been working towards proving a claim in the text: that the derivatives $f^{(k)} (0)$ and $f^{(k)} (1)$ are integers for all $k\ge0$. The text contains a four line argument only, but it seems essential to calculate the $k$-th derivatives exactly. 
+The proof, somewhat cluttered with conversions from type `nat` to `int` to `real`, is by induction on $k$. We are dealing with products of sets of integers. 
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_int_poly<span class="main">:</span>
@@ -122,6 +123,8 @@ We calculate the coefficients of the $k$th derivative precisely.
 <span class="keyword1 command">qed</span>
 </pre>
 
+So the derivative $f^{(k)} (0)$ is indeed an integer.
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_0<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">0</span> <span class="main">∈</span> <span class="main">ℤ</span><span>"</span>
 <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted quoted"><span>"</span><span class="free">n</span> <span class="main">≤</span> <span class="free">k</span><span>"</span></span><span class="main">)</span>
@@ -139,6 +142,10 @@ We calculate the coefficients of the $k$th derivative precisely.
 <span class="keyword1 command">qed</span>
 </pre>
 
+To prove that $f^{(k)} (1)$ is an integer, we have to work harder.
+First we prove that $f'(x) = - {f'(1-x)}$.
+The proof is annoyingly long because to write the chain rule you need to make the function composition explicit.
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> deriv_hf_minus<span class="main">:</span> <span class="quoted quoted"><span>"</span>deriv <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">-</span> deriv <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">)</span><span>"</span>
 <span class="keyword1 command">proof</span>
@@ -154,11 +161,16 @@ We calculate the coefficients of the $k$th derivative precisely.
 <span class="keyword1 command">qed</span>
 </pre>
 
+Then we need a quick proof that all the necessary derivatives exist.
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> deriv_n_hf_diffr <span class="main">[</span><span class="operator">iff</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="keyword1">field_differentiable</span> <span class="keyword1">at</span> <span class="free">x</span><span>"</span>
   <span class="keyword1 command">unfolding</span> field_differentiable_def hf_deriv_int_poly
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> exI <span class="main keyword3">|</span> <span class="operator">force</span><span class="main">)</span><span class="main keyword3">+</span>
 </pre>
+
+Then, we prove another claim about $k$-th derivatives: that $f^{(k)}(x) = (−1)^k f^{(k)}(1−x)$.
+It is an easy induction.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> deriv_n_hf_minus<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span><span class="main">-</span><span class="main">1</span><span class="main">)</span><span class="main">^</span><span class="free">k</span> <span class="main">*</span> <span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf <span class="free">n</span><span class="main">)</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">)</span><span>"</span>
@@ -186,7 +198,8 @@ We calculate the coefficients of the $k$th derivative precisely.
 <span class="keyword1 command">qed</span>
 </pre>
 
-Finally we approach the main result, with two simple facts about $k$th derivatives.
+Finally we are able to show that the derivatives $f^{(k)} (1)$ are all integers.
+Moreover, for $k>2n$, the derivatives vanish.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_1<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>deriv<span class="main">^^</span><span class="free">k</span><span class="main">)</span> <span class="main">(</span>hf</span> <span class="free">n</span><span class="main">)</span> <span class="main">1</span> <span class="main">∈</span> <span class="main">ℤ</span><span>"</span>
@@ -196,17 +209,9 @@ Finally we approach the main result, with two simple facts about $k$th derivativ
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">force</span> <span class="quasi_keyword">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> cf_def hf_deriv_int_poly<span class="main">)</span>
 </pre>
 
-<pre class="source">
-</pre>
+The main argument lies in the proof that all integer exponentials are irrational. The details are too complicated to outline here, but are available in the sources quoted earlier. I have omitted some of the complicated sub-proofs, but the full development is available online.
 
 <pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-<span class="keyword1 command">text</span> <span class="quoted plain_text"><span>‹</span><span>The case for positive integers</span><span>›</span></span>
 <span class="keyword1 command entity_def" id="offset_6847..6852">lemma</span> exp_nat_irrational<span class="main">:</span>
   <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">s</span> <span class="main">&gt;</span> <span class="main">0</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span>exp <span class="main">(</span>real_of_int <span class="free">s</span><span class="main">)</span> <span class="main">∉</span> <span class="main">ℚ</span><span>"</span></span>
 <span class="keyword1 command">proof</span>
@@ -219,30 +224,10 @@ Finally we approach the main result, with two simple facts about $k$th derivativ
     <span class="keyword1 command">by</span> <span class="operator">linarith</span>
   <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="skolem">n</span> <span class="main">&gt;</span> <span class="main">0</span><span>"</span></span>
     <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="skolem">a</span> <span class="main">&gt;</span> <span class="main">0</span><span>›</span></span> n_def <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> best</span><span class="main main">)</span> zero_less_nat_eq zero_less_power<span class="main">)</span>
-  <span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="free">s</span> <span class="main">^</span> <span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">+</span><span class="main">1</span><span class="main">)</span> <span class="main">≤</span> <span class="free">s</span> <span class="main">^</span> <span class="main">(</span><span class="numeral">3</span><span class="main">*</span><span class="skolem">n</span><span class="main">)</span><span>"</span></span>
-    <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="skolem">a</span> <span class="main">&gt;</span> <span class="main">0</span><span>›</span></span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> power_increasing<span class="main">)</span> <span class="operator">auto</span>
-  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">=</span> real_of_int<span class="main">(</span><span class="free">s</span><span class="main">^</span><span class="numeral">3</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span><span>"</span></span>
-    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> power_mult<span class="main">)</span>
-  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">≤</span> <span class="main">(</span><span class="skolem">n</span> <span class="main">/</span> <span class="numeral">3</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span><span>"</span></span>
-    <span class="keyword1 command">using</span> assms ns3 <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> power_mono<span class="main">)</span>
-  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">≤</span> <span class="main">(</span><span class="skolem">n</span> <span class="main">/</span> exp <span class="main">1</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span><span>"</span></span>
-    <span class="keyword1 command">using</span> exp_le <span class="quoted quoted"><span>‹</span><span class="skolem">n</span> <span class="main">&gt;</span> <span class="main">0</span><span>›</span></span>
-    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="dynamic dynamic">divide_simps</span><span class="main">)</span>
-  <span class="keyword1 command">finally</span> <span class="keyword1 command">have</span> s_le<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">s</span> <span class="main">^</span> <span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">+</span><span class="main">1</span><span class="main">)</span> <span class="main">≤</span> <span class="main">(</span><span class="skolem">n</span> <span class="main">/</span> exp <span class="main">1</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span><span>"</span></span>
-    <span class="keyword1 command">by</span> <span class="operator">presburger</span>
+  <span class="keyword1 command">have</span> s_le<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">s</span> <span class="main">^</span> <span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">+</span><span class="main">1</span><span class="main">)</span> <span class="main">≤</span> <span class="main">(</span><span class="skolem">n</span> <span class="main">/</span> exp <span class="main">1</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span><span>"</span></span>
+    <em>omitted</em>
   <span class="keyword1 command">have</span> a_less<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="skolem">a</span> <span class="main">&lt;</span> sqrt <span class="main">(</span><span class="numeral">2</span><span class="main">*</span>pi<span class="main">*</span><span class="skolem">n</span><span class="main">)</span><span>"</span></span>
-  <span class="keyword1 command">proof</span> <span class="operator">-</span>
-    <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="numeral">2</span><span class="main">*</span>pi <span class="main">&gt;</span> <span class="main">1</span><span>"</span></span>
-      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>z3<span class="main main">)</span> pi_gt_zero sin_gt_zero_02 sin_le_zero<span class="main">)</span>
-    <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="skolem">a</span> <span class="main">=</span> sqrt <span class="main">(</span><span class="skolem">a</span><span class="main">^</span><span class="numeral">2</span><span class="main">)</span><span>"</span></span>
-      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ab<span class="main main">(</span>1<span class="main main">)</span> order_less_imp_le<span class="main">)</span>
-    <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">≤</span> sqrt <span class="skolem">n</span><span>"</span></span>
-      <span class="keyword1 command">unfolding</span> n_def
-      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> ccfv_SIG</span><span class="main main">)</span> int_nat_eq of_nat_less_of_int_iff real_sqrt_le_mono<span class="main">)</span>
-    <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">&lt;</span> sqrt <span class="main">(</span><span class="numeral">2</span><span class="main">*</span>pi<span class="main">*</span><span class="skolem">n</span><span class="main">)</span><span>"</span></span>
-      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="quoted quoted"><span>‹</span><span class="main">0</span> <span class="main">&lt;</span> <span class="skolem">n</span><span>›</span></span> <span class="quoted quoted"><span>‹</span><span class="main">1</span> <span class="main">&lt;</span> <span class="numeral">2</span> <span class="main">*</span> pi<span>›</span></span><span class="main">)</span>
-    <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span>
-  <span class="keyword1 command">qed</span>
+    <em>omitted</em>
   <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>sqrt <span class="main">(</span><span class="numeral">2</span><span class="main">*</span>pi<span class="main">*</span><span class="skolem">n</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="skolem">n</span> <span class="main">/</span> exp <span class="main">1</span><span class="main">)</span> <span class="main">^</span> <span class="skolem">n</span> <span class="main">&gt;</span> <span class="skolem">a</span> <span class="main">*</span> <span class="free">s</span> <span class="main">^</span> <span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">+</span><span class="main">1</span><span class="main">)</span><span>"</span></span>
     <span class="keyword1 command">using</span> mult_strict_right_mono <span class="main">[</span><span class="operator">OF</span> a_less<span class="main">]</span> mult_left_mono <span class="main">[</span><span class="operator">OF</span> s_le<span class="main">]</span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> best</span><span class="main main">)</span> s_le ab<span class="main main">(</span>1<span class="main main">)</span> assms of_int_1 of_int_le_iff of_int_mult zero_less_power<span class="main">)</span>
@@ -316,8 +301,12 @@ Finally we approach the main result, with two simple facts about $k$th derivativ
   <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="quoted">False</span>
     <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="main">0</span> <span class="main">&lt;</span> <span class="var">?N</span><span>›</span></span> Ints_cases N_Ints <span class="keyword1 command">by</span> <span class="operator">force</span>
 <span class="keyword1 command">qed</span>
+</pre>
 
-<span class="keyword1 command entity_def" id="offset_12212..12219">theorem</span> exp_irrational<span class="main">:</span>
+The full result, for rational arguments, should be clear from the Isabelle text alone.
+
+<pre class="source">
+<span class="keyword1 command entity_def">theorem</span> exp_irrational<span class="main">:</span>
   <span class="keyword2 keyword">fixes</span> <span class="free">q</span><span class="main">::</span><span class="quoted">real</span> <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">q</span> <span class="main">∈</span> <span class="main">ℚ</span><span>"</span></span> <span class="quoted quoted"><span>"</span><span class="free">q</span> <span class="main">≠</span> <span class="main">0</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span>exp <span class="free">q</span> <span class="main">∉</span> <span class="main">ℚ</span><span>"</span></span>
 <span class="keyword1 command">proof</span>
   <span class="keyword3 command">assume</span> q<span class="main">:</span> <span class="quoted quoted"><span>"</span>exp <span class="free">q</span> <span class="main">∈</span> <span class="main">ℚ</span><span>"</span></span>
@@ -331,4 +320,10 @@ Finally we approach the main result, with two simple facts about $k$th derivativ
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> del_insts</span><span class="main main">)</span> Rats_inverse <span class="quoted quoted"><span>‹</span><span class="skolem">s</span> <span class="main">≠</span> <span class="main">0</span><span>›</span></span> exp_minus exp_nat_irrational of_int_of_nat<span class="main">)</span>
 <span class="keyword1 command">qed</span>
 </pre>
-  
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
