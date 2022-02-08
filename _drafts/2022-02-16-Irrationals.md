@@ -11,7 +11,7 @@ The authors confine themselves to proofs requiring "only a modest amount of tech
 Nothing too advanced or specialised, but nevertheless, a selection of insightful techniques across the mathematical landscape.
 Here we look at an Isabelle/HOL proof that the exponential function yields irrational numbers.
 
-### Statement of the problem
+### Getting started
 
 Let's be precise about that claim: $\exp r$ is irrational for all rational, nonzero $r$. 
 Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive rational $r≠1$.
@@ -22,7 +22,9 @@ and we can look at some highlights here.
 
 The proof begines by defining the function
 
-$$ f(x) = \frac{x^n (1-x)^n}{n!}, $$
+$$ \begin{align*}
+f(x) &= \frac{x^n (1-x)^n}{n!}, 
+\end{align*} $$
 
 which goes straightforwardly into Isabelle. (I refuse to reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
 
@@ -36,6 +38,8 @@ although I could not see a way to carry the proof right to the end without calcu
 <pre class="source">
 <span class="keyword1 command entity_def">definition</span> <span class="entity entity_def">cf</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">cf</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">n</span> <span class="bound">i</span><span class="main">.</span> <span class="keyword1">if</span> <span class="bound">i</span> <span class="main">&lt;</span> <span class="bound">n</span> <span class="keyword1">then</span> <span class="main">0</span> <span class="keyword1">else</span> <span class="main">(</span><span class="bound">n</span> <span class="keyword1">choose</span> <span class="main">(</span><span class="bound">i</span><span class="main">-</span><span class="bound">n</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="main">-</span><span class="main">1</span><span class="main">)</span><span class="main">^</span><span class="main">(</span><span class="bound">i</span><span class="main">-</span><span class="bound">n</span><span class="main">)</span><span>"</span></span>
 </pre>
+
+### A few simple proofs
 
 The proof that they **are** the right coefficients may be instructive.
 Sums are tedious to manipulate, especially when we perform a change of variables.
@@ -95,6 +99,8 @@ The (omitted) manipulations resemble those we've just seen.
   <span class="quoted quoted"><span>"</span>deriv <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="free">n</span><span class="main">.</span> of_int <span class="main">(</span><span class="free">c</span> <span class="bound">i</span><span class="main">)</span> <span class="main">*</span> <span class="bound">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span> <span class="free">x</span>
      <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free">n</span><span class="main">=</span><span class="main">0</span> <span class="keyword1">then</span> <span class="main">0</span> <span class="keyword1">else</span> <span class="main">(</span><span class="main">∑</span><span class="bound">i</span><span class="main">=</span><span class="main">0</span><span class="main">..</span><span class="free">n</span> <span class="main">-</span> Suc <span class="main">0</span><span class="main">.</span> real_of_int <span class="main">(</span><span class="main">(</span>int <span class="bound">i</span> <span class="main">+</span> <span class="main">1</span><span class="main">)</span> <span class="main">*</span> <span class="free">c</span> <span class="main">(</span>Suc <span class="bound">i</span><span class="main">)</span><span class="main">)</span> <span class="main">*</span> <span class="free">x</span><span class="main">^</span><span class="bound">i</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
 </pre>
+
+### Reasoning about iterated derivatives by induction
 
 We have been working towards proving a claim in the text: that the derivatives $f^{(k)} (0)$ and $f^{(k)} (1)$ are integers for all $k\ge0$. The text contains a four line argument only, but it seems essential to calculate the $k$-th derivatives exactly. 
 The proof, somewhat cluttered with conversions from type `nat` to `int` to `real`, is by induction on $k$. We are dealing with products of sets of integers. 
@@ -209,7 +215,25 @@ Moreover, for $k>2n$, the derivatives vanish.
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">force</span> <span class="quasi_keyword">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> cf_def hf_deriv_int_poly<span class="main">)</span>
 </pre>
 
-The main argument lies in the proof that all integer exponentials are irrational. The details are too complicated to outline here, but are available in the sources quoted earlier. I have omitted some of the complicated sub-proofs, but the full development is available online.
+### Time for the big one
+
+The main argument lies in the proof that all integer exponentials are irrational. 
+We assume that $\exp s$ has the form $a/b$ where $s$, $a$, $b>0$.
+We define $n$ as the larger of $a^2$ and $3s^3$, from which we eventually prove that
+$n! > as^{2n+1}$.
+We define
+
+$$ \begin{align*}
+F(x) = \sum_{i\le 2n} (-1)^i  s^{2n-i} f^{(i)} (x). 
+\end{align*} $$
+
+and then show that
+
+$$ \begin{align*}
+F'(x) = -{sF(x)} + s^{2n+1} f(x).
+\end{align*} $$
+
+We put $N = aF(1) − bF(0)$, show $N$ to be an integer, and eventually show by bounding an integral that $0<N<1$, contradiction. A few subproofs of a dozen or so lines are omitted below. The full development is [available online](https://www.isa-afp.org/browser_info/current/AFP/Irrationals_From_THEBOOK/Irrationals_From_THEBOOK.html).
 
 <pre class="source">
 <span class="keyword1 command entity_def" id="offset_6847..6852">lemma</span> exp_nat_irrational<span class="main">:</span>
@@ -245,7 +269,8 @@ The main argument lies in the proof that all integer exponentials are irrational
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> refl <span class="dynamic dynamic">derivative_eq_intros</span> <span class="main keyword3">|</span> <span class="operator">force</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> <span class="dynamic dynamic">algebra_simps</span><span class="main">)</span><span class="main keyword3">+</span>
   <span class="keyword1 command">let</span> <span class="var quoted var">?N</span> <span class="main">=</span> <span class="quoted quoted"><span>"</span><span class="skolem">b</span> <span class="main">*</span> integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="skolem">sF'</span><span>"</span></span>
   <span class="keyword1 command">have</span> sF'_integral<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="skolem">sF'</span> <span class="keyword1">has_integral</span> <span class="skolem">sF</span> <span class="main">1</span> <span class="main">-</span> <span class="skolem">sF</span> <span class="main">0</span><span class="main">)</span> <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span><span>"</span></span>
-    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">)</span> fundamental_theorem_of_calculus has_field_derivative_iff_has_vector_derivative has_vector_derivative_at_within sF_der<span class="main">)</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">)</span> fundamental_theorem_of_calculus has_vector_derivative_at_within
+            has_field_derivative_iff_has_vector_derivative sF_der<span class="main">)</span>
   <span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="var">?N</span> <span class="main">=</span> <span class="skolem">a</span> <span class="main">*</span> <span class="skolem">F</span> <span class="main">1</span> <span class="main">-</span> <span class="skolem">b</span> <span class="main">*</span> <span class="skolem">F</span> <span class="main">0</span><span>"</span></span>
     <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="skolem">b</span> <span class="main">&gt;</span> <span class="main">0</span><span>›</span></span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> integral_unique exp_s sF_def <span class="dynamic dynamic">algebra_simps</span><span class="main">)</span>
   <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">∈</span> <span class="main">ℤ</span><span>"</span></span>
@@ -264,16 +289,7 @@ The main argument lies in the proof that all integer exponentials are irrational
   <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="skolem">sF'</span> <span class="main">=</span> of_int <span class="free">s</span> <span class="main">^</span> Suc<span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">)</span> <span class="main">*</span> integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> exp <span class="main">(</span><span class="free">s</span><span class="main">*</span><span class="bound">x</span><span class="main">)</span> <span class="main">*</span> hf</span> <span class="skolem">n</span> <span class="bound">x</span><span class="main">)</span><span>"</span>
     <span class="keyword1 command">unfolding</span> sF'_def <span class="keyword1 command">by</span> <span class="operator">force</span>
   <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">≤</span> of_int <span class="free">s</span> <span class="main">^</span> Suc<span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span>exp <span class="free">s</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> fact <span class="skolem">n</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
-  <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">rule</span> mult_left_mono<span class="main">)</span>
-    <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> exp <span class="main">(</span><span class="free">s</span><span class="main">*</span><span class="bound">x</span><span class="main">)</span> <span class="main">*</span> hf</span> <span class="skolem">n</span> <span class="bound">x</span><span class="main">)</span> <span class="main">≤</span> integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> exp <span class="free">s</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> fact <span class="skolem">n</span><span class="main">)</span><span class="main">)</span><span>"</span>
-    <span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">intro</span> mult_mono integral_le<span class="main">)</span>
-      <span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> exp <span class="main">(</span><span class="free">s</span><span class="main">*</span><span class="bound">x</span><span class="main">)</span> <span class="main">*</span> hf</span> <span class="skolem">n</span> <span class="bound">x</span><span class="main">)</span> <span class="keyword1">integrable_on</span> <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span><span>"</span>
-        <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="main">0</span> <span class="main">&lt;</span> <span class="var">?N</span><span>›</span></span> not_integrable_integral sF'_def <span class="keyword1 command">by</span> <span class="operator">fastforce</span>
-    <span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">use</span> assms hf_nonneg hf_le_inverse_fact <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">auto</span><span class="main">)</span>
-    <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">=</span> exp <span class="free">s</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> fact <span class="skolem">n</span><span class="main">)</span><span>"</span></span>
-      <span class="keyword1 command">by</span> <span class="operator">simp</span>
-    <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span>integral <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> exp <span class="main">(</span><span class="free">s</span><span class="main">*</span><span class="bound">x</span><span class="main">)</span> <span class="main">*</span> hf</span> <span class="skolem">n</span> <span class="bound">x</span><span class="main">)</span> <span class="main">≤</span> exp <span class="free">s</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> fact <span class="skolem">n</span><span class="main">)</span><span>"</span> <span class="keyword1 command">.</span>
-  <span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">use</span> assms <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">auto</span><span class="main">)</span>
+    <em>omitted</em>
   <span class="keyword1 command">finally</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="var">?N</span> <span class="main">≤</span> <span class="skolem">b</span> <span class="main">*</span> of_int <span class="free">s</span> <span class="main">^</span> Suc<span class="main">(</span><span class="numeral">2</span><span class="main">*</span><span class="skolem">n</span><span class="main">)</span> <span class="main">*</span> exp <span class="free">s</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> fact <span class="skolem">n</span><span class="main">)</span><span>"</span></span>
     <span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span><span class="skolem">b</span> <span class="main">&gt;</span> <span class="main">0</span><span>›</span></span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> sF'_def mult_ac <span class="dynamic dynamic">divide_simps</span><span class="main">)</span>
   <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">...</span> <span class="main">&lt;</span> <span class="main">1</span><span>"</span></span>
@@ -300,11 +316,5 @@ The full result, for rational arguments, should be clear from the Isabelle text 
   <span class="keyword1 command">ultimately</span> <span class="keyword3 command">show</span> <span class="quoted">False</span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span><span> del_insts</span><span class="main main">)</span> Rats_inverse <span class="quoted quoted"><span>‹</span><span class="skolem">s</span> <span class="main">≠</span> <span class="main">0</span><span>›</span></span> exp_minus exp_nat_irrational of_int_of_nat<span class="main">)</span>
 <span class="keyword1 command">qed</span>
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
 </pre>
 
