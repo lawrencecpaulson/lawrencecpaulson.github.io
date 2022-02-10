@@ -165,7 +165,7 @@ As of this writing, no termination checker can handle it.
 
 ### Odds and ends
 
-I have published a [more thorough treatment](https://doi.org/10.1017/bsl.2021.47) of this example in the Bulletin of Symbolic Logic.
+I have published a [more thorough treatment](https://doi.org/10.1017/bsl.2021.47) of this example in the *Bulletin of Symbolic Logic*.
 
 You'll find the Isabelle proof text at `src/HOL/Examples/Ackermann.thy` in your downloaded copy of Isabelle, and can also [browse it online](https://isabelle.in.tum.de/dist/library/HOL/HOL-Examples/Ackermann.html).
 
