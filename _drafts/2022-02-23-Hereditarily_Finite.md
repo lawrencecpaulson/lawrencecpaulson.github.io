@@ -29,7 +29,7 @@ g(7) &= \lbrace g(2), g(1), g(0)\rbrace = \lbrace \lbrace \lbrace \phi\rbrace \r
 g(11) &= \lbrace g(3), g(1), g(0)\rbrace  = \lbrace \lbrace \lbrace \phi\rbrace, \phi\rbrace, \lbrace \phi\rbrace , \phi\rbrace 
 \end{align*} $$
 
-Note that 11 is 1011 in binary and that $g(0)$, $g(1)$, $g(3)$ and $g(11)$ are the first four von Neumann ordinals. I wonder how to characterise those $n$ such that $g(n)$ is an ordinal?
+Note that 11 is 1011 in binary and that $g(0)$, $g(1)$, $g(3)$ and $g(11)$ are the first four von Neumann ordinals. It seems that if $n$ codes an ordinal then $2^n+n$ codes the next ordinal, so the ordinal 4 is $g(2059)$.
 
 The way $g$ operates on binary strings reminds me of the [Pascal](https://dl.acm.org/doi/10.1145/234286.1057812) 
 programming language's *set types*, which provide clean access to the hardware bit level. A Pascal set is a bit string: bitwise “and” performs intersection, bitwise “or” performs union, etc. Pascal was first implemented on a CDC computer with 60-bit words, allowing sets over any type having up to 60 values. 
