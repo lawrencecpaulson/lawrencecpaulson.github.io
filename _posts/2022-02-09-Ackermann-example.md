@@ -62,7 +62,7 @@ $$
 
 (The boxes anchor the rewrite rules to the start of the list. The # operator separates list elements.)
 
-The point of this version is that it corresponds naturally to a registe or Turing machine program. The problem is, how can we be sure that it corresponds to Ackermann's function? How do we even know that it terminates? The termination of Ackermann's function itself is trivial, but that proof doesn't work here.
+The point of this version is that it corresponds naturally to a register or Turing machine program. The problem is, how can we be sure that it corresponds to Ackermann's function? How do we even know that it terminates? The termination of Ackermann's function itself is trivial, but that proof doesn't work here.
 
 This question is an instance of the [halting problem](https://plato.stanford.edu/entries/turing-machine/#HaltProb). Although it is undecidable in general, sophisticated techniques and tools exist for proving the termination of a rewrite system. For this one, all existing tools fail. Fortunately, there's a remarkably simple termination proof using Isabelle/HOL, and it illustrates the treatment of tricky recursive functions.
 
