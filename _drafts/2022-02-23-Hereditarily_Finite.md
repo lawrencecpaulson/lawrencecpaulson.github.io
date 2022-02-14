@@ -63,36 +63,49 @@ But if you are already comfortable with set theory, they are the exact same sets
 #### Gödel's incompleteness theorems
 
 [Świerczkowski](https://doi.org/10.4064/DM422-0-1) used HF sets as the basis for proving Gödel's incompleteness theorems, and I [formalised his work](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf) using Isabelle/HOL.
-Sets are preferable to natural numbers because encoding ("Gödel numbering) becomes trivial. Pairing schemes based on powers of primes or the Chinese remainder theorem require nontrivial mathematics, which (for the second incompleteness theorem) has to be formalised.
+Sets are preferable to natural numbers because encoding ("Gödel numbering") becomes trivial. Pairing schemes based on powers of primes or the Chinese remainder theorem require nontrivial mathematics, which (for the second incompleteness theorem) has to be formalised.
 Here we would be looking at a formalisation not in Isabelle/HOL's higher-order logic but in a bare-bones formal calculus defined inductively within that logic.
-
+If you think doing mathematics in a modern proof assistant is difficult, let me remark that doing mathematics in a formalised calculus is a bit like using the kind of proof assistant we had 40 years ago.
 
 #### Finite automata
 
-The HF sets are a simple route out of the strict typing paradigm that bugs some people so much. Some years ago, Christian Urban published an elegant treatment regular languages avoiding the usual approach in terms of finite automata because of the difficulty of representing state spaces using simple types. But if we use HF sets to denote the state spaces of automata, then we have no problem forming Cartesian products of state spaces when forming the product of two automata, forming the powerset of the state space when transforming a nondeterministic finite automata into a deterministic one, and so forth.
+The HF sets are a simple route out of the strict typing paradigm that bugs some people so much. Some years ago, Christian Urban and Xingyuan Zhang [published](https://doi.org/10.1007/978-3-642-22863-6_25) 
+an elegant [formalisation](https://www.isa-afp.org/entries/Myhill-Nerode.html)
+of regular language theory, avoiding the usual approach in terms of finite automata, because of the difficulty of representing state spaces using simple types. But if we use HF sets to denote the state spaces of automata, then we have no problem forming Cartesian products of state spaces when forming the product of two automata, forming the powerset of the state space when transforming a nondeterministic finite automata into a deterministic one, and so forth.
 
-[Paper](https://arxiv.org/pdf/1505.01662.pdf) published in the proceedings of CADE-25, the 25th International Conference on Automated Deduction, 2015.
+I [demonstrated](https://arxiv.org/pdf/1505.01662.pdf) that such results as the
+Myhill-Nerode theorem could indeed by [formalised](https://www.isa-afp.org/entries/Finite_Automata_HF.html)
+in the traditional manner, without any hacks to get past the type system.
 
 ### The HF sets in Isabelle/HOL
 
+Implementing the hereditarily finite sets in Isabelle/HOL makes use of [`Nat_Bijection`](https://isabelle.in.tum.de/library/HOL/HOL-Library/Nat_Bijection.html),
+a library of bijections involving the natural numbers. It illustrates many aspects of how new types can be defined.
 
-
-HOL-Library [Nat_Bijection](https://isabelle.in.tum.de/library/HOL/HOL-Library/Nat_Bijection.html)
-
+First is the function to encode a set of natural numbers as a natural number, as a sum of powers of two. The rather concise notation below abbreviates
+$\sum\, \lbrace 2^i\mid i\in I\rbrace $:
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">set_encode</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>nat</span> set</span> <span class="main">⇒</span> nat<span>"</span>
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">set_encode</span> <span class="main">=</span></span> sum</span> <span class="main">(</span><span class="main">(^)</span> <span class="numeral">2</span><span class="main">)</span><span>"</span>
 </pre>
 
+I described the inverse operation above in terms of binary notation and counting 0s from the right. It can be done more concisely in terms of integer division:
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">set_decode</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>nat</span> <span class="main">⇒</span> nat</span> set<span>"</span>
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">set_decode</span> <span class="free bound entity">x</span> <span class="main">=</span></span> <span class="main">{</span><span class="bound">n</span><span class="main">.</span> odd</span> <span class="main">(</span><span class="free bound entity">x</span> <span class="keyword1">div</span> <span class="numeral">2</span> <span class="main">^</span> <span class="bound">n</span><span class="main">)</span><span class="main">}</span><span>"</span>
 </pre>
 
+With the help of those two library functions, we can go ahead and introduce the type `hf`, of hereditarily finite sets. Note that we need the Isabelle/HOL set type here; it's essential to bear in mind the difference between "HF set" (the type we are creating) and "set", which is built in.
+
+As a general rule, <span class="keyword1 command">typedef</span> defines a new, abstract type as a copy of a nonempty set, in this case the set of all natural numbers. Every HF set will be represented by a unique natural number.
+
 <pre class="source">
 <span class="keyword1 command">typedef</span> hf <span class="main">=</span> <span class="quoted quoted"><span>"</span>UNIV <span class="main">::</span> nat set<span>"</span></span> <span class="keyword1 command">..</span>
 </pre>
+
+The declaration above introduces two functions, `Abs_hf` and `Rep_hf` to convert to convert between the abstract type and the representing set. For example, here we use `Rep_hf` to map an element of `hf` to the Isabelle/HOL set of its elements.
+The given HF set is converted to a natural number and then via `set_decode` to a finite set of natural numbers, whose image under `Abs_hf` is a set of HF sets.
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">hfset</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>hf</span> <span class="main">⇒</span> hf</span> set<span>"</span>
