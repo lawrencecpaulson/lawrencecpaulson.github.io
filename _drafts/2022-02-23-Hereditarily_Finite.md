@@ -32,7 +32,7 @@ g(11) &= \lbrace g(3), g(1), g(0)\rbrace  = \lbrace \lbrace \lbrace \phi\rbrace,
 Note that 11 is 1011 in binary and that $g(0)$, $g(1)$, $g(3)$ and $g(11)$ are the first four von Neumann ordinals. It seems that if $n$ codes an ordinal then $2^n+n$ codes the next ordinal, so the ordinal 4 is $g(2059)$.
 
 The way $g$ operates on binary strings reminds me of the [Pascal](https://dl.acm.org/doi/10.1145/234286.1057812) 
-programming language's *set types*, which provide clean access to the hardware bit level. A Pascal set is a bit string: bitwise “and” performs intersection, bitwise “or” performs union, etc. Pascal was first implemented on a CDC computer with 60-bit words, allowing sets over any type having up to 60 values. 
+programming language's *set types*, which provide clean access to the hardware bit level. A Pascal set is a bit string: bitwise “and” performs intersection, bitwise “or” performs union, etc. Pascal was first implemented on a CDC computer with 60-bit words, allowing sets over any type having up to 60 values. Okay, these are not the same thing after all!
 
 [Świerczkowski](https://doi.org/10.4064/DM422-0-1) gives
 a first-order theory for HF having a constant 0 (the empty set), a binary
@@ -48,7 +48,7 @@ z=x\lhd y \iff \forall u\, (u\in z\iff u\in x\lor u=y) \\
 $$
 
 Note that $x\lhd y$ inserts a new element $y$ into the set $x$.
-The induction principle may seem a bit quirky.
+The induction principle may seem a bit quirky: the induction hypotheses make no distinction between the set being inserted and the set being inserted into.
 
 ### Uses for the HF sets
 
@@ -60,9 +60,11 @@ But if you are already comfortable with set theory, they are the exact same sets
 
 ### Some applications of HF sets to formalisation
 
+The HF sets can be used anywhere you need a diversity of possible data structures where no single element can be seen as infinite (such as an arbitrary real number). In particular, they seem natural for programming language semantics, though nobody seems to have tried this.
+
 #### Gödel's incompleteness theorems
 
-[Świerczkowski](https://doi.org/10.4064/DM422-0-1) used HF sets as the basis for proving Gödel's incompleteness theorems, and I [formalised his work](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf) using Isabelle/HOL.
+[Świerczkowski](https://doi.org/10.4064/DM422-0-1) used HF sets as the basis for proving Gödel's incompleteness theorems, and I [formalised his work](https://arxiv.org/abs/2104.14260) using Isabelle/HOL.
 Sets are preferable to natural numbers because encoding ("Gödel numbering") becomes trivial. Pairing schemes based on powers of primes or the Chinese remainder theorem require nontrivial mathematics, which (for the second incompleteness theorem) has to be formalised.
 Here we would be looking at a formalisation not in Isabelle/HOL's higher-order logic but in a bare-bones formal calculus defined inductively within that logic.
 If you think doing mathematics in a modern proof assistant is difficult, let me remark that doing mathematics in a formalised calculus is a bit like using the kind of proof assistant we had 40 years ago.
@@ -112,15 +114,28 @@ The given HF set is converted to a natural number and then via `set_decode` to a
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">hfset</span> <span class="free bound entity">a</span> <span class="main">=</span> Abs_hf</span> <span class="main">`</span> set_decode</span> <span class="main">(</span>Rep_hf <span class="free bound entity">a</span><span class="main">)</span><span>"</span>
 </pre>
 
+And now for the inverse of the function above. It takes a set `A` of HF sets; their image under `Rep_hf` is a set of natural numbers, which is then encoded as a single HF set. If `A` is infinite, incidentally, then `encode` will return zero, since `sum` can only handle finite summations.
+
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">HF</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>hf</span> set <span class="main">⇒</span> hf</span><span>"</span>
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">HF</span> <span class="free bound entity">A</span> <span class="main">=</span> Abs_hf</span> <span class="main">(</span>set_encode</span> <span class="main">(</span>Rep_hf <span class="main">`</span> <span class="free bound entity">A</span><span class="main">)</span><span class="main">)</span><span>"</span>
 </pre>
 
+Now that we can convert between an HF set and the finite set of its elements, it's trivial to define for HF the analogues of the functions on sets that we already have. Here is the example of membership (the difference between the two ∈ symbols, one bold and one not, is unfortunately invisible here):
+
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">hmem</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>hf</span> <span class="main">⇒</span> hf</span> <span class="main">⇒</span> bool<span>"</span>  <span class="main">(</span><span class="keyword2 keyword">infixl</span> <span class="quoted"><span>"</span><span class="keyword1"><span class="hidden">❙</span><strong>∈</strong></span><span>"</span></span> 50<span class="main">)</span>
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">hmem</span> <span class="free bound entity">a</span> <span class="free bound entity">b</span> <span class="main">⟷</span> <span class="free bound entity">a</span> <span class="main">∈</span> hfset</span> <span class="free bound entity">b</span><span>"</span></span>
 </pre>
+
+I am grateful to [Brian Huffman](https://galois.com/team/brian-huffman/) for the material shown above.
+There is much more to the [full development](https://www.isa-afp.org/entries/HereditarilyFinite.html) of HF sets.
+
+### Type class instantiations for type <span class="source">hf</span>
+
+Before winding up, I'd like to highlight some type class instantiations. Their purpose is simply to allow us to reuse some common symbols in a clean way.
+
+First, we arrange that 0 will denote the empty set:
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> hf <span class="main">::</span> <span class="quoted">zero</span>
@@ -129,6 +144,8 @@ The given HF set is converted to a natural number and then via `set_decode` to a
   <span class="keyword1 command">instance</span> <span class="keyword1 command">..</span>
 <span class="keyword2 keyword">end</span>
 </pre>
+
+The standard ordering relations ($\leq$ and $<$) become available after we instantiate type `hf` to `order`, which is the type class of partial orderings. Here, they will refer to the subset relation on HF sets.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> hf <span class="main">::</span> <span class="quoted">order</span>
@@ -139,6 +156,8 @@ The given HF set is converted to a natural number and then via `set_decode` to a
 <span class="keyword2 keyword">end</span>
 </pre>
 
+Several type instantiations later, we are able to overload the generic sup and inf operators ($\sqcup$ and $\sqcap$) to denote union and intersection and prove that they form a distributive lattice. That will make available a library of fundamental results on such lattices.
+
 <pre class="source">
 <span class="keyword1 command">instantiation</span> hf <span class="main">::</span> <span class="quoted">distrib_lattice</span>
 <span class="keyword2 keyword">begin</span>
@@ -146,19 +165,7 @@ The given HF set is converted to a natural number and then via `set_decode` to a
 <span class="keyword2 keyword">end</span>
 </pre>
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-Thanks for Brian Huffman for this development
-
-AFP: https://www.isa-afp.org/entries/HereditarilyFinite.html
-
+There is much, much more, including addition and multiplication for sets (extending the corresponding operations for ordinals, due to Laurence Kirby), specialist material for the incompleteness theorems and a small development of finite automata.
 
 
 
