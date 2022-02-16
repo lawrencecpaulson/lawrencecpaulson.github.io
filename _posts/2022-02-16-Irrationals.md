@@ -19,7 +19,7 @@ Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive 
 The authors present a simple 19th-century [proof](https://proofsfromthebook.github.io/7) (alternative [source](https://planetmath.org/erisirrationalforrinmathbbqsetminus0)) that relies on nothing other than differentiation and integration.
 I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs and we can look at some highlights here.
 
-The proof begines by defining the function
+The proof begins by defining the function
 
 $$ \begin{align*}
 f(x) &= \frac{x^n (1-x)^n}{n!}, 
