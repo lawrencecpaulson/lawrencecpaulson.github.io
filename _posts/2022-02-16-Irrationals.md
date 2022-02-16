@@ -17,8 +17,7 @@ Let's be precise about that claim: $\exp r$ is irrational for all rational, nonz
 Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive rational $r≠1$.
 
 The authors present a simple 19th-century [proof](https://proofsfromthebook.github.io/7) (alternative [source](https://planetmath.org/erisirrationalforrinmathbbqsetminus0)) that relies on nothing other than differentiation and integration.
-I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs
-and we can look at some highlights here.
+I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs and we can look at some highlights here.
 
 The proof begines by defining the function
 
@@ -26,7 +25,7 @@ $$ \begin{align*}
 f(x) &= \frac{x^n (1-x)^n}{n!}, 
 \end{align*} $$
 
-which goes straightforwardly into Isabelle. (I refuse to reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
+which goes straightforwardly into Isabelle. (You shouldn't reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
 
 <pre class="source">
 <span class="keyword1 command entity_def">definition</span> <span class="entity entity_def">hf</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">hf</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">n</span><span class="main">.</span> <span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> <span class="main">(</span><span class="bound">x</span><span class="main">^</span><span class="bound">n</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span><span class="main">-</span><span class="bound">x</span><span class="main">)</span><span class="main">^</span><span class="bound">n</span><span class="main">)</span> <span class="main">/</span> fact <span class="bound">n</span><span>"</span></span>
@@ -148,7 +147,7 @@ So the derivative $f^{(k)} (0)$ is indeed an integer.
 <span class="keyword1 command">qed</span>
 </pre>
 
-To prove that $f^{(k)} (1)$ is an integer, we have to work harder.
+To prove that $f^{(k)} (1)$ is also an integer, we have to work harder.
 First we prove that $f'(x) = - {f'(1-x)}$.
 The proof is annoyingly long because to write the chain rule you need to make the function composition explicit.
 
