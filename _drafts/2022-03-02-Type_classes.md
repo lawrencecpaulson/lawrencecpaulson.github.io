@@ -13,3 +13,14 @@ Key to this process was (largely hidden) *type variables*, which were attached t
 
 One fly in the ointment was that many popular functions on lists, such as the membership test, involved equality. There is no mathematically sensible way to test arbitrary computable values for equality.
 One "solution" to this conundrum, to ignore the "mathematically sensible" and simply compare the underlying bit patterns, was adopted by OCaml. That was unacceptable to Milner, who introduced a class of *equality* type variables, for types supporting a meaningful equality test. This was the first type class.
+
+[Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) 
+1989
+
+Wenzel M. (1997) [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402). In: Gunter E.L., Felty A. (eds). TPHOLs 1997.
+
+Paulson, L.C. [Organizing Numerical Theories Using Axiomatic Type Classes](https://doi.org/10.1007/s10817-004-3997-6). J Autom Reasoning 33, 29–49 (2004).
+
+Hölzl J., Immler F., Huffman B. (2013) [Type Classes and Filters for Mathematical Analysis in Isabelle/HOL](https://doi.org/10.1007/978-3-642-39634-2_21). In: Blazy S., Paulin-Mohring C., Pichardie D. (eds) Interactive Theorem Proving. ITP 2013. 
+
+[Haskell-style type classes with Isabelle/Isar](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf)
