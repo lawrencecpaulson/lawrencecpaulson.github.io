@@ -17,6 +17,24 @@ One "solution" to this conundrum, to ignore the "mathematically sensible" and si
 [Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) 
 1989
 
+``It is natural to think of adding assertions to the class declaration, specifying properties that each instance must satisfy:
+
+class Eq a where
+
+(==) :: a -> a -> Bool % (==) is an equivalence relation
+
+class Num a where
+
+zero, one :: a (+), (*) :: a -> a -> a negate :: a -> a % (zero, one, (+), (*), negate) % form a ring
+
+It is valid for any proof to rely on these properties, so long as one proves that they hold for each instance declaration. Here the assertions have simply been written as comments; a more sophisticated system could perhaps verify or use such assertions.``
+
+[Type checking type classes](https://doi.org/10.1145/158511.158698)
+Tobias Nipkow, 
+Christian Prehofer
+POPL '93: Proceedings of the 20th ACM SIGPLAN-SIGACT symposium on Principles of programming languages 1993 
+Pages 409–418
+
 Wenzel M. (1997) [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402). In: Gunter E.L., Felty A. (eds). TPHOLs 1997.
 
 Paulson, L.C. [Organizing Numerical Theories Using Axiomatic Type Classes](https://doi.org/10.1007/s10817-004-3997-6). J Autom Reasoning 33, 29–49 (2004).
