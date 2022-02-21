@@ -50,7 +50,9 @@ Type classes were introduced to Coq in 2008. Clearly Coq's richer type system ma
 
 ### Recent history
 
-Going beyond mere numerics, Hölzl et al. [showed how type classes](https://doi.org/10.1007/978-3-642-39634-2_21) could be used to add flexibility to a formalised analysis library.
+John Harrison's [formalisation of Euclidean spaces](https://doi.org/10.1007/s10817-012-9250-9) (also [here](https://www.cl.cam.ac.uk/~jrh13/papers/neworleans.html)) in HOL Light covered a vast body of material, but restricted to $\mathbb{R}^n$ for results that were typically much more general.
+Hölzl et al. [showed how type classes](https://doi.org/10.1007/978-3-642-39634-2_21) could be used to add flexibility to formalised analysis, with results now proved for topological spaces, metric spaces, normed vector spaces and euclidean spaces. So type classes go beyond mere numerical reasoning.
+Unfortunately, the carriers of many spaces cannot be formalised as types, so a more general treatment in terms of sets also needs to be done.
 
 Kunčar, O., Popescu, A. 
 
