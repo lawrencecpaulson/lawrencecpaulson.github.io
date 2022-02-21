@@ -24,19 +24,18 @@ But when the time came to design the next generation language, [Standard ML](htt
 Many observers found it ugly to make a special case of equality. The [OCaml](https://ocaml.org) language continued the former treatment of equality.
 However, in 1989 [Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) proposed instead to generalise equality types to any collection of desired operations (sometimes called a *signature*).
 They gave as examples the overloading of arithmetic operators and the treatment of equality types. Another natural example is types equipped with a total ordering, a type class that could be the basis of polymorphic sorting functions.
-Although their suggestion was simply for a programming language feature, they saw further:
+Although their suggestion was simply for a programming language feature
+––it was incorporated into [Haskell](https://www.haskell.org)––they saw further:
 
 > It is natural to think of adding assertions to the class declaration, specifying properties that each instance must satisfy... It is valid for any proof to rely on these properties, so long as one proves that they hold for each instance declaration. Here the assertions have simply been written as comments; a more sophisticated system could perhaps verify or use such assertions.
 
-### Order-sorted polymorphism in Isabelle
+### Type classes and Isabelle/HOL
 
-[Type checking type classes](https://doi.org/10.1145/158511.158698)
-Tobias Nipkow, 
-Christian Prehofer
-POPL '93: Proceedings of the 20th ACM SIGPLAN-SIGACT symposium on Principles of programming languages 1993 
-Pages 409–418
+Isabelle had Milner style polymorphism from the beginning, but it wasn't available for defining logics: some mechanism was needed to distinguish between a many sorted first-order logic and higher order logic. [Tobias Nipkow](https://www21.in.tum.de/~nipkow/) recognised that type classes could be this mechanism, governing whether quantification was permitted over truth values and functions. Doing this right required a partial ordering on type classes, so-called order-sorted polymorphism, and his paper (with Prehofer) "[Type checking type classes](https://doi.org/10.1145/158511.158698)" appeared in 1993.
 
-Wenzel M. (1997) [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402). In: Gunter E.L., Felty A. (eds). TPHOLs 1997.
+It then fell to [Wenzel](https://sketis.net) to realise Wadler and Blott's remark quoted above.
+His 1997 [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402)
+set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms, so we could introduce < and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product combining two orderings to create another ordering. He addressed the necessary theoretical questions as well as outlining the facilities themselves.
 
 Paulson, L.C. [Organizing Numerical Theories Using Axiomatic Type Classes](https://doi.org/10.1007/s10817-004-3997-6). J Autom Reasoning 33, 29–49 (2004).
 
