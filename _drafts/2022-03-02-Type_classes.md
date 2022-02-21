@@ -35,15 +35,27 @@ Isabelle had Milner style polymorphism from the beginning, but it wasn't availab
 
 It then fell to [Wenzel](https://sketis.net) to realise Wadler and Blott's remark quoted above.
 His 1997 [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402)
-set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms, so we could introduce < and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product combining two orderings to create another ordering. He addressed the necessary theoretical questions as well as outlining the facilities themselves.
+set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms. One could introduce $\le$ and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product combining two orderings to create another ordering (and even that it would be a total ordering provided both of the constituent orderings were also total). He addressed the necessary theoretical questions as well as outlining the facilities themselves.
 
-### No, not group theory!
+### Organising numbers, not groups or rings
 
-Paulson, L.C. [Organizing Numerical Theories Using Axiomatic Type Classes](https://doi.org/10.1007/s10817-004-3997-6). J Autom Reasoning 33, 29–49 (2004).
+If I recall correctly, languished largely unused for quite some time. In particular, many proof assistants including Isabelle/HOL then and HOL Light even now suffered from massive duplication of material for the various numeric types of natural numbers, integers, rationals, real and complex numbers: the same proofs of innumerable basic facts that all depended on just a few common properties.
 
-Hölzl J., Immler F., Huffman B. (2013) [Type Classes and Filters for Mathematical Analysis in Isabelle/HOL](https://doi.org/10.1007/978-3-642-39634-2_21). In: Blazy S., Paulin-Mohring C., Pichardie D. (eds) Interactive Theorem Proving. ITP 2013. 
+In the early 2000s, I [tackled this duplication](https://doi.org/10.1007/s10817-004-3997-6) (alternative [source](https://www.cl.cam.ac.uk/~lp15/papers/Reports/TypeClasses.pdf)) by introducing a series of type classes with algebraic names like semiring, ring, ordered_ring, field, ordered_field. (Since that time, the menagerie of algebraic type classes has proliferated hugely.)
+The paper is a readable but outdated overview of axiomatic type classes.
 
-Kunčar, O., Popescu, A. A Consistent Foundation for Isabelle/HOL. J Autom Reasoning 62, 531–555 (2019). https://doi.org/10.1007/s10817-018-9454-8
-https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf
+It's essential to understand that a type class such as ring will include the ring axioms but will be of no value in reasoning about abstract rings. Type classes constrain types, and the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not mean that the integers are interesting to a ring theorist; we are simply making a statement about the behaviour of the operators $+$ and $\times$.
+
+Type classes were introduced to Coq in 2008. Clearly Coq's richer type system makes its type classes more powerful than Isabelle's, but it's worth noting that the tremendous group theory developments done in Coq were based on a [formalisation of finite groups](https://doi.org/10.1007/978-3-540-74591-4_8) where the group carriers were indeed sets, represented by lists.
+
+### Recent history
+
+Going beyond mere numerics, Hölzl et al. [showed how type classes](https://doi.org/10.1007/978-3-642-39634-2_21) could be used to add flexibility to a formalised analysis library.
+
+Kunčar, O., Popescu, A. 
+
+[A Consistent Foundation for Isabelle/HOL](https://doi.org/10.1007/s10817-018-9454-8)
+(alternative [source](https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf))
+
 
 [Haskell-style type classes with Isabelle/Isar](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf)
