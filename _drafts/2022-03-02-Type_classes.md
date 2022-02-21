@@ -37,8 +37,13 @@ It then fell to [Wenzel](https://sketis.net) to realise Wadler and Blott's remar
 His 1997 [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402)
 set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms, so we could introduce < and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product combining two orderings to create another ordering. He addressed the necessary theoretical questions as well as outlining the facilities themselves.
 
+### No, not group theory!
+
 Paulson, L.C. [Organizing Numerical Theories Using Axiomatic Type Classes](https://doi.org/10.1007/s10817-004-3997-6). J Autom Reasoning 33, 29–49 (2004).
 
 Hölzl J., Immler F., Huffman B. (2013) [Type Classes and Filters for Mathematical Analysis in Isabelle/HOL](https://doi.org/10.1007/978-3-642-39634-2_21). In: Blazy S., Paulin-Mohring C., Pichardie D. (eds) Interactive Theorem Proving. ITP 2013. 
+
+Kunčar, O., Popescu, A. A Consistent Foundation for Isabelle/HOL. J Autom Reasoning 62, 531–555 (2019). https://doi.org/10.1007/s10817-018-9454-8
+https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf
 
 [Haskell-style type classes with Isabelle/Isar](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf)
