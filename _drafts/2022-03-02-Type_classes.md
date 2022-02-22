@@ -6,7 +6,7 @@ tags: Isabelle, type classes
 ---
 
 Type classes now play a major role in all the leading proof assistants: Coq, Lean and of course Isabelle/HOL. They have come a long way from their origins in the world of functional programming languages.
-They were mentioned in the **previous post**, so let's take a closer look.
+They were mentioned in the [previous post]{% post_url 2022-02-23-Hereditarily_Finite %}, so let's take a closer look.
 
 ### Robin Milner and polymorphic type checking
 
@@ -44,20 +44,22 @@ If I recall correctly, languished largely unused for quite some time. In particu
 In the early 2000s, I [tackled this duplication](https://doi.org/10.1007/s10817-004-3997-6) (alternative [source](https://www.cl.cam.ac.uk/~lp15/papers/Reports/TypeClasses.pdf)) by introducing a series of type classes with algebraic names like semiring, ring, ordered_ring, field, ordered_field. (Since that time, the menagerie of algebraic type classes has proliferated hugely.)
 The paper is a readable but outdated overview of axiomatic type classes.
 
-It's essential to understand that a type class such as ring will include the ring axioms but will be of no value in reasoning about abstract rings. Type classes constrain types, and the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not mean that the integers are interesting to a ring theorist; we are simply making a statement about the behaviour of the operators $+$ and $\times$.
+It's essential to understand that a type class such as `ring`, though including the ring axioms, will be of no value in reasoning about abstract rings. Type classes constrain types, and the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not imagine that the integers are an *interesting* ring; we are simply making a statement about the behaviour of the operators $+$ and $\times$.
 
 Type classes were introduced to Coq in 2008. Clearly Coq's richer type system makes its type classes more powerful than Isabelle's, but it's worth noting that the tremendous group theory developments done in Coq were based on a [formalisation of finite groups](https://doi.org/10.1007/978-3-540-74591-4_8) where the group carriers were indeed sets, represented by lists.
 
 ### Recent history
 
-John Harrison's [formalisation of Euclidean spaces](https://doi.org/10.1007/s10817-012-9250-9) (also [here](https://www.cl.cam.ac.uk/~jrh13/papers/neworleans.html)) in HOL Light covered a vast body of material, but restricted to $\mathbb{R}^n$ for results that were typically much more general.
+John Harrison's [formalisation of Euclidean spaces](https://doi.org/10.1007/s10817-012-9250-9) (also [here](https://www.cl.cam.ac.uk/~jrh13/papers/neworleans.html)) in HOL Light covered a vast body of material, but unfortunately restricted to $\mathbb{R}^n$ for results that were typically much more general.
 Hölzl et al. [showed how type classes](https://doi.org/10.1007/978-3-642-39634-2_21) could be used to add flexibility to formalised analysis, with results now proved for topological spaces, metric spaces, normed vector spaces and euclidean spaces. So type classes go beyond mere numerical reasoning.
-Unfortunately, the carriers of many spaces cannot be formalised as types, so a more general treatment in terms of sets also needs to be done.
+Unfortunately, the carriers of many spaces cannot be formalised as types, so a more general treatment of analysis in terms of sets is necessary.
+A start has been made for metric and topological spaces, also in HOL Light, but there is much more to be done.
 
-Kunčar, O., Popescu, A. 
+During the 1990s, the Isabelle developers took the view that definitions were the user's responsibility, not even bothering to check whether definitions were circular. Recently, many people have come to the view that a proof assistant should provide a 100% guarantee against definitions introducing formal inconsistencies. 
+Responding to some examples where circular definitions could be made through trickery involving type classes, Kunčar and Popescu [established sufficient conditions](https://doi.org/10.1007/s10817-018-9454-8)
+(alternative [source](https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf)) for ensuring the non-circularity of any system of overloaded definitions and type definitions. These checks have been incorporated into Isabelle/HOL since 2016.
+But you still need to take responsibility for your definitions: if they are wrong, all your conclusions are worthless.
 
-[A Consistent Foundation for Isabelle/HOL](https://doi.org/10.1007/s10817-018-9454-8)
-(alternative [source](https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf))
+For a modern tutorial on type classes, see Haftmann's ["Haskell-style type classes with Isabelle/Isar"](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf).
+It's distributed with Isabelle and is immediately available from the documentation panel of your jEdit session.
 
-
-[Haskell-style type classes with Isabelle/Isar](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf)
