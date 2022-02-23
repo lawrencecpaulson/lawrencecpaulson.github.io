@@ -167,4 +167,4 @@ Several type instantiations later, we are able to overload the generic sup and i
 
 There is much, much more, including specialist material for the incompleteness theorems and a small development of finite automata.
 And there's another thing: [addition and multiplication of sets](https://doi.org/10.1002/malq.200610026), extending the corresponding operations for ordinals, due to [Laurence Kirby](http://faculty.baruch.cuny.edu/lkirby/).
-And while looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets.](https://dx.doi.org/10.1007%2Fs00153-008-0073-7).
+And while looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets](https://dx.doi.org/10.1007%2Fs00153-008-0073-7).
