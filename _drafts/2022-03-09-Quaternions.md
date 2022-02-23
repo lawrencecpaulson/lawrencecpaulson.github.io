@@ -5,6 +5,8 @@ usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
 
+The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by Hamilton in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers, rather than from HOL Light) is that its definition can be regarded as coinductive. Moreover, continuing the previous post about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native.
+
 ### Defining the type
 
 As with the complex numbers, coinduction is convenient
