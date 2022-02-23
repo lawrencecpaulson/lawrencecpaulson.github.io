@@ -5,11 +5,11 @@ usemathjax: true
 tags: logic, set theory
 ---
 
-A set is *hereditarily finite* if it is finite and all of its elements are hereditarily finite. They satisfy the axioms of set theory with the negation of the axiom of infinity. There are countably many HF sets, and they are a natural domain for formalising computation. They also allow a clean treatment of Gödel's incompleteness theorems.
+A set is *hereditarily finite* if it is finite and all of its elements are hereditarily finite. They satisfy the axioms of set theory with the negation of the axiom of infinity. There are countably many HF sets, and they are a natural domain for formalising computation. They also allow a straightforward treatment of Gödel's incompleteness theorems.
 
 ### Introduction to the HF sets
 
-The inductive conception of HF sets justifies the recursive definition $f(x)=\sum\, \lbrace 2^{f(y)}\mid y\in x\rbrace $, yielding a bijection $f:\text{HF}\to \mathbb{N}$  between the HF sets and the natural numbers.
+The inductive conception of HF sets, given above, justifies the recursive definition $f(x)=\sum\, \lbrace 2^{f(y)}\mid y\in x\rbrace $, yielding a bijection $f:\text{HF}\to \mathbb{N}$  between the HF sets and the natural numbers.
 Defining $x<y$ if and only if $f(x)<f(y)$ yields an linear ordering on HF.
 It's easy to see that $<$ extends both the membership and the subset relations.
 
@@ -32,11 +32,11 @@ g(11) &= \lbrace g(3), g(1), g(0)\rbrace  = \lbrace \lbrace \lbrace \phi\rbrace,
 Note that 11 is 1011 in binary and that $g(0)$, $g(1)$, $g(3)$ and $g(11)$ are the first four von Neumann ordinals. It seems that if $n$ codes an ordinal then $2^n+n$ codes the next ordinal, so the ordinal 4 is $g(2059)$.
 
 The way $g$ operates on binary strings reminds me of the [Pascal](https://dl.acm.org/doi/10.1145/234286.1057812) 
-programming language's *set types*, which provide clean access to the hardware bit level. A Pascal set is a bit string: bitwise “and” performs intersection, bitwise “or” performs union, etc. Pascal was first implemented on a CDC computer with 60-bit words, allowing sets over any type having up to 60 values. Okay, these are not the same thing after all!
+programming language's *set types*, which provide type-safe access to the hardware bit level. A Pascal set is a bit string: bitwise “and” performs intersection, bitwise “or” performs union, etc. Pascal was first implemented on a CDC computer with 60-bit words, allowing sets over any type having up to 60 values. Okay, these are not the same thing after all!
 
 [Świerczkowski](https://doi.org/10.4064/DM422-0-1) gives
 a first-order theory for HF having a constant 0 (the empty set), a binary
-operation symbol $\lhd$ (augmentation, or ``eats''),
+operation symbol $\lhd$ (augmentation, or "eats"),
 a relation symbol $\in$ (membership) as well as equality, satisfying
 the following axioms:
 $$
@@ -167,4 +167,4 @@ Several type instantiations later, we are able to overload the generic sup and i
 
 There is much, much more, including specialist material for the incompleteness theorems and a small development of finite automata.
 And there's another thing: [addition and multiplication of sets](https://doi.org/10.1002/malq.200610026), extending the corresponding operations for ordinals, due to [Laurence Kirby](http://faculty.baruch.cuny.edu/lkirby/).
-And while looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets.](https://dx.doi.org/10.1007%2Fs00153-008-0073-7).
+While looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets.](https://dx.doi.org/10.1007%2Fs00153-008-0073-7).
