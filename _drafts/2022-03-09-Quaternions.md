@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The quaterions––and type classes"
+title:  "The quaterions—and type classes"
 usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
@@ -14,14 +14,13 @@ where $a$, $b$, $c$ and $d$ are real numbers and $\mathbf{i}$, $\mathbf{j}$, $\m
 
 $$ \mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1. $$
 
-It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them as a codatatype. (The Isabelle/HOL libraries define the complex numbers similarly.) A codatatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions. The overall effect is similar to a 4-tuple however.
+It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them (like the complex numbers) as a co-datatype. A co-datatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions. The overall effect is similar to a 4-tuple however.
 
 <pre class="source">
 <span class="keyword1 command">codatatype</span> quat <span class="main">=</span> Quat <span class="main">(</span><span class="free entity">Re</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im1</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im2</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im3</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span>
 </pre>
 
-Note that the selectors for $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ are
-`Im1`, `Im2`, `Im3`, respectively, while `Re` returns the real part of a quaternion.
+The selectors `Im1`, `Im2`, `Im3` will return the coefficients of to $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$, respectively, while `Re` will return the real part of a quaternion.
 It is trivial to prove that two quaternions are equal if and only if their four components all coincide.
 
 <pre class="source">
@@ -31,6 +30,10 @@ It is trivial to prove that two quaternions are equal if and only if their four 
 
 
 ### Defining the primitive operators
+
+It is now possible to define the primitive quaternions, $\mathbf{i}$, $\mathbf{j}$ and $\mathbf{k}$.
+With co-recursion, new entities are defined in terms of the behaviour of the selectors. For example, the quaternion $\mathbf{i}$ yields zero for all selectors except `Im1`. 
+The quaternions $\mathbf{j}$ and $\mathbf{k}$ are defined analogously.
 
 <pre class="source">
 <span class="keyword1 command">primcorec</span> <span class="entity">quat_ii</span> <span class="main">::</span> <span class="quoted">quat</span>  <span class="main">(</span><span class="quoted"><span>"</span><span class="keyword1">𝗂</span><span>"</span></span><span class="main">)</span>
@@ -44,6 +47,8 @@ It is trivial to prove that two quaternions are equal if and only if their four 
 </pre>
 
 ### Addition and Subtraction: An Abelian Group
+
+The development now proceeds by showing that quaternions are an instance of one type class after another. The first is `ab_group_add`, the class of abelian groups with the signature $(0, {+}, {-})$. For this instance declaration to be accepted, definitions must be provided for zero, addition, unary minus and subtraction, and they must be shown to satisfy the usual group axioms. The proofs of the latter turn out to take a single line. The definitions again use co-recursion, and as we can see below, these operations are all defined componentwise.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">ab_group_add</span>
@@ -79,7 +84,7 @@ It is trivial to prove that two quaternions are equal if and only if their four 
 <span class="keyword2 keyword">end</span>
 </pre>
 
-Now we can already reason about summations
+This <span class="keyword1 command">instantiation</span> declaration not only makes the entire library of facts about `ab_group_add` available to quaternions, but also additional operators such as for general summations:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> Re_sum <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>Re</span><span class="main">(</span>sum <span class="free">f</span> <span class="free">S</span><span class="main">)</span> <span class="main">=</span> sum <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span>  Re</span><span class="main">(</span><span class="free">f</span> <span class="bound">x</span><span class="main">)</span><span class="main">)</span> <span class="free">S</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="free">f</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="tfree">'a</span> <span class="main">⇒</span> quat</span><span>"</span></span>
@@ -102,7 +107,7 @@ Now we can already reason about summations
   <span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span>Im3</span> <span class="main">(</span>scaleR <span class="free bound entity">r</span> <span class="free bound entity">x</span><span class="main">)</span> <span class="main">=</span> <span class="free bound entity">r</span> <span class="main">*</span> Im3</span> <span class="free bound entity">x</span><span>"</span>
 
 <span class="keyword1 command">instance</span>
-  <span class="keyword1 command">by</span> <span class="operator">standard</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> quat_eq_iff distrib_left distrib_right  scaleR_add_right<span class="main">)</span>
+  <span class="keyword1 command">by</span> <span class="operator">standard</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> quat_eq_iff distrib_left distrib_right scaleR_add_right<span class="main">)</span>
 
 <span class="keyword2 keyword">end</span>
 </pre>
@@ -127,7 +132,8 @@ Now we can already reason about summations
   <span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span>Im3</span> <span class="main">(</span><span class="free bound entity">x</span> <span class="main">*</span> <span class="free bound entity">y</span><span class="main">)</span> <span class="main">=</span> Re</span> <span class="free bound entity">x</span> <span class="main">*</span> Im3 <span class="free bound entity">y</span> <span class="main">+</span> Im1 <span class="free bound entity">x</span> <span class="main">*</span> Im2 <span class="free bound entity">y</span> <span class="main">-</span> Im2 <span class="free bound entity">x</span> <span class="main">*</span> Im1 <span class="free bound entity">y</span> <span class="main">+</span> Im3 <span class="free bound entity">x</span> <span class="main">*</span>  Re <span class="free bound entity">y</span><span>"</span>
 
 <span class="keyword1 command">instance</span>
-  <span class="keyword1 command">by</span> <span class="operator">standard</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> quat_eq_iff distrib_left distrib_right Rings.right_diff_distrib Rings.left_diff_distrib<span class="main">)</span>
+  <span class="keyword1 command">by</span> <span class="operator">standard</span>
+     <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> quat_eq_iff distrib_left distrib_right right_diff_distrib left_diff_distrib<span class="main">)</span>
 
 <span class="keyword2 keyword">end</span>
 </pre>
