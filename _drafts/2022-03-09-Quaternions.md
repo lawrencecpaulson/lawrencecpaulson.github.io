@@ -9,11 +9,20 @@ The quaternion number system is an extension of the complex numbers to 4 dimensi
 
 ### Defining the type
 
-As with the complex numbers, coinduction is convenient
+Quaternions have the form $a + b \mathbf{i} + c \mathbf{j} + d \mathbf{k}$
+where $a$, $b$, $c$ and $d$ are real numbers and $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ are the primitive quaternions, satisfying a number of laws such as 
+
+$$ \mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1. $$
+
+It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them as a codatatype. (The Isabelle/HOL libraries define the complex numbers similarly.) A codatatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions. The overall effect is similar to a 4-tuple however.
+
 <pre class="source">
 <span class="keyword1 command">codatatype</span> quat <span class="main">=</span> Quat <span class="main">(</span><span class="free entity">Re</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im1</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im2</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im3</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span>
 </pre>
 
+Note that the selectors for $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ are
+`Im1`, `Im2`, `Im3`, respectively, while `Re` returns the real part of a quaternion.
+It is trivial to prove that two quaternions are equal if and only if their four components all coincide.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> quat_eq_iff<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">=</span> <span class="free">y</span> <span class="main">⟷</span> Re</span> <span class="free">x</span> <span class="main">=</span> Re</span> <span class="free">y</span> <span class="main">∧</span> Im1 <span class="free">x</span> <span class="main">=</span> Im1 <span class="free">y</span> <span class="main">∧</span> Im2 <span class="free">x</span> <span class="main">=</span> Im2 <span class="free">y</span> <span class="main">∧</span> Im3 <span class="free">x</span> <span class="main">=</span> Im3 <span class="free">y</span><span>"</span>
