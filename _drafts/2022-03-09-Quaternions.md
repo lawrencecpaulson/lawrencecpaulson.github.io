@@ -84,7 +84,7 @@ The development now proceeds by showing that quaternions are an instance of one 
 <span class="keyword2 keyword">end</span>
 </pre>
 
-This <span class="keyword1 command">instantiation</span> declaration not only makes the entire library of facts about `ab_group_add` available to quaternions, but also additional operators such as for general summations:
+This <span class="keyword1 command">instantiation</span> declaration not only makes the entire library of facts about `ab_group_add` available to quaternions, but also any associated operators. This particular lemma (which actually appears later in the theory) states that `Re` distributes over summations.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> Re_sum <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>Re</span><span class="main">(</span>sum <span class="free">f</span> <span class="free">S</span><span class="main">)</span> <span class="main">=</span> sum <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span>  Re</span><span class="main">(</span><span class="free">f</span> <span class="bound">x</span><span class="main">)</span><span class="main">)</span> <span class="free">S</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="free">f</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="tfree">'a</span> <span class="main">⇒</span> quat</span><span>"</span></span>
