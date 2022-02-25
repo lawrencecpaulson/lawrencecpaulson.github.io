@@ -14,7 +14,7 @@ where $a$, $b$, $c$ and $d$ are real numbers and $\mathbf{i}$, $\mathbf{j}$, $\m
 
 $$ \mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1. $$
 
-It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them (like the complex numbers) as a co-datatype. A co-datatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions. The overall effect is similar to a 4-tuple however.
+It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them (like the complex numbers) as a co-datatype. A co-datatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions (sometimes called destructors or projections). The overall effect is similar to a 4-tuple however.
 
 <pre class="source">
 <span class="keyword1 command">codatatype</span> quat <span class="main">=</span> Quat <span class="main">(</span><span class="free entity">Re</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im1</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im2</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im3</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span>
@@ -46,7 +46,7 @@ The quaternions $\mathbf{j}$ and $\mathbf{k}$ are defined analogously.
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span>Re</span> <span class="keyword1 free">𝗄</span> <span class="main">=</span> <span class="main">0</span><span>"</span></span> <span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span>Im1</span> <span class="keyword1 free">𝗄</span> <span class="main">=</span> <span class="main">0</span><span>"</span></span> <span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span>Im2</span> <span class="keyword1 free">𝗄</span> <span class="main">=</span> <span class="main">0</span><span>"</span></span> <span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span>Im3</span> <span class="keyword1 free">𝗄</span> <span class="main">=</span> <span class="main">1</span><span>"</span></span>
 </pre>
 
-### Addition and Subtraction: An Abelian Group
+### Addition and subtraction: an abelian group
 
 The development now proceeds by showing that quaternions are an instance of one type class after another. The first is `ab_group_add`, the class of abelian groups with the signature $(0, {+}, {-})$. For this instance declaration to be accepted, definitions must be provided for zero, addition, unary minus and subtraction, and they must be shown to satisfy the usual group axioms. The proofs of the latter turn out to take a single line. The definitions again use co-recursion, and as we can see below, these operations are all defined componentwise.
 
@@ -92,11 +92,13 @@ This <span class="keyword1 command">instantiation</span> declaration not only ma
 </pre>
 
 
-### A Vector Space
+### Scalar multiplication: a vector space
+
+The development continues, following the HOL Light original while continually looking for opportunities to instantiate an appropriate type class. Next is to show that quaternions are a vector space, so we instantiate `real_vector`. The (overloaded) scalar multiplication operator is called `scaleR` and its co-recursive definition is self-explanatory.
+The required properties (which amount to linearity) have a one line proof.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">real_vector</span>
-
 <span class="keyword2 keyword">begin</span>
 
 <span class="keyword1 command">primcorec</span> <span class="entity class_parameter">scaleR_quat</span>
@@ -112,9 +114,11 @@ This <span class="keyword1 command">instantiation</span> declaration not only ma
 <span class="keyword2 keyword">end</span>
 </pre>
 
-### Real algebra with 1
+### Multiplication: real algebra with unit
 
-[[Note: not a field!]]
+According to legend, Hamilton struggled for years to define a well-behaved multiplication operation for the three-dimensional space he was working on, suddenly realising that it could be done if he introduced a fourth component. As always, co-recursion defines the operations (1 and $\times$) in terms of the four selector functions.
+A real algebra with unit satisfies the axioms of a ring and the multiplication also commutes with scalar multiplication. However, quaternion multiplication is not commutative. I was pleased to find that all the necessary type classes for this development were already available in Isabelle/HOL.
+
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">real_algebra_1</span>
@@ -140,12 +144,9 @@ This <span class="keyword1 command">instantiation</span> declaration not only ma
 
 Suddenly by magic we've gained the ability to use *numerals* for quaterions, e.g.
 
-<pre class="source">
-<span class="keyword1 command">lemma</span> "(<span class="free">x</span>::<span class="quoted">quat</span>) = <span class="main">3000</span>"
-</pre>
+Up to this point I have hidden nothing from the quaternion development (available [online](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html)) apart from one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers.
 
-
-### Multiplication and Division: A Real Division Algebra
+### Multiplication and division: a real division algebra
 
 Note: not a field! 
 
