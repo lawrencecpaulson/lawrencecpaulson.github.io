@@ -142,13 +142,15 @@ A real algebra with unit satisfies the axioms of a ring and the multiplication a
 <span class="keyword2 keyword">end</span>
 </pre>
 
-Suddenly by magic we've gained the ability to use *numerals* for quaterions, e.g.
+Suddenly by magic we've gained the ability to use *numerals* to denote quaterions.
+Numerals can be hundreds of digits long, represented internally by a symbolic binary notation. Arithmetic on them is surprisingly efficient.
+This type class instantiation has also given us the functions `of_nat`, `of_int`, `of_real`, injecting other numeric types (the natural numbers, integers, reals) into the quaternions.
 
-Up to this point I have hidden nothing from the quaternion development (available [online](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html)) apart from one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers.
 
 ### Multiplication and division: a real division algebra
 
-Note: not a field! 
+The next instantiation, to the type class `real_div_algebra`—the quaternions do not form a field—requires us to define the multiplicative inverse and then (trivially) division. For the first time, justification of the type class axioms is not trivial, hence the four <span class="keyword3 command">show</span> commands below.
+
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">real_div_algebra</span>
@@ -187,7 +189,6 @@ So now we have division for quaterions, e.g.
 
 And Isabelle can even detect that it's false automatically
 
-Large numerals work
 
 <pre>
 Auto Quickcheck found a counterexample:
@@ -278,7 +279,7 @@ Evaluated terms:
 These are topological spaces, so we have limits and continuity for free
 
 
-Almost nothing has been skipped until now
+Up to this point I have hidden nothing from the quaternion development (available [online](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html)) apart from one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers.
 
 
 <pre class="source">
