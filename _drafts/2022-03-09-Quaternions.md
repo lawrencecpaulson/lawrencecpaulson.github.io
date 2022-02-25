@@ -147,7 +147,7 @@ Numerals can be hundreds of digits long, represented internally by a symbolic bi
 This type class instantiation has also given us the functions `of_nat`, `of_int`, `of_real`, injecting other numeric types (the natural numbers, integers, reals) into the quaternions.
 
 
-### Multiplication and division: a real division algebra
+### And now division: a real division algebra
 
 The next instantiation, to the type class `real_div_algebra`—the quaternions do not form a field—requires us to define the multiplicative inverse and then (trivially) division. For the first time, justification of the type class axioms is not trivial, hence the four <span class="keyword3 command">show</span> commands below.
 
@@ -181,14 +181,13 @@ The next instantiation, to the type class `real_div_algebra`—the quaternions d
 <span class="keyword2 keyword">end</span>
 </pre>
 
-So now we have division for quaterions, e.g.
+Here is a trivial example illustrating the use of both numerals and division for quaternions:
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> "(<span class="free">x</span>::<span class="quoted">quat</span>)*<span class="main">1000</span>/<span class="main">1001</span>  = <span class="free">x</span>"
+<span class="keyword1 command">lemma</span> "(<span class="free">x</span>::<span class="quoted">quat</span>)*<span class="main">1000</span>/<span class="main">1001</span> = <span class="free">x</span>"
 </pre>
 
-And Isabelle can even detect that it's false automatically
-
+If we type in the line above, Isabelle instantly and automatically detects that the claim is false, producing the following message:
 
 <pre>
 Auto Quickcheck found a counterexample:
@@ -202,7 +201,8 @@ Evaluated terms:
      (- (1000 / 1001)) (- (1000 / 1001))
 </pre>
 
-
+It also works with much larger numbers. Counterexample detection is not always possible, but it works in [much more sophisticated situations](https://doi.org/10.1007/978-3-642-35308-6_10) than the one shown, and it is a tremendous time saver.
+[Nitpick](http://dx.doi.org/10.1007/978-3-642-14052-5_11) is another counterexample finder, working on different principles from Quickcheck and also highly effective.
 
 ### Real normed division algebra
 
