@@ -5,7 +5,7 @@ usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
 
-The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by Hamilton in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers, rather than from HOL Light) is that its definition can be regarded as coinductive. Moreover, continuing the previous post about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native.
+The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by Hamilton in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers, rather than from HOL Light) is that its definition can be regarded as [coinductive](https://doi.org/10.1007/978-3-319-08970-6_7). Moreover, continuing the [previous post]{% post_url 2022-03-02-Type_classes %} about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native.
 
 ### Defining the type
 
@@ -187,7 +187,7 @@ Here is a trivial example illustrating the use of both numerals and division for
 <span class="keyword1 command">lemma</span> "(<span class="free">x</span>::<span class="quoted">quat</span>)*<span class="main">1000</span>/<span class="main">1001</span> = <span class="free">x</span>"
 </pre>
 
-If we type in the line above, Isabelle instantly and automatically detects that the claim is false, producing the following message:
+And here's another thing. If we type in the line above, Isabelle instantly and automatically detects that the claim is false, producing the following message:
 
 <pre>
 Auto Quickcheck found a counterexample:
@@ -205,6 +205,10 @@ It also works with much larger numbers. Counterexample detection is not always p
 [Nitpick](http://dx.doi.org/10.1007/978-3-642-14052-5_11) is another counterexample finder, working on different principles from Quickcheck and also highly effective.
 
 ### Real normed division algebra
+
+Now we define a norm on quaternions, instantiating the type class `real_normed_div_algebra`. The norm of $a + b \mathbf{i} + c \mathbf{j} + d \mathbf{k}$ is
+simply $\sqrt{a^2+b^2+c^2+d^2}$. This type class requires definitions of associated operators such as `dist`, the metric space distance function.
+The declaration explicitly proves some required properties of `norm`, such as the triangle inequality, while the properties of the derived operations are trivial by definition.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">real_normed_div_algebra</span>
@@ -244,9 +248,15 @@ It also works with much larger numbers. Counterexample detection is not always p
 <span class="keyword2 keyword">end</span>
 </pre>
 
+Having done this instantiation, Isabelle "knows" that quaternions are a topological space.
+Quaternions now enjoy the full vocabulary of open and closed sets, limits and continuity, derivatives and infinite sums. Because HOL Light does not have type classes, the original HOL Light development of quaternions includes whole files of library material, copied and pasted after the necessary type substitutions.
 
 
 ### Real inner product space
+
+Our final instantiation is to `real_inner`, the type class of real-valued inner product spaces.
+This step unlocks additional library material, for dot products.
+Five necessary properties of the given definition of inner products, such as the commutative and distributive laws, are shown explicitly.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">real_inner</span>
@@ -276,16 +286,11 @@ It also works with much larger numbers. Counterexample detection is not always p
 <span class="keyword2 keyword">end</span>
 </pre>
 
-These are topological spaces, so we have limits and continuity for free
 
+Up to this point I have hidden essentially nothing from the [full quaternion development](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html).
+There's only one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers. Starting from a few basic definitions, we issued six <span class="keyword1 command">instantiation</span> declarations to put at our disposal the material from three decades of library construction.
 
-Up to this point I have hidden nothing from the quaternion development (available [online](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html)) apart from one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers.
-
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
+That's only the beginning. The quaternion development goes on to derive specific properties and applications of quaternions, all "borrowed" from the HOL Light original.
+The point of this example is simply to see how much we can accomplish with type classes alone.
+What can't be done with type classes can possibly be done using locales, which are strictly more general, but that's a topic for another time.
 
