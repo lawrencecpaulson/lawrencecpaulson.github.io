@@ -6,7 +6,7 @@ tags: Isabelle, type classes
 ---
 
 Type classes now play a major role in all the leading proof assistants: Coq, Lean and of course Isabelle/HOL. They have come a long way from their origins in the world of functional programming languages.
-They were mentioned in the [previous post]{% post_url 2022-02-23-Hereditarily_Finite %}, so let's take a closer look.
+They were mentioned in the [previous post]({% post_url 2022-02-23-Hereditarily_Finite %}), so let's take a closer look.
 
 ### Robin Milner and polymorphic type checking
 
@@ -21,7 +21,7 @@ One fly in the ointment was that many popular functions on lists, such as the me
 The original ML ignored this problem, simply testing equality of the internal representations.
 But when the time came to design the next generation language, [Standard ML](https://doi.org/10.1145/3386336), Milner introduced a class of *equality* type variables: for types supporting a meaningful equality test. This was the first type class, identifying those types for which the equality operation was permitted.
 
-Many observers found it ugly to make a special case of equality. The [OCaml](https://ocaml.org) language continued the former treatment of equality.
+To make a special case of equality struck many observers as ugly. The [OCaml](https://ocaml.org) language continued the former, unsafe, treatment of equality.
 However, in 1989 [Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) proposed instead to generalise equality types to any collection of desired operations (sometimes called a *signature*).
 They gave as examples the overloading of arithmetic operators and the treatment of equality types. Another natural example is types equipped with a total ordering, a type class that could be the basis of polymorphic sorting functions.
 Although their suggestion was simply for a programming language feature
@@ -31,26 +31,32 @@ Although their suggestion was simply for a programming language feature
 
 ### Type classes and Isabelle/HOL
 
-Isabelle had Milner style polymorphism from the beginning, but it wasn't available for defining logics: some mechanism was needed to distinguish between a many sorted first-order logic and higher order logic. [Tobias Nipkow](https://www21.in.tum.de/~nipkow/) recognised that type classes could be this mechanism, governing whether quantification was permitted over truth values and functions. Doing this right required a partial ordering on type classes, so-called order-sorted polymorphism, and his paper (with Prehofer) "[Type checking type classes](https://doi.org/10.1145/158511.158698)" appeared in 1993.
+Isabelle had Milner style polymorphism from the beginning, but it wasn't available for defining logics. For that to make sense, some mechanism was needed to distinguish between a many sorted first-order logic and higher order logic. [Tobias Nipkow](https://www21.in.tum.de/~nipkow/) recognised that type classes could be this mechanism, governing whether or not quantification was permitted over truth values and functions. Doing this right required a partial ordering on type classes, so-called order-sorted polymorphism, and his paper (with Prehofer) "[Type checking type classes](https://doi.org/10.1145/158511.158698)" appeared in 1993.
 
 It then fell to [Wenzel](https://sketis.net) to realise Wadler and Blott's remark quoted above.
 His 1997 [Type classes and overloading in higher-order logic](https://doi.org/10.1007/BFb0028402)
-set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms. One could introduce $\le$ and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product combining two orderings to create another ordering (and even that it would be a total ordering provided both of the constituent orderings were also total). He addressed the necessary theoretical questions as well as outlining the facilities themselves.
+set out the principles of type class definitions linking axiomatic properties to constant symbols, as well as inheritance from other type classes. A type class could have no axioms (bare overloading) or could extend another type class with additional axioms. One could introduce $\le$ and then graduate to partial orderings, then total orderings. A type could be an instance of a type class, even such apparently tricky cases as the Cartesian product:
+
+- combining two partial orderings to create a partial ordering (on pairs)
+- but also, combining two *total* orderings to create another total ordering
+
+He addressed the necessary theoretical questions as well as outlining the facilities themselves.
 
 ### Organising numbers, not groups or rings
 
-If I recall correctly, languished largely unused for quite some time. In particular, many proof assistants including Isabelle/HOL then and HOL Light even now suffered from massive duplication of material for the various numeric types of natural numbers, integers, rationals, real and complex numbers: the same proofs of innumerable basic facts that all depended on just a few common properties.
+If I recall correctly, type classes languished largely unused for quite some time. In particular, Isabelle/HOL (like HOL Light even now) suffered from massive duplication of material for the various numeric types of natural numbers, integers, rationals, real and complex numbers: the same proofs of innumerable basic facts that all depended on just a few common properties.
 
 In the early 2000s, I [tackled this duplication](https://doi.org/10.1007/s10817-004-3997-6) (alternative [source](https://www.cl.cam.ac.uk/~lp15/papers/Reports/TypeClasses.pdf)) by introducing a series of type classes with algebraic names like semiring, ring, ordered_ring, field, ordered_field. (Since that time, the menagerie of algebraic type classes has proliferated hugely.)
 The paper is a readable but outdated overview of axiomatic type classes.
 
-It's essential to understand that a type class such as `ring`, though including the ring axioms, will be of no value in reasoning about abstract rings. Type classes constrain types, and the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not imagine that the integers are an *interesting* ring; we are simply making a statement about the behaviour of the operators $+$ and $\times$.
+It's essential to understand that a type class such as `ring`, though including the ring axioms, will be of no value in reasoning about abstract rings. Type classes constrain types; the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not imagine that the integers are an *interesting* ring; we are simply making a statement about the behaviour of the operators $+$ and $\times$. (And when I say *set* here, I'm just referring to the typed sets of higher-order logic.)
 
 Type classes were introduced to Coq in 2008. Clearly Coq's richer type system makes its type classes more powerful than Isabelle's, but it's worth noting that the tremendous group theory developments done in Coq were based on a [formalisation of finite groups](https://doi.org/10.1007/978-3-540-74591-4_8) where the group carriers were indeed sets, represented by lists.
 
 ### Recent history
 
 John Harrison's [formalisation of Euclidean spaces](https://doi.org/10.1007/s10817-012-9250-9) (also [here](https://www.cl.cam.ac.uk/~jrh13/papers/neworleans.html)) in HOL Light covered a vast body of material, but unfortunately restricted to $\mathbb{R}^n$ for results that were typically much more general.
+Harrison had used an ingennious technique to encode $\mathbb{R}^n$ as a polymorphic type.
 Hölzl et al. [showed how type classes](https://doi.org/10.1007/978-3-642-39634-2_21) could be used to add flexibility to formalised analysis, with results now proved for topological spaces, metric spaces, normed vector spaces and euclidean spaces. So type classes go beyond mere numerical reasoning.
 Unfortunately, the carriers of many spaces cannot be formalised as types, so a more general treatment of analysis in terms of sets is necessary.
 A start has been made for metric and topological spaces, also in HOL Light, but there is much more to be done.
