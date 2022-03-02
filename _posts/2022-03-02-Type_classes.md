@@ -24,8 +24,7 @@ But when the time came to design the next generation language, [Standard ML](htt
 To make a special case of equality struck many observers as ugly. The [OCaml](https://ocaml.org) language continued the former, unsafe, treatment of equality.
 However, in 1989 [Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) proposed instead to generalise equality types to any collection of desired operations (sometimes called a *signature*).
 They gave as examples the overloading of arithmetic operators and the treatment of equality types. Another natural example is types equipped with a total ordering, a type class that could be the basis of polymorphic sorting functions.
-Although their suggestion was simply for a programming language feature
-––it was incorporated into [Haskell](https://www.haskell.org)––they saw further:
+Although their suggestion was simply for a programming language feature—it was incorporated into [Haskell](https://www.haskell.org)—they saw further:
 
 > It is natural to think of adding assertions to the class declaration, specifying properties that each instance must satisfy... It is valid for any proof to rely on these properties, so long as one proves that they hold for each instance declaration. Here the assertions have simply been written as comments; a more sophisticated system could perhaps verify or use such assertions.
 
