@@ -5,7 +5,7 @@ usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
 
-The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by Hamilton in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers, rather than from HOL Light) is that its definition can be regarded as [coinductive](https://doi.org/10.1007/978-3-319-08970-6_7). Moreover, continuing the [previous post]{% post_url 2022-03-02-Type_classes %} about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native.
+The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by [Hamilton](https://mathshistory.st-andrews.ac.uk/Biographies/Hamilton/) in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers, rather than from HOL Light) is that its definition can be regarded as [coinductive](https://doi.org/10.1007/978-3-319-08970-6_7). Moreover, continuing the [previous post]({% post_url 2022-03-02-Type_classes %}) about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native (so to speak).
 
 ### Defining the type
 
@@ -14,7 +14,7 @@ where $a$, $b$, $c$ and $d$ are real numbers and $\mathbf{i}$, $\mathbf{j}$, $\m
 
 $$ \mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1. $$
 
-It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them (like the complex numbers) as a co-datatype. A co-datatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions (sometimes called destructors or projections). The overall effect is similar to a 4-tuple however.
+It would be natural to represent quaternions by 4-tuples, but it is even simpler to represent them (like the complex numbers) as a *codatatype*. A codatatype is dual to a datatype; just as the latter is specified by enumerating its constructor functions, the former is specified by enumerating its selector functions (sometimes called destructors or projections). Category theorists should note that codatatypes are terminal coalgebras. Here we get something close to a 4-tuple.
 
 <pre class="source">
 <span class="keyword1 command">codatatype</span> quat <span class="main">=</span> Quat <span class="main">(</span><span class="free entity">Re</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im1</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im2</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span> <span class="main">(</span><span class="free entity">Im3</span><span class="main">:</span> <span class="quoted">real</span><span class="main">)</span>
@@ -32,7 +32,7 @@ It is trivial to prove that two quaternions are equal if and only if their four 
 ### Defining the primitive operators
 
 It is now possible to define the primitive quaternions, $\mathbf{i}$, $\mathbf{j}$ and $\mathbf{k}$.
-With co-recursion, new entities are defined in terms of the behaviour of the selectors. For example, the quaternion $\mathbf{i}$ yields zero for all selectors except `Im1`. 
+With corecursion, new entities are defined in terms of the behaviour of the selectors. For example, the quaternion $\mathbf{i}$ yields zero for all selectors except `Im1`. 
 The quaternions $\mathbf{j}$ and $\mathbf{k}$ are defined analogously.
 
 <pre class="source">
@@ -48,7 +48,7 @@ The quaternions $\mathbf{j}$ and $\mathbf{k}$ are defined analogously.
 
 ### Addition and subtraction: an abelian group
 
-The development now proceeds by showing that quaternions are an instance of one type class after another. The first is `ab_group_add`, the class of abelian groups with the signature $(0, {+}, {-})$. For this instance declaration to be accepted, definitions must be provided for zero, addition, unary minus and subtraction, and they must be shown to satisfy the usual group axioms. The proofs of the latter turn out to take a single line. The definitions again use co-recursion, and as we can see below, these operations are all defined componentwise.
+The development now proceeds by showing that quaternions are an instance of one type class after another. The first is `ab_group_add`, the class of abelian groups with the signature $(0, {+}, {-})$. For this instance declaration to be accepted, definitions must be provided for zero, addition, unary minus and subtraction, and they must be shown to satisfy the usual group axioms. The proofs of the latter turn out to take a single line. The definitions again use corecursion, and as we can see below, these operations are all defined componentwise.
 
 <pre class="source">
 <span class="keyword1 command">instantiation</span> quat <span class="main">::</span> <span class="quoted">ab_group_add</span>
@@ -84,7 +84,7 @@ The development now proceeds by showing that quaternions are an instance of one 
 <span class="keyword2 keyword">end</span>
 </pre>
 
-This <span class="keyword1 command">instantiation</span> declaration not only makes the entire library of facts about `ab_group_add` available to quaternions, but also any associated operators. This particular lemma (which actually appears later in the theory) states that `Re` distributes over summations.
+This <span class="keyword1 command">instantiation</span> declaration not only makes the entire library of facts about `ab_group_add` available to quaternions, but also any associated operators. This particular lemma (which actually appears later in the theory) states that `Re` distributes over finite summations.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> Re_sum <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>Re</span><span class="main">(</span>sum <span class="free">f</span> <span class="free">S</span><span class="main">)</span> <span class="main">=</span> sum <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span>  Re</span><span class="main">(</span><span class="free">f</span> <span class="bound">x</span><span class="main">)</span><span class="main">)</span> <span class="free">S</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="free">f</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="tfree">'a</span> <span class="main">⇒</span> quat</span><span>"</span></span>
@@ -94,7 +94,7 @@ This <span class="keyword1 command">instantiation</span> declaration not only ma
 
 ### Scalar multiplication: a vector space
 
-The development continues, following the HOL Light original while continually looking for opportunities to instantiate an appropriate type class. Next is to show that quaternions are a vector space, so we instantiate `real_vector`. The (overloaded) scalar multiplication operator is called `scaleR` and its co-recursive definition is self-explanatory.
+The development continues, following the HOL Light original while continually looking for opportunities to instantiate an appropriate type class. Next is to show that quaternions are a vector space, so we instantiate `real_vector`. The (overloaded) scalar multiplication operator is called `scaleR` and its corecursive definition is self-explanatory.
 The required properties (which amount to linearity) have a one line proof.
 
 <pre class="source">
@@ -116,7 +116,7 @@ The required properties (which amount to linearity) have a one line proof.
 
 ### Multiplication: real algebra with unit
 
-According to legend, Hamilton struggled for years to define a well-behaved multiplication operation for the three-dimensional space he was working on, suddenly realising that it could be done if he introduced a fourth component. As always, co-recursion defines the operations (1 and $\times$) in terms of the four selector functions.
+According to legend, Hamilton struggled for years to define a well-behaved multiplication operation for the three-dimensional space he was working on, suddenly realising that it could be done if he introduced a fourth component. As always, corecursion defines the operations (1 and $\times$) in terms of the four selector functions.
 A real algebra with unit satisfies the axioms of a ring and the multiplication also commutes with scalar multiplication. However, quaternion multiplication is not commutative. I was pleased to find that all the necessary type classes for this development were already available in Isabelle/HOL.
 
 
@@ -248,8 +248,8 @@ The declaration explicitly proves some required properties of `norm`, such as th
 <span class="keyword2 keyword">end</span>
 </pre>
 
-Having done this instantiation, Isabelle "knows" that quaternions are a topological space.
-Quaternions now enjoy the full vocabulary of open and closed sets, limits and continuity, derivatives and infinite sums. Because HOL Light does not have type classes, the original HOL Light development of quaternions includes whole files of library material, copied and pasted after the necessary type substitutions.
+Having done this instantiation, Isabelle knows that quaternions are a topological space.
+Quaternions now enjoy the full vocabulary of open and closed sets, limits and continuity, derivatives and infinite sums. Because HOL Light does not have type classes, its formalisation of quaternions includes whole files of library material, copied and pasted with the obvious type substitutions.
 
 
 ### Real inner product space
@@ -291,6 +291,9 @@ Up to this point I have hidden essentially nothing from the [full quaternion dev
 There's only one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers. Starting from a few basic definitions, we issued six <span class="keyword1 command">instantiation</span> declarations to put at our disposal the material from three decades of library construction.
 
 That's only the beginning. The quaternion development goes on to derive specific properties and applications of quaternions, all "borrowed" from the HOL Light original.
+There's also a development of [Octonions](https://www.isa-afp.org/entries/Octonions.html) by 
+Angeliki Koutsoukou-Argyraki.
+
 The point of this example is simply to see how much we can accomplish with type classes alone.
-What can't be done with type classes can possibly be done using locales, which are strictly more general, but that's a topic for another time.
+What can't be done with type classes can possibly be done using *locales*, which are strictly more general, but that's a topic for another time.
 
