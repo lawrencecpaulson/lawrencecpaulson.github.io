@@ -53,7 +53,6 @@ The main lesson from his work is that the "functions" that we get must be *conti
 What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$.
 
 
-
 ### Some thoughts from Neel Krishnaswami
 
 I asked Neel his views on the matter and he replied as follows in an email (there was more):
@@ -82,8 +81,10 @@ can be interpreted in any topos, in exactly the same way that
 intuitionistic bounded ZF can be interpreted in any topos.
 
 In other words, your types can be interpreted in many weird and wonderful ways.
-But I'll wager that the ring axioms were written down with specific instances (such as polynomials)
-already in mind. We need interpretations that make intuitive sense.
+But we need interpretations that make intuitive sense.
+Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
+
+> I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
 
 
 ### What set theory does and what it doesn't
