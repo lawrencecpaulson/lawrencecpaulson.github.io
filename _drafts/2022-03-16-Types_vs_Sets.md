@@ -9,7 +9,7 @@ A recent Twitter thread brought home to me that there is widespread confusion ab
 
 ### Type theory in two minutes
 
-Type theory was a response to Russell's paradox. In its earliest form, in [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/), it consisted of Byzantine rules (but bizarrely, no visible syntax) governing the use of variables. It created a type hierarchy in which, at each type level, you could define "classes": what we would call typed sets.
+Type theory was a response to Russell's and other paradoxes. In its earliest form, in [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/), it consisted of Byzantine rules (but bizarrely, no visible syntax) governing the use of variables. It created a type hierarchy in which, at each type level, you could define "classes": what we would call typed sets.
 Simplified by [Ramsey](https://plato.stanford.edu/entries/ramsey/), codified by Church and later christened "higher-order logic",
 [simple type theory](https://plato.stanford.edu/entries/type-theory-church/) again offers a hierarchy of types constructed from an arbitrary but infinite type of individuals, a type of truth values and a function type former.
 It's notable that [Church's original paper](https://www.jstor.org/stable/2266170?seq=1#metadata_info_tab_contents) repeatedly refers to possible interpretations of his theory, but never once to sets, although Zermelo–Frankel set theory was well established by 1940 and an interpretation of Church's theory in ZF is trivial: function types denote set-theoretic function spaces.
@@ -94,7 +94,11 @@ I would advise them to relax. The point is not that ordered pairs and natural nu
 They can even can be justified conceptually, through the idea of the [cumulative hierarchy of sets](https://doi.org/10.2307/2025204).
 The point of set theory is the knowledge that you can get away with constructions such as those in perfect safety.
 
-Axiomatic set theory also gives us a critical warning. It's that you risk inconsistency if you assume collections that are too big. It's dangerous to regard the collection of all sets as a single entity, then to build on top of that. And yet, that is precisely what is done in category theory: their very starting point, **Set**, is the category of *all Zermelo–Frankel sets*.
+Axiomatic set theory also gives us a critical warning: you risk inconsistency if you assume collections that are too big. 
+So when we say that the carrier of a group is a set, it doesn't have to be specifically a ZF set;
+but if we imagine collecting up *all groups* as a single entity, that warning light should flash.
+It's dangerous to take the collection of all sets as a single entity, then to build on top of that. And yet, that is precisely what is done in category theory, again and again.
+Their very starting point, **Set**, is the category of *all Zermelo–Frankel sets*.
 What on Earth do they need all of them for? No one has ever told me.
 And category theorists are happy to tell you how much they despise ZF set theory, although they have gobbled it up whole. If you despise Spam, do you wrap it in filo pastry with truffle sauce?
 
