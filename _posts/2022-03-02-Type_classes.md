@@ -65,6 +65,6 @@ Responding to some examples where circular definitions could be made through tri
 (alternative [source](https://www.andreipopescu.uk/pdf/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf)) for ensuring the non-circularity of any system of overloaded definitions and type definitions. These checks have been incorporated into Isabelle/HOL since 2016.
 But you still need to take responsibility for your definitions: if they are wrong, all your conclusions are worthless.
 
-For a modern tutorial on type classes, see Haftmann's ["Haskell-style type classes with Isabelle/Isar"](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/classes.pdf).
+For a modern tutorial on type classes, see Haftmann's ["Haskell-style type classes with Isabelle/Isar"](https://isabelle.in.tum.de/dist/Isabelle/doc/classes.pdf).
 It's distributed with Isabelle and is immediately available from the documentation panel of your jEdit session.
 
