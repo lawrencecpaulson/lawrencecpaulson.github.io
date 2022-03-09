@@ -21,7 +21,8 @@ In a [previous post]({% post_url 2021-10-27-formalisms %}) you can read
 
 As a computer scientist, I don't find it ridiculous: everything on a computer is encoded as a bit string. Let's pursue the analogy: if we have a directory full of devotional icons in some image format, and another directory full of hardcore porn clips in some video format, it's certainly conceivable that the exact same bit string could appear in both directories. On the other hand, it's easy to see why a mathematician would resent being informed that they *are* working in ZFC whether they like it or not. That *is* ridiculous. Like the intuitionists — but unlike Gödel and others — I regard mathematical objects as existing only in our minds. It's good to know that they can be encoded in ZF, just as it's good that images, videos and music can all be coded as bit strings, but imagine how stupid it would be to insist that images, videos and music *were* nothing but bit strings.
 
-Interest in [type theories](https://plato.stanford.edu/entries/type-theory/) had exploded by the 1980s, including System F (developed independently by Girard and Reynolds), the [calculus of constructions](https://doi.org/10.1016/0890-5401(88)90005-3) of Coquand and Huet and various versions of Martin-Löf's intuitionistic type theory.
+Interest in [type theories](https://plato.stanford.edu/entries/type-theory/) had exploded by the 1980s, including System F (developed independently by Girard and Reynolds),
+various versions of Martin-Löf's [intuitionistic type theory](https://royalsocietypublishing.org/doi/10.1098/rsta.1984.0073) and finally the [calculus of constructions](https://doi.org/10.1016/0890-5401(88)90005-3) of Coquand and Huet.
 In every case, they were created with no interpretation in mind.
 They were justified syntactically, for example via proofs of [strong normalisation](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1600&context=cis_reports).
 Models came later.
