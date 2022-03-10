@@ -61,6 +61,9 @@ Thierry Coquand, whose *calculus of constructions* evolved into the type theory 
 > One main theme of this work is the importance of *notations* in mathematics and computer science: new questions were asked and solved only because of the use of AUTOMATH notation, itself a variation of λ-notation introduced by A. Church for representing functions. 
 
 Emphasis his. This quote is from a draft paper entitled "Some remarks about Dependent Type Theory".
+Regarding this syntactic approach, Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
+
+> I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
 
 I emailed Neel Krishnaswami for his views on the matter of types versus sets and he replied as follows (there was more):
 
@@ -89,9 +92,7 @@ intuitionistic bounded ZF can be interpreted in any topos.
 
 In other words, your types can be interpreted in many weird and wonderful ways.
 But we need interpretations that make intuitive sense.
-Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
-
-> I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
+Neel informs me that the original calculus of constructions was modified (during the transition to the [calculus of inductive constructions](https://hal.inria.fr/hal-01094195)) in order to make standard set-theoretic models possible.
 
 
 ### What set theory does and what it doesn't
