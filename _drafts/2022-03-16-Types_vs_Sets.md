@@ -54,9 +54,15 @@ The main lesson from his work is that the "functions" that we get must be *conti
 What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$.
 
 
-### Some thoughts from Neel Krishnaswami
+### Some thoughts from scientific colleagues
 
-I asked Neel his views on the matter and he replied as follows in an email (there was more):
+Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Coq and Lean, stated his view clearly:
+
+> One main theme of this work is the importance of *notations* in mathematics and computer science: new questions were asked and solved only because of the use of AUTOMATH notation, itself a variation of λ-notation introduced by A. Church for representing functions. 
+
+Emphasis his. This quote is from a draft paper entitled "Some remarks about Dependent Type Theory".
+
+I emailed Neel Krishnaswami for his views on the matter of types versus sets and he replied as follows (there was more):
 
 > A view from I tend to think of the syntactic rules of type theory as giving a "presentation of an algebraic theory".
 

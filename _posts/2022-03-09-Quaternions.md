@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The quaterions—and type classes"
+title:  "The quaternions—and type classes"
 usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
