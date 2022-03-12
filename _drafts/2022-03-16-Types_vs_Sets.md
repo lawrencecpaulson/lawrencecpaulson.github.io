@@ -47,8 +47,8 @@ It is striking to see the [Curry-Howard Correspondence](https://plato.stanford.e
 It barely gets a mention under [Intuitionism](https://plato.stanford.edu/entries/intuitionism/).
 
 For some time there was scepticism as to whether any interesting model could be found to make sense of such horrors as $(\lambda x. xx)(\lambda x. xx)$.
-Dana Scott was [ultimately successful](https://doi.org/10.1016/S0049-237X(08)71262-X),
-and in a lovely essay imagines a 1930s "Master's student" formulating a new conception of function in set theory, from which the laws of the $\lambda$-calculus would follow as theorems. 
+Dana Scott was ultimately successful,
+and in [lovely essay](https://doi.org/10.1016/S0049-237X(08)71262-X) (also available [here](/papers/Scott-models.pdf)) a imagines a 1930s Master's student formulating a new conception of function in set theory, from which the laws of the $\lambda$-calculus would follow as theorems. 
 For mortals it's hard to get an intuitive feel for Scott's models, especially his $D_\infty$ construction.
 The main lesson from his work is that the "functions" that we get must be *continuous* in a certain complete partial ordering, an insight that had a profound impact on the field of programming language semantics.
 What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$.
