@@ -90,7 +90,7 @@ It had been created in 1973 by Andrzej Trybulec.
 It offered a highly flexible language, based on Tarski–Grothendieck set theory,
 for mathematical concepts and proofs.
 
-The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's Isar language borrows heavily from Mizar.
+The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's [Isar](https://rdcu.be/cIPdi) language borrows heavily from Mizar.
 They are also pronounced similarly (if you [are German](https://www.muenchen.de/int/en/culture-leisure/sport-fitness/lakes-munich/isar.html)).
 
 The [Mizar Mathematical Library](http://www.mizar.org/library/)
