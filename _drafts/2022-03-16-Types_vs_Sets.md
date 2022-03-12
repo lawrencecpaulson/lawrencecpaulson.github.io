@@ -9,7 +9,7 @@ A recent Twitter thread brought home to me that there is widespread confusion ab
 
 ### Type theory in two minutes
 
-Type theory was a response to Russell's paradox. In its earliest form, in [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/), it consisted of Byzantine rules (but bizarrely, no visible syntax) governing the use of variables. It created a type hierarchy in which, at each type level, you could define "classes": what we would call typed sets.
+Type theory was a response to Russell's and other paradoxes. In its earliest form, in [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/), it consisted of Byzantine rules (but bizarrely, no visible syntax) governing the use of variables. It created a type hierarchy in which, at each type level, you could define "classes": what we would call typed sets.
 Simplified by [Ramsey](https://plato.stanford.edu/entries/ramsey/), codified by Church and later christened "higher-order logic",
 [simple type theory](https://plato.stanford.edu/entries/type-theory-church/) again offers a hierarchy of types constructed from an arbitrary but infinite type of individuals, a type of truth values and a function type former.
 It's notable that [Church's original paper](https://www.jstor.org/stable/2266170?seq=1#metadata_info_tab_contents) repeatedly refers to possible interpretations of his theory, but never once to sets, although Zermelo–Frankel set theory was well established by 1940 and an interpretation of Church's theory in ZF is trivial: function types denote set-theoretic function spaces.
@@ -21,7 +21,8 @@ In a [previous post]({% post_url 2021-10-27-formalisms %}) you can read
 
 As a computer scientist, I don't find it ridiculous: everything on a computer is encoded as a bit string. Let's pursue the analogy: if we have a directory full of devotional icons in some image format, and another directory full of hardcore porn clips in some video format, it's certainly conceivable that the exact same bit string could appear in both directories. On the other hand, it's easy to see why a mathematician would resent being informed that they *are* working in ZFC whether they like it or not. That *is* ridiculous. Like the intuitionists — but unlike Gödel and others — I regard mathematical objects as existing only in our minds. It's good to know that they can be encoded in ZF, just as it's good that images, videos and music can all be coded as bit strings, but imagine how stupid it would be to insist that images, videos and music *were* nothing but bit strings.
 
-Interest in [type theories](https://plato.stanford.edu/entries/type-theory/) had exploded by the 1980s, including System F (developed independently by Girard and Reynolds), the [calculus of constructions](https://doi.org/10.1016/0890-5401(88)90005-3) of Coquand and Huet and various versions of Martin-Löf's intuitionistic type theory.
+Interest in [type theories](https://plato.stanford.edu/entries/type-theory/) had exploded by the 1980s, including System F (developed independently by Girard and Reynolds),
+various versions of Martin-Löf's [intuitionistic type theory](https://royalsocietypublishing.org/doi/10.1098/rsta.1984.0073) and finally the [calculus of constructions](https://doi.org/10.1016/0890-5401(88)90005-3) of Coquand and Huet.
 In every case, they were created with no interpretation in mind.
 They were justified syntactically, for example via proofs of [strong normalisation](https://repository.upenn.edu/cgi/viewcontent.cgi?article=1600&context=cis_reports).
 Models came later.
@@ -53,9 +54,18 @@ The main lesson from his work is that the "functions" that we get must be *conti
 What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$.
 
 
-### Some thoughts from Neel Krishnaswami
+### Some thoughts from scientific colleagues
 
-I asked Neel his views on the matter and he replied as follows in an email (there was more):
+Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Coq and Lean, stated his view clearly:
+
+> One main theme of this work is the importance of *notations* in mathematics and computer science: new questions were asked and solved only because of the use of AUTOMATH notation, itself a variation of λ-notation introduced by A. Church for representing functions. 
+
+Emphasis his. This quote is from a draft paper entitled "Some remarks about Dependent Type Theory".
+Regarding this syntactic approach, Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
+
+> I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
+
+I emailed Neel Krishnaswami for his views on the matter of types versus sets and he replied as follows (there was more):
 
 > A view from I tend to think of the syntactic rules of type theory as giving a "presentation of an algebraic theory".
 
@@ -82,9 +92,7 @@ intuitionistic bounded ZF can be interpreted in any topos.
 
 In other words, your types can be interpreted in many weird and wonderful ways.
 But we need interpretations that make intuitive sense.
-Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
-
-> I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
+Neel informs me that the original calculus of constructions was modified (during the transition to the [calculus of inductive constructions](https://hal.inria.fr/hal-01094195)) in order to make standard set-theoretic models possible.
 
 
 ### What set theory does and what it doesn't
@@ -94,7 +102,11 @@ I would advise them to relax. The point is not that ordered pairs and natural nu
 They can even can be justified conceptually, through the idea of the [cumulative hierarchy of sets](https://doi.org/10.2307/2025204).
 The point of set theory is the knowledge that you can get away with constructions such as those in perfect safety.
 
-Axiomatic set theory also gives us a critical warning. It's that you risk inconsistency if you assume collections that are too big. It's dangerous to regard the collection of all sets as a single entity, then to build on top of that. And yet, that is precisely what is done in category theory: their very starting point, **Set**, is the category of *all Zermelo–Frankel sets*.
+Axiomatic set theory also gives us a critical warning: you risk inconsistency if you assume collections that are too big. 
+So when we say that the carrier of a group is a set, it doesn't have to be specifically a ZF set;
+but if we imagine collecting up *all groups* as a single entity, that warning light should flash.
+It's dangerous to take the collection of all sets as a single entity, then to build on top of that. And yet, that is precisely what is done in category theory, again and again.
+Their very starting point, **Set**, is the category of *all Zermelo–Frankel sets*.
 What on Earth do they need all of them for? No one has ever told me.
 And category theorists are happy to tell you how much they despise ZF set theory, although they have gobbled it up whole. If you despise Spam, do you wrap it in filo pastry with truffle sauce?
 

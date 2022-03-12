@@ -92,7 +92,7 @@ But how does Isabelle/HOL handle the issue of termination?
   </span><span class="keyword1 command">by</span><span> </span><span class="operator">pat_completeness</span><span> </span><span class="operator">auto</span>
 </pre>
 
-[Alex Krauss's](https://www21.in.tum.de/~krauss/) wonderful [function definition package](https://isabelle.in.tum.de/dist/Isabelle2021-1/doc/functions.pdf) anticipates such difficult cases.
+[Alex Krauss's](https://www21.in.tum.de/~krauss/) wonderful [function definition package](https://isabelle.in.tum.de/dist/Isabelle/doc/functions.pdf) anticipates such difficult cases.
 It allows us to define function `f` first and deal with its termination later.
 When prompted by the keyword `domintros`, it defines the predicate `f_dom` expressing the termination of `f` for a given argument. Then arbitrary recursion equations for `f` can be accepted, but the package makes them conditional: they will hold only if `f` terminates on the given argument.
 Then our task is to prove that `f_dom` holds on the arguments we are interested in
