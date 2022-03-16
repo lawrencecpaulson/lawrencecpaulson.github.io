@@ -10,7 +10,7 @@ A recent Twitter thread brought home to me that there is widespread confusion ab
 ### Type theory in two minutes
 
 Type theory was a response to Russell's and other paradoxes. In its earliest form, in [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/), it consisted of Byzantine rules (but bizarrely, no visible syntax) governing the use of variables. It created a type hierarchy in which, at each type level, you could define "classes": what we would call typed sets.
-Simplified by [Ramsey](https://plato.stanford.edu/entries/ramsey/), codified by Church and later christened "higher-order logic",
+Simplified by [Ramsey](https://plato.stanford.edu/entries/ramsey/), codified by [Church](https://plato.stanford.edu/entries/church/) and later christened "higher-order logic",
 [simple type theory](https://plato.stanford.edu/entries/type-theory-church/) again offers a hierarchy of types constructed from an arbitrary but infinite type of individuals, a type of truth values and a function type former.
 It's notable that [Church's original paper](https://www.jstor.org/stable/2266170?seq=1#metadata_info_tab_contents) repeatedly refers to possible interpretations of his theory, but never once to sets, although Zermelo–Frankel set theory was well established by 1940 and an interpretation of Church's theory in ZF is trivial: function types denote set-theoretic function spaces.
 
@@ -36,12 +36,12 @@ Church's untyped [$\lambda$-calculus](https://plato.stanford.edu/entries/lambda-
 - $\lambda x.M$ (abstractions)
 - $M N$ (combinations)
 
-The most basic rule of the $\lambda$-calculus is $\beta$-reduction, which replaces $(\lambda x. M)N$ by $M[N/x]$ or in other words, a copy of $M$ in which every free occurrence of $x$ has been replaced by $N$.
+The most basic rule of the $\lambda$-calculus is *$\beta$-reduction*, which replaces $(\lambda x. M)N$ by $M[N/x]$, which denotes a copy of $M$ in which every free occurrence of $x$ has been replaced by $N$.
 Obviously, $\lambda x. M$ should be seen as a sort of function, with $(\lambda x. M)N$ the application of that function to the argument $N$. But there is no obvious model for the $\lambda$-calculus.
-There is the degenerate model (where all terms denote the same thing) and there are syntactic models (where $\lambda x. M$ simply denotes the corresponding functions on $\lambda$-terms themselves).
+There is the degenerate model (where all terms denote the same thing) and there are syntactic models (where $\lambda$-terms essentially denote themselves).
 
 A quick flick through Church's [*Calculi of Lambda Conversion*](https://compcalc.github.io/public/church/church_calculi_1941.pdf) makes it clear that this is mathematics at its most formalistic. Indeed, Church's colleague Haskell Curry became a firm [advocate of the formalist school](https://plato.stanford.edu/entries/formalism-mathematics/#TerForCur) of the foundations of mathematics.
-This is the view that mathematics is a mechanical game played with absolutely meaningless symbols. Nothing more.
+This is the view that mathematics is a mechanical game played with meaningless symbols. Absolutely nothing more.
 Many advocates of "constructivism" today seem to be playing this formalistic game; they are not practising intuitionism. 
 It is striking to see the [Curry-Howard Correspondence](https://plato.stanford.edu/entries/formalism-mathematics/#CurHowCor) covered in the Stanford Encyclopaedia of Philosophy's entry on [Formalism in the Philosophy of Mathematics](https://plato.stanford.edu/entries/formalism-mathematics/).
 It barely gets a mention under [Intuitionism](https://plato.stanford.edu/entries/intuitionism/).
@@ -51,7 +51,9 @@ Dana Scott was ultimately successful,
 and in [lovely essay](https://doi.org/10.1016/S0049-237X(08)71262-X) (also available [here](/papers/Scott-Models.pdf)) a imagines a 1930s Master's student formulating a new conception of function in set theory, from which the laws of the $\lambda$-calculus would follow as theorems. 
 For mortals it's hard to get an intuitive feel for Scott's models, especially his $D_\infty$ construction.
 The main lesson from his work is that the "functions" that we get must be *continuous* in a certain complete partial ordering, an insight that had a profound impact on the field of programming language semantics.
-What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$.
+
+What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$ just like 0, $\pi$, $\sqrt 2$, etc. are the names of certain real numbers.
+The $\lambda$-calculus existed for decades with no imagined model.
 
 
 ### Some thoughts from scientific colleagues
