@@ -23,13 +23,13 @@ It's trivially reflective, symmetric and transitive. Writing $[(a,b)]$ for the e
 
 $$
 \begin{align*}
-a &= [(a,0)] \\
+a &= [(a,0)] \qquad \text{mapping $\mathbb{N}$ to $\mathbb{Z}$} \\
 -[(a,b)] &= [(b,a)] \\
 [(a,b)] + [(c,d)] &= [(a+c,b+d)] 
 \end{align*}
 $$
 
-As usual, operations on the equivalence classes are defined in terms of operations on the representatives. To be well-defined, those operations must respect the equivalence relation, delivering the same result regardless of which representative was chosen. Another example is a function to map nonnegative integers to natural numbers:
+As usual, operations on the equivalence classes are defined in terms of operations on the representatives. To be well-defined, those operations must *respect the equivalence relation*, delivering the same result regardless of which representative was chosen. Another example is a function to map nonnegative integers to natural numbers:
 
 $$
 \begin{align*}
@@ -37,14 +37,24 @@ $$
 \end{align*}
 $$
 
-The most obvious definitions of equivalence classes, respecting the equivalence relation, etc., work without fuss. My (2006) paper spells through the details with an emphasis on definitions and lemmas allowing the simplest formal proofs.
+This makes sense because for nonnegative integers, $a\ge b$.
+And if $a+d = c+b$ we quickly obtain $c\ge d$ and $a-b=c-d$.
 
-`the_elem`
+The most obvious definitions of equivalence classes, respecting the equivalence relation, etc., work without fuss. My (2006) [paper](https://dl.acm.org/doi/10.1145/1183278.1183280) (also
+[here](https://arxiv.org/abs/1907.07591)) spells out the absolutely straightforward details with an emphasis on definitions and lemmas allowing the simplest formal proofs.
 
-### Some basic definitions
 
-Having set out to prove that quotienting has nothing to do with types, I was dismayed to read my own (2006) [paper](https://dl.acm.org/doi/10.1145/1183278.1183280) (also
-[here](https://arxiv.org/abs/1907.07591)) on the topic:
+### No need for the axiom of choice (AC)
+
+Many authors seem to dislike equivalence classes, using AC to choose an arbitrary representative. While I accept AC, it's poor taste and overcomplicated to use it without cause. Operations on equivalence classes can be defined simply as the union of all possible results of the corresponding operation on representatives. If the operation respects the equivalence relation, then the union will be trivial, the union of a family of identical sets, and we get our result by $\bigcup\\{x\\} = x$.
+
+You may well ask, what if the desired result isn't a set? This issue does not arise in Isabelle/ZF, where I first did this work and where everything is a set. For Isabelle/HOL a simple trick solves the problem: it's always possible to define your operation to return a singleton set, and finally extract the desired result by calling `the_elem`, which maps $\\{x\\} \mapsto x$.
+
+By the way, referring to such an operation as the "axiom of unique choice" is as oxymoronic as referring to plastic as "vegan leather".
+
+### So what about types?
+
+Having set out to prove that quotienting has nothing to do with types, I was dismayed to read my own paper on the topic:
 
 > A quotient construction defines an abstract type from a concrete type, using an equivalence relation to identify elements of the concrete type that are to be regarded as indistinguishable. The elements of a quotient type are equivalence classes: sets of equivalent concrete values.
 
