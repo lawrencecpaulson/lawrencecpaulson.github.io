@@ -60,15 +60,25 @@ Having set out to prove that quotienting has nothing to do with types, I was dis
 
 The idea that types are connected with quotienting is pervasive, especially in computer science, where one of the most important principles is data abstraction.
 But this view narrows our horizons, and the actual mathematics reported in that paper operates at the level of sets.
+And by "sets" here it makes little difference whether we are in ZFC or using the typed sets of higher-order logic.
+
+The techniques in my paper are fine for declaring something like the integers, but demand a lot of repetitious work in the case of a [recursive datatype with equational constraints](https://isabelle.in.tum.de/library/HOL/HOL-Induct/QuoDataType.html) and even more so when there's [nested datatype recursion](https://isabelle.in.tum.de/library/HOL/HOL-Induct/QuoNestedDataType.html):
+the number of trivial facts to be stated and proved is quadratic in the number of datatype constructors. 
+
+More automation can be obtained through the [lifting and transfer](https://rdcu.be/cI622) package.
+It is powerful, general and modular, but somewhat mysterious: not so easy to learn. And yet I can see nearly 8600 calls to the `transfer` method in the Isabelle distribution and libraries.
+It is however, type-based, transferring properties and definitions between concrete and abstract types.
+To do a quotient construction on a set, my more direct methods should do the job.
+
 
 ### Quotients in dependent type theory
 
-I'm not an expert and what I know I tend to hear indirectly. One thing I hear is that quotienting in type theory involves a *setoid*, a type paired with an explicit equality relation. (See [Barthe et al.](https://doi.org/10.1017/S0956796802004501), also [here](https://hal.archives-ouvertes.fr/hal-01124972).
+I'm not an expert and what I know I tend to hear indirectly. One thing I hear is that quotienting in type theory often involves a *setoid*, a type paired with an explicit equality relation. (See [Barthe et al.](https://doi.org/10.1017/S0956796802004501), also [here](https://hal.archives-ouvertes.fr/hal-01124972).
 See also [*setoid hell*](https://www.google.com/search?client=safari&rls=10_15_7&q=setoid+hell&ie=UTF-8&oe=UTF-8).)
 Straightforward quotienting is apparently not possible.
 Cyril Cohen suggests some [pragmatic techniques](https://rdcu.be/cI1i6) for Coq.
 However, [quotients in Lean](https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients)
 are handled differently, with quotients built in and supported by an additional axiom.
-I gather that type theory purists are outraged by Lean's approach and would comment that it's a shame that such sophisticated type theories cannot directly support such elementary constructions.
 
-
+I gather that type theory purists are outraged by Lean's approach.
+It's a shame that such sophisticated type theories cannot deal with something as trivial as equivalence classes.
