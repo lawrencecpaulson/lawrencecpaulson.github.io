@@ -52,7 +52,7 @@ and in [lovely essay](https://doi.org/10.1016/S0049-237X(08)71262-X) (also avail
 For mortals it's hard to get an intuitive feel for Scott's models, especially his $D_\infty$ construction.
 The main lesson from his work is that the "functions" that we get must be *continuous* in a certain complete partial ordering, an insight that had a profound impact on the field of programming language semantics.
 
-What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$ just like 0, $\pi$, $\sqrt 2$, etc. are the names of certain real numbers.
+What we can't do is claim that $\lambda$-terms are nothing but the names of certain elements of $D_\infty$ just as 0, $\pi$, $\sqrt 2$, etc. are the names of certain real numbers.
 The $\lambda$-calculus existed for decades with no imagined model.
 
 
@@ -103,9 +103,9 @@ Neel informs me that the original calculus of constructions was modified (during
 As already remarked, it's wrong to insist that all mathematicians are working in ZFC. This claim completely misrepresents what set theory tells us. Many people are seriously bothered by definitions such as $(x,y) = \\{\\{x\\}, \\{x,y\\}\\}$ and $n = \\{0, \ldots, n-1\\}$.
 I would advise them to relax. The point is not that ordered pairs and natural numbers can (let alone must) be coded in that way, but rather that some truly tremendous things (the notion of ordinals, cardinals, transfinite induction, fantastic combinatorial constructions, gigantic hierarchies of spaces) can be justified axiomatically. 
 They can even can be justified conceptually, through the idea of the [cumulative hierarchy of sets](https://doi.org/10.2307/2025204).
-The point of set theory is the knowledge that you can get away with constructions such as those in perfect safety.
+The point of set theory is the knowledge that you can get away with ambitious constructions such as those in perfect safety.
 
-Axiomatic set theory also gives us a critical warning: you risk inconsistency if you assume collections that are too big. 
+Axiomatic set theory also gives us a critical warning: **you risk inconsistency if you assume collections that are too big**. 
 So when we say that the carrier of a group is a set, it doesn't have to be specifically a ZF set;
 but if we imagine collecting up *all groups* as a single entity, that warning light should flash.
 It's dangerous to take the collection of all sets as a single entity, then to build on top of that. And yet, that is precisely what is done in category theory, again and again.
