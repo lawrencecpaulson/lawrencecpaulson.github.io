@@ -48,7 +48,8 @@ html:
     utterances:
       repo: "lawrencecpaulson/lawrencecpaulson.github.io"
 repository: "lawrencecpaulson/lawrencecpaulson.github.io"
-      
+google_analytics: G-9TCSTY02M9
+    
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
