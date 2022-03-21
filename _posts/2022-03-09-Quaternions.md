@@ -5,7 +5,7 @@ usemathjax: true
 tags: examples, Isabelle, quaternions
 ---
 
-The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by [Hamilton](https://mathshistory.st-andrews.ac.uk/Biographies/Hamilton/) in 1843. I translated the [HOL Light formalisation of quaternions](https://doi.org/10.1007/978-3-319-66107-0_15) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers) is that its definition can be regarded as [coinductive](https://doi.org/10.1007/978-3-319-08970-6_7). Moreover, continuing the [previous post]({% post_url 2022-03-02-Type_classes %}) about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native (so to speak).
+The quaternion number system is an extension of the complex numbers to 4 dimensions, introduced by [Hamilton](https://mathshistory.st-andrews.ac.uk/Biographies/Hamilton/) in 1843. I translated the [HOL Light formalisation of quaternions](https://rdcu.be/cJtAY) into Isabelle/HOL some time ago. One notable feature of the formalisation (taken from the Isabelle/HOL formalisation of the complex numbers) is that its definition can be regarded as [coinductive](https://rdcu.be/cJtAZ). Moreover, continuing the [previous post]({% post_url 2022-03-02-Type_classes %}) about axiomatic type classes, we have a dramatic demonstration of how quickly a new class of numbers can be made native (so to speak).
 
 ### Defining the type
 
@@ -201,8 +201,8 @@ Evaluated terms:
      (- (1000 / 1001)) (- (1000 / 1001))
 </pre>
 
-It also works with much larger numbers. Counterexample detection is not always possible, but it works in [much more sophisticated situations](https://doi.org/10.1007/978-3-642-35308-6_10) than the one shown, and it is a tremendous time saver.
-[Nitpick](http://dx.doi.org/10.1007/978-3-642-14052-5_11) is another counterexample finder, working on different principles from Quickcheck and also highly effective.
+It also works with much larger numbers. Counterexample detection is not always possible, but it works in [much more sophisticated situations](https://rdcu.be/cJtAD) than the one shown, and it is a tremendous time saver.
+[Nitpick](https://rdcu.be/cJtuJ) is another counterexample finder, working on different principles from Quickcheck and also highly effective.
 
 ### Real normed division algebra
 

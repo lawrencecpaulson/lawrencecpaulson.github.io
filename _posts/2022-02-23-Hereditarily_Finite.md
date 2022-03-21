@@ -71,7 +71,7 @@ If you think doing mathematics in a modern proof assistant is difficult, let me 
 
 #### Finite automata
 
-The HF sets are a simple route out of the strict typing paradigm that bugs some people so much. Some years ago, Christian Urban and Xingyuan Zhang [published](https://doi.org/10.1007/978-3-642-22863-6_25) 
+The HF sets are a simple route out of the strict typing paradigm that bugs some people so much. Some years ago, Wu, Zhang and Urban [published](https://rdcu.be/cJtCW) 
 an elegant [formalisation](https://www.isa-afp.org/entries/Myhill-Nerode.html)
 of regular language theory, avoiding the usual approach in terms of finite automata, because of the difficulty of representing state spaces using simple types. But if we use HF sets to denote the state spaces of automata, then we have no problem forming Cartesian products of state spaces when forming the product of two automata, forming the powerset of the state space when transforming a nondeterministic finite automata into a deterministic one, and so forth.
 
@@ -167,4 +167,4 @@ Several type instantiations later, we are able to overload the generic sup and i
 
 There is much, much more, including specialist material for the incompleteness theorems and a small development of finite automata.
 And there's another thing: [addition and multiplication of sets](https://doi.org/10.1002/malq.200610026), extending the corresponding operations for ordinals, due to [Laurence Kirby](http://faculty.baruch.cuny.edu/lkirby/).
-While looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets.](https://dx.doi.org/10.1007%2Fs00153-008-0073-7)
+While looking him up, I discovered through his webpage (where PDFs of his papers are available) that he is also [a fan of hereditary finite sets.](https://rdcu.be/cJtDL)

@@ -24,7 +24,7 @@ Mathematicians seem to have a deep understanding of the phenomena they work with
  
 ### A brief history of formalised mathematics
 
-Most of today's proof assistants were created in the 1980s. The first public release of [Isabelle](https://doi.org/10.1007/BF00248324) took place in 1986, around the same time as Mike Gordon's HOL system and the first version of the [Calculus of Constructions](https://doi.org/10.1016%2F0890-5401%2888%2990005-3), which later turned into Coq.
+Most of today's proof assistants were created in the 1980s. The first public release of [Isabelle](https://rdcu.be/cJtFU) took place in 1986, around the same time as Mike Gordon's HOL system and the first version of the [Calculus of Constructions](https://doi.org/10.1016%2F0890-5401%2888%2990005-3), which later turned into Coq.
 
 Of these early systems, HOL was the most practical from the start, having been built with the aim of verifying computer hardware. It was immediately put to use verifying significant chip designs. However, this early work required almost nothing that could be called mathematics. None of these early systems even had negative integers.
 

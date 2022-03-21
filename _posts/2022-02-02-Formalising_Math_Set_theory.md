@@ -31,7 +31,7 @@ Here is Art Quaife in 1989:
 
 > $1000 personal computers with the computational power of the human brain should be available by year 2030. The time will come when such crushers as Riemann's hypothesis and
 Goldbach's conjecture will be fair game for automated reasoning programs. For those of us who arrange to stick around, endless fun awaits us in the automated development and eventual enrichment of the corpus of mathematics.
-(In [Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://doi.org/10.1007/BF00263451), page 119--120.)
+(In [Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://rdcu.be/cJtDU), page 119--120.)
 
 2030 isn't far off, so this was a little ambitious (and we didn't get [HAL 9000](https://youtu.be/Wy4EfdnMZ5g) in 2001 either.)
 However, in the expression "arrange to stick around", Quaife is referring to life extension technologies (a.k.a. putting your body in the freezer), so possibly we can add a couple of centuries to the deadline.
@@ -55,7 +55,7 @@ So now the aim was to formalise *all important mathematical knowledge*.
 Quaife used von Neumann–Bernays–Gödel (NBG) set theory, as recommended in 1986 by Boyer et al., because ZF set theory cannot be finitely axiomatized. 
 
 > [ZF] cannot be input to a resolution-based theorem prover. Fortunately, the vNBG set theory has a finite axiomatization, and is in fact strictly stronger than ZF. 
-([Set theory in first-order logic: Clauses for Gödel's axioms](https://doi.org/10.1007/BF02328452), page 288.)
+([Set theory in first-order logic: Clauses for Gödel's axioms](https://rdcu.be/cJtEe), page 288.)
 
 From a syntactic point of view, the problem is that ZF involves terms that contain first-order formulas. 
 NBG uses variables ranging over proper classes as surrogates for formulas, bringing them within the mathematical domain of discourse. 
@@ -66,7 +66,7 @@ From these it is possible to recover the effect of ZF's
 separation and replacement axioms.
 
 Unfortunately, rendering first-order formulas into this combinator language is difficult. Belinfante wrote code to automate the translation
-and performed a series of experiments, [culminating](https://doi.org/10.1007/978-3-540-45085-6_18)
+and performed a series of experiments, [culminating](https://rdcu.be/cJtEs)
 in the the Schröder-Bernstein theorem.
 
 ### TG set theory

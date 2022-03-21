@@ -64,7 +64,7 @@ Thierry Coquand, whose *calculus of constructions* evolved into the type theory 
 
 Emphasis his. He states the situation clearly: **types are syntax, not semantics**. 
 
-Regarding this syntactic approach, Dana Scott's [criticism of combinatory logic](https://doi.org/10.1016/S0049-237X(08)71262-X) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
+Regarding this syntactic approach, Dana Scott's [criticism of combinatory logic](/papers/Scott-Models.pdf) (which can be regarded as synonymous with the $\lambda$-calculus for our purposes) seems apt:
 
 > I agree that we can regard Group Theory as an analysis of the structure of bijective functions under composition, Boolean Algebra as an analysis of sets under inclusion, Banach Space Theory as an analysis of functions under convergence of infinite series, etc. etc. But Combinatory Logic? It just does not seem to me to be a sound step in analysis to say: “We now permit our functions to be self-applied.” Just lke that. (page 258)
 
