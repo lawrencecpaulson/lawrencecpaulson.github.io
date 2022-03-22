@@ -40,17 +40,17 @@ $$
 This makes sense because for nonnegative integers, $a\ge b$.
 And if $a+d = c+b$ we quickly obtain $c\ge d$ and $a-b=c-d$.
 
-The most obvious definitions of equivalence classes, respecting the equivalence relation, etc., work without fuss. My (2006) [paper](https://dl.acm.org/doi/10.1145/1183278.1183280) (also
+The obvious definitions of the concepts—equivalence relations, equivalence classes, respecting the equivalence relation, etc.—work without fuss. My (2006) [paper](https://dl.acm.org/doi/10.1145/1183278.1183280) (also
 [here](https://arxiv.org/abs/1907.07591)) spells out the absolutely straightforward details with an emphasis on definitions and lemmas allowing the simplest formal proofs.
 
 
 ### No need for the axiom of choice (AC)
 
-Many authors seem to dislike equivalence classes, using AC to choose an arbitrary representative. While I accept AC, it's poor taste and overcomplicated to use it without cause. Operations on equivalence classes can be defined simply as the union of all possible results of the corresponding operation on representatives. If the operation respects the equivalence relation, then the union will be trivial, the union of a family of identical sets, and we get our result by $\bigcup\\{x\\} = x$.
+Many authors seem to dislike equivalence classes, instead using AC to choose an arbitrary representative. While I accept AC, it's surely poor taste to use it without cause, and it overcomplicates proofs. Operations on equivalence classes can be defined simply as the *union of all possible results* of the corresponding operation on representatives. If the operation respects the equivalence relation, then the union will be trivial, the union of a family of identical sets, and we get our result by $\bigcup\\{x\\} = x$.
 
 You may well ask, what if the desired result isn't a set? This issue does not arise in Isabelle/ZF, where I first did this work and where everything is a set. For Isabelle/HOL a simple trick solves the problem: it's always possible to define your operation to return a singleton set, and finally extract the desired result by calling `the_elem`, which maps $\\{x\\} \mapsto x$.
 
-By the way, referring to such an operation as the "axiom of unique choice" is as oxymoronic as referring to plastic as "vegan leather".
+By the way, referring to an operation like `the_elem` as the "axiom of unique choice" is as oxymoronic as referring to plastic as "vegan leather".
 
 ### So what about types?
 
@@ -66,7 +66,7 @@ The techniques in my paper are fine for declaring something like the integers, b
 the number of trivial facts to be stated and proved is quadratic in the number of datatype constructors. 
 
 More automation can be obtained through the [lifting and transfer](https://rdcu.be/cI622) package.
-It is powerful, general and modular, but somewhat mysterious: not so easy to learn. And yet I can see nearly 8600 calls to the `transfer` method in the Isabelle distribution and libraries.
+It is powerful, general and modular, but somewhat mysterious and not so easy to learn. And yet I can see nearly 8600 calls to the `transfer` method in the Isabelle distribution and libraries.
 It is however, type-based, transferring properties and definitions between concrete and abstract types.
 To do a quotient construction on a set, my more direct methods should do the job.
 
