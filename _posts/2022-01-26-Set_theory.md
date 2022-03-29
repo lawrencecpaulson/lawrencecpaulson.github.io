@@ -53,7 +53,7 @@ Also, I'd be interested to hear of mathematical domains that require more than t
 ### ZF and proof assistants
 
 Here's another answer to my question: ZF set theory turns out to be surprisingly close in strength to the calculus of inductive constructions (CIC), the type theory implemented by Coq and Lean.
-[Werner](https://link.springer.com/chapter/10.1007/BFb0014566)
+[Werner](https://rdcu.be/cJ5NL)
 presented encodings of CIC within ZFC and *vice versa*. 
 There is a correspondence between the universes of CIC and the inaccessible cardinals that must be assumed in addition to ZFC.
 To encode ZFC in CIC it is necessary to assume the axiom of choice, and therefore classical logic.
