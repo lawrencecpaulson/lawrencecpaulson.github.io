@@ -11,7 +11,8 @@ However, quotienting has nothing to do with types.
 
 ### A small example
 
-Let's define the set of integers from pairs of natural numbers by quotienting. Our equivalence relation on such pairs is
+Let's define the set of integers from pairs of natural numbers by quotienting. 
+The required equivalence relation on such pairs is
 
 $$
 \begin{align*}
@@ -46,9 +47,9 @@ The obvious definitions of the concepts—equivalence relations, equivalence cla
 
 ### No need for the axiom of choice (AC)
 
-Many authors seem to dislike equivalence classes, instead using AC to choose an arbitrary representative. While I accept AC, it's surely poor taste to use it without cause, and it overcomplicates proofs. Operations on equivalence classes can be defined simply as the *union of all possible results* of the corresponding operation on representatives. If the operation respects the equivalence relation, then the union will be trivial, the union of a family of identical sets, and we get our result by $\bigcup\\{x\\} = x$.
+Many authors seem to dislike equivalence classes, instead using AC to choose an arbitrary representative. While I accept AC, to use it without cause might be seen as lazy. More to the point, reasoning about AC can be delicate, leading to needlessly complicated proofs. Operations on equivalence classes can be defined simply as the *union of all possible results* of the corresponding operation on representatives. If the operation respects the equivalence relation, then the union will be trivial, the union of a family of identical sets, and we get our result by $\bigcup\\{x\\} = x$.
 
-You may well ask, what if the desired result isn't a set? This issue does not arise in Isabelle/ZF, where I first did this work and where everything is a set. For Isabelle/HOL a simple trick solves the problem: it's always possible to define your operation to return a singleton set, and finally extract the desired result by calling `the_elem`, which maps $\\{x\\} \mapsto x$.
+You may well ask, what if the desired result isn't a set? This issue does not arise in Isabelle/ZF, where I first did this work and where everything is a set. For Isabelle/HOL a simple trick solves the problem: it's always possible to define your operation to return a *singleton set*, and finally extract the desired result by calling `the_elem`, which maps $\\{x\\} \mapsto x$.
 
 By the way, referring to an operation like `the_elem` as the "axiom of unique choice" is as oxymoronic as referring to plastic as "vegan leather".
 
@@ -81,4 +82,4 @@ However, [quotients in Lean](https://leanprover.github.io/theorem_proving_in_lea
 are handled differently, with quotients built in and supported by an additional axiom.
 
 I gather that type theory purists are outraged by Lean's approach.
-It's a shame that such sophisticated type theories cannot deal with something as trivial as equivalence classes.
+It's puzzling that such sophisticated type theories struggle with something as trivial as equivalence classes.
