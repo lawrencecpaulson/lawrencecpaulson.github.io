@@ -9,9 +9,34 @@ Sledgehammer is the subsystem that links Isabelle/HOL to automatic theorem prove
 
 ### The beginnings
 
-My memories are hazy, but I was at a conference (very likely IJCAR 2001, in Siena) sitting on some steps and talking to a representative from Springer. He said something like "How can we increase the circulation of *Journal of Automated Reasoning*?" Is it profitable?, I recall asking. "Oh yes!" Then perhaps you could try to hold down the cost of a subscription?
+My memories are hazy, but I was at a conference (very likely IJCAR 2001, in Siena) sitting on some steps and talking to a representative from Springer. He said something like "How can we increase the circulation of [*Journal of Automated Reasoning*](https://www.springer.com/journal/10817)?" Is it profitable?, I recall asking. "Oh yes!" Then perhaps you could try to hold down the cost of a subscription?
 
 That conversation went nowhere, but I recall bumping into [Andrei Voronkov](http://voronkov.com), the architect of the [Vampire prover](https://vprover.github.io) and one of the tiny elite group of people who know how to make [resolution theorem proving](/papers/bachmair-hbar-resolution.pdf) actually work. It was his idea to see if we could combine our technologies and build something that was greater than both. I forget what happened in the interim, but by the time I received the [relevant grant](https://www.cl.cam.ac.uk/~lp15/Grants/Automation/), I found myself working instead with [Christoph Weidenbach](https://www.mpi-inf.mpg.de/departments/automation-of-logic/people/christoph-weidenbach) and his [SPASS prover](https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/spass-workbench).
 The Cambridge team included Jia Meng and Claire Quigley, and we already had a [super-preliminary paper](https://rdcu.be/cKaYp) ready for IJCAR 2004.
 
+### Why automation?
+
+We speak of automatic versus interactive theorem provers, but this dichotomy is misleading. (If there are two tools that do exactly the same thing, and one of them is fully automatic, what is the other one for?) In fact they do quite different things.
+
+* *Automatic theorem provers* solve big, one-shot problems, typically in a fairly weak formalism like first-order logic, perhaps augmented with arithmetic.
+
+* *Interactive theorem provers* are primarily specification editors. Users can build tangled nests of theories and theory libraries, and on the way, prove a variety of facts.
+
+Automation is necessary because proofs reduced to bare logical rules can be unfeasibly long. You are getting nowhere unless your system regards a fact such as the following is trivial:
+
+$$ 
+\begin{align*}
+C\not=\emptyset \quad\Longrightarrow\quad \bigcap_{x\in C} \bigl(A(x) \cap B(x)\bigr) =        
+       \bigl(\bigcap_{x\in C} A(x)\bigr)  \cap  \bigl(\bigcap_{x\in C} B(x)\bigr) 
+\end{align*}
+$$
+
+Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P).
+
+ And why resolution? One impetus came from my earlier work on [verifying cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)).
+
+[TAPS](https://doi.org/10.3233/JCS-2003-11203), also [here](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf)
+
 ### The objectives and the obstacles
+
+ 
