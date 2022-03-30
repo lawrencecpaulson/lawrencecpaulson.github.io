@@ -75,7 +75,7 @@ To do a quotient construction on a set, my more direct methods should do the job
 
 ### Quotients in dependent type theory
 
-I'm not an expert on and what I know I tend to hear indirectly. One thing I hear is that quotienting in type theory often involves a *setoid*, a type paired with an explicit equality relation. (See [Barthe et al.](https://doi.org/10.1017/S0956796802004501), also [here](https://hal.archives-ouvertes.fr/hal-01124972).
+I'm not an expert on most of these systems, and what I know I tend to hear indirectly. One thing I hear is that quotienting in type theory often involves a *setoid*, a type paired with an explicit equality relation. (See [Barthe et al.](https://doi.org/10.1017/S0956796802004501), also [here](https://hal.archives-ouvertes.fr/hal-01124972).
 See also [*setoid hell*](https://www.google.com/search?client=safari&rls=10_15_7&q=setoid+hell&ie=UTF-8&oe=UTF-8).)
 Straightforward quotienting is apparently not possible in Coq, 
 but Cyril Cohen suggests some [pragmatic techniques](https://rdcu.be/cI1i6).
