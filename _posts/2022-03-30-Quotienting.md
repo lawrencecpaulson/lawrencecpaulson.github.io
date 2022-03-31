@@ -52,6 +52,7 @@ Many authors seem to dislike equivalence classes, instead using AC to choose an 
 You may well ask, what if the desired result isn't a set? This issue does not arise in Isabelle/ZF, where I first did this work and where everything is a set. For Isabelle/HOL a simple trick solves the problem: it's always possible to define your operation to return a *singleton set*, and finally extract the desired result by calling `the_elem`, which maps $\\{x\\} \mapsto x$.
 
 By the way, referring to an operation like `the_elem` as the "axiom of unique choice" is as oxymoronic as referring to plastic as "vegan leather".
+I'd call it "[Hobson's axiom](https://en.wikipedia.org/wiki/Hobson%27s_choice)".
 
 ### So what about types?
 
