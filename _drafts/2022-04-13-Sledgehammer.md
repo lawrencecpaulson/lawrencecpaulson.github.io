@@ -31,11 +31,15 @@ C\not=\emptyset \quad\Longrightarrow\quad \bigcap_{x\in C} \bigl(A(x) \cap B(x)\
 \end{align*}
 $$
 
-Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P).
+Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P). What about the proof assistant you use?
 
- And why resolution? One impetus came from my earlier work on [verifying cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)).
+### Why resolution?
 
-[TAPS](https://doi.org/10.3233/JCS-2003-11203), also [here](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf)
+It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were solving real problems. Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was happy to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory-based) fail utterly.
+But I was stunned by the emergence of an automatic protocol verifier called
+[TAPS](https://doi.org/10.3233/JCS-2003-11203), also [here](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf).
+Its results were too good to be true, and I'm sorry to confess that my suspicious self asked its author, Ernie Cohen, a series of technical questions designed to see whether TAPS was really giving the right answers.
+It was clear that Cohen indeed had access to a magic bullet. I could not understand his translation from protocol models to first-order logic. But I did note that his system relied on [SPASS](https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/spass-workbench).
 
 ### The objectives and the obstacles
 
