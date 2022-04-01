@@ -35,7 +35,7 @@ Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P)
 
 ### Why resolution?
 
-It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were solving real problems. Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was happy to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory-based) fail utterly.
+It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were solving tonnes of real problems. Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was happy to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory based) fail utterly.
 But I was stunned by the emergence of an automatic protocol verifier called
 [TAPS](https://doi.org/10.3233/JCS-2003-11203), also [here](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf).
 Its results were too good to be true, and I'm sorry to confess that my suspicious self asked its author, Ernie Cohen, a series of technical questions designed to see whether TAPS was really giving the right answers.
