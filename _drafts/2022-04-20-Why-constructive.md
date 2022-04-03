@@ -5,7 +5,13 @@ usemathjax: true
 tags: logic, intuitionism, constructive logic, law of excluded middle
 ---
 
-[Coq](https://coq.inria.fr)) 
+Four decades ago, I was in a hi-fi shop looking at portable cassette players. Metal tapes had just come out, and metal-compatible cassette players were marketed with METAL emblazoned on the packaging. Three boys aged about 12 rushed into the shop. "That one's got metal!", shouted one. "This one's got metal too!" shouted another. The third boy kept asking, "but does that make it sound better?" Nobody listened to him.
+
+### "Our proofs are constructive"
+
+It's time we saw some pushback against cargo-cult constructivism. 
+
+[Coq](https://coq.inria.fr)
 
 ### Why Intuitionism?
 
