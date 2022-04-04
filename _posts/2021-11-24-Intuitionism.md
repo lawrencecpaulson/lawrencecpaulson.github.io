@@ -10,7 +10,7 @@ Intuitionism was for most of the 20th century a recondite topic in the foundatio
 ### Why Intuitionism?
 
 The best introduction to [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
- and [intuitionic logic](https://plato.stanford.edu/entries/logic-intuitionistic/) is through an example.
+ and [intuitionistic logic](https://plato.stanford.edu/entries/logic-intuitionistic/) is through an example.
 
 *Theorem*: There exist irrational numbers $x$ and $y$ such that $x^y$ is rational.
 
