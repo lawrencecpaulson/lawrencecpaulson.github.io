@@ -27,7 +27,8 @@ Analysis seemed to pose particular difficulties, and Bishop made a concerted eff
 Bishop was able to reconstruct a significant fragment of elementary analysis from constructive principles, arriving at a strikingly different mathematics where, for example, all functions turned out to be continuous.
 Mainstream mathematicians weren't interested, but it's easy to see why others might want to explore this world further.
 
-The intuitionistic philosophy explicitly rejects any identification of mathematics with language:
+The intuitionistic philosophy explicitly rejects any identification of mathematics with language.
+Here is [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), Brouwer's student and disciple:
 
 > Mathematics is a production of the human mind. [The intuitionistic mathematician] uses language, both natural and formalised, only for communicating thoughts, i.e., to get others or himself to follow his own mathematical ideas. Such a linguistic accompaniment is not a representation of mathematics; still less is it mathematics itself.
 
@@ -36,14 +37,13 @@ Thus it is diametrically opposed to the philosophy known as [formalism](https://
 
 ### Intuitionistic type theory
 
-
- 
- Haskell Curry proponent of a rival school, formalism.
+The emergence of Martin-Löf [intuitionistic type theory](https://plato.stanford.edu/entries/type-theory-intuitionistic/) in the 1970s brought constructive mathematics to the attention of a generation of computer scientists.
+It embodied a glaring contradiction: to support constructive mathematics and in particular the work of Bishop through a formal system combining the ideas of two opposites, Heyting and Curry.
  
 [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType).
 
 
-Martin-Löf [intuitionistic type theory](https://plato.stanford.edu/entries/type-theory-intuitionistic/),
+
 
 
 ### "Our proofs are constructive"
