@@ -159,7 +159,7 @@ But having got this far, I felt rather lazy (it was a Saturday) and instead of t
 
 That's the great thing about structured proofs: they can easily be modified to prove related results. There may well be a clever way to prove this fact from `Cauchy_Schwarz_ineq` by unfolding the function `inner`, which has multiple definitions (one for each instance of the `real_inner` type class). But sometimes, simplest is best.
 
-*Note*: all of the material above is scheduled for inclusion in the next Isabelle release, planned for December 2021. It can also be downloaded [here](/Isabelle-Examples/CauchySchwarz).
+*Note*: all of the material above is scheduled for inclusion in the next Isabelle release, planned for December 2021. It can also be downloaded [here](/Isabelle-Examples/CauchySchwarz.thy).
 
 ### Exercises
 

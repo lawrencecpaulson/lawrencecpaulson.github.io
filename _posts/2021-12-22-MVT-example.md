@@ -76,4 +76,4 @@ Looking closer at the proof justifications, we see multiple uses of the `intro` 
 
 GH Hardy's textbook *Pure Mathematics* is aimed at first-year mathematics undergraduates. It covers analysis up to "the general theory of the logarithmic, exponential, and circular functions". Hardy's Preface states "I regard the book as being really elementary." First published in 1908, it has gone through ten editions and is still in print.
 
-The file containing the MVT example is available to [download](/Isabelle-Examples/MVT.thy).
+The file containing the MVT example is available to [download](/Isabelle-Examples/Calculus.thy).
