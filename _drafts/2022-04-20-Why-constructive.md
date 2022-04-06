@@ -36,18 +36,45 @@ Here is [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), Brouwer's 
 Thus it is diametrically opposed to the philosophy known as [formalism](https://plato.stanford.edu/entries/formalism-mathematics/), which declares that the objects studied by mathematicians *are nothing but* the symbolic terms of their own language. A chief proponent of that philosophy was [Haskell B Curry](https://plato.stanford.edu/entries/formalism-mathematics/#TerForCur).
 
 
-### Intuitionistic type theory
+### Constructive type theories vs intuitionistism
 
 The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org/10.1093/oso/9780198501275.003.0010)" (also [here](/papers/Martin-Löf-intuitionistic_theory_of_types)) in 1972 brought constructive mathematics to the attention of a generation of computer scientists.
 As the first embodiment of the conception of [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType), it appeared to offer everything from the possibility of formalising Bishop-style constructivism to a principled approach to correct-program synthesis.
 At the same time, it embodied a glaring contradiction: to support constructive mathematics and in particular the work of Bishop through a formal system combining the ideas of two opposites, Heyting and Curry. 
 
-In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyting,  to affirm the axiom of choice and to adhere to some intuitionistic terminology, such as species. However, as other type theories emerged during the 1980s, the research community left most of that behind as so much baggage, retaining just a couple of core principles:
+In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyting,  to affirm the axiom of choice and to adhere to some intuitionistic terminology, such as species. However, as other type theories emerged during the 1980s, the research community left most of that behind as so much baggage, retaining just one core principle:
 
-1. Identifying functions with lambda-terms
-2. Rejecting the law of the excluded middle (LEM)
+* Rejecting the law of the excluded middle (LEM)
 
+Sometimes there is a good technical reason for this. The constructions of Martin-Löf type theory would not be executable in the presence of LEM. But sometimes, the reasoning is less clear. The original justification is gone: nobody still argues that 41 wasn't a prime number a million years ago.
 
+Now for something odd. The following formula is a tautology even in intuitionistic logic:
+
+$$ 
+\begin{align*}
+ (P \lor (P\to R) \to Q\to R) \to Q\to R 
+\end{align*}
+$$
+
+*Proof*. Assume $P \lor (P\to R) \to Q\to R)$ and $Q$, hoping to show $R$.
+From the two assumptions there follows $P \lor (P\to R) \to R$. Therefore $P\to R$ and $(P\to R) \to R$, from which follows $R$. [BFD](https://www.urbandictionary.com/define.php?term=BFD).
+
+Replacing $R$ by $\bot$ (falsity) above, we obtain
+
+$$ 
+\begin{align*}
+ (P \lor \neg P \to \neg Q) \to \neg Q.
+\end{align*}
+$$
+
+Thus, we are free to use the excluded middle provided the claim being proved is negative.  
+Are any interesting theorems negative? Just a few:
+
+* Fermat's last theorem, $\neg(\exists x y z n\in \mathbb{N^{+}}.\, x^n+y^n = z^n \land n>2)$
+* Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land \text{ $n$ is not the sum of two primes})$
+* Twin prime conjecture: there exists greatest twin prime.
+
+So you can achieve great things proving only negative statements! One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements, so the language of classical logic is slightly less precise. Then the critical question is how often that matters.
 
 ### "Our proofs are constructive"
 
@@ -57,11 +84,7 @@ It's time we saw some pushback against cargo-cult constructivism.
 
 ### Why Intuitionism?
 
-$$ (P ∨ ¬P ⟶ ¬Q) ⟶ ¬Q $$
 
-The same in a more general form, no ex falso quodlibet
-
-$$ (P ∨ (P⟶R) ⟶ Q ⟶ R) ⟶ Q ⟶ R $$
 
 [mentioned earlier]({% post_url 2021-11-24-Intuitionism %})
 
@@ -69,8 +92,6 @@ $$ (P ∨ (P⟶R) ⟶ Q ⟶ R) ⟶ Q ⟶ R $$
 
 The best introduction to [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
  and [intuitionistic logic](https://plato.stanford.edu/entries/logic-intuitionistic/) is through an example.
-
-
 
 
 
