@@ -17,8 +17,12 @@ The best introduction to [constructive mathematics](https://plato.stanford.edu/e
 *Proof*: Let $z = \sqrt 2^{\sqrt 2}$. If $z$ is rational then $x=y=\sqrt2$. 
 Otherwise put $x=z$ and $y=\sqrt2$. The conclusion holds because both are irrational while 
 
-$$ x^y = {\biggl(\sqrt2^{\sqrt2}\biggr)}^{\sqrt2}
-= \sqrt2^{\sqrt2\times\sqrt2} =\sqrt2^2 = 2. $$
+$$ 
+\begin{align*}
+x^y = {\biggl(\sqrt2^{\sqrt2}\biggr)}^{\sqrt2}
+= \sqrt2^{\sqrt2\times\sqrt2} =\sqrt2^2 = 2. 
+\end{align*}
+$$
 
 Unfortunately, this proof fails to deliver a specific value for $x$. To an intuitionist, this is no proof. Intuitionism demands that
 
