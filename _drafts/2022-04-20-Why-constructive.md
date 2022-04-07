@@ -82,7 +82,7 @@ Thus, we are free to use the excluded middle as much as we like provided the cla
 
 The most celebrated conjectures in mathematics appear to be universal formulas, which means they are — even to an intuitionist — negated existentials.
 
-One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements $\neg\neg P$ and $P$, so the language of classical logic is slightly less precise. Then the critical question is how often that matters.
+One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements $\neg\neg P$ and $P$, so the language of classical logic is slightly less precise. Then the critical question is how often that precision matters.
 And remember what we gain through classical logic:
 
 * powerful automatic proof procedures
@@ -90,19 +90,25 @@ And remember what we gain through classical logic:
 
 ### "Our proofs are constructive"
 
-It's time we saw some pushback against cargo-cult constructivism. 
+The reason for this grumbling post is that I have been seeing, for decades, excellent papers marred by silly claims about constructive reasoning. They are typically
 
-[Coq](https://coq.inria.fr)
+* Trivial (e.g. the subject matter concerns discrete, finite objects)
+* Irrelevant (the theorem being proved is negative and therefore free of constructive content)
+* Nonsensical (e.g. applying constructive methods within a classical axiomatic framework)
 
+Related work might be criticised simply because it is not constructive.
+If you ask why, the response will leave you in no doubt that "constructive" is simply better because it is, classical reasoning bordering on the immoral.
 
+And yet there are plenty of situations where constructive reasoning yields concrete dividends.
+One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
 
+> Our goal is to develop a theory of computability synthetically: we work in a mathematical universe in which all sets and functions come equipped with intrinsic computability structure. Precisely because computability is omnipresent, we never have to speak about it—there will be no mention of Turing machines, or any other notion of computation.
 
+Arguably, we should rise to the challenge of dealing with explicit models of computation.
+On the other hand, when textbook proofs themselves invoke the Church-Turing thesis, the synthetic approach allows a faithful formalisation.
+Caution is necessary, because the Church-Turing thesis is inconsistent with many formal systems; however, the approach [works in Coq.](https://drops.dagstuhl.de/opus/volltexte/2021/13455/)
 
-
-
-
-
-[Agda](https://wiki.portal.chalmers.se/agda/pmwiki.php),
+### Reference
 
 The Heyting quote above comes from here:
 
