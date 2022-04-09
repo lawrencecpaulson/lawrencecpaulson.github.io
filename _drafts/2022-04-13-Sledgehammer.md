@@ -97,6 +97,12 @@ Introduce abbreviations judiciously to avoid repeated terms, especially construc
 
 If you've done both of those things and sledgehammer still fails, see if you can think of some intermediate fact that follows from your assumptions and that could help to prove your conclusion. If sledgehammer can prove that fact, you have made progress.
 
+### Sledgehammer in action
+
+To get an idea of how Isabelle/HOL and sledgehammer work together, you might consider watching Martin Kleppmann's video entitled [Correctness proofs of distributed systems with Isabelle](https://martin.kleppmann.com/2019/09/14/strange-loop-isabelle.html).
+It is chiefly aimed at systems researchers and software developers unfamiliar with the concept of formal verification.
+ He presents his problem in distributed systems and then develops Isabelle proofs right there, including a number of successful sledgehammer calls.
+
 ### That last snarky remark
 
 One of the reasons I prefer higher-order logic to dependent type theories — apart from simple semantics, equality that works and no need to put everything in the kernel — is that dependent types seem to make automation much more difficult. Groups with access to institutional support and steady, ample resources still don't seem to have duplicated what had been built at Cambridge on a single £250K grant.

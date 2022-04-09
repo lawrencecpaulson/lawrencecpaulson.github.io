@@ -90,16 +90,18 @@ And remember what we gain through classical logic:
 
 ### "Our proofs are constructive"
 
-The reason for this grumbling post is that I have been seeing, for decades, excellent papers marred by silly claims about constructive reasoning. They are typically
+The reason for this grumbling post is that I have never encountered the promised formal development of Bishop-style analysis, which would have been fascinating.
+Instead, I have been seeing, for decades, excellent papers marred by silly, empty claims about constructive reasoning. They are typically
 
 * Trivial (e.g. the subject matter concerns discrete, finite objects)
 * Irrelevant (the theorem being proved is negative and therefore free of constructive content)
-* Nonsensical (e.g. applying constructive methods within a classical axiomatic framework)
+* Nonsensical (e.g. applying constructive methods to classical analysis)
 
 Related work might be criticised simply because it is not constructive.
-If you ask why, the response will leave you in no doubt that "constructive" is simply better because it is, classical reasoning bordering on the immoral.
+If you ask why, the response will leave you in no doubt that "constructive" is simply better,
+in a tone laden with moral condescension. You are lucky to be allowed in the same room with them.
 
-And yet there are plenty of situations where constructive reasoning yields concrete dividends.
+And yet there are plenty of situations where constructive reasoning really does yield concrete dividends.
 One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
 
 > Our goal is to develop a theory of computability synthetically: we work in a mathematical universe in which all sets and functions come equipped with intrinsic computability structure. Precisely because computability is omnipresent, we never have to speak about it—there will be no mention of Turing machines, or any other notion of computation.
