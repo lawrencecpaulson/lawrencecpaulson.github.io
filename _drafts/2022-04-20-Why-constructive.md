@@ -5,17 +5,19 @@ usemathjax: true
 tags: logic, intuitionism, constructive logic, law of excluded middle
 ---
 
-Four decades ago, I was in a hi-fi shop looking at portable cassette players. Metal tapes had just come out, and metal-compatible cassette players were marketed with METAL emblazoned on the packaging. Three boys aged about 12 rushed into the shop. "That one's got metal!", shouted one. "This one's got metal too!" shouted another. The third boy kept asking, "but does that make it sound better?" They ignored him.
+Four decades ago, I was in a hi-fi shop looking at portable cassette players. Metal tapes had just come out, and metal-compatible cassette players were marketed with METAL emblazoned on the packaging. Three boys aged about 12 rushed into the shop. "That one's got metal!", shouted one. "This one's got metal too!" shouted another. The third boy kept asking, "But does that make it sound better?" They ignored him.
 
 ### The intuitionist philosophy of mathematics
 
-Let's recall how constructive logic came about. Russell discovered his famous [paradox](https://plato.stanford.edu/entries/russell-paradox/) in 1901. It shocked the mathematical community because it destroyed a widespread idea: that sets and properties were essentially the same. Various other paradoxes emerged around the same time, some based on [self reference](https://www.dpmms.cam.ac.uk/~wtg10/richardsparadox.html) and others connected with size, like [Burali-Forti's paradox](https://www.oxfordreference.com/view/10.1093/oi/authority.20110803095535765).
+Let's recall how constructive logic came about. Russell discovered his famous [paradox](https://plato.stanford.edu/entries/russell-paradox/) in 1901. It shocked the mathematical community because it destroyed a widespread belief: that sets and properties were essentially the same concept. Various other paradoxes emerged around the same time, some based on [self reference](https://www.dpmms.cam.ac.uk/~wtg10/richardsparadox.html) and others connected with size, like [Burali-Forti's paradox](https://www.oxfordreference.com/view/10.1093/oi/authority.20110803095535765).
 The various schools of the philosophy of mathematics emerged as responses to these paradoxes. 
 
-[Intuitionism](https://plato.stanford.edu/entries/intuitionism/) longs to return to mathematics as it had been done until the mid-nineteenth century, when constructions were explicit and a function had to be given by an explicit rule.
+I mentioned [intuitionism](https://plato.stanford.edu/entries/intuitionism/) in a [previous post]({% post_url 2021-11-24-Intuitionism %}).
+It longs to return to mathematics as it had been done until the mid-nineteenth century, when constructions were explicit and a function had to be given by an explicit rule.
 I'm sympathetic to one of the core ideas of intuitionism — that mathematical objects exist only in our minds — but not to the whole crazy system of ideas.
 To [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), a mathematical fact only became true once it had been proved, so the [largest known prime](https://en.wikipedia.org/wiki/Largest_known_prime_number) could not be said to have been prime at all until recently.
-Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? Only God and Brouwer know for sure.
+Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (apparently, once something is proved it [remains true forever]( click).) 
+Only God and Brouwer know for sure.
 Brouwer rejected the Law of the Excluded Middle (LEM) because to him, $P\lor \neg P$ was the claim that $P$ or $\neg P$ had already been proved (or could be in principle).
 
 Other ideas connected with intuitionism included [bar induction and the fan theorem](https://plato.stanford.edu/entries/intuitionism/#BarThe), and choice sequences, which were introduced in order to justify the existence of real numbers:
@@ -42,11 +44,15 @@ The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org
 As the first embodiment of the conception of [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType), it appeared to offer everything from the possibility of formalising Bishop-style constructivism to a principled approach to correct-program synthesis.
 At the same time, it embodied a glaring contradiction: to support constructive mathematics and in particular the work of Bishop through a formal system combining the ideas of two opposites, Heyting and Curry. 
 
-In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyting,  to affirm the axiom of choice and to adhere to some intuitionistic terminology, such as species. However, as other type theories emerged during the 1980s, the research community left most of that behind as so much baggage, retaining just one core principle:
+In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyting,  to affirm the axiom of choice and to adhere to some intuitionistic terminology, such as species. However, as other type theories emerged during the 1980s, [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/) left most of that behind as so much baggage, retaining just two core principles:
 
-* Rejecting the law of the excluded middle (LEM)
+1. A proof of $P\lor Q$ or $\exists x.\,P(x)$ should communicate which choice was made
+2. The law of the excluded middle (LEM) must be rejected.
 
-Sometimes there is a good technical reason for this. The constructions of Martin-Löf type theory would not be executable in the presence of LEM. But sometimes, the reasoning is less clear. The original justification is gone: nobody still argues that 41 wasn't a prime number a million years ago.
+These ideas aren't unreasonable. You can't have Principle 1 if you have LEM. The constructions of Martin-Löf type theory would not be executable in the presence of LEM. 
+A formal system conforming to those principles can be expected to have specific properties not found in other systems. However, *formal systems are not the same thing as mathematics*.
+
+Classical mathematicians already distinguish between proofs that merely guarantee existence — for example, there are only countably many algebraic numbers, so transcendental numbers exist — and those that exhibit a particular object. The constructive objection is that the reasoning must be constructive right the way through, not merely in the construction of the desired object. Such an objection however is seldom supported by reasons.
 
 Now for something odd. The following formula is a tautology even in intuitionistic logic:
 
@@ -67,39 +73,46 @@ $$
 \end{align*}
 $$
 
-Thus, we are free to use the excluded middle provided the claim being proved is negative.  
-Are any interesting theorems negative? Just a few:
+Thus, we are free to use the excluded middle as much as we like provided the claim being proved is negative. Are any interesting statements negative? Here are some:
 
 * Fermat's last theorem, $\neg(\exists x y z n\in \mathbb{N^{+}}.\, x^n+y^n = z^n \land n>2)$
 * Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land \text{ $n$ is not the sum of two primes})$
-* Twin prime conjecture: there exists greatest twin prime.
+* Twin prime conjecture: there exists a greatest twin prime.
+* The Riemann hypothesis: the nontrivial zeros of the [zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function) all have real part $1/2$
 
-So you can achieve great things proving only negative statements! One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements, so the language of classical logic is slightly less precise. Then the critical question is how often that matters.
+The most celebrated conjectures in mathematics appear to be universal formulas, which means they are — even to an intuitionist — negated existentials.
+
+One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements $\neg\neg P$ and $P$, so the language of classical logic is slightly less precise. Then the critical question is how often that precision matters.
+And remember what we gain through classical logic:
+
+* powerful automatic proof procedures
+* access to the vast world of mathematics as it is done by practically everybody.
 
 ### "Our proofs are constructive"
 
-It's time we saw some pushback against cargo-cult constructivism. 
+The reason for this grumbling post is that I have been seeing, for decades, excellent papers marred by silly claims about constructive reasoning. They are typically
 
-[Coq](https://coq.inria.fr)
+* Trivial (e.g. the subject matter concerns discrete, finite objects)
+* Irrelevant (the theorem being proved is negative and therefore free of constructive content)
+* Nonsensical (e.g. applying constructive methods within a classical axiomatic framework)
 
-### Why Intuitionism?
+Related work might be criticised simply because it is not constructive.
+If you ask why, the response will leave you in no doubt that "constructive" is simply better because it is, classical reasoning bordering on the immoral.
 
+And yet there are plenty of situations where constructive reasoning yields concrete dividends.
+One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
 
+> Our goal is to develop a theory of computability synthetically: we work in a mathematical universe in which all sets and functions come equipped with intrinsic computability structure. Precisely because computability is omnipresent, we never have to speak about it—there will be no mention of Turing machines, or any other notion of computation.
 
-[mentioned earlier]({% post_url 2021-11-24-Intuitionism %})
+Arguably, we should rise to the challenge of dealing with explicit models of computation.
+On the other hand, when textbook proofs themselves invoke the Church-Turing thesis, the synthetic approach allows a faithful formalisation.
+Caution is necessary, because the Church-Turing thesis is inconsistent with many formal systems; however, the approach [works in Coq.](https://drops.dagstuhl.de/opus/volltexte/2021/13455/)
 
+### Reference
 
+The Heyting quote above comes from here:
 
-The best introduction to [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/)
- and [intuitionistic logic](https://plato.stanford.edu/entries/logic-intuitionistic/) is through an example.
-
-
-
-### Intuitionistic type theory
-
-[Agda](https://wiki.portal.chalmers.se/agda/pmwiki.php),
-
-Carnap, R., Heyting, A., & Neumann, J. (1984). Symposium on the foundations of mathematics. In P. Benacerraf & H. Putnam (Eds.), Philosophy of Mathematics: Selected Readings (pp. 41-65). Cambridge: Cambridge University Press. doi:10.1017/CBO9781139171519.003
+* Carnap, R., Heyting, A., & Neumann, J. (1984). Symposium on the foundations of mathematics. In P. Benacerraf & H. Putnam (Eds.), Philosophy of Mathematics: Selected Readings (pp. 41-65). Cambridge: Cambridge University Press. doi:10.1017/CBO9781139171519.003
 
 
 
