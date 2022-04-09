@@ -99,5 +99,5 @@ If you've done both of those things and sledgehammer still fails, see if you can
 
 ### That last snarky remark
 
-One of the reasons I prefer higher-order logic to depend on type theories — apart from simple semantics, equality that works and no need to put everything in the kernel — is that dependent types seem to make automation much more difficult. Groups with access to institutional support and steady, ample resources still don't seem to have duplicated what had been built at Cambridge on a single £250K grant.
+One of the reasons I prefer higher-order logic to dependent type theories — apart from simple semantics, equality that works and no need to put everything in the kernel — is that dependent types seem to make automation much more difficult. Groups with access to institutional support and steady, ample resources still don't seem to have duplicated what had been built at Cambridge on a single £250K grant.
 And please don't say "dependent type checking makes other automation unnecessary". I keep hearing this.
