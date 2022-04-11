@@ -98,8 +98,8 @@ Instead, I have been seeing, for decades, excellent papers marred by silly, empt
 * Nonsensical (e.g. applying constructive methods to classical analysis)
 
 Related work might be criticised simply because it is not constructive.
-If you ask why, the response will leave you in no doubt that "constructive" is simply better,
-in a tone laden with moral condescension. You are lucky to be allowed in the same room with them.
+If one asks why, the response is typically that "constructive" is simply better,
+in a tone laden with moral condescension. But it isn't actually better without specific reasons, especially since the original philosophical basis for intuitionism has been jettisoned. The new Constructivism looks a lot like the old Formalism.
 
 And yet there are plenty of situations where constructive reasoning really does yield concrete dividends.
 One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
