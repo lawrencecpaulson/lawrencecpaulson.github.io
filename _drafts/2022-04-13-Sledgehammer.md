@@ -35,8 +35,10 @@ Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P)
 
 ### Why resolution?
 
-It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were solving tonnes of real problems. Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was quietly pleased to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory based) fail utterly.
+It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were making a huge impact on software and hardware verficiation. 
+Resolution provers were incredibly powerful, but earlier ideas to use theorem-proving to accomplish planning or even general intelligence had clearly failed. Resolution was looking like a solution without a problem.
 
+Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was quietly pleased to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory based) fail utterly.
 There then appeared an automatic protocol verifier called
 [TAPS](https://doi.org/10.3233/JCS-2003-11203) (alternative [link](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf)).
 Its results were too good to be true, and I'm sorry to confess that I was suspicious. I asked the author, Ernie Cohen, a series of technical questions designed to find out whether TAPS really was giving the right answers.
@@ -86,24 +88,24 @@ These projects were done by Jasmin Blanchette, Sascha Böhme and Tobias Nipkow.
 
 ### Usage tips
 
-Although sledgehammer offers configuration free one click invocation, there are some useful tips in the [manual](https://isabelle.in.tum.de/doc/sledgehammer.pdf).
+Although sledgehammer offers configuration-free one-click invocation, there are some useful tips in the [manual](https://isabelle.in.tum.de/doc/sledgehammer.pdf).
 I almost always run sledgehammer using the jEdit panel, but occasionally it's a good idea to create a specialised invocation, and you need to read the manual for that.
 I tend to do this when the panel found a proof but a better one might be found if more time was allocated.
 
-The most obvious advice: keep your subgoals simple. A simple tip is to first apply `auto`, then use sledgehammer to prove each of the resulting goals. This proof will be a mess and will require restructuring, but at least you will know that there is a proof.
+The most obvious advice: keep your subgoals simple. A simple tip is to first apply `auto`, then use sledgehammer to prove each of the resulting goals. This proof will be a mess and will require restructuring, but getting that first proof is a major step.
 
 Goals containing giant set comprehensions can be difficult even for humans, let alone the computer.
 Introduce abbreviations judiciously to avoid repeated terms, especially constructions containing bound variables.
 
-If you've done both of those things and sledgehammer still fails, see if you can think of some intermediate fact that follows from your assumptions and that could help to prove your conclusion. If sledgehammer can prove that fact, you have made progress.
+If you've done all those things and sledgehammer still fails, see if you can think of some intermediate fact that follows from your assumptions and that could help to prove your conclusion. If sledgehammer can prove that fact, you have made progress.
 
 ### Sledgehammer in action
 
 To get an idea of how Isabelle/HOL and sledgehammer work together, you might consider watching Martin Kleppmann's video entitled [Correctness proofs of distributed systems with Isabelle](https://martin.kleppmann.com/2019/09/14/strange-loop-isabelle.html).
 It is chiefly aimed at systems researchers and software developers unfamiliar with the concept of formal verification.
- He presents his problem in distributed systems and then develops Isabelle proofs right there, including a number of successful sledgehammer calls.
+He presents his problem in distributed systems and then introduces Isabelle/HOL, starting about five minutes in. He develops some Isabelle proofs right before your eyes, including a number of successful sledgehammer calls.
 
 ### That last snarky remark
 
-One of the reasons I prefer higher-order logic to dependent type theories — apart from simple semantics, equality that works and no need to put everything in the kernel — is that dependent types seem to make automation much more difficult. Groups with access to institutional support and steady, ample resources still don't seem to have duplicated what had been built at Cambridge on a single £250K grant.
-And please don't say "dependent type checking makes other automation unnecessary". I keep hearing this.
+One of the reasons I prefer higher-order logic to dependent type theories — apart from simple semantics, equality that works and no need to put everything in the kernel — is that dependent types seem to make automation *much* more difficult. Groups with access to institutional support and steady, ample resources still don't seem to have duplicated what had been built at Cambridge on a single £250K grant.
+And please don't say "dependent type checking makes other automation unnecessary". Yes, I keep hearing this.
