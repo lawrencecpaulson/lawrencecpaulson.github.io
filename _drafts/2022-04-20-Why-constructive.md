@@ -35,7 +35,7 @@ Here is [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), Brouwer's 
 
 > Mathematics is a production of the human mind. [The intuitionistic mathematician] uses language, both natural and formalised, only for communicating thoughts, i.e., to get others or himself to follow his own mathematical ideas. Such a linguistic accompaniment is not a representation of mathematics; still less is it mathematics itself.
 
-Thus it is diametrically opposed to the philosophy known as [formalism](https://plato.stanford.edu/entries/formalism-mathematics/), which declares that the objects studied by mathematicians *are nothing but* the symbolic terms of their own language. A chief proponent of that philosophy was [Haskell B Curry](https://plato.stanford.edu/entries/formalism-mathematics/#TerForCur).
+Thus it is diametrically opposed to the philosophy known as [formalism](https://plato.stanford.edu/entries/formalism-mathematics/), which declares that the objects studied by mathematicians *are nothing but* the symbolic terms of their own language. A chief proponent of that philosophy was [Haskell B Curry](https://plato.stanford.edu/entries/formalism-mathematics/#TerForCur). Yes, the same Curry as in Curry–Howard isomorphism.
 
 
 ### Constructive type theories vs intuitionistism
@@ -49,10 +49,13 @@ In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyti
 1. A proof of $P\lor Q$ or $\exists x.\,P(x)$ should communicate which choice was made
 2. The law of the excluded middle (LEM) must be rejected.
 
-These ideas aren't unreasonable. You can't have Principle 1 if you have LEM. The constructions of Martin-Löf type theory would not be executable in the presence of LEM. 
+These ideas aren't unreasonable. You can't have Principle 1 if you have LEM. 
+Moreover, the constructions of Martin-Löf type theory would not be executable in the presence of LEM. 
 A formal system conforming to those principles can be expected to have specific properties not found in other systems. However, *formal systems are not the same thing as mathematics*.
 
 Classical mathematicians already distinguish between proofs that merely guarantee existence — for example, there are only countably many algebraic numbers, so transcendental numbers exist — and those that exhibit a particular object. The constructive objection is that the reasoning must be constructive right the way through, not merely in the construction of the desired object. Such an objection however is seldom supported by reasons.
+
+### The wonderful excluded middle
 
 Now for something odd. The following formula is a tautology even in intuitionistic logic:
 
@@ -73,11 +76,11 @@ $$
 \end{align*}
 $$
 
-Thus, we are free to use the excluded middle as much as we like provided the claim being proved is negative. Are any interesting statements negative? Here are some:
+Thus, we are free to use the excluded middle as much as we like provided the claim being proved is *negative*. Are any interesting statements negative? Here are some:
 
 * Fermat's last theorem, $\neg(\exists x y z n\in \mathbb{N^{+}}.\, x^n+y^n = z^n \land n>2)$
 * Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land \text{ $n$ is not the sum of two primes})$
-* Twin prime conjecture: there exists a greatest twin prime.
+* Twin prime conjecture: $\neg(\exists p.\, \text{$p$ is the greatest twin prime})$
 * The Riemann hypothesis: the nontrivial zeros of the [zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function) all have real part $1/2$
 
 The most celebrated conjectures in mathematics appear to be universal formulas, which means they are — even to an intuitionist — negated existentials.
@@ -94,7 +97,7 @@ The reason for this grumbling post is that I have never encountered the promised
 Instead, I have been seeing, for decades, excellent papers marred by silly, empty claims about constructive reasoning. They are typically
 
 * Trivial (e.g. the subject matter concerns discrete, finite objects)
-* Irrelevant (the theorem being proved is negative and therefore free of constructive content)
+* Irrelevant (proving a negative statement about simple, finite objects, completely free of constructive content)
 * Nonsensical (e.g. applying constructive methods to classical analysis)
 
 Related work might be criticised simply because it is not constructive.
