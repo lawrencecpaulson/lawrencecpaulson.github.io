@@ -18,9 +18,9 @@ The Cambridge team included Jia Meng and Claire Quigley, and we already had a [p
 
 We speak of automatic versus interactive theorem provers, but this dichotomy is misleading. (If there are two tools that do exactly the same thing, and one of them is fully automatic, what is the other one for?) In fact they do quite different things.
 
-* *Automatic theorem provers* solve big, one-shot problems, typically in a fairly weak formalism like first-order logic, perhaps augmented with arithmetic.
+* *Automatic theorem provers* solve tough, one-shot problems, typically in a fairly weak formalism like first-order logic, perhaps augmented with arithmetic.
 
-* *Interactive theorem provers* are primarily specification editors. Users can build tangled nests of theories and theory libraries, and on the way, prove a variety of facts.
+* *Interactive theorem provers* are primarily specification editors. Users can build tangled webs of theories and theory libraries, and on the way, prove a series of facts leading to some deep results.
 
 Automation is necessary because proofs reduced to bare logical rules can be unfeasibly long. You are going to struggle unless your prover regards a fact such as this is trivial:
 
