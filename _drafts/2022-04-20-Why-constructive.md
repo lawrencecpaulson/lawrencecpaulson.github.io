@@ -33,7 +33,7 @@ Mainstream mathematicians weren't interested, but it's easy to see why others mi
 The intuitionistic philosophy explicitly rejects any identification of mathematics with language.
 Here is [Arend Heyting](https://en.wikipedia.org/wiki/Arend_Heyting), Brouwer's student and disciple:
 
-> Mathematics is a production of the human mind. [The intuitionistic mathematician] uses language, both natural and formalised, only for communicating thoughts, i.e., to get others or himself to follow his own mathematical ideas. Such a linguistic accompaniment is not a representation of mathematics; still less is it mathematics itself.
+> Mathematics is a production of the human mind. [The intuitionistic mathematician] uses language, both natural and formalised, only for communicating thoughts, i.e., to get others or himself to follow his own mathematical ideas. Such a linguistic accompaniment is not a representation of mathematics; still less is it mathematics itself. [1]
 
 Thus it is diametrically opposed to the philosophy known as [formalism](https://plato.stanford.edu/entries/formalism-mathematics/), which declares that the objects studied by mathematicians *are nothing but* the symbolic terms of their own language. A chief proponent of that philosophy was [Haskell B Curry](https://plato.stanford.edu/entries/formalism-mathematics/#TerForCur). Yes, the same Curry as in Curry–Howard isomorphism.
 
@@ -117,7 +117,7 @@ Caution is necessary, because the Church-Turing thesis is inconsistent with many
 
 The Heyting quote above comes from here:
 
-* Carnap, R., Heyting, A., & Neumann, J. (1984). Symposium on the foundations of mathematics. In P. Benacerraf & H. Putnam (Eds.), Philosophy of Mathematics: Selected Readings (pp. 41-65). Cambridge: Cambridge University Press. doi:10.1017/CBO9781139171519.003
+1. Carnap, R., Heyting, A., & Neumann, J. (1984). Symposium on the foundations of mathematics. In P. Benacerraf & H. Putnam (Eds.), *Philosophy of Mathematics: Selected Readings* (pp. 41-65). Cambridge University Press. doi:10.1017/CBO9781139171519.003
 
 
 
