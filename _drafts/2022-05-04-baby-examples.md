@@ -5,13 +5,19 @@ usemathjax: true
 tags: examples, Isabelle
 ---
 
-For absolute beginners, proof assistants are daunting. Everything you do seems to go wrong. So let's have some super simple examples that should be easy to follow, and that already highlight some pitfalls to watch out for.
+For absolute beginners, proof assistants are daunting. Everything you do seems to go wrong. So let's have some super simple examples that should be easy to follow, and that highlight some pitfalls to watch out for.
 
-We begin by trying to prove $3-2=1$ using `auto`, but it fails. Hovering near the blue dot in the left margin, or checking the Output panel, we see a hint about a missing type constraint:
+### An algebraic identity
 
-<img src="/images/3minus2.png" alt="trying to prove 3-2=1" width="400"/>
+First, a note of caution: Isabelle/HOL is great at inferring types in expressions, but the simplest examples might well be ambiguous, leading to frustration.
+For example, it should be trivial to prove $3-2=1$ using `auto`, but it fails. Hovering near the blue dot in the left margin, or checking the Output panel, we see a hint about a missing type constraint:
 
-Isabelle can infer that the problem involves numbers, but it can't infer a precise type and therefore it's not clear whether substraction is even meaningful. So it's wise always to include an explicit type constraint in all problems involving numeric types, as in the following trivial example (originally due to Kevin Buzzard) to verify an algebraic identity.
+<img src="/images/3minus2.png" alt="trying and failing to prove 3-2=1" width="400"/>
+
+Isabelle sees that the problem involves numbers, but it can't infer a precise type and therefore it's not clear whether substraction is even meaningful. So it's wise always to include an explicit type constraint in problems involving numeric types.
+You can also use CTRL-hover (CMD-hover on Macs) to inspect the type of any variable in Isabelle/jEdit.
+
+In the following trivial algebraic identity (due to Kevin Buzzard), we specify the type of `x` using <span class="keyword2 keyword">fixes</span>.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span>
@@ -22,16 +28,21 @@ Isabelle can infer that the problem involves numbers, but it can't infer a preci
 
 The arguments given to the simplifier are critical:
 
-* `algebra_simps` contains the obvious algebraic simplification rules, using associativity and commutativity to arrange terms into a canonical order, and distributive laws to multiply out all the terms.
-* `eval_nat_numeral` expands numerals such as 3 and 47055833459 from their internal symbolic binary notation into unary notation as a series of `Suc` applications to `0`. (Sadly, the second example will not terminate.) The `Suc` form is necessary to trigger the simplification $a^{n+1}=a\times a^n$; this identity is called `power_Suc`, but it is a *default simplification rule*, meaning we don't need to mention it.
+* `algebra_simps` is a bundle of simplification rules (*simprules*), containing the obvious algebraic laws: associativity and commutativity to arrange terms into a canonical order, and distributive laws to multiply out all the terms.
+* `eval_nat_numeral` is a single simprule that expands numerals such as 3 and 47055833459 from their internal symbolic binary notation into unary notation as a series of `Suc` applications to `0`. (Sadly, the second example will not terminate.) 
 
-With both rules included, `simp` solves the problem. Using only one of them makes the expressions blow up. Figuring out what to do when faced with an avalanche of symbols is a skill you need to develop. The problem could be either that you used too many simplification rules, or not enough.
+The `Suc` form is necessary to trigger the simplification $a^{n+1}=a\times a^n$; this identity is called `power_Suc`, but it is a *default simprule*, meaning we don't need to mention it.
 
+With both rules included, `simp` solves the problem. Using only one of them makes the expressions blow up. A skill you need to develop is figuring out what to do when faced with an avalanche of symbols: did you use too many simplification rules, or not enough?
+A good strategy is to simplify with the fewest possible rules and gradually add more.
+Gigantic formulas are impossible to grasp, but close inspection sometimes reveals subexpressions that could be eliminated through the use of another simprule.
+
+### A numerical inequality
 
 The next example, also due to Kevin, is to show that $\sqrt 2 + \sqrt 3 < \sqrt 10$.
 One obvious approach is to get rid of some of the radicals by squaring both sides.
-So we formalise the corresponding formula and open a proof using the same simplification rules as in the previous example. It leaves us with the task of showing $2(\sqrt 2\sqrt 3) < 5$. Repeating the previous idea, we again square both sides and again apply the same simplification rules, and it works because $24<25$.
-Curiously, the two `show` commands, although both going from $x^2<y^2$ to $x<y$, require different formal justifications. Both were found by [sledgehammer]({% post_url 2022-04-13-Sledgehammer %}).
+So we state the corresponding formula as a lemma using <span class="keyword2 keyword">have</span>  and open a <span class="keyword2 keyword">proof</span> using the same simplification rules as in the previous example. It leaves us with the task of showing $2(\sqrt 2\sqrt 3) < 5$. Repeating the previous idea, we square both sides and apply those simplification rules again. (It works because $24<25$.)
+Curiously, the <span class="keyword2 keyword">show</span> commands, although both inferring $x<y$ from $x^2<y^2$,  require different formal justifications. Both were found by [sledgehammer]({% post_url 2022-04-13-Sledgehammer %}).
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> <span class="quoted quoted"><span>"</span>sqrt <span class="numeral">2</span> <span class="main">+</span> sqrt <span class="numeral">3</span> <span class="main">&lt;</span> sqrt <span class="numeral">10</span><span>"</span></span><span>
@@ -48,7 +59,6 @@ Curiously, the two `show` commands, although both going from $x^2<y^2$ to $x<y$,
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-
 But there's a much simpler way to prove the theorem above: by numerical evaluation using [Johannes Hölzl's](https://home.in.tum.de//~hoelzl/) amazing [approximation tactic](https://www.researchgate.net/publication/238740304_Proving_Inequalities_over_Reals_with_Computation_in_IsabelleHOL).
 
 <pre class="source">
@@ -59,12 +69,13 @@ But there's a much simpler way to prove the theorem above: by numerical evaluati
 Is it cheating? No. Working out the inequality by hand calculation is absolutely a proof. The algebraic proof above is less work for somebody who doesn't trust calculators. However, the ability to decide such questions by calculation (interval arithmetic, to be precise) is a huge labour-saver.
 
 
-
-
 <pre class="source">
   <span class="keyword1 command">lemma</span> <span class="quoted quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span> <span class="main">{</span><span class="numeral">0.999</span><span class="main">..</span><span class="numeral">1.001</span><span class="main">}</span> <span class="main">⟹</span> <span class="main">¦</span>pi <span class="main">-</span> <span class="numeral">4</span> <span class="main">*</span> arctan <span class="free">x</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="numeral">0.0021</span><span>"</span></span>
     <span class="keyword1 command">by</span> <span class="main">(</span><a class="entity_ref"><span class="operator">approximation 20<span class="main">)</span></span></a>
 </pre>
+
+To use this wonder-working tool, your theory file needs to import the library theory `HOL-Decision_Procs.Approximation`.
+
 
 
 While we are talking about automatic tactics, Chaieb's `sos` deserves a mention. It uses [sum of squares](https://mediatum.ub.tum.de/doc/649541/649541.pdf) methods to decide real polynomial inequalities.
@@ -77,9 +88,12 @@ While we are talking about automatic tactics, Chaieb's `sos` deserves a mention.
   </span><span class="keyword1 command">by</span> <span class="operator">sos</span>
 </pre>
 
+A decision procedure, it always settles the question, but with too many variables you won't live long enough to see the result. To use it, your theory needs to import `HOL-Library.Sum_of_Squares`.
 
-XXXX
 
+### The square root of two is irrational
+
+I contrived this example to demonstrate sledgehammer and especially how beautifully it interacts with the development of a structured proof. I knew the matehamtical proof already, so the point was to formalise it using sledgehammer alone, without reference to other [formal proofs](http://www.cs.ru.nl/~freek/comparison/comparison.pdf).
 
 
 <pre class="source">
