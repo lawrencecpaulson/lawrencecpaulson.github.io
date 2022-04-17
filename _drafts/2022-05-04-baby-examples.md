@@ -95,6 +95,7 @@ A decision procedure, it always settles the question, but with too many variable
 
 I contrived this example to demonstrate sledgehammer and especially how beautifully it interacts with the development of a structured proof. I knew the matehamtical proof already, so the point was to formalise it using sledgehammer alone, without reference to other [formal proofs](http://www.cs.ru.nl/~freek/comparison/comparison.pdf).
 
+The irrationality of $\sqrt2$ is stated in terms of $\mathbb Q$, which in Isabelle/HOL is a weird polymorphic set: it is the range of the function `of_rat`, which embeds type `rat` into larger types such as `real` and `complex`.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> <span class="quoted quoted"><span>"</span>sqrt <span class="numeral">2</span> <span class="main">∉</span> <span class="main">ℚ</span><span>"</span></span><span>
@@ -103,26 +104,28 @@ I contrived this example to demonstrate sledgehammer and especially how beautifu
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">q</span><span class="main">::</span><span class="quoted">rat</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span>sqrt <span class="numeral">2</span> <span class="main">=</span> of_rat <span class="skolem">q</span><span>"</span></span><span>
     </span><span class="keyword1 command">using</span> Rats_cases <span class="keyword1 command">by</span> <span class="operator">blast</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="skolem">q</span><span class="main">^</span><span class="numeral">2</span> <span class="main">=</span> <span class="numeral">2</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> abs_numeral of_rat_eq_iff of_rat_numeral_eq of_rat_power power2_eq_square real_sqrt_mult_self<span class="main">)</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> abs_numeral of_rat_eq_iff of_rat_numeral_eq of_rat_power power2_eq_square
+              real_sqrt_mult_self<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">m</span> <span class="skolem skolem">n</span><span>
     </span><span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span>coprime <span class="skolem">m</span> <span class="skolem">n</span><span>"</span></span> <span class="quoted quoted"><span>"</span><span class="skolem">q</span> <span class="main">=</span> of_int <span class="skolem">m</span> <span class="main">/</span> of_int <span class="skolem">n</span><span>"</span></span><span>
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Fract_of_int_quotient Rat_cases<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>of_int <span class="skolem">m</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">/</span> of_int <span class="skolem">n</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">=</span> <span class="main">(</span><span class="numeral">2</span><span class="main">::</span>rat<span class="main">)</span><span>"</span></span><span>
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> <span class="quoted quoted"><span>‹</span><span class="skolem">q</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span> <span class="main">=</span> <span class="numeral">2</span><span>›</span></span> power_divide<span class="main">)</span><span>
-  </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> 2</span><span class="main">:</span> <span class="quoted quoted"><span>"</span>of_int <span class="skolem">m</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">=</span> <span class="main">(</span><span class="numeral">2</span><span class="main">::</span>rat<span class="main">)</span> <span class="main">*</span> of_int <span class="skolem">n</span> <span class="main">^</span> <span class="numeral">2</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> division_ring_divide_zero double_eq_0_iff mult_2_right mult_zero_right nonzero_divide_eq_eq<span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> 2<span class="main">:</span> <span class="quoted quoted"><span>"</span>of_int <span class="skolem">m</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">=</span> <span class="main">(</span><span class="numeral">2</span><span class="main">::</span>rat<span class="main">)</span> <span class="main">*</span> of_int <span class="skolem">n</span> <span class="main">^</span> <span class="numeral">2</span><span>"</span></span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> division_ring_divide_zero double_eq_0_iff mult_2_right mult_zero_right
+              nonzero_divide_eq_eq<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="numeral">2</span> <span class="keyword1">dvd</span> <span class="skolem">m</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> <span class="main main">(</span>mono_tags<span class="main main">,</span> lifting<span class="main main">)</span> even_mult_iff even_numeral of_int_eq_iff of_int_mult of_int_numeral power2_eq_square<span class="main">)</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> <span class="main main">(</span>mono_tags<span class="main main">,</span> lifting<span class="main main">)</span> even_mult_iff even_numeral of_int_eq_iff of_int_mult
+              of_int_numeral power2_eq_square<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">r</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">m</span> <span class="main">=</span> <span class="numeral">2</span><span class="main">*</span><span class="skolem">r</span><span>"</span></span><span>
     </span><span class="keyword1 command">by</span> <span class="operator">blast</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="numeral">2</span> <span class="keyword1">dvd</span> <span class="skolem">n</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">)</span> <span class="quoted"><span>"</span>2<span>"</span></span> <span class="quoted quoted"><span>‹</span>even <span class="skolem">m</span><span>›</span></span> dvdE even_mult_iff mult.left_commute mult_cancel_left of_int_1 of_int_add of_int_eq_iff of_int_mult one_add_one power2_eq_square<span class="main">)</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">)</span> <span class="quoted"><span>"</span>2<span>"</span></span> <span class="quoted quoted"><span>‹</span>even <span class="skolem">m</span><span>›</span></span> dvdE even_mult_iff mult.left_commute mult_cancel_left of_int_1 
+            of_int_add of_int_eq_iff of_int_mult one_add_one power2_eq_square<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted">False</span><span>
     </span><span class="keyword1 command">using</span> <span class="quoted quoted"><span>‹</span>coprime <span class="skolem">m</span> <span class="skolem">n</span><span>›</span></span> <span class="quoted quoted"><span>‹</span><span class="skolem">m</span> <span class="main">=</span> <span class="numeral">2</span> <span class="main">*</span> <span class="skolem">r</span><span>›</span></span> <span class="keyword1 command">by</span> <span class="operator">simp</span><span>
 </span><span class="keyword1 command">qed</span>
 </pre>
-
-
 
 
 
@@ -149,4 +152,4 @@ I contrived this example to demonstrate sledgehammer and especially how beautifu
 
 To run this example yourself, you need to install [Isabelle](https://isabelle.in.tum.de/) (it's easy!) and perhaps read some [introductory documentation](https://isabelle.in.tum.de/dist/Isabelle/doc/prog-prove.pdf). 
 
-Download the file containing this example [here](/Isabelle-Examples/Baby.thy).
+You can download the theory file `Baby.thy` [here](/Isabelle-Examples/Baby.thy).
