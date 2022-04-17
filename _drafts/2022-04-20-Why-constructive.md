@@ -76,7 +76,11 @@ $$
 \end{align*}
 $$
 
-Thus, we are free to use the excluded middle as much as we like provided the claim being proved is *negative*. Are any interesting statements negative? Here are some:
+Thus, we are free to use the excluded middle as much as we like provided the claim being proved is *negative*. 
+Many important results are positive: for example, both the [completensss theorem](https://plato.stanford.edu/entries/goedel/#ComThe)
+and [König's infinity lemma](https://en.wikipedia.org/wiki/Kőnig%27s_lemma)
+make non-constructive existential claims.
+Are any interesting statements negative? Here are some:
 
 * Fermat's last theorem, $\neg(\exists x y z n\in \mathbb{N^{+}}.\, x^n+y^n = z^n \land n>2)$
 * Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land \text{ $n$ is not the sum of two primes})$

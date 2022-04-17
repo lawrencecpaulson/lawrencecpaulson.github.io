@@ -1,9 +1,13 @@
 section \<open>Baby examples\<close>
 
-theory Baby imports
-  "HOL-Decision_Procs.Approximation"
+theory Baby 
+  imports "HOL-Library.Sum_of_Squares" 
+          "HOL-Decision_Procs.Approximation"
 
 begin
+
+text \<open>a simplification rule for powers\<close>
+thm power_Suc
 
 text \<open>Kevin Buzzard's examples\<close>
 lemma
@@ -26,6 +30,9 @@ qed
 
 lemma "sqrt 2 + sqrt 3 < sqrt 10"
   by (approximation 10)
+
+lemma "x \<in> {0.999..1.001} \<Longrightarrow> \<bar>pi - 4 * arctan x\<bar> < 0.0021"
+  by (approximation 20)
 
 lemma "3.141592635389 < pi"
   by (approximation 30)
