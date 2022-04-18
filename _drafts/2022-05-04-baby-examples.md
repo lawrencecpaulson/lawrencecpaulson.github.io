@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Getting started: some baby examples"
+title:  "Getting started: some baby examples, some tricks"
 usemathjax: true 
 tags: examples, Isabelle
 ---
@@ -94,8 +94,30 @@ A decision procedure, it always settles the question, but with too many variable
 ### The square root of two is irrational
 
 I contrived this example to demonstrate sledgehammer and especially how beautifully it interacts with the development of a structured proof. I knew the matehamtical proof already, so the point was to formalise it using sledgehammer alone, without reference to other [formal proofs](http://www.cs.ru.nl/~freek/comparison/comparison.pdf).
+It also illustrates some tricky points requiring numeric types.
 
 The irrationality of $\sqrt2$ is stated in terms of $\mathbb Q$, which in Isabelle/HOL is a weird polymorphic set: it is the range of the function `of_rat`, which embeds type `rat` into larger types such as `real` and `complex`.
+So the proof begins by assuming that 
+sqrt <span class="numeral">2</span> <span class="main">∈</span> <span class="main">ℚ</span>,
+thus obtaining `q` of type `rat` such that 
+`sqrt` <span class="numeral">2</span> <span class="main">=</span> of_rat <span class="skolem">q</span> and after that, 
+<span class="skolem">q</span><span class="main">^</span><span class="numeral">2</span> <span class="main">=</span> <span class="numeral">2</span>.
+Sledgehammer was unable to derive this in a single step from the assumption, and this step-by-step approach (thinking of a simple intermediate property) is absolutely typical.
+
+We next obtain `m` and `n` such that 
+<pre class="source">
+    <span class="quoted quoted"><span>"</span>coprime <span class="skolem">m</span> <span class="skolem">n</span><span>"</span></span>       <span class="quoted quoted"><span>"</span><span class="skolem">q</span> <span class="main">=</span> of_int <span class="skolem">m</span> <span class="main">/</span> of_int <span class="skolem">n</span><span>"</span></span></pre>
+
+Two tricks here are knowing that `coprime` is available, and using the embedding `of_int` to ensure that `m` and `n` are integers (far better than simply declaring `m` and `n` to have type `int`, when Isabelle may insert embeddings in surprising places).
+Next we state the goal
+
+<pre class="source">
+    <span class="quoted quoted"><span>"</span>of_int <span class="skolem">m</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">/</span> of_int <span class="skolem">n</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">=</span> <span class="main">(</span><span class="numeral">2</span><span class="main">::</span>rat<span class="main">)</span><span>"</span></span>
+</pre>
+
+Now a super-important point: the embeddings `of_nat`, `of_int`, `of_real` specify their domain type, but their range type can be anything belonging to a suitably rich type class. Since 2 can also have many types, the `2::rat` is necessary to ensure that we are talking about the rationals.
+
+The proof continues with the expected argument of showing that 2 is a divisor of both `m` and `n`, contradicting the fact that they are coprime.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> <span class="quoted quoted"><span>"</span>sqrt <span class="numeral">2</span> <span class="main">∉</span> <span class="main">ℚ</span><span>"</span></span><span>
@@ -128,28 +150,11 @@ The irrationality of $\sqrt2$ is stated in terms of $\mathbb Q$, which in Isabel
 </pre>
 
 
-
-<pre class="source">
-</pre>
-
-
-
-
-
-
-<pre class="source">
-</pre>
-
-
-
-
-
-<pre class="source">
-</pre>
-
-
-
-
-To run this example yourself, you need to install [Isabelle](https://isabelle.in.tum.de/) (it's easy!) and perhaps read some [introductory documentation](https://isabelle.in.tum.de/dist/Isabelle/doc/prog-prove.pdf). 
+Every step in this proof was obtained by sledgehammer. The main skill involves thinking up the right intermediate goals when sledgehammer fails.
 
 You can download the theory file `Baby.thy` [here](/Isabelle-Examples/Baby.thy).
+You might want to generalise the example to show that the square root of every prime is irrational. The `prime` predicate and supporting theory can be imported from
+`HOL-Computational_Algebra.Primes`.
+
+Give it a try. Isabelle is [easy to install](https://isabelle.in.tum.de/) and comes with [plenty of documentation](https://isabelle.in.tum.de/dist/Isabelle/doc/prog-prove.pdf). 
+
