@@ -14,9 +14,9 @@ The various schools of the philosophy of mathematics emerged as responses to the
 
 I mentioned [intuitionism](https://plato.stanford.edu/entries/intuitionism/) in a [previous post]({% post_url 2021-11-24-Intuitionism %}).
 It longs to return to mathematics as it had been done until the mid-nineteenth century, when constructions were explicit and a function had to be given by an explicit rule.
-I'm sympathetic to one of the core ideas of intuitionism — that mathematical objects exist only in our minds — but not to the whole crazy system of ideas.
+I'm sympathetic to one of the core ideas of intuitionism—that mathematical objects exist only in our minds—but not to the whole crazy system of ideas.
 To [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), a mathematical fact only became true once it had been proved, so the [largest known prime](https://en.wikipedia.org/wiki/Largest_known_prime_number) could not be said to have been prime at all until recently.
-Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (apparently, once something is proved it [remains true forever]( click).) 
+Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (Apparently, once something is proved it [remains true forever]( click).) 
 Only God and Brouwer know for sure.
 Brouwer rejected the Law of the Excluded Middle (LEM) because to him, $P\lor \neg P$ was the claim that $P$ or $\neg P$ had already been proved (or could be in principle).
 
@@ -51,9 +51,9 @@ In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyti
 
 These ideas aren't unreasonable. You can't have Principle 1 if you have LEM. 
 Moreover, the constructions of Martin-Löf type theory would not be executable in the presence of LEM. 
-A formal system conforming to those principles can be expected to have specific properties not found in other systems. However, *formal systems are not the same thing as mathematics*.
+A formal system conforming to those principles can be expected to have strong properties not found in other systems. However, *formal systems are not the same thing as mathematics*.
 
-Classical mathematicians already distinguish between proofs that merely guarantee existence — for example, there are only countably many algebraic numbers, so transcendental numbers exist — and those that exhibit a particular object. The constructive objection is that the reasoning must be constructive right the way through, not merely in the construction of the desired object. Such an objection however is seldom supported by reasons.
+Classical mathematicians already distinguish between proofs that merely guarantee existence—for example, there are only countably many algebraic numbers, so transcendental numbers exist—and those that exhibit a particular object. The constructive objection is that the reasoning must be constructive right the way through, not merely in the construction of the desired object. Such an objection however is seldom supported by reasons.
 
 ### The wonderful excluded middle
 
@@ -87,7 +87,7 @@ Are any interesting statements negative? Here are some:
 * Twin prime conjecture: $\neg(\exists p.\, \text{$p$ is the greatest twin prime})$
 * The Riemann hypothesis: the nontrivial zeros of the [zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function) all have real part $1/2$
 
-The most celebrated conjectures in mathematics appear to be universal formulas, which means they are — even to an intuitionist — negated existentials.
+The most celebrated conjectures in mathematics appear to be universal formulas, which means they are—even to an intuitionist—negated existentials.
 
 One way for an intuitionist to comprehend classical reasoning is to say that it simply identifies the two statements $\neg\neg P$ and $P$, so the language of classical logic is slightly less precise. Then the critical question is how often that precision matters.
 And remember what we gain through classical logic:
@@ -102,11 +102,11 @@ Instead, I have been seeing, for decades, excellent papers marred by silly, empt
 
 * Trivial (e.g. the subject matter concerns discrete, finite objects)
 * Irrelevant (proving a negative statement about simple, finite objects, completely free of constructive content)
-* Nonsensical (e.g. applying constructive methods to classical analysis)
+* Nonsensical (e.g. applying constructive methods to classical analysis, a vegan meal with a starter of foie gras)
 
-Related work might be criticised simply because it is not constructive.
+I've seen related work criticised simply because it is not constructive.
 If one asks why, the response is typically that "constructive" is simply better,
-in a tone laden with moral condescension. But it isn't actually better without specific reasons, especially since the original philosophical basis for intuitionism has been jettisoned. The new Constructivism looks a lot like the old Formalism.
+in a tone laden with moral condescension. But it isn't actually better without specific reasons, and the original philosophical basis for intuitionism has been jettisoned. The new Constructivism looks a lot like the old Formalism.
 
 And yet there are plenty of situations where constructive reasoning really does yield concrete dividends.
 One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
