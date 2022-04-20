@@ -84,7 +84,7 @@ make non-constructive existential claims.
 Are any interesting statements negative? Here are some:
 
 * Fermat's last theorem, $\neg(\exists x y z n\in \mathbb{N^{+}}.\, x^n+y^n = z^n \land n>2)$
-* Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land \text{ $n$ is not the sum of two primes})$
+* Goldbach's conjecture, $\neg(\exists n\in \mathbb{N}.\, n>2 \land 2\mid n \land \text{ $n$ is not the sum of two primes})$
 * Twin prime conjecture: $\neg(\exists p.\, \text{$p$ is the greatest twin prime})$
 * The Riemann hypothesis: the nontrivial zeros of the [zeta function](https://en.wikipedia.org/wiki/Riemann_zeta_function) all have real part $1/2$
 
@@ -94,7 +94,7 @@ One way for an intuitionist to comprehend classical reasoning is to say that it 
 And remember what we gain through classical logic:
 
 * powerful automatic proof procedures
-* access to the vast world of mathematics as it is done by practically everybody.
+* access to the vast world of mathematics as it is done by practically everybody
 
 ### "Our proofs are constructive"
 
