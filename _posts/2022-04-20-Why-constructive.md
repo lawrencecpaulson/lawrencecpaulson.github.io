@@ -66,7 +66,7 @@ $$
 \end{align*}
 $$
 
-*Proof*. Assume $P \lor (P\to R) \to Q\to R)$ and $Q$, hoping to show $R$.
+*Proof*. Assume $P \lor (P\to R) \to Q\to R$ and $Q$, hoping to show $R$.
 From the two assumptions there follows $P \lor (P\to R) \to R$. Therefore $P\to R$ and $(P\to R) \to R$, from which follows $R$. [BFD](https://www.urbandictionary.com/define.php?term=BFD).
 
 Replacing $R$ by $\bot$ (falsity) above, we obtain
