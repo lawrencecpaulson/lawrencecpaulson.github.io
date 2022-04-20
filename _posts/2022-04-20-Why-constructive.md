@@ -13,7 +13,7 @@ Let's recall how constructive logic came about. Russell discovered his famous [p
 The various schools of the philosophy of mathematics emerged as responses to these paradoxes. 
 
 I mentioned [intuitionism](https://plato.stanford.edu/entries/intuitionism/) in a [previous post]({% post_url 2021-11-24-Intuitionism %}).
-It longs to return to mathematics as it had been done until the mid-nineteenth century, when constructions were explicit and a function had to be given by an explicit rule.
+It longs to return to mathematics as it had been done from Euclid until the mid-nineteenth century, when constructions were explicit. It held that every function should be given by an explicit rule.
 I'm sympathetic to one of the core ideas of intuitionism—that mathematical objects exist only in our minds—but not to the whole crazy system of ideas.
 To [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), a mathematical fact only became true once it had been proved, so the [largest known prime](https://en.wikipedia.org/wiki/Largest_known_prime_number) could not be said to have been prime at all until recently.
 Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (Apparently, once something is proved it [remains true forever]( click).) 
@@ -46,10 +46,11 @@ At the same time, it embodied a glaring contradiction: to support constructive m
 
 In his early papers, Martin-Löf continued to refer to Brouwer, Bishop and Heyting,  to affirm the axiom of choice and to adhere to some intuitionistic terminology, such as species. However, as other type theories emerged during the 1980s, [constructive mathematics](https://plato.stanford.edu/entries/mathematics-constructive/) left most of that behind as so much baggage, retaining just two core principles:
 
-1. A proof of $P\lor Q$ or $\exists x.\,P(x)$ should communicate which choice was made
+1. A proof of $P\lor Q$ or $\exists x.\,P(x)$ should communicate which choice was made.
 2. The law of the excluded middle (LEM) must be rejected.
 
-These ideas aren't unreasonable. You can't have Principle 1 if you have LEM. 
+These ideas aren't unreasonable. 
+Principle 1 is attractive in itself, and you can't have it if you have LEM. 
 Moreover, the constructions of Martin-Löf type theory would not be executable in the presence of LEM. 
 A formal system conforming to those principles can be expected to have strong properties not found in other systems. However, *formal systems are not the same thing as mathematics*.
 
@@ -106,7 +107,7 @@ Instead, I have been seeing, for decades, excellent papers marred by silly, empt
 
 I've seen related work criticised simply because it is not constructive.
 If one asks why, the response is typically that "constructive" is simply better,
-in a tone laden with moral condescension. But it isn't actually better without specific reasons, and the original philosophical basis for intuitionism has been jettisoned. The new Constructivism looks a lot like the old Formalism.
+in a tone laden with moral condescension. But it isn't actually better without specific reasons, and the original philosophical basis for intuitionism has been jettisoned. The new Intuitionism looks a lot like the old Formalism.
 
 And yet there are plenty of situations where constructive reasoning really does yield concrete dividends.
 One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
