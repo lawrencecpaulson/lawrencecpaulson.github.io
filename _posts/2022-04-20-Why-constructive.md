@@ -20,14 +20,14 @@ Fermat's last theorem was not true until 1993 (when Wiles first announced it), o
 Only God and Brouwer know for sure.
 Brouwer rejected the Law of the Excluded Middle (LEM) because to him, $P\lor \neg P$ was the claim that $P$ or $\neg P$ had already been proved (or could be in principle).
 
-Other ideas connected with intuitionism included [bar induction and the fan theorem](https://plato.stanford.edu/entries/intuitionism/#BarThe), and choice sequences, which were introduced in order to justify the existence of real numbers:
+Other ideas connected with intuitionism included [bar induction and the fan theorem](https://plato.stanford.edu/entries/intuitionism/#BarThe), and [choice sequences](https://plato.stanford.edu/entries/intuitionism/#TheCon), which were introduced in order to justify the existence of real numbers:
 
 > A *choice sequence* is an infinite sequence of numbers (or finite objects) created by the free will. 
 
 Instead of sets there were [species](https://encyclopediaofmath.org/wiki/Species) and [spreads](https://encyclopediaofmath.org/wiki/Spread_(in_intuitionistic_logic)).
 From such a peculiar standpoint, mathematics would have to be developed all over again.
 Analysis seemed to pose particular difficulties, and Bishop made a concerted effort to develop [constructive analysis](https://ncatlab.org/nlab/show/Bishop%27s+constructive+mathematics).
-Bishop was able to reconstruct a significant fragment of elementary analysis from constructive principles, arriving at a strikingly different mathematics where, for example, all functions turned out to be continuous.
+Bishop was able to reconstruct a significant fragment of elementary analysis from constructive principles, arriving at a strikingly different mathematics where, for example, all total functions turned out to be continuous.
 Mainstream mathematicians weren't interested, but it's easy to see why others might want to explore that world further.
 
 The intuitionistic philosophy explicitly rejects any identification of mathematics with language.
