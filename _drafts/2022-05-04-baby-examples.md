@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Getting started: some baby examples, some cool proof methods"
+title:  "Getting started with Isabelle: baby examples, cool proof methods"
 usemathjax: true 
 tags: examples, Isabelle
 ---
