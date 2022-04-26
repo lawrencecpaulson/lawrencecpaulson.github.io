@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Getting started: some baby examples, some tricks"
+title:  "Getting started: some baby examples, some cool proof methods"
 usemathjax: true 
 tags: examples, Isabelle
 ---
@@ -12,7 +12,7 @@ For absolute beginners, proof assistants are daunting. Everything you do seems t
 First, a note of caution: Isabelle/HOL is great at inferring types in expressions, but the simplest examples might well be ambiguous, leading to frustration.
 For example, it should be trivial to prove $3-2=1$ using `auto`, but it fails. Hovering near the blue dot in the left margin, or checking the Output panel, we see a hint about a missing type constraint:
 
-<img src="/images/3minus2.png" alt="trying and failing to prove 3-2=1" width="400"/>
+<img src="/images/3minus2.png" alt="trying and failing to prove 3-2=1" width="500"/>
 
 Isabelle sees that the problem involves numbers, but it can't infer a precise type and therefore it's not clear whether substraction is even meaningful. So it's wise always to include an explicit type constraint in problems involving numeric types.
 You can also use CTRL-hover (CMD-hover on Macs) to inspect the type of any variable in Isabelle/jEdit.
