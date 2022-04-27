@@ -22,14 +22,20 @@ This last point can be puzzling if you watch the progress bar on the right and f
 
 <img src="/images/looping-proof.png" alt="a proof of False?" width="500"/>
 
-What's going on? The first lemma, `whoops`, is actually false but the supplied proof fails to terminate. Isabelle assumes that the proof will succeed eventually, allowing `False` to be proved. This strange phenomenon can only happen in interactive mode.
+What's going on? The first lemma, `whoops`, is actually false but the supplied proof fails to terminate. Isabelle assumes that the proof will succeed eventually, allowing `False` to be proved. This strange phenomenon can only happen in interactive mode: the corresponding batch job will run forever. Unfortunately, a student once submitted work containing this error.
+
+More beginner's points:
+
+* When typing text, jEdit will flag errors in your partially-entered text. Ignore and keep going.
+* Text containing syntactic or type errors is skipped over. Since it can't be interpreted, "live" highlighting is not avaiable.
+* Syntax errors can either be inside formulas ("inner syntax") or in Isar elements themselves ("outer syntax").
 
 ### Watch those colours
 
-More points:
+bound vs free vs "hanging" variables
 
-* When typing text, jEdit will flag errors in your partially-entered text. Ignore and keep going.
-* Text containing errors is skipped over. Since it can't be interpreted, "live" highlighting is not avaiable for erroneous material.
+approved vs legacy Isar commands
+
 
 auto-indentation; colouring; 
 
