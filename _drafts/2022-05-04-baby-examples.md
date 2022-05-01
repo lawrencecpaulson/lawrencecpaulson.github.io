@@ -33,7 +33,7 @@ The arguments given to the simplifier are critical:
 
 The `Suc` form is necessary to trigger the simplification $a^{n+1}=a\times a^n$; this identity is called `power_Suc`, but it is a *default simprule*, meaning we don't need to mention it.
 
-With both rules included, `simp` solves the problem. Using only one of them makes the expressions blow up. A skill you need to develop is figuring out what to do when faced with an avalanche of symbols: did you use too many simplification rules, or not enough?
+With both rules included, `simp` solves the problem. Using only one of them makes the expressions blow up. A skill you need to develop is figuring out what to do when faced with a sea of symbols: did you use too many simplification rules, or too few?
 A good strategy is to simplify with the fewest possible rules and gradually add more.
 Gigantic formulas are impossible to grasp, but close inspection sometimes reveals subexpressions that could be eliminated through the use of another simprule.
 
@@ -93,7 +93,7 @@ A decision procedure, it always settles the question, but with too many variable
 
 ### The square root of two is irrational
 
-I contrived this example to demonstrate sledgehammer and especially how beautifully it interacts with the development of a structured proof. I knew the matehamtical proof already, so the point was to formalise it using sledgehammer alone, without reference to other [formal proofs](http://www.cs.ru.nl/~freek/comparison/comparison.pdf).
+I contrived this example to demonstrate sledgehammer and especially how beautifully it interacts with the development of a structured proof. I knew the mathematical proof already, so the point was to formalise it using sledgehammer alone, without reference to other [formal proofs](http://www.cs.ru.nl/~freek/comparison/comparison.pdf).
 It also illustrates some tricky points requiring numeric types.
 
 The irrationality of $\sqrt2$ is stated in terms of $\mathbb Q$, which in Isabelle/HOL is a weird polymorphic set: it is the range of the function `of_rat`, which embeds type `rat` into larger types such as `real` and `complex`.
@@ -102,7 +102,7 @@ sqrt <span class="numeral">2</span> <span class="main">∈</span> <span class="m
 thus obtaining `q` of type `rat` such that 
 `sqrt` <span class="numeral">2</span> <span class="main">=</span> of_rat <span class="skolem">q</span> and after that, 
 <span class="skolem">q</span><span class="main">^</span><span class="numeral">2</span> <span class="main">=</span> <span class="numeral">2</span>.
-Sledgehammer was unable to derive this in a single step from the assumption, and this step-by-step approach (thinking of a simple intermediate property) is absolutely typical.
+Sledgehammer was unable to derive this in a single step from the assumption, and this step-by-step approach (thinking of a simple intermediate property) is the simplest way to give sledgehammer a hint.
 
 We next obtain `m` and `n` such that 
 <pre class="source">
@@ -115,7 +115,7 @@ Next we state the goal
     <span class="quoted quoted"><span>"</span>of_int <span class="skolem">m</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">/</span> of_int <span class="skolem">n</span> <span class="main">^</span> <span class="numeral">2</span> <span class="main">=</span> <span class="main">(</span><span class="numeral">2</span><span class="main">::</span>rat<span class="main">)</span><span>"</span></span>
 </pre>
 
-Now a super-important point: the embeddings `of_nat`, `of_int`, `of_real` specify their domain type, but their range type can be anything belonging to a suitably rich type class. Since 2 can also have many types, the `2::rat` is necessary to ensure that we are talking about the rationals.
+Now a *super-important point*: the embeddings `of_nat`, `of_int`, `of_real` specify their domain type, but their range type **can be anything** belonging to a suitably rich type class. Since 2 can also have many types, the `2::rat` is necessary to ensure that we are talking about the rationals.
 
 The proof continues with the expected argument of showing that 2 is a divisor of both `m` and `n`, contradicting the fact that they are coprime.
 
