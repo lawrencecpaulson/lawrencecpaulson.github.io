@@ -5,19 +5,20 @@ usemathjax: true
 tags: examples, Isabelle
 ---
 
-For absolute beginners, proof assistants are daunting. Everything you do seems to go wrong. So let's have some super simple examples that should be easy to follow, and that highlight some pitfalls to watch out for.
+For absolute beginners, proof assistants are daunting. Everything you do seems to go wrong. So let's have some super simple examples that show how to get started while highlighting some pitfalls.
 
 ### An algebraic identity
 
 First, a note of caution: Isabelle/HOL is great at inferring types in expressions, but the simplest examples might well be ambiguous, leading to frustration.
-For example, it should be trivial to prove $3-2=1$ using `auto`, but it fails. Hovering near the blue dot in the left margin, or checking the Output panel, we see a hint about a missing type constraint:
+For example, it should be trivial to prove $3-2=1$ using `auto`, but it fails. Hovering with your mouse near the blue dot in the left margin, or checking the Output panel, you might see a hint about a missing type constraint:
 
 <img src="/images/3minus2.png" alt="trying and failing to prove 3-2=1" width="500"/>
 
 Isabelle sees that the problem involves numbers, but it can't infer a precise type and therefore it's not clear whether substraction is even meaningful. So it's wise always to include an explicit type constraint in problems involving numeric types.
-You can also use CTRL-hover (CMD-hover on Macs) to inspect the type of any variable in Isabelle/jEdit.
+You can also use CTRL-hover (CMD-hover on Macs) to inspect the type of any variable in Isabelle/jEdit. (More on this next week!)
 
 In the following trivial algebraic identity (due to Kevin Buzzard), we specify the type of `x` using <span class="keyword2 keyword">fixes</span>.
+It's trivial to prove, using a single call to the simplifier.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span>
@@ -41,8 +42,10 @@ Gigantic formulas are impossible to grasp, but close inspection sometimes reveal
 
 The next example, also due to Kevin, is to show that $\sqrt 2 + \sqrt 3 < \sqrt 10$.
 One obvious approach is to get rid of some of the radicals by squaring both sides.
-So we state the corresponding formula as a lemma using <span class="keyword2 keyword">have</span>  and open a <span class="keyword2 keyword">proof</span> using the same simplification rules as in the previous example. It leaves us with the task of showing $2(\sqrt 2\sqrt 3) < 5$. Repeating the previous idea, we square both sides and apply those simplification rules again. (It works because $24<25$.)
-Curiously, the <span class="keyword2 keyword">show</span> commands, although both inferring $x<y$ from $x^2<y^2$,  require different formal justifications. Both were found by [sledgehammer]({% post_url 2022-04-13-Sledgehammer %}).
+So we state the corresponding formula as a lemma using <span class="keyword2 keyword">have</span>  and open a <span class="keyword2 keyword">proof</span> using the same simplification rules as in the previous example. It leaves us with the task of showing $2(\sqrt 2\sqrt 3) < 5$. Repeating the previous idea,
+we use <span class="keyword2 keyword">have</span> to state that formula with both sides squared, then apply those simplification rules again. (It works because $24<25$.)
+Curiously, the <span class="keyword2 keyword">show</span> commands, although both inferring $x<y$ from $x^2<y^2$,  require different formal justifications, both found by [sledgehammer]({% post_url 2022-04-13-Sledgehammer %}).
+The rest of the proof below was typed in manually.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> <span class="quoted quoted"><span>"</span>sqrt <span class="numeral">2</span> <span class="main">+</span> sqrt <span class="numeral">3</span> <span class="main">&lt;</span> sqrt <span class="numeral">10</span><span>"</span></span><span>
@@ -150,7 +153,8 @@ The proof continues with the expected argument of showing that 2 is a divisor of
 </pre>
 
 
-Every step in this proof was obtained by sledgehammer. The main skill involves thinking up the right intermediate goals when sledgehammer fails.
+**Every step** in this proof was obtained by sledgehammer. The main skill involves thinking up the right intermediate goals when sledgehammer fails, and typing them in.
+Yes, formal proof really is just another sort of coding.
 
 You can download the theory file `Baby.thy` [here](/Isabelle-Examples/Baby.thy).
 You might want to generalise the example to show that the square root of every prime is irrational. The `prime` predicate and supporting theory can be imported from
