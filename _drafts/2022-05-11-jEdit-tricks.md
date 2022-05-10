@@ -5,8 +5,8 @@ usemathjax: true
 tags: jEdit, Isabelle
 ---
 
-As mentioned last time, proof assistants can be daunting, and it's not just about how to prove theorems. It's about being aware of all the bells and whistles provided to help you prove theorems. The first modern proof assistant, Edinburgh LCF, provided nothing but a top-level to the ML programming language, designed specifically to the [Meta Language](https://www.research.ed.ac.uk/en/publications/a-metalanguage-for-interactive-proof-in-lcf) for proving theorems. It was a bare-bones environment, but at least it was Turing complete! Nowadays, things work differently. 
-This post is mainly for beginners, but experienced users should skip to the end: they can learn something too.
+As mentioned last time, proof assistants can be daunting, and it's not just about how to prove theorems. It's about being aware of all the bells and whistles provided to help you prove theorems. The first modern proof assistant, [Edinburgh LCF](https://link.springer.com/book/10.1007/3-540-09724-4), provided nothing but a top-level to the ML programming language, designed specifically to the [Meta Language](https://www.research.ed.ac.uk/en/publications/a-metalanguage-for-interactive-proof-in-lcf) for proving theorems. It was a bare-bones environment, but at least it was Turing complete! Nowadays, things work differently. 
+This post is mainly for beginners; experienced users should skip to the end, where they might learn something too.
 
 ### Isabelle/jEdit fundamentals
  
@@ -15,7 +15,7 @@ Nothing says daunting like the Isabelle/jEdit
 Let me summarise his main points even more briefly:
 
 * Isabelle/jEdit looks like a text editor, but Isabelle is processing your text the entire time.
-* Each and every symbol you can see is digested by the Isabelle process, 
+* Each and every symbol you can see has been digested by the Isabelle process, 
 * By hovering/clicking you can interrogate symbols for their types and definitions.
 * The whole document is processed in parallel, so the last proof can be fully processed while some earlier parts are still running.
 
@@ -23,7 +23,7 @@ This last point can be puzzling if you watch the progress bar on the right and f
 
 <img src="/images/jEdit-tricks-looping-proof.png" alt="a proof of False?" width="500"/>
 
-What's going on? The first lemma, `whoops`, is actually false but the supplied proof fails to terminate. Isabelle assumes that the proof will succeed eventually, so it continues on and proves `False`. This strange phenomenon can only happen in interactive mode: the corresponding batch job will run forever. Unfortunately, a student once submitted work containing this error and almost entirely incorrect.
+What's going on? The first lemma, `whoops`, is actually false but the supplied proof fails to terminate. Isabelle assumes that the proof will succeed eventually, so it continues on and proves `False`. This strange phenomenon can only happen in interactive mode: the corresponding batch job will run forever. Unfortunately, a student once submitted work containing this error; it was almost entirely incorrect and he had no idea.
 
 More beginner's points:
 
@@ -37,7 +37,7 @@ Some colours will be obvious to you: purple, as above, for a running proof metho
 
 <img src="/images/jEdit-tricks-hanging.png" alt="have with hanging variables" width="500"/>
 
-The variables `m` and `n` are shaded. That's because they aren't fixed in the lemma statement (either explicitly by <span class="keyword2 keyword">fixes</span> or implicitly by being mentioned). Neither are they declared locally in the <span class="keyword2 keyword">have</span> line (using <span class="keyword2 keyword">for</span>). So although the little fact has been proved, it just refers to some particular  `m` and `n` that we know nothing about.
+The variables `m` and `n` are shaded. That's because they aren't fixed in the lemma statement (either explicitly by <span class="keyword2 keyword">fixes</span> or implicitly by being mentioned). Neither are they declared locally in the <span class="keyword2 keyword">have</span> line (using <span class="keyword2 keyword">for</span>). So although the little fact has been proved, it just refers to some particular  `m` and `n` that we know nothing about. It's good for nothing.
 
 Surely we wanted to prove this fact for *all* `m` and `n`. One way is to make them bound variables. They are rendered in *green*, while free variables are *blue*.
 
@@ -54,7 +54,7 @@ We prefer structured proofs, such as you can see in [previous posts]({% post_url
 If you use "improper commands" such as <span class="keyword1 command improper command">apply</span>, they'll be highlighted in red.
 There are a couple of instances in the proofs for 
 [Wetzel's problem]({% post_url 2022-04-27-Wetzel %}).
-Apologies about the guilt-tripping!
+It's basically guilt-tripping.
 
 ### Deep inspecting of your text
 
@@ -69,7 +69,7 @@ Here is the definition of the operator `dvd`:
 
 <img src="/images/jEdit-tricks-click.png" alt="click to definition" width="550"/>
 
-If you hover-click over a theorem name, you get taken to its proof. The text is coloured pink to indicate that it's frozen: this definition was compiled into the Isabelle/HOL image and therefore cannot be modified.
+If you hover-click over a theorem name, you get taken to its proof. The text is coloured pink to indicate that it's *frozen*: this definition was compiled into the Isabelle/HOL image and therefore cannot be modified.
 
 Sometimes a theory file opens with errors. To jump to them quickly, try these shortcuts:
 * skip to next error: SHIFT-C-N
