@@ -9,7 +9,7 @@ tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 (1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system. (2) Moreover, no such formal system can prove any statement implying its own consistency.
 The first theorem is proved by using integer arithmetic to encode logical formulas, operations on them such as substitution, and inference according to the rules of the formal system. A fixedpoint construction to create an explicit formula expressing its own unprovability.
 The technical complications of the first theorem are formidable but were overcome already by [Shankar](https://doi.org/10.1017/CBO9780511569883) in the 1980s and again by John Harrison and [Russell O’Connor](https://rdcu.be/cNaig).
-This post will describe [my own formalisation](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf) of the first theorem, using Isabelle/HOL.
+This post introduces [my own formalisation](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf) of the first theorem, using Isabelle/HOL. It also demonstrates the use of Christian Urban's nominal package for formalising syntax involving variable binding.
 
 ### Remarks about the informal proof
 
@@ -19,7 +19,7 @@ My formalisation follows a development by [Świerczkowski](https://doi.org/10.40
 He gave a no-handwaving informal proof, a gift for anyone who might come along later to formalise it. He wrote out many details glossed over in textbooks.
 He made strategic decisions to minimise the effort needed to reach even the second incompleteness theorem, which had been regarded by many as unattainable.
 
-Świerczkowski chose to rely on the hereditarily finite sets rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler. 
+Świerczkowski chose to rely on the [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %}) rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler. 
 He also proved a meta-theorem stating that every true $\Sigma$ formula is provable in the calculus with no need to write out the proofs. A $\Sigma$ formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also certain *false* formulas have explicit *disproofs*), but it only works of all quantifiers are bounded, and so actually requires more work than just writing out some formal proofs.
 
 The stages of the proofs of the first theorem are as follows:
@@ -40,11 +40,17 @@ The proof requires proving that the encoded operations carry out their intended 
 
 ### A formal logic and its Isabelle/HOL formalisation
 
-
+Now let's see a few highlights of the [Isabelle formalisation of incompleteness](https://www.isa-afp.org/entries/Incompleteness.html).
+A bit of magic (omitted here) sets up the nominal package and creates the type `name` to serve as a type of variable names.
+The nominal package provide its own datatype declaration facility.
+We can now declare a type for the terms of our formalism. Terms can be variables, 0 or "eats" ($A \lhd x$ for the set whose elements are those of $A$, plus $x$).
 
 <pre class="source">
 <span class="keyword1 command">nominal_datatype</span> tm <span class="main">=</span> Zero <span class="main">|</span> Var <span class="quoted">name</span> <span class="main">|</span> Eats <span class="quoted">tm</span> <span class="quoted">tm</span>
 </pre>
+
+The formulas provide a bare bones predicate calculus, able to express $x\in y$, $x=y$, $P\lor Q$, $\neg P$ and $\exists x.\, P$.
+The phrase <kbd><span class="keyword2 keyword">binds</span> <span class="quoted free">x</span> <span class="keyword2 keyword">in</span> f</kbd> indicates that the occurrence of `x` is binding.
 
 <pre class="source">
 <span class="keyword1 command">nominal_datatype</span> fm <span class="main">=</span><span>
@@ -53,6 +59,75 @@ The proof requires proving that the encoded operations carry out their intended 
   </span><span class="main">|</span> Disj <span class="quoted">fm</span> <span class="quoted">fm</span>   <span class="main">(</span><span class="keyword2 keyword">infixr</span> <span class="quoted"><span>"</span><span class="keyword1 keyword1">OR</span><span>"</span></span> 130<span class="main">)</span><span>
   </span><span class="main">|</span> Neg <span class="quoted">fm</span><span>
   </span><span class="main">|</span> Ex x<span class="main">::</span><span class="quoted">name</span> f<span class="main">::</span><span class="quoted">fm</span> <span class="keyword2 keyword">binds</span> <span class="quoted free">x</span> <span class="keyword2 keyword">in</span> f
+</pre>
+
+This is all we need to define the syntax of our first-order calculus. The next steps will define substitution (necessary to express the rules of inference) and the semantics.
+
+### Defining substitution
+
+Substitution of a term for a variable in another term is trivial. It has no effect on 0; a variable is replaced by the new term if it matches; compound terms (involving $\lhd$) are substituted recursively.
+The last line proves that the function uses names legitimately.
+It is the last such proof we are going to see: they become gruesome, which is the only real drawback of the nominal package.
+
+<pre class="source">
+<span class="keyword1 command">nominal_function</span> <span class="entity">subst</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>name <span class="main">⇒</span> tm <span class="main">⇒</span> tm <span class="main">⇒</span> tm<span>"</span></span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+   </span><span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> Zero       <span class="main">=</span> Zero<span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="main">(</span>Var <span class="free bound entity">k</span><span class="main">)</span>    <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free bound entity">i</span><span class="main">=</span><span class="free bound entity">k</span> <span class="keyword1">then</span> <span class="free bound entity">x</span> <span class="keyword1">else</span> Var <span class="free bound entity">k</span><span class="main">)</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> Eats <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
+</span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> eqvt_def subst_graph_aux_def<span class="main">)</span> <span class="main">(</span><span class="operator">metis</span> tm.strong_exhaust<span class="main">)</span>
+</pre>
+
+Substitution over formulas is also pretty straightforward. In most cases it is simply built up recursively.
+The line for the existential quantifier says in effect, ensure that the quantified variable is fresh with respect to the variable and term of the substitution, then simply substitute recursively. We can read this as an order to rename the bound variable appropriately to prevent a name clash, and we don't actually care what name is chosen.
+
+<pre class="source">
+<span class="keyword1 command">nominal_function</span>  <span class="entity">subst_fm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm <span class="main">⇒</span> name <span class="main">⇒</span> tm <span class="main">⇒</span> fm<span>"</span></span> <span class="main">(</span><span class="quoted"><span>"</span>_<span class="keyword1">'(</span>_<span class="keyword1">::=</span>_<span class="keyword1">')</span><span>"</span></span> <span class="main">[</span>1000<span class="main">,</span> 0<span class="main">,</span> 0<span class="main">]</span> 200<span class="main">)</span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+    </span>Mem<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="main">(</span>Mem <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span>  <span class="main">=</span> Mem <span class="main">(</span>subst <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span>subst <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Eq<span class="main">:</span>   <span class="quoted quoted"><span>"</span><span class="main">(</span>Eq <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span>   <span class="main">=</span> Eq  <span class="main">(</span>subst <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span>subst <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Disj<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>Disj <span class="free bound entity">A</span> <span class="free bound entity">B</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span> <span class="main">=</span> Disj <span class="main">(</span><span class="free bound entity">A</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span><span class="main">)</span> <span class="main">(</span><span class="free bound entity">B</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Neg<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="main">(</span>Neg <span class="free bound entity">A</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span>    <span class="main">=</span> Neg  <span class="main">(</span><span class="free bound entity">A</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Ex<span class="main">:</span>   <span class="quoted quoted"><span>"</span>atom <span class="free bound entity">j</span> <span class="main">♯</span> <span class="main">(</span><span class="free bound entity">i</span><span class="main">,</span> <span class="free bound entity">x</span><span class="main">)</span> <span class="main">⟹</span> <span class="main">(</span>Ex <span class="free bound entity">j</span> <span class="free bound entity">A</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span> <span class="main">=</span> Ex <span class="free bound entity">j</span> <span class="main">(</span><span class="free bound entity">A</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span><span class="main">)</span><span>"</span></span>
+</pre>
+
+This simple lemma says that if a variable is fresh for a term (which essentially means it is not free in the term), then substitution has no effect. Its proof is a one line induction. Note that $a\mathbin{\sharp} t$ means "$a$ is fresh for $t$.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> forget_subst_tm <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span>atom <span class="free">a</span> <span class="main">♯</span> <span class="free">tm</span> <span class="main">⟹</span> subst <span class="free">a</span> <span class="free">x</span> <span class="free">tm</span> <span class="main">=</span> <span class="free">tm</span><span>"</span></span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">tm</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> fresh_at_base<span class="main">)</span>
+</pre>
+
+This little lemma states that two successive substitutions within a formula are equivalent to a single substitution on the formula, the other substitution taking place in the term. The proof is another one-line induction, where the "avoiding" clause informs the nominal package of the syntactic entities that quantified bound variables must avoid. This sort of proof can be absolutely fiendish with other approaches to variable binding.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> subst_fm_commute<span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span><span>
+  </span><span class="quoted quoted"><span>"</span>atom <span class="free">j</span> <span class="main">♯</span> <span class="free">A</span> <span class="main">⟹</span> <span class="main">(</span><span class="free">A</span><span class="main">(</span><span class="free">i</span><span class="main">::=</span><span class="free">t</span><span class="main">)</span><span class="main">)</span><span class="main">(</span><span class="free">j</span><span class="main">::=</span><span class="free">u</span><span class="main">)</span> <span class="main">=</span> <span class="free">A</span><span class="main">(</span><span class="free">i</span> <span class="main">::=</span> subst <span class="free">j</span> <span class="free">u</span> <span class="free">t</span><span class="main">)</span><span>"</span></span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quoted free">A</span> <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">i</span> <span class="quoted free">j</span> <span class="quoted free">t</span> <span class="quoted free">u</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> fm.strong_induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> fresh_at_base<span class="main">)</span></span>
+</pre>
+
+
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
 </pre>
 
 <pre class="source">
