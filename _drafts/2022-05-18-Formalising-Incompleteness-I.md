@@ -6,10 +6,11 @@ tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
 [Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems. 
-(1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system. (2) Moreover, no such formal system can prove any statement implying its own consistency.
-The first theorem is proved by using integer arithmetic to encode logical formulas, operations on them such as substitution, and inference according to the rules of the formal system. A fixedpoint construction to create an explicit formula expressing its own unprovability.
+(1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system. (2) No such formal system can prove its own consistency.
+The first theorem is proved by using integer arithmetic to encode logical formulas, operations on them such as substitution, and inference according to the rules of the formal system. A fixedpoint construction yields an explicit formula expressing its own unprovability.
 The technical complications of the first theorem are formidable but were overcome already by [Shankar](https://doi.org/10.1017/CBO9780511569883) in the 1980s and again by John Harrison and [Russell O’Connor](https://rdcu.be/cNaig).
-This post introduces [my own formalisation](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf) of the first theorem, using Isabelle/HOL. It also demonstrates the use of Christian Urban's nominal package for formalising syntax involving variable binding.
+This post introduces [my own formalisation](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf), using Isabelle/HOL. It also demonstrates Christian Urban's *nominal package* for formalising syntax involving variable binding,
+and more generally, how to specify the syntax, semantics and proof theory of a formal system.
 
 ### Remarks about the informal proof
 
@@ -74,8 +75,8 @@ It is the last such proof we are going to see: they become gruesome, which is th
   </span><span class="keyword2 keyword">where</span><span>
    </span><span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> Zero       <span class="main">=</span> Zero<span>"</span></span><span>
  </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="main">(</span>Var <span class="free bound entity">k</span><span class="main">)</span>    <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free bound entity">i</span><span class="main">=</span><span class="free bound entity">k</span> <span class="keyword1">then</span> <span class="free bound entity">x</span> <span class="keyword1">else</span> Var <span class="free bound entity">k</span><span class="main">)</span><span>"</span></span><span>
- </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> Eats <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
-</span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> eqvt_def subst_graph_aux_def<span class="main">)</span> <span class="main">(</span><span class="operator">metis</span> tm.strong_exhaust<span class="main">)</span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> Eats <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span><span class="free">subst</span> <span class="free bound entity">i</span> <span class="free bound entity">x</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span>
+<span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> eqvt_def subst_graph_aux_def<span class="main">)</span> <span class="main">(</span><span class="operator">metis</span> tm.strong_exhaust<span class="main">)</span>
 </pre>
 
 Substitution over formulas is also pretty straightforward. In most cases it is simply built up recursively.
@@ -214,12 +215,62 @@ $\phi(0) \land \forall xy\, [\phi(x)\land\phi(y)\to\phi(x\lhd y)]\to \forall x\,
     </span><span class="main">∈</span> <span class="free">induction_axioms</span><span>"</span></span>
 </pre>
 
-Further axioms (omitted) describe the properties of the HF operators Zero and Eats, and there are basic equality axioms, and finally an unspecified extra axiom, standing for anything else we wish to assume. The extra axiom is required to be true in the semantics, and all the other axioms are proved to hold, so this proof calculus will be consistent by construction. We are finally ready to behold the inference system itself.
+Further axioms (omitted) describe the properties of the HF operators `Zero` and `Eats`; there are also some standard equality axioms. Finally, there's an unspecified **extra axiom**, standing for any else finite statement we wish to assume. The extra axiom is required to be true in the semantics, and all the other axioms are proved to hold, so this proof calculus will be consistent by construction. 
+
+We are finally ready to behold the inference system itself.
+Because it is a Hilbert system, $\Gamma\vdash\phi$ means that $\phi$ follows from the given set of assumptions, $\Gamma$.
+The first line is the trivial inclusion and the next six lines state that the various axioms are theorems.
 
 <pre class="source">
+<span class="keyword1 command">inductive</span> <span class="entity">hfthm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm set <span class="main">⇒</span> fm <span class="main">⇒</span> bool<span>"</span></span> <span class="main">(</span><span class="keyword2 keyword">infixl</span> <span class="quoted"><span>"</span><span class="keyword1">⊢</span><span>"</span></span> 55<span class="main">)</span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+    </span>Hyp<span class="main">:</span>    <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> <span class="free bound entity">H</span> <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> Extra<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="free bound entity">H</span> <span class="main free">⊢</span> extra_axiom<span>"</span></span><span>
+  </span><span class="main">|</span> Bool<span class="main">:</span>   <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> boolean_axioms <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> Eq<span class="main">:</span>     <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> equality_axioms <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> Spec<span class="main">:</span>   <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> special_axioms <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> HF<span class="main">:</span>     <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> HF_axioms <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> Ind<span class="main">:</span>    <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="main">∈</span> induction_axioms <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span><span>"</span></span><span>
+  </span><span class="main">|</span> MP<span class="main">:</span>     <span class="quoted quoted"><span>"</span><span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="free bound entity">H'</span> <span class="main free">⊢</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main">∪</span> <span class="free bound entity">H'</span> <span class="main free">⊢</span> <span class="free bound entity">B</span><span>"</span></span><span>
+  </span><span class="main">|</span> Exists<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="free bound entity">B</span> <span class="main">⟹</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="main">∀</span><span class="bound">C</span> <span class="main">∈</span> <span class="free bound entity">H</span><span class="main">.</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="bound">C</span> <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="main">(</span>Ex <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="free bound entity">B</span><span>"</span></span>
 </pre>
 
+The last two lines above are inference rules: 
+1. modus ponens: from $\phi\to\psi$ and $\phi$ infer $\psi$
+2. so-called $\exists$-introduction: from $\phi\to\psi$ infer $(\exists x.\,\phi)\to\psi$ provided $x$ is fresh
+
+
 <pre class="source">
+<span class="keyword1 command">theorem</span> hfthm_sound<span class="main">:</span> <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">H</span> <span class="main">⊢</span> <span class="free">A</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">∀</span><span class="bound">B</span><span class="main">∈</span><span class="free">H</span><span class="main">.</span> eval_fm <span class="free">e</span> <span class="bound">B</span><span class="main">)</span> <span class="main">⟹</span> eval_fm <span class="free">e</span> <span class="free">A</span><span>"</span></span><span>
+</span><span class="keyword1 command">using</span> assms<span>
+</span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induct</span> <span class="quasi_keyword">arbitrary</span><span class="main main">:</span> <span class="quoted free">e</span><span class="main">)</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Hyp <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Extra <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> extra_axiom_holds<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Bool <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> boolean_axioms_hold<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Eq <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> equality_axioms_hold<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Spec <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> special_axioms_hold<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>HF <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> HF_axioms_hold<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Ind <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> induction_axioms_hold<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>MP <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">H'</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Exists <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">i</span> <span class="skolem">e</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span> <span class="main">(</span><span class="operator">metis</span> forget_eval_fm<span class="main">)</span><span>
+</span><span class="keyword1 command">qed</span>
 </pre>
 
 <pre class="source">
