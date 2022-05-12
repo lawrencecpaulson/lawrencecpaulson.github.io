@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Formalising Gödel's incompleteness theorems, I"
-usemathjax: true 
+usemathjax: true
 tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
-[Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems. 
+[Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems.
 (1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system. (2) No such formal system can prove its own consistency.
 The first theorem is proved by using integer arithmetic to encode logical formulas, operations on them such as substitution, and inference according to the rules of the formal system. A fixedpoint construction yields an explicit formula expressing its own unprovability.
 The technical complications of the first theorem are formidable but were overcome already by [Shankar](https://doi.org/10.1017/CBO9780511569883) in the 1980s and again by John Harrison and [Russell O’Connor](https://rdcu.be/cNaig).
@@ -20,7 +20,7 @@ My formalisation follows a development by [Świerczkowski](https://doi.org/10.40
 He gave a no-handwaving informal proof, a gift for anyone who might come along later to formalise it. He wrote out many details glossed over in textbooks.
 He made strategic decisions to minimise the effort needed to reach even the second incompleteness theorem, which had been regarded by many as unattainable.
 
-Świerczkowski chose to rely on the [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %}) rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler. 
+Świerczkowski chose to rely on the [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %}) rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler.
 He also proved a meta-theorem stating that every true $\Sigma$ formula is provable in the calculus with no need to write out the proofs. A $\Sigma$ formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also certain *false* formulas have explicit *disproofs*), but it only works of all quantifiers are bounded, and so actually requires more work than just writing out some formal proofs.
 
 The stages of the proofs of the first theorem are as follows:
@@ -29,10 +29,10 @@ The stages of the proofs of the first theorem are as follows:
 3. Defining a coding system for the terms and formulas of the calculus
 4. Defining predicates within the calculus itself to recognise terms, formulas and operations such as substitution; then inference rules and provability itself
 5. Exhibiting the actual undecidable formula
- 
+
 ### On the treatment of bound variables
 
-Formal reasoning about syntax including variable binding is generally fraught with difficulties connected with substitution and variable capture. In Isabelle/HOL we are lucky to have the [nominal package](https://www.isa-afp.org/entries/Nominal2.html), created by [Christian Urban](https://rdcu.be/cNfaC) and based on theoretical work by Jamie Gabbay and Andrew Pitts. The [nominal approach](https://www.cl.cam.ac.uk/~amp12/papers/newaas/newaas-jv.pdf) to variable binding provides a calculus of permutations on variable names, and provides a smooth treatment of syntactic operations that treat bound variables appropriately (which in particular means that all results are independent of which names are chosen for the bound variables). It precisely defines the notion of a variable being fresh and gives you a means of picking fresh variables. You get to assume that variables are magically renamed whenever necessary. 
+Formal reasoning about syntax including variable binding is generally fraught with difficulties connected with substitution and variable capture. In Isabelle/HOL we are lucky to have the [nominal package](https://www.isa-afp.org/entries/Nominal2.html), created by [Christian Urban](https://rdcu.be/cNfaC) and based on theoretical work by Jamie Gabbay and Andrew Pitts. The [nominal approach](https://www.cl.cam.ac.uk/~amp12/papers/newaas/newaas-jv.pdf) to variable binding provides a calculus of permutations on variable names, and provides a smooth treatment of syntactic operations that treat bound variables appropriately (which in particular means that all results are independent of which names are chosen for the bound variables). It precisely defines the notion of a variable being fresh and gives you a means of picking fresh variables. You get to assume that variables are magically renamed whenever necessary.
 
 My formal development of the incompleteness theorems [uses the nominal approach](https://rdcu.be/bpgqj) in formalising the logical calculus: its syntax, syntactic operations and inference rules.
 When it comes to coding formulas of the calculus, we need a different approach to variable binding, as attempting to formalise the nominal approach within the formal calculus itself is not to be imagined. Although Swierczkowski used plain variable names, I felt certain that a nameless representation would work better, and the obvious one is [de Bruijn's](https://doi.org/10.1016/1385-7258(72)90034-0) (explanation [on Wikipedia](https://en.wikipedia.org/wiki/De_Bruijn_index)).
@@ -125,8 +125,8 @@ The semantics of a term map the HF constructors (Zero and Eats) to the correspon
 </pre>
 
 A bit of omitted magic allows us to write the semantics of a term as
-<span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span> 
-instead of 
+<span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span>
+instead of
 <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span>.
 Now for formulas:
 given an environment, the semantics of the formula of our calculus is a Boolean. It is a standard [Tarski truth definition](https://plato.stanford.edu/entries/tarski-truth/), in effect an embedding of our calculus into higher-order logic.
@@ -180,7 +180,7 @@ Nobody should imagine that such simple proofs could be possible in any approach 
 
 ### The inference system
 
-The internal calculus is defined by a Hilbert system. Our formulas have only disjunctions, negations and existential quantifiers, so the missing connectives such as conjunctions and universal quantifiers must be defined in the obvious way. 
+The internal calculus is defined by a Hilbert system. Our formulas have only disjunctions, negations and existential quantifiers, so the missing connectives such as conjunctions and universal quantifiers must be defined in the obvious way.
 For Boolean logic, the proof system incorporates the following fairly arbitrary set of axiom schemes.
 Formally this is an inductive definition, although there is no recursion, simply because it is easy to write and work with.
 
@@ -194,7 +194,7 @@ Formally this is an inductive definition, although there is no recursion, simply
   </span><span class="main">|</span> DisjConj<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="free bound entity">C</span> <span class="keyword1">OR</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="main">(</span><span class="main">(</span>Neg <span class="free bound entity">C</span><span class="main">)</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span>
 </pre>
 
-The scheme of "special axioms" defines existential quantification. 
+The scheme of "special axioms" defines existential quantification.
 In standard notation, these axioms have the form $\phi(t)\to \exists x.\,\phi(x)$, where $t$ is any term.
 
 <pre class="source">
@@ -215,7 +215,7 @@ $\phi(0) \land \forall xy\, [\phi(x)\land\phi(y)\to\phi(x\lhd y)]\to \forall x\,
     </span><span class="main">∈</span> <span class="free">induction_axioms</span><span>"</span></span>
 </pre>
 
-Further axioms (omitted) describe the properties of the HF operators `Zero` and `Eats`; there are also some standard equality axioms. Finally, there's an unspecified **extra axiom**, standing for any else finite statement we wish to assume. The extra axiom is required to be true in the semantics, and all the other axioms are proved to hold, so this proof calculus will be consistent by construction. 
+Further axioms (omitted) describe the properties of the HF operators `Zero` and `Eats`; there are also some standard equality axioms. Finally, there's an unspecified **extra axiom**, standing for any else finite statement we wish to assume. The extra axiom is required to be true in the semantics, and all the other axioms are proved to hold, so this proof calculus will be consistent by construction.
 
 We are finally ready to behold the inference system itself.
 Because it is a Hilbert system, $\Gamma\vdash\phi$ means that $\phi$ follows from the given set of assumptions, $\Gamma$.
@@ -235,130 +235,99 @@ The first line is the trivial inclusion and the next six lines state that the va
   </span><span class="main">|</span> Exists<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="free bound entity">B</span> <span class="main">⟹</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="main">∀</span><span class="bound">C</span> <span class="main">∈</span> <span class="free bound entity">H</span><span class="main">.</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="bound">C</span> <span class="main">⟹</span> <span class="free bound entity">H</span> <span class="main free">⊢</span> <span class="main">(</span>Ex <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="free bound entity">B</span><span>"</span></span>
 </pre>
 
-The last two lines above are inference rules: 
+The last two lines above are inference rules:
 1. modus ponens: from $\phi\to\psi$ and $\phi$ infer $\psi$
 2. so-called $\exists$-introduction: from $\phi\to\psi$ infer $(\exists x.\,\phi)\to\psi$ provided $x$ is fresh
 
+It is now easy to prove that the internal calculus is sound. The proof is a straightforward induction, referring to (omitted) proofs that the axioms are true in the semantics.
+The calculus is therefore consistent. This development of incompleteness differs from many others, which typically assume a more abstract calculus with consistency requirements. 
 
 <pre class="source">
-<span class="keyword1 command">theorem</span> hfthm_sound<span class="main">:</span> <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">H</span> <span class="main">⊢</span> <span class="free">A</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">∀</span><span class="bound">B</span><span class="main">∈</span><span class="free">H</span><span class="main">.</span> eval_fm <span class="free">e</span> <span class="bound">B</span><span class="main">)</span> <span class="main">⟹</span> eval_fm <span class="free">e</span> <span class="free">A</span><span>"</span></span><span>
-</span><span class="keyword1 command">using</span> assms<span>
-</span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induct</span> <span class="quasi_keyword">arbitrary</span><span class="main main">:</span> <span class="quoted free">e</span><span class="main">)</span><span>
+<span class="keyword1 command">theorem</span> hfthm_sound<span class="main">:</span> <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">H</span> <span class="main">⊢</span> <span class="free">A</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">∀</span><span class="bound">B</span><span class="main">∈</span><span class="free">H</span><span class="main">.</span> eval_fm <span class="free">e</span> <span class="bound">B</span><span class="main">)</span> <span class="main">⟹</span> eval_fm <span class="free">e</span> <span class="free">A</span><span>"</span></span>
+<span class="keyword1 command">using</span> assms
+<span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induct</span> <span class="quasi_keyword">arbitrary</span><span class="main main">:</span> <span class="quoted free">e</span><span class="main">)</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Hyp <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Extra <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> extra_axiom_holds<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> extra_axiom_holds<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Bool <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> boolean_axioms_hold<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> boolean_axioms_hold<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Eq <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> equality_axioms_hold<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> equality_axioms_hold<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Spec <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> special_axioms_hold<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> special_axioms_hold<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>HF <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> HF_axioms_hold<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> HF_axioms_hold<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Ind <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> induction_axioms_hold<span class="main">)</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> induction_axioms_hold<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>MP <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">H'</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
-</span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span>
+<span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Exists <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">i</span> <span class="skolem">e</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">auto</span> <span class="main">(</span><span class="operator">metis</span> forget_eval_fm<span class="main">)</span><span>
-</span><span class="keyword1 command">qed</span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span> <span class="main">(</span><span class="operator">metis</span> forget_eval_fm<span class="main">)</span>
+<span class="keyword1 command">qed</span>
 </pre>
+
+We now have a sound Hilbert system, but it would be extremely inconvenient for conducting actual proofs, which we shall have to do. A substantial amount of largely routine work is necessary to derive from it a sort of sequent calculus, which will allow a little bit of automation and sane-looking, if lengthy, proofs.
+
+The only nontrivial step in this derivation is proving the deduction theorem, which describes the relationship between assumptions and implication. Precisely, it says that any assumption can be made explicit as an implication. The full proof is given below (though referring to some omitted lemmas). It's another perfectly straightforward induction. Even the quantifier case is simple enough.
 
 <pre class="source">
+<span class="keyword1 command">lemma</span> deduction_Diff<span class="main">:</span> <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">H</span> <span class="main">⊢</span> <span class="free">B</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="free">H</span> <span class="main">-</span> <span class="main">{</span><span class="free">C</span><span class="main">}</span> <span class="main">⊢</span> <span class="free">C</span> <span class="keyword1">IMP</span> <span class="free">B</span><span>"</span></span>
+<span class="keyword1 command">using</span> assms
+<span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induct</span><span class="main">)</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Hyp <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Bool Imp_triv_I boolean_axioms.Ident hfthm.Hyp member_remove remove_def<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Extra <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Extra<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Bool <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Bool<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Eq <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Eq<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Spec <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Spec<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>HF <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.HF<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Ind <span class="skolem">A</span> <span class="skolem">H</span><span class="main">)</span> <span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Ind<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>MP <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">H'</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">hence</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="skolem">H</span><span class="main">-</span><span class="main">{</span><span class="free">C</span><span class="main">}</span><span class="main">)</span> <span class="main">∪</span> <span class="main">(</span><span class="skolem">H'</span><span class="main">-</span><span class="main">{</span><span class="free">C</span><span class="main">}</span><span class="main">)</span> <span class="main">⊢</span> Imp <span class="free">C</span> <span class="skolem">B</span><span>"</span></span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> S<span class="main">)</span><span>
+  </span><span class="keyword3 command">thus</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Un_Diff<span class="main">)</span>
+<span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Exists <span class="skolem">H</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">i</span><span class="main">)</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
+  </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted quoted"><span>"</span><span class="free">C</span> <span class="main">∈</span> <span class="skolem">H</span><span>"</span></span><span class="main">)</span><span>
+    </span><span class="keyword3 command">case</span> True<span>
+    </span><span class="keyword1 command">hence</span> <span class="quoted quoted"><span>"</span>atom <span class="skolem">i</span> <span class="main">♯</span> <span class="free">C</span><span>"</span></span> <span class="keyword1 command">using</span> Exists <span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+    </span><span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="skolem">H</span> <span class="main">-</span> <span class="main">{</span><span class="free">C</span><span class="main">}</span> <span class="main">⊢</span> <span class="skolem">A</span> <span class="keyword1">IMP</span> <span class="free">C</span> <span class="keyword1">IMP</span> <span class="skolem">B</span><span>"</span></span> <span class="keyword1 command">using</span> Exists<span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_Imp_commute<span class="main">)</span><span>
+    </span><span class="keyword1 command">ultimately</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="skolem">H</span> <span class="main">-</span> <span class="main">{</span><span class="free">C</span><span class="main">}</span> <span class="main">⊢</span> <span class="main">(</span>Ex <span class="skolem">i</span> <span class="skolem">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="free">C</span> <span class="keyword1">IMP</span> <span class="skolem">B</span><span>"</span></span> <span class="keyword1 command">using</span> Exists<span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> fm.fresh<span class="main main">(</span>3<span class="main main">)</span> fm.fresh<span class="main main">(</span>4<span class="main main">)</span> hfthm.Exists member_remove remove_def<span class="main">)</span><span>
+    </span><span class="keyword3 command">thus</span> <span class="var quoted var">?thesis</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_Imp_commute<span class="main">)</span><span>
+  </span><span class="keyword1 command">next</span><span>
+    </span><span class="keyword3 command">case</span> False<span>
+    </span><span class="keyword1 command">hence</span> <span class="quoted quoted"><span>"</span><span class="skolem">H</span> <span class="main">-</span> <span class="main">{</span><span class="free">C</span><span class="main">}</span> <span class="main">=</span> <span class="skolem">H</span><span>"</span></span> <span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+    </span><span class="keyword3 command">thus</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">using</span> Exists<span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Imp_triv_I hfthm.Exists<span class="main">)</span><span>
+  </span><span class="keyword1 command">qed</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-
-I have [previously commented]({% post_url 2021-12-15-Incompleteness %}) on the relevance of Gödel incompleteness to formalisation.
-But I can't resist remarking that a lot of today's work on type theory looks like Hilbert's Programme Reloaded: people are striving to create a formal system in which all mathematics can be done and to prove its consistency syntactically. Gödel's theorem tells us that any such theory will be incomplete, but that's not even the main problem with an outlook that seems to be absolutely mechanical.
-We formalise mathematics in the hope that it can be useful to mathematicians, but please let's forego fantasies of capturing the whole of mathematical thought in a formal system.
-
+That's surely enough for now. Next week, we shall see this calculus in use.
 
