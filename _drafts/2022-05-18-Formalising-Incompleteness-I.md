@@ -49,7 +49,7 @@ We can now declare a type for the terms of our formalism. Terms can be variables
 <span class="keyword1 command">nominal_datatype</span> tm <span class="main">=</span> Zero <span class="main">|</span> Var <span class="quoted">name</span> <span class="main">|</span> Eats <span class="quoted">tm</span> <span class="quoted">tm</span>
 </pre>
 
-The formulas provide a bare bones predicate calculus, able to express $x\in y$, $x=y$, $P\lor Q$, $\neg P$ and $\exists x.\, P$.
+The formulas provide a bare bones predicate calculus, able to express $x\in y$, $x=y$, $\phi\lor\psi$, $\neg \phi$ and $\exists x.\, \phi$.
 The phrase <kbd><span class="keyword2 keyword">binds</span> <span class="quoted free">x</span> <span class="keyword2 keyword">in</span> f</kbd> indicates that the occurrence of `x` is binding.
 
 <pre class="source">
@@ -91,14 +91,14 @@ The line for the existential quantifier says in effect, ensure that the quantifi
   </span><span class="main">|</span> Ex<span class="main">:</span>   <span class="quoted quoted"><span>"</span>atom <span class="free bound entity">j</span> <span class="main">♯</span> <span class="main">(</span><span class="free bound entity">i</span><span class="main">,</span> <span class="free bound entity">x</span><span class="main">)</span> <span class="main">⟹</span> <span class="main">(</span>Ex <span class="free bound entity">j</span> <span class="free bound entity">A</span><span class="main">)</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span> <span class="main">=</span> Ex <span class="free bound entity">j</span> <span class="main">(</span><span class="free bound entity">A</span><span class="main free">(</span><span class="free bound entity">i</span><span class="main free">::=</span><span class="free bound entity">x</span><span class="main free">)</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-This simple lemma says that if a variable is fresh for a term (which essentially means it is not free in the term), then substitution has no effect. Its proof is a one line induction. Note that $a\mathbin{\sharp} t$ means "$a$ is fresh for $t$.
+This simple lemma says that if a variable is fresh for a term (which essentially means it is not free in the term), then substitution has no effect. Its proof is one line: "induction then simplify". Note that $a\mathbin{\sharp} t$ means "$a$ is fresh for $t$.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> forget_subst_tm <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span>atom <span class="free">a</span> <span class="main">♯</span> <span class="free">tm</span> <span class="main">⟹</span> subst <span class="free">a</span> <span class="free">x</span> <span class="free">tm</span> <span class="main">=</span> <span class="free">tm</span><span>"</span></span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">tm</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> fresh_at_base<span class="main">)</span>
 </pre>
 
-This little lemma states that two successive substitutions within a formula are equivalent to a single substitution on the formula, the other substitution taking place in the term. The proof is another one-line induction, where the "avoiding" clause informs the nominal package of the syntactic entities that quantified bound variables must avoid. This sort of proof can be absolutely fiendish with other approaches to variable binding.
+This little lemma states that two successive substitutions within a formula are equivalent to a single substitution on the formula, the other substitution taking place in the term. The proof is another one-line induction, where the "avoiding" clause informs the nominal package of the syntactic entities that quantified bound variables must avoid. This sort of proof can be absolutely fiendish with other approaches to variable binding. Nominal requires some effort to justify a function definition, but in return it makes reasoning about the function really easy.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> subst_fm_commute<span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span><span>
@@ -106,8 +106,115 @@ This little lemma states that two successive substitutions within a formula are 
   <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quoted free">A</span> <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">i</span> <span class="quoted free">j</span> <span class="quoted free">t</span> <span class="quoted free">u</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> fm.strong_induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> fresh_at_base<span class="main">)</span></span>
 </pre>
 
+### Formal semantics of the calculus
 
+The formal semantics is defined in terms of the existing development of hereditarily finite sets.
+Variables are interpreted with respect to an environment, a [finite function](http://www.andreas-lochbihler.de/pub/lochbihler09tphols.pdf) mapping names to `hf` sets.
+The corresponding [AFP entry](https://www.isa-afp.org/entries/FinFun.html) is among the most heavily used in the entire Archive.
 
+As before, the definition for terms has a trivial justification (omitted anyway).
+The semantics of a term map the HF constructors (Zero and Eats) to the corresponding operators, while the meaning of a variable is looked up in the environment.
+
+<pre class="source">
+<span class="keyword1 command">nominal_function</span> <span class="entity">eval_tm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>name<span class="main">,</span> hf<span class="main">)</span> finfun <span class="main">⇒</span> tm <span class="main">⇒</span> hf<span>"</span></span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+   </span><span class="quoted quoted"><span>"</span><span class="free">eval_tm</span> <span class="free bound entity">e</span> Zero <span class="main">=</span> <span class="main">0</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="main">(</span>Var <span class="free bound entity">k</span><span class="main">)</span> <span class="main">=</span> finfun_apply <span class="free bound entity">e</span> <span class="free bound entity">k</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span> <span class="main">◃</span> <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">u</span><span>"</span></span>
+</pre>
+
+A bit of omitted magic allows us to write the semantics of a term as
+<span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span> 
+instead of 
+<span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span>.
+Now for formulas:
+given an environment, the semantics of the formula of our calculus is a Boolean. It is a standard [Tarski truth definition](https://plato.stanford.edu/entries/tarski-truth/), in effect an embedding of our calculus into higher-order logic.
+
+<pre class="source">
+<span class="keyword1 command">nominal_function</span> <span class="entity">eval_fm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>name<span class="main">,</span> hf<span class="main">)</span> finfun <span class="main">⇒</span> fm <span class="main">⇒</span> bool<span>"</span></span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+   </span><span class="quoted quoted"><span>"</span><span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="main">(</span><span class="free bound entity">t</span> <span class="keyword1">IN</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">⟷</span> <span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span> <span class="main"><span class="hidden">❙</span><strong>∈</strong></span> <span class="main">⟦</span><span class="free bound entity">u</span><span class="main">⟧</span><span class="free bound entity">e</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="main">(</span><span class="free bound entity">t</span> <span class="keyword1">EQ</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">⟷</span> <span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span> <span class="main">=</span> <span class="main">⟦</span><span class="free bound entity">u</span><span class="main">⟧</span><span class="free bound entity">e</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span> <span class="main">⟷</span> <span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="free bound entity">A</span> <span class="main">∨</span> <span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="free bound entity">B</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="main">(</span>Neg <span class="free bound entity">A</span><span class="main">)</span> <span class="main">⟷</span> <span class="main">(</span><span class="main">~</span> <span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span>atom <span class="free bound entity">k</span> <span class="main">♯</span> <span class="free bound entity">e</span> <span class="main">⟹</span> <span class="free">eval_fm</span> <span class="free bound entity">e</span> <span class="main">(</span>Ex <span class="free bound entity">k</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∃</span><span class="bound">x</span><span class="main">.</span> <span class="free">eval_fm</span> <span class="main">(</span>finfun_update <span class="free bound entity">e</span> <span class="free bound entity">k</span> <span class="bound">x</span><span class="main">)</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span>
+</pre>
+
+Omitted once again is an ugly proof that the function definition is legitimate.
+The only difficult case refers to the last line above, which the semantics of a quantified formula *provided* the bound variable is fresh in the environment.
+It is straightforward to prove that the last line in fact holds unconditionally.
+
+Now for some proofs. And once again, proofs about the functions just defined are simple. This one says that the semantics of a term `t` is unaffected if we update the environment at a variable that is fresh for `t`.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> forget_eval_tm <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted quoted"><span>"</span>atom <span class="free">i</span> <span class="main">♯</span> <span class="free">t</span> <span class="main">⟹</span>  <span class="main">⟦</span><span class="free">t</span><span class="main">⟧</span><span class="main">(</span>finfun_update <span class="free">e</span> <span class="free">i</span> <span class="free">x</span><span class="main">)</span> <span class="main">=</span> <span class="main">⟦</span><span class="free">t</span><span class="main">⟧</span><span class="free">e</span><span>"</span></span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">t</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> fresh_at_base<span class="main">)</span>
+</pre>
+
+This lemma is the analogous result for formulas. The proof is once again "induction, then simplify".
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> forget_eval_fm <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span><span>
+   </span><span class="quoted quoted"><span>"</span>atom <span class="free">k</span> <span class="main">♯</span> <span class="free">A</span> <span class="main">⟹</span> eval_fm <span class="main">(</span>finfun_update <span class="free">e</span> <span class="free">k</span> <span class="free">x</span><span class="main">)</span> <span class="free">A</span> <span class="main">=</span> eval_fm <span class="free">e</span> <span class="free">A</span><span>"</span></span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quoted free">A</span> <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">k</span> <span class="quoted free">e</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> fm.strong_induct<span class="main">)</span><span>
+     </span><span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> fresh_at_base finfun_update_twist<span class="main">)</span></span>
+</pre>
+
+The following two lemmas relate syntax with semantics: the effect of syntactic substitution is identical to that of updating the environment with the semantics of the substituted term.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> eval_subst_tm</span><span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">⟦</span>subst <span class="free">i</span> <span class="free">t</span> <span class="free">u</span><span class="main">⟧</span><span class="free">e</span> <span class="main">=</span> <span class="main">⟦</span><span class="free">u</span><span class="main">⟧</span><span class="main">(</span>finfun_update <span class="free">e</span> <span class="free">i</span> <span class="main">⟦</span><span class="free">t</span><span class="main">⟧</span><span class="free">e</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">u</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span><span class="main">)</span>
+</pre>
+
+And the same thing for formulas.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> eval_subst_fm<span class="main">:</span> <span class="quoted quoted"><span>"</span>eval_fm <span class="free">e</span> <span class="main">(</span><span class="free">fm</span><span class="main">(</span><span class="free">i</span><span class="main">::=</span> <span class="free">t</span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> eval_fm <span class="main">(</span>finfun_update <span class="free">e</span> <span class="free">i</span> <span class="main">⟦</span><span class="free">t</span><span class="main">⟧</span><span class="free">e</span><span class="main">)</span> <span class="free">fm</span><span>"</span></span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quoted free">fm</span> <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">i</span> <span class="quoted free">t</span> <span class="quoted free">e</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> fm.strong_induct<span class="main">)</span><span>
+     </span><span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> eval_subst_tm finfun_update_twist fresh_at_base<span class="main">)</span></span>
+</pre>
+
+Nobody should imagine that such simple proofs could be possible in any approach based on naïve variable names.
+
+### The inference system
+
+The internal calculus is defined by a Hilbert system. Our formulas have only disjunctions, negations and existential quantifiers, so the missing connectives such as conjunctions and universal quantifiers must be defined in the obvious way. 
+For Boolean logic, the proof system incorporates the following fairly arbitrary set of axiom schemes.
+Formally this is an inductive definition, although there is no recursion, simply because it is easy to write and work with.
+
+<pre class="source">
+<span class="keyword1 command">inductive_set</span> <span class="entity">boolean_axioms</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm set<span>"</span></span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+    </span>Ident<span class="main">:</span>     <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="free bound entity">A</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span><span>
+  </span><span class="main">|</span> DisjI1<span class="main">:</span>    <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span><span>
+  </span><span class="main">|</span> DisjCont<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="free bound entity">A</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span><span>
+  </span><span class="main">|</span> DisjAssoc<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="main">(</span><span class="free bound entity">B</span> <span class="keyword1">OR</span> <span class="free bound entity">C</span><span class="main">)</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span> <span class="keyword1">OR</span> <span class="free bound entity">C</span><span class="main">)</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span><span>
+  </span><span class="main">|</span> DisjConj<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="free bound entity">C</span> <span class="keyword1">OR</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="main">(</span><span class="main">(</span>Neg <span class="free bound entity">C</span><span class="main">)</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> <span class="free">boolean_axioms</span><span>"</span></span>
+</pre>
+
+The scheme of "special axioms" defines existential quantification. 
+In standard notation, these axioms have the form $\phi(t)\to \exists x.\,\phi(x)$, where $t$ is any term.
+
+<pre class="source">
+<span class="keyword1 command">inductive_set</span> <span class="entity">special_axioms</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm set<span>"</span></span> <span class="keyword2 keyword">where</span><span>
+  </span>I<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free bound entity">A</span><span class="main">(</span><span class="free bound entity">i</span><span class="main">::=</span><span class="free bound entity">x</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span>Ex <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="main">∈</span> <span class="free">special_axioms</span><span>"</span></span>
+</pre>
+
+The induction axioms include every instance of the induction scheme for HF sets.
+In standard notation, these axioms have the form
+$\phi(0) \land \forall xy\, [\phi(x)\land\phi(y)\to\phi(x\lhd y)]\to \forall x\,\phi(x)$.
+
+<pre class="source">
+<span class="keyword1 command">inductive_set</span> <span class="entity">induction_axioms</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm set<span>"</span></span> <span class="keyword2 keyword">where</span><span>
+  </span>ind<span class="main">:</span><span>
+  </span><span class="quoted quoted"><span>"</span>atom <span class="main">(</span><span class="free bound entity">j</span><span class="main">::</span>name<span class="main">)</span> <span class="main">♯</span> <span class="main">(</span><span class="free bound entity">i</span><span class="main">,</span><span class="free bound entity">A</span><span class="main">)</span><span>
+   </span><span class="main">⟹</span> <span class="free bound entity">A</span><span class="main">(</span><span class="free bound entity">i</span><span class="main">::=</span>Zero<span class="main">)</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="main">(</span>All <span class="free bound entity">i</span> <span class="main">(</span>All <span class="free bound entity">j</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">IMP</span> <span class="main">(</span><span class="free bound entity">A</span><span class="main">(</span><span class="free bound entity">i</span><span class="main">::=</span> Var <span class="free bound entity">j</span><span class="main">)</span> <span class="keyword1">IMP</span> <span class="free bound entity">A</span><span class="main">(</span><span class="free bound entity">i</span><span class="main">::=</span> Eats<span class="main">(</span>Var <span class="free bound entity">i</span><span class="main">)</span><span class="main">(</span>Var <span class="free bound entity">j</span><span class="main">)</span><span class="main">)</span><span class="main">)</span><span class="main">)</span><span class="main">)</span><span class="main">)</span><span>
+      </span><span class="keyword1">IMP</span> <span class="main">(</span>All <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span><span class="main">)</span><span>
+    </span><span class="main">∈</span> <span class="free">induction_axioms</span><span>"</span></span>
+</pre>
+
+Further axioms (omitted) describe the properties of the HF operators Zero and Eats, and there are basic equality axioms, and finally an unspecified extra axiom, standing for anything else we wish to assume. The extra axiom is required to be true in the semantics, and all the other axioms are proved to hold, so this proof calculus will be consistent by construction. We are finally ready to behold the inference system itself.
 
 <pre class="source">
 </pre>
@@ -171,6 +278,31 @@ This little lemma states that two successive substitutions within a formula are 
 
 <pre class="source">
 </pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
 
 
 
