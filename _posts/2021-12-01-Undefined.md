@@ -40,3 +40,5 @@ Free logics haven't caught on. It may simply be that people who really care abou
 Free logics generally do not introduce a constant `undefined` to designate ill-defined values, but such an approach is similar in spirit. It also has the same drawbacks.
 
 One occasionally sees proposals to use a three valued logic. There you have a constant `undefined` even for truth values. The idea here must be to identify logical formulas with computable Boolean expressions, where $x=x$ is defined only if $x$ is. However, this identification doesn't make sense: mathematics and computation are different things. We would also be forced to give up classical logic without getting in return the cool technical properties of intuitionistic logic.
+
+*Note added 2022-05-14*: See also "[Division by zero in type theory: a FAQ](https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/)" on the Xena blog.
