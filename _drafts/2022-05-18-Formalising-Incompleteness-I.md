@@ -21,14 +21,14 @@ He gave a no-handwaving informal proof, a gift for anyone who might come along l
 He made strategic decisions to minimise the effort needed to reach even the second incompleteness theorem, which had been regarded by many as unattainable.
 
 Świerczkowski chose to rely on the [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %}) rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler.
-He also proved a meta-theorem stating that every true $\Sigma$ formula is provable in the calculus with no need to write out the proofs. A $\Sigma$ formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also certain *false* formulas have explicit *disproofs*), but it only works of all quantifiers are bounded, and so actually requires more work than just writing out some formal proofs.
+He also proved a meta-theorem stating that every true Σ-formula is provable in the calculus with no need to write out the proofs. A Σ-formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also certain *false* formulas have explicit *disproofs*), but it only works of all quantifiers are bounded, and so actually requires more work than just writing out some formal proofs.
 
 The stages of the proofs of the first theorem are as follows:
-1. Formalisation of the internal calculus
-2. Meta-theorem stating that every true $\Sigma$ formula is provable
-3. Defining a coding system for the terms and formulas of the calculus
-4. Defining predicates within the calculus itself to recognise terms, formulas and operations such as substitution; then inference rules and provability itself
-5. Exhibiting the actual undecidable formula
+1. Formalisation of the internal calculus, HF
+2. Meta-theorem stating that every true Σ-sentence is provable
+3. Defining a coding system for all HF terms and formulas
+4. Defining predicates within HF itself to recognise terms, formulas and operations such as substitution; then inference rules and provability itself
+5. Exhibiting the actual undecidable HF formula
 
 ### On the treatment of bound variables
 
@@ -190,9 +190,9 @@ Nobody should imagine that such simple proofs could be possible in any approach 
 
 ### The inference system
 
-The internal calculus is defined by a Hilbert system. Our formulas have only disjunctions, negations and existential quantifiers, so the missing connectives such as conjunctions and universal quantifiers must be defined in the obvious way.
+HF, the internal calculus, is defined by a Hilbert system. HF formulas have only disjunctions, negations and existential quantifiers, so the missing connectives such as conjunctions and universal quantifiers must be defined as the obvious abbreviations.
 For Boolean logic, the proof system incorporates the following fairly arbitrary set of axiom schemes.
-Formally this is an inductive definition, although there is no recursion, simply because it is easy to write and work with.
+I defined it inductively for convenience, although there is no recursion.
 
 <pre class="source">
 <span class="keyword1 command">inductive_set</span> <span class="entity">boolean_axioms</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm set<span>"</span></span><span>
