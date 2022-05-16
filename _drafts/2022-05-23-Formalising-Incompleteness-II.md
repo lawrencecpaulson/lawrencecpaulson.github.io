@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Formalising Gödel's incompleteness theorems, I"
+title:  "Formalising Gödel's incompleteness theorems, II"
 usemathjax: true
 tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
