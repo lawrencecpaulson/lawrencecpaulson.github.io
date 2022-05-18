@@ -6,7 +6,7 @@ tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
 [Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems.
-(1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system. (2) No such formal system can prove its own consistency.
+(1) A consistent system strong enough to express the basic properties of integer addition and multiplication must be *incomplete*: there exists a formula that is neither provable nor refutable within the system, and (2) no such formal system can prove its own consistency.
 The first theorem is proved by using integer arithmetic to encode logical formulas, operations on them such as substitution, and inference according to the rules of the formal system. A fixedpoint construction yields an explicit formula expressing its own unprovability.
 The technical complications of the first theorem are formidable but were overcome already by [Shankar](https://doi.org/10.1017/CBO9780511569883) in the 1980s and again by John Harrison and [Russell O’Connor](https://rdcu.be/cNaig).
 This post introduces [my own formalisation](https://www.cl.cam.ac.uk/~lp15/papers/Formath/Goedel-logic.pdf), using Isabelle/HOL. It also demonstrates formalising syntax involving variable binding using the *nominal package* of Christian Urban and Stefan Berghofer.
@@ -21,7 +21,7 @@ He gave a no-handwaving informal proof, a gift for anyone who might come along l
 He made strategic decisions to minimise the effort needed to reach even the second incompleteness theorem, which had been regarded by many as unattainable.
 
 Świerczkowski chose to rely on the [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %}) rather than the integers as the basis for coding. Decoding $2^x3^y$ requires the fundamental theorem of arithmetic; an alternative coding option needs the Chinese remainder theorem and neither is tempting to formalise in an internalised first-order calculus. The set theoretic treatment of ordered pairs as $\\{\\{x\\},\\{x,y\\}\\}$ is infinitely simpler.
-He also proved a meta-theorem stating that every true Σ-formula is provable in the calculus with no need to write out the proofs. A Σ-formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also certain *false* formulas have explicit *disproofs*), but it only works of all quantifiers are bounded, and so actually requires more work than just writing out some formal proofs.
+He also proved a meta-theorem stating that every true Σ-formula is provable in the calculus with no need to write out the proofs. A Σ-formula can begin with any number of existential quantifiers, and they are sufficient to express much of the logic of coding. The standard approach yields a more powerful meta-theorem (where also *false* formulas have explicit *disproofs*), but it requires all quantifiers to be bounded, and ultimately requiring more work than just writing out some formal proofs.
 
 The stages of the proofs of the first theorem are as follows:
 1. Formalisation of the internal calculus, HF
@@ -134,7 +134,7 @@ The semantics of a term map the HF constructors (Zero and Eats) to the correspon
  </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span> <span class="main">◃</span> <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">u</span><span>"</span></span>
 </pre>
 
-A bit of omitted magic allows us to write the semantics of a term as
+An omitted bit of magic allows us to write the semantics of a term as
 <span class="main">⟦</span><span class="free bound entity">t</span><span class="main">⟧</span><span class="free bound entity">e</span>
 instead of
 <span class="free">eval_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span>.
@@ -285,6 +285,9 @@ The calculus is therefore consistent. This development of incompleteness differs
 <span class="keyword1 command">qed</span>
 </pre>
 
+
+### Proving the deduction theorem
+
 We now have a sound Hilbert system, but it would be extremely inconvenient for conducting actual proofs, which we shall have to do. A substantial amount of largely routine work is necessary to derive from it a sort of sequent calculus, which will allow a little bit of automation and sane-looking, if lengthy, proofs.
 
 The only nontrivial step in this derivation is proving the deduction theorem, which describes the relationship between assumptions and implication. Precisely, it says that any assumption can be made explicit as an implication. The full proof is given below (though referring to some omitted lemmas). It's another perfectly straightforward induction. Even the quantifier case is simple enough.
@@ -339,5 +342,4 @@ The only nontrivial step in this derivation is proving the deduction theorem, wh
 <span class="keyword1 command">qed</span>
 </pre>
 
-That's surely enough for now. Next week, we shall see this calculus in use.
-
+That's surely enough for now. More next week!
