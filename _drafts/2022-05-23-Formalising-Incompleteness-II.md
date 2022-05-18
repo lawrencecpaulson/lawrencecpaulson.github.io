@@ -112,21 +112,11 @@ As a trivial corollary, equality is also a Σ-formula:
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> Sigma_fm_Iff <span class="main main">[</span><span class="operator">OF</span> Extensionality<span class="main main">]</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> supp_conv_fresh<span class="main">)</span>
 </pre>
 
-### Every true Σ-sentence is a theorem
+### Some results connecting quantification and ground terms
 
-<pre class="source">
-<span class="keyword1 command">inductive</span> <span class="entity">se_fm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm <span class="main">⇒</span> bool<span>"</span></span> <span class="keyword2 keyword">where</span><span>
-    </span>MemI<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">t</span> <span class="keyword1">IN</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
-  </span><span class="main">|</span> DisjI<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span><span>"</span></span><span>
-  </span><span class="main">|</span> ConjI<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">AND</span> <span class="free bound entity">B</span><span class="main">)</span><span>"</span></span><span>
-  </span><span class="main">|</span> ExI<span class="main">:</span>   <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span>Ex <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span><span>
-  </span><span class="main">|</span> All2I<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="free bound entity">t</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span>All2 <span class="free bound entity">i</span> <span class="free bound entity">t</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span>
-</pre>
+Bounded universal quantifiers will be interpreted as finite conjunctions, while existentially quantified formulas will be proved by exhibiting a specific witness. For both of these, we need to reason about the terms that denote sets.
 
-<pre class="source">
-<span class="keyword1 command">lemma</span> subst_fm_in_se_fm<span class="main">:</span> <span class="quoted quoted"><span>"</span>se_fm <span class="free">A</span> <span class="main">⟹</span> se_fm <span class="main">(</span><span class="free">A</span><span class="main">(</span><span class="free">k</span><span class="main">::=</span><span class="free">x</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
-  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">k</span> <span class="quoted free">x</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> se_fm.strong_induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span><span class="main">)</span></span>
-</pre>
+Every hereditary finite set $x$ is the denotation of some HF term, $t$, and that term is ground (i.e., variable free):
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> obtain_const_tm<span class="main">:</span>  <span class="keyword2 keyword">obtains</span> <span class="free">t</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="main">⟦</span><span class="free">t</span><span class="main">⟧</span><span class="free">e</span> <span class="main">=</span> <span class="free">x</span><span>"</span></span> <span class="quoted quoted"><span>"</span>ground <span class="free">t</span><span>"</span></span><span>
@@ -139,13 +129,27 @@ As a trivial corollary, equality is also a Σ-formula:
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+An existential HF formula evaluates to true if and only if there exists a specific ground term, $t$, which yields a true formula if it is substituted for the quantified variable:
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> ex_eval_fm_iff_exists_tm<span class="main">:</span><span>
   </span><span class="quoted quoted"><span>"</span>eval_fm <span class="free">e</span> <span class="main">(</span>Ex <span class="free">k</span> <span class="free">A</span><span class="main">)</span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∃</span><span class="bound">t</span><span class="main">.</span> eval_fm <span class="free">e</span> <span class="main">(</span><span class="free">A</span><span class="main">(</span><span class="free">k</span><span class="main">::=</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span> <span class="main">∧</span> ground <span class="bound">t</span><span class="main">)</span><span>"</span></span><span>
 </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> eval_subst_fm<span class="main">)</span> <span class="main">(</span><span class="operator">metis</span> obtain_const_tm<span class="main">)</span>
 </pre>
 
+The following function returns the elements of any HF set.
+Note that both the set and its elements take the form of HF terms.
 
+<pre class="source">
+<span class="keyword1 command">nominal_function</span> <span class="entity">elts</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>tm <span class="main">⇒</span> tm set<span>"</span></span> <span class="keyword2 keyword">where</span><span>
+   </span><span class="quoted quoted"><span>"</span><span class="free">elts</span> Zero       <span class="main">=</span> <span class="main">{}</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">elts</span> <span class="main">(</span>Var <span class="free bound entity">k</span><span class="main">)</span>    <span class="main">=</span> <span class="main">{}</span><span>"</span></span><span>
+ </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">elts</span> <span class="main">(</span>Eats <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> insert <span class="free bound entity">u</span> <span class="main">(</span><span class="free">elts</span> <span class="free bound entity">t</span><span class="main">)</span><span>"</span></span>
+</pre>
+
+if $t$ is a ground term, and $A(u)$ is an HF theorem for each $u\in t$, then the formula $\forall x\in t.\,A(x)$ is also an HF theorem. The proof, given in full below, is by induction on HF terms. The only nontrivial case is for `Eats` terms, $t\lhd u$ when the induction hypothesis gives us $A(u)$ and $\forall x\in t.\,A(x)$ as HF theorems.
+The inductive step, $\forall x\in t\lhd u.\,A(x)$, 
+follows by a couple of applications of low-level HF inference rules.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> prove_elts_imp_prove_All2<span class="main">:</span><span>
@@ -162,6 +166,39 @@ As a trivial corollary, equality is also a Σ-formula:
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> anti_deduction<span class="main">)</span> <span class="main">(</span><span class="operator">metis</span> Iff_MP_same Var_Eq_subst_Iff thin1<span class="main">)</span><span>
 </span><span class="keyword1 command">qed</span> <span class="operator">auto</span>
 </pre>
+
+
+### Every true Σ-sentence is a theorem
+
+We finally have all the ingredients for the main theorem in this post.
+
+The previous definition of a Σ-formula did not allow nontrivial terms, only variables.
+With a little effort, some of it shown above, we can lift the restriction and allow arbitrary terms in atomic formulas and as the bounds of universal quantifiers.
+The following definition (of the so-called Σ-eats-formulas) codifies this more general class:
+
+<pre class="source">
+<span class="keyword1 command">inductive</span> <span class="entity">se_fm</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>fm <span class="main">⇒</span> bool<span>"</span></span> <span class="keyword2 keyword">where</span><span>
+    </span>MemI<span class="main">:</span>  <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">t</span> <span class="keyword1">IN</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> DisjI<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">OR</span> <span class="free bound entity">B</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> ConjI<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="free bound entity">B</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span><span class="free bound entity">A</span> <span class="keyword1">AND</span> <span class="free bound entity">B</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> ExI<span class="main">:</span>   <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span>Ex <span class="free bound entity">i</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> All2I<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">se_fm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> atom <span class="free bound entity">i</span> <span class="main">♯</span> <span class="free bound entity">t</span> <span class="main">⟹</span> <span class="free">se_fm</span> <span class="main">(</span>All2 <span class="free bound entity">i</span> <span class="free bound entity">t</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span>
+</pre>
+
+For illustration, here's one of the many facts proved about this definition.
+The class of Σ-eats-formulas is closed under substitutions for variables.
+The proof is a trivial induction.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> subst_fm_in_se_fm<span class="main">:</span> <span class="quoted quoted"><span>"</span>se_fm <span class="free">A</span> <span class="main">⟹</span> se_fm <span class="main">(</span><span class="free">A</span><span class="main">(</span><span class="free">k</span><span class="main">::=</span><span class="free">x</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">nominal_induct <span class="quasi_keyword">avoiding</span><span class="main main">:</span> <span class="quoted free">k</span> <span class="quoted free">x</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> se_fm.strong_induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span><span class="main">)</span></span>
+</pre>
+
+Here is our main theorem for the case of atomic formulas. It can be seen as a mutual induction, which turns out to be a key feature of HF reasoning: the cases for the subset and membership relation are treated simultaneously, each used in the proof of the other.
+The proof is by the complete induction on the size of the ground formula (or rather its arguments, $t$ and $u$).
+
+First, we prove that if $t\subseteq u$ evaluates to true then that formula is an HF theorem, by case analysis on the term $t$, because if it equals 0 then the result is trivial and if it has the form $x\lhd y$ then the induction hypothesis can be used.
+Second, the induction hypothesis is rephrased in terms of set equality, and then the claim for formulas of the form $t\in u$ is proved by case analysis on $u$.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ground_prove<span class="main">:</span><span>
@@ -184,6 +221,14 @@ As a trivial corollary, equality is also a Σ-formula:
   </span><span class="keyword1 command">qed</span><span>
 </span><span class="keyword1 command">qed</span>
 </pre>
+
+
+The main result is by complete induction on the size of the formula $\alpha$ (and apologies for calling it $\alpha$; I was following Świerczkowski).
+The base case, $t\in u$, follows immediately by the previous result. 
+The cases for $\lor$ and $\land$ are trivial despite requiring reasoning in the HF calculus.
+The existential case finds the required witness using the lemma `ex_eval_fm_iff_exists_tm`, which was proved above.
+The universal case is slightly more difficult, but uses two lemmas proved above: `subst_fm_in_se_fm` and `prove_elts_imp_prove_All2`.
+
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ground_se_fm_induction<span class="main">:</span><span>
@@ -220,14 +265,17 @@ As a trivial corollary, equality is also a Σ-formula:
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+
+The main theorem simply repackages the inductive proposition above. 
+Every Σ-sentence (ground formula) that evaluates to true in the standard HF model is a formal HF theorem.
+
 <pre class="source">
 <span class="keyword1 command">theorem</span> Sigma_fm_imp_thm<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">⟦</span>Sigma_fm <span class="free">A</span><span class="main">;</span> ground_fm <span class="free">A</span><span class="main">;</span> eval_fm e0 <span class="free">A</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="main">{}</span> <span class="main">⊢</span> <span class="free">A</span><span>"</span></span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> Iff_MP2_same ss_imp_se_fm empty_iff Sigma_fm_def eval_fm_Iff ground_fm_aux_def<span>
             </span>hfthm_sound se_fm_imp_thm subset_empty<span class="main">)</span>
 </pre>
 
-<pre class="source">
-</pre>
+It's remarkable how easy all this was. This theorem is invoked 10 times in the [formal incompleteness development](https://www.isa-afp.org/entries/Incompleteness.html). That's 10 occasions when the alternative would be tedious strings of HF steps, each of them hundreds of lines long and absolutely opaque.
 
 <pre class="source">
 </pre>
