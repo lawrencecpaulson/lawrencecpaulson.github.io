@@ -5,8 +5,8 @@ usemathjax: true
 tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
-Gödel's proof uses arithmetic (or in our case, hereditarily finite sets) to encode logical syntax, rules of inference, and therefore theorems of the internal calculus.
-Coding techniques are ubiquitous in computation theory, complexity theory and elsewhere in logic under the general heading of problem reduction:
+Gödel's proof uses arithmetic (or in our case, [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %})) to encode logical syntax, rules of inference, and therefore theorems of the internal calculus.
+Coding techniques are ubiquitous in computation theory, complexity theory and elsewhere in logic under the general heading of *problem reduction*:
 showing that something is impossible because it could otherwise be used to solve another problem already known to be impossible.
 A complication is that our calculus involves variable binding, with the attendant horrors of name clashes and renaming.
 As described in a [previous post]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), the Isabelle/HOL formalisation of HF deals with variable binding through the nominal package, but when coding HF in itself we shall be forced to use a simpler technique, due to de Bruijn.
@@ -19,6 +19,212 @@ De Bruijn's [own exposition](/papers/deBruijn-nameless-dummies.pdf)
 include remarks on the application of his technique to [AUTOMATH]({% post_url 2021-11-03-AUTOMATH %}), and today it is ubiquitous in proof assistants. 
 
 The definition of coding is via an intermediate representation of HF terms and formulas, which uses de Bruijn indices rather than nominal for variable binding. Even these definitions must be done using the nominal package, as they involve the type `name`. Proving the fidelity of the translation between the two representations is nontrivial.
+
+<pre class="source">
+<span class="keyword1 command">nominal_datatype</span> dbtm <span class="main">=</span> DBZero <span class="main">|</span> DBVar <span class="quoted">name</span> <span class="main">|</span> DBInd <span class="quoted">nat</span> <span class="main">|</span> DBEats <span class="quoted">dbtm</span> <span class="quoted">dbtm</span>
+</pre>
+
+<pre class="source">
+<span class="keyword1 command">nominal_datatype</span> dbfm <span class="main">=</span><span>
+    </span>DBMem <span class="quoted">dbtm</span> <span class="quoted">dbtm</span><span>
+  </span><span class="main">|</span> DBEq <span class="quoted">dbtm</span> <span class="quoted">dbtm</span><span>
+  </span><span class="main">|</span> DBDisj <span class="quoted">dbfm</span> <span class="quoted">dbfm</span><span>
+  </span><span class="main">|</span> DBNeg <span class="quoted">dbfm</span><span>
+  </span><span class="main">|</span> DBEx <span class="quoted">dbfm</span>
+</pre>
+
+<pre class="source">
+<span class="keyword1 command">fun</span> <span class="entity">lookup</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>name</span> list <span class="main">⇒</span> nat <span class="main">⇒</span> name</span> <span class="main">⇒</span> dbtm<span>"</span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+    </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">lookup</span> <span class="main">[]</span> <span class="free bound entity">n</span> <span class="free bound entity">x</span> <span class="main">=</span> DBVar</span> <span class="free bound entity">x</span><span>"</span></span><span>
+  </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">lookup</span> <span class="main">(</span><span class="free bound entity">y</span> <span class="main">#</span> <span class="free bound entity">ys</span><span class="main">)</span> <span class="free bound entity">n</span> <span class="free bound entity">x</span> <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free bound entity">x</span> <span class="main">=</span> <span class="free bound entity">y</span> <span class="keyword1">then</span> DBInd</span> <span class="free bound entity">n</span> <span class="keyword1">else</span> <span class="main">(</span><span class="free">lookup</span> <span class="free bound entity">ys</span> <span class="main">(</span>Suc <span class="free bound entity">n</span><span class="main">)</span> <span class="free bound entity">x</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
+</pre>
+
+<pre class="source">
+<span class="keyword1 command">nominal_function</span> <span class="entity">trans_tm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>name</span> list <span class="main">⇒</span> tm</span> <span class="main">⇒</span> dbtm<span>"</span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+   </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">trans_tm</span> <span class="free bound entity">e</span> Zero</span> <span class="main">=</span> DBZero</span><span>"</span><span>
+ </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">trans_tm</span> <span class="free bound entity">e</span> <span class="main">(</span>Var</span> <span class="free bound entity">k</span><span class="main">)</span> <span class="main">=</span> lookup</span> <span class="free bound entity">e</span> <span class="main">0</span> <span class="free bound entity">k</span><span>"</span><span>
+ </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">trans_tm</span> <span class="free bound entity">e</span> <span class="main">(</span>Eats</span> <span class="free bound entity">t</span> <span class="free bound entity">u</span><span class="main">)</span> <span class="main">=</span> DBEats</span> <span class="main">(</span><span class="free">trans_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">t</span><span class="main">)</span> <span class="main">(</span><span class="free">trans_tm</span> <span class="free bound entity">e</span> <span class="free bound entity">u</span><span class="main">)</span><span>"</span>
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
 
 <pre class="source">
 </pre>
