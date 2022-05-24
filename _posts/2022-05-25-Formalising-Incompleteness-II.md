@@ -60,9 +60,9 @@ It is straightforward to show that the Σ-formulas are closed according to the s
 Our next task is to demonstrate that all atomic formulas are Σ-formulas. This involves a series of fairly elementary proofs, relating various atomic formulas to strict Σ-formulas.
 We begin with the terms restricted to variables and gradually strengthen the results to other terms. 
 The subset relation, applied to variables, is a Σ-formula simply by its syntactic structure:
-$x\subset y \leftrightarrow (\forall j\in x.\, j\in y)$.
+$x\subseteq y \leftrightarrow (\forall j\in x.\, j\in y)$.
 The following is a representative example, where $x\subseteq 0 \longleftrightarrow(\forall j\in x.\, \bot)$ is proved in the HF calculus.
-Another theorem handles the case $x\subseteq y\lhd z$, and on we go.
+Another theorem handles the case $x\subseteq y\lhd z$, and on we go, step by tedious step.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> Subset_Zero_sf<span class="main">:</span> <span class="quoted quoted"><span>"</span>Sigma_fm <span class="main">(</span>Var <span class="free">i</span> <span class="keyword1">SUBS</span> Zero<span class="main">)</span><span>"</span></span><span>
@@ -92,7 +92,7 @@ The Isabelle proof begins by grabbing a pair of fresh variable names, then does 
     </span><span class="keyword1 command">using</span> ij<span>
     </span><span class="keyword1 command improper command">apply</span> <span class="operator">auto</span></span><span>
     </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">rule</span> Ex_I <span class="main main">[</span><span class="keyword2 keyword operator">where</span> x<span class="main main main">=</span><span class="quoted"><span class="quoted">Zero</span><span class="main main">]</span><span class="main keyword3">,</span> <span class="operator">simp</span><span class="main">)</span><span>
-    </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">rule</span> Ex_I <span class="main main">[</span><span class="keyword2 keyword operator">where</span> x<span class="main main main">=</span><span class="quoted quoted quoted">"</span>Eats Zero<span>"</span></span></span><span class="main main">]</span><span class="main">)</span><span>
+    </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">rule</span> Ex_I <span class="main main">[</span><span class="keyword2 keyword operator">where</span> x<span class="main main main">=</span><span class="quoted quoted quoted">"</span>Eats Zero<span>"</span></span><span class="main main">]</span><span class="main">)</span><span>
     </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> Mem_Eats_I2 assms thin0<span class="main">)</span><span>
     </span><span class="keyword1 command improper command">done</span><span>
 </span><span class="keyword1 command">qed</span>
