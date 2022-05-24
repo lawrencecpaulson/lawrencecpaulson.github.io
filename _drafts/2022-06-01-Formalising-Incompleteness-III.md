@@ -137,15 +137,7 @@ Substitution for free variables in a formula is now quite different from abstrac
  </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">subst_dbfm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="main">(</span>DBEx</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="main">=</span> DBEx</span> <span class="main">(</span><span class="free">subst_dbfm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span>
 </pre>
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
+Later, we'll relate de Bruijn abstraction and substitution to their nominal equivalents and check that our translations are valid.
 
 ### Well-formed de Bruijn terms and formulas
 
