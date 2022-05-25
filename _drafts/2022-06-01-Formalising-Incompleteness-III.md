@@ -102,7 +102,7 @@ Abstraction takes a name, an index number and a term, replacing every occurrence
 </pre>
 
 Substitution replaces a (necessarily free) occurrence of a named variable by a term.
-The term version looks rather like abstraction, but wait.
+The term version looks almost the same as abstraction, but wait until we get to formulas.
 
 <pre class="source">
 <span class="keyword1 command">nominal_function</span> <span class="entity">subst_dbtm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>dbtm</span> <span class="main">⇒</span> name</span> <span class="main">⇒</span> dbtm <span class="main">⇒</span> dbtm<span>"</span><span>
@@ -113,7 +113,16 @@ The term version looks rather like abstraction, but wait.
  </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">subst_dbtm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="main">(</span>DBEats</span> <span class="free bound entity">t1</span> <span class="free bound entity">t2</span><span class="main">)</span> <span class="main">=</span> DBEats</span> <span class="main">(</span><span class="free">subst_dbtm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="free bound entity">t1</span><span class="main">)</span> <span class="main">(</span><span class="free">subst_dbtm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="free bound entity">t2</span><span class="main">)</span><span>"</span>
 </pre>
 
-Abstraction over formulas is mostly the obvious structural recursion, except for the last line, which increments the index. The point is that a quantifier binds a new variable.
+
+The following fact relates the translation of the term in an extended environment with translating the same term without the extension, then abstracting over an additional name. The proof is another trivial induction.
+ 
+<pre class="source">
+<span class="keyword1 command">lemma</span> trans_tm_abs<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>trans_tm</span> <span class="main">(</span><span class="free">e</span><span class="main">@</span><span class="main">[</span><span class="free">name</span><span class="main">]</span><span class="main">)</span> <span class="free">t</span> <span class="main">=</span> abst_dbtm</span> <span class="free">name</span> <span class="main">(</span>length <span class="free">e</span><span class="main">)</span> <span class="main">(</span>trans_tm <span class="free">e</span> <span class="free">t</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">t</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> lookup_notin lookup_append<span class="main">)</span>
+</pre>
+
+Abstraction over formulas satisfies the corresponding property.
+Its definition is the obvious structural recursion **except** for the last line, which increments the index. The point is that a quantifier binds a new variable.
 
 <pre class="source">
 <span class="keyword1 command">nominal_function</span> <span class="entity">abst_dbfm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>name</span> <span class="main">⇒</span> nat <span class="main">⇒</span> dbfm</span> <span class="main">⇒</span> dbfm<span>"</span><span>
@@ -125,7 +134,7 @@ Abstraction over formulas is mostly the obvious structural recursion, except for
  </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">abst_dbfm</span> <span class="free bound entity">name</span> <span class="free bound entity">i</span> <span class="main">(</span>DBEx</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="main">=</span> DBEx</span> <span class="main">(</span><span class="free">abst_dbfm</span> <span class="free bound entity">name</span> <span class="main">(</span><span class="free bound entity">i</span><span class="main">+</span><span class="main">1</span><span class="main">)</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span>
 </pre>
 
-Substitution for free variables in a formula is now quite different from abstraction, because the quantifier case is treated exactly like all the others.
+Substitution for free variables in a formula is different from abstraction, because the quantifier case is treated exactly like all the others.
 
 <pre class="source">
 <span class="keyword1 command">nominal_function</span> <span class="entity">subst_dbfm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>dbtm</span> <span class="main">⇒</span> name</span> <span class="main">⇒</span> dbfm <span class="main">⇒</span> dbfm<span>"</span><span>
@@ -137,7 +146,8 @@ Substitution for free variables in a formula is now quite different from abstrac
  </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">subst_dbfm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="main">(</span>DBEx</span> <span class="free bound entity">A</span><span class="main">)</span> <span class="main">=</span> DBEx</span> <span class="main">(</span><span class="free">subst_dbfm</span> <span class="free bound entity">u</span> <span class="free bound entity">x</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span>
 </pre>
 
-Later, we'll relate de Bruijn abstraction and substitution to their nominal equivalents and check that our translations are valid.
+The term being substituted must be entirely without the `DBInd` constructor.
+The time has come to talk about the concept of a de Bruijn term or formula being well-formed.
 
 ### Well-formed de Bruijn terms and formulas
 
@@ -181,7 +191,7 @@ The opposite direction, that the translation of a term is always well formed, is
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">t</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span> <span class="operator">auto</span>
 </pre>
 
-And so we can characterise the well-formed de Bruijn terms precisely as the translations of nominal terms.
+And so we can characterise the well-formed de Bruijn terms *precisely* as the translations of nominal terms.
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> wf_dbtm_iff_is_tm<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>wf_dbtm</span> <span class="free">x</span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∃</span><span class="bound">t</span><span class="main">::</span>tm</span><span class="main">.</span> <span class="free">x</span> <span class="main">=</span> trans_tm <span class="main">[]</span> <span class="bound">t</span><span class="main">)</span><span>"</span><span>
@@ -189,6 +199,45 @@ And so we can characterise the well-formed de Bruijn terms precisely as the tran
 </pre>
 
 <pre class="source">
+<span class="keyword1 command">inductive</span> <span class="entity">wf_dbfm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>dbfm</span> <span class="main">⇒</span> bool<span>"</span></span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+    </span>Mem<span class="main">:</span>   <span class="quoted"><span class="quoted"><span>"</span>wf_dbtm</span> <span class="free bound entity">t1</span> <span class="main">⟹</span> wf_dbtm</span> <span class="free bound entity">t2</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="main">(</span>DBMem <span class="free bound entity">t1</span> <span class="free bound entity">t2</span><span class="main">)</span><span>"</span><span>
+  </span><span class="main">|</span> Eq<span class="main">:</span>    <span class="quoted"><span class="quoted"><span>"</span>wf_dbtm</span> <span class="free bound entity">t1</span> <span class="main">⟹</span> wf_dbtm</span> <span class="free bound entity">t2</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="main">(</span>DBEq <span class="free bound entity">t1</span> <span class="free bound entity">t2</span><span class="main">)</span><span>"</span><span>
+  </span><span class="main">|</span> Disj<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="free">wf_dbfm</span> <span class="free bound entity">A1</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="free bound entity">A2</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="main">(</span>DBDisj</span> <span class="free bound entity">A1</span> <span class="free bound entity">A2</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Neg<span class="main">:</span>   <span class="quoted"><span class="quoted"><span>"</span><span class="free">wf_dbfm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="main">(</span>DBNeg</span> <span class="free bound entity">A</span><span class="main">)</span><span>"</span></span><span>
+  </span><span class="main">|</span> Ex<span class="main">:</span>    <span class="quoted"><span class="quoted"><span>"</span><span class="free">wf_dbfm</span> <span class="free bound entity">A</span> <span class="main">⟹</span> <span class="free">wf_dbfm</span> <span class="main">(</span>DBEx</span> <span class="main">(</span>abst_dbfm</span> <span class="free bound entity">name</span> <span class="main">0</span> <span class="free bound entity">A</span><span class="main">)</span><span class="main">)</span><span>"</span>
+</pre>
+
+Application of similar techniques gives us a characterisation of well-formed de Bruijn formulas.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> wf_dbfm_iff_is_fm<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>wf_dbfm</span> <span class="free">x</span> <span class="main">⟷</span> <span class="main">(</span><span class="main">∃</span><span class="bound">A</span><span class="main">::</span>fm</span><span class="main">.</span> <span class="free">x</span> <span class="main">=</span> trans_fm <span class="main">[]</span> <span class="bound">A</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> wf_dbfm_imp_is_fm wf_dbfm_trans_fm<span class="main">)</span>
+</pre>
+
+It's impressive that two absolutely different treatments of variable binding turn out to be exactly equivalent, and with so little effort in the proofs.
+
+###  A few commutativity properties
+
+If you have a formula and two distinct names, one of which is fresh for the term `u`, then substitution and abstraction actually commute.
+And the proof is a single line!
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> dbfm_abst_swap_subst<span class="main">:</span><span>
+  </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">name</span> <span class="main">≠</span> <span class="free">name'</span> <span class="main">⟹</span> atom</span> <span class="free">name'</span> <span class="main">♯</span></span> <span class="free">u</span> <span class="main">⟹</span><span>
+   </span>subst_dbfm <span class="free">u</span> <span class="free">name</span> <span class="main">(</span>abst_dbfm <span class="free">name'</span> <span class="free">j</span> <span class="free">A</span><span class="main">)</span> <span class="main">=</span> abst_dbfm <span class="free">name'</span> <span class="free">j</span> <span class="main">(</span>subst_dbfm <span class="free">u</span> <span class="free">name</span> <span class="free">A</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">A</span> <span class="quasi_keyword">arbitrary</span><span class="main main">:</span> <span class="quoted free">j</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> dbfm.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> dbtm_abst_swap_subst<span class="main">)</span>
+</pre>
+
+Here, substitution on de Bruijn terms corresponds to substitution on the original nominal terms. The same property holds for formulas. The proof is again easy.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> subst_trans_commute <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span><span>
+  </span><span class="quoted"><span class="quoted"><span>"</span>atom</span> <span class="free">i</span> <span class="main">♯</span></span> <span class="free">e</span> <span class="main">⟹</span> subst_dbtm <span class="main">(</span>trans_tm <span class="free">e</span> <span class="free">u</span><span class="main">)</span> <span class="free">i</span> <span class="main">(</span>trans_tm <span class="free">e</span> <span class="free">t</span><span class="main">)</span> <span class="main">=</span> trans_tm <span class="free">e</span> <span class="main">(</span>subst <span class="free">i</span> <span class="free">u</span> <span class="free">t</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">t</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> tm.induct<span class="main">)</span><span>
+  </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> lookup_notin fresh_imp_notin_env<span class="main">)</span><span>
+  </span><span class="keyword1 command improper command">apply</span> <span class="main">(</span><span class="operator">metis</span> abst_dbtm_fresh_ignore dbtm_subst_ignore lookup_fresh lookup_notin subst_dbtm.simps<span class="main main">(</span>2<span class="main main">)</span><span class="main">)</span><span>
+  </span><span class="keyword1 command improper command">done</span>
 </pre>
 
 
@@ -237,8 +286,6 @@ And so we can characterise the well-formed de Bruijn terms precisely as the tran
 <pre class="source">
 </pre>
 
-<pre class="source">
-</pre>
 
 <pre class="source">
 </pre>
@@ -248,10 +295,6 @@ And so we can characterise the well-formed de Bruijn terms precisely as the tran
 
 <pre class="source">
 </pre>
-
-<pre class="source">
-</pre>
-
 
 
 <pre class="source">
