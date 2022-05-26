@@ -5,7 +5,7 @@ usemathjax: true
 tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
-Gödel's theorem, more than many other deep results, is burdened with a great many truly tiresome definitions and lemmas. It's necessary to codify in full the axioms and inference rules of HF, the [internal logic]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), as well as a toolbox of derived syntactic primitives needed for expressing and proving HF statements. (It's also necessary to prove that the primitives actually work, a particularly tiresome step that most authors omit.)
+Gödel's theorem, more than other deep results, is burdened with numerous tiresome definitions and lemmas. It's necessary to codify in full the axioms and inference rules of HF, the [internal logic]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), as well as a toolbox of derived syntactic primitives needed for expressing and proving HF statements. (It's also necessary to prove that the primitives actually work, a particularly tiresome step that most authors omit.)
 Here, let's look at something a bit more interesting: [Świerczkowski's](https://doi.org/10.4064/DM422-0-1) Theorem 2.5, which states that every true Σ-sentence is a theorem.
 This turns out to be vital once we set up Gödel encodings of formulas and define a provability predicate, Pf. It will be possible to show that φ is a theorem if and only if Pf⌜φ⌝ is true, for any HF formula φ. The point is that all of these syntactic predicates can be defined as Σ-formulas. Therefore, if Pf⌜φ⌝ is true, we get—for free—that Pf⌜φ⌝ is *formally* provable.
  To get started, we first need to define Σ-formulas.

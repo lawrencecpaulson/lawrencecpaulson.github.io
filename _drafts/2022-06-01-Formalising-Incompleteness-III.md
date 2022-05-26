@@ -11,7 +11,7 @@ showing that something is impossible because it could otherwise be used to solve
 A complication is that our calculus involves variable binding, with the attendant horrors of name clashes and renaming.
 As described in a [previous post]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), the Isabelle/HOL formalisation of HF deals with variable binding through the nominal package, but when coding HF in itself we shall be forced to use a simpler technique, due to de Bruijn.
 
-### de Bruijn indices
+### Overview of de Bruijn indices
 
 Briefly, [de Bruijn's technique](https://en.wikipedia.org/wiki/De_Bruijn_index) is to eliminate bound variable names altogether.
 Bound variables become nonnegative integers, where 0 refers to the innermost binder and greater integers refer to binders further out. It destroys readability, but that is no problem for coding.
@@ -22,7 +22,7 @@ The definition of coding is via an intermediate representation of HF terms and f
 
 ### Isabelle definitions terms and formulas, using de Bruijn indices
 
-We begin with terms. Free variables are identified by their names, as before, while bound variables are identified by their de Bruijn index.
+We begin with terms. Free variables are identified by their names, [as before]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), while bound variables are identified by their de Bruijn index.
 
 <pre class="source">
 <span class="keyword1 command">nominal_datatype</span> dbtm <span class="main">=</span> DBZero <span class="main">|</span> DBVar <span class="quoted">name</span> <span class="main">|</span> DBInd <span class="quoted">nat</span> <span class="main">|</span> DBEats <span class="quoted">dbtm</span> <span class="quoted">dbtm</span>
@@ -48,8 +48,8 @@ The translation from nominal terms to de Bruijn terms has at its heart the follo
   </span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">lookup</span> <span class="main">(</span><span class="free bound entity">y</span> <span class="main">#</span> <span class="free bound entity">ys</span><span class="main">)</span> <span class="free bound entity">n</span> <span class="free bound entity">x</span> <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="free bound entity">x</span> <span class="main">=</span> <span class="free bound entity">y</span> <span class="keyword1">then</span> DBInd</span> <span class="free bound entity">n</span> <span class="keyword1">else</span> <span class="main">(</span><span class="free">lookup</span> <span class="free bound entity">ys</span> <span class="main">(</span>Suc <span class="free bound entity">n</span><span class="main">)</span> <span class="free bound entity">x</span><span class="main">)</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-The translation itself is the obvious recursive traversal, calling the function above.
-The argument `e` is the environment in which variables are interpreted.
+The translation itself is the obvious recursive traversal, calling the lookup function above.
+The argument `e` is the *environment* in which variables are interpreted.
 
 <pre class="source">
 <span class="keyword1 command">nominal_function</span> <span class="entity">trans_tm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>name</span> list <span class="main">⇒</span> tm</span> <span class="main">⇒</span> dbtm<span>"</span><span>
@@ -151,8 +151,8 @@ The time has come to talk about the concept of a de Bruijn term or formula being
 
 ### Well-formed de Bruijn terms and formulas
 
-A de Bruijn index identifies the corresponding binder, and we've a problem if it doesn't exist.
-The notion of de Bruijn terms and formulas being well-defined is straightforward to formalise.
+A de Bruijn index requires a matching binder, and we've a problem if it doesn't exist.
+The notion of de Bruijn terms and formulas being *well-formed* is straightforward to formalise.
 As always, we begin with the terms:
 
 <pre class="source">
@@ -198,6 +198,8 @@ And so we can characterise the well-formed de Bruijn terms *precisely* as the tr
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> wf_dbtm_imp_is_tm wf_dbtm_trans_tm<span class="main">)</span>
 </pre>
 
+A well formed de Bruijn formula is defined in terms of abstraction in the last line, which handles the existential quantifier. The abstraction operation is called with the name of the quantified variable, substituting a de Bruijn index of 0. The abstraction operation will increase this index as it passes through other quantifiers. A lot is going on, and yet the definition is simple.
+
 <pre class="source">
 <span class="keyword1 command">inductive</span> <span class="entity">wf_dbfm</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>dbfm</span> <span class="main">⇒</span> bool<span>"</span></span><span>
   </span><span class="keyword2 keyword">where</span><span>
@@ -216,8 +218,11 @@ Application of similar techniques gives us a characterisation of well-formed de 
 </pre>
 
 It's impressive that two absolutely different treatments of variable binding turn out to be exactly equivalent, and with so little effort in the proofs.
+The formal specification of well-founded terms and formulas will be needed later in the incompleteness development.
 
 ###  A few commutativity properties
+
+The development requires a great many facts relating substitution, abstraction, freshness and the translations between the nominal and de Bruijn levels. Here are just a couple. Thankfully, most of these are easy to prove.
 
 If you have a formula and two distinct names, one of which is fresh for the term `u`, then substitution and abstraction actually commute.
 And the proof is a single line!
@@ -240,331 +245,4 @@ Here, substitution on de Bruijn terms corresponds to substitution on the origina
   </span><span class="keyword1 command improper command">done</span>
 </pre>
 
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-
-
-
-I have [previously commented]({% post_url 2021-12-15-Incompleteness %}) on the relevance of Gödel incompleteness to formalisation.
-
-
+I imagine that readers have had enough of Gödel for the moment, so I shall have to think of something else for next week!
