@@ -5,7 +5,22 @@ usemathjax: true
 tags: examples, Isabelle, newbies, descriptions
 ---
 
-XX
+A description is a term that designates "the least", "the greatest" or simply "any" *x* such that Φ(*x*): it literally describes the desired (or simply *any suitable*) value in in language of its properties.
+The built-in facts governing Min, Max, etc. are straightforward, but getting what you want from them is often frustratingly difficult.
+Often it's best to give the job to sledgehammer.
+Let's take a look at a few contrived, but (I hope) illustrative examples.
+
+### The range of description operators
+
+A great variety of functions are available. Here are the main ones:
+
+* `Least`/`Greatest` denote the least/greatest value satisfying a given *formula*. The corresponding Isabelle keyword is `LEAST`/`GREATEST`.
+* `Min`/`Max`: these are suitable for non-empty, **finite** sets. The underlyibg type must be linearly ordered (belong to type class `linorder`).
+* `Inf`/`Sup` denote the infimum/supremum of possibly infinite or empty sets. These come in two versions, for complete lattices and for conditionally complete lattices.
+* `Eps` is Hilbert's $\epsilon$-operator, which is a full version of the axiom of choice. The corresponding Isabelle keyword is `SOME`. Although a unique description operator also exists, it's obsolute: Isabelle/HOL no longer offers the option to work without AC.
+
+Unsurprisingly, some of these are defined in terms of others, with `Eps` as the true primitive. Type classes play a major role. For example, a type in class `wellorder` is guaranteed to have suitable `Least` elements for any non-False predicate.
+
 
 ### A dummy theorem statement
 
