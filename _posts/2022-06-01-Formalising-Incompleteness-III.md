@@ -6,7 +6,7 @@ tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
 ---
 
 Gödel's proof uses arithmetic (or in our case, [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %})) to encode logical syntax, rules of inference, and therefore theorems of the internal calculus.
-Coding techniques are ubiquitous in computation theory, complexity theory and elsewhere in logic under the general heading of *problem reduction*:
+Analogous coding techniques are ubiquitous in computation theory, complexity theory and elsewhere in logic under the general heading of *problem reduction*:
 showing that something is impossible because it could otherwise be used to solve another problem already known to be impossible.
 A complication is that our calculus involves variable binding, with the attendant horrors of name clashes and renaming.
 As described in a [previous post]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), the Isabelle/HOL formalisation of HF deals with variable binding through the nominal package, but when coding HF in itself we shall be forced to use a simpler technique, due to de Bruijn.
