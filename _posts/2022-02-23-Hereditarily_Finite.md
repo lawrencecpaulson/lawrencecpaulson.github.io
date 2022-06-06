@@ -128,7 +128,7 @@ Now that we can convert between an HF set and the finite set of its elements, it
   <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">hmem</span> <span class="free bound entity">a</span> <span class="free bound entity">b</span> <span class="main">⟷</span> <span class="free bound entity">a</span> <span class="main">∈</span> hfset</span> <span class="free bound entity">b</span><span>"</span></span>
 </pre>
 
-I am grateful to [Brian Huffman](https://galois.com/team/brian-huffman/) for the material shown above.
+I am grateful to Brian Huffman for the material shown above.
 There is much more to the [full development](https://www.isa-afp.org/entries/HereditarilyFinite.html) of HF sets.
 
 ### Type class instantiations for type <span class="source">hf</span>

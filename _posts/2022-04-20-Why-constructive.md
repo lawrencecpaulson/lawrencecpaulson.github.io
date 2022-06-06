@@ -16,7 +16,7 @@ I mentioned [intuitionism](https://plato.stanford.edu/entries/intuitionism/) in 
 It longs to return to mathematics as it had been done from Euclid until the mid-nineteenth century, when constructions were explicit. It held that every function should be given by an explicit rule.
 I'm sympathetic to one of the core ideas of intuitionism—that mathematical objects exist only in our minds—but not to the whole crazy system of ideas.
 To [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), a mathematical fact only became true once it had been proved, so the [largest known prime](https://en.wikipedia.org/wiki/Largest_known_prime_number) could not be said to have been prime at all until recently.
-Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (Apparently, once something is proved it [remains true forever]( click).) 
+Fermat's last theorem was not true until 1993 (when Wiles first announced it), or maybe October 1994 (when he corrected the error in his proof), or maybe 1995 (after the proof had been accepted by referees and published). Or maybe in 1637, when Fermat first perceived its truth? (Apparently, once something is proved it [remains true forever](https://plato.stanford.edu/entries/intuitionism/#BHKInt).) 
 Only God and Brouwer know for sure.
 Brouwer rejected the Law of the Excluded Middle (LEM) because to him, $P\lor \neg P$ was the claim that $P$ or $\neg P$ had already been proved (or could be in principle).
 
@@ -40,7 +40,7 @@ Thus it is diametrically opposed to the philosophy known as [formalism](https://
 
 ### Constructive type theories vs intuitionistism
 
-The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org/10.1093/oso/9780198501275.003.0010)" (also [here](/papers/Martin-Löf-intuitionistic_theory_of_types)) in 1972 brought constructive mathematics to the attention of a generation of computer scientists.
+The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org/10.1093/oso/9780198501275.003.0010)" (also [here](/papers/Martin-Löf-intuitionistic_theory_of_types.pdf)) in 1972 brought constructive mathematics to the attention of a generation of computer scientists.
 As the first embodiment of the conception of [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType), it appeared to offer everything from the possibility of formalising Bishop-style constructivism to a principled approach to correct-program synthesis.
 At the same time, it embodied a glaring contradiction: to support constructive mathematics and in particular the work of Bishop through a formal system combining the ideas of two opposites, Heyting and Curry. 
 
