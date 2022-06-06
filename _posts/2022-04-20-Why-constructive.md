@@ -40,7 +40,8 @@ Thus it is diametrically opposed to the philosophy known as [formalism](https://
 
 ### Constructive type theories vs intuitionistism
 
-The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org/10.1093/oso/9780198501275.003.0010)" (also [here](/papers/Martin-Löf-intuitionistic_theory_of_types.pdf)) in 1972 brought constructive mathematics to the attention of a generation of computer scientists.
+The emergence of Martin-Löf's "[Intuitionistic theory of types](https://doi.org/10.1093/oso/9780198501275.003.0010)" 
+(also [here](/papers/ML-Int-TT.pdf)) in 1972 brought constructive mathematics to the attention of a generation of computer scientists.
 As the first embodiment of the conception of [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType), it appeared to offer everything from the possibility of formalising Bishop-style constructivism to a principled approach to correct-program synthesis.
 At the same time, it embodied a glaring contradiction: to support constructive mathematics and in particular the work of Bishop through a formal system combining the ideas of two opposites, Heyting and Curry. 
 
