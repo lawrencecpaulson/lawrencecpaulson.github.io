@@ -14,11 +14,12 @@ Let's take a look at a few contrived, but (I hope) illustrative examples, leavin
 A great variety of functions are available. Here are the main ones:
 
 * `Least`/`Greatest` denote the least/greatest value satisfying a given predicate calculus *formula*. The corresponding Isabelle keyword is `LEAST`/`GREATEST`.
-* `Min`/`Max`: these functions are suitable for non-empty, **finite** sets. The underlyibg type must be linearly ordered (belong to type class `linorder`).
+* `Min`/`Max`: these functions are suitable for non-empty, **finite** sets. The underlying type must be linearly ordered (belong to type class `linorder`).
 * `Inf`/`Sup` are functions to denote the infimum/supremum of possibly infinite or empty sets. These come in two versions, for complete lattices and for conditionally complete lattices.
-* `Eps` is [Hilbert's $\epsilon$-operator]({% post_url 2021-11-10-Axiom_of_Choice %}), which is a full version of the [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}) (AC). The corresponding Isabelle keyword is `SOME`. Although a unique description operator also exists, it has become obsolute: Isabelle/HOL no longer offers the option to work without AC. The option remains available in [Isabelle/ZF.]({% post_url 2022-01-26-Set_theory %})
+* `Eps` is [Hilbert's $\epsilon$-operator]({% post_url 2021-11-10-Axiom_of_Choice %}), which yields the full [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}) (AC). The corresponding Isabelle keyword is `SOME`. Although a *unique* description operator also exists, it has become obsolete: Isabelle/HOL no longer offers the option to work without AC. 
+(That option remains available in [Isabelle/ZF]({% post_url 2022-01-26-Set_theory %}).)
 
-Unsurprisingly, some of these are defined in terms of others, with `Eps` as the true primitive. Type classes play a major role. For example, a type in class `wellorder` is guaranteed to have suitable `Least` elements for any non-False predicate.
+Unsurprisingly, some of these are defined in terms of others, with `Eps` as the base primitive. Type classes play a major role. For example, a type in class `wellorder` is guaranteed to have suitable `Least` elements for any non-False predicate.
 
 
 ### A silly theorem statement
@@ -55,12 +56,12 @@ Here, we get two functions at the same time!
     </span><span class="keyword1 command">by</span> <span class="operator">metis</span>
 </pre>
 
-If you try this and the `metis` call hangs, it's likely that your forall-exists formula is too complicated. Simplify it by making definitions.
+If you try this and the `metis` call hangs, it's likely that your forall-exists formula is too complicated (or just wrong). Simplify it by making definitions.
 
 ### Example 2: What is the minimum radius?
 
 The infimum of all the radii of the balls in 𝒮 is easily defined.
-It exists because there's a lower bound (zero, obviously).
+It exists because there's a lower bound (zero).
 The use of the image operator is typical: this is the simplest way to denote the set of all radii of elements of 𝒮.
 
 <pre class="source">
