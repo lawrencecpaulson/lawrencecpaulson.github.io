@@ -5,7 +5,7 @@ usemathjax: true
 tags: general, ALEXANDRIA, AUTOMATH, de Bruijn
 ---
 
-Vladimir Voevodsky  was a leading proponent of the formalisation of mathematics, lecturing frequently on the risks of errors in complicated technical arguments and the necessity to start using computers to verify the work of mathematicians. The opinions of a Fields Medallist naturally carried weight.
+Vladimir Voevodsky was a leading proponent of the formalisation of mathematics, lecturing frequently on the risks of errors in complicated technical arguments and the necessity to start using computers to verify the work of mathematicians. The opinions of a Fields Medallist naturally carried weight.
 From the other side, the verification world, one impetus for the formalisation of mathematics was the [floating point division bug](https://en.wikipedia.org/wiki/Pentium_FDIV_bug) in the Pentium, back in 1994.
 (See my [prior post]({% post_url 2021-12-08-ALEXANDRIA %}) on the ALEXANDRIA project.)
 However, de Bruijn had created the first version of [AUTOMATH]({% post_url 2021-11-03-AUTOMATH %}) by 1968, and Wang had built an automatic theorem prover already in 1958, in hope of eventually formalising mathematics.
@@ -16,10 +16,12 @@ What is the point?
 The Cambridge hardware verification group had a pragmatic focus. Until the Pentium division bug, if I recall correctly, our systems didn't even know about negative numbers.
 Subsequent formalisations of the real numbers, special functions such as the exponential and probability theory were aligned to specific verification tasks.
 My colleagues expressed opinions that seem quite striking now: that it was obvious that all mathematical results could be formalised and that doing so, absent an application, was a waste of time.
-Some indeed expressed disdain for such time wasters, who indulged themselves while ignoring hardware/software verification issues of genuine importance.
+Some expressed outright disdain for such time wasters, who indulged themselves while ignoring hardware/software verification issues of genuine importance.
 I regret to say that I accepted this view and sometimes discouraged students from working on the formalisation of pure mathematics; I even wrote two papers ([this one](https://rdcu.be/bRiRv) and [that one](https://rdcu.be/bRiRA))
 about the formalisation of set theory, being careful to include "verification" in the title.
 I came up with the slogan that verification forced us to verify mathematics because today's computer systems (those connected with vehicles for example) are specified in terms of models of the real world which are heavily mathematical.
+
+In actual fact, I have never verified anything resembling a real computer system or program in my entire career.
 
 ### Views from the AUTOMATH project
 
@@ -35,9 +37,28 @@ These sound like good reasons, and incidentally, nobody accepts a PhD thesis tha
 
 > A further motive, for the author, was that the Work involved in the project appealed to him.
 
-It's an excellent reason when we reflect that John Harrison formalised a mountain of analysis, including the prime number theorem, with no conceivable verification application in mind.
+It's an excellent reason. John Harrison formalised a mountain of analysis, including the prime number theorem, with no conceivable verification application in mind.
+Formalising mathematics can be addictive!
 
-### xxx
+### What's happening now?
+
+There's an enormous amount of activity today. Some of it is focused on [univalent foundations](https://ncatlab.org/nlab/show/univalent+foundations+for+mathematics)/homotopy type theory, a field launched by Voevodsky and others (notably Steve Awody),
+about which I shall say little because I know even less.
+But my impression is that this work is still foundational as opposed to formalising mathematics in quantity.
+At the other extreme is the formalisation effort launched by
+[Kevin Buzzard](https://xenaproject.wordpress.com) using the [Lean theorem prover](https://leanprover.github.io),
+which is attempting to formalise the latest and most advanced mathematical material.
+Another angle is the [Formal Abstracts](https://formalabstracts.github.io) project of Thomas Hales (another Fields Medallist), aiming to "express the results of mathematical publications in a computer-readable form".
+
+My own ALEXANDRIA project, funded by the ERC, is formalising material in Isabelle/HOL.
+Other researchers around the world continue to formalise mathematical material, some of it highly advanced, in a great variety of systems.
+
+### And how can it be justified?
+
+
+
+SIMPLE TYPES VS DEPENDENT TYPES
+
 
 > As to the question what part of mathematics can be written in AUTOMATH,
 > it should first be remarked that we do not possess a workable definition of
