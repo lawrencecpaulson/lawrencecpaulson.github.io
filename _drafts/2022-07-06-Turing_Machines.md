@@ -15,7 +15,7 @@ Just ask Mr Google while relaxing at home, a glass of single malt at your side.
 Turing's paper can be found [online](https://doi.org/10.1112/plms/s2-42.1.230)
 (also [here](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf)).
 It is a wonderful read, even with its mistakes: as Joel David Hamkins [explains](http://jdh.hamkins.org/alan-turing-on-computable-numbers/), 
-Turing's definition of computable real numbers as those having computable decimal expansions doesn't actually work.
+Turing's definition of computable real numbers as those having computable decimal expansions doesn't actually work, though a fix is not difficult.
 
 Turing states his intentions right in the title: "On Computable Numbers, with an Application to the [Decision Problem]". (The *[Entscheidungsproblem](https://en.wikipedia.org/wiki/Entscheidungsproblem)* asks whether there exists an effective technique for determining whether a given formula of first-order logic is valid, i.e., true in all interpretations.)
 Turing expands on his thinking as follows:
@@ -32,7 +32,7 @@ The paper makes many other fundamental contributions:
 * the *universal machine*, and with it the idea of *coding* machines in the form of numbers
 * the *halting problem* for machines so coded, and its *undecidability* by diagonalisation
 
-And much more. Turing, in this one paper, created a new field of mathematics (recursion theory) as well as launching the field of theoretical computer science.
+And much more. Turing, in this one paper, launched the field of theoretical computer science.
 
 NO CONSTRUCTION OF UNIVERSAL TM
 
@@ -52,5 +52,13 @@ And what about those remarks about Church?
 
 ### Turing and Church at Princeton
 
-[An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/2371045)
+Turing was working at the exact moment that many researchers were converging on the idea of "effective calculability". In keeping with my suggestion to read the original papers, let me recommend Church's [An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/2371045).
+Here we find a definition of the $\lambda$-calculus, a definition of recursive function (in the sense of Kleene/Gödel) and some undecidability results for the existence and equivalence of normal forms in the $\lambda$-calculus.
+Church and Kleene had already proved the equivalence of the $\lambda$-definable functions and recursive functions; during Turing's time at Princeton, the equivalence between the $\lambda$-definable functions and the Turing-computable was also proved, establishing the Church-Turing thesis: that the effectively computable functions are precisely the functions in those mathematically equivalent classes.
 
+As is often remarked, this thesis cannot be proved because "effectively computable" is not a precise concept.
+The Turing-computable functions can be regarded as a generous class because they include many functions that cannot be computed in the lifetime of the universe for more than a tiny number of values.
+Examples are easily produced with the help of [Ackermann's function]({% post_url 2022-02-09-Ackermann-example %}).
+If we define $f(n) = A(n,n)$, we cannot hope to compute even $f(4)$.
+
+[History of the Church–Turing thesis](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis)
