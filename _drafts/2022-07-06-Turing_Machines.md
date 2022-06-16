@@ -48,9 +48,9 @@ For a contrary view, here is Maurice Wilkes, [interviewed by David P. Anderson](
 
 Um, WTF?? Well, Wilkes was 96 at the time of this interview, and himself a [notable computer pioneer](https://www.theguardian.com/technology/2010/nov/30/sir-maurice-wilkes-obituary), the father of the [EDSAC](https://www.tnmoc.org/edsac). In his bizarre answer we see perhaps his jealousy of Turing's iconic status. The two men clearly didn't get along. We also see Wilkes's lifelong disdain for theory: though the idea of coding machines as numbers anticipates the stored-program computer, Turing's work here is purely mathematical, having no engineering implications whatever.
 
-And what is this thing about Church?
+And what about those remarks about Church?
 
 ### Turing and Church at Princeton
 
-
+[An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/2371045)
 
