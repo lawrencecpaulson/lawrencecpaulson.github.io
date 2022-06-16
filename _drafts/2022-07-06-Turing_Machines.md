@@ -34,7 +34,20 @@ The paper makes many other fundamental contributions:
 
 And much more. Turing, in this one paper, launched the field of theoretical computer science.
 
-NO CONSTRUCTION OF UNIVERSAL TM
+### On the universal machine and the halting problem
+
+We can't be sure what put Turing onto the idea of a universal machine, but once he thought of it, he probably thought that their existence was obvious.
+Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on machine state and type synmbol, do this or that according to a given list of transition rules—there was obviously a TM to carry out such a task.
+Turing's paper is a bit sketchy about how the details of the constrution, but it seems that nobody minded.
+(After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, and the details turned out to be fiendish.)
+
+Today, we are much more sophisticated. We use a standard bijection between $\mathbb{N}$ and  $\mathbb{N}\times\mathbb{N}$ to pack lists of integers into a single integer.
+Then (typically using *register machines* rather than TMs, for simplicity), the full, precise code of a universal machine can fit on a couple of slides, no handwaving.
+
+The idea that the halting problem was undecidable was surely also obvious, because many mathematical conjectures would otherwise also be decidable, such as Fermat's last theorem: $\forall x y z n\in \mathbb{N^{+}}.\, n>2\to x^n+y^n \not= z^n$.
+It would be trivial to write a program to test for the existence of a counterexample and to test whether it terminated.
+But Turing did need to find a proof; the thought to use diagonalisation may have come from Gödel's use of the same technique in 1931 to prove his incompleteness theoerem.
+
 
 ### Turing and Maurice Wilkes
 
@@ -53,10 +66,11 @@ And what about those remarks about Church?
 ### Turing and Church at Princeton
 
 Turing was working at the exact moment that many researchers were converging on the idea of "effective calculability". In keeping with my suggestion to read the original papers, let me recommend Church's [An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/2371045).
+To be honest, it is a tough read, but it puts you into the context of the time.
 Here we find a definition of the $\lambda$-calculus, a definition of recursive function (in the sense of Kleene/Gödel) and some undecidability results for the existence and equivalence of normal forms in the $\lambda$-calculus.
 Church and Kleene had already proved the equivalence of the $\lambda$-definable functions and recursive functions; during Turing's time at Princeton, the equivalence between the $\lambda$-definable functions and the Turing-computable was also proved, establishing the Church-Turing thesis: that the effectively computable functions are precisely the functions in those mathematically equivalent classes.
 
-As is often remarked, this thesis cannot be proved because "effectively computable" is not a precise concept.
+As is often remarked, this claim cannot be proved because "effectively computable" is not a precise concept.
 The Turing-computable functions can be regarded as a generous class because they include many functions that cannot be computed in the lifetime of the universe for more than a tiny number of values.
 Examples are easily produced with the help of [Ackermann's function]({% post_url 2022-02-09-Ackermann-example %}).
 If we define $f(n) = A(n,n)$, we cannot hope to compute even $f(4)$.
