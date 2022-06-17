@@ -52,7 +52,7 @@ It would be trivial to write a program to search for $x$, $y$, $z$, $n>2$ such t
 $x^n+y^n = z^n$; such a program would terminate if and only if Fermat's last theorem was false.
 But Turing did need to find a proof; the idea to use diagonalisation may have come from Gödel's use of the same technique in 1931 to prove his incompleteness theoerem.
 
-Then it was perhaps that he realised that a positive solution to the decision problem would have to imply a solution to the halting problem as well.
+Then it was perhaps that he realised that a positive solution to the decision problem would have to imply a solution to the halting problem as well: a key application of *problem reduction*.
 It's a shame we don't know how the ideas involved in his brilliant conception came together.
 
 ### Turing and Maurice Wilkes
@@ -77,10 +77,19 @@ To be honest, it is a tough read, but it puts you into the context of the time.
 Here we find a definition of the $\lambda$-calculus, a definition of recursive function (in the sense of Kleene/Gödel) and some undecidability results for the existence and equivalence of normal forms in the $\lambda$-calculus.
 Church and Kleene had already proved the equivalence of the $\lambda$-definable functions and recursive functions; during Turing's time at Princeton, the equivalence between the $\lambda$-definable functions and the Turing-computable was also proved, establishing the Church-Turing thesis: that the effectively computable functions are precisely the functions in those mathematically equivalent classes.
 
+### Is the Church-Turing thesis true?
+
 As is often remarked, this claim cannot be proved because "effectively computable" is not a precise concept.
 The Turing-computable functions can be regarded as a generous class because they include many functions that cannot be computed in the lifetime of the universe for more than a tiny number of values.
 Examples are easily produced with the help of [Ackermann's function]({% post_url 2022-02-09-Ackermann-example %}).
 If you define $f(n) = A(n,n)$, you cannot hope to compute even $f(4)$.
 And $g(n) = A(4,n)$ is all but impossible to compute despite being primitive recursive.
 
-[History of the Church–Turing thesis](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis)
+Although there were no computers as we know them in the 1930s, the idea of affective computability was perfectly well known to mathematicians.
+The idea of effectiveness was already present in the straightedge and compass constructions of Greek geometry, and it is also part of the formulation of the [Entscheidungsproblem](https://plato.stanford.edu/entries/computability/) and [Hilbert's tenth problem](http://math.uchicago.edu/~shmuel/lg-readings/martin%20davis,%20hilbert%2010.pdf).
+The genius of Turing's conception, compared with [Gödel's recursive functions](https://plato.stanford.edu/entries/recursive-functions/) and Church's $\lambda$-calculus, is that it is obviously right. Gödel himself was not sure whether his recursive functions captured the idea of computation, and many people could be sceptical that Church had the right idea. Turing's was simple and natural, and the clincher, provably equivalent to those other models.
+
+These days, computation is typically interwoven with communication, and none of these models of computation have anything to say about networking. Unfortunately, the numerous models we have of concurrent computation do not turn out to be equivalent.
+The situation regarding concurrency remains messy.
+
+Wikipedia has a [useful chronology](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis) of those events.
