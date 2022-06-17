@@ -37,17 +37,23 @@ And much more. Turing, in this one paper, launched the field of theoretical comp
 ### On the universal machine and the halting problem
 
 We can't be sure what put Turing onto the idea of a universal machine, but once he thought of it, he probably thought that their existence was obvious.
-Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on machine state and type synmbol, do this or that according to a given list of transition rules—there was obviously a TM to carry out such a task.
+Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on the machine state and tape synmbol, do this or do that according to a given list of transition rules—there was obviously a TM to carry out such a routine task.
 Turing's paper is a bit sketchy about how the details of the constrution, but it seems that nobody minded.
 (After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, and the details turned out to be fiendish.)
 
 Today, we are much more sophisticated. We use a standard bijection between $\mathbb{N}$ and  $\mathbb{N}\times\mathbb{N}$ to pack lists of integers into a single integer.
 Then (typically using *register machines* rather than TMs, for simplicity), the full, precise code of a universal machine can fit on a couple of slides, no handwaving.
 
-The idea that the halting problem was undecidable was surely also obvious, because many mathematical conjectures would otherwise also be decidable, such as Fermat's last theorem: $\forall x y z n\in \mathbb{N^{+}}.\, n>2\to x^n+y^n \not= z^n$.
-It would be trivial to write a program to test for the existence of a counterexample and to test whether it terminated.
-But Turing did need to find a proof; the thought to use diagonalisation may have come from Gödel's use of the same technique in 1931 to prove his incompleteness theoerem.
+*FIGURE OF UNIVERSAL MACHINE*
 
+The idea that the halting problem was undecidable was surely also obvious.
+Otherwise, many mathematical conjectures would otherwise also be decidable, such as Fermat's last theorem.
+It would be trivial to write a program to search for $x$, $y$, $z$, $n>2$ such that
+$x^n+y^n = z^n$; such a program would terminate if and only if Fermat's last theorem was false.
+But Turing did need to find a proof; the idea to use diagonalisation may have come from Gödel's use of the same technique in 1931 to prove his incompleteness theoerem.
+
+Then it was perhaps that he realised that a positive solution to the decision problem would have to imply a solution to the halting problem as well.
+It's a shame we don't know how the ideas involved in his brilliant conception came together.
 
 ### Turing and Maurice Wilkes
 
@@ -59,7 +65,8 @@ For a contrary view, here is Maurice Wilkes, [interviewed by David P. Anderson](
 > 
 > There was no distinction in that paper that had any practical significance. He was lucky to get it published at all but I'm very glad he did. I mean [Alonzo] Church had got the same result by other methods.
 
-Um, WTF?? Well, Wilkes was 96 at the time of this interview, and himself a [notable computer pioneer](https://www.theguardian.com/technology/2010/nov/30/sir-maurice-wilkes-obituary), the father of the [EDSAC](https://www.tnmoc.org/edsac). In his bizarre answer we see perhaps his jealousy of Turing's iconic status. The two men clearly didn't get along. We also see Wilkes's lifelong disdain for theory: though the idea of coding machines as numbers anticipates the stored-program computer, Turing's work here is purely mathematical, having no engineering implications whatever.
+WTF? Well, Wilkes was 96 at the time of this interview, and himself a [notable computer pioneer](https://www.theguardian.com/technology/2010/nov/30/sir-maurice-wilkes-obituary), the father of the [EDSAC](https://www.tnmoc.org/edsac). In his bizarre answer we see perhaps his jealousy of Turing's iconic status. The two men clearly didn't get along! We also see Wilkes's lifelong disdain for theory: though the idea of coding machines as numbers anticipates the stored-program computer, Turing's work here is purely mathematical, having no engineering implications whatever.
+And despite Turing's interest in the engineering of actual computers, his attempts to get involved were repeatedly frustrated.
 
 And what about those remarks about Church?
 
@@ -73,6 +80,7 @@ Church and Kleene had already proved the equivalence of the $\lambda$-definable 
 As is often remarked, this claim cannot be proved because "effectively computable" is not a precise concept.
 The Turing-computable functions can be regarded as a generous class because they include many functions that cannot be computed in the lifetime of the universe for more than a tiny number of values.
 Examples are easily produced with the help of [Ackermann's function]({% post_url 2022-02-09-Ackermann-example %}).
-If we define $f(n) = A(n,n)$, we cannot hope to compute even $f(4)$.
+If you define $f(n) = A(n,n)$, you cannot hope to compute even $f(4)$.
+And $g(n) = A(4,n)$ is all but impossible to compute despite being primitive recursive.
 
 [History of the Church–Turing thesis](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis)
