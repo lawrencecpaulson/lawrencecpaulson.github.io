@@ -18,11 +18,15 @@ What is the point?
 
 The Cambridge hardware verification group had a pragmatic focus. Until the Pentium division bug, if I recall correctly, our systems didn't even know about negative numbers.
 Subsequent formalisations of the real numbers, special functions such as $\exp x$ and probability theory were aligned to specific verification objectives.
-My colleagues expressed opinions that seem quite striking now: that it was obvious that all mathematical results could be formalised and that doing so, absent an application, was a waste of time.
+My colleagues expressed opinions that seem quite striking now: 
+
+* that it was obvious that all mathematical material could be formalised 
+* that doing so, absent an application, was a waste of time
+
 Some expressed outright disdain for such time-wasters, who indulged themselves in the beautiful but useless while ignoring hardware/software verification issues of genuine importance.
 
-I regret to confess that I accepted this view and sometimes discouraged students from working on the formalisation of pure mathematics; I was even 
-careful to include "verification" in the titles of two papers
+I regret to confess that I accepted this view and sometimes discouraged students from working on the formalisation of pure mathematics.
+I was even careful to include "verification" in the titles of two papers
 ([this one](https://rdcu.be/bRiRv) and [that one](https://rdcu.be/bRiRA))
 on the formalisation of set theory.
 I came up with the slogan that verification forced us to verify mathematics because today's computer systems (those connected with vehicles for example) are specified in terms of models of the real world which are heavily mathematical.
@@ -35,9 +39,9 @@ NG de Bruijn has [written at length](https://www.win.tue.nl/automath/) on AUTOMA
 and [AUT002](https://www.win.tue.nl/automath/archive/webversion/aut002/aut002.html), "The mathematical language AUTOMATH"), give away little by means of motivation.
 The former paper begins "AUTOMATH is a language intended for expressing detailed mathematical thoughts." Fortunately, his student van Benthem Jutting, in [his PhD thesis](https://pure.tue.nl/ws/files/1710991/23183.pdf), gives some specific reasons:
 
-1. "Mechanical verification will increase the reliability of certain kinds of proofs. A need for this may be felt where a proof is extremely long, complicated and tedious."
-2. "Mechanically verifiable languages set a standard by which informal language may be measured, and may thereby have an influence on the use of language in mathematics generally."
-3. "The use of such languages gives an insight into the structure of mathematical texts."
+* "Mechanical verification will increase the reliability of certain kinds of proofs. A need for this may be felt where a proof is extremely long, complicated and tedious."
+* "Mechanically verifiable languages set a standard by which informal language may be measured, and may thereby have an influence on the use of language in mathematics generally."
+* "The use of such languages gives an insight into the structure of mathematical texts."
 
 These sound like good aims, and incidentally, nobody accepts a PhD thesis that doesn't begin with motivation. Jutting added an additional reason:
 
@@ -68,7 +72,7 @@ Yes: strangely enough, in formalising mathematics we are doing empirical science
 
 The texts written and published by mathematicians are real-world phenomena every bit as much as say, whale songs. Empirical projects to test the adequacy of logical systems have been going on since de Bruijn and the formalisation of Landau’s *[Foundations of Analysis](http://homepages.math.uic.edu/~kauffman/Landau.pdf)*. Landau was a highly atypical text—meticulously detailed, accurate and elementary—but appropriate for that first attempt.
 
-Projects such as ALEXANDRIA and Xena test the suitability of logical systems and their accompanying tools to formalise mathematics in all its variety. Buzzard stresses the importance of trying to tackle the most advanced definitions and proofs used by mathematicians today, hence his focus on perfectoid spaces. I’m handicapped by a complete lack of mathematical expertise beyond basic algebra and analysis, but my colleagues are doing impressive work, mostly in combinatorics and number theory. 
+Projects such as ALEXANDRIA and Xena test the suitability of logical systems and their accompanying tools to formalise mathematics in all its variety. Buzzard stresses the importance of trying to tackle the most advanced definitions and proofs used by mathematicians today, hence his focus on perfectoid spaces. I’m handicapped by a complete lack of mathematical expertise beyond basic algebra, analysis and set theory, but my colleagues are doing impressive work, mostly in combinatorics and number theory. 
 
 The most basic question being investigated is whether simple types or dependent types are best for formalising mathematics.
 I know that much of the research community made up their mind on that issue long ago, but we have been here before.
@@ -81,8 +85,8 @@ Still, PVS never came close to displacing Gordon's HOL, despite being more sophi
 So what are the advantages of simple types?
 
 1. Simpler, more intuitive formalisms
-2. Equality that works, where $i-1+i=i$
-3. Better automation, more easily implemented.
+2. Equality that works, where $A(i-1+1)=A(i)$ if $i\in\mathbb{N}^{+}$
+3. Much better automation. And much more easily implemented.
 
 And there seems to be something brittle about today's type theories.
 Two definitions that are mathematically equivalent can behave differently to such an extent
@@ -122,8 +126,9 @@ And yet, de Bruijn foresaw this situation:
 
 The full German text of Landau's *Grundlagen der Analysis* is [available online](https://www.cs.ru.nl/~freek/factor/grundlagen.tex.gz) as a plain TeX document, having apparently been re-typeset in a fit of madness by [Freek Wiedijk](https://www.cs.ru.nl/~freek/).
 Take a look at his webpage on the [de Bruijn factor](https://www.cs.ru.nl/~freek/factor/).
+
 Landau's text begins
 
 > Ich setze nur logisches Denken und die deutsche Sprache als bekannt voraus.
 
-That is, "I assume given only logical thinking and the German language."
+"I assume given only logical thinking and the German language."
