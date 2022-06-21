@@ -46,14 +46,16 @@ Then (typically using *register machines* rather than TMs, for simplicity), the 
 
 *FIGURE OF UNIVERSAL MACHINE*
 
-The idea that the halting problem was undecidable was surely also obvious.
+The idea that the halting problem is undecidable is obvious.
 Otherwise, many mathematical conjectures would otherwise also be decidable, such as Fermat's last theorem.
 It would be trivial to write a program to search for $x$, $y$, $z$, $n>2$ such that
 $x^n+y^n = z^n$; such a program would terminate if and only if Fermat's last theorem was false.
-But Turing did need to find a proof; the idea to use diagonalisation may have come from Gödel's use of the same technique in 1931 to prove his incompleteness theoerem.
 
-Then it was perhaps that he realised that a positive solution to the decision problem would have to imply a solution to the halting problem as well: a key application of *problem reduction*.
-It's a shame we don't know how the ideas involved in his brilliant conception came together.
+Contrary to popular belief, Turing's paper does not address the halting problem, but a related property that he calls circularity. A TM is *circular* provided it “never writes down more than a finite number of symbols of the first kind” (zeros and ones).
+Circularity mattered, I suppose, because of his specific interest in approximating real numbers using binary strings.
+According to Christopher Strachey, Turing informed him of a proof of the undecidability of the actual halting problem, which he reproduced in a Letter to the *Computer Journal* only in 1965.
+
+<img src="/images/Strachey-halting.png" alt="Halting problem proof" width="1000"/>
 
 ### Turing and Maurice Wilkes
 
@@ -93,3 +95,5 @@ These days, computation is typically interwoven with communication, and none of 
 The situation regarding concurrency remains messy.
 
 Wikipedia has a [useful chronology](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis) of those events.
+
+*Postscript*: I would like to thank Ken Moody and Andrew Pitts for helpful remarks.
