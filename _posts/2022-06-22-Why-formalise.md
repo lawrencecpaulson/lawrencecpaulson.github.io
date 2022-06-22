@@ -10,7 +10,7 @@ From the other side, the verification world, a major impetus for the formalisati
 (See my [prior post]({% post_url 2021-12-08-ALEXANDRIA %}) on the ALEXANDRIA project.)
 However, Trybulec started his [Mizar](http://mizar.org) project in 1973,
 de Bruijn had created the first version of [AUTOMATH]({% post_url 2021-11-03-AUTOMATH %}) by 1968, 
-and [Wang had built an automatic theorem prover](% post_url 2022-02-02-Formalising_Math_Set_theory %}) already in 1958, in hope of eventually formalising mathematics.
+and [Wang had built an automatic theorem prover]({% post_url 2022-02-02-Formalising_Math_Set_theory %}) already in 1958, in hope of eventually formalising mathematics.
 People have been dreaming about this for a long time.
 What is the point?
 
