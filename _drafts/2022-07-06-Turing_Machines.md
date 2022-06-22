@@ -30,36 +30,39 @@ Turing's main concern, as we see both from his title and from the passage quoted
 The paper makes many other fundamental contributions: 
 
 * the *universal machine*, and with it the idea of *coding* machines in the form of numbers
-* the *halting problem* for machines so coded, and its *undecidability* by diagonalisation
+* the *halting problem* (not exactly!) for machines so coded, and its *undecidability* by diagonalisation
 
 And much more. Turing, in this one paper, launched the field of theoretical computer science.
 
-### On the universal machine and the halting problem
+### On the universal machine and the halting (?) problem
 
-We can't be sure what put Turing onto the idea of a universal machine, but once he thought of it, he probably thought that their existence was obvious.
-Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on the machine state and tape synmbol, do this or do that according to a given list of transition rules—there was obviously a TM to carry out such a routine task.
+We can't be sure what put Turing on to the idea of a universal machine, but once he thought of it, he probably thought that its existence was obvious.
+Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on the machine state and tape synmbol, do this or do that as directed by a given list of transition rules—there was obviously a TM to carry out such a routine task.
 Turing's paper is a bit sketchy about how the details of the constrution, but it seems that nobody minded.
-(After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, and the details turned out to be fiendish.)
+(After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, and the details [turned out to be fiendish](https://www.jstor.org/stable/43046506).)
 
-Today, we are much more sophisticated. We use a standard bijection between $\mathbb{N}$ and  $\mathbb{N}\times\mathbb{N}$ to pack lists of integers into a single integer.
-Then (typically using *register machines* rather than TMs, for simplicity), the full, precise code of a universal machine can fit on a couple of slides, no handwaving.
+Today we have universal machines that have been worked out to the last detail. Here at Cambridge, [Dr Ken Moody](https://www.cl.cam.ac.uk/~km10/) coded a universal register machine couple of decades ago.
+He used a standard bijection between $\mathbb{N}$ and $\mathbb{N}\times\mathbb{N}$ to pack lists of integers into a single integer.
+He coded a small library of little register machines to perform operations such as push on stack and pop from stack and created a design reminiscent of the fetch-execute cycle of a real processor.
+The whole thing fits on a couple of slides.
 
 *FIGURE OF UNIVERSAL MACHINE*
 
-The idea that the halting problem is undecidable is obvious.
-Otherwise, many mathematical conjectures would otherwise also be decidable, such as Fermat's last theorem.
-It would be trivial to write a program to search for $x$, $y$, $z$, $n>2$ such that
-$x^n+y^n = z^n$; such a program would terminate if and only if Fermat's last theorem was false.
+The halting problem is obviously undecidable.
+Otherwise, many mathematical conjectures would be trivial to resolve, such as Fermat's last theorem:
+just write a program to search for $x$, $y$, $z$, $n>2$ such that
+$x^n+y^n = z^n$ and ask whether it terminates.
+Nevertheless, the undecidability claim has to be rigorously expressed and proved.
 
 Contrary to popular belief, Turing's paper does not address the halting problem, but a related property that he calls circularity. A TM is *circular* provided it “never writes down more than a finite number of symbols of the first kind” (zeros and ones).
-Circularity mattered, I suppose, because of his specific interest in approximating real numbers using binary strings.
+Circularity mattered, I suppose, because of Turing's specific interest in approximating real numbers using binary strings.
 According to Christopher Strachey, Turing informed him of a proof of the undecidability of the actual halting problem, which he reproduced in a Letter to the *Computer Journal* only in 1965.
 
 <img src="/images/Strachey-halting.png" alt="Halting problem proof" width="1000"/>
 
 ### Turing and Maurice Wilkes
 
-For a contrary view, here is Maurice Wilkes, [interviewed by David P. Anderson](http://doi.acm.org/10.1145/1562164.1562180):
+For a contrarian opinion of Turing, here is Maurice Wilkes, [interviewed by David P. Anderson](http://doi.acm.org/10.1145/1562164.1562180):
 
 > **Looking back, what would you say was the significance of Turing's 1936 Entscheidungs-problem paper?**
 > 
@@ -68,7 +71,7 @@ For a contrary view, here is Maurice Wilkes, [interviewed by David P. Anderson](
 > There was no distinction in that paper that had any practical significance. He was lucky to get it published at all but I'm very glad he did. I mean [Alonzo] Church had got the same result by other methods.
 
 WTF? Well, Wilkes was 96 at the time of this interview, and himself a [notable computer pioneer](https://www.theguardian.com/technology/2010/nov/30/sir-maurice-wilkes-obituary), the father of the [EDSAC](https://www.tnmoc.org/edsac). In his bizarre answer we see perhaps his jealousy of Turing's iconic status. The two men clearly didn't get along! We also see Wilkes's lifelong disdain for theory: though the idea of coding machines as numbers anticipates the stored-program computer, Turing's work here is purely mathematical, having no engineering implications whatever.
-And despite Turing's interest in the engineering of actual computers, his attempts to get involved were repeatedly frustrated.
+Turing was interested in the engineering of actual computers, but his attempts to get involved were repeatedly frustrated.
 
 And what about those remarks about Church?
 
@@ -89,11 +92,14 @@ And $g(n) = A(4,n)$ is all but impossible to compute despite being primitive rec
 
 Although there were no computers as we know them in the 1930s, the idea of affective computability was perfectly well known to mathematicians.
 The idea of effectiveness was already present in the straightedge and compass constructions of Greek geometry, and it is also part of the formulation of the [Entscheidungsproblem](https://plato.stanford.edu/entries/computability/) and [Hilbert's tenth problem](http://math.uchicago.edu/~shmuel/lg-readings/martin%20davis,%20hilbert%2010.pdf).
-The genius of Turing's conception, compared with [Gödel's recursive functions](https://plato.stanford.edu/entries/recursive-functions/) and Church's $\lambda$-calculus, is that it is obviously right. Gödel himself was not sure whether his recursive functions captured the idea of computation, and many people could be sceptical that Church had the right idea. Turing's was simple and natural, and the clincher, provably equivalent to those other models.
+The genius of Turing's conception, compared with [Gödel's recursive functions](https://plato.stanford.edu/entries/recursive-functions/) and Church's $\lambda$-calculus, is that it is obviously right. Gödel himself was not sure whether his recursive functions captured the idea of computation, and many people could be sceptical that Church had the right idea. Turing's was simple and natural, and the clincher, provably equivalent to those other models. 
+He published that fact in his 1937 paper, "[Computability and λ-definability](https://doi.org/10.2307/2268280)".
+
+> The purpose of the present paper is to show that the computable functions introduced by the author are identical with the $\lambda$-definable functions of Church and the general recursive' functions due to Herbrand and Gbdel and developed by Kleene. It is shown that every X-definable function is computable and that every computable function is general recursive.
+
+Wikipedia has a [useful chronology](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis) of those events.
 
 These days, computation is typically interwoven with communication, and none of these models of computation have anything to say about networking. Unfortunately, the numerous models we have of concurrent computation do not turn out to be equivalent.
 The situation regarding concurrency remains messy.
-
-Wikipedia has a [useful chronology](https://en.wikipedia.org/wiki/History_of_the_Church–Turing_thesis) of those events.
 
 *Postscript*: I would like to thank Ken Moody and Andrew Pitts for helpful remarks.
