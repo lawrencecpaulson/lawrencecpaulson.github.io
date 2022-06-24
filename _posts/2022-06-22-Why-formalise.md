@@ -60,8 +60,8 @@ At the other extreme is the Xena project of
 [Kevin Buzzard](https://xenaproject.wordpress.com), 
 who has inspired a group of enthusiastic mathematicians:
 the [Lean Prover Community](https://leanprover-community.github.io)
-has formalised some of the most advanced mathematics using [Lean](https://leanprover.github.io).
-Another angle is the [Formal Abstracts](https://formalabstracts.github.io) project of Thomas Hales (another Fields Medallist), aiming to "express the results of mathematical publications in a computer-readable form".
+has formalised highly advanced mathematics using [Lean](https://leanprover.github.io).
+Another angle is the [Formal Abstracts](https://formalabstracts.github.io) project of Thomas Hales (notable for proving the centuries-old [Kepler Conjecture](https://doi.org/10.1017/fmp.2017.1)), aiming to "express the results of mathematical publications in a computer-readable form".
 
 My own [ALEXANDRIA project](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/), funded by the ERC, is formalising material in Isabelle/HOL.
 Other researchers around the world continue to formalise mathematical material, some of it highly advanced, in a great variety of systems.
