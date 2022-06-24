@@ -58,8 +58,9 @@ about which I shall say little because I know even less.
 But my impression is that this work is still foundational as opposed to formalising mathematical papers in quantity.
 At the other extreme is the Xena project of
 [Kevin Buzzard](https://xenaproject.wordpress.com), 
-which uses the [Lean theorem prover](https://leanprover.github.io)
-to formalise the latest and most advanced mathematical material.
+who has inspired a group of enthusiastic mathematicians:
+the [Lean Prover Community](https://leanprover-community.github.io)
+has formalised some of the most advanced mathematics using [Lean](https://leanprover.github.io).
 Another angle is the [Formal Abstracts](https://formalabstracts.github.io) project of Thomas Hales (another Fields Medallist), aiming to "express the results of mathematical publications in a computer-readable form".
 
 My own [ALEXANDRIA project](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/), funded by the ERC, is formalising material in Isabelle/HOL.
