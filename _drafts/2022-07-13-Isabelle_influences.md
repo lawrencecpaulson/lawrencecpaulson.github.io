@@ -62,6 +62,7 @@ That was perfect, because I wouldn't have to puzzle out its theoretical properti
 I simply invested in a copy of [Lambek and Scott](https://www.cambridge.org/gb/academic/subjects/mathematics/logic-categories-and-sets/introduction-higher-order-categorical-logic?format=PB&isbn=9780521356534).
 In a [new paper](https://rdcu.be/cQnjt), I described Isabelle as it worked with this logical framework. 
 Both papers refer extensively to both de Bruijn and Martin-Löf.
+In particular, I note that Martin-Löf's "theory of arities and expressions" is precisely the typed $\lambda$-calculus with one base type.
 
 ### Natural deduction
 
@@ -79,7 +80,15 @@ One cannot even express a rule of inference without a notion of implication:
 $\Phi\Rightarrow\Psi$.
 Certain quantifier rules, and induction rules, take premises that are in effect universally quantified:
 $[\bigwedge x.\,\Phi(x)]\Rightarrow\Psi$.
-In a logical framework, which is supposed to support the natural deduction style, and for a variety of formalisms, it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object logic*) and the *meta logic* itself.
+In a logical framework intended to support the natural deduction style, and for a variety of formalisms, it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
+
+Two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
+The exact same separation exists in Isabelle **except**
+in the case of Isabelle/HOL, where the identification of 
+meta-level types with higher-order logic types turned out to be 
+essential in order to make things work.
+
+XXXX
 
 Martin-Löf type theory as pure development of ND, in particular mathematical induction as the elimination rule for N
 
