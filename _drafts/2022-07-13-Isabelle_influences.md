@@ -90,6 +90,15 @@ essential in order to make things work.
 
 XXXX
 
+[Martin-Löf type theory](http://www.jstor.com/stable/37448) 
+is notable for many things, but few ever mention that it is 
+perfect exemplar of natural deduction.
+The various type symbols are defined in a purely modular way:
+if you took a dislike to $\Pi$ say, you could simply omit all of the $\Pi$ rules and the rest of the formalism would work.
+The introduction and elimination rules for $(\Sigma x\in A)\,B(x)$ coincide, through the propositions-as-types principle,
+with those for the existential quantifier in classical predicate logic; analogous claims hold for the types $(\Pi x\in A)\,B(x)$ 
+and $A+B$.
+
 Martin-Löf type theory as pure development of ND, in particular mathematical induction as the elimination rule for N
 
 $\Sigma$ and $\Pi$
