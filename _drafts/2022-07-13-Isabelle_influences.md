@@ -75,7 +75,7 @@ $$
  \frac{\phi \quad \psi}{\phi\land \psi.} \label{conjI}
 $$
 
-Natural deduction may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms that typically combine connectives, as in
+Natural deduction may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms in which various connectives are jumbled up together, as in
 $(\neg \phi\to\neg\psi)\to(\psi\to\phi)$.
 In this particular Hilbert system, $\phi\land \psi$ is actually
 *defined* to denote $\neg (\phi\to\neg\psi)$.
@@ -90,7 +90,7 @@ We cannot even express a rule of inference without a notion of implication:
 $\Phi\Rightarrow\Psi$.
 Certain quantifier rules, and induction rules, take premises that are in effect universally quantified:
 $[\bigwedge x.\,\Phi(x)]\Rightarrow\Psi$.
-In a logical framework intended to support the natural deduction style, and for a variety of formalisms, it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
+In a logical framework intended to support the natural deduction style—and for a variety of formalisms—it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
 We now can write the conjunction rule (\ref{conjI}) as
 
 $$\begin{align*} \textrm{true}(\phi)\Rightarrow\textrm{true}(\psi)\Rightarrow\textrm{true}(\phi\land \psi). 
