@@ -75,6 +75,13 @@ $$
  \frac{\phi \quad \psi}{\phi\land \psi.} \label{conjI}
 $$
 
+Intrinsic to natural deduction is the idea of working with a context of **assumptions**.
+The introduction rule for $\to$ expresses that you prove $\phi\to\psi$ by assuming $\phi$ and showing $\psi$:
+
+$$
+ \frac{\displaystyle {[\phi] \atop \psi}}{\phi\to \psi.}   \label{impI}
+$$
+
 Natural deduction may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms in which various connectives are jumbled up together, as in
 $(\neg \phi\to\neg\psi)\to(\psi\to\phi)$.
 In this particular Hilbert system, $\phi\land \psi$ is actually
@@ -94,6 +101,11 @@ In a logical framework intended to support the natural deduction style—and for
 We now can write the conjunction rule (\ref{conjI}) as
 
 $$\begin{align*} \textrm{true}(\phi)\Rightarrow\textrm{true}(\psi)\Rightarrow\textrm{true}(\phi\land \psi). 
+\end{align*}$$
+
+The Isabelle formulation of the implication rule (\ref{impI}) shows the interaction between the two levels of implication:
+
+$$\begin{align*} (\textrm{true}(\phi)\Rightarrow\textrm{true}(\psi))\Rightarrow\textrm{true}(\phi\to \psi). 
 \end{align*}$$
 
 Martin-Löf fans will note that the constant "true" above is serving as a *form of judgement*.  Computer scientists will see it as a coercion from object-level truth values (having type *bool*) to meta-level truth values (having type *prop*).
@@ -121,37 +133,36 @@ $$\begin{align*}
 Strictly speaking, this is not quite natural deduction, in that two symbols are used: $\in$ as well as $\cap$. The presence of $\in$ here is both unavoidable and tolerable.
 You will find many examples of such derived natural deduction rules in the Isabelle theories, though there is no rigourous policy demanding this.
 Unlike many other systems (such as PVS and Nuprl), Isabelle offers no tactic that attempts to prove theorems by expanding all definitions.
+Such a proof strategy is neither natural nor efficient.
 
 ### Natural deduction in Martin-Löf type theory
 
 [Martin-Löf type theory](http://www.jstor.com/stable/37448) 
-is notable for many things, but few ever mention that it is 
+is notable for many things, but few mention that it is 
 perfect exemplar of natural deduction.
 The various type symbols are defined in a purely modular way:
 if you took a dislike to $\Pi$ say, you could simply omit all of the $\Pi$ rules and the rest of the formalism would work.
-The introduction and elimination rules for $(\Sigma x\in A)\,B(x)$ coincide, through the propositions-as-types principle,
-with those for the existential quantifier (and for conjunction!) in classical predicate logic; analogous claims hold for the types $(\Pi x\in A)\,B(x)$ 
+Thanks to the propositions-as-types principle, 
+the introduction and elimination rules for $(\Sigma x\in A)\,B(x)$ correspond
+to those for the existential quantifier (and conjunction!) in classical predicate logic.
+Analogous correspondences hold for the types $(\Pi x\in A)\,B(x)$ 
 and $A+B$.
 
 Here is one of the natural deduction rules for the type N (the natural numbers):
 
-$$ \frac{\displaystyle {\; \atop c\in \textrm{N}\quad d \in A(0)}\quad 
+$$\begin{align*}
+ \frac{\displaystyle {\; \atop c\in \textrm{N}\quad d \in A(0)}\quad 
    {[x\in \textrm{N},\; y\in A(x)] \atop e(x,y)\in A(\textrm{succ}(x))}}
-        {\textrm{rec}(c,d,e) \in A(c)} $$
+        {\textrm{rec}(c,d,e) \in A(c)} 
+\end{align*}$$
         
-I hope it looks familiar. It is the typing rule for rec, which performs primitive recursion, but by propositions-as-types it is also mathematical induction.
-And suddenly it is obvious that induction rules are simply the natural deduction elimination rules for inductively defined types.
-Yet there are actual textbooks that will inform you that the conclusion of an induction rule should be universally quantified, and that induction rules should be regarded as additional $\forall$-introduction rules!
+I hope it looks familiar. It is the typing rule for rec, which performs primitive recursion, but by propositions-as-types it is also *mathematical induction*.
+And suddenly it is obvious that induction rules are simply the natural deduction *elimination rules for inductively defined types*. Or sets.
+Yet there are textbooks that will insist that the conclusion of an induction rule should be universally quantified, and (absurdly) that induction rules should be regarded as $\forall$-introduction rules!
+Such attitudes are reflected in those proof assistants, such as the HOL familiy,
+that require induction formulas to be universally quantified.
 
-Such attitudes are reflected in many proof assistants, those that require induction formulas to be universally quantified.
-
-XXXXX 
-
-
-$\Sigma$ and $\Pi$
-
-
-
+Although Isabelle does not have dependent types, the $\Sigma$ and $\Pi$ constructions are also valuable in the world of sets. The formulations of these constructions in Isabelle, right down to the names of the primitives, often correspond to their Martin Löf equivalents.
 
 ### Stanford
 
@@ -161,3 +172,6 @@ A curious point: what did I learn from my four and a bit years at Stanford?
 * Nelson and Oppen's [congruence closure](https://dl.acm.org/doi/10.1145/322186.322198), which was nifty to know even though I never used it
 
 People at Stanford had a bizarre obsession with first-order logic, which I, familiar with AUTOMATH, regarded as trivial. They in turn would have regarded with contempt AUTOMATH's punched card interaction model. Much of the work I did at Stanford was genuinely lousy.
+
+I must have learned *something* during the course of my PhD at Stanford,
+but little of it seems to have ended up in Isabelle.
