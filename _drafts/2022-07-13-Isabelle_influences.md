@@ -27,7 +27,8 @@ I had a copy of their code and I wasn't impressed. I was sure I could do a bette
 I would follow the LCF approach, but I would take care to be efficient.
 In particular, I would definitely represent $\lambda$-binding with de Bruijn indices,
 a technique that hadn't caught on yet. ([Nuprl](https://www.nuprl.org) didn't use it either.)
-My ambition was to handle a formula that could fill a couple of screens; never in my wildest dreams did I imagine the [huge developments](https://www.isa-afp.org/entries/DPRM_Theorem.html) we have now. [This one](https://www.isa-afp.org/entries/Hermite_Lindemann.html) too.
+My ambition was to handle a formula that could fill a couple of screens; never in my wildest dreams did I imagine the [huge developments](https://www.isa-afp.org/entries/DPRM_Theorem.html) we have now. 
+([This one](https://www.isa-afp.org/entries/Hermite_Lindemann.html) too.)
 
 There I was, applying the LCF architecture to Martin-Löf type theory as it was in the early 1980s, still with extensional equality.
 I wanted to apply a powerful technique invented by
@@ -68,9 +69,18 @@ In particular, I note that Martin-Löf's "theory of arities and expressions" is 
 
 [*Natural deduction*](https://en.wikipedia.org/wiki/Natural_deduction) refers to a style of presenting a logic as a seet of inference rules, in which each rule refers to one logical symbol only. 
 The rules for each connective are then independent of one another.
-It may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms in which various connectives are jumbled up together, as in
+Here, the $\land$-introduction rule gives us the one and only way to derive a conclusion involving conjunction:
+
+$$
+ \frac{\phi \quad \psi}{\phi\land \psi.} \label{conjI}
+$$
+
+Natural deduction may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms that typically combine connectives, as in
 $(\neg \phi\to\neg\psi)\to(\psi\to\phi)$.
-The Hilbert approach yields concise presentations of logic that are fine for developing metatheory but extremely difficult to use as an actual proof system.
+In this particular Hilbert system, $\phi\land \psi$ is actually
+*defined* to denote $\neg (\phi\to\neg\psi)$.
+The Hilbert approach yields concise presentations of logic:
+fine for developing metatheory, but extremely difficult to use as an actual proof system.
 
 One question asked by every Isabelle newbie is, why are there two versions of "implies" (namely $\Longrightarrow$ and $\to$) and two versions of "for all" ($\bigwedge$ and $\forall$)?
 No other proof assistant does this: at least, not AUTOMATH, HOL or Coq.
@@ -80,21 +90,66 @@ We cannot even express a rule of inference without a notion of implication:
 $\Phi\Rightarrow\Psi$.
 Certain quantifier rules, and induction rules, take premises that are in effect universally quantified:
 $[\bigwedge x.\,\Phi(x)]\Rightarrow\Psi$.
-In a logical framework intended to support the natural deduction style—and for a variety of formalisms—it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
+In a logical framework intended to support the natural deduction style, and for a variety of formalisms, it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
+We now can write the conjunction rule (\ref{conjI}) as
 
-Two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
+$$\begin{align*} \textrm{true}(\phi)\Rightarrow\textrm{true}(\psi)\Rightarrow\textrm{true}(\phi\land \psi). 
+\end{align*}$$
+
+Martin-Löf fans will note that the constant "true" above is serving as a *form of judgement*.  Computer scientists will see it as a coercion from object-level truth values (having type *bool*) to meta-level truth values (having type *prop*).
+
+The two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
 The exact same separation exists in Isabelle **except**
 in the case of Isabelle/HOL, where the [identification of 
 meta-level types](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.6171) with higher-order logic types turned out to be 
 essential in order to make things work.
 
-XXXX
+[David Schmidt](https://people.cs.ksu.edu/~schmidt/), who was my fellow postdoc (1982–4) on an Edinburgh/Cambridge joint project on LCF, wrote some reports advocating the broader adoption of natural deduction.
+He chose set theory as an example: to reason about say $x\in A\cap B$, instead of rewriting $A\cap B$ by a possibly ugly and technical definition, or even by the identity
 
-Martin-Löf type theory as pure development of ND, in particular mathematical induction as the elimination rule for N
+$$\begin{align*}
+ x\in A\cap B\iff x\in A \land x\in B,
+\end{align*}$$
+
+split that identity and derive natural deduction style inference rules for both directions.
+The introduction rule might be
+
+$$\begin{align*}
+ \frac{x\in A \quad x\in B}{x\in A\cap B.}
+\end{align*}$$
+
+Strictly speaking, this is not quite natural deduction, in that two symbols are used: $\in$ as well as $\cap$. The presence of $\in$ here is both unavoidable and tolerable.
+You will find many examples of such derived natural deduction rules in the Isabelle theories, though there is no rigourous policy demanding this.
+Unlike many other systems (such as PVS and Nuprl), Isabelle offers no tactic that attempts to prove theorems by expanding all definitions.
+
+### Natural deduction in Martin-Löf type theory
+
+[Martin-Löf type theory](http://www.jstor.com/stable/37448) 
+is notable for many things, but few ever mention that it is 
+perfect exemplar of natural deduction.
+The various type symbols are defined in a purely modular way:
+if you took a dislike to $\Pi$ say, you could simply omit all of the $\Pi$ rules and the rest of the formalism would work.
+The introduction and elimination rules for $(\Sigma x\in A)\,B(x)$ coincide, through the propositions-as-types principle,
+with those for the existential quantifier (and for conjunction!) in classical predicate logic; analogous claims hold for the types $(\Pi x\in A)\,B(x)$ 
+and $A+B$.
+
+Here is one of the natural deduction rules for the type N (the natural numbers):
+
+$$ \frac{\displaystyle {\; \atop c\in \textrm{N}\quad d \in A(0)}\quad 
+   {[x\in \textrm{N},\; y\in A(x)] \atop e(x,y)\in A(\textrm{succ}(x))}}
+        {\textrm{rec}(c,d,e) \in A(c)} $$
+        
+I hope it looks familiar. It is the typing rule for rec, which performs primitive recursion, but by propositions-as-types it is also mathematical induction.
+And suddenly it is obvious that induction rules are simply the natural deduction elimination rules for inductively defined types.
+Yet there are actual textbooks that will inform you that the conclusion of an induction rule should be universally quantified, and that induction rules should be regarded as additional $\forall$-introduction rules!
+
+Such attitudes are reflected in many proof assistants, those that require induction formulas to be universally quantified.
+
+XXXXX 
+
 
 $\Sigma$ and $\Pi$
 
-[David Schmidt](https://people.cs.ksu.edu/~schmidt/)??
 
 
 
