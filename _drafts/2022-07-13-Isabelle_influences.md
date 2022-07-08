@@ -68,24 +68,24 @@ In particular, I note that Martin-Löf's "theory of arities and expressions" is 
 
 [*Natural deduction*](https://en.wikipedia.org/wiki/Natural_deduction) refers to a style of presenting a logic as a seet of inference rules, in which each rule refers to one logical symbol only. 
 The rules for each connective are then independent of one another.
-It may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms that typically combine connectives, as in
+It may be contrasted with a [*Hilbert system*](https://en.wikipedia.org/wiki/Hilbert_system): one or two general inference rules, plus a system of axioms in which various connectives are jumbled up together, as in
 $(\neg \phi\to\neg\psi)\to(\psi\to\phi)$.
 The Hilbert approach yields concise presentations of logic that are fine for developing metatheory but extremely difficult to use as an actual proof system.
 
 One question asked by every Isabelle newbie is, why are there two versions of "implies" (namely $\Longrightarrow$ and $\to$) and two versions of "for all" ($\bigwedge$ and $\forall$)?
 No other proof assistant does this: at least, not AUTOMATH, HOL or Coq.
-The answer is that it is necessary in a logical framework for natural deduction.
+The answer is that a logical framework for natural deduction must have these two levels.
 
-One cannot even express a rule of inference without a notion of implication:
+We cannot even express a rule of inference without a notion of implication:
 $\Phi\Rightarrow\Psi$.
 Certain quantifier rules, and induction rules, take premises that are in effect universally quantified:
 $[\bigwedge x.\,\Phi(x)]\Rightarrow\Psi$.
-In a logical framework intended to support the natural deduction style, and for a variety of formalisms, it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
+In a logical framework intended to support the natural deduction style—and for a variety of formalisms—it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
 
 Two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
 The exact same separation exists in Isabelle **except**
-in the case of Isabelle/HOL, where the identification of 
-meta-level types with higher-order logic types turned out to be 
+in the case of Isabelle/HOL, where the [identification of 
+meta-level types](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.6171) with higher-order logic types turned out to be 
 essential in order to make things work.
 
 XXXX

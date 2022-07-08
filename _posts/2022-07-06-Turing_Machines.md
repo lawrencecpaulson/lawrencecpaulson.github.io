@@ -37,7 +37,7 @@ And much more. Turing, in this one paper, launched the field of theoretical comp
 ### On the universal machine
 
 We can't be sure what put Turing on to the idea of a universal machine, but once he thought of it, he probably thought that its existence was obvious.
-Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on the machine state and tape synmbol, do this or do that as directed by a given list of transition rules—there was obviously a TM to carry out such a routine task.
+Since the very point of a TM was to simulate a clerk working at a desk, and the operation of a TM was itself clerical—depending on the machine state and tape symbol, do this or do that as directed by a given list of transition rules—there was obviously a TM to carry out such a routine task.
 Turing's paper is a bit sketchy about how the details of the constrution, but it seems that nobody minded.
 (After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, although the details [turned out to be fiendish](https://www.jstor.org/stable/43046506).)
 
