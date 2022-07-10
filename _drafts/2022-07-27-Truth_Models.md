@@ -58,7 +58,10 @@ it's essential [not to oversell what has been proved](https://rdcu.be/cRjMz), re
 
 To a mathematician, a model is something else entirely: a construction (typically a set) satisfying a given collection of axioms.
 In many cases, in apparent inversion of the situation in science, the axioms themselves capture just a few essential aspects of already existing constructions: we had the models *before* we had the axioms.
-In a few cases, such as the Zermelo-Fraenkel axioms or the $\lambda$-calculus, the axioms were inspired by other considerations, but without a model we'll feel uncomfortable about using them.
+In a few cases, such as the Zermelo-Fraenkel axioms or the $\lambda$-calculus, the axioms were inspired by other considerations; 
+without a model, people feel uncomfortable about using them.
+
+<img src="/images/pure-silver.jpg" alt="I guarantee these bullets are pure silver" width="600"/>
 
 
 * Axioms are another matter. We don't have to "believe" axioms. 
