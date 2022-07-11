@@ -177,12 +177,14 @@ that require induction formulas to be universally quantified.
 
 A curious point: 
 after completing my undergraduate degree at Caltech, I did a PhD at Stanford.
-What did I pick up from my four and a bit years at Stanford?
+What did I do in my four and a bit years at Stanford?
 
-* Derek Oppen's [pretty printer](https://www.cs.tufts.edu/~nr/cs257/archive/derek-oppen/prettyprinting.pdf), which found its way into Cambridge LCF and Isabelle
-* Nelson and Oppen's [congruence closure](https://dl.acm.org/doi/10.1145/322186.322198) and decision procedure work, which was cool, even though I never used it
+* I did a little bit of program verification under [David Luckham](https://profiles.stanford.edu/david-luckham), but it didn't end well
+* I did a rather quirky [PhD project](https://doi.org/10.1145/582153.582178), supervised (and funded!) by [John Hennessy](https://profiles.stanford.edu/john-hennessy)
+* I picked up Derek Oppen's [pretty printer](https://www.cs.tufts.edu/~nr/cs257/archive/derek-oppen/prettyprinting.pdf), which found its way into Cambridge LCF and Isabelle
+* ... and Nelson and Oppen's [congruence closure](https://dl.acm.org/doi/10.1145/322186.322198) and decision procedure work, which was cool, though I never used it
 
-People at Stanford had a bizarre obsession with first-order logic, which I, familiar with AUTOMATH, recognised as trivial. They in turn would have scorned AUTOMATH's punched card interaction model. Much of the work I did at Stanford was genuinely lousy.
+People at the Stanford AI Lab had a bizarre obsession with first-order logic, which I, familiar with AUTOMATH, recognised as trivial. They in turn would have scorned AUTOMATH's punched card interaction model. Much of the work I did at Stanford was genuinely lousy.
 
 I must have learned *something* during the course of my PhD at Stanford,
 but little of it seems to have ended up in Isabelle.
