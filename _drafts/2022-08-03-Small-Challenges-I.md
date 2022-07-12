@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "A few small formalisation challenges"
+usemathjax: true 
+tags: general, examples
+---
+
+Novices getting to grips with interactive theorem proving need examples to formalise.
+When Russell O'Connor was getting to grips with Coq, he thought that a nice exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
+I hope he will not be offended if I remark that that was a crazy idea, even though he was successful. Below, I list a few proofs that I would like to see formalised. I am not sure how easy they are, but I am sure all of them are easier than Gödel's Theorem.
+
+### Filling boxes with bricks
+
+NG de Bruijn [published a note](https://doi.org/10.2307/2316785) that began by pointing out that the dimensions of a brick are typically 1×2×4 and that, although such bricks can be fitted together in numerous ways, it is impossible to fill a volume by such bricks unless it can be done trivially, with all the bricks neatly lined up in rows.
+He generalises this fact to an arbitrary number of dimensions and he defines necessary and sufficient conditions on the dimensions of bricks
+for this condition to hold (it does not hold for 1×2×3 bricks). His paper concludes 
+
+> The questions of the bricks 1×2×4 arose from a remark by the proposer's
+> son F. W. de Bruijn who discovered, at the age of 7, that he was unable to fill
+> his 6×6×6 box by bricks 1×2×4.
+
+Unjustly, de Bruijn never received a Fields medal for this work. I've had the paper sitting on my computer for 20 years now and never got around to formalising it.
+
+### Defining reals without the use of rationals
+
+This is [another paper](https://doi.org/10.1016/1385-7258(76)90055-X) by de Bruijn (I'm clearly a fan) and the title is self-explanatory.
+Can we construct the real numbers in fewer stages than the usual, and in particular, without the use of quotient constructions?
+His approach may appeal particularly to users of type theory systems, but defining multiplication looks difficult and he doesn't cover it.
+He does refer to another paper, [The real numbers as a wreath product](https://doi.org/10.1016/0001-8708(75)90115-2) by Faltin et al.,
+praising it as a promising approach although requiring the dreaded equivalence classes: Iit might be just the thing for Isabelle/HOL.
+I know that we have the reals already.
+
+### A simple proof that π is irrational
+
+We know that π is irrational (indeed, it is transcendental) by the Hermite–Lindemann–Weierstraß transcendence theorem, which has been [formalised in Isabelle](https://www.isa-afp.org/entries/Hermite_Lindemann.html) by [Manuel Eberl](http://cl-informatik.uibk.ac.at/users/meberl/).
+But do you really want to rely on some overblown 19th-century result when a [cute one page proof](https://projecteuclid.org/journals/bulletin-of-the-american-mathematical-society/volume-53/issue-6/A-simple-proof-that-pi-is-irrational/bams/1183510788.full) is available?
+The proof involves defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
+This sounds like the same technique as I used to prove that exponentials were irrational in an [earlier post.]({% post_url 2022-02-16-Irrationals %})
