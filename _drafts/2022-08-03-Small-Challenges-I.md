@@ -36,3 +36,11 @@ We know that π is irrational (indeed, it is transcendental) by the Hermite–Li
 But do you really want to rely on some overblown 19th-century result when a [cute one page proof](https://projecteuclid.org/journals/bulletin-of-the-american-mathematical-society/volume-53/issue-6/A-simple-proof-that-pi-is-irrational/bams/1183510788.full) is available?
 The proof involves defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
 This sounds like the same technique as I used to prove that exponentials were irrational in an [earlier post.]({% post_url 2022-02-16-Irrationals %})
+
+### Impossibility of cubing the cube
+
+Already done by Floris van Doorn in Lean
+
+### The old standbys
+
+Proofs from THE BOOK
