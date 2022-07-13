@@ -28,7 +28,7 @@ Can we construct the real numbers in fewer stages than the usual, and in particu
 His approach may appeal particularly to users of type theory systems, but defining multiplication looks difficult and he doesn't cover it.
 He does refer to another paper, [The real numbers as a wreath product](https://doi.org/10.1016/0001-8708(75)90115-2) by Faltin et al.,
 praising it as a promising approach although requiring the dreaded equivalence classes: Iit might be just the thing for Isabelle/HOL.
-I know that we have the reals already.
+I know that we have the reals already, but it looks like fun.
 
 ### A simple proof that π is irrational
 
@@ -39,8 +39,32 @@ This sounds like the same technique as I used to prove that exponentials were ir
 
 ### Impossibility of cubing the cube
 
-Already done by Floris van Doorn in Lean
+Littlewood, in his *Mathematician's Miscellany*, posed the question
 
-### The old standbys
+> Dissection of squares and cubes into squares and cubes, finite in number and all unequal.
 
-Proofs from THE BOOK
+"Squaring the square" turns out to be difficult.
+The following is the simplest example.
+
+<img src="/images/squared_square.png" alt="The smallest squared square" width="800"/>
+
+The analogous cube dissection is impossible. Here is Littlewood:
+
+> In a square dissection the smallest square is not at an edge (for obvious reasons). Suppose now a cube dissection does exist. The cubes standing on the bottom face induce a square dissection of that face, and the smallest of the cubes at the face stands on an internal square. The top face of this cube is enclosed by walls; cubes must stand on this top face; take the smallest—the process continues indefinitely.”
+
+This is not much of a proof.
+Floris van Doorn [managed to formalise it](https://github.com/leanprover-community/mathlib/blob/master/archive/100-theorems-list/82_cubing_a_cube.lean) within 24 hours, in Lean.
+An Isabelle version is still lacking.
+
+This problem is of interest because it belongs to the famous [list of 100 "top" theorems](https://www.cs.ru.nl/~freek/100/), maintained by Freek Wiedijk.
+As of today, 98 of them have been proved in at least one system.
+Isabelle and HOL Light are tied at the top, with 86 problems each.
+
+### Mathematics textbooks
+
+I'm sorry to have to mention that mathematical proofs typically found in textbooks are frequently little more than a succession of hints and not really suitable for formalisation, especially by a novice.
+However,
+[*Proofs from THE BOOK*](https://en.wikipedia.org/wiki/Proofs_from_THE_BOOK)
+is full of nice examples, not too big and complicated, and with reasonably detailed proofs.
+There are still gaps however, so you will have work to do!
+
