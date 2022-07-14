@@ -2,7 +2,7 @@
 layout: post
 title:  "What is the point of formalising mathematics?"
 usemathjax: true 
-tags: general, ALEXANDRIA, AUTOMATH, de Bruijn
+tags: [general, ALEXANDRIA, Mizar, AUTOMATH, de Bruijn]
 ---
 
 Vladimir Voevodsky was a leading proponent of the formalisation of mathematics. Until his death in 2017, he lectured frequently on the risks of errors in complicated technical arguments and the necessity to start using computers to verify the work of mathematicians. The opinions of a Fields Medallist naturally carried weight.

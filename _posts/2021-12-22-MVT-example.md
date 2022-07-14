@@ -2,7 +2,7 @@
 layout: post
 title:  "Readability in proofs: the mean value theorem"
 usemathjax: true 
-tags: examples, Isabelle, mean value theorem
+tags: [examples, Isabelle, analysis]
 ---
 
 Doing mathematics requires a combination of intuition and rigour. Intuition is the source of ideas and conjectures. Proofs need to be rigorous, while at the same time avoiding excessive detail, which would destroy readability. That is why we need intuition even to read a proof, let alone to conceive the theorem in the first place. How can we capture intuition in a formal proof?

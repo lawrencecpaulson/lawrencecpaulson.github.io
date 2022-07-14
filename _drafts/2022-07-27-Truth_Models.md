@@ -2,7 +2,7 @@
 layout: post
 title:  "Mathematical truth, mathematical modelling and axioms"
 usemathjax: true 
-tags: general, logic
+tags: general logic
 ---
 
 The recent pandemic has given us a striking demonstration of science in action.

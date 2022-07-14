@@ -2,7 +2,7 @@
 layout: post
 title:  "Is Zermelo-Fraenkel set theory the foundation of mathematics?"
 usemathjax: true 
-tags: Zermelo, set theory, axiom of choice, ZFC, Isabelle/ZF
+tags: [set theory, axiom of choice, Ernst Zermelo, Isabelle]
 ---
 
 

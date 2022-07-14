@@ -2,7 +2,7 @@
 layout: post
 title:  "Types versus sets (and what about categories?)"
 usemathjax: true 
-tags: general, logic, type theory, set theory
+tags: [general, logic, type theory, Martin-Löf type theory, set theory]
 ---
 
 A recent Twitter thread brought home to me that there is widespread confusion about what types actually are, even among the most prominent researchers. In particular: *are types the same thing as sets*? At the risk of repeating some of my prior posts, perhaps it's time for a little history about type theory, set theory and their respective roles as foundations of mathematics.

@@ -2,7 +2,7 @@
 layout: post
 title:  "More on Fibonacci numbers, with equational reasoning"
 usemathjax: true 
-tags: examples, Isabelle, Fibonacci, gcd
+tags: examples Isabelle Fibonacci gcd
 ---
 
 The [previous post]({% post_url 2021-10-13-Fib-example %}) introduced a definition of the Fibonacci function along with some simple proofs by induction. We continue our tour with examples of *equational reasoning*.

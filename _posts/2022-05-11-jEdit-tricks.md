@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started: basic Isabelle/jEdit tricks"
 usemathjax: true 
-tags: jEdit, Isabelle, newbies
+tags: jEdit Isabelle newbies
 ---
 
 As mentioned last time, proof assistants can be daunting, and it's not just about how to prove theorems. It's about being aware of all the bells and whistles provided to help you prove theorems. The first modern proof assistant, [Edinburgh LCF](https://link.springer.com/book/10.1007/3-540-09724-4), provided nothing but a top-level to the ML programming language, designed specifically to the [Meta Language](https://www.research.ed.ac.uk/en/publications/a-metalanguage-for-interactive-proof-in-lcf) for proving theorems. It was a bare-bones environment, but at least it was Turing complete! Nowadays, things work differently. 

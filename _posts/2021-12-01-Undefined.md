@@ -2,7 +2,7 @@
 layout: post
 title:  "Undefined values, or what do we get when we divide by zero?"
 usemathjax: true 
-tags: logic, descriptions
+tags: logic descriptions
 ---
 
 One perplexing issue, especially for newcomers to machine proof, is the question of undefined values: whether from division by zero or from a non-existent limit, integral or other sophisticated concept. This issue produces strong opinions and some proposed solutions are radical. But for many proof assistants the solution is basically "don't worry about it".

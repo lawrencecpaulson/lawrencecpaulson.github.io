@@ -2,7 +2,7 @@
 layout: post
 title:  "A few small formalisation challenges"
 usemathjax: true 
-tags: general, examples
+tags: general examples
 ---
 
 Novices getting to grips with interactive theorem proving need examples to formalise.

@@ -24,4 +24,9 @@
 	{% if site.google_analytics and jekyll.environment == 'production' %}
 	{% include analytics.html %}
 	{% endif %}
+<!-- Collect all tags into site.tags -->
+{{ tag | replace: " ","_" }}
+{% if site.tags != "" %}
+  {% include collecttags.html %}
+{% endif %}
 </head>

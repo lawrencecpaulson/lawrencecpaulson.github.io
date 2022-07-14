@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising Gödel's incompleteness theorems, III: Coding and Bound Variables"
 usemathjax: true
-tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
+tags: [Isabelle, incompleteness, nominal package]
 ---
 
 Gödel's proof uses arithmetic (or in our case, [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %})) to encode logical syntax, rules of inference, and therefore theorems of the internal calculus.

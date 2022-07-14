@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising Gödel's incompleteness theorems, I"
 usemathjax: true
-tags: Isabelle/HOL, Gödel, incompleteness, nominal Isabelle
+tags: [Isabelle, incompleteness, nominal package]
 ---
 
 [Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems.

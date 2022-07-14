@@ -2,7 +2,7 @@
 layout: post
 title:  "How Isabelle emerged from the trends of the 1980s"
 usemathjax: true 
-tags: general, de Bruijn, LCF, AUTOMATH, Martin-Löf type theory
+tags: [general, LCF, AUTOMATH, Martin-Löf type theory, de Bruijn]
 ---
 
 The fault lines of today's proof assistant community are striking.

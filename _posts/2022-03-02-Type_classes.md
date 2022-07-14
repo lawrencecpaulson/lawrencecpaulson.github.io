@@ -2,7 +2,7 @@
 layout: post
 title:  "Axiomatic type classes: some history, some examples"
 usemathjax: true 
-tags: Isabelle, type classes
+tags: [Isabelle, type classes, Robin Milner]
 ---
 
 Type classes now play a major role in all the leading proof assistants: Coq, Lean and of course Isabelle/HOL. They have come a long way from their origins in the world of functional programming languages.

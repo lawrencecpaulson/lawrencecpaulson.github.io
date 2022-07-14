@@ -2,7 +2,7 @@
 layout: post
 title:  "Dealing with descriptions in Isabelle/HOL: least, greatest, whatever"
 usemathjax: true 
-tags: examples, Isabelle, newbies, descriptions
+tags: examples Isabelle newbies descriptions
 ---
 
 A description is a term that designates "the least", "the greatest" or simply "any" *x* such that Φ(*x*): it describes the desired value (or simply *any suitable* value) in the language of its properties.

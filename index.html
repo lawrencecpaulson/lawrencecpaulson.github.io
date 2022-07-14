@@ -11,7 +11,8 @@ title: {{ site.name }}
         Here, we explore every aspect of doing logic on the computer:
         its foundations, its applications and the issues involved with formalising mathematics.
 </p>
-  <h1>Posts</h1>
+{% include archive.html %}
+<h1>Posts</h1>
   <ul class="posts">
     {% for post in site.posts %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
