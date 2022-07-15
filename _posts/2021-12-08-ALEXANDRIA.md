@@ -2,7 +2,7 @@
 layout: post
 title:  "ALEXANDRIA: Large-Scale Formal Proof for the Working Mathematician"
 usemathjax: true 
-tags: general ALEXANDRIA Mizar
+tags: [general, ALEXANDRIA, Mizar, HOL system]
 ---
 
 [ALEXANDRIA](https://cordis.europa.eu/project/id/742178) is an ERC Advanced Grant with the aim of making verification technology — originally designed to verify computer systems — useful in the practice of professional mathematics.

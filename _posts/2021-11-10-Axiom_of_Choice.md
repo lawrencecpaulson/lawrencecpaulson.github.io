@@ -2,7 +2,7 @@
 layout: post
 title:  "The axiom of choice and descriptions"
 usemathjax: true 
-tags: [logic, set theory, Ernst Zermelo, axiom of choice]
+tags: [logic, set theory, Ernst Zermelo, axiom of choice, HOL system]
 ---
 
 Few topics in mathematics are more contentious––or misunderstood––than the axiom of choice. We adopt it in the form of Hilbert's ε-operator.
