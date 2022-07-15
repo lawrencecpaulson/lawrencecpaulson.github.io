@@ -2,7 +2,7 @@
 layout: post
 title:  "Equivalence classes and quotienting"
 usemathjax: true 
-tags: quotients
+tags: [type theory, set theory, quotients]
 ---
 
 A *quotient construction* partitions a set according to ∼, some equivalence relation. The *equivalence classes* — members of the partition — are maximal sets of ∼-equivalent elements. To use computer science jargon, the construction yields an *abstract type* (the equivalence classes) and the elements of those classes belong to an underlying *concrete type*.
