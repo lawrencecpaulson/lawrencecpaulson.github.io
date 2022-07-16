@@ -2,7 +2,7 @@
 layout: post
 title:  "Introductory example: Fibonacci numbers"
 usemathjax: true 
-tags: examples Isabelle Fibonacci
+tags: examples Isabelle Fibonacci newbies
 ---
 
 Let's see what mathematics looks like in Isabelle/HOL.  This post is not a self-contained tutorial; it simply aims to show a simple recursive definition and a couple of proofs by induction. Some good (and bad) points about machine proof should become obvious. There are links to further reading at the end.
