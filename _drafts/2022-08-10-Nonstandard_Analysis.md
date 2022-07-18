@@ -1,16 +1,25 @@
 ---
 layout: post
-title:  "Nonstandard Analysis"
+title:  "The formalisation of nonstandard analysis"
 usemathjax: true 
-tags: [logic, Jacques Fleuriot]
+tags: [logic, Jacques Fleuriot, nonstandard analysis]
 ---
 
-Newton Leibniz
-Bishop Berkely
+Calculus is concerned with change over infinitesimal intervals. Both Isaac Newton and Wilhelm Leibniz regarded infinitely small quantities as mathematically meaningful, and Leonhard Euler continued to work with 
+[infinitesimals](https://plato.stanford.edu/entries/continuity/) even after [Bishop Berkeley](https://en.wikipedia.org/wiki/George_Berkeley) published his [polemic](https://en.wikipedia.org/wiki/The_Analyst) against the practice in 1734.
+Not until the 19th century were infinitesimals banished from mathematics by the $\epsilon$-$\delta$ arguments of Cauchy, Bolzano, Weierstraß and others.
+And then, in the 1960s, [Abraham Robinson](https://en.wikipedia.org/wiki/Abraham_Robinson) discovered a coherent and rigorous interpretation of infinitesimals.
+But is [nonstandard analysis](https://en.wikipedia.org/wiki/Nonstandard_analysis) relevant to formalised mathematics?
 
-[infinitesimals](https://plato.stanford.edu/entries/continuity/)
+### Nonstandard analysis
 
 NSA satisfies the exact same first-order axioms as standard real analysis
+
+You need to extend the signature to be able to "see" the infinitesimals
+
+You get infinities as well. Also for the natruals, complexes, ...
+
+Quite different from the extended reals!
 
 
 ultrafilter construction
