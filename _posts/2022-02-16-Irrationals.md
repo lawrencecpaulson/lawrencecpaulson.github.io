@@ -2,7 +2,7 @@
 layout: post
 title:  "A classical proof: exponentials are irrational"
 usemathjax: true
-tags: [examples, Isabelle, Proofs from THE BOOK, analysis]
+tags: [examples, Isabelle, Archive of Formal Proofs, Proofs from THE BOOK, analysis]
 ---
 
 In *[Proofs from THE BOOK](https://link.springer.com/book/10.1007/978-3-662-57265-8)*, Aigner and Ziegler
