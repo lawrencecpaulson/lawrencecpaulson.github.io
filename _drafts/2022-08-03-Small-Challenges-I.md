@@ -6,7 +6,7 @@ tags: general examples
 ---
 
 Novices getting to grips with interactive theorem proving need examples to formalise.
-When Russell O'Connor was getting to grips with Coq, he thought that a nice exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
+When Russell O'Connor was getting to grips with Coq, he thought that a nice little exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
 I hope he will not be offended if I remark that that was a crazy idea, even though he was successful. Below, I list a few proofs that I would like to see formalised. I am not sure how easy they are, but I am sure all of them are easier than Gödel's Theorem.
 
 ### Filling boxes with bricks
@@ -24,18 +24,19 @@ Unjustly, de Bruijn never received a Fields medal for this work. I've had the pa
 ### Defining reals without the use of rationals
 
 This is [another paper](https://doi.org/10.1016/1385-7258(76)90055-X) by de Bruijn (I'm clearly a fan) and the title is self-explanatory.
-Can we construct the real numbers in fewer stages than the usual, and in particular, without the use of quotient constructions?
-His approach may appeal particularly to users of type theory systems, but defining multiplication looks difficult and he doesn't cover it.
-He does refer to another paper, [The real numbers as a wreath product](https://doi.org/10.1016/0001-8708(75)90115-2) by Faltin et al.,
-praising it as a promising approach although requiring the dreaded equivalence classes: Iit might be just the thing for Isabelle/HOL.
-I know that we have the reals already, but it looks like fun.
+Can we construct the real numbers in fewer stages than is usual, and in particular, avoiding any quotient constructions?
+(His approach may appeal particularly to users of type theory systems.) 
+Unfortunately, defining multiplication looks difficult and he doesn't cover it.
+Instead he recommends another paper, [The real numbers as a wreath product](https://doi.org/10.1016/0001-8708(75)90115-2) by Faltin et al.,
+which requires the dreaded equivalence classes and might be just the thing for Isabelle/HOL.
+I know that we have the reals already, but anyway.
 
 ### A simple proof that π is irrational
 
-We know that π is irrational (indeed, it is transcendental) by the Hermite–Lindemann–Weierstraß transcendence theorem, which has been [formalised in Isabelle](https://www.isa-afp.org/entries/Hermite_Lindemann.html) by [Manuel Eberl](http://cl-informatik.uibk.ac.at/users/meberl/).
+We know that π is irrational (indeed, transcendental) by the Hermite–Lindemann–Weierstraß transcendence theorem, which has been [formalised in Isabelle](https://www.isa-afp.org/entries/Hermite_Lindemann.html) by [Manuel Eberl](http://cl-informatik.uibk.ac.at/users/meberl/).
 But do you really want to rely on some overblown 19th-century result when a [cute one page proof](https://projecteuclid.org/journals/bulletin-of-the-american-mathematical-society/volume-53/issue-6/A-simple-proof-that-pi-is-irrational/bams/1183510788.full) is available?
-The proof involves defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
-This sounds like the same technique as I used to prove that exponentials were irrational in an [earlier post.]({% post_url 2022-02-16-Irrationals %})
+The proof involves assuming the contrary, defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
+This sounds like the same technique used to prove that exponentials were irrational in my [earlier post.]({% post_url 2022-02-16-Irrationals %})
 
 ### Impossibility of cubing the cube
 
@@ -62,9 +63,10 @@ Isabelle and HOL Light are tied at the top, with 86 problems each.
 
 ### Mathematics textbooks
 
-I'm sorry to have to mention that mathematical proofs typically found in textbooks are frequently little more than a succession of hints and not really suitable for formalisation, especially by a novice.
-However,
+I'm sorry to have to mention that the proofs found in mathematics textbooks are frequently little more than a succession of hints and not suitable for formalisation, especially by a novice.
+However, the wonderful
 [*Proofs from THE BOOK*](https://en.wikipedia.org/wiki/Proofs_from_THE_BOOK)
-is full of nice examples, not too big and complicated, and with reasonably detailed proofs.
+is full of nice examples, not too complicated, and with reasonably detailed proofs.
+You don't have to understand homological algebra or K-theory.
 There are still gaps however, so you will have work to do!
 
