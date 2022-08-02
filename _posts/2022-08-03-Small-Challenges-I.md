@@ -7,7 +7,7 @@ tags: general examples
 
 Novices getting to grips with interactive theorem proving need examples to formalise.
 When Russell O'Connor was getting to grips with Coq, he thought that a nice little exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
-I hope he will not be offended if I remark that that was a crazy idea, even though he was successful. Below, I list a few proofs that I would like to see formalised. I am not sure how easy they are, but I am sure all of them are easier than Gödel's Theorem.
+I hope he will not be offended if I remark that that was a crazy idea, even though he was successful. Below, I list a few proofs that I would like to see formalised. I am not sure how easy they are, but all of them are easier than Gödel's Theorem!
 
 ### Filling boxes with bricks
 
@@ -19,17 +19,17 @@ for this condition to hold (it does not hold for 1×2×3 bricks). His paper conc
 > son F. W. de Bruijn who discovered, at the age of 7, that he was unable to fill
 > his 6×6×6 box by bricks 1×2×4.
 
-Unjustly, de Bruijn never received a Fields medal for this work. I've had the paper sitting on my computer for 20 years now and never got around to formalising it.
+Shockingly, de Bruijn never received a [Fields Medal](https://www.mathunion.org/imu-awards/fields-medal) for this work. I've had the paper sitting on my computer for 20 years now and never got around to formalising it.
 
 ### Defining reals without the use of rationals
 
-This is [another paper](https://doi.org/10.1016/1385-7258(76)90055-X) by de Bruijn (I'm clearly a fan) and the title is self-explanatory.
+This is [another paper](https://doi.org/10.1016/1385-7258(76)90055-X) by de Bruijn (I'm clearly a fan of his) and the title is self-explanatory.
 Can we construct the real numbers in fewer stages than is usual, and in particular, avoiding any quotient constructions?
 (His approach may appeal particularly to users of type theory systems.) 
 Unfortunately, defining multiplication looks difficult and he doesn't cover it.
 Instead he recommends another paper, [The real numbers as a wreath product](https://doi.org/10.1016/0001-8708(75)90115-2) by Faltin et al.,
 which requires the dreaded equivalence classes and might be just the thing for Isabelle/HOL.
-I know that we have the reals already, but anyway.
+I know that we have two formalisations of the reals already, but who's counting?
 
 ### A simple proof that π is irrational
 
