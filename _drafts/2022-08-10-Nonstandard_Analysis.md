@@ -36,7 +36,7 @@ In order to make use of our richer domain, we need a richer vocabulary.
 * a hyperreal $x$ is *finite* if $\lvert x \rvert\le r$ for some $r\in\mathbb{R}$
 * every finite hyperreal $x$ has a *standard part* $\textrm{st}(x)\in\mathbb{R}$ with $x\approx\textrm{st}(x)$
 
-There's not enough space here to go through everything. Suffice it to say that things work reasonably. The infinite numbers turn out to be the reciprocal is of nonzero infinitesimals (division by zero still being undefined). If two quantities are infinitely close then so are the results of arithmetic operations. It's all coherent, while at the same time we can construct $\epsilon$ as well as its reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
+There's not enough space here to go through everything. Suffice it to say that things work reasonably. The infinite numbers turn out to be the reciprocals of nonzero infinitesimals (division by zero still being undefined). If two quantities are infinitely close then so are the results of arithmetic operations. It's all coherent, while at the same time we can construct $\epsilon$ as well as its reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
 
 "What do you mean, *construct*?"
 
@@ -44,10 +44,25 @@ There's not enough space here to go through everything. Suffice it to say that t
 
 ### But do infinitesimals actually exist?
 
-Roman numerals work for positive integers only.
-Although the Romans were familiar with the concept of debt
+People like to question the legitimacy of everything but the counting numbers: positive integers.
+The Romans had numerals for nothing else.
+But why not zero, when it was possible to no olives (or whatever), and why not negative integers, 
+when the Romans were familiar with the concept of debt?
+The Greeks, meanwhile, are alleged to have [had a freakout](https://nrich.maths.org/2671)
+over the discovery of irrational numbers.
+Even today we have to live with the silly terminology of the *real numbers*, as contrasted with *imaginary numbers*.
+When we see numbers diagrammed on the complex plane, they all look equally "real".
+And, of course, **all** mathematical entities are imaginary:
+if you don't believe me, try to buy the [number five on eBay](https://www.ebay.co.uk/sch/i.html?_nkw=number+five).
 
-You get infinities as well. Also for the naturals, complexes, ...
+The arguments of the 19th Century have left us in the strange position of accepting certain infinities (Cantor's transfinite ordinal and cardinal numbers), while rejecting the infinitesimals.
+But all they need to "exist" as useful mathematical entities is a coherent theory, backed by reliable intuitions.
+*Pace* Berkeley, Leibniz and Euler knew what they were doing.
+Although they never promulgated a theory of infinitesimals, they avoided making serious errors.
+
+Fleuriot: Newton
+
+ Also for the naturals, complexes, ...
 
 [model theory](https://plato.stanford.edu/entries/model-theory/)
 
