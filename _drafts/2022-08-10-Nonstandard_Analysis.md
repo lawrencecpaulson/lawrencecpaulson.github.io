@@ -42,6 +42,11 @@ There's not enough space here to go through everything. Suffice it to say that t
 
 ### The ultrafilter construction of the hyperreals
 
+### But do infinitesimals actually exist?
+
+Roman numerals work for positive integers only.
+Although the Romans were familiar with the concept of debt
+
 You get infinities as well. Also for the naturals, complexes, ...
 
 [model theory](https://plato.stanford.edu/entries/model-theory/)
