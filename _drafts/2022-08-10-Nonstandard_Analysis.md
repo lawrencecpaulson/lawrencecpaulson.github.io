@@ -44,6 +44,9 @@ There's not enough space here to go through everything. Suffice it to say that t
 
 ### The ultrafilter construction of the hyperreals
 
+[Jacques Fleuriot](https://homepages.inf.ed.ac.uk/jdf/), 
+when he was doing his PhD here at Cambridge, 
+
 
 [On the mechanization of real analysis in Isabelle/HOL](https://rdcu.be/cRUFK)
 
@@ -77,7 +80,9 @@ if you don't believe me, try to buy the [number five on eBay](https://www.ebay.c
 The arguments of the 19th Century have left us in the strange position of accepting certain infinities (Cantor's transfinite ordinal and cardinal numbers), while rejecting the infinitesimals.
 But all they need to "exist" as useful mathematical entities is a coherent theory, backed by reliable intuitions.
 *Pace* Berkeley, Leibniz and Euler knew what they were doing.
-Although they never promulgated a theory of infinitesimals, they avoided making serious errors.
+Although they never promulgated a theory of infinitesimals, they avoided making serious errors. The following remark by [Bair et al.](https://rdcu.be/cSXiN) seems appropriate:
+
+> Seeing with what dexterity Leibniz and Euler operated on inﬁnite sums as if they were ﬁnite sums, a modern scholar is faced with a stark choice. He can either declare that they didn’t know the difference between ﬁnite and inﬁnite sums, or detect in their procedures a unifying principle (explicit in the case of Leibniz, and more implicit in the case of Euler) that, under suitable circumstances, allows one to operate on inﬁnite sums as on ﬁnite sums.
 
 ### Jacques Fleuriot and Newton's *Principia*
 
@@ -90,6 +95,7 @@ Fortunately, Jacques was able to find an alternative route to replace that step.
 
 Jacques' formal development provides an environment in which proofs in the calculus can be conducted using non-standard methods and the results easily transferred from the hyperreals to the reals.
 Back then, I imagine that people would welcome the possibility of proving theorems without recourse to adding up fractions of epsilons.
+[Some authors claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigourous basis, are still the best framework for understanding Euler's work.
 Instead, sadly, the Isabelle/HOL theory of the hyperreals is hardly used for anything.
 I live in hope that somebody will decide to give it a try, if only out of curiosity.
 
