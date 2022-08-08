@@ -93,7 +93,7 @@ for mathematical concepts and proofs.
 The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's [Isar](https://rdcu.be/cIPdi) language borrows heavily from Mizar.
 They are also pronounced similarly (if you [are German](https://www.muenchen.de/int/en/culture-leisure/sport-fitness/lakes-munich/isar.html)).
 
-The [Mizar Mathematical Library](http://www.mizar.org/library/)
+The [Mizar Mathematical Library](http://mizar.org/library/)
 accumulated contributions by a great many authors.
 Isabelle's Archive of Formal Proofs is one of several modern-day imitators of the MML.
 There's a [Historical outline](https://doi.org/10.1007/s10817-017-9440-6) by Bancerek.
