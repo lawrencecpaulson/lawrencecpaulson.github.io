@@ -20,16 +20,18 @@ But it cannot be done entirely smoothly: there is no way to set up the extended 
 For surely $\infty+\infty=\infty$, which implies $\infty=0$.
 This doesn't matter if we simply want to use infinity as a placeholder to denote an undefined measure or limit.
 
-The extended reals are a convenience, but they do not offer a reasonable treatment of infinity, let alone infinitesimals.
+The extended reals are a convenience, but they do not offer a mathematically interesting treatment of infinity, let alone infinitesimals.
+Isabelle/HOL provides various [extended numeric types](https://isabelle.in.tum.de/dist/library/HOL/HOL-Library/Extended_Real.html), and they provide utility without drama.
+Can we do better?
 
 ### The hyperreals
 
-The most important fact about the non-standard real numbers (*hyperreals*) is that they satisfy exactly the same first-order axioms as the standard real numbers.
-That is literally what "non-standard model" means: a model of a particular set of axioms other than the obvious one.
-They are guaranteed to exist by upward Löwenheim–Skolem theorem.
+The most important fact about the non-standard real numbers (*hyperreals*) is that they satisfy **exactly the same** first-order axioms as the standard real numbers.
+That is literally what ["non-standard model"](https://plato.stanford.edu/entries/model-theory) means: a model of a particular set of axioms other than the obvious one.
+They are guaranteed to exist by [upward Löwenheim–Skolem theorem](https://en.wikipedia.org/wiki/Löwenheim–Skolem_theorem).
 The hyperreals contain infinitesimals and infinities, but they satisfy the usual first-order axioms for a complete ordered field.
 
-In order to make use of our richer domain, we need a richer vocabulary.
+In order to make use of our richer domain, we need to enrich our vocabulary.
 
 * $\mathbb{R}^*$ denotes the hyperreals, with $\mathbb{R}$ for the standard (finite) reals
 * $x\approx y$ expresses that $x$ and $y$ are infinitely close, with $x\approx 0$ if $x$ is an *infinitesimal*
@@ -42,16 +44,33 @@ There's not enough space here to go through everything. Suffice it to say that t
 
 ### The ultrafilter construction of the hyperreals
 
+
+[On the mechanization of real analysis in Isabelle/HOL](https://rdcu.be/cRUFK)
+
+[Mechanising nonstandard real analysis](https://dx.doi.org/10.1112/S1461157000000267)
+
+
+ Also for the naturals, complexes, ...
+
+
+type classes??
+
+
+
+[A combination of nonstandard analysis and geometry theorem proving](https://rdcu.be/cM63n)
+
+
+
 ### But do infinitesimals actually exist?
 
 People like to question the legitimacy of everything but the counting numbers: positive integers.
 The Romans had numerals for nothing else.
-But why not zero, when it was possible to no olives (or whatever), and why not negative integers, 
+But why not zero, when it was possible to own no cattle, and why not negative integers, 
 when the Romans were familiar with the concept of debt?
 The Greeks, meanwhile, are alleged to have [had a freakout](https://nrich.maths.org/2671)
 over the discovery of irrational numbers.
 Even today we have to live with the silly terminology of the *real numbers*, as contrasted with *imaginary numbers*.
-When we see numbers diagrammed on the complex plane, they all look equally "real".
+When we see the complex numbers diagrammed on a plane, they all look equally "real".
 And, of course, **all** mathematical entities are imaginary:
 if you don't believe me, try to buy the [number five on eBay](https://www.ebay.co.uk/sch/i.html?_nkw=number+five).
 
@@ -60,22 +79,19 @@ But all they need to "exist" as useful mathematical entities is a coherent theor
 *Pace* Berkeley, Leibniz and Euler knew what they were doing.
 Although they never promulgated a theory of infinitesimals, they avoided making serious errors.
 
-Fleuriot: Newton
+### Jacques Fleuriot and Newton's *Principia*
 
- Also for the naturals, complexes, ...
+On the topic of errors: [Jacques Fleuriot](https://homepages.inf.ed.ac.uk/jdf/), 
+when he was doing his PhD here at Cambridge, discovered a flaw in a proof by Isaac Newton, whose famous *Principia Mathematica* expounded his theory of gravitation and the orbits of the planets.
+Crucially, Newton's proofs relied on infinitesimal reasoning combined with Euclidean geometry.
+Jacques [formalised a theory of infinitesimal geometry](https://rdcu.be/cM63n) in Isabelle in order to reconstruct the proofs in their original form.
+In his account of the [proof of the *Propositio Kepleriana*](https://rdcu.be/cIK7a) he is able to follow Newton step by laborious step until Newton proposes to multiply an infinite quantity by an infinitesimal in the hope of obtaining an infinitesimal result, but this does not follow.
+Fortunately, Jacques was able to find an alternative route to replace that step.
 
-[model theory](https://plato.stanford.edu/entries/model-theory/)
+Jacques' formal development provides an environment in which proofs in the calculus can be conducted using non-standard methods and the results easily transferred from the hyperreals to the reals.
+Back then, I imagine that people would welcome the possibility of proving theorems without recourse to adding up fractions of epsilons.
+Instead, sadly, the Isabelle/HOL theory of the hyperreals is hardly used for anything.
+I live in hope that somebody will decide to give it a try, if only out of curiosity.
 
 
-type classes??
 
-
-[On the mechanization of real analysis in Isabelle/HOL](https://rdcu.be/cRUFK)
-
-[A combination of nonstandard analysis and geometry theorem proving](https://rdcu.be/cM63n)
-
-[Proving Newton's Propositio Kepleriana](https://rdcu.be/cIK7a)
-
-[Mechanising nonstandard real analysis](https://dx.doi.org/10.1112/S1461157000000267)
-
-[Jacques Fleuriot](https://homepages.inf.ed.ac.uk/jdf/)
