@@ -2,7 +2,7 @@
 layout: post
 title:  "The formalisation of nonstandard analysis"
 usemathjax: true 
-tags: [logic, Jacques Fleuriot, nonstandard analysis]
+tags: [logic, Jacques Fleuriot, nonstandard analysis, Leonhard Euler]
 ---
 
 Calculus is concerned with change over infinitesimal intervals. Both Isaac Newton and Wilhelm Leibniz regarded infinitely small quantities as mathematically meaningful, and Leonhard Euler continued to work with 
@@ -16,20 +16,22 @@ But is [nonstandard analysis](https://en.wikipedia.org/wiki/Nonstandard_analysis
 
 In many contexts we see the set of real numbers extended with plus and minus infinity.
 This extension can be convenient for talking about situations where a measure or sum is infinite.
-But it cannot be done entirely smoothly: there is no way to set up the extended reals so that we get a field.
+But it cannot be done entirely smoothly: there is no reasonable way to set up the extended reals so that we get a field.
 For surely $\infty+\infty=\infty$, which implies $\infty=0$.
-This doesn't matter if we simply want to use infinity as a placeholder to denote an undefined measure or limit.
+This doesn't matter if we simply want to use infinity as a placeholder to denote an undefined limit.
 
 The extended reals are a convenience, but they do not offer a mathematically interesting treatment of infinity, let alone infinitesimals.
-Isabelle/HOL provides various [extended numeric types](https://isabelle.in.tum.de/dist/library/HOL/HOL-Library/Extended_Real.html), and they provide utility without drama.
+Isabelle/HOL provides various [extended numeric types](https://isabelle.in.tum.de/dist/library/HOL/HOL-Library/Extended_Real.html).
+They provide utility without drama, or even interest.
 Can we do better?
 
 ### The hyperreals
 
 The most important fact about the non-standard real numbers (*hyperreals*) is that they satisfy **exactly the same** first-order axioms as the standard real numbers.
-That is literally what ["non-standard model"](https://plato.stanford.edu/entries/model-theory) means: a model of a particular set of axioms other than the obvious one.
-They are guaranteed to exist by [upward Löwenheim–Skolem theorem](https://en.wikipedia.org/wiki/Löwenheim–Skolem_theorem).
+That is literally what ["non-standard model"](https://plato.stanford.edu/entries/model-theory) means: fixing a particular set of axioms, then choosing a model other than the obvious one.
+Models of arbitrarily large cardinality are guaranteed to exist by [upward Löwenheim–Skolem theorem](https://en.wikipedia.org/wiki/Löwenheim–Skolem_theorem).
 The hyperreals contain infinitesimals and infinities, but they satisfy the usual first-order axioms for a complete ordered field.
+So how can we even know they are there?
 
 In order to make use of our richer domain, we need to enrich our vocabulary.
 
@@ -38,30 +40,27 @@ In order to make use of our richer domain, we need to enrich our vocabulary.
 * a hyperreal $x$ is *finite* if $\lvert x \rvert\le r$ for some $r\in\mathbb{R}$
 * every finite hyperreal $x$ has a *standard part* $\textrm{st}(x)\in\mathbb{R}$ with $x\approx\textrm{st}(x)$
 
-There's not enough space here to go through everything. Suffice it to say that things work reasonably. The infinite numbers turn out to be the reciprocals of nonzero infinitesimals (division by zero still being undefined). If two quantities are infinitely close then so are the results of arithmetic operations. It's all coherent, while at the same time we can construct $\epsilon$ as well as its reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
+There's not enough space here to go through everything. Suffice it to say that things work reasonably. The infinite numbers turn out to be the reciprocals of nonzero infinitesimals.
+Division by zero is still undefined, not ``infinity''. If two quantities are infinitely close then so are the results if you add or multiply them by the same thing. It's all coherent, while at the same time we can construct the infinitesimal $\epsilon$ as well as its (infinite) reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
+We get a limitless supply of infinitesimals and infinities.
 
 "What do you mean, *construct*?"
 
 ### The ultrafilter construction of the hyperreals
 
-[Jacques Fleuriot](https://homepages.inf.ed.ac.uk/jdf/), 
-when he was doing his PhD here at Cambridge, 
+[Jacques Fleuriot](https://homepages.inf.ed.ac.uk/jdf/) formalised
+[the real numbers](https://rdcu.be/cRUFK), the hyperreals and much else in Isabelle/HOL in connection with his [award-winning PhD](https://www.amazon.com/Combination-Nonstandard-Application-Distinguished-Dissertations/dp/1852334665).
 
+In his extensive account of his formalisation of
+[nonstandard real analysis](https://dx.doi.org/10.1112/S1461157000000267),
+he begins by reminding us how easy it is to arrive at inconsistencies with an axiomatic approach.
+[Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/) always advocated explicit constructions, despite the [additional work required](https://www.azquotes.com/quote/568414),
+and fortunately there is a construction of the hyperreals from the real numbers.
+It requires the theory of filters and ultrafilters, and a quotient construction on sequences of real numbers.
+The details do not concern us here, and remember: that the hyperreals can be constructed as equivalent classes of sequences of real numbers doesn't mean that is literally what they are, any more than a real number is a Cauchy sequence or an ordered pair is a certain set.
 
-[On the mechanization of real analysis in Isabelle/HOL](https://rdcu.be/cRUFK)
-
-[Mechanising nonstandard real analysis](https://dx.doi.org/10.1112/S1461157000000267)
-
-
- Also for the naturals, complexes, ...
-
-
-type classes??
-
-
-
-[A combination of nonstandard analysis and geometry theorem proving](https://rdcu.be/cM63n)
-
+Similar constructions work for the natural numbers, giving us infinite natural numbers, and for other numeric types.
+And since the hyperreals form an ordered field, the type *hypreal* can be instantiated with all the usual [type classes]({% post_url 2022-03-02-Type_classes %}).
 
 
 ### But do infinitesimals actually exist?
@@ -76,6 +75,9 @@ Even today we have to live with the silly terminology of the *real numbers*, as 
 When we see the complex numbers diagrammed on a plane, they all look equally "real".
 And, of course, **all** mathematical entities are imaginary:
 if you don't believe me, try to buy the [number five on eBay](https://www.ebay.co.uk/sch/i.html?_nkw=number+five).
+
+If you are looking for numbers that don't actually exist, I would propose the plus and minus infinity of the extended reals. 
+They don't enjoy any interesting theory and are used only as placeholders.
 
 The arguments of the 19th Century have left us in the strange position of accepting certain infinities (Cantor's transfinite ordinal and cardinal numbers), while rejecting the infinitesimals.
 But all they need to "exist" as useful mathematical entities is a coherent theory, backed by reliable intuitions.
@@ -95,9 +97,8 @@ Fortunately, Jacques was able to find an alternative route to replace that step.
 
 Jacques' formal development provides an environment in which proofs in the calculus can be conducted using non-standard methods and the results easily transferred from the hyperreals to the reals.
 Back then, I imagine that people would welcome the possibility of proving theorems without recourse to adding up fractions of epsilons.
-[Some authors claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigourous basis, are still the best framework for understanding Euler's work.
 Instead, sadly, the Isabelle/HOL theory of the hyperreals is hardly used for anything.
 I live in hope that somebody will decide to give it a try, if only out of curiosity.
-
+[Bair et al. claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigourous basis, are still the best framework for understanding Euler's work.
 
 
