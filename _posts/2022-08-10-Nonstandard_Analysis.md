@@ -99,6 +99,6 @@ Jacques' formal development provides an environment in which proofs in the calcu
 Back then, I imagine that people would welcome the possibility of proving theorems without recourse to adding up fractions of epsilons.
 Instead, sadly, the Isabelle/HOL theory of the hyperreals is hardly used for anything.
 I live in hope that somebody will decide to give it a try, if only out of curiosity.
-[Bair et al. claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigourous basis, are still the best framework for understanding Euler's work.
+[Bair et al. claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigorous basis, are still the best framework for understanding Euler's work.
 
 
