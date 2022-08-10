@@ -57,10 +57,10 @@ he begins by reminding us how easy it is to arrive at inconsistencies with an ax
 [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/) always advocated explicit constructions, despite the [additional work required](https://www.azquotes.com/quote/568414),
 and fortunately there is a construction of the hyperreals from the real numbers.
 It requires the theory of filters and ultrafilters, and a quotient construction on sequences of real numbers.
-The details do not concern us here, and remember: that the hyperreals can be constructed as equivalent classes of sequences of real numbers doesn't mean that is literally what they are, any more than a real number is a Cauchy sequence or an ordered pair is a certain set.
+The details do not concern us here, and remember: that the hyperreals can be constructed as equivalence classes of sequences of real numbers doesn't mean that is literally what they are, any more than a real number is a Cauchy sequence or an ordered pair is a certain set.
 
-Similar constructions work for the natural numbers, giving us infinite natural numbers, and for other numeric types.
-And since the hyperreals form an ordered field, the type *hypreal* can be instantiated with all the usual [type classes]({% post_url 2022-03-02-Type_classes %}).
+Similar constructions work for the natural numbers (giving us infinite natural numbers) and for other numeric types.
+And since the hyperreals form an ordered field, the type `hypreal` can be instantiated with all the usual [type classes]({% post_url 2022-03-02-Type_classes %}).
 
 
 ### But do infinitesimals actually exist?
@@ -96,8 +96,8 @@ In his account of the [proof of the *Propositio Kepleriana*](https://rdcu.be/cIK
 Fortunately, Jacques was able to find an alternative route to replace that step.
 
 Jacques' formal development provides an environment in which proofs in the calculus can be conducted using non-standard methods and the results easily transferred from the hyperreals to the reals.
-Back then, I imagine that people would welcome the possibility of proving theorems without recourse to adding up fractions of epsilons.
-Instead, sadly, the Isabelle/HOL theory of the hyperreals is hardly used for anything.
+Back then, I imagined that people would welcome the possibility of proving theorems without having to add up fractions of epsilons.
+Instead, sadly, the Isabelle/HOL theory of the hyperreals lies neglected.
 I live in hope that somebody will decide to give it a try, if only out of curiosity.
 [Bair et al. claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigorous basis, are still the best framework for understanding Euler's work.
 
