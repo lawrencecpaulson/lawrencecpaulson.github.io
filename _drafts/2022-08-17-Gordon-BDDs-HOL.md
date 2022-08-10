@@ -5,7 +5,10 @@ usemathjax: true
 tags: [HOL system, PVS, BDDs, MJC Gordon]
 ---
 
-On 22 August, it will be five years since the death of [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/), who all but invented hardware verification, made major contributions to proof assistant architecture and showed that higher-order logic was a powerful formalism for verification.
+On 22 August, it will be five years since the death of [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/), who • basically invented hardware verification
+• contributed to the first version of the [ML programming language](https://doi.org/10.1145/512760.512773)
+• made major contributions to proof assistant architecture, and 
+• showed that higher-order logic was a powerful formalism for verification.
 My [biography](http://doi.org/10.1098/rsbm.2018.0019) (also available [here](https://arxiv.org/abs/1806.04002)) describes his main achievements.
 But it is almost silent about the coolest thing he ever did: integrating binary decision diagrams (BDDs) with the HOL system.
 
@@ -21,8 +24,9 @@ Converting a formula to a BDD yields a *canonical form* for this function.
 
 Invented in 1986, BDDs were originally used to verify hardware designs, proving agreement between specification and implementation for combinational hardware devices such as adders.
 Crucially, in the event of non-agreement, they exhibited counterexamples.
-All fully automatic, and with luck or skill, highly efficient.
-Randall Bryant's [original paper](https://doi.org/10.1109/TC.1986.1676819) described experiments involving numerous devices and included a proof that binary multiplication could not be treated efficiently.
+All was fully automatic, and with luck or skill, highly efficient.
+Randall Bryant's [original paper](https://doi.org/10.1109/TC.1986.1676819) described experiments involving numerous devices.
+He included a proof that binary multiplication could not be treated efficiently.
 
 [Model checking](https://doi.org/10.1145/5397.5399) is a verification technique based on state enumeration, supporting a temporal logic and ideally suited for checking properties of concurrent systems.
 Initially, verifying a system required first reducing it (by possibly extreme simplifying assumptions) to a few hundred states.
