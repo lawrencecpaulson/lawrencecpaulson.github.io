@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with Isabelle: baby examples, cool proof methods"
 usemathjax: true 
-tags: examples Isabelle newbies
+tags: examples Isabelle newbies sledgehammer
 ---
 
 For absolute beginners, proof assistants are daunting. Everything you do seems to go wrong. So let's have some super simple examples that show how to get started while highlighting some pitfalls.
