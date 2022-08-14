@@ -41,8 +41,7 @@ What to do?
 One answer came from the [Prototype Verification System](http://pvs.csl.sri.com/) (PVS) community.
 They undertook verification projects that attempted combine interactive proof with model checking.
 PVS had included "a BDD-based tautology checker" from the very beginning.
-Unfortunately, tautology checking isn't particularly useful in interactive theorem proving,
-and BDDs are capable of much more.
+Unfortunately, tautology checking isn't particularly useful in interactive theorem proving, and BDDs are capable of much more.
 
 In his (2000) paper "[Reachability Programming in HOL98 Using BDDs](https://rdcu.be/cROox)",
 Mike Gordon describes two experiments aimed at achieving a true integration between BDDs and interactive theorem proving.
