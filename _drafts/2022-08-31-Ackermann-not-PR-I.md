@@ -6,7 +6,7 @@ tags: [examples, Isabelle, Ackermann's function]
 ---
 
 A university-level course on computation theory will invariably cover [recursive functions](https://plato.stanford.edu/entries/recursive-functions/): the model of computation developed by Gödel and Kleene.
-Students learn about the *primitive recursive* (PR) functions, a fairly natural idea, but also learn that the PR functions are insufficient.
+Students learn about the [*primitive recursive*](https://en.wikipedia.org/wiki/Primitive_recursive_function) (PR) functions, a fairly natural idea, but also learn that the PR functions are insufficient.
 True, these functions include all the familiar arithmetic operations,
 as well as all the obvious syntactic operations on expressions that have been 
 "Gödel-numbered" (coded in terms of arithmetic formulas).
