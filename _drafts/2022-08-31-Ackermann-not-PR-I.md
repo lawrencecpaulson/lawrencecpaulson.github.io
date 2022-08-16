@@ -11,7 +11,7 @@ True, these functions include all the familiar arithmetic operations,
 as well as all the obvious syntactic operations on expressions that have been 
 "Gödel-numbered" (coded in terms of arithmetic formulas).
 Among the PR functions are many that cannot be regarded as *feasibly* computable because they grow at an utterly unimaginable rate. 
-(And do not, not say "exponential" here: exponential growth is negligible in this world.)
+(And absolutely do not say "exponential" here: exponential growth is negligible in this world.)
 The PR functions are insufficient because, in three simple lines, we can define 
 an obviously computable function that grows faster than any of them.
 It is, of course, [Ackermann's function](https://plato.stanford.edu/entries/recursive-functions/#AckePeteFunc).
@@ -19,7 +19,7 @@ It is, of course, [Ackermann's function](https://plato.stanford.edu/entries/recu
 
 ### The Ackermann-Péter function
 
-As I have mentioned in a [previous post]({% post_url 2022-02-09-Ackermann-example %}),
+As mentioned in a [previous post]({% post_url 2022-02-09-Ackermann-example %}),
 Ackermann's "generalised exponential" (simplified by Rózsa Péter) is as follows:
 
 $$
@@ -34,7 +34,7 @@ Its first argument determines the rate of growth.
 Arguments of 0 and 1 yield trivial functions, but things get nasty from 4 onwards.
 The proof that Ackermann's function is not primitive recursive begins with a series of results about its growth for various argument patterns.
 We'll cover those in today's post.
-In a future post, we'll see how to define the primitive recursive functions themselves, inductively, in order to prove by induction (on the construction of some PR function *f*) that we can always find an argument to dominate *f*.
+In a future post, we'll see how to define the primitive recursive functions themselves, inductively, and prove by induction (on the construction of any given PR function $f$) that we can always find an argument to dominate $f$.
 
 ### Expressing Ackermann's function
 
@@ -48,8 +48,8 @@ We can define Ackermann's function as follows:
 </span><span class="main">|</span><span> </span><span class="quoted quoted"><span>"</span><span class="free">ack</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">n</span><span class="main">)</span><span> </span><span class="main">=</span><span> </span><span class="free">ack</span><span> </span><span class="free bound entity">m</span><span> </span><span class="main">(</span><span class="free">ack</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="free bound entity">n</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-Recall that such a specification is automatically transformed to eliminate the recursion, and the desired recursion equations are automatically proved from the hidden, low level definition.
-Isabelle's recursion package also returns an induction rule tailored to this specific recursion.
+Recall that such a specification is automatically transformed to eliminate the recursion, and the desired recursion equations are generated from the hidden, low level definition.
+Isabelle's recursion package also returns an *induction rule* tailored to this specific recursion.
 
 ### Properties involving the second argument of *A*
 
@@ -64,7 +64,7 @@ The Isabelle development doesn't strictly follow Szasz, and in particular the Ac
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">i</span> <span class="quoted free">j</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> ack.induct<span class="main">)</span> <span class="operator">simp_all</span>
 </pre>
 
-The main theorem uses currying to freeze the first argument, regarding Ackermann's as a unary function.
+The main theorem uses currying to freeze the first argument, regarding Ackermann's as a unary function $A(i,-)$ for some suitable $i$.
 We need to know that this function will be strictly monotonic, i.e. that Ackermann's is monotonic in its second argument.
 This can be proved first for the successor case, 
 again by Ackermann induction.
@@ -137,15 +137,16 @@ Its behaviour for 1 (just adding 2) is Szasz' A8:
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">j</span><span class="main">)</span> <span class="operator">simp_all</span>
 </pre>
 
-Its behaviour for a first argument of 2 (essentially doubling) is Szasz' A9:
+Its behaviour for a first argument of 2 (essentially doubling) is A9:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_2 <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="main">(</span>Suc <span class="main">(</span>Suc <span class="main">0</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span> <span class="main">=</span> <span class="numeral">2</span> <span class="main">*</span> <span class="free">j</span> <span class="main">+</span> <span class="numeral">3</span><span>"</span></span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">j</span><span class="main">)</span> <span class="operator">simp_all</span>
 </pre>
 
-The development doesn't require its behaviour for an argument of 3, but it's instructive to note what happens.
+The Ackermann development doesn't need the following lemma about an argument of 3, but it's instructive to note what happens.
 We go from 2 times something to 2 to the power something.
+We've already reached exponential growth, and we're just getting started.
 You can imagine what happens with an argument of 4. And you can't imagine what happens with an argument of 11.
 
 <pre class="source">
@@ -199,9 +200,10 @@ And once again, a non-strict version:
 
 ### Building up the first argument
 
-At risk of repeating myself, the proof that Ackermann's function is not PR involves choosing a suitable first argument. Each of the following results exhibits a suitable first argument $i$ such that $A(i,{-})$ grows faster than some other expression involving Ackermann's function. These will deal with various inductive cases connected with the construction of primitive recursive functions.
+As mentioned above, the proof that Ackermann's function is not PR involves choosing a suitable first argument. Each of the following results exhibits 
+some $i$ such that $A(i,{-})$ grows faster than some other expression involving Ackermann's function. These will deal with various inductive cases connected with the construction of primitive recursive functions.
 
-This one, A10, deals with nested function calls:
+A10 deals with nested function calls:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_nest_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="main">(</span>ack</span> <span class="free">i2</span> <span class="free">j</span><span class="main">)</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">2</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span><span>
@@ -216,7 +218,7 @@ This one, A10, deals with nested function calls:
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-This one, A11, deals with the sum of two function calls:
+A11 deals with the sum of two function calls:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_add_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">+</span> ack</span> <span class="free">i2</span> <span class="free">j</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span><span>
@@ -232,7 +234,7 @@ This one, A11, deals with the sum of two function calls:
 </pre>
 
 I find this last result (A12) rather curious. Adding 4 to the first argument is a super gigantic leap and doesn't seem necessary. 
-On the other hand, e can make it as big as we wish, so who cares?
+On the other hand, it can be as big as we wish, so who cares?
 And as stated, the theorem follows quickly from the previous one.
 
 
@@ -248,14 +250,7 @@ And as stated, the theorem follows quickly from the previous one.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be found in Isabelle's Archive of Formal Proofs.
-You can confirm that nothing has been skipped up to this part of the development.
-Although the final result is remarkable and deep, it's easy to formalise, 
-which is why people were able to do with the early 90s.
-
-By the way, if you are looking for a function that is not primitive recursive and has a practical application, the answer is, any programming language interpreter.
-An interpreter takes a program (encoded somehow) and runs it, so it can easily run forever.
-PR functions necessarily terminate.
-And an interpreter for a programming language of PR functions will always terminate (because PR functions always terminate) but cannot be PR itself (by the obvious diagonalisation argument).
+The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be downloaded from Isabelle's Archive of Formal Proofs.
+You can confirm that the proofs really are as simple as they appear on this post.
 
 

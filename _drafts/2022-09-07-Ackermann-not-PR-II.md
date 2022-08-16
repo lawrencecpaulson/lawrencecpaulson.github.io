@@ -241,9 +241,15 @@ Note that <span class="antiquoted"><span class="operator"><span class="hidden">\
 
 
 The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be found in Isabelle's Archive of Formal Proofs.
-You can confirm that nothing has been skipped up to this part of the development.
+
+
 Although the final result is remarkable and deep, it's easy to formalise, 
 which is why people were able to do with the early 90s.
 
+
+By the way, if you are looking for a function that is not primitive recursive and has a practical application, the answer is, any programming language interpreter.
+An interpreter takes a program (encoded somehow) and runs it, so it can easily run forever.
+PR functions necessarily terminate.
+And an interpreter for a programming language of PR functions will always terminate (because PR functions always terminate) but cannot be PR itself (by the obvious diagonalisation argument).
 
 
