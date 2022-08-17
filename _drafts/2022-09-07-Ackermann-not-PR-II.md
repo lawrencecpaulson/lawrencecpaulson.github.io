@@ -13,7 +13,7 @@ in order to prove by induction (on the construction of some PR function *f*) tha
 
 
 Peter Aczel [has written](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [here](/papers/Aczel-Inductive-Defs.pdf))
-inductive definition
+a comprehensive paper on inductive definitions
 
 ### The primitive recursive functions
 
