@@ -45,7 +45,7 @@ Unfortunately, tautology checking isn't particularly useful in interactive theor
 
 In his (2000) paper "[Reachability Programming in HOL98 Using BDDs](https://rdcu.be/cROox)",
 Mike Gordon describes two experiments aimed at achieving a true integration between BDDs and interactive theorem proving.
-With both, he his aim was to enable "intimate combinations of deduction and algorithmic verification, like model checking."
+With both, his aim was to enable "intimate combinations of deduction and algorithmic verification, like model checking."
 His first approach involved implementing functions to convert between HOL terms and BDDs, but he found it to be lacking. So what was his second approach? Let's look at Mike's own words:
 
 > In the LCF approach, theorems are represented by an abstract type whose primitive operations are the axioms and inference rules of a logic. Theorem proving tools are implemented by composing together the inference rules using ML programs.
@@ -58,7 +58,7 @@ In addition to $\land$, $\lor$, etc., even *quantifiers* were permitted, though 
 thus, the system can represent so-called [quantified Boolean formulas](https://en.wikipedia.org/wiki/True_quantified_Boolean_formula) (QBFs).
 
 Mike went on to show how the set of reachable states of a finite state machine could be computed efficiently as a BDD, using a fixedpoint construction.
-He remarked that he all 32 steps of the calculation of the BDDs of the sets of reachable states of peg solitaire could be completed in a few hours on his 500MB Linux box. And that reminds me: all those years ago he asked me to draw a peg solitaire figure for him:
+He remarked that all 32 steps of the calculation of the BDDs of the sets of reachable states of peg solitaire could be completed in a few hours on his 500MHz Linux box. And that reminds me: all those years ago he asked me to draw a peg solitaire figure for him:
 
 <p style="text-align: center;"><img src="/images/peg-solitaire.png" alt="peg solitaire" width="300"/></p>
 
