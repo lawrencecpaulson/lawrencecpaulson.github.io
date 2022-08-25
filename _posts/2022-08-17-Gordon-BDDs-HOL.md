@@ -73,3 +73,6 @@ If you'd like to look deeper into all this, please consult the
 of Mike's paper, which omits the first experiment and adds further detail about the second one.
 And I need to mention that "the coolest thing that Mike ever did" has [tough competition](https://www.cl.cam.ac.uk/events/cl75/posters/f/acjf3-screen.pdf).
 
+#### *Postscript*
+
+As remarked in the comments below, Mike's implementation of BDD judgements in HOL did not involve extending the proof kernel, but rather, creating a *second kernel* specifically about BDDs. The HOL proof kernel already includes provision for *oracles* (arbitrary code that can generate theorems, labelled as such). Mike provided an oracle to allow some results from the BDD world to be transferred into the world of ordinary theorems.
