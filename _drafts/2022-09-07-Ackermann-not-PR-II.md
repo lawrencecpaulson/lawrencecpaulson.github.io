@@ -7,7 +7,7 @@ tags: [examples, Isabelle, Ackermann's function, inductive definitions]
 
 The [previous post]({% post_url 2022-08-31-Ackermann-not-PR-I %})
 presented the first half of the proof that Ackermann's function $A(i,j)$ is not primitive recursive: proving a series of inequalities describing the growth of $A$.
-In this post, we'll see how to specify the [primitive recursive functions](https://en.wikipedia.org/wiki/Primitive_recursive_function) via an inductive definition.
+In this post, we'll see how to specify the [primitive recursive functions](https://plato.stanford.edu/entries/recursive-functions/#PrimRecuFuncPR) via an inductive definition.
 
 in order to prove by induction (on the construction of some PR function *f*) that we can always find an argument to dominate *f*.
 
