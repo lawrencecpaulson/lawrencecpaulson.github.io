@@ -11,7 +11,7 @@ True, these functions include all the familiar arithmetic operations,
 as well as all the obvious syntactic operations on expressions that have been 
 "Gödel-numbered" (coded in terms of arithmetic formulas).
 Among the PR functions are many that cannot be regarded as *feasibly* computable because they grow at an utterly unimaginable rate. 
-(And absolutely do not say "exponential" here: exponential growth is negligible in this world.)
+(Do not say "exponential": in this context, **exponential growth is negligible**.)
 The PR functions are insufficient because, in three simple lines, we can define 
 an obviously computable function that grows faster than any of them.
 It is, of course, [Ackermann's function](https://plato.stanford.edu/entries/recursive-functions/#AckePeteFunc).
@@ -39,7 +39,7 @@ In a future post, we'll see how to define the primitive recursive functions them
 ### Expressing Ackermann's function
 
 As mentioned in that previous post, Isabelle/HOL provides a package that accepts a wide variety of recursive function definitions, in most cases dealing automatically with issues such as pattern matching and termination.
-We can define Ackermann's function as follows:
+We can specify Ackermann's function to the machine as follows:
 
 <pre class="source">
 <span class="keyword1"><span class="command">fun</span> <span class="entity">ack</span></span><span> </span><span class="main">::</span><span> </span><span class="quoted quoted"><span>"</span><span class="main">[</span>nat<span class="main">,</span>nat<span class="main">]</span><span> </span><span class="main">⇒</span><span> </span>nat<span>"</span></span><span> </span><span class="keyword2 keyword">where</span><span>
@@ -51,10 +51,10 @@ We can define Ackermann's function as follows:
 Recall that such a specification is automatically transformed to eliminate the recursion, and the desired recursion equations are generated from the hidden, low level definition.
 Isabelle's recursion package also returns an *induction rule* tailored to this specific recursion.
 
-### Properties involving the second argument of *A*
+### Properties involving the second argument
 
 The formal development follows a [1991 paper](https://www.researchgate.net/publication/2662353_A_Machine_Checked_Proof_that_Ackermann's_Function_is_not_Primitive_Recursive)
-by Nora Szasz, and the names of properties are hers.
+by Nora Szasz, and the names of the properties are hers.
 She proved that Ackermann's Function was not PR using ALF, an early implementation of Martin-Löf type theory and a predecessor of [Agda](https://agda.readthedocs.io/en/v2.6.0.1/getting-started/what-is-agda.html). 
 
 The Isabelle development doesn't strictly follow Szasz, and in particular the Ackermann recursion equations are already available to us, so the first property be proved is A4. It's an elementary inequality, proved by Ackermann induction (`Ack.induct`) followed by simplification.
@@ -88,7 +88,7 @@ Here's the non-strict version.
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ack_less_mono2 less_mono_imp_le_mono<span class="main">)</span>
 </pre>
 
-### Properties involving the first argument of *A*
+### Properties involving the first argument
 
 Next come a variety of inequalities involving both arguments, and concerned with what happens when we increase the first argument. The first property, A6, holds by a simple mathematical induction.
 Note that sledgehammer has generated a proof of the induction step.
@@ -130,7 +130,7 @@ Curiously enough, Szasz did not mention requiring any of these results.
 ### First arguments of 1, 2 and 3
 
 We already know that Ackermann's function, given a first argument of 0, denotes the successor.
-Its behaviour for 1 (just adding 2) is Szasz' A8:
+Its behaviour for 1 is Szasz' A8, namely $A(1,j) = j+2$:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_1 <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="main">(</span>Suc <span class="main">0</span><span class="main">)</span> <span class="free">j</span> <span class="main">=</span> <span class="free">j</span> <span class="main">+</span> <span class="numeral">2</span><span>"</span></span><span>
@@ -145,7 +145,7 @@ Its behaviour for a first argument of 2 (essentially doubling) is A9:
 </pre>
 
 The Ackermann development doesn't need the following lemma about an argument of 3, but it's instructive to note what happens.
-We go from 2 times something to 2 to the power something.
+Instead of $2j+3$ it returns $2^{j+3}-3$.
 We've already reached exponential growth, and we're just getting started.
 You can imagine what happens with an argument of 4. And you can't imagine what happens with an argument of 11.
 
@@ -162,15 +162,15 @@ You can imagine what happens with an argument of 4. And you can't imagine what h
 
 I'd like to mention a couple of fine points. 
 
-1. We aren't using Ackermann induction any more, but mostly good old mathematical induction.
+1. The proofs aren't using Ackermann induction any more, but mostly good old mathematical induction.
 How do you know which to choose? Mostly it's trial and error. It's often possible to get a proof using the "wrong" induction rule, but with a lot of needless pain.
 
-2. Sometimes we write integer constants as ordinary numbers and sometimes as strings of successors (`Suc`). the successor form is necessary for rewriting by the Ackermann recursion equations. You can't count on Isabelle magically converting from one form to the other is needed.
+2. Sometimes we write integer constants as decimal integers and sometimes as strings of successors (`Suc`). The successor form is necessary for rewriting by recursion equations. You can't count on Isabelle magically converting from one form to the other is needed. Simplifying by `eval_nat_numeral` translates decimal integers into unary (`Suc`) form, and 1 is always simplified to `Suc 0`.
 
 ### Monotonicity in the first argument
 
-The following three lemmas are all related to Szasz' A7.
-And I confess to a touch of blindness: monotonicity in Ackermann's first argument should follow easily from `ack_less_ack_Suc1`, but it isn't easy enough for sledgehammer, so we prove it another way.
+The following three lemmas are all related to property A7.
+And I confess to a touch of blindness: monotonicity in Ackermann's first argument should follow easily from `ack_less_ack_Suc1`, but it isn't easy enough for sledgehammer, but we can prove it another way.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_less_mono1_aux<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i</span> <span class="free">k</span> <span class="main">&lt;</span> ack</span> <span class="main">(</span>Suc <span class="main">(</span><span class="free">i</span><span class="main">+</span><span class="free">j</span><span class="main">)</span><span class="main">)</span> <span class="free">k</span><span>"</span><span>
@@ -191,7 +191,7 @@ And I confess to a touch of blindness: monotonicity in Ackermann's first argumen
   </span><span class="keyword1 command">using</span> ack_less_mono1_aux less_iff_Suc_add <span class="keyword1 command">by</span> <span class="operator">auto</span>
 </pre>
 
-And once again, a non-strict version:
+And once again, we need a non-strict version:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_le_mono1<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">≤</span> <span class="free">j</span> <span class="main">⟹</span> ack</span> <span class="free">i</span> <span class="free">k</span> <span class="main">≤</span> ack</span> <span class="free">j</span> <span class="free">k</span><span>"</span><span>
