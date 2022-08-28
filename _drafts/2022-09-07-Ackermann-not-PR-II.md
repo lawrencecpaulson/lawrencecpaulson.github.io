@@ -6,27 +6,39 @@ tags: [examples, Isabelle, Ackermann's function, inductive definitions]
 ---
 
 The [previous post]({% post_url 2022-08-31-Ackermann-not-PR-I %})
-presented the first half of the proof that Ackermann's function $A(i,j)$ is not primitive recursive: proving a series of inequalities describing the growth of $A$.
-In this post, we'll see how to specify the [primitive recursive functions](https://plato.stanford.edu/entries/recursive-functions/#PrimRecuFuncPR) via an inductive definition.
+presented the first half of the proof that Ackermann's function $A(i,j)$ is not primitive recursive: a series of inequalities describing how the function grows with various arguments.
+In this post, we'll see how to define the [primitive recursive functions](https://plato.stanford.edu/entries/recursive-functions/#PrimRecuFuncPR) inductively.
+Using the aforementioned inequalities, it will be straightforward to prove
+(by induction on the construction of some PR function *f*) that we can always find an argument to dominate *f*.
+This celebrated result has an easy proof, and it provides a distinctive example
+of an inductive definition.
 
-in order to prove by induction (on the construction of some PR function *f*) that we can always find an argument to dominate *f*.
-
-
-Peter Aczel [has written](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [here](/papers/Aczel-Inductive-Defs.pdf))
-a comprehensive paper on inductive definitions
 
 ### The primitive recursive functions
 
+I'm assuming that you have already encountered the PR functions in some course on computation theory. If not, the [Wikipedia article](https://en.wikipedia.org/wiki/Primitive_recursive_function)
+is an excellent overview.
+They are a family of $k$-ary functions over the natural numbers, for all $k$, including the following:
 
-$$
-\begin{align*}
-	A(0,n) & = n+1\\
-	A(m+1,0) & = A(m,1)\\
-	A(m+1,n+1) & = A(m,A(m+1,n)).
-\end{align*}
+* The *successor function* $S:\mathbb{N}\to\mathbb{N}$ such that
+$S(x)=x+1$
+* *Constant functions* $C^k_n:\mathbb{N}^k\to\mathbb{N}$ such that
+$C^k_n(x_1,\ldots,x_k)=n$
+* *Projection functions* $P^k_i:\mathbb{N}^k\to\mathbb{N}$ such that
+$P^k_i(x_1,\ldots,x_k)=x_i$
+
+The primitive recursive functions are closed under the following two operations:
+
+* The *composition* $h\circ(g_1,\ldots,g_m)$ of an $m$-ary function $h$ and $k$-ary functions $g_1,\ldots,g_m$ denotes some $f$ such that
+$$ f(x_1,\ldots,x_k)=h(g_1(x_1,\ldots ,x_k),\ldots ,g_m(x_1,\ldots ,x_k)). $$
+* Primitive recursion is, of course, the key idea. Given the $k$-ary function $g(x_1,\ldots ,x_k)$ and the $(k + 2)$-ary function $h(y,z,x_1,\ldots ,x_k)$,
+we obtain the $(k+1)$-ary function $f$ defined by 
+
+$$\begin{aligned}
+f(0,x_1,\ldots ,x_k)&=g(x_1,\ldots ,x_k)\\f(S(y),x_1,\ldots ,x_k)&=h(y,f(y,x_1,\ldots ,x_k),x_1,\ldots ,x_k).\end{aligned}
 $$
 
-### Inductive definition 
+Our initial task is to formalise these ideas in higher-order logic.
 
 <pre class="source">
 <span class="keyword1 command">primrec</span> <span class="entity">hd0</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat list <span class="main">⇒</span> nat<span>"</span></span> <span class="keyword2 keyword">where</span><span>
@@ -66,6 +78,7 @@ $$
 
 Note that <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">g</span><span>›</span></span></span> is applied first to <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">PREC</span> <span class="free">f</span> <span class="free">g</span> <span class="free">y</span><span>›</span></span></span> and then to <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">y</span><span>›</span></span></span><span>!</span><span>›</span></span>
 
+### Inductive definition 
 
 <pre class="source">
 <span class="keyword1 command">inductive</span> <span class="entity">PRIMREC</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>nat list <span class="main">⇒</span> nat<span class="main">)</span> <span class="main">⇒</span> bool<span>"</span></span> <span class="keyword2 keyword">where</span><span>
@@ -245,6 +258,10 @@ The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) c
 
 Although the final result is remarkable and deep, it's easy to formalise, 
 which is why people were able to do with the early 90s.
+
+
+Peter Aczel [has written](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [here](/papers/Aczel-Inductive-Defs.pdf))
+a comprehensive paper on inductive definitions
 
 
 By the way, if you are looking for a function that is not primitive recursive and has a practical application, the answer is, any programming language interpreter.
