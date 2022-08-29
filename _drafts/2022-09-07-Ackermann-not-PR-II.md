@@ -40,28 +40,60 @@ $$
 
 Our initial task is to formalise these ideas in higher-order logic.
 
+### Formalising the set of PR functions
+
+If we regard the above as a programming language, it's absolutely minimalist, even by comparison with the pure $\lambda$-calculus.
+Every recursion must be bounded by a precomputed integer.
+Worse, the arguments in the recursion are not allowed to vary, so a typical functional programming style is impossible.
+Division, for example, is tricky to code.
+
+But crucially, the PR functions are not a language at all.
+They are a subset of $\bigcup_{k\ge0}\,\mathbb{N}^k\to\mathbb{N}$.
+We shall be defining a *set* of functions.
+
+Our first decision is how to formalise the tuples of arguments $(x_1,\ldots,x_k)$. Szasz, using ALF (and apparently just writing out the desired rules) defines a set $T(k)$ of $k$-tuples of natural numbers.
+Such a dependently-typed option isn't available in Isabelle/HOL, and anyway,
+it seems simpler to use lists.
+
+#### The base cases
+
+Following Szasz, let's define a version of the built-in function `hd` that
+returns zero for the empty list:
+
 <pre class="source">
 <span class="keyword1 command">primrec</span> <span class="entity">hd0</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat list <span class="main">⇒</span> nat<span>"</span></span> <span class="keyword2 keyword">where</span><span>
   </span><span class="quoted quoted"><span>"</span><span class="free">hd0</span> <span class="main">[]</span> <span class="main">=</span> <span class="main">0</span><span>"</span></span><span>
 </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">hd0</span> <span class="main">(</span><span class="free bound entity">m</span> <span class="main">#</span> <span class="free bound entity">ms</span><span class="main">)</span> <span class="main">=</span> <span class="free bound entity">m</span><span>"</span></span>
 </pre>
 
+Now for the successor function:
+
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">SC</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat list <span class="main">⇒</span> nat<span>"</span></span><span>
   </span><span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">SC</span> <span class="free bound entity">l</span> <span class="main">=</span> Suc <span class="main">(</span>hd0</span> <span class="free bound entity">l</span><span class="main">)</span><span>"</span></span>
 </pre>
 
+We have the functions `CONSTANT n` for each `n`, by [currying](https://en.wikipedia.org/wiki/Currying):
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">CONSTANT</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat <span class="main">⇒</span> nat list <span class="main">⇒</span> nat<span>"</span></span><span>
-  </span><span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">CONSTANT</span> <span class="free bound entity">k</span> <span class="free bound entity">l</span> <span class="main">=</span> <span class="free bound entity">k</span><span>"</span></span>
+  </span><span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">CONSTANT</span> <span class="free bound entity">n</span> <span class="free bound entity">l</span> <span class="main">=</span> <span class="free bound entity">n</span><span>"</span></span>
 </pre>
 
+Projection is expressed with the help of `drop`, a function to remove a given number of elements from the front of a list:
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">PROJ</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat <span class="main">⇒</span> nat list <span class="main">⇒</span> nat<span>"</span></span><span>
   </span><span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">PROJ</span> <span class="free bound entity">i</span> <span class="free bound entity">l</span> <span class="main">=</span> hd0</span> <span class="main">(</span>drop <span class="free bound entity">i</span> <span class="free bound entity">l</span><span class="main">)</span><span>"</span></span>
 </pre>
+
+#### Operations to combine PR functions
+
+Szasz defined the dependent type $TPR(n,m)$ to represent (the codes of) functions from $n$-tuples to $m$-tuples, i.e. functions $\mathbb{N}^n\to\mathbb{N}^m$. 
+By working with such tupled functions, Szasz can specify function composition 
+as combining elements of $TPR(k,m)$ and $TPR(n,k)$ to yield $TPR(n,m)$.
+The Isabelle/HOL equivalent composes a function `g` with a **list** `fs` of functions.
+Given an argument list `l`, each element `f` of the list `fs` is applied to `l` and the result is presented to `g`:
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">COMP</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">[</span>nat list <span class="main">⇒</span> nat<span class="main">,</span> <span class="main">(</span>nat list <span class="main">⇒</span> nat<span class="main">)</span> list<span class="main">,</span> nat list<span class="main">]</span> <span class="main">⇒</span> nat<span>"</span></span><span>
