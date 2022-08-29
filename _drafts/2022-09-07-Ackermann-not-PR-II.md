@@ -35,7 +35,7 @@ $$ f(x_1,\ldots,x_k)=h(g_1(x_1,\ldots ,x_k),\ldots ,g_m(x_1,\ldots ,x_k)). $$
 we obtain the $(k+1)$-ary function $f$ defined by 
 
 $$\begin{aligned}
-f(0,x_1,\ldots ,x_k)&=g(x_1,\ldots ,x_k)\\f(S(y),x_1,\ldots ,x_k)&=h(y,f(y,x_1,\ldots ,x_k),x_1,\ldots ,x_k).\end{aligned}
+f(0,x_1,\ldots ,x_k)&=g(x_1,\ldots ,x_k)\\f(S(y),x_1,\ldots ,x_k)&=h(f(y,x_1,\ldots ,x_k),y,x_1,\ldots ,x_k).\end{aligned}
 $$
 
 Our initial task is to formalise these ideas in higher-order logic.
@@ -100,6 +100,11 @@ Given an argument list `l`, each element `f` of the list `fs` is applied to `l` 
   </span><span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">COMP</span> <span class="free bound entity">g</span> <span class="free bound entity">fs</span> <span class="free bound entity">l</span> <span class="main">=</span> <span class="free bound entity">g</span> <span class="main">(</span>map <span class="main">(</span><span class="main">λ</span><span class="bound">f</span><span class="main">.</span> <span class="bound">f</span> <span class="free bound entity">l</span><span class="main">)</span> <span class="free bound entity">fs</span><span class="main">)</span><span>"</span></span>
 </pre>
 
+Primitive recursion itself is delegated to `rec_nat`, a low-level function for recursion over the natural numbers.
+Provided the argument list is nonempty, its tail (namely `l`) represents the tuple $(x_1,\ldots,x_k)$ while `y` ranges over the predecessors of `x` and `r` represents the inner recursive call.
+The function `g` is applied first to `PREC f g y` and then to `y`.
+And the first line of the definition below handles the degenerate case, 
+because primitive recursion is actually undefined for the empty list.
 
 <pre class="source">
 <span class="keyword1 command">fun</span> <span class="entity">PREC</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">[</span>nat list <span class="main">⇒</span> nat<span class="main">,</span> nat list <span class="main">⇒</span> nat<span class="main">,</span> nat list<span class="main">]</span> <span class="main">⇒</span> nat<span>"</span></span><span>
@@ -108,7 +113,6 @@ Given an argument list `l`, each element `f` of the list `fs` is applied to `l` 
   </span><span class="main">|</span> <span class="quoted quoted"><span>"</span><span class="free">PREC</span> <span class="free bound entity">f</span> <span class="free bound entity">g</span> <span class="main">(</span><span class="free bound entity">x</span> <span class="main">#</span> <span class="free bound entity">l</span><span class="main">)</span> <span class="main">=</span> rec_nat <span class="main">(</span><span class="free bound entity">f</span> <span class="free bound entity">l</span><span class="main">)</span> <span class="main">(</span><span class="main">λ</span><span class="bound">y</span> <span class="bound">r</span><span class="main">.</span> <span class="free bound entity">g</span> <span class="main">(</span><span class="bound">r</span> <span class="main">#</span> <span class="bound">y</span> <span class="main">#</span> <span class="free bound entity">l</span><span class="main">)</span><span class="main">)</span> <span class="free bound entity">x</span><span>"</span></span>
 </pre>
 
-Note that <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">g</span><span>›</span></span></span> is applied first to <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">PREC</span> <span class="free">f</span> <span class="free">g</span> <span class="free">y</span><span>›</span></span></span> and then to <span class="antiquoted"><span class="operator"><span class="hidden">\&lt;^</span><span class="control">term</span><span class="hidden">&gt;</span></span><span class="quoted"><span>‹</span><span class="free">y</span><span>›</span></span></span><span>!</span><span>›</span></span>
 
 ### Inductive definition 
 
@@ -177,8 +181,8 @@ Note that <span class="antiquoted"><span class="operator"><span class="hidden">\
 </span><span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Cons <span class="skolem">a</span> <span class="skolem">l</span><span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack.simps<span class="main main">(</span>1<span class="main main">)</span> add.commute <span>drop_Cons'</span> hd0.simps<span class="main main">(</span>2<span class="main main">)</span> leD leI lessI not_less_eq sum_list.Cons trans_le_add2<span class="main">)</span><span>
-</span><span class="keyword1 command">qed</span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack.simps<span class="main main">(</span>1<span class="main main">)</span> add.commute <span>drop_Cons'</span> hd0.simps<span class="main main">(</span>2<span class="main main">)</span> leD leI lessI not_less_eq sum_list.Cons trans_le_add2<span class="main">)</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
 #### The COMP case
@@ -193,8 +197,8 @@ Note that <span class="antiquoted"><span class="operator"><span class="hidden">\
 </span><span class="keyword1 command">next</span><span>
   </span><span class="keyword3 command">case</span> <span class="main">(</span>Cons <span class="skolem">a</span> <span class="skolem">fs</span><span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">simp</span> <span class="main">(</span><span class="operator">blast</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> add_less_mono ack_add_bound less_trans<span class="main">)</span><span>
-</span><span class="keyword1 command">qed</span>
+    </span><span class="keyword1 command">by</span> <span class="operator">simp</span> <span class="main">(</span><span class="operator">blast</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> add_less_mono ack_add_bound less_trans<span class="main">)</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
 <pre class="source">
@@ -253,7 +257,7 @@ Note that <span class="antiquoted"><span class="operator"><span class="hidden">\
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ack_bounds_PRIMREC<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>PRIMREC</span> <span class="free">f</span> <span class="main">⟹</span> <span class="main">∃</span><span class="bound">k</span><span class="main">.</span> <span class="main">∀</span><span class="bound">l</span><span class="main">.</span> <span class="free">f</span> <span class="bound">l</span> <span class="main">&lt;</span> ack</span> <span class="bound">k</span> <span class="main">(</span>sum_list <span class="bound">l</span><span class="main">)</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">erule</span> PRIMREC.induct<span class="main">)</span> <span class="main">(</span><span class="operator">blast</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> SC_case CONSTANT_case PROJ_case COMP_case PREC_case<span class="main">)</span><span class="main keyword3">+</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">erule</span> PRIMREC.induct<span class="main">)</span> <span class="main">(</span><span class="operator">blast</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> SC_case CONSTANT_case PROJ_case COMP_case PREC_case<span class="main">)</span><span class="main keyword3">+</span>
 </pre>
 
 <pre class="source">
