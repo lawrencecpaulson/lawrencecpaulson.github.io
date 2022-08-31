@@ -8,11 +8,11 @@ tags: [examples, Isabelle, Ackermann's function]
 A university-level course on computation theory will invariably cover [recursive functions](https://plato.stanford.edu/entries/recursive-functions/): the model of computation developed by Gödel and Kleene.
 Students learn about the [*primitive recursive*](https://en.wikipedia.org/wiki/Primitive_recursive_function) (PR) functions, a fairly natural idea, but also learn that the PR functions are insufficient.
 True, these functions include all the familiar arithmetic operations,
-as well as all the obvious syntactic operations on expressions that have been 
+as well as all the obvious syntactic operations on expressions that have been
 "Gödel-numbered" (coded in terms of arithmetic formulas).
-Among the PR functions are many that cannot be regarded as *feasibly* computable because they grow at an utterly unimaginable rate. 
+Among the PR functions are many that cannot be regarded as *feasibly* computable because they grow at an utterly unimaginable rate.
 (Do not say "exponential": in this context, **exponential growth is negligible**.)
-The PR functions are insufficient because, in three simple lines, we can define 
+The PR functions are insufficient because, in three simple lines, we can define
 an obviously computable function that grows faster than any of them.
 It is, of course, [Ackermann's function](https://plato.stanford.edu/entries/recursive-functions/#AckePeteFunc).
 
@@ -53,9 +53,9 @@ Isabelle's recursion package also returns an *induction rule* tailored to this s
 
 ### Properties involving the second argument
 
-The formal development follows a [1991 paper](https://www.researchgate.net/publication/2662353_A_Machine_Checked_Proof_that_Ackermann's_Function_is_not_Primitive_Recursive)
+The formal development follows a [1993 paper](https://dl.acm.org/doi/abs/10.5555/185881.185934)
 by Nora Szasz, and the names of the properties are hers.
-She proved that Ackermann's Function was not PR using ALF, an early implementation of Martin-Löf type theory and a predecessor of [Agda](https://agda.readthedocs.io/en/v2.6.0.1/getting-started/what-is-agda.html). 
+She proved that Ackermann's Function was not PR using ALF, an early implementation of Martin-Löf type theory and a predecessor of [Agda](https://agda.readthedocs.io/en/v2.6.0.1/getting-started/what-is-agda.html).
 
 The Isabelle development doesn't strictly follow Szasz, and in particular the Ackermann recursion equations are already available to us, so the first property be proved is A4. It's an elementary inequality, proved by Ackermann induction (`Ack.induct`) followed by simplification.
 
@@ -66,7 +66,7 @@ The Isabelle development doesn't strictly follow Szasz, and in particular the Ac
 
 The main theorem uses currying to freeze the first argument, regarding Ackermann's as a unary function $A(i,-)$ for some suitable $i$.
 We need to know that this function will be strictly monotonic, i.e. that Ackermann's is monotonic in its second argument.
-This can be proved first for the successor case, 
+This can be proved first for the successor case,
 again by Ackermann induction.
 
 <pre class="source">
@@ -111,7 +111,7 @@ From this, we get a basic monotonicity result for the first argument:
 </pre>
 
 And then a result reminiscent of A4:
- 
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> less_ack1 <span class="main">[</span><span class="operator">iff</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">&lt;</span> ack</span> <span class="free">i</span> <span class="free">j</span><span>"</span></span><span>
 </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induct</span> <span class="quoted free">i</span><span class="main">)</span><span>
@@ -160,12 +160,12 @@ You can imagine what happens with an argument of 4. And you can't imagine what h
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">fastforce</span> <span class="quasi_keyword">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> power_add <span class="dynamic dynamic">algebra_simps</span><span class="main">)</span><span>
 </span><span class="keyword1 command">qed</span><</pre>
 
-I'd like to mention a couple of fine points. 
+I'd like to mention a couple of fine points.
 
 1. The proofs aren't using Ackermann induction any more, but mostly good old mathematical induction.
 How do you know which to choose? Mostly it's trial and error. It's often possible to get a proof using the "wrong" induction rule, but with a lot of needless pain.
 
-2. Sometimes we write integer constants as decimal integers and sometimes as strings of successors (`Suc`). The successor form is necessary for rewriting by recursion equations. You can't count on Isabelle magically converting from one form to the other is needed. Simplifying by `eval_nat_numeral` translates decimal integers into unary (`Suc`) form, and 1 is always simplified to `Suc 0`.
+2. Sometimes we write natural number constants as decimal integers and sometimes as strings of successors (`Suc`). The successor form is necessary for rewriting by recursion equations. You can't count on Isabelle magically converting from one form to the other is needed. Simplifying by `eval_nat_numeral` translates decimal integers into unary (`Suc`) form, and 1 is always simplified to `Suc 0`.
 
 ### Monotonicity in the first argument
 
@@ -200,57 +200,58 @@ And once again, we need a non-strict version:
 
 ### Building up the first argument
 
-As mentioned above, the proof that Ackermann's function is not PR involves choosing a suitable first argument. Each of the following results exhibits 
+As mentioned above, the proof that Ackermann's function is not PR involves choosing a suitable first argument. Each of the following results exhibits
 some $i$ such that $A(i,{-})$ grows faster than some other expression involving Ackermann's function. These will deal with various inductive cases connected with the construction of primitive recursive functions.
 
 A10 deals with nested function calls:
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> ack_nest_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="main">(</span>ack</span> <span class="free">i2</span> <span class="free">j</span><span class="main">)</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">2</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span><span>
-</span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
-  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="main">(</span>ack</span> <span class="free">i2</span> <span class="free">j</span><span class="main">)</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="main">(</span>ack <span class="main">(</span>Suc <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span class="main">)</span><span>"</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">meson</span> ack_le_mono1 ack_less_mono1 ack_less_mono2 le_add1 le_trans less_add_Suc2 not_less<span class="main">)</span><span>
-  </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">...</span> <span class="main">=</span> ack</span> <span class="main">(</span>Suc <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span>Suc <span class="free">j</span><span class="main">)</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">simp</span><span>
-  </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">...</span> <span class="main">≤</span> ack</span> <span class="main">(</span><span class="numeral">2</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span></span><span>
-    </span><span class="keyword1 command">using</span> ack2_le_ack1 add_2_eq_Suc <span class="keyword1 command">by</span> <span class="operator">presburger</span><span>
-  </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span><span>
-</span><span class="keyword1 command">qed</span>
+<span class="keyword1 command">lemma</span> ack_nest_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="main">(</span>ack</span> <span class="free">i2</span> <span class="free">j</span><span class="main">)</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">2</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+<span class="keyword1 command">proof</span> <span class="operator">-</span>
+  <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="main">(</span>ack</span> <span class="free">i2</span> <span class="free">j</span><span class="main">)</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="main">(</span>ack <span class="main">(</span>Suc <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span class="main">)</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">meson</span> ack_le_mono1 ack_less_mono1 ack_less_mono2 le_add1 le_trans less_add_Suc2 not_less<span class="main">)</span>
+  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">=</span></span> ack</span> <span class="main">(</span>Suc <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span>Suc <span class="free">j</span><span class="main">)</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="operator">simp</span>
+  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">≤</span></span> ack</span> <span class="main">(</span><span class="numeral">2</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+    <span class="keyword1 command">using</span> ack2_le_ack1 add_2_eq_Suc <span class="keyword1 command">by</span> <span class="operator">presburger</span>
+  <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
 A11 deals with the sum of two function calls:
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> ack_add_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">+</span> ack</span> <span class="free">i2</span> <span class="free">j</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span><span>
-</span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
-  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">≤</span> ack</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i2</span> <span class="free">j</span> <span class="main">≤</span> ack</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span>"</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ack_le_mono1<span class="main">)</span><span>
-  </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">+</span> ack</span> <span class="free">i2</span> <span class="free">j</span> <span class="main">&lt;</span> ack <span class="main">(</span>Suc <span class="main">(</span>Suc <span class="main">0</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span>ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span class="main">)</span><span>"</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">simp</span><span>
-  </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">...</span> <span class="main">&lt;</span> ack</span> <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack_nest_bound add.assoc numeral_2_eq_2 numeral_Bit0<span class="main">)</span><span>
-  </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span><span>
-</span><span class="keyword1 command">qed</span>
+<span class="keyword1 command">lemma</span> ack_add_bound<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">+</span></span> ack <span class="free">i2</span> <span class="free">j</span> <span class="main">&lt;</span> ack <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+<span class="keyword1 command">proof</span> <span class="operator">-</span>
+  <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">≤</span></span> ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i2</span> <span class="free">j</span> <span class="main">≤</span></span> ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp_all</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ack_le_mono1<span class="main">)</span>
+  <span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">i1</span> <span class="free">j</span> <span class="main">+</span></span> ack <span class="free">i2</span> <span class="free">j</span> <span class="main">&lt;</span> ack <span class="main">(</span>Suc <span class="main">(</span>Suc <span class="main">0</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span>ack <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span> <span class="free">j</span><span class="main">)</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="operator">simp</span>
+  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">&lt;</span></span> ack</span> <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="main">(</span><span class="free">i1</span> <span class="main">+</span> <span class="free">i2</span><span class="main">)</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack_nest_bound add.assoc numeral_2_eq_2 numeral_Bit0<span class="main">)</span>
+  <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
-I find this last result (A12) rather curious. Adding 4 to the first argument is a super gigantic leap and doesn't seem necessary. 
+I find this last result (A12) rather curious. Adding 4 to the first argument is a super gigantic leap and doesn't seem necessary.
 On the other hand, it can be as big as we wish, so who cares?
 And as stated, the theorem follows quickly from the previous one.
 
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> ack_add_bound2<span class="main">:</span><span>
-  </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">&lt;</span> ack</span> <span class="free">k</span> <span class="free">j</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">+</span> <span class="free">j</span> <span class="main">&lt;</span> ack</span> <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span> <span class="free">j</span><span>"</span></span><span>
-</span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
-  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">+</span> <span class="free">j</span> <span class="main">&lt;</span> ack</span> <span class="free">k</span> <span class="free">j</span> <span class="main">+</span> ack</span> <span class="main">0</span> <span class="free">j</span><span>"</span><span>
-    </span><span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="operator">auto</span><span>
-  </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">...</span> <span class="main">&lt;</span> ack</span> <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span> <span class="free">j</span><span>"</span></span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack_add_bound add.right_neutral<span class="main">)</span><span>
-  </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span><span>
-</span><span class="keyword1 command">qed</span>
+<span class="keyword1 command">lemma</span> ack_add_bound2<span class="main">:</span>
+  <span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">&lt;</span></span> ack</span> <span class="free">k</span> <span class="free">j</span><span>"</span> <span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">+</span></span> <span class="free">j</span> <span class="main">&lt;</span></span> ack <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+<span class="keyword1 command">proof</span> <span class="operator">-</span>
+  <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">i</span> <span class="main">+</span></span> <span class="free">j</span> <span class="main">&lt;</span></span> ack <span class="free">k</span> <span class="free">j</span> <span class="main">+</span> ack <span class="main">0</span> <span class="free">j</span><span>"</span>
+    <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="operator">auto</span>
+  <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">&lt;</span></span> ack</span> <span class="main">(</span><span class="numeral">4</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span> <span class="free">j</span><span>"</span>
+    <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> ack_add_bound add.right_neutral<span class="main">)</span>
+  <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">.</span>
+<span class="keyword1 command">qed</span>
 </pre>
 
 The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be downloaded from Isabelle's Archive of Formal Proofs.
 You can confirm that the proofs really are as simple as they appear on this post.
+We'll examine the rest of the proof next week!
 
 
