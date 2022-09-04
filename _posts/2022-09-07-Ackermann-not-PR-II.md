@@ -31,14 +31,14 @@ Primitive recursive can be combined as follows:
 
 * The *composition* $g\circ(f_1,\ldots,f_m)$ of an $m$-ary function $g$ and $k$-ary functions $f_1,\ldots,f_m$ denotes a function mapping
 $$ (x_1,\ldots,x_k) \mapsto g(f_1(x_1,\ldots ,x_k),\ldots ,f_m(x_1,\ldots ,x_k)). $$
-* Primitive recursion, the key idea: given the $k$-ary function $g(x_1,\ldots ,x_k)$ and the $(k + 2)$-ary function $h(y,z,x_1,\ldots ,x_k)$,
-we obtain the $(k+1)$-ary function $f$ defined by
+* *Primitive recursion* combines the $k$-ary function $g(x_1,\ldots ,x_k)$ and the $(k + 2)$-ary function $h(y,z,x_1,\ldots ,x_k)$
+to obtain the $(k+1)$-ary function $f$ defined by
 
 $$\begin{aligned}
 f(0,x_1,\ldots ,x_k)&=g(x_1,\ldots ,x_k)\\f(S(y),x_1,\ldots ,x_k)&=h(f(y,x_1,\ldots ,x_k),y,x_1,\ldots ,x_k).\end{aligned}
 $$
 
-And there are no primitive recursive functions other than those specified above.
+Finally, and crucially, there are no primitive recursive functions other than those specified above.
 Our initial task is to formalise these ideas in higher-order logic.
 
 ### Formalising the set of PR functions
@@ -48,7 +48,7 @@ Every recursion must be bounded by a precomputed integer.
 Worse, the arguments in the recursion are not allowed to vary, so a typical functional programming style is impossible.
 Division, for example, is tricky to code.
 It isn't defined in the Wikipedia article and I can't see a better algorithm than explicit inversion of multiplication, i.e.,
-trying ever larger quotients and stopping before they get too large.
+trying ever larger "quotients" and stopping before they get too large.
 
 But we are not defining a language at all but rather a *predicate* identifying those functions
 in $\bigcup_{k\ge0}\,\mathbb{N}^k\to\mathbb{N}$ that are primitive recursive.
@@ -155,7 +155,7 @@ The following five claims were present in the development, but are not actually 
 #### The actual inductive definition
 
 Having defined all the basic functions and operations to combine them, the inductive definition itself is trivial. Several of these functions are simple enough that they could have been written in line, but it's convenient to have names such as `SC` available separately.
-It's notable that Szasz did in fact formalise a language of PR functions, interpreting this language as a separate step.
+It's notable that Szasz did in fact formalise a language of PR functions, which she interpreted in a separate step.
 
 <pre class="source">
 <span class="keyword1 command">inductive</span> <span class="entity">PRIMREC</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="main">(</span>nat list <span class="main">⇒</span> nat<span class="main">)</span> <span class="main">⇒</span> bool<span>"</span></span> <span class="keyword2 keyword">where</span><span>
@@ -175,7 +175,7 @@ Peter Aczel's [chapter](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [he
 ### Now for the inductive proof itself
 
 To prove that Ackermann's function is not primitive recursive, we show that for each PR function $f$ we can find some bound $k$, in the sense that $A(k,{-})$ grows strictly faster than $f$.
-To build up to this result, we work through all the ways of constructing a PR function. It's only a matter of style that we prove these cases as separate lemmas rather than as one great induction.
+To build up to this result, we work through all the ways of constructing a PR function. It's only a matter of style that we prove these cases as separate lemmas rather than as one big induction.
 
 #### The base cases
 
@@ -317,8 +317,8 @@ The actual function that is not primitive recursive is Ackermann's function alon
 
 The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be found in Isabelle's Archive of Formal Proofs.
 I tidied it considerably in the course of writing this blog post. The new version
-will remain hidden in the development branch of the AFP until Isabelle 2022 is released, this coming September.
-Although the theorem is remarkable and deep, it's easy to formalise.
+will remain hidden in the development branch of the AFP until Isabelle 2022 is released, around October.
+Although the theorem is remarkable and deep, it's formal proof is concise: a mere 300 lines.
 
 By the way, if you are looking for a function that is not primitive recursive and has a practical application, the answer is, any programming language interpreter.
 An interpreter takes a source program (encoded somehow) and executes it, so it can easily run forever.
