@@ -15,8 +15,7 @@ What is the right way to achieve interoperability between proof assistant librar
 
 ### Libraries of mathematics
 
-Before the hegemony of x86, people used to say that the significance of a computer architecture was determined by its software base. 
-Today, the significance of a proof assistant is to a large extent determined by its libraries:
+Just as the significance of a platform is determined by its application base, the significance of a proof assistant is to a large extent determined by its libraries:
 
 * [Mathematical Components](https://math-comp.github.io)
 (among others) for [Coq](https://coq.inria.fr); 
@@ -47,7 +46,13 @@ and then—with a couple of big grant proposals falling short—found myself at 
 The HOL Light library was definitely valuable, or so people told me. Regrettably, my knowledge of multivariate analysis is minimal, and please don't utter the word "homology".
 I was ideally suited to this task, because HOL Light is astonishingly retro, hardly different from Cambridge LCF as I left it in 1984.
 Aspects of the work could be automated through Perl scripts and the porting of routine material was actually kind of relaxing, kind of like doing a crossword.
-I seldom had to actually run HOL Light in order to see what was going on in a proof with the exception of a tiny number of exceptionally long, horrible or treacherous HOL Light scripts.
+And oh! The nostalgia of seeing `REPEAT GEN_TAC` (which dates to Edinburgh LCF)
+and theorem continuations (my own weird baby).
+I seldom had to actually run HOL Light in order to see what was going on in a proof with the exception of a tiny number of exceptionally long, ghastly or treacherous HOL Light scripts.
+I could even figure out such horrors as
+<pre>
+  FIRST_ASSUM(ASSUME_TAC o MATCH_MP OPEN_IN_IMP_SUBSET)
+</pre>
 
 The Isabelle analysis library today contains approximately 10,000 named theorems, including Cauchy’s integral and residue theorems, the Liouville theorem, the open mapping and domain invariance theorems, the maximum modulus principle and the Krein-Milman theorem.
 This represents 100-200K lines of HOL Light proofs (the wretched homology development alone is 11,400 lines).
