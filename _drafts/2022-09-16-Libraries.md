@@ -5,17 +5,17 @@ usemathjax: true
 tags: [general, Isabelle, Archive of Formal Proofs, HOL system, Coq]
 ---
 
-In 2005, a student arrived who wanted to do PhD involving formalised probability theory.
-I advised him to use HOL4, where theories of Lebesgue integration and probability theory had already been formalised; they were not available in Isabelle/HOL.
+In 2005, a student arrived who wanted to do a PhD involving formalised probability theory.
+I advised him to use HOL4, where theories of Lebesgue integration and probability theory had [already been formalised](https://doi.org/10.48456/tr-566); they were not available in Isabelle/HOL.
 Ironically, he eventually discovered that the HOL4 theories didn't meet his requirements and he was forced to redo them.
 This episode explains why I have since devoted so much effort to porting libraries into Isabelle/HOL.
 But note: Isabelle/HOL already had, from 2004, a *full copy* of the HOL4 libraries, translated by importer tools.
-I even never thought of using these libraries, and they were quietly withdrawn in 2012.
+I never even thought of using these libraries, and they were quietly withdrawn in 2012.
 What is the right way to achieve interoperability between proof assistant libraries?
 
 ### Libraries of mathematics
 
-Just as the significance of a platform is determined by its application base, the significance of a proof assistant is to a large extent determined by its libraries:
+Just as the significance of a platform is determined by its application base, the significance of a proof assistant is largely determined by its libraries:
 
 * [Mathematical Components](https://math-comp.github.io)
 (among others) for [Coq](https://coq.inria.fr); 
@@ -26,14 +26,14 @@ for [Isabelle](https://isabelle.in.tum.de).
 * John Harrison's [Euclidean spaces](https://rdcu.be/cJtGW) 
 and ["top 100 theorems"](https://www.cs.ru.nl/~freek/100/)
 for [HOL Light](https://www.cl.cam.ac.uk/~jrh13/hol-light/) 
-* Although [Mizar](http://mizar.org) introduced a groundbreaking mathematical language, for many researchers the real attraction was its huge library.
+* Although [Mizar](http://mizar.org) introduced a groundbreaking mathematical language, for many researchers the real attraction was the huge Mizar Mathematical Library.
 
-The wastefulness of having so much of the same mathematics formalised incompatibly, multiple times, attracted many people's notice.
-The proprietors of newer systems were naturally covetous of the large libraries of older systems. This feeling was particularly strong among the various implementations of higher-order logic, one single formalism if we can ignore the various bells and whistles on each of the implementations.
+Many people thought it wasteful to have so many overlapping but incompatible libraries.
+The proprietors of newer systems were naturally covetous of the accumulated wealth of older systems. This feeling was particularly strong among the various implementations of higher-order logic, one single formalism if we ignore each implementation's bells and whistles.
 Powerful and efficient importers were built, e.g. by [Obua and Skalberg](https://rdcu.be/cUZ2i), but they didn't catch on. Despite that, research in this area continues.
 
-I am not optimistic for the prospects of this sort of library porting, for a simple reason: we need the **actual proofs**. All the attempts that I have seen involve finding a lowest-common-denominator calculus to unify two different proof assistants and through that to emulate proofs in one system using proofs in the other. Ideally, corresponding more basic libraries (e.g. of the natural numbers) are identified and matched rather than translated.
-Still, the very best one can hope for is a list of statements certified by the importer as having been proved somewhere else.
+I am not optimistic for the prospects of this sort of library porting, for a simple reason: we need the **actual proofs**. All the attempts that I have seen involve finding a lowest-common-denominator calculus for two different proof assistants and thus to emulate proofs in one system using proofs in the other. Ideally, corresponding more basic libraries (e.g. of the natural numbers) are identified and matched rather than translated.
+Still, the very best one can hope for is a list of statements certified by the importer as having been proved somewhere, somehow.
 
 
 ### Porting proofs from HOL Light to Isabelle/HOL
@@ -44,25 +44,27 @@ It might seem an odd use of my time. I had spent years away from Isabelle workin
 and then—with a couple of big grant proposals falling short—found myself at a loose end.
 
 The HOL Light library was definitely valuable, or so people told me. Regrettably, my knowledge of multivariate analysis is minimal, and please don't utter the word "homology".
-I was ideally suited to this task, because HOL Light is astonishingly retro, hardly different from Cambridge LCF as I left it in 1984.
-Aspects of the work could be automated through Perl scripts and the porting of routine material was actually kind of relaxing, kind of like doing a crossword.
+I was ideally suited to this task: HOL Light is astonishingly retro, hardly different from Cambridge LCF as I left it in 1984.
+Aspects of the work could be automated through Perl scripts and the porting of routine material was actually kind of relaxing, like doing a crossword (only much easier).
 And oh! The nostalgia of seeing `REPEAT GEN_TAC` (which dates to Edinburgh LCF)
-and theorem continuations (my own weird baby).
-I seldom had to actually run HOL Light in order to see what was going on in a proof with the exception of a tiny number of exceptionally long, ghastly or treacherous HOL Light scripts.
+and "conversions" and "theorem continuations" (my own weird babies).
+I seldom had to actually run HOL Light in order to see what was going on in a proof except for a few exceptionally long, ghastly or treacherous HOL Light scripts.
+Two variables called `x` but with different types? No problem.
 I could even figure out such horrors as
-<pre>
+<pre class="source">
   FIRST_ASSUM(ASSUME_TAC o MATCH_MP OPEN_IN_IMP_SUBSET)
 </pre>
 
 The Isabelle analysis library today contains approximately 10,000 named theorems, including Cauchy’s integral and residue theorems, the Liouville theorem, the open mapping and domain invariance theorems, the maximum modulus principle and the Krein-Milman theorem.
 This represents 100-200K lines of HOL Light proofs (the wretched homology development alone is 11,400 lines).
-The material was ported by a variety of people.
+The material was ported by a variety of people. 
+But for my sins, I think I ported the bulk of it.
 
-### Example
+### Working through an example
 
-At 50 lines, the following HOL Light proof counts as medium-sized. It's not one of the many trivial lemmas that seem to be necessary, but neither is it even close to being a fearful monstrosity.
+At 50 lines, the following HOL Light proof counts as medium-sized. It's not one of the many trivial lemmas that are always necessary, but neither is it in any way difficult.
 
-<pre>
+<pre class="source">
 let HOMEOMORPHIC_PUNCTURED_SPHERE_AFFINE_GEN = prove
  (`!s:real^N->bool t:real^M->bool a.
         convex s /\ bounded s /\ a IN relative_frontier s /\
@@ -115,9 +117,21 @@ let HOMEOMORPHIC_PUNCTURED_SPHERE_AFFINE_GEN = prove
     ASM SET_TAC[]]);;
 </pre>
 
-42 lines
+I should mention that I often had little grasp of the mathematics.
+Convex and bounded sets are simple enough. Affine? No idea. Affine dimension presumably has something to do with dimensions in linear algebra, and at the start of this work I had never come across the word *homeomorphism*. I did manage to learn bits and pieces while porting all this material, and I'm pretty sure that this particular theorem generalises the well-known fact that a punctured sphere can be continuously flattened to a plane: the so-called [stereographic projection](https://en.wikipedia.org/wiki/Stereographic_projection).
 
-<pre>
+The proof script is typical of HOL Light.
+Formidable though it appears, every proof is a combination of backward reasoning from the goal and forward reasoning from the assumptions, and a close look will reveal these steps.
+However, the lack of a structured language means that the same effect might be obtained in strikingly different ways. 
+We see in the first line case analysis on whether the set `s` is empty, though in reality the assumptions imply that it is nonempty. Calls to `MP_TAC` typically involve inserting instances of previous theorems into the list of assumptions (I invented this technique, may God forgive me), when our task is to find the corresponding theorem in the Isabelle library
+(porting it if it is not there) and first proving the corresponding instances of its premises, which can be read off from the explicit instance given here by `ISPECL`. 
+The line beginning `DISCH_THEN(X_CHOOSE_THEN` notes an existential claim from the theorem just instantiated. (Those are theorem continuations.)
+Sometimes the proofs are nested but we can keep going, hoping that an induction formula is not being generated dynamically, because then you often can't see what the induction is all about.
+
+This process is largely mechanical, which is why I could port proofs that I didn't understand, and why I believe that the future of proof porting must involve the porting of proofs at a high level, where we can see the structure of the result.
+For this example, the result of my largely ignorant and mechanical translation at least resembles mathematics:
+
+<pre class="source">
 <span class="keyword1 command">proposition</span> homeomorphic_punctured_sphere_affine_gen<span class="main">:</span><span>
   </span><span class="keyword2 keyword">fixes</span> <span class="free">a</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="tfree">'a</span> <span class="main">::</span> euclidean_space</span><span>"</span></span><span>
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span>convex</span> <span class="free">S</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span>bounded</span> <span class="free">S</span><span>"</span></span> <span class="keyword2 keyword">and</span> a<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">a</span> <span class="main">∈</span></span> rel_frontier</span> <span class="free">S</span><span>"</span><span>
@@ -162,9 +176,14 @@ let HOMEOMORPHIC_PUNCTURED_SPHERE_AFFINE_GEN = prove
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+In the Isabelle proof, we can see that the first step is to obtain an affine and convex set `U`. We prove the set `S` to be nonempty and from that obtain a specific element `z` belonging to `U`.
+The argument continues with intelligible steps.
+With this proof, the ported version is not only more legible than the original but it's actually shorter, at 42 lines instead of 50.
+
+
 ### WLOG example
 
-<pre>
+<pre class="source">
 let CARD_EQ_CONNECTED = prove
  (`!s a b:real^N.
         connected s /\ a IN s /\ b IN s /\ ~(a = b) ==> s =_c (:real)`,
@@ -190,7 +209,7 @@ XXXX
 * Unfortunately, the WLOG tactics transform all the assertions in the problem!
 * It is often unclear what is being proved.
 
-<pre>
+<pre class="source">
 <span class="keyword1 command">lemma</span> connected_uncountable<span class="main">:</span><span>
   </span><span class="keyword2 keyword">fixes</span> <span class="free">S</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="tfree">'a</span><span class="main">::</span>metric_space</span> set</span><span>"</span><span>
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span>connected</span> <span class="free">S</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">a</span> <span class="main">∈</span></span> <span class="free">S</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">b</span> <span class="main">∈</span></span> <span class="free">S</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">a</span> <span class="main">≠</span></span> <span class="free">b</span><span>"</span></span> <span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span>uncountable</span> <span class="free">S</span><span>"</span></span><span>
