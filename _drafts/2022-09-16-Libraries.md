@@ -181,7 +181,21 @@ The argument continues with intelligible steps.
 With this proof, the ported version is not only more legible than the original but it's actually shorter, at 42 lines instead of 50.
 
 
-### WLOG example
+### A WLOG example
+
+Many proofs contain the phrase *without loss of generality*.
+Sometimes it's a mere appeal to symmetry: if $x\not=y$ then it is okay to assume that in fact $x<y$, provided the claim being proved is unchanged when $x$ and $y$ are swapped.
+The concept of WLOG is impossible to make precise; it involves an intuitive feeling that the essence of the proof of some statement is also present in the proof of some similar statement.
+Remember, all theorems are equivalent.
+
+John Harrison's paper ["Without Loss of Generality"](https://rdcu.be/cU7YV)
+describes a suite of tactics in HOL Light for handling common cases of WLOG reasoning, with a focus on geometry.
+They are powerful tools in the hands of a HOL Light user and a nasty surprise to somebody trying to port to these proofs.
+They transform the goal in a way that is often hard to work out in your head, creating one of the few occasions when it's really necessary to launch HOL Light to figure out what is going on.
+
+The following example states that a connected set in Euclidean space
+is necessarily uncountable if it contains two distinct points $a$ and $b$.
+The first step assumes that $b$ lies on the Origin and the second assumes that $a$ lies on the unit circle. Damn.
 
 <pre class="source">
 let CARD_EQ_CONNECTED = prove
@@ -203,11 +217,14 @@ let CARD_EQ_CONNECTED = prove
       ASM_REWRITE_TAC[DOT_RZERO]]]);;
 </pre>
 
-XXXX
-
-* HOL Light has tactics to assume that some point is zero, or that some vector is aligned with the X-axis, or has length 1, Without Loss of Generality
-* Unfortunately, the WLOG tactics transform all the assertions in the problem!
-* It is often unclear what is being proved.
+This is one of those occasions when it's best to give up.
+Because I could understand what the theorem was claiming, I could find another proof.
+It's actually more general than the original, holding for all metric spaces.
+It relies on the fact that the function $d(a,{-})$, which maps an arbitrary $x$ to its distance $d(a,x)$ from $a$ is continuous, reducing the uncountability of $S$ to that of the closed interval $[0,d(a,b)]$.
+Remember that the operator ( \` ) denotes image, so 
+<span class="source">dist</span> <span class="free">a</span>&ensp;`&ensp;S
+denotes the image of $d(a,{-})$ under $S$.
+This image is uncountable, so the conclusion follows.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> connected_uncountable<span class="main">:</span><span>
@@ -227,22 +244,12 @@ XXXX
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+### Concluding thoughts
 
+A big drawback of these analysis libraries, both the HOL Light originals
+and the ported versions, is that the use of types was focused much more on convenience than flexibility.
+Already HOL Light include some attempts to generalise the material beyond $\mathbb{R}^n$, and the same is needed in Isabelle/HOL.
+Fortunately, because the ported proofs have a legible structure, the effort needed to do this might not be too great.
+More generally, attempts to translate materials from one proof assistant to another should ideally look at the structure of the proof at a high level.
 
-2004
-
-* Proof import: new image HOL4 contains the imported library from
-  the HOL4 system with about 2500 theorems. It is imported by
-  replaying proof terms produced by HOL4 in Isabelle. The HOL4 image
-  can be used like any other Isabelle image.  See
-  HOL/Import/HOL/README for more information.
-
-2012
-
-* Session HOL-Import: Re-implementation from scratch is faster,
-simpler, and more scalable.  Requires a proof bundle, which is
-available as an external component.  Discontinued old (and mostly
-dead) Importer for HOL4 and HOL Light.  
-
-
-(While we should eat our own dog food, we shouldn't force it on our students without compelling reasons.)
+*And by the way*: while we researchers should eat our own dog food, we shouldn't force it on others without compelling reasons.

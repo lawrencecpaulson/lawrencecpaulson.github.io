@@ -45,7 +45,7 @@ Our initial task is to formalise these ideas in higher-order logic.
 
 If we regard the constructions above as a programming language, it's absolutely minimalist, even by comparison with the pure $\lambda$-calculus.
 Every recursion must be bounded by a precomputed integer.
-Worse, the arguments in the recursion are not allowed to vary, so a typical functional programming style is impossible.
+Worse, the arguments in the recursion are not allowed to vary, so the common functional programming technique of [*accumulating arguments*](https://wiki.haskell.org/Performance/Accumulating_parameter) is impossible.
 Division, for example, is tricky to code.
 It isn't defined in the Wikipedia article and I can't see a better algorithm than explicit inversion of multiplication, i.e.,
 trying ever larger "quotients" and stopping before they get too large.
@@ -154,7 +154,8 @@ The following five claims were present in the development, but are not actually 
 
 #### The actual inductive definition
 
-Having defined all the basic functions and operations to combine them, the inductive definition itself is trivial. Several of these functions are simple enough that they could have been written in line, but it's convenient to have names such as `SC` available separately.
+Having defined all the basic functions and operations to combine them, the inductive definition itself is trivial. Several of these functions are simple enough that they could have been written inline, 
+but it's convenient to have names such as `SC` available separately.
 It's notable that Szasz did in fact formalise a language of PR functions, which she interpreted in a separate step.
 
 <pre class="source">
