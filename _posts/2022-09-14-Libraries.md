@@ -2,7 +2,7 @@
 layout: post
 title:  "Porting Libraries of Mathematics Between Proof Assistants"
 usemathjax: true 
-tags: [general, Isabelle, Archive of Formal Proofs, HOL system, Coq]
+tags: [general, Isabelle, Archive of Formal Proofs, HOL system, HOL Light, Coq]
 ---
 
 In 2005, a student arrived who wanted to do a PhD involving formalised probability theory.
