@@ -11,7 +11,7 @@ Ironically, he eventually discovered that the HOL4 theories didn't meet his requ
 This episode explains why I have since devoted so much effort to porting libraries into Isabelle/HOL.
 But note: Isabelle/HOL already had, from 2004, a *full copy* of the HOL4 libraries, translated by importer tools.
 I never even thought of using these libraries, and they were quietly withdrawn in 2012.
-What is the right way to achieve interoperability between proof assistant libraries?
+Why was that? And what is the right way to achieve interoperability between proof assistant libraries?
 
 ### Libraries of mathematics
 
@@ -32,9 +32,9 @@ Many people thought it wasteful to have so many overlapping but incompatible lib
 The proprietors of newer systems were naturally covetous of the accumulated wealth of older systems. This feeling was particularly strong among the various implementations of higher-order logic, one single formalism if we ignore each implementation's bells and whistles.
 Powerful and efficient importers were built, e.g. by [Obua and Skalberg](https://rdcu.be/cUZ2i), but they didn't catch on. Despite that, research in this area continues.
 
-I am not optimistic for the prospects of this sort of library porting, for a simple reason: we need the **actual proofs**. All the attempts that I have seen involve finding a lowest-common-denominator calculus for two different proof assistants and thus to emulate proofs in one system using proofs in the other. Ideally, corresponding more basic libraries (e.g. of the natural numbers) are identified and matched rather than translated.
+I am not optimistic for the prospects of this sort of library porting, for a simple reason: we need the **actual proofs**. All the attempts that I have seen involve finding a lowest-common-denominator calculus for two different proof assistants and thus to emulate proofs in one system using proofs in the other. Ideally, corresponding basic libraries (e.g. of the natural numbers) are identified and matched rather than translated.
 Still, the very best one can hope for is a list of statements certified by the importer as having been proved somewhere, somehow.
-
+This isn't satisfying.
 
 ### Porting proofs from HOL Light to Isabelle/HOL
 
@@ -44,7 +44,7 @@ It might seem an odd use of my time. I had spent years away from Isabelle workin
 and then—with a couple of big grant proposals falling short—found myself at a loose end.
 
 The HOL Light library was definitely valuable, or so people told me. Regrettably, my knowledge of multivariate analysis is minimal, and please don't utter the word "homology".
-I was ideally suited to this task: HOL Light is astonishingly retro, hardly different from Cambridge LCF as I left it in 1984.
+I was ideally suited to this porting task: HOL Light is astonishingly retro, hardly different from [Cambridge LCF](https://github.com/kohlhase/CambridgeLCF) as I left it in 1984.
 Aspects of the work could be automated through Perl scripts and the porting of routine material was actually kind of relaxing, like doing a crossword (only much easier).
 And oh! The nostalgia of seeing `REPEAT GEN_TAC` (which dates to Edinburgh LCF)
 and "conversions" and "theorem continuations" (my own weird babies).
@@ -62,7 +62,8 @@ But for my sins, I think I ported the bulk of it.
 
 ### Working through an example
 
-At 50 lines, the following HOL Light proof counts as medium-sized. It's not one of the many trivial lemmas that are always necessary, but neither is it in any way difficult.
+At 50 lines, the following HOL Light proof counts as medium-sized. It's not trivial, but neither is it in any way difficult.
+ RuthlesslyAll you need is persistence.
 
 <pre class="source">
 let HOMEOMORPHIC_PUNCTURED_SPHERE_AFFINE_GEN = prove
@@ -128,7 +129,9 @@ We see in the first line case analysis on whether the set `s` is empty, though i
 The line beginning `DISCH_THEN(X_CHOOSE_THEN` notes an existential claim from the theorem just instantiated. (Those are theorem continuations.)
 Sometimes the proofs are nested but we can keep going, hoping that an induction formula is not being generated dynamically, because then you often can't see what the induction is all about.
 
-This process is largely mechanical, which is why I could port proofs that I didn't understand, and why I believe that the future of proof porting must involve the porting of proofs at a high level, where we can see the structure of the result.
+This process is largely mechanical, which is why I could port proofs that I didn't understand.
+That's why I believe that the future of proof porting must involve the porting of proofs **at a high level**, where we can see the structure of the result—and not by translating the primitive inferences of a calculus.
+
 For this example, the result of my largely ignorant and mechanical translation at least resembles mathematics:
 
 <pre class="source">
@@ -177,8 +180,9 @@ For this example, the result of my largely ignorant and mechanical translation a
 </pre>
 
 In the Isabelle proof, we can see that the first step is to obtain an affine and convex set `U`. We prove the set `S` to be nonempty and from that obtain a specific element `z` belonging to `U`.
-The argument continues with intelligible steps.
-With this proof, the ported version is not only more legible than the original but it's actually shorter, at 42 lines instead of 50.
+The argument continues with intelligible steps:
+a chain of sets all homeomorphic to one another.
+The ported proof is not only more legible than the original but it's actually shorter, at 42 lines instead of 50; this doesn't always happen.
 
 
 ### A WLOG example
@@ -186,16 +190,16 @@ With this proof, the ported version is not only more legible than the original b
 Many proofs contain the phrase *without loss of generality*.
 Sometimes it's a mere appeal to symmetry: if $x\not=y$ then it is okay to assume that in fact $x<y$, provided the claim being proved is unchanged when $x$ and $y$ are swapped.
 The concept of WLOG is impossible to make precise; it involves an intuitive feeling that the essence of the proof of some statement is also present in the proof of some similar statement.
-Remember, all theorems are equivalent.
+Remember, *all* theorems are equivalent.
 
 John Harrison's paper ["Without Loss of Generality"](https://rdcu.be/cU7YV)
 describes a suite of tactics in HOL Light for handling common cases of WLOG reasoning, with a focus on geometry.
-They are powerful tools in the hands of a HOL Light user and a nasty surprise to somebody trying to port to these proofs.
+They are powerful tools in the hands of a HOL Light user and a nasty surprise to somebody trying to port these proofs.
 They transform the goal in a way that is often hard to work out in your head, creating one of the few occasions when it's really necessary to launch HOL Light to figure out what is going on.
 
 The following example states that a connected set in Euclidean space
-is necessarily uncountable if it contains two distinct points $a$ and $b$.
-The first step assumes that $b$ lies on the Origin and the second assumes that $a$ lies on the unit circle. Damn.
+is uncountable if it contains two distinct points $a$ and $b$.
+The first step assumes that $b$ lies on the Origin, and the second step assumes that $a$ lies on the unit circle. Damn.
 
 <pre class="source">
 let CARD_EQ_CONNECTED = prove
@@ -250,6 +254,6 @@ A big drawback of these analysis libraries, both the HOL Light originals
 and the ported versions, is that the use of types was focused much more on convenience than flexibility.
 Already HOL Light include some attempts to generalise the material beyond $\mathbb{R}^n$, and the same is needed in Isabelle/HOL.
 Fortunately, because the ported proofs have a legible structure, the effort needed to do this might not be too great.
-More generally, attempts to translate materials from one proof assistant to another should ideally look at the structure of the proof at a high level.
+Anybody who wants to steal the Isabelle/HOL library will have the advantage (compared with stealing from HOL Light) that the mathematical argument is right in front of their eyes.
 
-*And by the way*: while we researchers should eat our own dog food, we shouldn't force it on others without compelling reasons.
+As for the story that started this blog post, some people have asked me how I could allow one of my own students to use something other than Isabelle. The reason is this: while we researchers should eat our own dog food, we shouldn't force it on others.
