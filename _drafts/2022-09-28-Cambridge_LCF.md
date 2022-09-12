@@ -44,8 +44,15 @@ the idea of writing a single piece of code that simply worked for multiple types
 As types were interpreted by Scott domains, every type contained a "bottom" or "undefined" value, which was written `UU`.
 That fragment of logic perhaps sufficed for the little examples floating around at the time, but it would be exceeded very quickly.
 
-
 ### Extending the logic
+
+If you give somebody the source code, they might want to tinker with it, especially if there's under 10,000 lines of Lisp and about 1500 lines of ML.
+The ML interpreter was written in Lisp, as were the terms and formulas of PPLAMBDA
+and the syntactic functions over them.
+Completing the logic to full predicate calculus required a bit of coding,
+trivial by modern standards but complicated by having a single VAX/750 equipped with 4 MB to be shared by the entire department. Those were the days.
+
+WAS C LCF CLASSICAL?
 
 ### Compilation for ML
 
