@@ -62,8 +62,7 @@ But for my sins, I think I ported the bulk of it.
 
 ### Working through an example
 
-At 50 lines, the following HOL Light proof counts as medium-sized. It's not trivial, but neither is it in any way difficult.
- RuthlesslyAll you need is persistence.
+At 50 lines, the following HOL Light proof counts as medium-sized. It's not trivial, but neither is it in any way difficult. All you need is persistence.
 
 <pre class="source">
 let HOMEOMORPHIC_PUNCTURED_SPHERE_AFFINE_GEN = prove
