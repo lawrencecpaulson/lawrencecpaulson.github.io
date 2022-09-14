@@ -105,7 +105,7 @@ It had one great advantage: helped by Gerard I had achieved decent performance, 
 Cambridge LCF then became the basis of many other proof assistants.
 Mike Gordon used it in his hardware verification developments, first LCF_LSM and then HOL88, keeping the extended tactic library.
 Gerard Huet used it in early experiments with the calculus of constructions.
-The ML subsystem, known as Cambridge ML, was also the basis of the original version of Nuprl.
+The ML subsystem, known as Cambridge ML, was also the basis of the [original version of Nuprl](https://www.nuprl.org/book/Metalanguage.html).
 
 More details in Mike's paper "From LCF to HOL: a short history",
 *[Proof, Language, and Interaction: Essays in Honour of Robin Milner](https://mitpress.mit.edu/books/proof-language-and-interaction)* 169–185.
