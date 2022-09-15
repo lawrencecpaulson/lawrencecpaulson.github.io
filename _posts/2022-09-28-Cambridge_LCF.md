@@ -9,7 +9,7 @@ Just over 40 years ago, 2 February 1982, I arrived at Heathrow to take up a post
 Mike kindly met me at the airport and drove me to a room that he had organised himself (favours which I have sadly never offered to any of my visitors).
 This was the true start of my research career, leaving behind my [offbeat PhD project](https://dl.acm.org/doi/10.1145/582153.582178)
 and ultimately reconnecting with ideas I had [picked up from NG de Bruijn]({% post_url 2021-11-03-AUTOMATH %}): the formalisation of mathematics.
-Although I am best known for the development of Isabelle, most of my work in those early years went directly into the HOL system.
+Although I am best known for the development of Isabelle, most of my work in those early years went directly into the [HOL system](https://hol-theorem-prover.org).
 
 ### Edinburgh LCF
 
@@ -19,7 +19,7 @@ Talia Ringer has coined the expression *ephemeral proof objects* to describe the
 because the section of the code where proofs can be constructed is strictly confined.
 Hardly anyone remembers the meaning of the acronym LCF: *Logic for Computable Functions*.
 Edinburgh LCF was created in order to carry out proofs in what was then called 
-["fixpoint theory"](https://doi.org/10.1145/361454.361460) and was later subsumed into denotational semantics, where it dropped out of sight.
+["fixpoint theory"](https://doi.org/10.1145/361454.361460) and was later subsumed into denotational semantics, where it sank out of sight.
 And it implemented a logic defined by Dana Scott in a paper that he had withdrawn from publication, so you had to get an illicit copy.
 (It [finally appeared](https://doi.org/10.1016/0304-3975(93)90095-B) in 1993.)
 
@@ -28,12 +28,13 @@ It appeared in Springer's Lecture Notes series, volume 78; a catalogue listing t
 
 The radical innovation of LCF was that its *metalanguage* (ML) would be a computationally complete programming language rather than some fixed set of commands.
 This satisfied the twin goals of putting automation into the hands of the users 
-while at the same time, through the proof kernel described [elsewhere]({% post_url 2022-01-05-LCF %}), preventing them from proving $0=1$.
+while at the same time, through the proof kernel described [elsewhere]({% post_url 2022-01-05-LCF %}), preventing them from proving $0=1$
+no matter how hard they tried.
 Not that 0 or 1 was actually part of the formalism!
 
 The first part of the book introduces ML, already described as "a general purpose programming language".
 Not until page 62 do we reach the LCF formalism, called PPLAMBDA.
-It's introduced by the example of proving that if $f(G)=G$ then $\mathop{\textrm fix}(f) \sqsubseteq G$.
+It's introduced by the example of proving that if $f(G)=G$ then $\mathop{\textrm{fix}}(f) \sqsubseteq G$.
 
 <img src="/images/PPLAMBDA-proof.png" alt="PPLAMBDA proof of a small example" width="750"/>
 
@@ -43,8 +44,8 @@ Commonplace today in modern offshoots of ML, such as OCaml, and in languages suc
 the idea of writing a single piece of code that simply worked for multiple types seemed a miracle.
 * On the other hand, disappointment with PPLAMBDA, a tiny fragment of predicate logic with only implication, conjunction and universal quantifiers and the corresponding logical rules.
 As types were interpreted by Scott domains, every type contained a "bottom" or "undefined" value, which was written `UU`.
-There was a boolean type `tr` with values `TT` and `FF` for true and false (as well as `UU`), and inference rules for case analysis and *ex falso quodlibet* on booleans.
-That fragment of logic perhaps sufficed for the little examples floating around at the time, but it would be exceeded very quickly.
+There was a boolean type `tr` with values `TT` and `FF` for true and false (as well as `UU`), and inference rules for case analysis and *ex falso quodlibet* on booleans (but not for formulas!).
+That fragment perhaps sufficed for the little examples floating around at the time, but it would be exceeded very quickly.
 
 ### Extending the logic
 
@@ -67,6 +68,7 @@ so I devoted a lot of time to the study of Martin-Löf type theory, intuitionism
 
 Edinburgh LCF was surprisingly spartan. As mentioned, the only logical connectives it supported were $\forall$, $\land$ and $\to$, but tactics were provided for $\forall$ alone.
 Looking again at the Edinburgh LCF manual, I see that the first proof (on page 63), corresponding to the diagram shown above, did not use tactics at all but was a purely forward proof using the axioms and inference rules of PPLAMBDA.
+The theorem was obtained by repeatedly applying inference rules (functions mapping theorems to theorems) to axioms, at the ML level.
 
 The process of doing a **tactic** proof was simply to bind your formula to an ML identifier, and using what few tactics there were, bind the subgoal list to another identifier and the validation function (necessary to deliver the final conclusion as a theorem) to a third.
 Then repeat this process for each of the subgoals.
@@ -75,7 +77,7 @@ At the end of the first tactic proof example (page 66), the manual says
 > Now the goal list is null, so the composition of our proofs applied to the null theorem list will achieve the main goal.
 
 I recall somebody telling me that you would be so happy that the goal list was null, combining the validation functions would be fun.
-But one of the first things I did was to devise a simple "subgoal package" that would maintain the current list of goals in a mutable variable and manage the partial proofs internally, so that you could prove everything using tactics alone, and when you had a null subgoal list the theorem you wanted in the first place would pop out.
+But one of the first things I did was to devise a simple "subgoal package" that would maintain the current list of goals in a mutable variable and manage the partial proofs internally, so that you could prove everything using tactics alone, and when you had a null subgoal list the theorem you wanted in the first place would just pop out.
 
 ### Advanced proof tools
 
@@ -86,7 +88,7 @@ She had written ingenious code for combining theorems via pattern matching.
 The implication $P\to Q$ justifies inferring by forward chaining from an 
 instance of $P$ to the corresponding instance of $Q$ 
 or in backward chaining reducing a goal that is an instance of $Q$ to the corresponding instance of $P$.
-I distinctly recall she had implemented a tactic that she called `RESTAC`, which operated on a set of assumptions and deliver all possible conclusions by forward chaining.
+She had implemented a tactic that she called `RESTAC`, which operated on a set of assumptions and delivered all possible conclusions by forward chaining from the implications there.
 There may have been other tactics along those lines.
 I took these and added more and unfortunately can no longer remember who wrote what.
 But we still have `RES_TAC` in the HOL family of provers.
@@ -94,22 +96,24 @@ And the use of implications for forward/backward chaining is one of the core pri
 
 ### Cambridge LCF (and Cambridge ML)
 
-Of course the new system had to be called Cambridge LCF. 
+Of course the new system had to be called [Cambridge LCF](https://www.cl.cam.ac.uk/~lp15/archive/lcf.tar.gz). 
 It comprised 15,000 lines of Lisp and about 4900 lines of ML.
-People were annoyed with me because I had made funds of incompatible changes.
+People were annoyed with me because I had made tonnes of incompatible changes.
 (I never could cope with upward compatibility.)
 So I had to write a new manual, which [came out as a book](https://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf).
 
-Unfortunately, nobody cared about Cambridge LCF because "fixpoint theory" was as dead as a doornail.
-It had one great advantage: helped by Gerard I had achieved decent performance, with ML code being transformed into compiled Lisp.
-Cambridge LCF then became the basis of many other proof assistants.
+Unfortunately, nobody cared about Cambridge LCF because "fixpoint theory" was already as dead as a doornail.
+*It* didn't die, however: helped by Gerard I had achieved decent performance for ML, code now being transformed into *compiled* Lisp.
+Cambridge LCF thus became the basis of many other proof assistants.
 Mike Gordon used it in his hardware verification developments, first LCF_LSM and then HOL88, keeping the extended tactic library.
-Gerard Huet used it in early experiments with the calculus of constructions.
+Gerard Huet used it in early experiments with the calculus of constructions, which ultimately become Coq.
 The ML subsystem, known as Cambridge ML, was also the basis of the [original version of Nuprl](https://www.nuprl.org/book/Metalanguage.html).
 
-More details in Mike's paper "From LCF to HOL: a short history",
+### Postscript
+
+You'll find more details in Mike's paper "From LCF to HOL: a short history",
 *[Proof, Language, and Interaction: Essays in Honour of Robin Milner](https://mitpress.mit.edu/books/proof-language-and-interaction)* 169–185.
-Quote on p. 170. Available for free [here](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).)
+Available for free [here](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).)
 
 
 
