@@ -5,23 +5,48 @@ usemathjax: true
 tags: [general, Robin Milner, Standard ML]
 ---
 
-Dave MacQueen (along with Robert Harper and John Reppy) has written the definitive [History of Standard ML](https://doi.org/10.1145/3386336).
-How many people have to patience to read 100 pages on that subject I don't know.
-Here I'd like to offer just my brief, personal and utterly subjective impressions of its early days, 
-up to the deeply unfortunately split that created
-what was then called CaML.
-Standard ML was a tragic missed opportunity
+Dave MacQueen (with Robert Harper and John Reppy) has written a 100-page [History of Standard ML](https://doi.org/10.1145/3386336).
+Here I offer my brief, personal and utterly subjective impressions of its early days, 
+up to the deeply unfortunate schism that created
+what was then called [Caml](https://caml.inria.fr).
+[Standard ML](https://cs.lmu.edu/~ray/notes/introml/) was a tragic missed opportunity.
+But even today there are still several viable 
+implementations: [Poly/ML](https://www.polyml.org), [SML/NJ](https://smlnj.org), 
+[Moscow ML](https://mosml.org) and [MLton](http://www.mlton.org).
+They are substantially compatible because the language was defined by an operational semantics.
+It's sad that well into the 21st Century, Computer Science has so regressed that people no longer distinguish between 
+a programming language and its implementation.
 
-Edinburgh ML
+### Edinburgh ML
 
-* Huet: Compilation of ML into Lisp but no speed up because of closures
-* implementing a sort of lambda-lifting including optimisations for currying, a factor of 20 (?) speed up
-* enabling its adoption and other systems (as described in the previous post)
+The [previous post]({% post_url 2022-09-28-Cambridge_LCF %})
+describes how Edinburgh LCF created a new architecture for theorem proving based on a programmable metalanguage, namely ML.
+Execution was slow because ML code was translated into Lisp, then implemented.
+Gérard Huet modified the system to emit the Lisp in source form and compile it, but it ran no faster.
+As he explained, every ML function was represented by
+a closure containing a quoted LAMBDA-expression, 
+and quoted Lisp S-expressions do not get compiled into machine instructions.
 
-Luca Cardelli
+When it was my turn with LCF, I managed to solve this problem
+by what is now called [*λ-lifting*](https://en.wikipedia.org/wiki/Lambda_lifting):
+by closure bodies were extracted and declared as top-level Lisp functions.
+It was also necessary to optimise the treatment of currying.
+As a curried function receives its arguments one after another,
+it returns a succession of essentially trivial closures;
+by compiling additional functions to cover the common cases of 
+a curried function being applied to 2, 3, etc., arguments at once,
+this wasteful computation could be eliminated.
+I don't remember running benchmarks, but Mike Gordon claimed
+a speedup by [a factor of twenty](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).).
 
-* anecdotes e.g. bouncing Dijkstras and the Dijkstra font?
-* "ML under UNIX"
+ML was finally usable. But the arrival of Luca Cardelli's 
+"ML under UNIX" changed everything. It was a richer and quite
+different language with native-code generation and reasonable
+performance. It was to prevent ML splintering as Lisp did
+that prompted Robin Milner to launch his standardisation effort.
+
+### The fateful meeting
+
 
 Milner: Standard ML design effort
 
@@ -50,3 +75,7 @@ And so much else is ridiculous:
 
 * John Harrison built HOL Light on top of OCaml (apparently for its syntax alone) at a time when all OCaml strings were mutable, so you could trivially break soundness by getting hold of the actual string representing truth, namely `T`, and replace it by `F`. John was also committed to an ML platform that did not allow you to save a core image, so you had to rebuild HOL Light every single time you launched it.
 * the syntax of Edinburgh ML was restricted because it used a simple precedence parser that allowed each token to serve only a single purpose. So if anybody asks why OCaml separates list elements by semicolons rather than commas and terminates declarations by double semicolons rather than the conventional semicolon, it's because of the limitations of a parsing technology that was already obsolete 50 years ago.
+
+I hear that OCaml is finally approaching the degree of
+support for multithreading that Poly/ML achieved about 
+15 years ago despite receiving 1% of the resources.
