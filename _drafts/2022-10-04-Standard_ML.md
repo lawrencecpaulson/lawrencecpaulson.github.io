@@ -5,6 +5,13 @@ usemathjax: true
 tags: [general, Robin Milner, Standard ML]
 ---
 
+Dave MacQueen (along with Robert Harper and John Reppy) has written the definitive [History of Standard ML](https://doi.org/10.1145/3386336).
+How many people have to patience to read 100 pages on that subject I don't know.
+Here I'd like to offer just my brief, personal and utterly subjective impressions of its early days, 
+up to the deeply unfortunately split that created
+what was then called CaML.
+Standard ML was a tragic missed opportunity
+
 Edinburgh ML
 
 * Huet: Compilation of ML into Lisp but no speed up because of closures
