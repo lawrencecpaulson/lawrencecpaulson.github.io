@@ -47,11 +47,34 @@ that prompted Robin Milner to launch his standardisation effort.
 
 ### The fateful meeting
 
+MacQueen's account lists a series of meetings convened by Milner
+in order arrive at a consensus for Standard ML.
+I no longer have a clear recollection.
+The events sketched below may have happened in June 1984 or April 1983.
 
-Milner: Standard ML design effort
+The delegate sent by Huet to represent Projet Formel was not like that. A quiet and gentle man, he put through his requests and 
+they all were forcefully shot down.
+I can't remember them all, but I believe they wanted the following:
 
-* A meeting dominated by Dave MacQueen (though I was probably a jerk myself) in which "the French got nothing they wanted"
-* I still don't like what they wanted: non-linear patterns, a "where" clause and generally homage to Peter Landin's ISWIM
+* "non-linear patterns", i.e. repeating a pattern variable was permitted and denoted an equality test
+* a `where` syntax for local declarations
+* more generally, to keep the syntax closer to Edinburgh ML
+
+Clearly Dave and Gérard had different visions of ML, and while
+Gérard would have fiercely pressed his demands, Dave got his way.
+I actually think he was right on all counts: non-linear patterns
+only seem useful for a few little examples, while `where` would
+not only be redundant but would introduce new scoping issues
+exactly when we were striving for a syntax where all scopes
+were delimited. But for the sake of harmony it would have been far
+better to have conceded some of those points.
+As somebody privately remarked, "the French did not get anything they wanted". We know how that ended.
+
+A colleague who once went in my stead to a much later ML meeting 
+remarked that it was "hard to hear over the sound of clashing egos".
+
+
+
 * MacQueen (and Cardelli?) wanted a logical syntax in which constructs nested well, but which people still find ugly (and MacQueen disliked the "fun" compromise)
 
 Strangely enough, most of the contention was over the ambiguity inherent in the following declaration:
