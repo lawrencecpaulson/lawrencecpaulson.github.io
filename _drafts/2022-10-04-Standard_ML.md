@@ -14,52 +14,53 @@ But even today there are still several viable
 implementations: [Poly/ML](https://www.polyml.org), [SML/NJ](https://smlnj.org), 
 [Moscow ML](https://mosml.org) and [MLton](http://www.mlton.org).
 They are substantially compatible because the language was defined by an operational semantics.
-It's sad that well into the 21st Century, Computer Science has so regressed that people no longer distinguish between 
-a programming language and its implementation.
+It's sad that well into the 21st Century, Computer Science has so regressed that people no longer see the point of distinguishing
+between a programming language and its implementation.
 
 ### Edinburgh ML
 
 The [previous post]({% post_url 2022-09-28-Cambridge_LCF %})
-describes how Edinburgh LCF created a new architecture for theorem proving based on a programmable metalanguage, namely ML.
-Execution was slow because ML code was translated into Lisp, then implemented.
-Gérard Huet modified the system to emit the Lisp in source form and compile it, but it ran no faster.
+describes how Edinburgh LCF created a distinctive new architecture for theorem proving based on a *programmable metalanguage*, namely ML.
+Execution was slow because ML code was translated into Lisp to be interpreted there.
+Gérard Huet modified the compiler to emit the Lisp in source form to be compiled, but it ran no faster.
 As he explained, every ML function was represented by
 a closure containing a quoted LAMBDA-expression, 
-and quoted Lisp S-expressions do not get compiled into machine instructions.
+and the Lisp compiler does not compile S-expressions into 
+executable machine instructions.
 
-When it was my turn with LCF, I managed to solve this problem
+When Gérard sent the LCF sources back to me, 
+I managed to solve this problem
 by what is now called [*λ-lifting*](https://en.wikipedia.org/wiki/Lambda_lifting):
-by closure bodies were extracted and declared as top-level Lisp functions.
-It was also necessary to optimise the treatment of currying.
-As a curried function receives its arguments one after another,
-it returns a succession of essentially trivial closures;
-by compiling additional functions to cover the common cases of 
-a curried function being applied to 2, 3, etc., arguments at once,
+by extracting the closure bodies and declaring them as top-level Lisp functions.
+Currying also required optimisation.
+As a curried function receives its arguments
+it returns a succession of trivial closures;
+by compiling additional functions to cover the common case of 
+a curried function being applied to multiple arguments at once,
 this wasteful computation could be eliminated.
-I don't remember running benchmarks, but Mike Gordon claimed
-a speedup by [a factor of twenty](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).).
+I don't remember running any benchmarks, but I surely did.
+Mike Gordon reported a speedup by [a factor of twenty](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).).
 
 ML was finally usable. But the arrival of Luca Cardelli's 
 "ML under UNIX" changed everything. It was a richer and quite
 different language with native-code generation and reasonable
-performance. It was to prevent ML splintering as Lisp did
-that prompted Robin Milner to launch his standardisation effort.
+performance. The danger that ML could splinter as Lisp did
+prompted Robin Milner to launch his standardisation effort.
 
 ### The fateful meeting
 
 MacQueen's account lists a series of meetings convened by Milner
 in order arrive at a consensus for Standard ML.
 I no longer have a clear recollection.
-The events sketched below may have happened in June 1984 or April 1983.
+The meeting sketched below may have happened in June 1984 or April 1983.
 A colleague who went in my stead to a much later ML meeting 
 remarked that it was "hard to hear over the sound of clashing egos".
 
 The delegate sent by Gérard to represent Projet Formel was not like that. A quiet and gentle man (sorry, cannot recall his name), 
-he put in Gérard's requests and 
-they were all shot down.
-I can't remember them all, but I believe they included the following:
+he put forward Gérard's proposals and they were all shot down.
+I can't remember them all but recall the following:
 
-* "non-linear patterns", i.e. repeating a pattern variable was permitted and denoted an equality test
+* "non-linear patterns", i.e. repeating a pattern variable would be permitted and denoted an equality test
 * a `where` syntax for local declarations
 * more generally, to keep the syntax closer to Edinburgh ML
 
@@ -72,7 +73,7 @@ not only be redundant but would introduce new scoping issues
 exactly when we were striving for a syntax where all scopes
 were delimited. But for the sake of harmony it would have been far
 better to have conceded some of those points.
-As somebody privately remarked, "the French did not get anything they wanted". We know how that ended.
+As somebody told me at the time, "the French did not get anything they wanted". We know how that ended.
 
 ### Standard ML modules
 
@@ -80,14 +81,14 @@ The other point of contention was [MacQueen's module proposal](https://www.resea
 with its structures, signatures and functors.
 (See this article by
 [Mads Tofte](https://link.springer.com/content/pdf/10.1007/3-540-61628-4_8.pdf).)
-Roughly speaking, structures (which contain the executable code) correspond to values and 
-satisfy signatures, which correspond to types.
-Functors provide a way to define structures that take other structures as parameters.
-In 1984, it seemed ludicrously baroque to simple-minded people like myself (and I believe, to the French group too).
-As I recall, Caml launched with a simple module system.
-OCaml today [also has functors](https://ocaml.org/docs/functors),
-which don't work so well for impure code if
-[this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
+Roughly speaking, *structures* (which contain the executable code) correspond to values and 
+satisfy *signatures*, which correspond to types and allow a module
+to be specified without reference to any implementation.
+*Functors* provide a way to define structures that take other structures as parameters.
+In 1984, MacQueen's proposal seemed ludicrously baroque to simple-minded people like myself (and I believe, to the French group too).
+As I recall, Caml launched with basic modules that worked with Unix Makefiles to generate `.o` filtes, which was regarded as a big win.
+OCaml modules today [apparently resemble MacQueen's](https://ocaml.org/docs/functors),
+if [this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
 
 
 Is a 40MB file huge? Large? (a couple of digital photos or half an hour of music in MP3 format)
