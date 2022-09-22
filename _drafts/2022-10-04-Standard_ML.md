@@ -51,17 +51,21 @@ MacQueen's account lists a series of meetings convened by Milner
 in order arrive at a consensus for Standard ML.
 I no longer have a clear recollection.
 The events sketched below may have happened in June 1984 or April 1983.
+A colleague who went in my stead to a much later ML meeting 
+remarked that it was "hard to hear over the sound of clashing egos".
 
-The delegate sent by Huet to represent Projet Formel was not like that. A quiet and gentle man, he put through his requests and 
-they all were forcefully shot down.
-I can't remember them all, but I believe they wanted the following:
+The delegate sent by Gérard to represent Projet Formel was not like that. A quiet and gentle man (sorry, cannot recall his name), 
+he put in Gérard's requests and 
+they were all shot down.
+I can't remember them all, but I believe they included the following:
 
 * "non-linear patterns", i.e. repeating a pattern variable was permitted and denoted an equality test
 * a `where` syntax for local declarations
 * more generally, to keep the syntax closer to Edinburgh ML
 
 Clearly Dave and Gérard had different visions of ML, and while
-Gérard would have fiercely pressed his demands, Dave got his way.
+Gérard would have fiercely pressed his demands, 
+he wasn't there and Dave got his way.
 I actually think he was right on all counts: non-linear patterns
 only seem useful for a few little examples, while `where` would
 not only be redundant but would introduce new scoping issues
@@ -70,10 +74,25 @@ were delimited. But for the sake of harmony it would have been far
 better to have conceded some of those points.
 As somebody privately remarked, "the French did not get anything they wanted". We know how that ended.
 
-A colleague who once went in my stead to a much later ML meeting 
-remarked that it was "hard to hear over the sound of clashing egos".
+### Standard ML modules
+
+The other point of contention was [MacQueen's module proposal](https://www.researchgate.net/publication/2477673_Modules_for_Standard_ML)
+with its structures, signatures and functors.
+(See this article by
+[Mads Tofte](https://link.springer.com/content/pdf/10.1007/3-540-61628-4_8.pdf).)
+Roughly speaking, structures (which contain the executable code) correspond to values and 
+satisfy signatures, which correspond to types.
+Functors provide a way to define structures that take other structures as parameters.
+In 1984, it seemed ludicrously baroque to simple-minded people like myself (and I believe, to the French group too).
+As I recall, Caml launched with a simple module system.
+OCaml today [also has functors](https://ocaml.org/docs/functors),
+which don't work so well for impure code if
+[this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
 
 
+Is a 40MB file huge? Large? (a couple of digital photos or half an hour of music in MP3 format)
+
+### Syntactic questions
 
 * MacQueen (and Cardelli?) wanted a logical syntax in which constructs nested well, but which people still find ugly (and MacQueen disliked the "fun" compromise)
 
