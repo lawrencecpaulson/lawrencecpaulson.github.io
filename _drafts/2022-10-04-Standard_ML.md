@@ -85,15 +85,30 @@ Roughly speaking, *structures* (which contain the executable code) correspond to
 satisfy *signatures*, which correspond to types and allow a module
 to be specified without reference to any implementation.
 *Functors* provide a way to define structures that take other structures as parameters.
-In 1984, MacQueen's proposal seemed ludicrously baroque to simple-minded people like myself (and I believe, to the French group too).
+In 1984, MacQueen's proposal seemed ludicrously baroque to simple-minded souls like myself (and I believe, to the French group too).
 As I recall, Caml launched with basic modules that worked with Unix Makefiles to generate `.o` filtes, which was regarded as a big win.
 OCaml modules today [apparently resemble MacQueen's](https://ocaml.org/docs/functors),
 if [this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
 
-
-Is a 40MB file huge? Large? (a couple of digital photos or half an hour of music in MP3 format)
-
 ### Syntactic questions
+
+The tragedy of the split was that there were no disagreements
+about the abstract syntax, semantics, applications or general direction of ML. 
+It was all about concrete syntax.
+
+Peter Landin's ISWIM was a fairly arbitrary
+syntactic sugaring of the typed λ-calculus.
+Edinburgh ML was substantially based on that.
+Some of its syntactic quirks were imposed by its simple precedence parser, which allowed each token to serve only a single purpose. 
+In particular, lists were written $[x;y;z]$ and not $[x,y,z]$ 
+because the parser would then not cope with $(x,y)$ for ordered pairs; for the same reason, top-level declarations could not be
+terminated by a semicolon, so the double-semicolon was introduced.
+I still don't know how they managed to use semicolons to separate
+conmands as well as list elements.
+
+the syntax of Edinburgh ML was restricted because it used a simple precedence parser that allowed each token to serve only a single purpose. 
+
+
 
 * MacQueen (and Cardelli?) wanted a logical syntax in which constructs nested well, but which people still find ugly (and MacQueen disliked the "fun" compromise)
 
@@ -117,8 +132,13 @@ I realise the tone of this post is bitter. It's hard to say that anybody did any
 And so much else is ridiculous:
 
 * John Harrison built HOL Light on top of OCaml (apparently for its syntax alone) at a time when all OCaml strings were mutable, so you could trivially break soundness by getting hold of the actual string representing truth, namely `T`, and replace it by `F`. John was also committed to an ML platform that did not allow you to save a core image, so you had to rebuild HOL Light every single time you launched it.
+
 * the syntax of Edinburgh ML was restricted because it used a simple precedence parser that allowed each token to serve only a single purpose. So if anybody asks why OCaml separates list elements by semicolons rather than commas and terminates declarations by double semicolons rather than the conventional semicolon, it's because of the limitations of a parsing technology that was already obsolete 50 years ago.
 
 I hear that OCaml is finally approaching the degree of
 support for multithreading that Poly/ML achieved about 
 15 years ago despite receiving 1% of the resources.
+
+
+
+Is a 40MB file huge? Large? (a couple of digital photos or half an hour of music in MP3 format)
