@@ -23,9 +23,9 @@ The [previous post]({% post_url 2022-09-28-Cambridge_LCF %})
 describes how Edinburgh LCF created a distinctive new architecture for theorem proving based on a *programmable metalanguage*, namely ML.
 Execution was slow because ML code was translated into Lisp to be interpreted there.
 Gérard Huet modified the compiler to emit the Lisp in source form to be compiled, but it ran no faster.
-As he explained, every ML function was represented by
+As he informed me, every ML function was represented by
 a closure containing a quoted LAMBDA-expression, 
-and the Lisp compiler does not compile S-expressions into 
+and the Lisp compiler cannot compile S-expressions into 
 executable machine instructions.
 
 When Gérard sent the LCF sources back to me, 
@@ -56,7 +56,7 @@ The meeting sketched below may have happened in June 1984 or April 1983.
 A colleague who went in my stead to a much later ML meeting 
 remarked that it was "hard to hear over the sound of clashing egos".
 
-The delegate sent by Gérard to represent Projet Formel was not like that. A quiet and gentle man (sorry, cannot recall his name), 
+The delegate sent by Gérard to represent Projet Formel was not like that. Guy Cousineau was quiet and gentle;
 he put forward Gérard's proposals and they were all shot down.
 I can't remember them all but recall the following:
 
@@ -92,35 +92,46 @@ if [this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is corr
 
 ### Syntactic questions
 
-The tragedy of the split was that there were no disagreements
-about the abstract syntax, semantics, applications or general direction of ML. 
-It was all about concrete syntax.
-
 Peter Landin's ISWIM was a fairly arbitrary
-syntactic sugaring of the typed λ-calculus.
-Edinburgh ML was substantially based on that.
-Some of its syntactic quirks were imposed by its simple precedence parser, which allowed each token to serve only a single purpose. 
+syntactic sugaring of the typed λ-calculus,
+and Edinburgh ML was substantially based on that.
+Some of its syntactic quirks were imposed by its rather basic
+precedence parser, which allowed each token to serve only a single purpose. (Mike told me this.) 
 In particular, lists were written $[x;y;z]$ and not $[x,y,z]$ 
 because the parser would then not cope with $(x,y)$ for ordered pairs; for the same reason, top-level declarations could not be
 terminated by a semicolon, so the double-semicolon was introduced.
 I still don't know how they managed to use semicolons to separate
 conmands as well as list elements.
 
-the syntax of Edinburgh ML was restricted because it used a simple precedence parser that allowed each token to serve only a single purpose. 
+The tragedy of the ML schism was that there were no disagreements
+about the abstract syntax, semantics, applications or general direction of ML. 
+It was all about concrete syntax.
+Gérard preferred to stay close to the ISWIM syntax ("even though Landin was English!"), while Dave wanted a logical and robust syntax.
 
-
-
-* MacQueen (and Cardelli?) wanted a logical syntax in which constructs nested well, but which people still find ugly (and MacQueen disliked the "fun" compromise)
-
-Strangely enough, most of the contention was over the ambiguity inherent in the following declaration:
+Much of the contention was over the ambiguity inherent in the following declaration:
 
 > let f x = ...
 
-With ISWIM, this unambiguously defines the function `f`. That's because ISWIM had no concept of constructor. In OCaml this could define either `x` (if `f` is a constructor) or `f`. If my memory is correct, MacQueen was adamant that we should not overload `let` to such an extent. In Standard ML, the equivalent
+With ISWIM, this defines `f` to be a function taking argument `x`. 
+The same declaration in OCaml similarly declares the function `f`,
+**unless** `f` is a *datatype constructor*, when instead it declares `x`.
+The syntax is fine for ISWIM, which has datatype constructors.
+Dave was adamant that ML should not overload `let` to such an extent. He was surely right.
 
+In Standard ML, the two possibilities have different declaration forms:
+
+> fun f x = ...
+> 
 > val f x = ...
 
-can only bind `x` (and is an error unless `f` has been declared as a constructor). 
+The later form can only bind `x` and is illegal 
+unless `f` has been already declared as a constructor. 
+
+### Into the 1990s
+
+
+
+
 
 There was no possibility of stopping research into functional languages which would have caused divergences in any case, but it's a tragedy that trying out a different dialect fails the moment you type the simplest function.
 It is also hard to argue that the syntax of OCaml is particularly beautiful, certainly not beautiful enough to justify dividing the ML community.
@@ -128,6 +139,8 @@ But some people really hated `val`.
 
 I realise the tone of this post is bitter. It's hard to say that anybody did anything wrong, and rather, we should have listened to each other better. On the Standard ML side, a few people took stubborn positions and never relinquished them. On the other hand, the standardisation effort yielded a convincing demonstration of operational semantics applied to a real programming language, and at one point there were at least four independent and perfectly usable implementations of Standard ML (as well as a couple of prototype or reference implementations).
 
+
+ but which people still find ugly (and MacQueen disliked the "fun" compromise)
 
 And so much else is ridiculous:
 
