@@ -80,7 +80,7 @@ As somebody told me at the time, "the French did not get anything they wanted". 
 
 The other point of contention was [Dave's module proposal](https://www.researchgate.net/publication/2477673_Modules_for_Standard_ML)
 with its structures, signatures and functors.
-(Some insignts by
+(Some insights by
 [Mads Tofte](https://link.springer.com/content/pdf/10.1007/3-540-61628-4_8.pdf).)
 Roughly speaking, *structures* (which contain the executable code) correspond to values and 
 satisfy *signatures*, which correspond to types and allow a module
@@ -102,7 +102,7 @@ In particular, lists were written $[x;y;z]$ and not $[x,y,z]$
 because the parser would then not cope with $(x,y)$ for ordered pairs; for the same reason, top-level declarations could not be
 terminated by a semicolon, so the bizarre double-semicolon was introduced.
 I still don't know how they managed to use semicolons to separate
-conmands as well as list elements.
+commands as well as list elements.
 Weirdest of all, you could actually omit the brackets in $(x,y,z)$.
 
 The tragedy of the ML schism was that there were no disagreements
@@ -169,7 +169,7 @@ when your key objective is soundness?
 * With no way to save an image, you had to rebuild HOL Light from sources at every launch (even today). Even Edinburgh LCF was a stand-alone executable.
 
 When I was porting HOL Light libraries, I occasionally had to replay
-a proof. I would have to launcch OCaml, 
+a proof. I would have to launch OCaml, 
 first thing in the morning.
 I could load the sources of HOL Light in under a minute.
 But the full analysis library would not finish loading until after lunch. 
