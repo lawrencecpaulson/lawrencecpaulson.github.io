@@ -173,7 +173,7 @@ a proof. I would have to launch OCaml,
 first thing in the morning.
 I could load the sources of HOL Light in under a minute.
 But the full analysis library would not finish loading until after lunch. 
-This is the world-beating system?
+This is a world-beating system?
 
 John chose Caml for its old-fashioned syntax. Such is the power of nostalgia.
 
@@ -188,8 +188,10 @@ another mild and self-effacing personality, who accomplished so much:
 * good performance and fantastic debugging tools
 * not merely "saving an image", but sharable executable units, either including the Read-Eval-Print loop or standalone;
 * support for one hardware architecture after another (including Apple Silicon)
-* [support for multi-threading](https://doi.org/10.1145/1708046.1708058) (I hear that OCaml is finally catching up, 
-15 years later, thanks to having 100× the funding.)
+* [support for multi-threading](https://doi.org/10.1145/1708046.1708058), 
+(also [here](/papers/Matthews-parallel.pdf))
+— they say that OCaml is finally catching up, 
+15 years later, thanks to having 100 times as much funding.
 
 A mystery I shall never understand is the difference in performance
 between SML/NJ and Poly/ML. The former enjoyed vastly greater funding
