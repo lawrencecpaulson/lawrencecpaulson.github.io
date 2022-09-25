@@ -39,11 +39,11 @@ by compiling additional functions to cover the common case of
 a curried function being applied to multiple arguments at once,
 this wasteful computation could be eliminated.
 I don't remember running any benchmarks, but I surely did.
-Mike Gordon reported a speedup by [a factor of twenty](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).).
+Mike Gordon reported a speedup by [a factor of twenty](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).
 
-ML was finally usable. But the arrival of Luca Cardelli's 
-"ML under UNIX" changed everything. It was a richer and quite
-different language with native-code generation and reasonable
+ML was finally usable. But the arrival of [Luca Cardelli](http://lucacardelli.name)'s 
+"ML under UNIX" changed everything. It was a rich, powerful language 
+with native-code generation and good
 performance. The danger that ML could splinter as Lisp did
 prompted Robin Milner to launch his standardisation effort.
 
@@ -68,7 +68,8 @@ Clearly Dave and Gérard had different visions of ML, and while
 Gérard would have fiercely pressed his demands, 
 he wasn't there and Dave got his way.
 I actually think he was right on all counts: non-linear patterns
-only seem useful for a few little examples, while `where` would
+are harder to implement and
+only useful for a few little examples, while `where` would
 not only be redundant but would introduce new scoping issues
 exactly when we were striving for a syntax where all scopes
 were delimited. But for the sake of harmony it would have been far
@@ -79,20 +80,20 @@ As somebody told me at the time, "the French did not get anything they wanted". 
 
 The other point of contention was [Dave's module proposal](https://www.researchgate.net/publication/2477673_Modules_for_Standard_ML)
 with its structures, signatures and functors.
-(See this article by
+(Some insignts by
 [Mads Tofte](https://link.springer.com/content/pdf/10.1007/3-540-61628-4_8.pdf).)
 Roughly speaking, *structures* (which contain the executable code) correspond to values and 
 satisfy *signatures*, which correspond to types and allow a module
 to be specified without reference to any implementation.
 *Functors* provide a way to define structures that take other structures as parameters.
-In 1984, Dave's proposal seemed ludicrously baroque to simple-minded souls like myself (and I believe, to the French group too).
+In 1984, Dave's proposal seemed ludicrously baroque to simple-minded souls like myself and seemingly to the French group too.
 As I recall, Caml launched with basic modules that worked with Unix Makefiles to generate `.o` files, which was regarded as a big win.
 OCaml modules today [apparently resemble Standard ML's](https://ocaml.org/docs/functors),
 if [this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
 
 ### Syntactic questions
 
-Peter Landin's ISWIM was a fairly arbitrary
+Peter Landin's [ISWIM](https://doi.org/10.1145/365230.365257) was a fairly arbitrary
 syntactic sugaring of the typed λ-calculus,
 and Edinburgh ML was substantially based on that.
 Some of its syntactic quirks were imposed by its rather basic
@@ -102,6 +103,7 @@ because the parser would then not cope with $(x,y)$ for ordered pairs; for the s
 terminated by a semicolon, so the bizarre double-semicolon was introduced.
 I still don't know how they managed to use semicolons to separate
 conmands as well as list elements.
+Weirdest of all, you could actually omit the brackets in $(x,y,z)$.
 
 The tragedy of the ML schism was that there were no disagreements
 about the abstract syntax, semantics, applications or general direction of ML. 
@@ -163,10 +165,17 @@ John Harrison built HOL Light on top of Caml.
 In this he overlooked two sharp disadvantages:
 
 * All Caml strings were mutable, so you could change any constant, even `T` into `F`. It's now fixed in OCaml, but who could overlook such a point 
-when focussing on soundness?
+when your key objective is soundness?
 * With no way to save an image, you had to rebuild HOL Light from sources at every launch (even today). Even Edinburgh LCF was a stand-alone executable.
 
-John chose Caml for its traditional syntax. Such is the power of nostalgia.
+When I was porting HOL Light libraries, I occasionally had to replay
+a proof. I would have to launcch OCaml, 
+first thing in the morning.
+I could load the sources of HOL Light in under a minute.
+But the full analysis library would not finish loading until after lunch. 
+This is the world-beating system?
+
+John chose Caml for its old-fashioned syntax. Such is the power of nostalgia.
 
 ### SML/NJ vs Poly/ML
 
@@ -177,7 +186,7 @@ So let me put in a few words of praise for David Matthews,
 another mild and self-effacing personality, who accomplished so much:
 
 * good performance and fantastic debugging tools
-* not merely "saving an image", but sharable executable units;
+* not merely "saving an image", but sharable executable units, either including the Read-Eval-Print loop or standalone;
 * support for one hardware architecture after another (including Apple Silicon)
 * [support for multi-threading](https://doi.org/10.1145/1708046.1708058) (I hear that OCaml is finally catching up, 
 15 years later, thanks to having 100× the funding.)
