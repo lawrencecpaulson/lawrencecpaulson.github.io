@@ -172,3 +172,10 @@ You'll find the Isabelle proof text at `src/HOL/Examples/Ackermann.thy` in your 
 The Isabelle/HOL libraries also contain a [formal proof](https://isabelle.in.tum.de/dist/library/HOL/HOL-ex/Primrec.html)  that Ackermann's function is not primitive recursive. The set of primitive recursive functions is defined inductively and the development is straightforward.
 
 Finally, see [Rosetta code](https://rosettacode.org/wiki/Ackermann_function) for implementations of Ackermann's function in hundreds of programming languages, such as SNOBOL4.
+
+### Postscript added 28-09-2022
+
+Nachum Dershowitz and Zohar Manna
+treat this stack-based implementation of Ackermann's function 
+in their seminal paper, 
+[Proving Termination with Multiset Orderings](https://doi.org/10.1145/359138.359142).
