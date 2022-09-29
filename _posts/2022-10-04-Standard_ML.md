@@ -103,7 +103,8 @@ because the parser would then not cope with $(x,y)$ for ordered pairs; for the s
 terminated by a semicolon, so the bizarre double-semicolon was introduced.
 I still don't know how they managed to use semicolons to separate
 commands as well as list elements.
-Weirdest of all, you could actually omit the brackets in $(x,y,z)$.
+Weirdest of all, you could actually omit the brackets in $(x,y,z)$,
+which may be the real reason why list elements must be separated by semicolons.
 
 The tragedy of the ML schism was that there were no disagreements
 about the abstract syntax, semantics, applications or general direction of ML. 
@@ -134,6 +135,9 @@ Some people really hated `val`, and still insist that Standard ML
 syntax is ugly. Concrete syntax is subjective, but for a functional
 language, let's just say it's odd that OCaml doesn't have a 
 streamlined syntax for (drum roll) *declaring a function* using pattern-matching.
+It's odd that the floating-point
+operators are `+.`, `-.`, etc., rather than being overloaded, as they are in almost every
+other programming language. (Edinburgh ML had no type of reals.)
 And remember, some of the quirks of OCaml's syntax are due to the 
 limitations of a parsing technology that was already obsolete 50 years ago.
 
