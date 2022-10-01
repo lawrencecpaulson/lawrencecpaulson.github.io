@@ -34,16 +34,17 @@ An alternative way to defeat this attack involves a more complicated protocol, i
 The first message is a request to unlock, including not a code but an 
 *identifier* for the car (so that they don't all respond).
 In response, the car will generate a random integer $N$ and encrypt it using an 
-encryption key $K_C$, which it shares with the fob.
+encryption key $Kc$, which it shares with the fob.
 The fob decrypts this response and sends $N$ back to the car's locking system to be checked.
 Replay attacks fail because an old value of $N$ will be rejected.
 
-This three message protocol is typically written as follows:
+This three message protocol is typically written in the 
+following notation:
 
 $$\begin{align*} 
-F\to C&: C \\
-C\to F&: \{N\}_{K_C} \\
-F\to C&: N
+1.\quad F\to C&: C \\
+2.\quad C\to F&: \{N\}_{\mathit{Kc}} \\
+3.\quad F\to C&: N
 \end{align*}$$
 
 The second message is a freshness challenge and illustrates the most common method of defeating
@@ -84,4 +85,49 @@ and sharing the required key.
 
 ### The Needham-Schroeder protocol and Lowe's attack
 
-[Using encryption for authentication in large networks of computers](https://doi.org/10.1145/359657.359659)
+In 1978, Roger Needham and Michael Schroeder set forth the principles of crypto protocols in their classic paper,
+["Using encryption for authentication in large networks of computers"](https://doi.org/10.1145/359657.359659).
+One of their protocols has become particularly well known
+in the following form:
+
+$$
+\newcommand\Na{\mathit{Na}}
+\newcommand\Nb{\mathit{Nb}}
+\newcommand\Ka{\mathit{Ka}}
+\newcommand\Kb{\mathit{Kb}}
+\def\lbb{\mathopen{\{\kern-.30em|}}
+\def\rbb{\mathclose{|\kern-.32em\}}}
+\def\comp#1{\lbb#1\rbb}
+\begin{alignat*}{2}
+  &1.&\quad  A\to B  &: \comp{\Na,A}_{\Kb} \\
+  &2.&\quad  B\to A  &: \comp{\Na,\Nb}_{\Ka} \\
+  &3.&\quad  A\to B  &: \comp{\Nb}_{\Kb}
+\end{alignat*}$$
+
+This is the *Needham-Schroeder public-key protocol*.
+We have principals $A$ and $B$ ("Alice and Bob").
+
+In the first message, Alice contacts Bob, including nonce $\mathit{Na}$
+as a challenge, encrypted with Bob's public key.
+By returning $\mathit{Na}$, Bob proves his presence to Alice,
+and he includes his own challenge, $\mathit{Nb}$,
+both encrypted with Alice's public key.
+The third message proves Alice's presence to Bob.
+
+XXXX
+
+message~3 assures $B$ of $A$'s presence.  Burrows et al.\ claimed a
+further property, namely that $\Na$ and~$\Nb$ become known only to
+$A$ and~$B$.  (Such shared secrets might be used to compute a
+session key.)  Lowe refuted this claim, noting that if $A$ ran the protocol
+with an enemy~$C$, then $C$ could start a new run with any
+agent~$B$, masquerading as $A$~\cite{lowe-fdr}.
+
+One might argue that this is no attack at all.  An agent who is careless
+enough to talk to the enemy cannot expect any guarantees.  The mechanised
+analysis presented below reveals that the protocol's guarantees for~$A$ are
+adequate.  However, those for $B$ are not: they rely upon $A$'s being careful,
+which is a stronger assumption than mere honesty.  Moreover, the attack can
+also occur if $A$ talks to an honest agent whose private key has been
+compromised.  Lowe suggests a simple fix that provides good guarantees for
+both $A$ and~$B$.
