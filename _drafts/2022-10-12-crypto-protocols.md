@@ -113,15 +113,35 @@ By returning $\mathit{Na}$, Bob proves his presence to Alice,
 and he includes his own challenge, $\mathit{Nb}$,
 both encrypted with Alice's public key.
 The third message proves Alice's presence to Bob.
+Now each knows that the other is online, and one could imagine a 
+"session key" being calculated from $\mathit{Na}$ and $\mathit{Nb}$
+for use in private communications.
+(Public-key encryption is too expensive to be use with long messages.)
+
+Unfortunately, there is a flaw with this scheme, [pointed out](https://rdcu.be/cWJBL) by
+Gavin Lowe back in 1996.
+Suppose that Alice runs the protocol with a *dishonest* agent $C$ 
+("Charlie"). In that case, Charlie can initiate a new run of the protocol
+with some $D$, sending along Alice's first message re-encrypted with $\mathit{Kd}$.
+By interleaving the two runs, Charlie can use Alice to decrypt the 
+second message, thereby completing the run with $D$ 
+while masquerading as $A$: a failure of authentication.
+Lowe also showed how to defeat the attack by
+a slight chance to the protocol's second message:
+
+$$
+\newcommand\Na{\mathit{Na}}
+\newcommand\Nb{\mathit{Nb}}
+\newcommand\Ka{\mathit{Ka}}
+\newcommand\Kb{\mathit{Kb}}
+\def\lbb{\mathopen{\{\kern-.30em|}}
+\def\rbb{\mathclose{|\kern-.32em\}}}
+\def\comp#1{\lbb#1\rbb}
+  2'.\quad  B\to A : \comp{\Na,\Nb,B}_{\Ka}
+$$
+
 
 XXXX
-
-message~3 assures $B$ of $A$'s presence.  Burrows et al.\ claimed a
-further property, namely that $\Na$ and~$\Nb$ become known only to
-$A$ and~$B$.  (Such shared secrets might be used to compute a
-session key.)  Lowe refuted this claim, noting that if $A$ ran the protocol
-with an enemy~$C$, then $C$ could start a new run with any
-agent~$B$, masquerading as $A$~\cite{lowe-fdr}.
 
 One might argue that this is no attack at all.  An agent who is careless
 enough to talk to the enemy cannot expect any guarantees.  The mechanised
