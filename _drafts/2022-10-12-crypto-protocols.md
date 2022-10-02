@@ -13,13 +13,14 @@ and *encrypt* your communications (keeping them secure from any eavesdropper).
 Viewed at a sufficiently high level, a protocol looks like an abstract program
 with the great advantage, to people like myself, of not ever having to think about
 nasty low-level things like bits.
-Although I have never verified code, I (along with many other people) have studied the verification of cryptographic protocols.
+Although I have never verified code, I (among many others) have 
+verified cryptographic protocols.
 There is a lot of confusion about the basic ideas here, which I hope to clarify below.
 
 ### Electronic car key fobs
 
 The simplest example of a protocol and what can go wrong is a car key fob.
-The first version of these was easy to hack: it simply sent a secret code to the car's locking system, which would check it against its own copy of the code and then unlock.
+The first version of this was easy to hack: it simply sent a secret code to the car's locking system, which would check it against its own copy of the code and then unlock.
 An attacker could trivially record the signal sent from the key fob
 and use it to unlock the car at any time. This is a simple *replay attack*.
 
@@ -30,7 +31,7 @@ A replay of the message recorded earlier would fail this check.
 The drawback of this *timestamp* approach is that it requires an accurate clock in the key fob.
 Some protocols do use timestamps, notably [Kerberos](https://web.mit.edu/kerberos/), but usually people do not want the bother of maintaining synchronised clocks.
 
-An alternative way to defeat this attack involves a more complicated protocol, involving three messages.
+An alternative way to defeat this attack involves a *challenge-response* protocol, involving three messages.
 The first message is a request to unlock, including not a code but an 
 *identifier* for the car (so that they don't all respond).
 In response, the car will generate a random integer $N$ and encrypt it using an 
@@ -54,7 +55,7 @@ Timestamps and nonces are the two main techniques for proving freshness.
 
 ### Protocol verification: basic principles
 
-Generally we assume the following scenario (the [Dolev-Yao threat model](https://doi.org/10.1109/TIT.1983.1056650)):
+Generally we assume the following scenario (the [Dolev–Yao threat model](https://doi.org/10.1109/TIT.1983.1056650)):
 
 * a population of *principals* or *agents* $A$, $B$, $\ldots$
 * *nonces*, which we assume to be impossible to guess
@@ -80,7 +81,6 @@ which they use for key distribution.
 Returning to the car example, we do not expect a fob
 to perform public-key encryption but rather to be manufactured for a particular car
 and sharing the required key.
-
 
 
 ### The Needham-Schroeder protocol and Lowe's attack
@@ -126,6 +126,7 @@ with some $D$, sending along Alice's first message re-encrypted with $\mathit{Kd
 By interleaving the two runs, Charlie can use Alice to decrypt the 
 second message, thereby completing the run with $D$ 
 while masquerading as $A$: a failure of authentication.
+(Details are in Lowe's paper.)
 Lowe also showed how to defeat the attack by
 a slight chance to the protocol's second message:
 
@@ -140,14 +141,55 @@ $$
   2'.\quad  B\to A : \comp{\Na,\Nb,B}_{\Ka}
 $$
 
+I knew Roger Needham personally and he was jolly annoyed by these observations,
+as were other senior figures.
+This "attack" relies on Alice opening the protocol with a bad guy, Charlie.
+While the Dolev–Yao threat model declares that the enemy is one of the agents, 
+the Needham–Schroeder paper (written five years earlier), makes weaker assumptions. 
+Their intruder "only" controls the network:
 
-XXXX
+> We assume that an intruder can interpose a computer in all communication paths, and thus can alter or copy parts of messages, replay messages, or emit false material. While this may seem an extreme view, it is the only safe one when designing authentication protocols.
 
-One might argue that this is no attack at all.  An agent who is careless
-enough to talk to the enemy cannot expect any guarantees.  The mechanised
-analysis presented below reveals that the protocol's guarantees for~$A$ are
-adequate.  However, those for $B$ are not: they rely upon $A$'s being careful,
-which is a stronger assumption than mere honesty.  Moreover, the attack can
-also occur if $A$ talks to an honest agent whose private key has been
-compromised.  Lowe suggests a simple fix that provides good guarantees for
-both $A$ and~$B$.
+But he does not have the identity of an agent, and in fact
+
+> Our viewpoint throughout is to provide authentication services to principals that choose to communicate securely. 
+
+Lowe's attack is not possible under this weaker threat model.
+Roger's point is that his protocol
+**achieves what it set out to achieve**.
+Verification is meaningless unless you are explicit about what you are
+trying to prove.
+The Needham–Schroeder paper set forth its assumptions clearly, 
+but almost nobody seems to have noticed. It would have been enough
+to note that the protocol is correct under its original assumptions
+but fails under the now widely accepted Dolev–Yao model.
+
+### More and more bogus
+
+The security community puts a premium on new protocol attacks, 
+which has given the protocol verification community perverse incentives
+to find completely impossible attacks.
+One trend was to ignore message types (agent names, nonces, keys, etc.).
+The standard attacking technique is to splice together fragments of
+prior messages to create a new message that will appear to an honest agent
+as having the correct form.
+Examples I've seen included two nonces $(\mathit{Na}, \mathit{Nb})$
+stuffed into a field where a single nonce is expected, or where a key
+is expected. And yet it's absolutely impossible for two nonces to have the 
+same bit length as a single nonce. It's highly that a nonce will have the same size as a key.
+
+I once attended a conference where a student put up his work, culminating
+in an "attack" involving random nonces (or something) being shoved into a timestamp field. Not only would the bit lengths fail to agree; 
+the timestamp check would undoubtedly fail. His verifier did not model
+timestamp checking, so the "attack" succeeded. 
+The student mentioned that his attack had been added to a database of
+protocol attacks used by researchers to evaluate verifiers.
+Many of the other "attacks" on this databases seemed to be as dubious as his.
+
+Questions were invited from the floor, but I elected to keep my
+mouth shut. No point embarrassing a student.
+
+Burglary, Bribery, Blackmail
+
+
+
