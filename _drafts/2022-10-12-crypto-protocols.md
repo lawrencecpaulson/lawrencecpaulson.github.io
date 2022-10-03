@@ -14,7 +14,7 @@ Viewed at a sufficiently high level, a protocol looks like an abstract program
 with the great advantage, to people like myself, of not ever having to think about
 nasty low-level things like bits.
 Although I have never verified code, I (among many others) have 
-verified cryptographic protocols.
+[verified cryptographic protocols](https://doi.org/110.3233/JCS-1998-61-205).
 There is a lot of confusion about the basic ideas here, which I hope to clarify below.
 
 ### Electronic car key fobs
@@ -188,6 +188,31 @@ Many of the other "attacks" on this databases seemed to be as dubious as his.
 
 Questions were invited from the floor, but I elected to keep my
 mouth shut. No point embarrassing a student.
+
+### Proofs of broken protocols
+
+The verification community puts a premium on proofs, so it has the opposite perverse incentives.
+Early on I [verified a recursive authentication protocol](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf), attracting a lot of attention
+because it could mutually authenticate an arbitrarily large group of principals
+and could involve arbitrarily many messages.
+A quirk of the protocol was that it avoided the use of encryption in order to evade US export controls,
+using instead exclusive-or with a random-looking quantity.
+Having no means to reason about exclusive-or, I ignored this aspect (which are regarded as rather silly),
+verifying instead what I regarded as the real protocol.
+
+Unfortunately, the exclusive-or version turned out to be absolutely broken.
+If any one of the principals decides to cheat, they can obtain all the session keys that were distributed
+in that run. Ryan and Schneider, aware of my proof, [pointed out that](https://doi.org/10.1016/S0020-0190(97)00180-4)
+verification of an abstract security protocol does not imply correctness of implementations,
+even if the implementation of a particular abstraction (encryption) seems to be correct in isolation.
+Correctness properties do not seem to compose when it comes to security.
+
+On the same theme: I proved the correctness of a fairly abstract version of
+Transport Layer Security (TLS). And yet there exist numerous broken implementations of TLS 
+(and of its predecessor, SSL).
+
+### Structured proofs?
+
 
 Burglary, Bribery, Blackmail
 
