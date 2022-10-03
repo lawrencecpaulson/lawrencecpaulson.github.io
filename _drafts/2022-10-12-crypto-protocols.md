@@ -144,7 +144,7 @@ $$
 I knew Roger Needham personally and he was jolly annoyed by these observations,
 as were other senior figures.
 This "attack" relies on Alice opening the protocol with a bad guy, Charlie.
-While the Dolev–Yao threat model declares that the enemy is one of the agents, 
+While the Dolev–Yao threat model indeed declares that the enemy is one of the agents, 
 the Needham–Schroeder paper (written five years earlier), makes weaker assumptions. 
 Their intruder "only" controls the network:
 
@@ -161,30 +161,28 @@ Verification is meaningless unless you are explicit about what you are
 trying to prove.
 The Needham–Schroeder paper set forth its assumptions clearly, 
 but almost nobody seems to have noticed. It would have been enough
-to note that the protocol is correct under its original assumptions
-but fails under the now widely accepted Dolev–Yao model.
+to note that while the protocol fails under the now widely accepted Dolev–Yao model, 
+it is correct according to its own design criteria.
 
-### More and more bogus
+### Plainly bogus crypto protocol attacks
 
 The security community puts a premium on new protocol attacks, 
 which has given the protocol verification community perverse incentives
-to find completely impossible attacks.
+to find impossible "attacks".
 One trend was to ignore message types (agent names, nonces, keys, etc.).
 The standard attacking technique is to splice together fragments of
 prior messages to create a new message that will appear to an honest agent
-as having the correct form.
-Examples I've seen included two nonces $(\mathit{Na}, \mathit{Nb})$
-stuffed into a field where a single nonce is expected, or where a key
-is expected. And yet it's absolutely impossible for two nonces to have the 
-same bit length as a single nonce. It's highly that a nonce will have the same size as a key.
+as having the correct form. This can be done for real.
+But examples I've seen included two nonces $(\mathit{Na}, \mathit{Nb})$
+stuffed into a field where a single nonce is expected, 
+or a key where a nonce is expected. And yet it's impossible for two nonces to have the same size as a single nonce. (These are fixed-width bit fields.)
+It's highly unlikely that a nonce will have the same size as a key.
 
 I once attended a conference where a student put up his work, culminating
-in an "attack" involving random nonces (or something) being shoved into a timestamp field. Not only would the bit lengths fail to agree; 
-the timestamp check would undoubtedly fail. His verifier did not model
-timestamp checking, so the "attack" succeeded. 
+in an "attack" involving random nonces (or something) being shoved into a timestamp field. Not only would the bit lengths differ; 
+the timestamp check would undoubtedly fail. 
 The student mentioned that his attack had been added to a database of
 protocol attacks used by researchers to evaluate verifiers.
-Many of the other "attacks" on this databases seemed to be as dubious as his.
 
 Questions were invited from the floor, but I elected to keep my
 mouth shut. No point embarrassing a student.
@@ -197,8 +195,8 @@ because it could mutually authenticate an arbitrarily large group of principals
 and could involve arbitrarily many messages.
 A quirk of the protocol was that it avoided the use of encryption in order to evade US export controls,
 using instead exclusive-or with a random-looking quantity.
-Having no means to reason about exclusive-or, I ignored this aspect (which are regarded as rather silly),
-verifying instead what I regarded as the real protocol.
+Having no means to reason about exclusive-or, I ignored this aspect (which I regarded as rather silly),
+verifying instead what I regarded as the *real* protocol.
 
 Unfortunately, the exclusive-or version turned out to be absolutely broken.
 If any one of the principals decides to cheat, they can obtain all the session keys that were distributed
