@@ -87,7 +87,7 @@ satisfy *signatures*, which correspond to types and allow a module
 to be specified without reference to any implementation.
 *Functors* provide a way to define structures that take other structures as parameters.
 In 1984, Dave's proposal seemed ludicrously baroque to simple-minded souls like myself and seemingly to the French group too.
-As I recall, Caml launched with basic modules that worked with Unix Makefiles to generate `.o` files, which was regarded as a big win.
+As I recall, Caml launched with basic modules that worked with UNIX Makefiles to generate `.o` files, which was regarded as a big win.
 OCaml modules today [apparently resemble Standard ML's](https://ocaml.org/docs/functors),
 if [this guy](https://jozefg.bitbucket.io/posts/2015-01-08-modules.html) is correct.
 
@@ -190,7 +190,7 @@ but one gets far more attention to the other.
 So let me put in a few words of praise for David Matthews,
 another mild and self-effacing personality, who accomplished so much:
 
-* good performance and fantastic debugging tools
+* good performance; fantastic debugging and profiling tools
 * not merely "saving an image", but sharable executable units, either including the Read-Eval-Print loop or standalone;
 * support for one hardware architecture after another (including Apple Silicon)
 * [support for multi-threading](https://doi.org/10.1145/1708046.1708058)
