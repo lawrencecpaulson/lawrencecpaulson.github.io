@@ -2,7 +2,7 @@
 layout: post
 title:  "BDDs in HOL: the coolest thing Mike Gordon ever did"
 usemathjax: true 
-tags: [HOL system, PVS, BDDs, MJC Gordon]
+tags: [HOL system, PVS, BDDs, MJC Gordon, verification]
 ---
 
 On 22 August, it will be five years since the death of [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/), who • basically invented hardware verification

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Verifying cryptographic protocols"
+title:  "Verifying cryptographic protocols, I: Fundamentals"
 usemathjax: true
-tags: [general]
+tags: [general,verification]
 ---
 
 A *cryptographic protocol* is a message sequence, typically of fixed length, with the aim of establishing secure communications between two *principals*.
@@ -55,29 +55,30 @@ Timestamps and nonces are the two main techniques for proving freshness.
 
 ### Protocol verification: basic principles
 
-Generally we assume the following scenario (the [Dolev–Yao threat model](https://doi.org/10.1109/TIT.1983.1056650)):
+Generally we assume the following scenario:
 
 * a population of *principals* or *agents* $A$, $B$, $\ldots$
 * *nonces*, which we assume to be impossible to guess
+* *timestamps*, and unstructured data (the message payload)
 * the ability to encrypt, decrypt and hash messages
-* an *intruder* who can copy, reroute, delete and even create messages
+* an *intruder* who can copy, reroute, delete and create messages  
 
 The intruder is almost omnipotent. 
-He is even assumed to have the identity of a normal principal, i.e. he is "inside the castle".
-His only limitations are that he cannot simply guess
-nonces or cryptographic keys.
+According to the now-prevailing ([Dolev–Yao threat model](https://doi.org/10.1109/TIT.1983.1056650)),
+he is even assumed to have the identity of a normal principal, i.e. he has infiltrated the user group.
+He can do essentially unlimited amounts of work, but he does not have the power to guess
+nonces or to crack encryption.
 
-Because of the last assumption, we can never prove that a protocol terminates.
-Our concern is strictly with the safe execution of protocols.
+Because the intruder can delete messages, we can never prove that a protocol terminates.
+Our concern is strictly with the **safe** execution of protocols.
 We assume that encryption and hashing are perfect on the grounds that
 if they were not, no protocol could be secure, and we are concerned about
-replay attacks that bypass encryption.
+attacks that bypass encryption.
 
-*Public-key encryption* is much more expensive than *shared-key encryption* 
-and is chiefly used to solve the *key distribution problem* – to convey
-a fresh shared key to a distant party – rather than to encrypt long messages.
+*Public-key encryption* is expensive, so it is chiefly used to solve the *key distribution problem*—to convey
+a fresh shared key to a distant party—rather than to encrypt long messages.
 Other protocols are based entirely on keys shared with a *trusted third party*,
-which they use for key distribution.
+which performs key distribution.
 Returning to the car example, we do not expect a fob
 to perform public-key encryption but rather to be manufactured for a particular car
 and sharing the required key.
@@ -146,7 +147,8 @@ as were other senior figures.
 This "attack" relies on Alice opening the protocol with a bad guy, Charlie.
 While the Dolev–Yao threat model indeed declares that the enemy is one of the agents, 
 the Needham–Schroeder paper (written five years earlier), makes weaker assumptions. 
-Their intruder "only" controls the network:
+As they clearly state at the start of [their paper](https://doi.org/10.1145/359657.359659), 
+the intruder "only" controls the network:
 
 > We assume that an intruder can interpose a computer in all communication paths, and thus can alter or copy parts of messages, replay messages, or emit false material. While this may seem an extreme view, it is the only safe one when designing authentication protocols.
 
@@ -159,7 +161,7 @@ Roger's point is that his protocol
 **achieves what it set out to achieve**.
 Verification is meaningless unless you are explicit about what you are
 trying to prove.
-The Needham–Schroeder paper set forth its assumptions clearly, 
+The Needham–Schroeder paper declared its assumptions, 
 but almost nobody seems to have noticed. It would have been enough
 to note that while the protocol fails under the now widely accepted Dolev–Yao model, 
 it is correct according to its own design criteria.
@@ -209,10 +211,10 @@ On the same theme: I proved the correctness of a fairly abstract version of
 Transport Layer Security (TLS). And yet there exist numerous broken implementations of TLS 
 (and of its predecessor, SSL).
 
-### Structured proofs?
+### What about the real world?
 
+Back in 1997, while attending the Computer Security Foundations Workshop, I was buttonholed by [Robert Morris](https://en.wikipedia.org/wiki/Robert_Morris_(cryptographer)), who at the time was Chief Scientist of the [National Security Agency](https://www.nsa.gov). "Tell me something interesting!
 
-Burglary, Bribery, Blackmail
-
-
-
+I must have told him about my work.
+He then remarked that real-world protocols did not at all resemble the ones discussed at the Workshop, saying that nobody even used nonces. (If that was true back then, it is certainly true no longer: 
+protocols such as TLS definitely use nonces.) And he said, "Never forget the three B's: Burglary, Bribery and Blackmail." None of these, however, are relevant to the world of cryptographic protocols.
