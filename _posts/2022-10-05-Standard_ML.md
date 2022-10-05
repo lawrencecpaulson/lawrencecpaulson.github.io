@@ -193,15 +193,14 @@ another mild and self-effacing personality, who accomplished so much:
 * good performance and fantastic debugging tools
 * not merely "saving an image", but sharable executable units, either including the Read-Eval-Print loop or standalone;
 * support for one hardware architecture after another (including Apple Silicon)
-* [support for multi-threading](https://doi.org/10.1145/1708046.1708058),
-(also [here](/papers/Matthews-parallel.pdf))
-— they say that OCaml is finally catching up,
+* [support for multi-threading](https://doi.org/10.1145/1708046.1708058)
+(also [here](/papers/Matthews-parallel.pdf)); they say that OCaml is finally catching up,
 15 years later, thanks to having 100 times as much funding.
 
 A mystery I shall never understand is the difference in performance
 between SML/NJ and Poly/ML. The former enjoyed vastly greater funding
 and had a strong team of developers compared with DCJM's one-man show.
-Benchmarks I ran for my ML book consistently gave SML/NJ a big performance advantage.
+Benchmarks I ran for [my ML book](https://www.cl.cam.ac.uk/~lp15/MLbook/) consistently gave SML/NJ a big performance advantage.
 But with Isabelle, the strong performer was Poly/ML.
 Once David got parallelism working, Poly/ML's advantage was so
 overwhelming that we dropped our long-standing policy of supporting
