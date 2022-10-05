@@ -157,8 +157,7 @@ But he does not have the identity of an agent, and in fact
 > Our viewpoint throughout is to provide authentication services to principals that choose to communicate securely. 
 
 Lowe's attack is not possible under this weaker threat model.
-Roger's point is that his protocol
-**achieves what it set out to achieve**.
+Roger's point is that his protocol **achieves what it set out to achieve**.
 Verification is meaningless unless you are explicit about what you are
 trying to prove.
 The Needham–Schroeder paper declared its assumptions, 
