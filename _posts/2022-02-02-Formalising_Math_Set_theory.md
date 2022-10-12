@@ -38,6 +38,8 @@ However, in the expression "arrange to stick around", Quaife is referring to lif
 With a complete proof procedure, a proof will definitely be found if one exists, but the time and space required could make it utterly infeasible.
 The freezer will thaw first. Gödel incompleteness could also spoil the party.
 
+<img src="/images/frozen_friends.jpg" alt="Friends frozen no longer" width="600"/>
+
 Quaife did achieve significant results however. He produced the first usable formalisation of axiomatic set theory in an automatic theorem prover.
 He used [Otter](https://www.cs.unm.edu/~mccune/otter/), the leading resolution theorem prover of that era.
 Such provers are fully automatic, but in practice, somebody needs to lend a hand by suggesting lemmas to be proved in the correct order,
