@@ -119,17 +119,17 @@ Now each knows that the other is online, and one could imagine a
 for use in private communications.
 (Public-key encryption is too expensive to be use with long messages.)
 
-Unfortunately, there is a flaw with this scheme, [pointed out](https://rdcu.be/cWJBL) by
-Gavin Lowe back in 1996.
+Unfortunately, there is a flaw with this scheme, which Gavin Lowe discovered in 1996 through his
+[pioneering work](https://rdcu.be/cWJBL) on protocol verification using model checking.
 Suppose that Alice runs the protocol with a *dishonest* agent $C$ 
 ("Charlie"). In that case, Charlie can initiate a new run of the protocol
 with some $D$, sending along Alice's first message re-encrypted with $\mathit{Kd}$.
 By interleaving the two runs, Charlie can use Alice to decrypt the 
 second message, thereby completing the run with $D$ 
 while masquerading as $A$: a failure of authentication.
-(Details are in Lowe's paper.)
+(Details of the attack are in Lowe's paper.)
 Lowe also showed how to defeat the attack by
-a slight chance to the protocol's second message:
+a slight change to the protocol's second message:
 
 $$
 \newcommand\Na{\mathit{Na}}
@@ -142,8 +142,11 @@ $$
   2'.\quad  B\to A : \comp{\Na,\Nb,B}_{\Ka}
 $$
 
+Charlie cannot pass off this message as his own because he cannot replace that $B$ by $C$, 
+which is what Alice would expect.
+
 I knew Roger Needham personally and he was jolly annoyed by these observations,
-as were other senior figures.
+as were other senior security researchers.
 This "attack" relies on Alice opening the protocol with a bad guy, Charlie.
 While the Dolev–Yao threat model indeed declares that the enemy is one of the agents, 
 the Needham–Schroeder paper (written five years earlier), makes weaker assumptions. 
@@ -161,7 +164,7 @@ Roger's point is that his protocol **achieves what it set out to achieve**.
 Verification is meaningless unless you are explicit about what you are
 trying to prove.
 The Needham–Schroeder paper declared its assumptions, 
-but almost nobody seems to have noticed. It would have been enough
+but almost nobody seems to have noticed. It is enough
 to note that while the protocol fails under the now widely accepted Dolev–Yao model, 
 it is correct according to its own design criteria.
 
@@ -179,10 +182,10 @@ stuffed into a field where a single nonce is expected,
 or a key where a nonce is expected. And yet it's impossible for two nonces to have the same size as a single nonce. (These are fixed-width bit fields.)
 It's highly unlikely that a nonce will have the same size as a key.
 
-I once attended a conference where a student put up his work, culminating
-in an "attack" involving random nonces (or something) being shoved into a timestamp field. Not only would the bit lengths differ; 
+I once attended a conference where a student presented his work, culminating
+in an "attack" involving random junk being shoved into a timestamp field. Not only would the bit lengths differ; 
 the timestamp check would undoubtedly fail. 
-The student mentioned that his attack had been added to a database of
+The student mentioned that his attack had been accepted to a database of
 protocol attacks used by researchers to evaluate verifiers.
 
 Questions were invited from the floor, but I elected to keep my
@@ -194,7 +197,7 @@ The verification community puts a premium on proofs, so it has the opposite perv
 Early on I [verified a recursive authentication protocol](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf), attracting a lot of attention
 because it could mutually authenticate an arbitrarily large group of principals
 and could involve arbitrarily many messages.
-A quirk of the protocol was that it avoided the use of encryption in order to evade US export controls,
+A quirk of the protocol was that it avoided the use of encryption in order to evade American export controls,
 using instead exclusive-or with a random-looking quantity.
 Having no means to reason about exclusive-or, I ignored this aspect (which I regarded as rather silly),
 verifying instead what I regarded as the *real* protocol.
@@ -206,13 +209,13 @@ verification of an abstract security protocol does not imply correctness of impl
 even if the implementation of a particular abstraction (encryption) seems to be correct in isolation.
 Correctness properties do not seem to compose when it comes to security.
 
-On the same theme: I proved the correctness of a fairly abstract version of
-Transport Layer Security (TLS). And yet there exist numerous broken implementations of TLS 
-(and of its predecessor, SSL).
+On the same theme: I [proved the correctness](https://dl.acm.org/doi/10.1145/322510.322530) of a fairly abstract version of
+Transport Layer Security. And yet there exist numerous broken implementations of TLS 
+and of its predecessor, SSL.
 
 ### What about the real world?
 
-Back in 1997, while attending the Computer Security Foundations Workshop, I was buttonholed by [Robert Morris](https://en.wikipedia.org/wiki/Robert_Morris_(cryptographer)), who at the time was Chief Scientist of the [National Security Agency](https://www.nsa.gov). "Tell me something interesting!
+Back in 1997, while attending the Computer Security Foundations Workshop, I was buttonholed by [Robert Morris](https://en.wikipedia.org/wiki/Robert_Morris_(cryptographer)), who at the time was Chief Scientist of the [National Security Agency](https://www.nsa.gov). "Tell me something interesting!"
 
 I must have told him about my work.
 He then remarked that real-world protocols did not at all resemble the ones discussed at the Workshop, saying that nobody even used nonces. (If that was true back then, it is certainly true no longer: 
