@@ -64,4 +64,10 @@ Later, I used Gödel's [constructible universe](https://plato.stanford.edu/entri
 Isabelle/ZF then languished for many years, but lately a group at the University of Argentina has formalised [a string of major results](https://cs.famaf.unc.edu.ar/~pedro/forcing/) based on forcing.
 An astounding feat.
  
-The [development of modern set theory](https://plato.stanford.edu/entries/settheory-early/) took about a century. It eventually solved most of the foundational problems that had to be addressed, but by that time most mathematicians had lost interest. So it goes.
+The [development of modern set theory](https://plato.stanford.edu/entries/settheory-early/) 
+took about a century. It eventually solved most of the foundational problems that had to be addressed, 
+but by that time most mathematicians had lost interest. So it goes.
+
+### Postscript added 16-10-2022
+
+It's surely relevant that the market for NFTs has gone [right down the pan](https://www.investmentmonitor.ai/crypto/nft-market-collapse-cryptocurrency-value).
