@@ -11,19 +11,40 @@ by Nachum Dershowitz and Zohar Manna, whom I knew as a graduate student at Stanf
 A *multiset* is a concept of collection that differs from a set in that
 multiple occurrences of elements are significant.
 Computer scientists typically encounter them as a way of specifying
-the concept of sorting: to transform an input list into an output 
+the concept of sorting: to transform an input list into an output
 that is correctly ordered but equal to the input when both are regarded as multisets.
 Dershowitz and Manna showed that multisets also provided
-natural but strong orderings for proving the termination of computer programs.
+natural but strong orderings for proving termination.
 I had written about the termination of a rewrite system for Ackermann's function
-in a [previous post]({% post_url 2022-02-09-Ackermann-example %}). 
-I was advised to contact Dershowitz, "a leading
-expert on termination", and his reply was that the answer I sought
-was already in his 1979 paper!
+in an [earlier post]({% post_url 2022-02-09-Ackermann-example %})
+and was advised to contact "Dershowitz, a leading
+expert on termination".
+His reply was that the answer I sought was in his 1979 paper!
 
-### Ackermann's function
+### Multiset orderings
 
+The idea is to lift an ordering on the elements of multisets to the multisets themselves.
+The precise definition of how to compare two multisets is somewhat involved,
+but basically involves cancelling everything they have in common and comparing
+the largest elements at which they differ.
+It may suffice to recount a conversation I had long ago with a dubious
+Rod Burstall: "So if apples are greater than oranges then three apples are greater than two oranges? No: then one apple is greater than a million oranges."
+Powerful stuff, and yet this ordering is [well-founded](https://en.wikipedia.org/wiki/Well-founded_relation) (therefore terminating)
+provided the element ordering is.
 
+A mathematician would probably prefer to replace multisets by non-increasing sequences, compared lexicographically.
+Then it's clear that if the base ordering
+has order type $\alpha$ then the corresponding multiset ordering
+will have order type $\omega^\alpha$.
+Dershowitz and Manna also considered the iterated nesting of multisets,
+which has order type [$\epsilon_0$](https://en.wikipedia.org/wiki/Epsilon_number).
+This is easily strong enough for any termination question likely to arise in computer science.
+
+### Ackermann's function (again)
+
+In the interest of saving you from having to keep referring
+to the [previous post]({% post_url 2022-02-09-Ackermann-example %})
+on Ackermann's function, let's recall its definition:
 
 $$
 \begin{align*}
@@ -33,14 +54,17 @@ $$
 \end{align*}
 $$
 
+Called the generalised exponential, it is an attempt to extend the sequence
+*successor*, *addition*, *multiplication*, *exponentiation* indefinitely according to its first argument.
+It grows fast: faster than any primitive recursive function, which is
+[easy to prove]({% post_url 2022-09-07-Ackermann-not-PR-II %}).
 
-
-
-### Ackermann's function as a rewrite system
-
-What's fiendish about the recursion in Ackermann's function is that it is nested. Nevertheless, reducing recursion to iteration is second nature to a computer scientist. The recursion corresponds fairly straightforwardly to a stack computation, or again to a term rewriting system:
+Ackermann's function can easily be expressed in terms of a stack computation, or equivalently as a term rewriting system:
 
 $$
+\DeclareMathOperator{\Suc}{Suc}
+\DeclareMathOperator{\ack}{ack}
+\newcommand{\cons}{\mathbin{\#}}
 \begin{align*}
 	\Box \cons n\cons 0\cons L &\longrightarrow \Box \cons \Suc n \cons  L\\
 	\Box \cons 0\cons \Suc m\cons L &\longrightarrow \Box \cons 1\cons  m \cons L\\
@@ -48,14 +72,14 @@ $$
 \end{align*}
 $$
 
-(The boxes anchor the rewrite rules to the start of the list. The # operator separates list elements.)
-
+(In Isabelle, # separates list elements.)
 
 
 ### Defining the functions in Isabelle/HOL
 
-The definition of Ackermann's function can be typed into Isabelle/HOL more-or-less verbatim.
-That it's well-defined and terminating is detected automatically, and the recursion equations shown are *proved* from a low-level, non-recursive definition. All that happens automatically.
+As before, both definitions of Ackermann's function can be typed straight into Isabelle/HOL.
+The termination of the basic version is proved automatically.
+It's by the lexicographic combination of the two arguments, which works despite the nested recursion in the third line.
 
 <pre class="source">
 <span class="keyword1"><span class="command">fun</span> <span class="entity">ack</span></span><span> </span><span class="main">::</span><span> </span><span class="quoted quoted"><span>"</span><span class="main">[</span>nat<span class="main">,</span>nat<span class="main">]</span><span> </span><span class="main">⇒</span><span> </span>nat<span>"</span></span><span> </span><span class="keyword2 keyword">where</span><span>
@@ -64,9 +88,11 @@ That it's well-defined and terminating is detected automatically, and the recurs
 </span><span class="main">|</span><span> </span><span class="quoted quoted"><span>"</span><span class="free">ack</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">n</span><span class="main">)</span><span> </span><span class="main">=</span><span> </span><span class="free">ack</span><span> </span><span class="free bound entity">m</span><span> </span><span class="main">(</span><span class="free">ack</span><span> </span><span class="main">(</span>Suc<span> </span><span class="free bound entity">m</span><span class="main">)</span><span> </span><span class="free bound entity">n</span><span class="main">)</span><span>"</span></span>
 </pre>
 
-The rewrite rule system shown above can also be typed in verbatim.
-The box symbols are unnecessary, since pattern matching inherently targets the start of the list.
-But how does Isabelle/HOL handle the issue of termination?
+Now we declare the stack version.
+[Last time]({% post_url 2022-02-09-Ackermann-example %}),
+the termination of the stack computation was shown by explicit reasoning
+about its domain. The declaration below still uses the `function` keyword,
+which means that the termination proof will come later.
 
 <pre class="source">
 <span class="keyword1 command">function</span><span> </span><span class="entity">ackloop</span><span> </span><span class="main">::</span><span> </span><span class="quoted quoted"><span>"</span>nat<span> </span>list<span> </span><span class="main">⇒</span><span> </span>nat<span>"</span></span><span> </span><span class="keyword2 keyword">where</span><span>
@@ -78,49 +104,85 @@ But how does Isabelle/HOL handle the issue of termination?
   </span><span class="keyword1 command">by</span><span> </span><span class="operator">pat_completeness</span><span> </span><span class="operator">auto</span>
 </pre>
 
-[Alex Krauss's](https://www21.in.tum.de/~krauss/) wonderful [function definition package](https://isabelle.in.tum.de/dist/Isabelle/doc/functions.pdf) anticipates such difficult cases.
-It allows us to define function `f` first and deal with its termination later.
-When prompted by the keyword `domintros`, it defines the predicate `f_dom` expressing the termination of `f` for a given argument. Then arbitrary recursion equations for `f` can be accepted, but the package makes them conditional: they will hold only if `f` terminates on the given argument.
-Then our task is to prove that `f_dom` holds on the arguments we are interested in
-and even partial recursive functions can be dealt with.
-Here we shall prove that `ackloop` is a total function by proving that `ackloop_dom` is always satisfied.
+Only this time, termination will be proved with the help of multisets.
 
-### Proving termination
+### Proving termination via multisets
 
-
-Now that termination has been proved for all possible arguments, we can point out that fact to Isabelle/HOL:
+Recall that the multiset ordering is based on an ordering of the element type.
+The elements of our multisets will be pairs of natural numbers,
+ordered lexicographically (the first component dominating).
+If the first two elements of the stack are $z$ and $y$, then
+the multiset will contain the pair $(y,z)$, and each further stack element $x$
+will contribute the pair $(x+1,0)$ to the multiset.
+The following function accomplishes this:
 
 <pre class="source">
-<span class="keyword1 command">termination</span><span> </span><span class="quoted">ackloop</span><span>
-  </span><span class="keyword1 command">by</span><span> </span><span class="main">(</span><span class="operator">simp</span><span> </span><span class="quasi_keyword">add</span><span class="main main">:</span><span> </span>ackloop_dom<span class="main">)</span>
+<span class="keyword1 command">fun</span> <span class="entity">ack_mset</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>nat</span> list</span> <span class="main">⇒</span> <span class="main">(</span>nat<span class="main">×</span>nat<span class="main">)</span> multiset<span>"</span> <span class="keyword2 keyword">where</span><span>
+  </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">ack_mset</span> <span class="main">[]</span></span> <span class="main">=</span></span> <span class="main">{#}</span><span>"</span><span>
+</span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">ack_mset</span> <span class="main">[</span><span class="free bound entity">x</span><span class="main">]</span> <span class="main">=</span></span> <span class="main">{#}</span></span><span>"</span><span>
+</span><span class="main">|</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">ack_mset</span> <span class="main">(</span><span class="free bound entity">z</span><span class="main">#</span></span><span class="free bound entity">y</span><span class="main">#</span></span><span class="free bound entity">l</span><span class="main">)</span> <span class="main">=</span> mset <span class="main">(</span><span class="main">(</span><span class="free bound entity">y</span><span class="main">,</span><span class="free bound entity">z</span><span class="main">)</span> <span class="main">#</span> map <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">(</span>Suc <span class="bound">x</span><span class="main">,</span> <span class="main">0</span><span class="main">)</span><span class="main">)</span> <span class="free bound entity">l</span><span class="main">)</span><span>"</span>
 </pre>
 
-The effect is to make the recursion equations for `ackloop` unconditional.
+It's not difficult to check that for each of the recursive calls made by
+the stack-based computation, the corresponding multiset decreases
+according to the multiset ordering and therefore the recursion terminates.
+More details are in [the paper](https://doi.org/10.1145/359138.359142);
+it's Example 3, on page 471.
+Reflecting the conventions of 1979, the program is coded in a variant of Algol
+and $z$ is a global variable rather than a stack element.
+
+The most difficult case of termination I had to formalise explicitly, below.
+It's for the first recursive call.
+That the multiset $\{(m,n+1)\}$ is less than $\{(m+1,0),(0,n)\}$
+requires step-by-step reasoning. The cases for the other two recursive calls
+are proved automatically.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> case1<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ack_mset</span> <span class="main">(</span>Suc</span> <span class="free">n</span> <span class="main">#</span> <span class="free">l</span><span class="main">)</span> <span class="main">&lt;</span> add_mset <span class="main">(</span><span class="main">0</span><span class="main">,</span><span class="free">n</span><span class="main">)</span> <span class="main">{#</span> <span class="main">(</span>Suc <span class="bound">x</span><span class="main">,</span> <span class="main">0</span><span class="main">)</span><span class="main">.</span> <span class="bound">x</span> <span class="main">∈#</span> mset <span class="free">l</span> <span class="main">#}</span><span>"</span><span>
+</span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted free">l</span><span class="main">)</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Cons <span class="skolem">m</span> <span class="skolem">list</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">{#</span><span class="main">(</span><span class="skolem">m</span><span class="main">,</span> Suc</span> <span class="free">n</span><span class="main">)</span><span class="main">#}</span> <span class="main">&lt;</span></span> <span class="main">{#</span><span class="main">(</span>Suc <span class="skolem">m</span><span class="main">,</span> <span class="main">0</span><span class="main">)</span><span class="main">#}</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+  </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">≤</span></span> <span class="main">{#</span><span class="main">(</span>Suc</span> <span class="skolem">m</span><span class="main">,</span> <span class="main">0</span><span class="main">)</span><span class="main">,</span> <span class="main">(</span><span class="main">0</span><span class="main">,</span><span class="free">n</span><span class="main">)</span><span class="main">#}</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
+  </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> Cons<span class="main">)</span><span>
+</span><span class="keyword1 command">qed</span> <span class="operator">auto</span>
+</pre>
+
+The following command asks Isabelle—specifically, Alex Krauss's [function package](https://isabelle.in.tum.de/dist/Isabelle/doc/functions.pdf)— to check termination
+with reference to the function `ack_mset`,
+supplying the result proved above as a lemma.
+
+<pre class="source">
+<span class="keyword1 command">termination</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">relation</span> <span class="quoted"><span class="quoted"><span>"</span>inv_image</span> <span class="main">{</span><span class="main">(</span><span class="bound">x</span><span class="main">,</span><span class="bound">y</span><span class="main">)</span><span class="main">.</span> <span class="bound">x</span><span class="main">&lt;</span></span><span class="bound">y</span><span class="main">}</span> ack_mset<span>"</span><span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> wf case1<span class="main">)</span>
+</pre>
+
+Since the supplied tactic proved the termination subgoals, termination is established.
+Isabelle will now supply unconditional recursion equations for the function.
 
 ### Proving the two definitions equivalent
 
-We are nearly there. Knowing that `ackloop` is a total function, and with the help of its own induction rule, we trivially prove its equivalence to `acklist`.
+Last time, I introduced an additional function as part of the proof
+that the stack-based computation was equivalent to the traditional version of
+Ackermann's function. This had educational value perhaps,
+but the equivalence can be proved without it.
+The following result is all we need:
 
 <pre class="source">
-<span class="keyword1 command">lemma</span><span> </span>ackloop_acklist<span class="main">:</span><span> </span><span class="quoted quoted"><span>"</span>ackloop<span> </span><span class="free">l</span><span> </span><span class="main">=</span><span> </span>acklist<span> </span><span class="free">l</span><span>"</span></span><span>
-  </span><span class="keyword1 command">by</span><span> </span><span class="main">(</span><span class="operator">induction</span><span> </span><span class="quoted free">l</span><span> </span><span class="quasi_keyword">rule</span><span class="main main">:</span><span> </span>ackloop.induct<span class="main">)</span><span> </span><span class="operator">auto</span>
+<span class="keyword1 command">lemma</span> ackloop_ack<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>ackloop</span> <span class="main">(</span><span class="free">n</span> <span class="main">#</span></span> <span class="free">m</span> <span class="main">#</span> <span class="free">l</span><span class="main">)</span> <span class="main">=</span> ackloop <span class="main">(</span>ack <span class="free">m</span> <span class="free">n</span> <span class="main">#</span> <span class="free">l</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">m</span> <span class="quoted free">n</span> <span class="quasi_keyword">arbitrary</span><span class="main main">:</span> <span class="quoted free">l</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> ack.induct<span class="main">)</span> <span class="operator">auto</span>
 </pre>
 
-It follows directly that Ackermann's function can be computed with the help of `ackloop`.
+As in the [earlier post]({% post_url 2022-02-09-Ackermann-example %}),
+a one line proof is possible thanks to `ack.induct`, the induction rule
+specific to Ackermann's function.
+And now we are done!
 
 <pre class="source">
-<span class="keyword1 command">theorem</span><span> </span>ack<span class="main">:</span><span> </span><span class="quoted quoted"><span>"</span>ack<span> </span><span class="free">m</span><span> </span><span class="free">n</span><span> </span><span class="main">=</span><span> </span>ackloop<span> </span><span class="main">[</span><span class="free">n</span><span class="main">,</span><span class="free">m</span><span class="main">]</span><span>"</span></span><span>
-  </span><span class="keyword1 command">by</span><span> </span><span class="main">(</span><span class="operator">simp</span><span> </span><span class="quasi_keyword">add</span><span class="main main">:</span><span> </span>ackloop_acklist<span class="main">)</span>
+<span class="keyword1 command">theorem</span> <span class="quoted"><span class="quoted"><span>"</span>ack</span> <span class="free">m</span> <span class="free">n</span> <span class="main">=</span></span> ackloop <span class="main">[</span><span class="free">n</span><span class="main">,</span><span class="free">m</span><span class="main">]</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ackloop_ack<span class="main">)</span>
 </pre>
 
-This example is unusual in that the formal proofs are all one-liners. More commonly, formal proofs are horrible. And yet there is nothing trivial about the termination of `ackloop`.
-The system of rewrite rules for Ackermann's function has been added to the [Termination Problems Data Base](http://termination-portal.org/wiki/TPDB) (TPDB) as 
-[`Paulson_20/ackermann_iterative.xml`](https://termcomp.github.io/tpdb.html?ver=11.2&path=TRS_Standard%2FPaulson_20%2Fackermann_iterative.xml).
-As of this writing, no termination checker can handle it.
-
-### Odds and ends
-
-I have published a [more thorough treatment](https://doi.org/10.1017/bsl.2021.47) of this example in the *Bulletin of Symbolic Logic*.
-
-You'll find the Isabelle proof text at `src/HOL/Examples/Ackermann.thy` in your downloaded copy of Isabelle, and can also [browse it online](https://isabelle.in.tum.de/dist/library/HOL/HOL-Examples/Ackermann.html).
-
+You'll find the Isabelle proof development [here](/Isabelle-Examples/AckermannM.thy).
