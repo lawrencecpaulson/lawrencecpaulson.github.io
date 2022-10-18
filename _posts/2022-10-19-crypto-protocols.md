@@ -220,3 +220,13 @@ Back in 1997, while attending the Computer Security Foundations Workshop, I was 
 I must have told him about my work.
 He then remarked that real-world protocols did not at all resemble the ones discussed at the Workshop, saying that nobody even used nonces. (If that was true back then, it is certainly true no longer: 
 protocols such as TLS definitely use nonces.) And he said, "Never forget the three B's: Burglary, Bribery and Blackmail." None of these, however, are relevant to the world of cryptographic protocols.
+
+### Postscript: key fob attacks continue
+
+Electronically opened cars are still not safe. But the attacks are infinitely more sophisticated
+than the early replay attacks. Roger Needham told me once how damaging it was that the first
+key fobs were so vulnerable: once criminals got hooked on stealing cars that way, security improvements
+would merely set up an arms race, while if the first key fobs had been secure
+that would have been that. These days, attackers manage somehow to 
+[load their own software](https://www.europol.europa.eu/media-press/newsroom/news/31-arrested-for-stealing-cars-hacking-keyless-tech)
+into the car.
