@@ -13,9 +13,10 @@ and *encrypt* your communications (keeping them secure from any eavesdropper).
 Viewed at a sufficiently high level, a protocol looks like an abstract program
 with the great advantage, to people like myself, of not ever having to think about
 nasty low-level things like bits.
-Although I have never verified code, I (among many others) have 
-[verified cryptographic protocols](https://doi.org/110.3233/JCS-1998-61-205).
-There is a lot of confusion about the basic ideas here, which I hope to clarify below.
+Although I have never verified code, I among many others have 
+[verified cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205)
+(also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)).
+There is a lot of confusion about the basic ideas, which I hope to clarify below.
 
 ### Electronic car key fobs
 
