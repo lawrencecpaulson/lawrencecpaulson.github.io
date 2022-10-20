@@ -132,9 +132,8 @@ solving the subgoal corresponding to a fake message.
 ### Events, traces and other basic notions
 
 Protocols are formalised with respect to a "God's eye" trace model.
-It is effectively an operational semantics.
 The trace holds all message send attempts from the beginning of time, including
-multiprotocol runs possibly interleaved with any number of parties.
+multiple protocol runs possibly interleaved with any number of parties.
 
 <pre class="source">
 <span class="keyword1 command">datatype</span><span>
@@ -159,11 +158,15 @@ But I never updated the Needham-Schroeder formalisation, so we don't need
 The basic model includes several other primitives, which can be briefly described as follows:
 - `bad`: the set of compromised agents (their keys are known to the Spy)
 - `used`: the set of all message components ever sent, whether visible or not
-- `knows`: the set of all message components visible to a given agent (we only care about the Spy)
+- `knows`: the set of message components visible to a given agent (generally the Spy)
 - `pubEK`: the public encryption key of a given agent
 
 
 ### The protocol
+
+The [earlier post]({% post_url 2022-10-19-crypto-protocols %})
+described the Needham–Schroeder public key protocol and mentioned the flaw
+found by Gavin Lowe. Here is the protocol with its correction (in message 2):
 
 $$
 \newcommand\Na{\mathit{Na}}
@@ -178,6 +181,19 @@ $$
   &2.&\quad  B\to A  &: \comp{\Na,\Nb,B}_{\Ka} \\
   &3.&\quad  A\to B  &: \comp{\Nb}_{\Kb}
 \end{alignat*}$$
+
+A reminder of the notation. Some arbitrary principal "Alice" decides for some reason to run the protocol with some other principal, "Bob" and sends the first message (which contains `Na`, a fresh random number).
+Upon the receipt of what appears to be an instance of message 1, Bob can continue
+the protocol by sending message 2 (containing another random number) back to Alice.
+Alice, upon receiving message 2, checks that it has the correct form,
+which for this version of the protocol involves checking both `Na` and the name `B`.
+If everything is okay, she sends message 3, and if Bob actually receives this message,
+he will confirm `Nb` and that will constitute a successful run.
+If any of the messages fail to get through or do not have the required form,
+the protocol attempt will simply be abandoned.
+
+
+It is effectively an operational semantics.
 
 
 <pre class="source">
