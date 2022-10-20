@@ -22,7 +22,7 @@ I know that an attempt was made using a Certain Verification System.
 But even my proofs are too labour intensive, and crypto protocol verification
 is today done almost exclusively by fully automatic techniques.
 
-### The basic formal setup
+### Messages and operations on them
 
 [Lowe's work](https://rdcu.be/cWJBL) was the starting point
 for much of the work on protocol verification undertaken during the late
@@ -129,9 +129,79 @@ solving the subgoal corresponding to a fake message.
   </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">X</span> <span class="main">∈</span></span> synth</span> <span class="main">(</span>analz <span class="free">G</span><span class="main">)</span> <span class="main">⟹</span> analz <span class="main">(</span>insert <span class="free">X</span> <span class="free">H</span><span class="main">)</span> <span class="main">⊆</span> synth <span class="main">(</span>analz <span class="free">G</span><span class="main">)</span> <span class="main">∪</span> analz <span class="main">(</span><span class="free">G</span> <span class="main">∪</span> <span class="free">H</span><span class="main">)</span><span>"</span>
 </pre>
 
+### Events, traces and other basic notions
+
+Protocols are formalised with respect to a "God's eye" trace model.
+It is effectively an operational semantics.
+The trace holds all message send attempts from the beginning of time, including
+multiprotocol runs possibly interleaved with any number of parties.
+
+<pre class="source">
+<span class="keyword1 command">datatype</span><span>
+  </span>event <span class="main">=</span> Says  <span class="quoted">agent</span> <span class="quoted">agent</span> <span class="quoted">msg</span><span>
+        </span><span class="main">|</span> Gets  <span class="quoted">agent</span>       <span class="quoted">msg</span><span>
+        </span><span class="main">|</span> Notes <span class="quoted">agent</span>       <span class="quoted">msg</span>
+</pre>
+
+The event `Says A B X` represents the attempt by agent `A` to send message `X` to agent `B`.
+This was at one point the only event in the model.
+Later I introduced `Notes`, to represent the local storage of an agent and also
+information leakage outside the protocol.
+[Giampaolo Bella](https://www.dmi.unict.it/giamp/), one of my PhD students, introduced `Gets` to signify the reception of a message 
+by a specific agent, who (because the Spy controls the network) 
+has no way of knowing who the true sender was.
+Giampaolo felt that the explicit `Gets` event made for clearer protocol specifications.
+Giampaolo went on to do an enormous amount of work on protocol verification,
+including timestamp-based protocols, smartcard protocols and other advanced configurations, and even [wrote a book](https://link.springer.com/book/10.1007/978-3-540-68136-6) on the subject.
+But I never updated the Needham-Schroeder formalisation, so we don't need
+`Gets` here.
+
+The basic model includes several other primitives, which can be briefly described as follows:
+- `bad`: the set of compromised agents (their keys are known to the Spy)
+- `used`: the set of all message components ever sent, whether visible or not
+- `knows`: the set of all message components visible to a given agent (we only care about the Spy)
+- `pubEK`: the public encryption key of a given agent
+
+
 ### The protocol
 
+$$
+\newcommand\Na{\mathit{Na}}
+\newcommand\Nb{\mathit{Nb}}
+\newcommand\Ka{\mathit{Ka}}
+\newcommand\Kb{\mathit{Kb}}
+\def\lbb{\mathopen{\{\kern-.30em|}}
+\def\rbb{\mathclose{|\kern-.32em\}}}
+\def\comp#1{\lbb#1\rbb}
+\begin{alignat*}{2}
+  &1.&\quad  A\to B  &: \comp{\Na,A}_{\Kb} \\
+  &2.&\quad  B\to A  &: \comp{\Na,\Nb,B}_{\Ka} \\
+  &3.&\quad  A\to B  &: \comp{\Nb}_{\Kb}
+\end{alignat*}$$
+
+
 <pre class="source">
+<span class="keyword1 command">inductive_set</span> <span class="entity">ns_public</span> <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>event</span> list</span> set<span>"</span><span>
+  </span><span class="keyword2 keyword">where</span><span>
+   </span>Nil<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="main">[]</span></span> <span class="main">∈</span></span> <span class="free">ns_public</span><span>"</span><span>
+   </span><span class="comment1"><span>― ‹</span>Initial trace is empty<span>›</span></span><span>
+ </span><span class="main">|</span> Fake<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free bound entity">evsf</span> <span class="main">∈</span></span> <span class="free">ns_public</span><span class="main">;</span>  <span class="free bound entity">X</span> <span class="main">∈</span></span> synth <span class="main">(</span>analz <span class="main">(</span>spies <span class="free bound entity">evsf</span><span class="main">)</span><span class="main">)</span><span class="main">⟧</span><span>
+          </span><span class="main">⟹</span> Says Spy <span class="free bound entity">B</span> <span class="free bound entity">X</span>  <span class="main">#</span> <span class="free bound entity">evsf</span> <span class="main">∈</span> <span class="free">ns_public</span><span>"</span><span>
+   </span><span class="comment1"><span>― ‹</span>The spy can say almost anything.<span>›</span></span><span>
+ </span><span class="main">|</span> NS1<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free bound entity">evs1</span> <span class="main">∈</span></span> <span class="free">ns_public</span><span class="main">;</span>  Nonce</span> <span class="free bound entity">NA</span> <span class="main">∉</span> used <span class="free bound entity">evs1</span><span class="main">⟧</span><span>
+          </span><span class="main">⟹</span> Says <span class="free bound entity">A</span> <span class="free bound entity">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free bound entity">NA</span><span class="main">,</span> Agent <span class="free bound entity">A</span><span class="main">⦄</span><span class="main">)</span><span>
+                </span><span class="main">#</span> <span class="free bound entity">evs1</span>  <span class="main">∈</span>  <span class="free">ns_public</span><span>"</span><span>
+   </span><span class="comment1"><span>― ‹</span><span>Alice initiates a protocol run, sending a nonce to Bob</span><span>›</span></span><span>
+ </span><span class="main">|</span> NS2<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free bound entity">evs2</span> <span class="main">∈</span></span> <span class="free">ns_public</span><span class="main">;</span>  Nonce</span> <span class="free bound entity">NB</span> <span class="main">∉</span> used <span class="free bound entity">evs2</span><span class="main">;</span><span>
+           </span>Says <span class="free bound entity">A'</span> <span class="free bound entity">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free bound entity">NA</span><span class="main">,</span> Agent <span class="free bound entity">A</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free bound entity">evs2</span><span class="main">⟧</span><span>
+          </span><span class="main">⟹</span> Says <span class="free bound entity">B</span> <span class="free bound entity">A</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">A</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free bound entity">NA</span><span class="main">,</span> Nonce <span class="free bound entity">NB</span><span class="main">,</span> Agent <span class="free bound entity">B</span><span class="main">⦄</span><span class="main">)</span><span>
+                </span><span class="main">#</span> <span class="free bound entity">evs2</span>  <span class="main">∈</span>  <span class="free">ns_public</span><span>"</span><span>
+   </span><span class="comment1"><span>― ‹</span><span>Bob responds to Alice's message with a further nonce</span><span>›</span></span><span>
+ </span><span class="main">|</span> NS3<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free bound entity">evs3</span> <span class="main">∈</span></span> <span class="free">ns_public</span><span class="main">;</span><span>
+           </span>Says</span> <span class="free bound entity">A</span>  <span class="free bound entity">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free bound entity">NA</span><span class="main">,</span> Agent <span class="free bound entity">A</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free bound entity">evs3</span><span class="main">;</span><span>
+           </span>Says <span class="free bound entity">B'</span> <span class="free bound entity">A</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">A</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free bound entity">NA</span><span class="main">,</span> Nonce <span class="free bound entity">NB</span><span class="main">,</span> Agent <span class="free bound entity">B</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free bound entity">evs3</span><span class="main">⟧</span><span>
+          </span><span class="main">⟹</span> Says <span class="free bound entity">A</span> <span class="free bound entity">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="free bound entity">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">#</span> <span class="free bound entity">evs3</span> <span class="main">∈</span> <span class="free">ns_public</span><span>"</span><span>
+   </span><span class="comment1"><span>― ‹</span>Alice proves her existence by sending <span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted free">NB</span><span class="antiquote">}</span></span> back to Bob.<span>›</span></span>
 </pre>
 
 <pre class="source">
@@ -143,6 +213,22 @@ solving the subgoal corresponding to a fake message.
 <pre class="source">
 </pre>
 
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
 
 <pre class="source">
 </pre>
