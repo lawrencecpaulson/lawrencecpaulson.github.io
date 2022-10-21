@@ -158,7 +158,7 @@ But I never updated the Needham-Schroeder formalisation, so we don't need
 The basic model includes several other primitives, which can be briefly described as follows:
 - `bad`: the set of compromised agents (their keys are known to the Spy)
 - `used`: the set of all message components ever sent, whether visible or not
-- `knows`: the set of message components visible to a given agent (generally the Spy)
+- `spies`: the set of message components visible to the Spy
 - `pubEK`: the public encryption key of a given agent
 
 
@@ -166,7 +166,7 @@ The basic model includes several other primitives, which can be briefly describe
 
 The [earlier post]({% post_url 2022-10-19-crypto-protocols %})
 described the Needham–Schroeder public key protocol and mentioned the flaw
-found by Gavin Lowe. Here is the protocol with its correction (in message 2):
+found by Gavin Lowe. The corrected protocol mentions $B$ in message 2:
 
 $$
 \newcommand\Na{\mathit{Na}}
@@ -182,18 +182,22 @@ $$
   &3.&\quad  A\to B  &: \comp{\Nb}_{\Kb}
 \end{alignat*}$$
 
-A reminder of the notation. Some arbitrary principal "Alice" decides for some reason to run the protocol with some other principal, "Bob" and sends the first message (which contains `Na`, a fresh random number).
+A reminder of the notation. Some arbitrary principal "Alice" decides for some reason to run the protocol with some other principal, "Bob" and sends the first message (which contains a fresh random number).
 Upon the receipt of what appears to be an instance of message 1, Bob can continue
 the protocol by sending message 2 (containing another random number) back to Alice.
 Alice, upon receiving message 2, checks that it has the correct form,
-which for this version of the protocol involves checking both `Na` and the name `B`.
+which for this version of the protocol involves confirming both her nonce and the name $B$.
 If everything is okay, she sends message 3, and if Bob actually receives this message,
-he will confirm `Nb` and that will constitute a successful run.
+he will check for his nonce and that will constitute a successful run.
 If any of the messages fail to get through or do not have the required form,
 the protocol attempt will simply be abandoned.
 
-
-It is effectively an operational semantics.
+We reason informally about such a protocol by saying for example "Bob knows Alice is present
+by message 3, when his nonce challenge was correctly returned to him.
+Only Alice could have done this, because that nonce was encrypted using her public key."
+This is inductive reasoning, so it's not surprising that a cryptographic protocol
+can naturally be modelled by an inductive definition, 
+effectively an operational semantics.
 
 
 <pre class="source">
@@ -219,6 +223,28 @@ It is effectively an operational semantics.
           </span><span class="main">⟹</span> Says <span class="free bound entity">A</span> <span class="free bound entity">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free bound entity">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="free bound entity">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">#</span> <span class="free bound entity">evs3</span> <span class="main">∈</span> <span class="free">ns_public</span><span>"</span><span>
    </span><span class="comment1"><span>― ‹</span>Alice proves her existence by sending <span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted free">NB</span><span class="antiquote">}</span></span> back to Bob.<span>›</span></span>
 </pre>
+
+We formalise a protocol by specifying the possible traces of messages that could be sent
+over the network. Starting with the empty trace our possibilities are any of the three protocol messages or a Fake message from the Spy, using the `synth` and `analz` operators
+to generate arbitrary messages. 
+Some aspects of the formalisation of the protocol messages deserve comment.
+
+1. Protocol message `NS1`, says that any trace can be extended
+by a message containing a nonce `NA` that has never appeared before.
+That knowledge is not available, but the constraint can be achieved 
+with high probability simply by generating a random number.
+2. Message `NS2` extends the trace (including another random number)
+provided a suitable copy of message 1 has already appeared.
+The decryption of that message is implicit in requiring that it be encrypted
+with B's public key. The sender of the message 1 is written as A'
+because it is not possible to know who the true sender of a message is
+(ascertaining this is the very purpose of authentication).
+3. Again for message `NS3`, the comparison between the instance message 2 
+just received and the message 1 originally sent is implicit in the formulation
+itself, with no decryption or comparison operations necessary.
+
+One appeal of the inductive method is that the formal specification is so close
+to the conventional notation.
 
 <pre class="source">
 </pre>
