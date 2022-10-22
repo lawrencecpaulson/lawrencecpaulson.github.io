@@ -28,7 +28,7 @@ is today done almost exclusively by fully automatic techniques.
 for much of the work on protocol verification undertaken during the late
 1990s, though it was not always credited.
 It completely superseded earlier work on [authentication logics](https://doi.org/10.1145/77648.77649),
-which although celebrated at first, doesn't seem to yield reliable results.
+which although celebrated at first, didn't yield reliable results.
 
 The principals or agents consist of a trusted *authentication server* (required by many protocols), infinitely many friendly agents, and the intruder or Sanpy.
 
@@ -152,6 +152,8 @@ has no way of knowing who the true sender was.
 Giampaolo felt that the explicit `Gets` event made for clearer protocol specifications.
 Giampaolo went on to do an enormous amount of work on protocol verification,
 including timestamp-based protocols, smartcard protocols and other advanced configurations, and even [wrote a book](https://link.springer.com/book/10.1007/978-3-540-68136-6) on the subject.
+(Later still, [Jean Martina](https://jeanmartina.paginas.ufsc.br)
+investigated multicast protocols.)
 But I never updated the Needham-Schroeder formalisation, so we don't need
 `Gets` here.
 
