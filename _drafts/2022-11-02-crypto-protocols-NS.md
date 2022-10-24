@@ -8,29 +8,27 @@ tags: [general,verification]
 [Not long ago]({% post_url 2022-10-19-crypto-protocols %})
 I wrote about cryptographic protocols and their verification.
 In this post, we shall see a simple example: the famous
-Needham-Schroeder public key protocol and its verification using Isabelle/HOL.
-The protocol will be the version as corrected by Lowe, because the original
-provide weaker guarantees and is harder to reason about.
+[Needham-Schroeder public key protocol](https://en.wikipedia.org/wiki/Needham–Schroeder_protocol) and its verification using Isabelle/HOL.
+The protocol will be the version as corrected by Lowe: the original
+provides weaker guarantees and is harder to reason about.
 Only highlights can be shown here. The proofs rely on a lot of formal machinery,
 which is described in the [journal paper](https://doi.org/10.3233/JCS-1998-61-205) 
 (also available [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)).
 For many people, crypto protocol verification rather than Isabelle
 seems to be my main research achievement, and yet they can't really be separated:
-these techniques don't seem to be reproducible in proof assistants that have
+these techniques don't seem to be reproducible in those proof assistants that have
 weaker automation, namely, all of them.
 I know that an attempt was made using a Certain Verification System.
-But even my proofs are too labour intensive, and crypto protocol verification
-is today done almost exclusively by fully automatic techniques.
 
 ### Messages and operations on them
 
 [Lowe's work](https://rdcu.be/cWJBL) was the starting point
 for much of the work on protocol verification undertaken during the late
-1990s, though it was not always credited.
+1990s, and sometimes it was even acknowledged.
 It completely superseded earlier work on [authentication logics](https://doi.org/10.1145/77648.77649),
 which although celebrated at first, didn't yield reliable results.
 
-The principals or agents consist of a trusted *authentication server* (required by many protocols), infinitely many friendly agents, and the intruder or Sanpy.
+The principals or agents consist of a trusted *authentication server* (required by many protocols), infinitely many friendly agents, and the intruder or Spy.
 
 <pre class="source">
 <span class="keyword1 command">datatype</span> agent <span class="main">=</span> Server <span class="main">|</span> Friend <span class="quoted">nat</span> <span class="main">|</span> Spy</pre>
@@ -54,9 +52,8 @@ is identical to the key itself. No encryption algorithms are formalised.
          
 Several operators are defined inductively to specify what can be derived
 from a set of (presumably intercepted) messages.
-For reasoning about secrecy, `analz` is particularly important.
-It specifies the set of message components that can be extracted from a given set,
-and in particular, the body of an encrypted message becomes available
+For reasoning about secrecy, `analz` specifies the set of message components that can be extracted from a given set.
+The body of an encrypted message becomes available
 if the decryption key is available.
 
 <pre class="source">
@@ -72,7 +69,7 @@ if the decryption key is available.
 
 The function `parts` (omitted here) is an over-approximation of `analz`,
 defined similarly except that decryption does not require a key.
-It is useful for reasoning about secrets that have been communicated,
+It is useful for reasoning about *all* secrets that have been communicated,
 whereas `analz` is for reasoning about secrets that are no longer secret.
 
 The function `synth` describes the set of messages that could be synthesised
@@ -95,7 +92,7 @@ To create an encrypted message, you need the encryption key.
   </span><span class="main">|</span> Crypt  <span class="main">[</span><span class="operator">intro</span><span class="main">]</span><span class="main">:</span>   <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free bound entity">X</span> <span class="main">∈</span></span> <span class="free">synth</span> <span class="free">H</span><span class="main">;</span>  Key</span><span class="main">(</span><span class="free bound entity">K</span><span class="main">)</span> <span class="main">∈</span> <span class="free">H</span><span class="main">⟧</span> <span class="main">⟹</span> Crypt <span class="free bound entity">K</span> <span class="free bound entity">X</span> <span class="main">∈</span> <span class="free">synth</span> <span class="free">H</span><span>"</span>
 </pre>
 
-Innumerable properties can be proved for these operators by simple inductions.
+Innumerable properties are for these operators by simple inductions.
 They turn out to be idempotent and monotonic.
 Identities are proved to simplify the arguments of the operators, for example to
 pull out inserted elements. We can pull out an inserted nonce, for example:
@@ -266,7 +263,102 @@ and checking that the side conditions can be satisfied.
 <span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">NB</span><span class="main">.</span></span> <span class="main">∃</span><span class="bound">evs</span> <span class="main">∈</span> ns_public<span class="main">.</span> Says <span class="free">A</span> <span class="free">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="bound">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> set <span class="bound">evs</span><span>"</span>
 </pre>
 
-Another point about methodology: it's careless to talk about "verifying" anything
+The objectives of the protocol are sufficiently vague 
+("Alice and Bob are authenticated to one another") that we need to decide for ourselves what to prove. The following are technical properties that turned out to be necessary
+in order to prove more clear-cut properties about secrecy.
+As so often happens in machine proofs, they look too easy to bother with.
+First we prove that it is impossible for a nonce used in message 1
+to be identical to announce used in message 2 (intuitively, because they are chosen randomly).
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> no_nonce_NS1_NS2<span class="main">:</span><span> 
+      </span><span class="quoted quoted"><span>"</span><span class="main">⟦</span><span class="free">evs</span> <span class="main">∈</span></span> ns_public<span class="main">;</span><span>
+        </span>Crypt <span class="main">(</span>pubEK <span class="free">C</span><span class="main">)</span> <span class="main">⦃</span><span class="free">NA'</span><span class="main">,</span> Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">D</span><span class="main">⦄</span> <span class="main">∈</span> parts <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span class="main">;</span><span>
+        </span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span><span class="main">⦄</span> <span class="main">∈</span> parts <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span class="main">⟧</span><span>  
+       </span><span class="main">⟹</span> Nonce <span class="free">NA</span> <span class="main">∈</span> analz <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> ns_public.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> analz_insertI<span class="main">)</span>
+</pre>
+
+Next comes what I have called a unicity property: that a particular nonce uniquely
+identifies all the message components bound up with it. This fact relies on the assumption
+that the nonce in question is not known to the Spy, who could otherwise do anything with it.
+Honest agents generate a fresh nonce every time, hence this property.
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> unique_NA<span class="main">:</span><span>
+  </span><span class="keyword2 keyword">assumes</span> NA<span class="main">:</span> <span class="quoted quoted"><span>"</span>Crypt</span><span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span>  <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span> <span class="main">⦄</span> <span class="main">∈</span> parts<span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
+              </span><span class="quoted quoted"><span>"</span>Crypt</span><span class="main">(</span>pubEK <span class="free">B'</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A'</span><span class="main">⦄</span> <span class="main">∈</span> parts<span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
+              </span><span class="quoted quoted"><span>"</span>Nonce</span> <span class="free">NA</span> <span class="main">∉</span> analz <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
+    </span><span class="keyword2 keyword">and</span> evs<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">evs</span> <span class="main">∈</span></span> ns_public<span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="free">A</span><span class="main">=</span></span><span class="free">A'</span> <span class="main">∧</span> <span class="free">B</span><span class="main">=</span><span class="free">B'</span><span>"</span>
+</pre>
+
+The proofs start to get messier, so I prefer to omit some of them.
+A dogmatic approach to structured proofs doesn't work in verification generally,
+where proof steps can easily generate gigantic subgoals.
+And by the way: the reason the trace variable has distinctive names `evs1`, 
+`evs2`, `evs3` is to make it easy to see which protocol rule we are talking about
+in a messy, non-structured induction.
+
+The following theorem is a key protocol objective: Alice's nonce from message 1 will remain
+forever secret from the Spy, provided both Alice and Bob are trustworthy.
+
+<pre class="source">
+<span class="keyword1 command">theorem</span> Spy_not_see_NA<span class="main">:</span><span>
+  </span><span class="keyword2 keyword">assumes</span> NA<span class="main">:</span> <span class="quoted quoted"><span>"</span>Says</span> <span class="free">A</span> <span class="free">B</span> <span class="main">(</span>Crypt<span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span>"</span><span>
+              </span><span class="quoted quoted"><span>"</span><span class="free">A</span> <span class="main">∉</span></span> bad<span>"</span> <span class="quoted quoted"><span>"</span><span class="free">B</span> <span class="main">∉</span></span> bad<span>"</span><span>
+    </span><span class="keyword2 keyword">and</span> evs<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="free">evs</span> <span class="main">∈</span></span> ns_public<span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span>Nonce</span> <span class="free">NA</span> <span class="main">∉</span> analz <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">using</span> evs NA<span>
+</span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">induction</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> ns_public.induct<span class="main">)</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>Fake <span class="skolem">evsf</span> <span class="skolem">X</span> <span class="skolem">B</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">spy_analz</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>NS2 <span class="skolem">evs2</span> <span class="skolem">NB</span> <span class="skolem">A'</span> <span class="skolem">B</span> <span class="skolem">NA</span> <span class="skolem">A</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">simp</span> <span class="main">(</span><span class="operator">metis</span> Says_imp_analz_Spy analz_into_parts parts.simps unique_NA usedI<span class="main">)</span><span>
+</span><span class="keyword1 command">next</span><span>
+  </span><span class="keyword3 command">case</span> <span class="main">(</span>NS3 <span class="skolem">evs3</span> <span class="skolem">A</span> <span class="skolem">B</span> <span class="skolem">NA</span> <span class="skolem">B'</span> <span class="skolem">NB</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">simp</span> <span class="main">(</span><span class="operator">meson</span> Says_imp_analz_Spy analz_into_parts no_nonce_NS1_NS2<span class="main">)</span><span>
+</span><span class="keyword1 command">qed</span> <span class="operator">auto</span>
+</pre>
+
+An analogous property can be proved for Bob's nonce from message 2.
+It doesn't hold for the original, flawed version of Needham–Schroeder.
+
+The following theorem authenticates Bob to Alice.
+More formally, if Alice has sent message 1 and receives a copy of message 2
+containing a copy of the nonce that she sent, then it was in fact sent by Bob.
+
+<pre class="source">
+<span class="keyword1 command">theorem</span> A_trusts_NS2<span class="main">:</span><span>
+     </span><span class="quoted quoted"><span>"</span><span class="main">⟦</span>Says</span> <span class="free">A</span>  <span class="free">B</span> <span class="main">(</span>Crypt<span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span class="main">;</span><span>
+       </span>Says <span class="free">B'</span> <span class="free">A</span> <span class="main">(</span>Crypt<span class="main">(</span>pubEK <span class="free">A</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Nonce <span class="free">NB</span><span class="main">,</span> Agent <span class="free">B</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span class="main">;</span><span>
+       </span><span class="free">A</span> <span class="main">∉</span> bad<span class="main">;</span>  <span class="free">B</span> <span class="main">∉</span> bad<span class="main">;</span>  <span class="free">evs</span> <span class="main">∈</span> ns_public<span class="main">⟧</span><span>
+      </span><span class="main">⟹</span> Says <span class="free">B</span> <span class="free">A</span> <span class="main">(</span>Crypt<span class="main">(</span>pubEK <span class="free">A</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Nonce <span class="free">NB</span><span class="main">,</span> Agent <span class="free">B</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span>"</span>
+</pre>
+
+And this theorem authenticates Alice to Bob.
+
+<pre class="source">
+<span class="keyword1 command">theorem</span> B_trusts_NS3<span class="main">:</span><span>
+     </span><span class="quoted quoted"><span>"</span><span class="main">⟦</span>Says</span> <span class="free">B</span> <span class="free">A</span>  <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">A</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Nonce <span class="free">NB</span><span class="main">,</span> Agent <span class="free">B</span><span class="main">⦄</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span class="main">;</span><span>
+       </span>Says <span class="free">A'</span> <span class="free">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="free">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span class="main">;</span><span>
+       </span><span class="free">A</span> <span class="main">∉</span> bad<span class="main">;</span>  <span class="free">B</span> <span class="main">∉</span> bad<span class="main">;</span>  <span class="free">evs</span> <span class="main">∈</span> ns_public<span class="main">⟧</span><span>
+      </span><span class="main">⟹</span> Says <span class="free">A</span> <span class="free">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="free">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> set <span class="free">evs</span><span>"</span>
+</pre>
+
+The last two properties above guarantee to Alice and Bob that the other person
+indeed participated in the protocol. The secrecy properties assure them
+that the nonces they exchanged are available to them alone.
+A practical application of this protocol might involve calculating a session key
+from those nonces in order to transmit a serious amount of data.
+
+### Postscript
+
+It's careless to talk about "verifying" anything
 unless it has a definitive formal specification.
 A cryptographic protocol — the last time I looked, admittedly quite a while ago —
 is typically proposed through an
@@ -276,347 +368,18 @@ of messages down to bitfield boundaries.
 The aims will be taken for granted ("establish secure communications")
 with little discussion of specific protocol objectives
 and no abstract protocol design independent of its machine implementation.
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
+As discussed in the [earlier post]({% post_url 2022-10-19-crypto-protocols %}), 
+ambiguity about the original protocol's
+security assumptions resulted in disagreements among experts as to whether it was
+correct or not.
+
+If you check the [corresponding formal development](https://isabelle.in.tum.de/dist/library/HOL/HOL-Auth/NS_Public.html) 
+online, you will find much uglier proofs than those shown here. 
+I took the opportunity to beautify them, 
+but the new proofs will not be visible until the release of
+Isabelle2023.
+
+My colleagues and I [wrote numerous papers](https://www.cl.cam.ac.uk/~lp15/papers/Auth/index.html) on protocol verification.
+But my proofs are too labour intensive.
+Others have taken the field forward, and crypto protocol verification
+is today done almost exclusively by fully automatic techniques.
