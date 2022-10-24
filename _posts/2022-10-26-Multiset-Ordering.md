@@ -6,9 +6,9 @@ tags: [examples, Isabelle, Ackermann's function]
 ---
 
 The title of this post is identical to the title of a [seminal paper](https://doi.org/10.1145/359138.359142)
-by Nachum Dershowitz and Zohar Manna, whom I knew as a graduate student at Stanford.
+by Nachum Dershowitz and Zohar Manna, both of whom I knew as a graduate student at Stanford.
 (I had the privilege of doing some directed reading under Zohar's supervision.)
-A *multiset* is a concept of collection that differs from a set in that
+*Multisets* are collections, like sets except that
 multiple occurrences of elements are significant.
 Computer scientists typically encounter them as a way of specifying
 the concept of sorting: to transform an input list into an output
@@ -36,7 +36,7 @@ A mathematician would probably prefer to replace multisets by non-increasing seq
 Then it's clear that if the base ordering
 has order type $\alpha$ then the corresponding multiset ordering
 will have order type $\omega^\alpha$.
-Dershowitz and Manna also considered the iterated nesting of multisets,
+Dershowitz and Manna also considered the *iterated* nesting of multisets,
 which has order type [$\epsilon_0$](https://en.wikipedia.org/wiki/Epsilon_number).
 This is easily strong enough for any termination question likely to arise in computer science.
 
@@ -78,7 +78,7 @@ $$
 ### Defining the functions in Isabelle/HOL
 
 As before, both definitions of Ackermann's function can be typed straight into Isabelle/HOL.
-The termination of the basic version is proved automatically.
+The termination of the standard version is proved automatically.
 It's by the lexicographic combination of the two arguments, which works despite the nested recursion in the third line.
 
 <pre class="source">
@@ -128,8 +128,9 @@ the stack-based computation, the corresponding multiset decreases
 according to the multiset ordering and therefore the recursion terminates.
 More details are in [the paper](https://doi.org/10.1145/359138.359142);
 it's Example 3, on page 471.
-Reflecting the conventions of 1979, the program is coded in a variant of Algol
-and $z$ is a global variable rather than a stack element.
+The program in that paper reflects the conventions of 1979:
+it is coded in a variant of Algol
+with $z$ a global variable rather than a stack element.
 
 The most difficult case of termination I had to formalise explicitly, below.
 It's for the first recursive call.
