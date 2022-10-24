@@ -164,7 +164,7 @@ The basic model includes several other primitives, which can be briefly describe
 - `pubEK`: the public encryption key of a given agent
 
 
-### The protocol
+### Formalising the protocol
 
 The [earlier post]({% post_url 2022-10-19-crypto-protocols %})
 described the Needham–Schroeder public key protocol and mentioned the flaw
@@ -245,11 +245,38 @@ because it is not possible to know who the true sender of a message is
 just received and the message 1 originally sent is implicit in the formulation
 itself, with no decryption or comparison operations necessary.
 
-One appeal of the inductive method is that the formal specification is so close
-to the conventional notation.
+It's nice that the formal specification is so close to the conventional notation.
+It's not cluttered with any implementation details. That's also a reminder
+that the proof offers no guarantees against implementation errors.
+
+### Some properties proved of this protocol
+
+Our protocol model only allows the proof of *safety properties*, i.e.,
+that all executions are safe. It cannot prove *liveness properties*,
+because the Spy has the power to prevent anything from happening by intercepting
+all messages. With this sort of model, if you make a mistake and specify a protocol
+that simply cannot run (typically because the message formats aren't consistent),
+then all the safety properties will hold vacuously. Therefore the first thing to do
+is run a little sanity check. The following result isn't interesting except to show
+that traces exist in which the final protocol message is actually sent.
+The proof involves simply joining up the protocol rules in the correct order
+and checking that the side conditions can be satisfied.
 
 <pre class="source">
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">NB</span><span class="main">.</span></span> <span class="main">∃</span><span class="bound">evs</span> <span class="main">∈</span> ns_public<span class="main">.</span> Says <span class="free">A</span> <span class="free">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="bound">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> set <span class="bound">evs</span><span>"</span>
 </pre>
+
+Another point about methodology: it's careless to talk about "verifying" anything
+unless it has a definitive formal specification.
+A cryptographic protocol — the last time I looked, admittedly quite a while ago —
+is typically proposed through an
+[RFC](https://en.wikipedia.org/wiki/Request_for_Comments),
+a mixture of prose and technical diagrams showing the formats
+of messages down to bitfield boundaries.
+The aims will be taken for granted ("establish secure communications")
+with little discussion of specific protocol objectives
+and no abstract protocol design independent of its machine implementation.
+
 
 <pre class="source">
 </pre>
