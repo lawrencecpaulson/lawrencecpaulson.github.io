@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Proving Termination with Multiset Orderings"
+title:  "Proving termination with multiset orderings"
 usemathjax: true
 tags: [examples, Isabelle, Ackermann's function]
 ---
