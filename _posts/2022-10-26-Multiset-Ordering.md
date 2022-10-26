@@ -7,7 +7,7 @@ tags: [examples, Isabelle, Ackermann's function]
 
 The title of this post is identical to the title of a [seminal paper](https://doi.org/10.1145/359138.359142)
 by Nachum Dershowitz and Zohar Manna, both of whom I knew as a graduate student at Stanford.
-(I had the privilege of doing some directed reading under Zohar's supervision.)
+(I had the privilege of doing directed reading under Zohar's supervision.)
 *Multisets* are collections, like sets except that
 multiple occurrences of elements are significant.
 Computer scientists typically encounter them as a way of specifying
