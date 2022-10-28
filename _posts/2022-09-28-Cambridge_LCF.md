@@ -44,7 +44,9 @@ Commonplace today in modern offshoots of ML, such as OCaml, and in languages suc
 the idea of writing a single piece of code that simply worked for multiple types seemed a miracle.
 * On the other hand, disappointment with PPLAMBDA, a tiny fragment of predicate logic with only implication, conjunction and universal quantifiers and the corresponding logical rules.
 As types were interpreted by Scott domains, every type contained a "bottom" or "undefined" value, which was written `UU`.
-There was a boolean type `tr` with values `TT` and `FF` for true and false (as well as `UU`), and inference rules for case analysis and *ex falso quodlibet* on booleans (but not for formulas!).
+There was a boolean type `tr` with values `TT` and `FF` for true and false (as well as `UU`), and inference rules for case analysis and 
+[*ex falso quodlibet*](https://en.wikipedia.org/wiki/Principle_of_explosion) 
+on booleans (but not for formulas!).
 That fragment perhaps sufficed for the little examples floating around at the time, but it would be exceeded very quickly.
 
 ### Extending the logic
