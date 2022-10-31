@@ -258,140 +258,72 @@ In particular, the elimination rule is modus ponens.
 
 ### Equality types
 
+The equality (or identity) types mediate between equality judgments $a=b:A$ and ordinary membership judgements.
+To form an equality type you need only a type $A$ and two expressions $a$ and $b$ belonging to type $A$.
+It expresses the proposition that $a$ and $b$ are equal when considered as elements of $A$.
+More broadly, in type theory identity is regarded as being an aspect of a type
+as opposed to being a property of $a$ and $b$ alone.
+
 <pre class="source">
   EqF<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="main">⟦</span><span class="bound">A</span> <span class="keyword1">type</span></span><span class="main">;</span> <span class="bound">a</span> <span class="main">:</span></span> <span class="bound">A</span><span class="main">;</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span class="main">⟧</span> <span class="main">⟹</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="keyword1">type</span><span>"</span> 
 </pre>
+
+Whenever we possess an equality judgement, for example through a computation rule,
+the corresponding equality type can be introduced.
 
 <pre class="source">
   EqI<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">a</span> <span class="main">=</span></span> <span class="bound">b</span> <span class="main">:</span></span> <span class="bound">A</span> <span class="main">⟹</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
 </pre>
 
+The type theory of 1982 is extensional. In particular, a proof of any
+identity however deep was collapsed down to the token `eq`.
+
+
 <pre class="source">
   EqE<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">p</span> <span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">a</span> <span class="main">=</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span>"</span> 
 </pre>
+
+And this `eq` the only possible element of an equality type.
 
 <pre class="source">
   EqC<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">p</span> <span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">p</span> <span class="main">=</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
 </pre>
 
-### Automation of rewriting and type-checking
+To the objection that the equality type rules unreasonably destroy information, we have
+following response:
 
-### Watching proof objects emerge
+> You seem to believe that every constructive mathematician means the same thing by "proof" that you do. In fact the word "proof' as used in Martin-Löf's systems means, the information that a computer would need to verify a statement.
 
+This quote is from [*Foundations of Constructive Mathematics*](https://link.springer.com/book/10.1007/978-3-642-68952-9) 
+by Michael J Beeson
+(Springer, 1980), page 281. It is said to be a paraphrase of a letter from Peter Aczel
+to Beeson.
+And the claim is that there is no need for the complicated proof of an identity
+to be preserved in the elements of identity types, merely the fact of the identity itself,
+which is trivial to verify in any particular instance.
 
+The ability to erase the derivations of identities is powerful.
+It was the foundation of my
+[early paper](https://doi.org/10.1016/S0747-7171(86)80002-5) on well-founded recursion.
+I outlined an approach for constructing well-founded relations in order to prove the termination
+of almost any recursive function likely to arise in a computational context.
+The complicated proofs of the recursion equations would be erased by the elimination rule
+for the equality type. 
+Similarly, the rewriting tactics that I devised for Isabelle/CTT relied on our ability
+to apply a chain of identities without having to store any details.
 
-<pre class="source">
-</pre>
+### Boom!
 
-<pre class="source">
-</pre>
+Unfortunately, sometime towards the end of the 1980s I learned that the equality types
+had been reformulated to destroy this erasing property and extensionality in general.
+Ever since (in every type theory I am familiar with), a fundamental distinction must be made
+between $n+0=n$ and $0+n=n$ on natural numbers: one will hold by definition
+but the other only by induction, and therefore a second class form of equality.
+This continues to be an obstacle to the use of dependent types in Lean.
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-
-
-
-I have [previously commented]({% post_url 2021-12-15-Incompleteness %}) on the relevance of Gödel incompleteness to formalisation.
-
-
-
-In particular, I note that Martin-Löf's underlying syntactic theory is precisely the typed $\lambda$-calculus with one base type.
-
-
-But I was deeply taken by and devoted perhaps a year of intensive work in order to produce [a paper](https://doi.org/10.1016/S0747-7171(86)80002-5) on well-founded recursion that nobody noticed:
-
-
-The problem was, for unification to be meaningful for Martin-Löf type theory, it had to take account of variable binding. Luckily, I had spent a couple of weeks with Huet at Inria. One day, he had taken me aside to explain higher-order unification.
-I probably understood only 2% of what he said, but something must have stuck in my mind.
-It was enough for me to locate and study [his paper on the topic](https://doi.org/10.1016/0304-3975(75)90011-0).
-It became clear that higher-order unification would indeed do the trick.
-
-
-
-### A Logical framework
-
-My [first paper on Isabelle](https://doi.org/10.1016/0743-1066(86)90015-4) (also [here](https://doi.org/10.48456/tr-82))
-describes some of this development, as well as my first experiments using Martin-Löf type theory.
-Already this paper describes Isabelle as relying on Martin-Löf's "theory of arities and expressions", originally due to Frege.
-
-
-In a [new paper](https://rdcu.be/cQnjt), I described Isabelle as it worked with this logical framework.
-
-
-
-Martin-Löf fans will note that the constant "true" above is serving as a *form of judgement*.  Computer scientists will see it as a coercion from object-level truth values (having type *bool*) to meta-level truth values (having type *prop*).
-
-The two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
+I am pretty sure that the rules for the 
+[intensional identity type](https://www.pls-lab.org/en/Intensional_Type_Theory)
+could be entered in the Isabelle as straightforwardly as the other rules shown above.
+But I never tried.
 
 
