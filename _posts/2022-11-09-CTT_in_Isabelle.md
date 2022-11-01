@@ -55,7 +55,7 @@ the empty type `F`. It has an eliminator, called `contr`.
 *True* is represented by `T`, which has one element: `tt`.
 <pre class="source">
   F         <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>t</span><span>"</span></span><span>
-  </span>T         <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>t</span><span>"</span></span>          <span class="comment1"><span>― ‹</span><span class="antiquoted raw_text"><span class="operator">‹</span><span>F›</span></span><span> is empty, </span><span class="antiquoted raw_text"><span class="operator">‹</span><span>T›</span></span> contains one element<span>›</span></span><span>
+  </span>T         <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>t</span><span>"</span></span> <span>
   </span>contr     <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>i</span><span class="main">⇒</span>i</span><span>"</span><span>
   </span>tt        <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span>i</span><span>"</span></span>
 </pre>
@@ -300,7 +300,7 @@ by Michael J Beeson
 to Beeson.
 And the claim is that there is no need for the complicated proof of an identity
 to be preserved in the elements of identity types, merely the fact of the identity itself,
-which is trivial to verify in any particular instance.
+which is trivial to check by calculation in any particular instance.
 
 The ability to erase the derivations of identities is powerful.
 It was the foundation of my
@@ -319,7 +319,8 @@ had been reformulated to destroy this erasing property and extensionality in gen
 Ever since (in every type theory I am familiar with), a fundamental distinction must be made
 between $n+0=n$ and $0+n=n$ on natural numbers: one will hold by definition
 but the other only by induction, and therefore a second class form of equality.
-This continues to be an obstacle to the use of dependent types in Lean.
+This continues to be an obstacle to the use of dependent types in Lean
+because the types $T(n+0)$ and $T(0+n)$ are not the same.
 
 I am pretty sure that the rules for the 
 [intensional identity type](https://www.pls-lab.org/en/Intensional_Type_Theory)

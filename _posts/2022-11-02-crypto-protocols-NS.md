@@ -12,7 +12,7 @@ In this post, we shall see a simple example: the famous
 The protocol will be the version as corrected by Lowe: the original
 provides weaker guarantees and is harder to reason about.
 Only highlights can be shown here. The proofs rely on a lot of formal machinery,
-which is described in the [journal paper](https://doi.org/10.3233/JCS-1998-61-205) 
+which is described in the [journal paper](https://doi.org/10.3233/JCS-1998-61-205)
 (also available [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)).
 For many people, crypto protocol verification rather than Isabelle
 seems to be my main research achievement, and yet they can't really be separated:
@@ -25,16 +25,18 @@ I know that an attempt was made using a Certain Verification System.
 [Lowe's work](https://rdcu.be/cWJBL) was the starting point
 for much of the work on protocol verification undertaken during the late
 1990s, and sometimes it was even acknowledged.
-It completely superseded earlier work on [authentication logics](https://doi.org/10.1145/77648.77649),
+It completely superseded earlier work on authentication logics [such as BAN](https://doi.org/10.1145/77648.77649),
 which although celebrated at first, didn't yield reliable results.
+In particular, BAN validates the incorrect version of the protocol discussed here.
 
+First, we set up a common framework for analysing security protocols in general.
 The principals or agents consist of a trusted *authentication server* (required by many protocols), infinitely many friendly agents, and the intruder or Spy.
 
 <pre class="source">
 <span class="keyword1 command">datatype</span> agent <span class="main">=</span> Server <span class="main">|</span> Friend <span class="quoted">nat</span> <span class="main">|</span> Spy</pre>
 
 Messages are constructed by hashing, concatenation or encryption over
-the four primitive message elements: agent names, etc. 
+the four primitive message elements: agent names, etc.
 
 <pre class="source">
 <span class="keyword1 command">datatype</span><span>
@@ -45,11 +47,11 @@ the four primitive message elements: agent names, etc.
          </span><span class="main">|</span> Hash   <span class="quoted">msg</span>       <span class="comment1"><span>― ‹</span>Hashing<span>›</span></span><span>
          </span><span class="main">|</span> MPair  <span class="quoted">msg</span> <span class="quoted">msg</span>   <span class="comment1"><span>― ‹</span>Compound messages<span>›</span></span><span>
          </span><span class="main">|</span> Crypt  <span class="quoted">key</span> <span class="quoted">msg</span>   <span class="comment1"><span>― ‹</span><span>Encryption, public- or shared-key</span><span>›</span></span></pre>
-         
+
 The formalisation of crypto keys is omitted here. Briefly: keys are integers
 and every key has an inverse, which in the case of shared-key encryption
 is identical to the key itself. No encryption algorithms are formalised.
-         
+
 Several operators are defined inductively to specify what can be derived
 from a set of (presumably intercepted) messages.
 For reasoning about secrecy, `analz` specifies the set of message components that can be extracted from a given set.
@@ -75,7 +77,7 @@ whereas `analz` is for reasoning about secrets that are no longer secret.
 The function `synth` describes the set of messages that could be synthesised
 from a given set of message components.
 It is here that the "unguessable" property of keys and nonces
-is formalised. All numbers are guessable 
+is formalised. All numbers are guessable
 (this makes sense for small integers, and timestamps).
 To create an encrypted message, you need the encryption key.
 
@@ -114,7 +116,7 @@ simplify nested expressions.
 </pre>
 
 The most critical combination is synthesis of analysis,
-for that is what the Spy does: break down past traffic, 
+for that is what the Spy does: break down past traffic,
 then combine the components into new messages.
 The following theorem allows us to eliminate an occurrence
 of such a fake message `X` from the argument of `analz`,
@@ -143,8 +145,8 @@ The event `Says A B X` represents the attempt by agent `A` to send message `X` t
 This was at one point the only event in the model.
 Later I introduced `Notes`, to represent the local storage of an agent and also
 information leakage outside the protocol.
-[Giampaolo Bella](https://www.dmi.unict.it/giamp/), one of my PhD students, introduced `Gets` to signify the reception of a message 
-by a specific agent, who (because the Spy controls the network) 
+[Giampaolo Bella](https://www.dmi.unict.it/giamp/), one of my PhD students, introduced `Gets` to signify the reception of a message
+by a specific agent, who (because the Spy controls the network)
 has no way of knowing who the true sender was.
 Giampaolo felt that the explicit `Gets` event made for clearer protocol specifications.
 Giampaolo went on to do an enormous amount of work on protocol verification,
@@ -195,7 +197,7 @@ We reason informally about such a protocol by saying for example "Bob knows Alic
 by message 3, when his nonce challenge was correctly returned to him.
 Only Alice could have done this, because that nonce was encrypted using her public key."
 This is inductive reasoning, so it's not surprising that a cryptographic protocol
-can naturally be modelled by an inductive definition, 
+can naturally be modelled by an inductive definition,
 effectively an operational semantics.
 
 
@@ -225,12 +227,12 @@ effectively an operational semantics.
 
 We formalise a protocol by specifying the possible traces of messages that could be sent
 over the network. Starting with the empty trace our possibilities are any of the three protocol messages or a Fake message from the Spy, using the `synth` and `analz` operators
-to generate arbitrary messages. 
+to generate arbitrary messages.
 Some aspects of the formalisation of the protocol messages deserve comment.
 
 1. Protocol message `NS1`, says that any trace can be extended
 by a message containing a nonce `NA` that has never appeared before.
-That knowledge is not available, but the constraint can be achieved 
+That knowledge is not available, but the constraint can be achieved
 with high probability simply by generating a random number.
 2. Message `NS2` extends the trace (including another random number)
 provided a suitable copy of message 1 has already appeared.
@@ -238,7 +240,7 @@ The decryption of that message is implicit in requiring that it be encrypted
 with B's public key. The sender of the message 1 is written as A'
 because it is not possible to know who the true sender of a message is
 (ascertaining this is the very purpose of authentication).
-3. Again for message `NS3`, the comparison between the instance message 2 
+3. Again for message `NS3`, the comparison between the instance message 2
 just received and the message 1 originally sent is implicit in the formulation
 itself, with no decryption or comparison operations necessary.
 
@@ -263,7 +265,7 @@ and checking that the side conditions can be satisfied.
 <span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">NB</span><span class="main">.</span></span> <span class="main">∃</span><span class="bound">evs</span> <span class="main">∈</span> ns_public<span class="main">.</span> Says <span class="free">A</span> <span class="free">B</span> <span class="main">(</span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">(</span>Nonce <span class="bound">NB</span><span class="main">)</span><span class="main">)</span> <span class="main">∈</span> set <span class="bound">evs</span><span>"</span>
 </pre>
 
-The objectives of the protocol are sufficiently vague 
+The objectives of the protocol are sufficiently vague
 ("Alice and Bob are authenticated to one another") that we need to decide for ourselves what to prove. The following are technical properties that turned out to be necessary
 in order to prove more clear-cut properties about secrecy.
 As so often happens in machine proofs, they look too easy to bother with.
@@ -271,10 +273,10 @@ First we prove that it is impossible for a nonce used in message 1
 to be identical to announce used in message 2 (intuitively, because they are chosen randomly).
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> no_nonce_NS1_NS2<span class="main">:</span><span> 
+<span class="keyword1 command">lemma</span> no_nonce_NS1_NS2<span class="main">:</span><span>
       </span><span class="quoted quoted"><span>"</span><span class="main">⟦</span><span class="free">evs</span> <span class="main">∈</span></span> ns_public<span class="main">;</span><span>
         </span>Crypt <span class="main">(</span>pubEK <span class="free">C</span><span class="main">)</span> <span class="main">⦃</span><span class="free">NA'</span><span class="main">,</span> Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">D</span><span class="main">⦄</span> <span class="main">∈</span> parts <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span class="main">;</span><span>
-        </span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span><span class="main">⦄</span> <span class="main">∈</span> parts <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span class="main">⟧</span><span>  
+        </span>Crypt <span class="main">(</span>pubEK <span class="free">B</span><span class="main">)</span> <span class="main">⦃</span>Nonce <span class="free">NA</span><span class="main">,</span> Agent <span class="free">A</span><span class="main">⦄</span> <span class="main">∈</span> parts <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span class="main">⟧</span><span>
        </span><span class="main">⟹</span> Nonce <span class="free">NA</span> <span class="main">∈</span> analz <span class="main">(</span>spies <span class="free">evs</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induct</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> ns_public.induct<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> analz_insertI<span class="main">)</span>
 </pre>
@@ -296,7 +298,7 @@ Honest agents generate a fresh nonce every time, hence this property.
 The proofs start to get messier, so I prefer to omit some of them.
 A dogmatic approach to structured proofs doesn't work in verification generally,
 where proof steps can easily generate gigantic subgoals.
-And by the way: the reason the trace variable has distinctive names `evs1`, 
+And by the way: the reason the trace variable has distinctive names `evs1`,
 `evs2`, `evs3` is to make it easy to see which protocol rule we are talking about
 in a messy, non-structured induction.
 
@@ -368,14 +370,14 @@ of messages down to bitfield boundaries.
 The aims will be taken for granted ("establish secure communications")
 with little discussion of specific protocol objectives
 and no abstract protocol design independent of its machine implementation.
-As discussed in the [earlier post]({% post_url 2022-10-19-crypto-protocols %}), 
+As discussed in the [earlier post]({% post_url 2022-10-19-crypto-protocols %}),
 ambiguity about the original protocol's
 security assumptions resulted in disagreements among experts as to whether it was
 correct or not.
 
-If you check the [corresponding formal development](https://isabelle.in.tum.de/dist/library/HOL/HOL-Auth/NS_Public.html) 
-online, you will find much uglier proofs than those shown here. 
-I took the opportunity to beautify them, 
+If you check the [corresponding formal development](https://isabelle.in.tum.de/dist/library/HOL/HOL-Auth/NS_Public.html)
+online, you will find much uglier proofs than those shown here.
+I took the opportunity to beautify them,
 but the new proofs will not be visible until the release of
 Isabelle2023.
 
