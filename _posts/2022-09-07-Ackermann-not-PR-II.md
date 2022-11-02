@@ -95,7 +95,7 @@ Now for a confession: here, tuples are indexed from zero and should properly be 
 
 Szasz defined the dependent type $TPR(n,m)$ to represent (the codes of) functions from $n$-tuples to $m$-tuples, i.e. functions $\mathbb{N}^n\to\mathbb{N}^m$.
 By working with such tupled functions, Szasz can specify function composition
-as combining elements of $TPR(k,m)$ and $TPR(n,k)$ to yield $TPR(n,m)$.
+as combining elements of $TPR(k,m)$ and $TPR(n,k)$ to yield $TPR(n,m)$.
 The Isabelle/HOL equivalent composes a function `g` with a **list** `fs` of functions.
 Given an argument list `l`, each element `f` of the list `fs` is applied to `l` and the result is presented to `g`.
 I would argue that this approach is simpler.
