@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "An Experiment: The Cauchy–Schwarz inequality"
-usemathjax: true 
-tags: [examples, Isabelle, Archive of Formal Proofs, analysis]
+usemathjax: true
+tags: [examples, Isabelle, Archive of Formal Proofs, analysis, Isar]
 ---
 
-The [Cauchy–Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products. It comes in various forms that any mathematician is expected to recognise. 
+The [Cauchy–Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products. It comes in various forms that any mathematician is expected to recognise.
 
 ### A successful search
 
@@ -45,10 +45,10 @@ A rabbit hole of inequalities!
 ### Concave and convex functions
 
 The following diagram ([borrowed from Wikipedia](https://commons.wikimedia.org/wiki/File:ConcaveDef.png)) shows what a concave function looks like.
- 
+
 ![Diagram of concave function](/images/ConcaveDef.png)
 
-And a concave function is the negation of a [convex function](https://en.wikipedia.org/wiki/Convex_function). Turning to SErAPIS again, I discovered that both concepts were defined in Isabelle's [Archive of Formal Proofs](https://www.isa-afp.org) (AFP). Moreover, convex functions were defined in the Isabelle libraries themselves, along with the key property that a function is convex if its second derivative is nonnegative. 
+And a concave function is the negation of a [convex function](https://en.wikipedia.org/wiki/Convex_function). Turning to SErAPIS again, I discovered that both concepts were defined in Isabelle's [Archive of Formal Proofs](https://www.isa-afp.org) (AFP). Moreover, convex functions were defined in the Isabelle libraries themselves, along with the key property that a function is convex if its second derivative is nonnegative.
 
 So by including the library session [HOL-Analysis](https://isabelle.in.tum.de/dist/library/HOL/HOL-Analysis/Inner_Product.html), concave functions are trivial to define:
 

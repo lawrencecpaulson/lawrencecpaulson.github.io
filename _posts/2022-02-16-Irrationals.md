@@ -2,7 +2,7 @@
 layout: post
 title:  "A classical proof: exponentials are irrational"
 usemathjax: true
-tags: [examples, Isabelle, Archive of Formal Proofs, Proofs from THE BOOK, analysis]
+tags: [examples, Isabelle, Archive of Formal Proofs, Proofs from THE BOOK, analysis, Isar]
 ---
 
 In *[Proofs from THE BOOK](https://link.springer.com/book/10.1007/978-3-662-57265-8)*, Aigner and Ziegler
@@ -13,7 +13,7 @@ Here we look at an Isabelle/HOL proof that the exponential function yields irrat
 
 ### Getting started
 
-Let's be precise about that claim: $\exp r$ is irrational for all rational, nonzero $r$. 
+Let's be precise about that claim: $\exp r$ is irrational for all rational, nonzero $r$.
 Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive rational $r≠1$.
 
 The authors present a simple 19th-century [proof](https://proofsfromthebook.github.io/7) (alternative [source](https://planetmath.org/erisirrationalforrinmathbbqsetminus0)) that relies on nothing other than differentiation and integration.
@@ -22,7 +22,7 @@ I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From
 The proof begins by defining the function
 
 $$ \begin{align*}
-f(x) &= \frac{x^n (1-x)^n}{n!}, 
+f(x) &= \frac{x^n (1-x)^n}{n!},
 \end{align*} $$
 
 which goes straightforwardly into Isabelle. (You shouldn't reserve `f` for the name of a constant, though.) Note that $n$ above becomes a parameter of the function we define.
@@ -78,7 +78,7 @@ The text states the following fact about $f$ (for any given $n$) with strict ine
 <span class="keyword1 command entity_def" id="offset_2207..2212">lemma</span>
   <span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="main">0</span> <span class="main">≤</span> <span class="free">x</span><span>"</span></span> <span class="quoted quoted"><span>"</span><span class="free">x</span> <span class="main">≤</span> <span class="main">1</span><span>"</span></span>
   <span class="keyword2 keyword">shows</span> hf_nonneg<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">0</span> <span class="main">≤</span> hf</span> <span class="free">n</span> <span class="free">x</span><span>"</span> <span class="keyword2 keyword">and</span> hf_le_inverse_fact<span class="main">:</span> <span class="quoted quoted"><span>"</span>hf</span> <span class="free">n</span> <span class="free">x</span> <span class="main">≤</span> <span class="main">1</span><span class="main">/</span>fact <span class="free">n</span><span>"</span>
-  <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> hf_def <span class="dynamic dynamic">divide_simps</span> mult_le_one power_le_one<span class="main">)</span>  
+  <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> hf_def <span class="dynamic dynamic">divide_simps</span> mult_le_one power_le_one<span class="main">)</span>
 </pre>
 
 That $f$ is differentiable is proved by calculating and discarding its derivative.
@@ -101,8 +101,8 @@ The (omitted) manipulations resemble those we've just seen.
 
 ### Reasoning about iterated derivatives by induction
 
-We have been working towards proving a claim in the text: that the derivatives $f^{(k)} (0)$ and $f^{(k)} (1)$ are integers for all $k\ge0$. The text contains a four line argument only, but it seems essential to calculate the $k$-th derivatives exactly. 
-The proof, somewhat cluttered with conversions from type `nat` to `int` to `real`, is by induction on $k$. We are dealing with products of sets of integers. 
+We have been working towards proving a claim in the text: that the derivatives $f^{(k)} (0)$ and $f^{(k)} (1)$ are integers for all $k\ge0$. The text contains a four line argument only, but it seems essential to calculate the $k$-th derivatives exactly.
+The proof, somewhat cluttered with conversions from type `nat` to `int` to `real`, is by induction on $k$. We are dealing with products of sets of integers.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> hf_deriv_int_poly<span class="main">:</span>
@@ -216,14 +216,14 @@ Moreover, for $k>2n$, the derivatives vanish.
 
 ### Time for the big one
 
-The main argument lies in the proof that all integer exponentials are irrational. 
+The main argument lies in the proof that all integer exponentials are irrational.
 We assume that $\exp s$ has the form $a/b$ where $s$, $a$, $b>0$.
 We define $n$ as the larger of $a^2$ and $3s^3$, from which we eventually prove that
 $n! > as^{2n+1}$.
 We define
 
 $$ \begin{align*}
-F(x) = \sum_{i\le 2n} (-1)^i  s^{2n-i} f^{(i)} (x). 
+F(x) = \sum_{i\le 2n} (-1)^i  s^{2n-i} f^{(i)} (x).
 \end{align*} $$
 
 and then show that

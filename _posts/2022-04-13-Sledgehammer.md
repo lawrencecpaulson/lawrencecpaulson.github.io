@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Sledgehammer: some history, some tips"
-usemathjax: true 
-tags: general sledgehammer
+usemathjax: true
+tags: general sledgehammer automation
 ---
 
 Sledgehammer is the subsystem that links Isabelle/HOL to automatic theorem provers like Vampire and Z3. It is so much part of the Isabelle user's everyday experience that it can be hard to remember a time before it was there. Let's see if I can dig up some memories, and also come up with some usage tips relevant today.
@@ -24,10 +24,10 @@ We speak of automatic versus interactive theorem provers, but this dichotomy is 
 
 Automation is necessary because proofs reduced to bare logical rules can be unfeasibly long. You are going to struggle unless your prover regards a fact such as this is trivial:
 
-$$ 
+$$
 \begin{align*}
-C\not=\emptyset \quad\Longrightarrow\quad \bigcap_{x\in C} \bigl(A(x) \cap B(x)\bigr) =        
-       \bigl(\bigcap_{x\in C} A(x)\bigr)  \cap  \bigl(\bigcap_{x\in C} B(x)\bigr) 
+C\not=\emptyset \quad\Longrightarrow\quad \bigcap_{x\in C} \bigl(A(x) \cap B(x)\bigr) =
+       \bigl(\bigcap_{x\in C} A(x)\bigr)  \cap  \bigl(\bigcap_{x\in C} B(x)\bigr)
 \end{align*}
 $$
 
@@ -35,7 +35,7 @@ Isabelle could prove this automatically [already in 1988](https://rdcu.be/cIK8P)
 
 ### Why resolution?
 
-It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were making a huge impact on software and hardware verficiation. 
+It was trendy to despise resolution theorem proving in the early 2000s. Other technologies, such as model checkers, BDDs and SAT solvers, were making a huge impact on software and hardware verficiation.
 Resolution provers were incredibly powerful, but earlier ideas to use theorem-proving to accomplish planning or even general intelligence had clearly failed. Resolution was looking like a solution without a problem.
 
 Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was quietly pleased to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory based) fail utterly.
@@ -48,7 +48,7 @@ It was: Cohen possessed some sort of magic bullet. I could not understand his tr
 
 The original proposal (written in 2003) said
 
-> Twenty years ago, when many users had to share a single computer, a proof command could realistically take at most a few seconds of processor time. Now that 2GHz processors are commonplace, we should abandon the traditional mode of interaction, where the proof tool does nothing until the user types a command. Background processes (perhaps on several computers) should try to prove the outstanding subgoals. 
+> Twenty years ago, when many users had to share a single computer, a proof command could realistically take at most a few seconds of processor time. Now that 2GHz processors are commonplace, we should abandon the traditional mode of interaction, where the proof tool does nothing until the user types a command. Background processes (perhaps on several computers) should try to prove the outstanding subgoals.
 
 It was clearly time to ask the hardware to do the hard work.
 By 2005, the objectives had become more clear-cut, as we can see in an
@@ -58,8 +58,8 @@ also [here](https://www.cl.cam.ac.uk/~lp15/papers/Automation/info-and-comp.pdf):
 * user interaction should be minimal:
  provers should run in the background;
  users should not have to select relevant lemmas
-* automatic provers should not be trusted 
-* proofs should be delivered in source form 
+* automatic provers should not be trusted
+* proofs should be delivered in source form
 
 These criteria came from reading about prior efforts to combine systems, which however impressive tended to require users to do quite a bit of work up front. Not trusting the external prover is intrinsic to our [LCF ethos]({% post_url 2022-01-05-LCF %}).
 So part of our task is somehow to *extract* a valid Isabelle/HOL proof from the proof emitted by Vampire or SPASS.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Verifying cryptographic protocols, II: a simple example"
 usemathjax: true
-tags: [general,verification]
+tags: [general,verification,automation]
 ---
 
 [Not long ago]({% post_url 2022-10-19-crypto-protocols %})

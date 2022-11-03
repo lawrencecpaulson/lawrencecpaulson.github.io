@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "More on Fibonacci numbers, with equational reasoning"
-usemathjax: true 
-tags: examples Isabelle Fibonacci gcd
+usemathjax: true
+tags: examples Isabelle Fibonacci gcd Isar
 ---
 
 The [previous post]({% post_url 2021-10-13-Fib-example %}) introduced a definition of the Fibonacci function along with some simple proofs by induction. We continue our tour with examples of *equational reasoning*.
-Chains of equalities and inequalities are common in proofs and a proof assistant should allow them to be written. 
+Chains of equalities and inequalities are common in proofs and a proof assistant should allow them to be written.
 
 
 Today our objective is a result involving greatest common divisors.
@@ -76,4 +76,3 @@ A clever step below is the use of `gcd_nat_induct`, which refers to an induction
 </pre>
 
 The proofs presented in this post are due to Gertrud Bauer.
- 

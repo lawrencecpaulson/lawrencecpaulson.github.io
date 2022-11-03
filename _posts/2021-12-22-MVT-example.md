@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Readability in proofs: the mean value theorem"
-usemathjax: true 
-tags: [examples, Isabelle, analysis]
+usemathjax: true
+tags: [examples, Isabelle, analysis, Isar]
 ---
 
 Doing mathematics requires a combination of intuition and rigour. Intuition is the source of ideas and conjectures. Proofs need to be rigorous, while at the same time avoiding excessive detail, which would destroy readability. That is why we need intuition even to read a proof, let alone to conceive the theorem in the first place. How can we capture intuition in a formal proof?
@@ -39,7 +39,7 @@ The proof in the Isabelle/HOL library is slightly different, defining a function
 
 
 The Isabelle proof rewards closer inspection. The theorem's assumptions
-include $a<b$ and the continuity and differentiability conditions on $\phi$. If you recall the earlier post on [undefined values]({% post_url 2021-12-01-Undefined %}), you'll understand why differentiability is expressed by a relation that actually names the derivative as $\phi'$. 
+include $a<b$ and the continuity and differentiability conditions on $\phi$. If you recall the earlier post on [undefined values]({% post_url 2021-12-01-Undefined %}), you'll understand why differentiability is expressed by a relation that actually names the derivative as $\phi'$.
 The conclusion of the theorem asserts that we "obtain" some $\xi$ satisfying the required properties. The **obtains** keyword is one way to express an existential conclusion.
 
 <pre class="source"><span class="keyword1"></span><span class="keyword1"><span class="command"><span class="entity_def" id="offset_47..54">theorem</span></span></span><span> </span><span class="entity_def" id="Calculus.mvt|fact"><span class="entity_def" id="Calculus.mvt|thm"><span>mvt</span></span></span><span class="main"><span>:</span></span><span>
