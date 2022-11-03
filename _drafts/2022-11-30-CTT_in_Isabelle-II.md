@@ -5,6 +5,9 @@ usemathjax: true
 tags: [Martin-Löf type theory, Isabelle]
 -
 
+[The last post]({% post_url 2022-11-23-CTT_in_Isabelle %})
+
+
 ### Automation of rewriting and type-checking
 
 ### Watching proof objects emerge
