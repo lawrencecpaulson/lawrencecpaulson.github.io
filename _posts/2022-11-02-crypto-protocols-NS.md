@@ -270,7 +270,7 @@ The objectives of the protocol are sufficiently vague
 in order to prove more clear-cut properties about secrecy.
 As so often happens in machine proofs, they look too easy to bother with.
 First we prove that it is impossible for a nonce used in message 1
-to be identical to announce used in message 2 (intuitively, because they are chosen randomly).
+to be identical to a nonce used in message 2 (intuitively, because they are chosen randomly).
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> no_nonce_NS1_NS2<span class="main">:</span><span>
