@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Dealing with descriptions in Isabelle/HOL: least, greatest, whatever"
-usemathjax: true 
-tags: examples Isabelle newbies descriptions sledgehammer
+usemathjax: true
+tags: [examples, Isabelle, newbies, descriptions, sledgehammer, David Hilbert]
 ---
 
 A description is a term that designates "the least", "the greatest" or simply "any" *x* such that Φ(*x*): it describes the desired value (or simply *any suitable* value) in the language of its properties.
@@ -16,7 +16,7 @@ A great variety of functions are available. Here are the main ones:
 * `Least`/`Greatest` denote the least/greatest value satisfying a given predicate calculus *formula*. The corresponding Isabelle keyword is `LEAST`/`GREATEST`.
 * `Min`/`Max`: these functions are suitable for non-empty, **finite** sets. The underlying type must be linearly ordered (belong to type class `linorder`).
 * `Inf`/`Sup` are functions to denote the infimum/supremum of possibly infinite or empty sets. These come in two versions, for complete lattices and for conditionally complete lattices.
-* `Eps` is [Hilbert's $\epsilon$-operator]({% post_url 2021-11-10-Axiom_of_Choice %}), which yields the full [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}) (AC). The corresponding Isabelle keyword is `SOME`. Although a *unique* description operator also exists, it has become obsolete: Isabelle/HOL no longer offers the option to work without AC. 
+* `Eps` is [Hilbert's $\epsilon$-operator]({% post_url 2021-11-10-Axiom_of_Choice %}), which yields the full [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}) (AC). The corresponding Isabelle keyword is `SOME`. Although a *unique* description operator also exists, it has become obsolete: Isabelle/HOL no longer offers the option to work without AC.
 (That option remains available in [Isabelle/ZF]({% post_url 2022-01-26-Set_theory %}).)
 
 Unsurprisingly, some of these are defined in terms of others, with `Eps` as the base primitive. Type classes play a major role. For example, a type in class `wellorder` is guaranteed to have suitable `Least` elements for any non-False predicate.
@@ -28,7 +28,7 @@ The following nonsensical "theorem" will be the basis for a couple of simple exa
 Our task is to prove something or other.
 
 <pre class="source">
-<span class="keyword1 command">lemma</span><span> 
+<span class="keyword1 command">lemma</span><span>
   </span><span class="keyword2 keyword">fixes</span> <span class="free">𝒮</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span><span class="tfree">'a</span><span class="main">::</span>metric_space set set<span>"</span></span> <span class="keyword2 keyword">and</span> <span class="free">L</span> <span class="main">::</span> <span class="quoted quoted"><span>"</span>nat list set<span>"</span></span><span>
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted quoted"><span>"</span><span class="free">𝒮</span> <span class="main">⊆</span> <span class="main">{</span>ball <span class="bound">x</span> <span class="bound">r</span> <span class="main">|</span> <span class="bound">x</span> <span class="bound">r</span><span class="main">.</span> <span class="bound">r</span><span class="main">&gt;</span><span class="main">0</span><span class="main">}</span><span>"</span></span> <span class="keyword2 keyword">and</span> <span class="quoted quoted"><span>"</span><span class="free">L</span> <span class="main">≠</span> <span class="main">{}</span><span>"</span></span><span>
   </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="free">P</span> <span class="free">𝒮</span> <span class="free">L</span><span>"</span></span>
@@ -51,7 +51,7 @@ For the proof, simply call `metis`.
 Here, we get two functions at the same time!
 
 <pre class="source">
-  <span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">centre</span> <span class="skolem skolem">rad</span> <span class="keyword2 keyword">where</span> rad<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">⋀</span><span class="bound">B</span><span class="main">.</span> <span class="bound">B</span> <span class="main">∈</span> <span class="free">𝒮</span> <span class="main">⟹</span> <span class="skolem">rad</span> <span class="bound">B</span> <span class="main">&gt;</span> <span class="main">0</span><span>"</span></span><span> 
+  <span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">centre</span> <span class="skolem skolem">rad</span> <span class="keyword2 keyword">where</span> rad<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">⋀</span><span class="bound">B</span><span class="main">.</span> <span class="bound">B</span> <span class="main">∈</span> <span class="free">𝒮</span> <span class="main">⟹</span> <span class="skolem">rad</span> <span class="bound">B</span> <span class="main">&gt;</span> <span class="main">0</span><span>"</span></span><span>
                          </span><span class="keyword2 keyword">and</span> centre<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">⋀</span><span class="bound">B</span><span class="main">.</span> <span class="bound">B</span> <span class="main">∈</span> <span class="free">𝒮</span> <span class="main">⟹</span> <span class="bound">B</span> <span class="main">=</span> ball <span class="main">(</span><span class="skolem">centre</span> <span class="bound">B</span><span class="main">)</span> <span class="main">(</span><span class="skolem">rad</span> <span class="bound">B</span><span class="main">)</span><span>"</span></span><span>
     </span><span class="keyword1 command">by</span> <span class="operator">metis</span>
 </pre>

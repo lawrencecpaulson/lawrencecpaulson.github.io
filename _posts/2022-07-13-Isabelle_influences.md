@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "How Isabelle emerged from the trends of the 1980s"
-usemathjax: true 
-tags: [general, LCF, AUTOMATH, Martin-Löf type theory, NG de Bruijn, Isabelle]
+usemathjax: true
+tags: [general, LCF, AUTOMATH, Martin-Löf type theory, NG de Bruijn, Isabelle, David Hilbert]
 ---
 
 The fault lines of today's proof assistant community are striking.
@@ -17,7 +17,7 @@ Isabelle was inspired by what I had learnt at Caltech in the mid-70s, at Cambrid
 At Caltech I had learnt about [AUTOMATH](https://www.cs.ru.nl/~freek/aut/) from de Bruijn, while at Cambridge I was deeply involved with [Edinburgh LCF](https://doi.org/10.1098/rsta.2014.0234).
 Through [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/) I established connections with Inria's [Gérard Huet](https://pauillac.inria.fr/~huet/) and the Chalmers group.
 
-During the early 80s I was busy with a variety of projects, including a [reimplementation of LCF](https://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf?format=PB). 
+During the early 80s I was busy with a variety of projects, including a [reimplementation of LCF](https://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf?format=PB).
 But I was deeply taken by [Martin-Löf type theory](http://www.jstor.com/stable/37448) and devoted perhaps a year of intensive work in order to produce [a paper](https://doi.org/10.1016/S0747-7171(86)80002-5) on well-founded recursion that nobody noticed:
 I hadn't understood that in intuitionistic type theory, if you wanted a thing, and you didn't fancy [Russell's "honest toil"](https://www.azquotes.com/quote/568414), it was perfectly okay to consult your intuition and simply add the thing you wanted.
 Of course, you had to have the *right* intuition or your addition would never get the official imprimatur.
@@ -27,7 +27,7 @@ I had a copy of their code and I wasn't impressed. I was sure I could do a bette
 I would follow the LCF approach, but I would take care to be efficient.
 In particular, I would definitely represent $\lambda$-binding with de Bruijn indices,
 a technique that hadn't caught on yet. ([Nuprl](https://www.nuprl.org) didn't use it either.)
-My ambition was to handle a formula that could fill a couple of screens; never in my wildest dreams did I imagine the [huge developments](https://www.isa-afp.org/entries/DPRM_Theorem.html) we have now. 
+My ambition was to handle a formula that could fill a couple of screens; never in my wildest dreams did I imagine the [huge developments](https://www.isa-afp.org/entries/DPRM_Theorem.html) we have now.
 ([This one](https://www.isa-afp.org/entries/Hermite_Lindemann.html) too.)
 
 There I was, applying the LCF architecture to Martin-Löf type theory as it was in the early 1980s, still with extensional equality.
@@ -48,7 +48,7 @@ No longer did we have to represent an inference rule by a *function* from premis
 An inference rule could simply be declared, a piece of syntax to be used for forwards or backwards chaining as one wished.
 The logical kernel needed to hold nothing more than the mechanism for composing rules.
 Unifiable *existential variables* would simply work, requiring no additional machinery.
-Adding a new logic could be as simple as specifying its primitives and entering its rules. 
+Adding a new logic could be as simple as specifying its primitives and entering its rules.
 That was the core idea: Isabelle would be a *generic* proof assistant.
 
 
@@ -57,29 +57,29 @@ That was the core idea: Isabelle would be a *generic* proof assistant.
 My [first paper on Isabelle](https://doi.org/10.1016/0743-1066(86)90015-4) (also [here](https://doi.org/10.48456/tr-82))
 describes some of this development, as well as my first experiments using Martin-Löf type theory.
 Already this paper describes Isabelle as relying on Martin-Löf's "theory of arities and expressions", originally due to Frege.
-His syntax is used even today in Isabelle, with the notable exception of Isabelle/HOL. The following equation is proved in Isabelle/ZF: 
+His syntax is used even today in Isabelle, with the notable exception of Isabelle/HOL. The following equation is proved in Isabelle/ZF:
 
 >     case(c, d, Inl(a)) = c(a)
 
 With the exception of the order of the arguments, it is identical to Martin-Löf's contraction rule for types of the form $A+B$.
 Almost the whole of MLTT (as constructions of sets, not types) can be found within Isabelle/ZF, and generally in the same syntactic form.
 Many ghosts of MLTT haunt Isabelle/HOL, too.
-$\Sigma$ and $\Pi$ constructions are valuable. 
+$\Sigma$ and $\Pi$ constructions are valuable.
 
 However, the 1986 version of Isabelle used a form of Skolemization for quantifiers.
 It seemed ad-hoc, and it was also inefficient. Inspired by the
 [Edinburgh Logical Framework](https://doi.org/10.1145/138027.138060), I decided to create my own version, free of space-wasting proof objects.
 I showed my effort to [Thierry Coquand](http://www.cse.chalmers.se/~coquand/), who informed me that I had simply re-invented intuitionistic higher order logic.
-That was perfect, because I wouldn't have to puzzle out its theoretical properties. 
+That was perfect, because I wouldn't have to puzzle out its theoretical properties.
 (Though I also wouldn't get anything published in *Journal of the ACM*.)
 I simply invested in a copy of [Lambek and Scott](https://www.cambridge.org/gb/academic/subjects/mathematics/logic-categories-and-sets/introduction-higher-order-categorical-logic?format=PB&isbn=9780521356534).
-In a [new paper](https://rdcu.be/cQnjt), I described Isabelle as it worked with this logical framework. 
+In a [new paper](https://rdcu.be/cQnjt), I described Isabelle as it worked with this logical framework.
 Both papers refer extensively to both de Bruijn and Martin-Löf.
 In particular, I note that Martin-Löf's underlying syntactic theory is precisely the typed $\lambda$-calculus with one base type.
 
 ### Natural deduction
 
-[*Natural deduction*](https://en.wikipedia.org/wiki/Natural_deduction) refers to a style of presenting a logic as a set of inference rules, in which each rule refers to one logical symbol only. 
+[*Natural deduction*](https://en.wikipedia.org/wiki/Natural_deduction) refers to a style of presenting a logic as a set of inference rules, in which each rule refers to one logical symbol only.
 The rules for each connective are then independent of one another.
 Here, the $\land$-introduction rule gives us the one and only way to derive a conclusion involving conjunction:
 
@@ -111,20 +111,20 @@ $[\bigwedge x.\,\Phi(x)]\Rightarrow\Psi$.
 In a logical framework intended to support the natural deduction style—and for a variety of formalisms—it's essential to maintain a clean separation between the syntax of the formalism being supported (the *object-logic*) and the *meta-logic* itself.
 We now can write the conjunction rule (\ref{conjI}) as
 
-$$\begin{align*} \textrm{true}(\phi)\Rightarrow\textrm{true}(\psi)\Rightarrow\textrm{true}(\phi\land \psi). 
+$$\begin{align*} \textrm{true}(\phi)\Rightarrow\textrm{true}(\psi)\Rightarrow\textrm{true}(\phi\land \psi).
 \end{align*}$$
 
 The Isabelle formulation of the implication rule (\ref{impI}) shows the interaction between the two levels of implication:
 
-$$\begin{align*} (\textrm{true}(\phi)\Rightarrow\textrm{true}(\psi))\Rightarrow\textrm{true}(\phi\to \psi). 
+$$\begin{align*} (\textrm{true}(\phi)\Rightarrow\textrm{true}(\psi))\Rightarrow\textrm{true}(\phi\to \psi).
 \end{align*}$$
 
 Martin-Löf fans will note that the constant "true" above is serving as a *form of judgement*.  Computer scientists will see it as a coercion from object-level truth values (having type *bool*) to meta-level truth values (having type *prop*).
 
 The two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
 The exact same separation exists in Isabelle **except**
-in the case of Isabelle/HOL, where the [identification of 
-meta-level types](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.6171) with higher-order logic types turns out to be 
+in the case of Isabelle/HOL, where the [identification of
+meta-level types](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.6171) with higher-order logic types turns out to be
 essential in order to make things work.
 
 [David Schmidt](https://people.cs.ksu.edu/~schmidt/), who was my fellow postdoc (1982–4) on an Edinburgh/Cambridge joint project on LCF, wrote some reports advocating the broader adoption of natural deduction.
@@ -148,25 +148,25 @@ Such a proof strategy is neither natural nor practical.
 
 ### Natural deduction in Martin-Löf type theory
 
-[Martin-Löf type theory](http://www.jstor.com/stable/37448) 
+[Martin-Löf type theory](http://www.jstor.com/stable/37448)
 is notable for many things, but few mention that it is a
 perfect exemplar of natural deduction.
 The various type symbols are defined in a purely modular way:
 if you took a dislike to $\Pi$ say, you could simply omit all of the $\Pi$ rules and the rest of the formalism would work.
-Thanks to the propositions-as-types principle, 
+Thanks to the propositions-as-types principle,
 the introduction and elimination rules for $(\Sigma x\in A)\,B(x)$ correspond
 to those for the existential quantifier (and conjunction, too!) in classical predicate logic.
-Analogous correspondences hold for the types $(\Pi x\in A)\,B(x)$ 
+Analogous correspondences hold for the types $(\Pi x\in A)\,B(x)$
 and $A+B$.
 
 Here is one of the natural deduction rules for the type $\textrm{N}$ (the natural numbers):
 
 $$\begin{align*}
- \frac{\displaystyle {\; \atop c\in \textrm{N}\quad d \in A(0)}\quad 
+ \frac{\displaystyle {\; \atop c\in \textrm{N}\quad d \in A(0)}\quad
    {[x\in \textrm{N},\; y\in A(x)] \atop e(x,y)\in A(\textrm{succ}(x))}}
-        {\textrm{rec}(c,d,e) \in A(c)} 
+        {\textrm{rec}(c,d,e) \in A(c)}
 \end{align*}$$
-        
+
 I hope it looks familiar. It is the typing rule for rec, which performs primitive recursion, but by propositions-as-types it is also *mathematical induction*.
 And suddenly it is obvious that induction rules are simply the natural deduction *elimination rules for inductively defined types*. Or sets.
 Yet there are textbooks that insist that the conclusion of an induction rule should be universally quantified, and (absurdly) that induction rules should be regarded as $\forall$-introduction rules!
@@ -175,7 +175,7 @@ that require induction formulas to be universally quantified.
 
 ### Stanford
 
-A curious point: 
+A curious point:
 after completing my undergraduate degree at Caltech, I did a PhD at Stanford.
 What did I do in my four and a bit years at Stanford?
 

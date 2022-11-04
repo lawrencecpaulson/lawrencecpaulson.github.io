@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Do Gödel's incompleteness theorems matter?"
-usemathjax: true 
-tags: general logic incompleteness
+usemathjax: true
+tags: [general, logic, incompleteness, David Hilbert]
 ---
 
 Gödel's incompleteness theorems are often regarded as placing strict limits on the power of logic. Don't they immediately imply that any project to formalise mathematics is doomed to fail?
@@ -17,11 +17,11 @@ Anybody who does anything involving Gödel's theorems quickly gets contacted by 
 
 As a teenager, I learned about many famous unsolved conjectures, such as Fermat's last theorem, the Riemann hypothesis, Goldbach's conjecture and the twin prime conjecture. Of these, all but the first remain unsolved, and occasionally people speculate that these are real-life instances of Gödel incompleteness. Note that such speculations have nothing to do with formalisation.
 
-It's true that in the 19th century mathematicians were sometimes careless about the axiomatic basis for their work. As we have seen in an [earlier post]({% post_url 2021-11-10-Axiom_of_Choice %}), many of the chief opponents of the axiom of choice had themselves relied on it unknowingly. Today we know that certain questions (most notably, the [continuum hypothesis](https://plato.stanford.edu/entries/continuum-hypothesis/)) are indeed independent of the standard axioms for set theory. Therefore any attempt to settle such a proposition must involve the assumption of [new axioms](https://plato.stanford.edu/entries/large-cardinals-determinacy/), such as determinacy. Again, such questions have nothing to do with formalisation. 
+It's true that in the 19th century mathematicians were sometimes careless about the axiomatic basis for their work. As we have seen in an [earlier post]({% post_url 2021-11-10-Axiom_of_Choice %}), many of the chief opponents of the axiom of choice had themselves relied on it unknowingly. Today we know that certain questions (most notably, the [continuum hypothesis](https://plato.stanford.edu/entries/continuum-hypothesis/)) are indeed independent of the standard axioms for set theory. Therefore any attempt to settle such a proposition must involve the assumption of [new axioms](https://plato.stanford.edu/entries/large-cardinals-determinacy/), such as determinacy. Again, such questions have nothing to do with formalisation.
 
 There was a project to formalise mathematics well before the development of machine logic. Nicolas Bourbaki, a pseudonym for a collective of French mathematicians, wrote a series of texts on a variety of mathematical topics. Their style was absolutely formal with all proofs reduced to logic as much as possible without machine support. These books were highly influential, but the project had its critics too. In [The ignorance of Bourbaki](https://rdcu.be/cJtBL), British logician A. R. D. Mathias wrote that
 
-> They were not ready to face the possibility, strongly suggested by G6del's work, that there are no foundations of mathematics in the sense proposed by Hilbert and embraced by Bourbaki; that there are no ways of grounding mathematics in logic or classes or whatever so that once a basis has thus been given in some primitive ideas, no further thought need be given to them; that though there are indeed foundational issues, they cannot be confined to Chapter One of the Great Book, for they permeate mathematics. 
+> They were not ready to face the possibility, strongly suggested by G6del's work, that there are no foundations of mathematics in the sense proposed by Hilbert and embraced by Bourbaki; that there are no ways of grounding mathematics in logic or classes or whatever so that once a basis has thus been given in some primitive ideas, no further thought need be given to them; that though there are indeed foundational issues, they cannot be confined to Chapter One of the Great Book, for they permeate mathematics.
 
 Indeed, as Franzén emphasises, the main consequence of incompleteness for mathematics is its *inexhaustibility*: it is impossible to write down a system of axioms from which all mathematical truths follow. Surely this is a good thing. An example of the opposite is Euclidean geometry, which (as formalised by Tarski) turns out to be decidable and complete. Every question in plane geometry can be settled by an algorithm, and if any mystery remains in this branch of mathematics, it's because that algorithm is super-exponential. We should be glad that the world of mathematics is open and unending.
 

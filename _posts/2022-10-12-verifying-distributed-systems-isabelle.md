@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Verifying distributed systems with Isabelle/HOL, by Martin Kleppmann"
-tags: [general,verification]
+tags: [general,verification,recruitment]
 ---
 
 We use distributed systems every day in the form of internet services. These systems are very useful, but also challenging to implement because networks are unpredictable. Whenever you send a message over the network, it is likely to arrive quite quickly, but it's possible that it might be delayed for a long time, or never arrive, or arrive several times.
