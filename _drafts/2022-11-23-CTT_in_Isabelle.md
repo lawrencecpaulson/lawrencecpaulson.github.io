@@ -292,11 +292,11 @@ And this `eq` the only possible element of an equality type.
 To the objection that the equality type rules unreasonably destroy information, we have
 following response:
 
-> You seem to believe that every constructive mathematician means the same thing by "proof" that you do. In fact the word "proof' as used in Martin-Löf's systems means, the information that a computer would need to verify a statement.
+> You seem to believe that every constructive mathematician means the same thing by "proof" that you do. In fact the word "proof' as used in Martin-Löf's systems means, the information that a computer would need to verify a statement.[^1]
 
-This quote is from [*Foundations of Constructive Mathematics*](https://link.springer.com/book/10.1007/978-3-642-68952-9) 
-by Michael J Beeson
-(Springer, 1980), page 281. It is said to be a paraphrase of a letter from Peter Aczel
+[^1]: From [*Foundations of Constructive Mathematics*](https://link.springer.com/book/10.1007/978-3-642-68952-9)  by Michael J Beeson (Springer, 1980), page 281. 
+
+This quote is said to be a paraphrase of a letter from Peter Aczel
 to Beeson.
 And the claim is that there is no need for the complicated proof of an identity
 to be preserved in the elements of identity types, merely the fact of the identity itself,

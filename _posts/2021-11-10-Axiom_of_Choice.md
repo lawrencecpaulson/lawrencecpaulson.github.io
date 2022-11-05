@@ -20,9 +20,9 @@ Typically they assumed some "obvious" fact such as that a countable union of cou
 So when Zermelo promulgated the axiom of choice at the turn of the 20th century, he aroused strong opposition.
 
 > It is a historic irony that many of the mathematicians who later opposed the Axiom of Choice had used it implicitly in their own researches. This occurred chiefly to those who were pursuing Cantorian set theory or applying it in real analysis. At the turn of the century such analysts included Rene Baire, Emile Borel, and Henri Lebesgue in France, as well as W. H. Young in Germany. ... At times these various mathematicians used [AC]
->  in the guise of infinitely many arbitrary choices, and at times it appeared indirectly via the Countable Union Theorem and similar results. Certainly the indirect uses did not indicate any conscious adoption of non-constructive premises. Yet when infinitely many arbitrary choices occurred in the work of a mathematician such as Borel, they revealed a certain ambivalence toward the methods permissible in mathematics.
+>  in the guise of infinitely many arbitrary choices, and at times it appeared indirectly via the Countable Union Theorem and similar results. Certainly the indirect uses did not indicate any conscious adoption of non-constructive premises. Yet when infinitely many arbitrary choices occurred in the work of a mathematician such as Borel, they revealed a certain ambivalence toward the methods permissible in mathematics.[^1]
 
-> Gregory H. Moore, *Zermelo's Axiom of Choice* (Springer, 1982), 64--65.
+[^1]: Gregory H. Moore, *Zermelo's Axiom of Choice* (Springer, 1982), 64--65.
 
 In the absence of AC, there exists a model of ZF in which *the set of all real numbers, though uncountable, is a countable union of countable sets*.
 In such a model, little survives of the work of Baire and Lebesgue.

@@ -64,11 +64,15 @@ the [axiom of choice](https://plato.stanford.edu/entries/mathematics-constructiv
 can be contentious.
 It was strongly opposed by a number of prominent mathematicians in the early days, but later gained acceptance even among intuitionists. Errett Bishop, who founded and developed the field of constructive analysis, wrote
 
-> A choice function exists in constructive mathematics, because a choice is *implied by the very meaning of existence*
+> A choice function exists in constructive mathematics, because a choice is *implied by the very meaning of existence*[^1]
+
+[^1]: Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
 
 Michael Dummett, Professor of Logic at Oxford, wrote (continuing for pages with extended examples) that
 
-> It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.
+> It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.[^2]
+
+[^2]: Michael Dummett, *Elements of Intuitionism* (Oxford, 1977), 52–54.
 
 Martin-Löf designed his type theory with the aim that AC should be provable and in his landmark [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448) presented a detailed derivation of it as his only example. Briefly, if $(\forall x:A) (\exists y:B) C(x,y)$ then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$.
 
@@ -83,11 +87,7 @@ positive integers $a$, $b$, $c$ and $n>2$ such that $a^n+b^n = c^n$. Then a fini
 
 I think they will be waiting a long time.
 
-### Sources for the quotations above
 
-1. Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
-
-2. Michael Dummett, *Elements of Intuitionism* (Oxford, 1977), 52–54.
 
 
 

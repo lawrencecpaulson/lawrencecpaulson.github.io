@@ -68,4 +68,4 @@ PS. If you are interested in our general philosophy about computer-verified proo
 [2] James P. Jones, Universal Diophantine equation. The Journal of Symbolic Logic 47 (1982), no. 3, 549–571. [URL](https://www.jstor.org/stable/2273588).
 [3] Zhi-Wei Sun, Further results on Hilbert's Tenth Problem. Sci. China Math. 64 (2021), no.2, 281-306. [URL](https://arxiv.org/abs/1704.03504).
 
-*This is a guest post by [Marco David](). Please let me know if you are interested in contributing a post of your own.*
+*This is a guest post by Marco David. Please let me know if you are interested in contributing a post of your own.*
