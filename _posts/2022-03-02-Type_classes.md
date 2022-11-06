@@ -26,7 +26,10 @@ However, in 1989 [Wadler and Blott](https://dl.acm.org/doi/10.1145/75277.75283) 
 They gave as examples the overloading of arithmetic operators and the treatment of equality types. Another natural example is types equipped with a total ordering, a type class that could be the basis of polymorphic sorting functions.
 Although their suggestion was simply for a programming language feature—it was incorporated into [Haskell](https://www.haskell.org)—they saw further:
 
-> It is natural to think of adding assertions to the class declaration, specifying properties that each instance must satisfy... It is valid for any proof to rely on these properties, so long as one proves that they hold for each instance declaration. Here the assertions have simply been written as comments; a more sophisticated system could perhaps verify or use such assertions.
+> It is natural to think of adding assertions to the class declaration, specifying properties that each instance must satisfy... It is valid for any proof to rely on these properties, so long as one proves that they hold for each instance declaration. Here the assertions have simply been written as comments; a more sophisticated system could perhaps verify or use such assertions.[^1]
+
+[^1]: Philip Wadler and Stephen Blott. [How to Make Ad-Hoc Polymorphism Less Ad Hoc](https://dl.acm.org/doi/10.1145/75277.75283). Principles of Programming Languages (1989), 60–76.
+
 
 ### Type classes and Isabelle/HOL
 

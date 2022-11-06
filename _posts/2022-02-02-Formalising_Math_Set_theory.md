@@ -17,8 +17,9 @@ who looked forward to a future where
 In the 20th century, some researchers expressed strikingly bold visions.
 Here is Hao Wang in 1958: 
 
-> The original aim of the writer was to take mathematical textbooks such as Landau on the number system, Hardy-Wright on number theory, Hardy on the calculus, Veblen-Young on projective geometry, the volumes by Bourbaki, as outlines and to make the machine formalize all the proofs (fill in the gaps).
-(In [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002), page 15.)
+> The original aim of the writer was to take mathematical textbooks such as Landau on the number system, Hardy-Wright on number theory, Hardy on the calculus, Veblen-Young on projective geometry, the volumes by Bourbaki, as outlines and to make the machine formalize all the proofs (fill in the gaps).[^1]
+
+[^1]: Hao Wang. [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002). *IBM Journal of Research and Development* **4**:1 (1960), 15.
 
 What he actually accomplished was impressive enough. He implemented a proof procedure for first-order logic with equality, which he claimed to be complete. He demonstrated its power by proving nearly 400 of the purely logical theorems
 of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/). While thinking about that accomplishment, take a moment to examine the specifications of the computer used, an [IBM 704](https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP704.html).
@@ -30,8 +31,9 @@ I presented here an example from "Hardy on the calculus" [not long ago]({% post_
 Here is Art Quaife in 1989:
 
 > $1000 personal computers with the computational power of the human brain should be available by year 2030. The time will come when such crushers as Riemann's hypothesis and
-Goldbach's conjecture will be fair game for automated reasoning programs. For those of us who arrange to stick around, endless fun awaits us in the automated development and eventual enrichment of the corpus of mathematics.
-(In [Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://rdcu.be/cJtDU), page 119--120.)
+Goldbach's conjecture will be fair game for automated reasoning programs. For those of us who arrange to stick around, endless fun awaits us in the automated development and eventual enrichment of the corpus of mathematics.[^2]
+
+[^2]: Art Quaife. [Automated Deduction in von Neumann–Bernays–Gödel Set Theory](https://rdcu.be/cJtDU). *Journal of Automated Reasoning* **8**:1 (1992), 119–120.
 
 2030 isn't far off, so this was a little ambitious (and we didn't get [HAL 9000](https://youtu.be/Wy4EfdnMZ5g) in 2001 either.)
 However, in the expression "arrange to stick around", Quaife is referring to life extension technologies (a.k.a. putting your body in the freezer), so possibly we can add a couple of centuries to the deadline.
@@ -54,10 +56,11 @@ So now the aim was to formalise *all important mathematical knowledge*.
 
 ### NGB set theory
 
-Quaife used von Neumann–Bernays–Gödel (NBG) set theory, as recommended in 1986 by Boyer et al., because ZF set theory cannot be finitely axiomatized. 
+Quaife used von Neumann–Bernays–Gödel (NBG) set theory, as recommended back in 1986 by Boyer et al., because ZF set theory cannot be finitely axiomatized. 
 
-> [ZF] cannot be input to a resolution-based theorem prover. Fortunately, the vNBG set theory has a finite axiomatization, and is in fact strictly stronger than ZF. 
-([Set theory in first-order logic: Clauses for Gödel's axioms](https://rdcu.be/cJtEe), page 288.)
+> [ZF] cannot be input to a resolution-based theorem prover. Fortunately, the vNBG set theory has a finite axiomatization, and is in fact strictly stronger than ZF.[^3]
+
+[^3]: Robert Boyer et al. [Set theory in first-order logic: Clauses for Gödel's axioms](https://rdcu.be/cJtEe). *Journal of Automated Reasoning* **2**:1 (1986), 288.
 
 From a syntactic point of view, the problem is that ZF involves terms that contain first-order formulas. 
 NBG uses variables ranging over proper classes as surrogates for formulas, bringing them within the mathematical domain of discourse. 

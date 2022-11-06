@@ -5,7 +5,6 @@ usemathjax: true
 tags: [set theory, type theory, axiom of choice, Ernst Zermelo, Isabelle, Archive of Formal Proofs]
 ---
 
-
 [Set theory](https://plato.stanford.edu/entries/set-theory/) (specifically, ZFC) is said to be the foundation of mathematics. Who says so, and are they right? How do our various typed formalisms compare to set theory?
 What about set theory as a branch of mathematics to be mechanised?
 
@@ -33,9 +32,11 @@ the reals and higher spaces as well as sets and functions over them. (These are 
 Only finitely many iterations are allowed, however; in Zermelo set theory we never reach $V_{\omega+\omega}$. 
 With ZF we get all of the $V$-levels plus a vast menagerie of unimaginable monstrosities, such as fixedpoints of the aleph operator
 (the solutions of $\kappa = \aleph_\kappa$ form a proper class).
-As pointed out by George Boolos (p. 258 of his [Must We Believe in Set Theory?](https://doi.org/10.1017/CBO9780511570681.013)):
+As pointed out by George Boolos,
 
-> $\kappa$ seems sufficiently large that the claim that it exists might plausibly be regarded as dubious, $\kappa$ is no gnat; it is a lot to swallow.
+> $\kappa$ seems sufficiently large that the claim that it exists might plausibly be regarded as dubious, $\kappa$ is no gnat; it is a lot to swallow.[^1]
+
+[^1]: George Boolos. [Must We Believe in Set Theory?](https://doi.org/10.1017/CBO9780511570681.013)), in *Between Logic and Intuition* (Cambridge University Press, 2009), p. 258.
 
 Recall that $\aleph_0$ is the cardinality of the natural numbers, 
 and the cardinality of the continuum is thought by many to be
