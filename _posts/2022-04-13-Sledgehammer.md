@@ -46,7 +46,7 @@ It was: Cohen possessed some sort of magic bullet. I could not understand his tr
 
 ### The objectives and the obstacles
 
-The original proposal (written in 2003) said
+The [original proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Automation/case.pdf) (written in 2003) said
 
 > Twenty years ago, when many users had to share a single computer, a proof command could realistically take at most a few seconds of processor time. Now that 2GHz processors are commonplace, we should abandon the traditional mode of interaction, where the proof tool does nothing until the user types a command. Background processes (perhaps on several computers) should try to prove the outstanding subgoals.
 
