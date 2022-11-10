@@ -35,14 +35,17 @@ It is noteworthy that the existence of a universal pair yields a stronger negati
 
 The attentive reader will have noticed that we made explicit the set of integers $\mathbb Z$ above. By analogy, one may define universal pairs over other sets, for example the natural numbers $\mathbb N$. As such, Hilbert's Tenth Problem over the integers is equivalent to Hilbert's Tenth Problem over the natural numbers by Legendre's four squares theorem. However, when it comes to universal pairs, there is a big difference in efficiency, i.e. the number of variables required for a universal equation.
 
-It is natural to try to reduce $\nu$ and $\delta$ as far as possible. However, unsurprisingly, there is a trade-off between the two. How far can you get? Universal pairs over the natural numbers have been known by Jones and Matiyasevich: They found extrema at $(58, 4)_{\mathbb N}$ with a lowest known degree of four, and $(9, 1.6 \times 10^{45})_{\mathbb N}$ with a lowest known number of variables of nine [[2]](#references). While these can be translated to the integers by naive substitution, this strategy is far from optimal over $\mathbb Z$.
+It is natural to try to reduce $\nu$ and $\delta$ as far as possible. However, unsurprisingly, there is a trade-off between the two. How far can you get? Universal pairs over the natural numbers have been known by Jones and Matiyasevich: 
+They found extrema at $(58, 4)\_{\mathbb N}$
+with a lowest known degree of four, and 
+$(9, 1.6 \times 10^{45})\_{\mathbb N}$ with a lowest known number of variables of nine [[2]](#references). While these can be translated to the integers by naive substitution, this strategy is far from optimal over $\mathbb Z$.
 
 ### New Results
 
 Combining various methods from the literature, my collaborators J. Bayer, S. Dubischar, M. Hassler and D. Schleicher have succeeded in obtaining much better universal pairs over the integers. A cornerstone of their work is the following result.
 
 **Proposition:**
-> There is $\delta \in \mathbb N$ such that $(11, \delta)_{\mathbb Z}$ is a universal pair.
+> There is $\delta \in \mathbb N$ such that $(11, \delta)\_{\mathbb Z}$ is a universal pair.
 
 (For the curious, our most recent calculation yields $\delta = 85501605795457180647645145654678344726563009024$ but this was intricate and lengthy. We expect the number to change should mistakes be found during the verification process.)
 
