@@ -61,7 +61,7 @@ There are no prerequisites to join, except for a curiosity to always learn more.
 
 We are ready to have you join fully remotely. Formalizing a central three-squares theorem or certain properties of Pell equations are components which are especially well-suited to be formalized remotely! We plan to meet via Zoom once a week. Beyond that, you are flexible to work on your tasks and collaborate with others as much as you please and need. The entire group is helpful, eager to learn, and constantly shares lessons learnt with each other. In Paris, France as well as Bremen, Germany there is also a possibility to meet parts of the group in person.
 
-Please [reach out](gdt-isabelle-up@ens.fr) if any of this sounds exciting and interesting to you! We look forward to hearing from you.
+Please [reach out](mailto:gdt-isabelle-up@ens.fr) if any of this sounds exciting and interesting to you! We look forward to hearing from you.
 
 PS. If you are interested in our general philosophy about computer-verified proofs, let me refer you to our recent meta-article on the status of formalization in mathematics, titled [Mathematical Proof Between Generations](https://arxiv.org/pdf/2207.04779.pdf) (arXiv:2207.04779).
 
