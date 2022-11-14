@@ -164,4 +164,5 @@ this way, formalised mathematics might serve greater purposes directly
 for human mathematicians, and not only as a intermediary to other
 technologies.
 
-*This is a guest post by [Pedro Sánchez Terraf](https://cs.famaf.unc.edu.ar/~pedro). Please let me know if you are interested in contributing a post of your own.*
+*This is a guest post by [Pedro Sánchez Terraf](https://cs.famaf.unc.edu.ar/~pedro). 
+Please let me know if you are interested in contributing a post of your own.*
