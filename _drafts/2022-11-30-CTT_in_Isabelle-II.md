@@ -7,9 +7,9 @@ tags: [Martin-Löf type theory, Isabelle, examples]
 
 The [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %})
 describes the implementation of Martin-Löf type theory in Isabelle.
-The ability to type in the rules in a notation as close as possible
-to the original papers and use them immediately for proofs was a key design objective
-in the early days of Isabelle.
+The ability to enter the rules in a notation as close as possible
+to the original papers and use them immediately for proofs was one of my key objectives
+for Isabelle in the 1980s.
 Now, through some tiny examples, let's see how terms can be built incrementally
 with the help of schematic variables and high-order unification.
 Such terms can be proof objects, but they do not have to be.
@@ -18,6 +18,7 @@ Such terms can be proof objects, but they do not have to be.
 
 The simplest possible example is to use the type formation rules,
 available as `form_rls`, a list of theorems starting with those for $N$ and the $\Pi$-types.
+In this way we can enumerate well-formed types by generating the corresponding proofs.
 
 To begin, we enter a **schematic** goal. This allows the use of schematic variables
 in the goal, presumably with the expectation that they will be replaced
@@ -67,6 +68,11 @@ So the $\Pi$-type degenerates to a mere function type and is displayed as such,
 thanks to some syntactic trickery in the implementation of CTT.
 We could have continued to backtrack in order to generate
 other well-formed types.
+
+Explicit backtracking, such as is shown here, is provided so that people can
+explore the proof space and sketch the design of backtracking-based proof automation.
+However, it should never form part of a polished proof because the reader has no chance
+of following what is going on.
 
 ### Watching proof objects emerge
 
