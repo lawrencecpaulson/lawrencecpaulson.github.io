@@ -12,22 +12,26 @@ schematic_goal "?A type"
   apply (rule form_rls)
   done
 
-schematic_goal "\<Prod>z:?A . N + ?B(z) type"
-  apply (rule form_rls)
-   apply (rule form_rls)
-  apply (rule form_rls)
-   apply (rule form_rls)
-  apply (rule form_rls)
+schematic_goal "<0, succ(0)> : ?A"
+  apply (rule intr_rls)
+   apply (rule intr_rls)
+  apply (rule intr_rls)
+  apply (rule intr_rls)
   done
 
-schematic_goal "<0, succ(0)> : ?A"
-  apply intr done
+lemma "<0, succ(0)> : N \<times> N"
+  by typechk 
 
-schematic_goal "\<Prod>w:N . Eq(?A,w,w) type"
+text "typechecking the addition function"
+schematic_goal "\<^bold>\<lambda>n. \<^bold>\<lambda>m. rec(n, m, \<lambda>x y. succ(y)) : ?A"
+  apply (rule intr_rls form_rls elim_rls | assumption)+
+  done
+
+
+schematic_goal "\<^bold>\<lambda>n. \<^bold>\<lambda>m. rec(n, m, \<lambda>x y. succ(y)) : ?A"
   apply typechk done
 
-schematic_goal "\<Prod>x:N . \<Prod>y:N . Eq(?A,x,y) type"
-  apply typechk done
+
 
 text "typechecking an application of fst"
 schematic_goal "(\<^bold>\<lambda>u. split(u, \<lambda>v w. v)) ` <0, succ(0)> : ?A"
@@ -192,67 +196,6 @@ schematic_goal [folded basic_defs]:
 
 (*Martin-Löf (1984) page 50*)
 text "AXIOM OF CHOICE!  Delicate use of elimination rules"
-schematic_goal
-  assumes "A type"
-    and "\<And>x. x:A \<Longrightarrow> B(x) type"
-    and "\<And>x y. \<lbrakk>x:A; y:B(x)\<rbrakk> \<Longrightarrow> C(x,y) type"
-  shows "?a : (\<Prod>x:A. \<Sum>y:B(x). C(x,y)) \<longrightarrow> (\<Sum>f: (\<Prod>x:A. B(x)). \<Prod>x:A. C(x, f`x))"
-  apply (intr assms)
-   prefer 2 apply add_mp
-   prefer 2 apply add_mp
-   apply (erule SumE_fst)
-  apply (rule replace_type)
-   apply (rule subst_eqtyparg)
-    apply (rule comp_rls)
-     apply (rule_tac [4] SumE_snd)
-       apply (typechk SumE_fst assms)
-  done
-
-text "Axiom of choice.  Proof without fst, snd.  Harder still!"
-schematic_goal [folded basic_defs]:
-  assumes "A type"
-    and "\<And>x. x:A \<Longrightarrow> B(x) type"
-    and "\<And>x y. \<lbrakk>x:A; y:B(x)\<rbrakk> \<Longrightarrow> C(x,y) type"
-  shows "?a : (\<Prod>x:A. \<Sum>y:B(x). C(x,y)) \<longrightarrow> (\<Sum>f: (\<Prod>x:A. B(x)). \<Prod>x:A. C(x, f`x))"
-  apply (intr assms)
-    (*Must not use add_mp as subst_prodE hides the construction.*)
-   apply (rule ProdE [THEN SumE])
-     apply assumption
-    apply assumption
-   apply assumption
-  apply (rule replace_type)
-   apply (rule subst_eqtyparg)
-    apply (rule comp_rls)
-     apply (erule_tac [4] ProdE [THEN SumE])
-      apply (typechk assms)
-  apply (rule replace_type)
-   apply (rule subst_eqtyparg)
-    apply (rule comp_rls)
-      apply (typechk assms)
-  apply assumption
-  done
-
-text "Example of sequent-style deduction"
-  (*When splitting z:A \<times> B, the assumption C(z) is affected;  ?a becomes
-    \<^bold>\<lambda>u. split(u,\<lambda>v w.split(v,\<lambda>x y.\<^bold> \<lambda>z. <x,<y,z>>) ` w)     *)
-schematic_goal
-  assumes "A type"
-    and "B type"
-    and "\<And>z. z:A \<times> B \<Longrightarrow> C(z) type"
-  shows "?a : (\<Sum>z:A \<times> B. C(z)) \<longrightarrow> (\<Sum>u:A. \<Sum>v:B. C(<u,v>))"
-  apply (rule intr_rls)
-   apply (tactic \<open>biresolve_tac \<^context> safe_brls 2\<close>)
-    (*Now must convert assumption C(z) into antecedent C(<kd,ke>) *)
-   apply (rule_tac [2] a = "y" in ProdE)
-    apply (typechk assms)
-  apply (rule SumE, assumption)
-  apply intr
-     defer 1
-     apply assumption+
-  apply (typechk assms)
-  done
-
-
 lemma Axiom_of_Choice:
   assumes "A type"
     and "\<And>x. x:A \<Longrightarrow> B(x) type"

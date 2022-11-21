@@ -32,7 +32,7 @@ Our initial goal invites Isabelle to generate a well formed type in any possible
 The cursor is placed after the application of the typing rules, which have instantiated `?A`
 with the type `N`:
 
-<img src="/images/CTT/typefm-out1.png" alt="type formation example output" height="66px" />
+<img src="/images/CTT/typefm-out1.png" alt="type formation example output" height="70px" />
 
 We have the option of asking Isabelle to backtrack over its most recent choice.
 Prolog programmers will notice the similarity to responding to a Prolog output
@@ -53,7 +53,7 @@ We continue by applying the same list of type formation rules again:
 The obvious choice for `?A4` is once again `N`. Note how type `?A` below is now
 partially filled in:
 
-<img src="/images/CTT/typefm-out3.png" alt="type formation example output" height="88px" />
+<img src="/images/CTT/typefm-out3.png" alt="type formation example output" height="66px" />
 
 We unimaginatively continue with the same set of rules, to instantiate the last remaining type.
 
@@ -62,7 +62,7 @@ We unimaginatively continue with the same set of rules, to instantiate the last 
 The family of types `?B4(x)` has been instantiated (yet again) with `N`.
 It is a degenerate family with no dependence on `x`.
 
-<img src="/images/CTT/typefm-out4.png" alt="type formation example output" height="66px" />
+<img src="/images/CTT/typefm-out4.png" alt="type formation example output" height="70px" />
 
 So the $\Pi$-type degenerates to a mere function type and is displayed as such,
 thanks to some syntactic trickery in the implementation of CTT.
@@ -73,6 +73,56 @@ Explicit backtracking, such as is shown here, is provided so that people can
 explore the proof space and sketch the design of backtracking-based proof automation.
 However, it should never form part of a polished proof because the reader has no chance
 of following what is going on.
+
+### Type inference
+
+Type inference means to deduce the type of a given expression.
+It's not always well-defined: some expressions will not have any type, 
+which implies they are meaningless.
+On the other hand, $\lambda x.\,x$ can have any type of the form $A\to A$
+where $A$ is a well-formed type.
+
+Let us deduce the type of the ordered pair $\langle 0,1\rangle$.
+It will suffice to use the introduction rules, which are bound to the name `intr_rls`.
+We once again enter a schematic goal, with a schematic variable
+where the expected type should go.
+Proving the theorem will fill in this type.
+
+<img src="/images/CTT/typeinf-in.png" alt="type inference example input" height="132px" />
+
+The first application of `intr_rls` will find the only possible match,
+namely the introduction rule (called `SumI`) for a ∑-type.
+The two subgoals demand type inference for the terms `0` and `succ(0)`.
+The type of the second component is allowed to depend on the value of the first.
+
+<img src="/images/CTT/typeinf-out1.png" alt="type inference example output" height="88px"/>
+
+For each successive application of `intr_rls`, the cursor moves down. 
+Let's look at the corresponding outputs.
+After the second step, the term `0` has been given type `N` and the corresponding subgoal
+has disappeared.
+The type of the entire expression, given by the schematic variable `?A`,
+has been updated accordingly.
+
+<img src="/images/CTT/typeinf-out2.png" alt="type inference example output" height="66px"/>
+
+After the third step, because of the `succ` function, the type of the second component
+is also seen to be `N`.
+There is no dependence, and the degenerate ∑-type is now displayed as simply `N×N`.
+Isabelle relies on syntactic trickery to achieve this.
+
+<img src="/images/CTT/typeinf-out3.png" alt="type inference example output" height="66px"/>
+
+The fourth and final step solves the remaining subgoal. 
+This is only possible because `0` also has type `N`; an ordered pair in this position
+would have prevented this step and of course the corresponding term would be nonsensical.
+
+<img src="/images/CTT/typeinf-out4.png" alt="type inference example output" height="66px"/>
+
+That was straightforward but the proof is too long, especially as it's so repetitious.
+Even in 1986, I had figured out how to automate that sort of thing.
+
+
 
 ### Watching proof objects emerge
 
