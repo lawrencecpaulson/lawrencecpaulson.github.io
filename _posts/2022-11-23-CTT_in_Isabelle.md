@@ -9,7 +9,7 @@ Last July, [I described]({% post_url 2022-07-13-Isabelle_influences %})
 how Isabelle emerged from a jumble of influences: AUTOMATH, LCF and Martin-Löf.
 I stated that Isabelle had originated as a proof assistant for
 [Martin-Löf type theory](http://www.jstor.com/stable/37448).
-Eventually I realised that the type theory community wasn't much interested in this work,
+Eventually I realised that the type theory community wasn't interested in this work,
 just as it wasn't much interested in [Nuprl](https://www.nuprl.org), which was
 by far the most developed type theory implementation out there.
 Both implementations had been left behind by the sudden change to intensional equality.
@@ -17,14 +17,14 @@ As I mentioned in the earlier post, the type theory influence remains strong
 in the other formalisms supported by Isabelle, notably higher-order logic
 and [ZF set theory](https://rdcu.be/cYn9P).
 Few however may be aware that Isabelle's instance for constructive type theory,
-Isabelle/CTT, still exists.
+Isabelle/CTT, still exists and still runs.
 
 
 ### Syntactic prerequisites
 
 The syntactic framework for type theory is the *system of arities*, which determines
 how many arguments an operator must be given before it is *saturated*.
-This system is nothing but the typed λ-calculus, so we begin by giving the types (or rather arities)
+This system is nothing but the typed λ-calculus, so we begin by introducing the types (or rather arities)
 of individuals, types and judgments.
 
 <pre class="source">
@@ -33,7 +33,7 @@ of individuals, types and judgments.
 </span><span class="keyword1 command">typedecl</span> o
 </pre>
 
-Now we introduce the four forms of judgment: to be a type, equality of types,
+Now we introduce the four forms of judgment: to be a well-formed type, equality of types,
 membership in a type, equality for members of the type:
 
 <pre class="source">
@@ -44,8 +44,9 @@ membership in a type, equality for members of the type:
   </span>Eqelem    <span class="main">::</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">[</span>i</span><span class="main">,</span>i</span><span class="main">,</span>t<span class="main">]</span><span class="main">⇒</span>prop<span>"</span>      <span class="main">(</span><span class="quoted"><span>"</span><span class="keyword3">(</span>_ <span class="keyword1">=</span><span class="keyword3">/ </span>_ <span class="keyword1">:</span><span class="keyword3">/ </span>_<span class="keyword3">)</span><span>"</span></span> <span class="main">[</span>10<span class="main">,</span>10<span class="main">,</span>10<span class="main">]</span> 5<span class="main">)</span>
 </pre>
 
-We see some Isabelle code to support standard notation such as $x=y:A$, for the fourth
-judgment form. (A fifth, a hack used to implement rewriting, isn't shown.)
+Each of these includes Isabelle mixfix declarations
+to support standard notation such as $x=y:A$. 
+(A fifth judgment form, a hack used to implement rewriting, isn't shown.)
 
 
 ### The basic propositional types
@@ -187,7 +188,7 @@ indexed by elements of $A$:
 The ∑-type is sometimes called a *dependent product*
 because its elements are ordered pairs $\langle a,b \rangle$ where the type of $b$
 may depend upon the value of $a$. (But just to be confusing, it is more often called
-the "dependent sum" type: incredibly annoying, and wrong.)
+the "dependent sum" type. This is incredibly annoying. And it's wrong.)
 The introduction rule constructs such ordered pairs.
 
 <pre class="source">
@@ -230,6 +231,9 @@ the type of the result may depend on the value of the argument.
 The sort of people who (incorrectly) refer to a ∑-type as a dependent sum
 may refer to a ∏-type as a dependent product (also incorrectly), 
 although you can't count on this.
+If memory serves, the terminology used here is due to [Robert Constable](https://www.cs.cornell.edu/home/rc/), 
+who led the Nuprl project and wrote a lot of expository material about type theory. 
+If you find yourself getting confused, just refer to "Pi and Sigma types".
 
 <pre class="source">
   ProdI<span class="main">: </span><span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="bound">A</span> <span class="keyword1">type</span></span><span class="main">;</span> <span class="main">⋀</span><span class="bound">x</span><span class="main">.</span> <span class="bound">x</span><span class="main">:</span></span><span class="bound">A</span> <span class="main">⟹</span> <span class="bound">b</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span class="main">:</span><span class="bound">B</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="main"><span class="hidden">❙</span><strong>λ</strong></span><span class="bound">x</span><span class="main">.</span> <span class="bound">b</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span> <span class="main">:</span> <span class="main">∏</span><span class="bound">x</span><span class="main">:</span><span class="bound">A</span><span class="main">.</span> <span class="bound">B</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span>"</span> 
@@ -258,35 +262,35 @@ In particular, the elimination rule is modus ponens.
 
 ### Equality types
 
-The equality (or identity) types mediate between equality judgments $a=b:A$ and ordinary membership judgements.
+The equality (or identity) types mediate between equality judgments $a=b:A$ and ordinary membership judgments.
 To form an equality type you need only a type $A$ and two expressions $a$ and $b$ belonging to type $A$.
 It expresses the proposition that $a$ and $b$ are equal when considered as elements of $A$.
-More broadly, in type theory identity is regarded as being an aspect of a type
+It is a principle of type theory that identity is regarded as being bound up with a type
 as opposed to being a property of $a$ and $b$ alone.
 
 <pre class="source">
-  EqF<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="main">⟦</span><span class="bound">A</span> <span class="keyword1">type</span></span><span class="main">;</span> <span class="bound">a</span> <span class="main">:</span></span> <span class="bound">A</span><span class="main">;</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span class="main">⟧</span> <span class="main">⟹</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="keyword1">type</span><span>"</span> 
+  EqF<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="bound">A</span> <span class="keyword1">type</span></span><span class="main">;</span> <span class="bound">a</span> <span class="main">:</span></span> <span class="bound">A</span><span class="main">;</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span class="main">⟧</span> <span class="main">⟹</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="keyword1">type</span><span>"</span> 
 </pre>
 
-Whenever we possess an equality judgement, for example through a computation rule,
+Whenever we possess an equality judgment, for example through a computation rule,
 the corresponding equality type can be introduced.
 
 <pre class="source">
-  EqI<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">a</span> <span class="main">=</span></span> <span class="bound">b</span> <span class="main">:</span></span> <span class="bound">A</span> <span class="main">⟹</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
+  EqI<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="bound">a</span> <span class="main">=</span></span> <span class="bound">b</span> <span class="main">:</span></span> <span class="bound">A</span> <span class="main">⟹</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
 </pre>
 
 The type theory of 1982 is extensional. In particular, a proof of any
-identity however deep was collapsed down to the token `eq`.
+identity however deep was collapsed down to a unique token, `eq`.
 
 
 <pre class="source">
-  EqE<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">p</span> <span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">a</span> <span class="main">=</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span>"</span> 
+  EqE<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">a</span> <span class="main">=</span> <span class="bound">b</span> <span class="main">:</span> <span class="bound">A</span><span>"</span> 
 </pre>
 
-And this `eq` the only possible element of an equality type.
+And this `eq` is the only possible element of an equality type.
 
 <pre class="source">
-  EqC<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">p</span> <span class="bound">a</span> <span class="bound">b</span> <span class="bound">A</span><span class="main">.</span> <span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">p</span> <span class="main">=</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
+  EqC<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="bound">p</span> <span class="main">:</span></span> Eq</span><span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">⟹</span> <span class="bound">p</span> <span class="main">=</span> eq <span class="main">:</span> Eq<span class="main">(</span><span class="bound">A</span><span class="main">,</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span><span>"</span> 
 </pre>
 
 To the objection that the equality type rules unreasonably destroy information, we have
@@ -296,8 +300,8 @@ following response:
 
 [^1]: From [*Foundations of Constructive Mathematics*](https://link.springer.com/book/10.1007/978-3-642-68952-9)  by Michael J Beeson (Springer, 1980), page 281. 
 
-This quote is said to be a paraphrase of a letter from Peter Aczel
-to Beeson.
+This quote is said to be a paraphrase of a letter from [Peter Aczel](http://www.cs.man.ac.uk/~petera/)
+to [Michael Beeson](https://www.cs.sjsu.edu/faculty/beeson/).
 And the claim is that there is no need for the complicated proof of an identity
 to be preserved in the elements of identity types, merely the fact of the identity itself,
 which is trivial to check by calculation in any particular instance.
@@ -317,14 +321,13 @@ to apply a chain of identities without having to store any details.
 Unfortunately, sometime towards the end of the 1980s I learned that the equality types
 had been reformulated to destroy this erasing property and extensionality in general.
 Ever since (in every type theory I am familiar with), a fundamental distinction must be made
-between $n+0=n$ and $0+n=n$ on natural numbers: one will hold by definition
-but the other only by induction, and therefore a second class form of equality.
-This continues to be an obstacle to the use of dependent types in Lean
-because the types $T(n+0)$ and $T(0+n)$ are not the same.
+between $n+0=n$ and $0+n=n$ on natural numbers: one of them will hold by definition
+but the other only by induction. 
+In the latter case, the equality will forever be second class.
+A persistent limitation of dependent types is that 
+$T(n+0)$ and $T(0+n)$ are different types.
 
 I am pretty sure that the rules for the 
 [intensional identity type](https://www.pls-lab.org/en/Intensional_Type_Theory)
 could be entered in the Isabelle as straightforwardly as the other rules shown above.
-But I never tried.
-
-
+But I never saw the point of trying.
