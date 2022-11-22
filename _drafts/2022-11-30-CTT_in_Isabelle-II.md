@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Martin-Löf type theory in Isabelle, II"
+title:  "Martin-Löf type theory in Isabelle: examples"
 usemathjax: true
-tags: [Martin-Löf type theory, Isabelle, examples]
+tags: [Martin-Löf type theory, constructive logic, Isabelle, examples]
 ---
 
 The [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %})
@@ -146,95 +146,78 @@ but has there is no actual dependence, they degenerate to a function type:
 
 ### Watching proof objects emerge
 
+A key selling point of Martin-Löf type theory in the 1980s, at least to me,
+was that you got a proof object (a "construction") every time you proved
+a theorem ("type inhabitation"). Under the propositions-as-types interpretation,
+the type $A\times A\to A$ corresponds to the tautology $A\land A\to A$:
 
-<pre class="source">
-</pre>
+<img src="/images/CTT/split-in1.png" alt="proof object for split: input" height="44px" />
 
-<pre class="source">
-</pre>
+The proof above also uses repetition of the type formation, 
+introduction and elimination rules,
+but on this occasion with the special proof method `erule` for the elimination rules.
+We need to take more care when generating, rather than typing, proof objects.
 
-<pre class="source">
-</pre>
+<img src="/images/CTT/split-out1.png" alt="proof object for split: output" height="66px" />
 
-<pre class="source">
-</pre>
+The proof method solves the goal and instantiates the schematic variable `?a`
+with a proof object involving the Σ-type eliminator, `split`.
+We have synthesised the function to return the first component of an ordered pair.
 
-<pre class="source">
-</pre>
+<img src="/images/CTT/split-in2.png" alt="proof object for split: input" height="88px" />
 
-<pre class="source">
-</pre>
+What's cool is that if we reject this solution by backtracking, we get instead
+the function to return the *second* component of an ordered pair 
+(compare $\lambda x\,y.\,x$ and $\lambda x\,y.\,y$).
 
-<pre class="source">
-</pre>
+<img src="/images/CTT/split-out2.png" alt="proof object for split: output" height="66px" />
 
-<pre class="source">
-</pre>
+### The double negation of the excluded middle
 
+As far as I can tell, nobody in the type theory world took the slightest interest in this implementation. I gave it up as a bad job. The material distributed with Isabelle
+represents work that is 30 years old.
+However, those CTT experiments were the starting point
+of all the automation provided now for Isabelle/ZF and Isabelle/HOL.
 
-<pre class="source">
-</pre>
+Isabelle continued to evolve, and along the way, the [Isar language](https://isabelle.in.tum.de/Isar/) was introduced
+(by [Makarius Wenzel](https://sketis.net)).
+Since Isabelle is generic, improvements to the core system are inherited
+to all the logic instantiations.
+We get, for free, the ability to write structured Isar proofs in constructive type theory.
 
-<pre class="source">
-</pre>
+#### The double negation of the excluded middle
 
-<pre class="source">
-</pre>
+As everybody knows, the law of the excluded middle fails constructively.
+However, its double negation is an intuitionistic tautology.
+If $\neg(A\lor\neg A)$ then (since it implies $\neg A$) we obtain $A\lor\neg A$,
+a contradiction. This proof should be evident in the structured proof below:
 
-<pre class="source">
-</pre>
+<img src="/images/CTT/struct-LEM.png" alt="structured proof of LEM" height="230px" />
 
-<pre class="source">
-</pre>
+#### The axiom of choice
 
-<pre class="source">
-</pre>
+Martin-Löf gave a derivation of the axiom of choice as his sole example
+when he published his type theory.[^1]
+Although his proof is detailed, including the construction of the corresponding proof object,
+It was tricky to push through Isabelle.
+In the structured proof shown below, some echoes of his proof can be seen.
+This version, however, takes the proof object as given.
+It's possible to write a line by line proof from which this object emerges.
 
-### Automation of rewriting and type-checking
+[^1]: Per Martin-Löf, [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448). *Philosophical Transactions of the Royal Society of London*. Series A. **312**:1522 (1984), 501–518.
 
+<img src="/images/CTT/struct-AC.png" alt="structured proof of LEM" height="450px" />
 
-<pre class="source">
-</pre>
+I recall being told that the Isabelle/CTT formalisation was not faithful because
+the variables in contexts were bound when they were not bound variables in the writings of
+Martin-Löf. I can only imagine that the proof above will be viewed by some with horror.
+And yet the one derivation he himself supplied in that paper does not show a single context.
+It looks quite a bit like the machine proof above.
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
+### Final remarks
 
 
-
-
-But I was deeply taken by and devoted perhaps a year of intensive work in order to produce that nobody noticed:
-
-
-The problem was, for unification to be meaningful for Martin-Löf type theory, it had to take account of variable binding. Luckily, I had spent a couple of weeks with Huet at Inria. One day, he had taken me aside to explain higher-order unification.
-I probably understood only 2% of what he said, but something must have stuck in my mind.
-It was enough for me to locate and study [his paper on the topic](https://doi.org/10.1016/0304-3975(75)90011-0).
-It became clear that higher-order unification would indeed do the trick.
-
-
+The [CTT development](https://isabelle.in.tum.de/dist/library/Misc/CTT/CTT.html) contains both the Martin-Löf type theory rules
+presented in the [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %}) and a tiny development of elementary arithmetic:
+addition, multiplication, division and remainder.
+You can download the examples in this post (plus others) [here](/Isabelle-Examples/CTT_Examples.thy).

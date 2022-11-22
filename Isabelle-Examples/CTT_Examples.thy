@@ -29,23 +29,12 @@ schematic_goal "\<^bold>\<lambda>n. \<^bold>\<lambda>m. rec(n, m, \<lambda>x y. 
   done
 
 
-
-
-
 text "This finds the functions fst and snd!"
 
-schematic_goal [folded basic_defs]: "A type \<Longrightarrow> ?a : (A \<times> A) \<longrightarrow> A"
-apply pc
-done
-
-schematic_goal [folded basic_defs]: "A type \<Longrightarrow> ?a : (A \<times> A) \<longrightarrow> A"
-  apply pc
+schematic_goal "A type \<Longrightarrow> ?a : (A \<times> A) \<longrightarrow> A"
+  apply (rule intr_rls form_rls | erule elim_rls | assumption)+
   back
   done
-
-schematic_goal "\<lbrakk>A type; B type\<rbrakk> \<Longrightarrow> ?a : (A \<times> B) \<longrightarrow> (B \<times> A)"
-  apply pc
-done
 
 text "Double negation of the Excluded Middle"
 schematic_goal "A type \<Longrightarrow> ?a : ((A + (A\<longrightarrow>F)) \<longrightarrow> F) \<longrightarrow> F"
@@ -57,14 +46,14 @@ schematic_goal "A type \<Longrightarrow> ?a : ((A + (A\<longrightarrow>F)) \<lon
 
 (*Experiment: the proof above in Isar*)
 lemma
-  assumes "A type" shows "(\<^bold>\<lambda>x. x ` inr(\<^bold>\<lambda>y. x ` inl(y))) : ((A + (A\<longrightarrow>F)) \<longrightarrow> F) \<longrightarrow> F"
+  assumes "A type" shows "(\<^bold>\<lambda>f. f ` inr(\<^bold>\<lambda>y. f ` inl(y))) : ((A + (A\<longrightarrow>F)) \<longrightarrow> F) \<longrightarrow> F"
 proof intr
-  fix x
-  assume x: "x : A + (A \<longrightarrow> F) \<longrightarrow> F" 
-  with assms have "inr(\<^bold>\<lambda>y. x ` inl(y)) : A + (A \<longrightarrow> F)"
+  fix f
+  assume f: "f : A + (A \<longrightarrow> F) \<longrightarrow> F" 
+  with assms have "inr(\<^bold>\<lambda>y. f ` inl(y)) : A + (A \<longrightarrow> F)"
     by pc
-  then show "x ` inr(\<^bold>\<lambda>y. x ` inl(y)) : F" 
-    by (rule ProdE [OF x])
+  then show "f ` inr(\<^bold>\<lambda>y. f ` inl(y)) : F" 
+    by (rule ProdE [OF f])
 qed (rule assms)+
 
 text "Binary sums and products"
@@ -73,10 +62,6 @@ schematic_goal "\<lbrakk>A type; B type; C type\<rbrakk> \<Longrightarrow> ?a : 
   done
 
 (*A distributive law*)
-schematic_goal "\<lbrakk>A type; B type; C type\<rbrakk> \<Longrightarrow> ?a : A \<times> (B + C) \<longrightarrow> (A \<times> B + A \<times> C)"
-  by pc
-
-(*more general version, same proof*)
 schematic_goal
   assumes "A type"
     and "\<And>x. x:A \<Longrightarrow> B(x) type"
@@ -86,11 +71,6 @@ schematic_goal
   done
 
 text "Construction of the currying functional"
-schematic_goal "\<lbrakk>A type; B type; C type\<rbrakk> \<Longrightarrow> ?a : (A \<times> B \<longrightarrow> C) \<longrightarrow> (A \<longrightarrow> (B \<longrightarrow> C))"
-  apply pc
-  done
-
-(*more general goal with same proof*)
 schematic_goal
   assumes "A type"
     and "\<And>x. x:A \<Longrightarrow> B(x) type"
@@ -101,11 +81,6 @@ schematic_goal
   done
 
 text "Martin-Löf (1984), page 48: axiom of sum-elimination (uncurry)"
-schematic_goal "\<lbrakk>A type; B type; C type\<rbrakk> \<Longrightarrow> ?a : (A \<longrightarrow> (B \<longrightarrow> C)) \<longrightarrow> (A \<times> B \<longrightarrow> C)"
-  apply pc
-  done
-
-(*more general goal with same proof*)
 schematic_goal
   assumes "A type"
     and "\<And>x. x:A \<Longrightarrow> B(x) type"
@@ -113,11 +88,6 @@ schematic_goal
   shows "?a : (\<Prod>x:A . \<Prod>y:B(x) . C(<x,y>))
         \<longrightarrow> (\<Prod>z : (\<Sum>x:A . B(x)) . C(z))"
   apply (pc assms)
-  done
-
-text "Function application"
-schematic_goal "\<lbrakk>A type; B type\<rbrakk> \<Longrightarrow> ?a : ((A \<longrightarrow> B) \<times> A) \<longrightarrow> B"
-  apply pc
   done
 
 text "Basic test of quantifier reasoning"
@@ -149,12 +119,6 @@ schematic_goal
   shows "?a : (\<Prod>x:A. C(inl(x))) \<longrightarrow> (\<Prod>y:B. C(inr(y)))
           \<longrightarrow> (\<Prod>z: A+B. C(z))"
   apply (pc assms)
-  done
-
-(*towards AXIOM OF CHOICE*)
-schematic_goal [folded basic_defs]:
-  "\<lbrakk>A type; B type; C type\<rbrakk> \<Longrightarrow> ?a : (A \<longrightarrow> B \<times> C) \<longrightarrow> (A \<longrightarrow> B) \<times> (A \<longrightarrow> C)"
-  apply pc
   done
 
 

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Martin-Löf type theory in Isabelle, I"
+title:  "Martin-Löf type theory in Isabelle: formalisation"
 usemathjax: true
-tags: [Martin-Löf type theory, Isabelle]
+tags: [Martin-Löf type theory, Isabelle, constructive logic]
 ---
 
 Last July, [I described]({% post_url 2022-07-13-Isabelle_influences %})
