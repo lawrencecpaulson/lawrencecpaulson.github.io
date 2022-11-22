@@ -121,7 +121,27 @@ would have prevented this step and of course the corresponding term would be non
 
 That was straightforward but the proof is too long, especially as it's so repetitious.
 Even in 1986, I had figured out how to automate that sort of thing.
+Here is the exact same proof, but this time declared as an ordinary lemma
+(these don't allow schematic variables, so the type is filled in)
+and with the proof done by repetition.
 
+<img src="/images/CTT/typeinf-lemma.png" alt="type inference example input" height="46px" />
+
+### Type inference of the addition function
+
+The following example is much more complicated. 
+Addition of natural numbers is expressed using the eliminator for type `N`,
+which is a higher order primitive recursion combinator.
+Type inference here requires inferring the types of the zero and successor cases, which need to be the same, well-formed type.
+The task requires many steps, but they are routine and can be performed by a mindless
+repetition of the type formation, introduction and elimination rules.
+
+<img src="/images/CTT/typeinf-add-in.png" alt="type inference for addition: input" height="66px" />
+
+In this case, two Π-types are inferred (thanks to the use of λ), 
+but has there is no actual dependence, they degenerate to a function type:
+
+<img src="/images/CTT/typeinf-add-out.png" alt="type inference for addition:  output" height="66px"/>
 
 
 ### Watching proof objects emerge
