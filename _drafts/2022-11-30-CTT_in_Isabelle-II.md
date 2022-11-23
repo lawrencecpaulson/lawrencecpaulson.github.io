@@ -11,7 +11,7 @@ The ability to enter the rules in a notation as close as possible
 to the original papers and use them immediately for proofs was one of my key objectives
 for Isabelle in the 1980s.
 Now, through some tiny examples, let's see how terms can be built incrementally
-with the help of schematic variables and high-order unification.
+with the help of schematic variables and higher-order unification.
 Such terms can be proof objects, but they do not have to be.
 
 ###  Incremental term construction
@@ -35,8 +35,8 @@ with the type `N`:
 <img src="/images/CTT/typefm-out1.png" alt="type formation example output" height="70px" />
 
 We have the option of asking Isabelle to backtrack over its most recent choice.
-Prolog programmers will notice the similarity to responding to a Prolog output
-with a semicolon:
+Prolog programmers will notice the similarity to rejecting a Prolog output
+by typing a semicolon:
 
 <img src="/images/CTT/typefm-in2.png" alt="type formation example input" height="66px" />
 
