@@ -173,7 +173,7 @@ Finally, the equality rules describe how this `when` operator is evaluated:
 </pre>
 
 The rule for `Inr` is analogous. By the propositions-as-types principle,
-the disjoint union corresponds to disjunction and the elimination role in particular
+the disjoint union corresponds to disjunction and the elimination rule
 performs a logical case analysis.
  
 ### The disjoint union of a family of types
@@ -211,10 +211,11 @@ pair and delivers the separate components to the function `c`:
     </span><span class="main">⟹</span> split<span class="main">(</span><span class="main">&lt;</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">&gt;</span><span class="main">,</span> <span class="main">λ</span><span class="bound">x</span> <span class="bound">y</span><span class="main">.</span> <span class="bound">c</span><span class="main">(</span><span class="bound">x</span><span class="main">,</span><span class="bound">y</span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> <span class="bound">c</span><span class="main">(</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">)</span> <span class="main">:</span> <span class="bound">C</span><span class="main">(</span><span class="main">&lt;</span><span class="bound">a</span><span class="main">,</span><span class="bound">b</span><span class="main">&gt;</span><span class="main">)</span><span>"</span> 
 </pre>
 
-According to propositions-as-types, a ∑-type correspond to existential quantification.
+According to propositions-as-types, a ∑-type corresponds to existential quantification.
 If the family $B(x)$ is just one single type $B$,
 the ∑-type degenerates to the Cartesian product $A\times B$, 
-which correspond to logical conjunction.
+which corresponds to logical conjunction.
+It's remarkable how one type can do so much!
 
 
 ### The product of a family of types
