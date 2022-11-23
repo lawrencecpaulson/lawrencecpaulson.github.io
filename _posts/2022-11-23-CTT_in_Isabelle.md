@@ -144,7 +144,7 @@ An instance of this type is formed from two other types:
 </pre>
 
 The introduction rules for this type create values by injecting into the left part
-or right part, respectively. The type for the opposite part must be well formed:
+or right part, respectively. The type for the opposite part must be well-formed:
 
 
 <pre class="source">
@@ -230,9 +230,9 @@ The introduction rule forms an element of the ∏-type, given a *dependent funct
 the type of the result may depend on the value of the argument.
 The sort of people who (incorrectly) refer to a ∑-type as a dependent sum
 may refer to a ∏-type as a dependent product (also incorrectly), 
-although you can't count on this.
-If memory serves, the terminology used here is due to [Robert Constable](https://www.cs.cornell.edu/home/rc/), 
-who led the Nuprl project and wrote a lot of expository material about type theory. 
+although you can't count on consistency here.
+If memory serves, this terminology is due to [Robert Constable](https://www.cs.cornell.edu/home/rc/), 
+who led the [Nuprl project](https://www.nuprl.org) and wrote a lot of expository material about type theory. 
 If you find yourself getting confused, just refer to "Pi and Sigma types".
 
 <pre class="source">
@@ -247,14 +247,14 @@ and applies it to the given argument `a`. The result of this application has typ
   ProdE<span class="main">:</span>  <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="bound">p</span> <span class="main">:</span></span> <span class="main">∏</span><span class="bound">x</span><span class="main">:</span><span class="bound">A</span><span class="main">.</span> <span class="bound">B</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span class="main">;</span> <span class="bound">a</span> <span class="main">:</span></span> <span class="bound">A</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="bound">p</span><span class="main">`</span><span class="bound">a</span> <span class="main">:</span> <span class="bound">B</span><span class="main">(</span><span class="bound">a</span><span class="main">)</span><span>"</span> 
 </pre>
 
-The equality rule, given a well typed function application, applies the function to its argument.
+The equality rule, given a well-typed function application, applies the function to its argument.
 This corresponds to β-reduction in the λ-calculus.
 
 <pre class="source">
   ProdC<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="bound">a</span> <span class="main">:</span></span> <span class="bound">A</span><span class="main">;</span> <span class="main">⋀</span><span class="bound">x</span><span class="main">.</span> <span class="bound">x</span><span class="main">:</span></span><span class="bound">A</span> <span class="main">⟹</span> <span class="bound">b</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span> <span class="main">:</span> <span class="bound">B</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="main">(</span><span class="main"><span class="hidden">❙</span><strong>λ</strong></span><span class="bound">x</span><span class="main">.</span> <span class="bound">b</span><span class="main">(</span><span class="bound">x</span><span class="main">)</span><span class="main">)</span> <span class="main">`</span> <span class="bound">a</span> <span class="main">=</span> <span class="bound">b</span><span class="main">(</span><span class="bound">a</span><span class="main">)</span> <span class="main">:</span> <span class="bound">B</span><span class="main">(</span><span class="bound">a</span><span class="main">)</span><span>"</span> 
 </pre>
 
-According to propositions as types, a ∏-type correspond to universal quantification.
+According to propositions as types, a ∏-type corresponds to universal quantification.
 In its degenerate form (no dependence in $B$), it is the function type $A\to B$
 and the inference rules are precisely those for implication.
 In particular, the elimination rule is modus ponens.
@@ -262,7 +262,7 @@ In particular, the elimination rule is modus ponens.
 
 ### Equality types
 
-The equality (or identity) types mediate between equality judgments $a=b:A$ and ordinary membership judgments.
+The equality (or *identity*) types mediate between equality judgments $a=b:A$ and ordinary membership judgments.
 To form an equality type you need only a type $A$ and two expressions $a$ and $b$ belonging to type $A$.
 It expresses the proposition that $a$ and $b$ are equal when considered as elements of $A$.
 It is a principle of type theory that identity is regarded as being bound up with a type
@@ -319,15 +319,16 @@ to apply a chain of identities without having to store any details.
 ### Boom!
 
 Unfortunately, sometime towards the end of the 1980s I learned that the equality types
-had been reformulated to destroy this erasing property and extensionality in general.
-Ever since (in every type theory I am familiar with), a fundamental distinction must be made
+had been reformulated to destroy this erasing property: and extensionality in general.
+Ever since (in most type theories apparently), a fundamental distinction must be made
 between $n+0=n$ and $0+n=n$ on natural numbers: one of them will hold by definition
 but the other only by induction. 
-In the latter case, the equality will forever be second class.
-A persistent limitation of dependent types is that 
-$T(n+0)$ and $T(0+n)$ are different types.
+In the latter case, the equality will forever be second class,
+and $T(n+0)$ and $T(0+n)$ will be different types.
 
 I am pretty sure that the rules for the 
 [intensional identity type](https://www.pls-lab.org/en/Intensional_Type_Theory)
 could be entered in the Isabelle as straightforwardly as the other rules shown above.
 But I never saw the point of trying.
+
+Next week, we'll see the formalisation in action.
