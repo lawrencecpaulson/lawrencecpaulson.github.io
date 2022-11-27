@@ -120,9 +120,9 @@ would have prevented this step and of course the corresponding term would be non
 <img src="/images/CTT/typeinf-out4.png" alt="type inference example output" height="66px"/>
 
 That was straightforward but the proof is too long, especially as it's so repetitious.
-Even in 1986, I had figured out how to automate that sort of thing.
+Even in 1986, we could automate that sort of thing.
 Here is the exact same proof, but this time declared as an ordinary lemma
-(these don't allow schematic variables, so the type is filled in)
+(these don't allow schematic variables, so the type is already filled in)
 and with the proof done by repetition.
 
 <img src="/images/CTT/typeinf-lemma.png" alt="type inference example input" height="46px" />
@@ -130,7 +130,7 @@ and with the proof done by repetition.
 ### Type inference of the addition function
 
 The following example is much more complicated. 
-Addition of natural numbers is expressed using the eliminator for type `N`,
+Addition of natural numbers is expressed using the *eliminator* for type `N`,
 which is a higher order primitive recursion combinator.
 Type inference here requires inferring the types of the zero and successor cases, which need to be the same, well-formed type.
 The task requires many steps, but they are routine and can be performed by a mindless
@@ -172,7 +172,7 @@ the function to return the *second* component of an ordered pair
 
 <img src="/images/CTT/split-out2.png" alt="proof object for split: output" height="66px" />
 
-### The double negation of the excluded middle
+### Structured proofs in constructive type theory
 
 As far as I can tell, nobody in the type theory world took the slightest interest in this implementation. I gave it up as a bad job. The material distributed with Isabelle
 represents work that is 30 years old.
@@ -183,7 +183,7 @@ Isabelle continued to evolve, and along the way, the [Isar language](https://isa
 (by [Makarius Wenzel](https://sketis.net)).
 Since Isabelle is generic, improvements to the core system are inherited
 to all the logic instantiations.
-We get, for free, the ability to write structured Isar proofs in constructive type theory.
+We get, for free, the ability to write *structured Isar proofs* in constructive type theory.
 
 #### The double negation of the excluded middle
 
