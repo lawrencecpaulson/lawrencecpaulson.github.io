@@ -45,6 +45,9 @@ Also through Gardner I came across the [game of Nim](https://en.wikipedia.org/wi
 for which perfect play can be got by a simple algorithm. This may be
 the first decent program I ever wrote.
 
+I loved writing code. Once I had finished a program and it could no longer be improved, my task was to find some other project. 
+Presumably this is how I got into the frame of mind for doing research.
+
 ### Experiments with PDP-8 assembly language
 
 The [PDP-8](https://www.pdp8online.com) was a legendary minicomputer built by a legendary company,
@@ -88,13 +91,13 @@ During the four years I spent at Caltech, I went home every summer to work at a 
 called ICDC, Inc. They were an insurance premium finance house: 
 you could buy insurance on credit, with the policy as collateral.
 I learned how small business data processing was done during the 1970s.
-Every day, new accounts came in from fresh customers, along with payments on existing accounts.
+Every day, new accounts were opened and payments arrived for existing accounts.
 The transactions were keyed onto paper tape, then sorted and merged with the master file.
-Every day, letters went out: for the fresh customers, a welcome letter including
-little tear-off strips for each instalment, showing the amount, account number and due date.
-Other letters informed customers that they had missed a payment or payments,
-or were in default and their insurance would be cancelled.
-Those who were still owing would receive increasingly threatening
+Every day, letters went out: for the new customers, a welcome letter including
+tear-off coupons for each instalment, showing the amount, account number and due date.
+Other letters informed customers that they had missed a payment
+or were in default with their insurance cancelled.
+Those who were still owing despite the refunded premium would receive increasingly threatening
 letters from a pretend collection agency called World Wide Searchers.
 I was impressed by the office automation: the various letters came off the printer
 and were fed into machinery that stuffed envelopes automatically 
@@ -103,35 +106,42 @@ and stamped them with the correct postage.
 The computing environment was less impressive: a 
 [Varian 620/i](http://www.bitsavers.org/pdf/varian/620i/98A9902003C_620iSyRef_Mar69.pdf)
 with 16K of memory, several tape drives and several cartridge drives.
-There was no disc, and you could never count on all the tape drives being operational.
-Although the business language RPG was available,
+You could always count on some of the tape drives being out of action.
+There was no disc, and you had to become an expert on splicing paper tapes.
+Here too, the ASR-33 was king, and in this era of gigabit Internet in the home,
+consider that their transmission rate was only 110 baud, which is 9 million times slower.
+
+Although the business language RPG was available and was probably much more suitable,
 the programmers at ICDC had decided to hack the Fortran system so that REAL numbers
 were actually 32-bit integers, since you can't use floating-point for accounting purposes.
 Without going into details, let's just say the programming environment was delicate.
-If Edsger Dijkstra were to enter the machine room, he would probably perish within minutes.
+If [Edsger W Dijkstra](https://www.computer.org/profiles/edsger-dijkstra) were to enter the machine room, he would probably perish within minutes.
 
-During my first summer, an insurance group called Gateway went bankrupt.
-This caused a crisis: suddenly many of the loans lacked collateral.
+During my first summer, a major insurance group called Gateway went bankrupt.
+This was a crisis: suddenly a big chunk of loans lacked collateral.
 I was given the task of determining ICDC's exposure to Gateway and of generating letters
-to the affected customers informing them that they had to pay off the full balance
+to the affected customers informing them that they would have to pay off the full balance
 of their loans even though their insurance was gone
-(today it would be too bad for the lender) and that ICDC, Inc.
+(today it would be a haircut for the lender) and that ICDC, Inc.
 was prepared to refinance their existing balance and new insurance
 on generous terms.
 
-Just about every program they ran—and to run
-a program, you had to mount a tape holding its object code along with other tapes
-for its inputs and outputs—was nothing but a database query.
+To run a program, you had to mount a tape holding its object code along with other tapes
+for its inputs and outputs.
+(I also recall a small library of paper tapes but I have forgotten what they were for.)
+Just about every program they ran was nothing but a database query, 
+reading successive records from the master file and performing some action
+(such as printing a letter) for every record that satisfied certain criteria.
 Databases that could do these tasks were surely available by the 1970s
 and data processing services powered by mainframes probably could have
-replaced our team. As I discovered a few years later, this happened:
+replaced our team. As I discovered a few years later, this actually happened:
 something broke beyond repair and the company was forced temporarily
 to return to manual processing.
-But when I was there, rather than outsourcing their data processing needs,
-the company was building a small business software suite with the aim of taking in
+But when I was working there, rather than outsourcing their data processing needs,
+the company was building a small business software suite with the aim of satisfying
 the data processing needs of others. Something tells me they never got a single client.
 
 Academics are often urged to learn about the real world of industrial computing,
 but something tells me that the four summers I spent don't count.
-Yet I learned a lot.
+Yet I learned a lot. And I earned about $2.50 per hour.
 
