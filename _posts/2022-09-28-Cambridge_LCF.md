@@ -2,7 +2,7 @@
 layout: post
 title:  "Memories: Edinburgh LCF, Cambridge LCF, HOL88"
 usemathjax: true 
-tags: [general, Robin Milner, MJC Gordon, LCF, HOL system]
+tags: [general, Robin Milner, MJC Gordon, LCF, HOL system, memories]
 ---
 
 Just over 40 years ago, 2 February 1982, I arrived at Heathrow to take up a postdoc under Mike Gordon and Robin Milner to work on Edinburgh LCF.

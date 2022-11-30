@@ -2,9 +2,13 @@
 layout: post
 title:  "Memories: First exposure to computers"
 usemathjax: true
-tags: [general]
+tags: [general, memories]
 ---
 
+In *The Life and Games of Mikhail Tal*, the legendary former World Chess Champion
+mentioned his urge—when annotating his earliest games—to stretch out his hand
+to attach a question mark (indicating an error) to almost every move.
+That's how I feel about my early experiments.
 I must have been about 15 when I first touched a computer keyboard, an [ASR-33 teletype](https://en.wikipedia.org/wiki/Teletype_Model_33).
 Until then, my main hobby had been electronics: I built radios
 and owned a digital breadboard with a few flip-flops that could be
@@ -16,12 +20,7 @@ to have met David Hilbert, and he was never a schoolteacher in the USA.
 
 ### Experiments with BASIC
 
-In *The Life and Games of Mikhail Tal*, the legendary chess grandmaster
-commented on his urge—when annotating his earliest games—to stretch out his hand
-to attach a question mark (indicating an error) to almost every move.
-That's how I feel about my early experiments.
-
-BASIC is a terrible language, but there were no good alternatives back then.
+BASIC is a terrible language, but there were few alternatives back then.
 I had dial-up access to a 32K Hewlett-Packard minicomputer, and I got so obsessed
 I used to slip in for five minute sessions between classes. I learned how
 to get something out of the computer quickly.
@@ -42,7 +41,7 @@ the [Game of Life](https://conwaylife.com),
 invented by [John Conway](https://royalsocietypublishing.org/doi/10.1098/rsbm.2021.0034).
 I decided to do this in BASIC, using a small array and lots of nested loops.
 Also through Gardner I came across the [game of Nim](https://en.wikipedia.org/wiki/Nim),
-for which perfect play can be got by a simple algorithm. This may be
+for which perfect play can be had by a simple algorithm. This may be
 the first decent program I ever wrote.
 
 I loved writing code. Once I had finished a program and it could no longer be improved, my task was to find some other project. 
@@ -59,33 +58,33 @@ they finally gave in just to get her off the line.
 I am eternally grateful.
 These machines were less capable than the Hewlett-Packard model I could use at school,
 but they were right in front of me, panel lights, switches and everything.
-There was a DEC338 vector graphics display with a light pen.
+There was a [DEC 338](http://www.bitsavers.org/pdf/dec/graphics/338_Display_Brochure_1967.pdf)
+vector graphics display with a light pen.
 The hard disk could hold an immense 32K of 12-bit words and there was also a
 [DECtape drive](https://www.pdp8online.com/tu56/tu56.shtml).
 The two machines each had 8K of 12-bit words, which corresponds to 12K bytes of memory.
 Its cycle time of 1.5 µs would today be described as a clock rate of 667 kHz.
 
 Software included some sort of rudimentary operating system, 
-a programming language called [FOCAL-8](https://homepage.divms.uiowa.edu/~jones/pdp8/focal/)
+a BASIC-like programming language called [FOCAL-8](https://homepage.divms.uiowa.edu/~jones/pdp8/focal/)
 and minimal versions of Fortran and LISP.
 The luxurious [MACRO-8](https://www.grc.com/pdp-8/docs/macro-8_programming_manual.pdf)
 assembly language was also available. 
-It had to be [booted up manually](https://bigdanzblog.wordpress.com/2014/06/17/simh-pdp-8-manually-loading-the-rim-loader-the-binary-loader-and-an-application-from-paper-tape/) by keying instructions through the switches,
+The machine had to be [booted up manually](https://bigdanzblog.wordpress.com/2014/06/17/simh-pdp-8-manually-loading-the-rim-loader-the-binary-loader-and-an-application-from-paper-tape/) by keying instructions through the switches,
 then loading software via paper tape.
 
-
 I wrote a lot of code, most of it of no value,
-but I did learn how to program the light pen.
+but I did learn how floating-point arithmetic was implemented, how to program the light pen,
+and how code productively in assembler.
 I was even hired by a University of Pennsylvania Professor,
 [Ruzena Bajcsy](https://www2.eecs.berkeley.edu/Faculty/Homepages/bajcsy.html),
 to write a little program to transfer images
 from some device of hers to the mainframe upstairs.
 This was one of the very few times I was paid to write code.
 I believe that I got two dollars an hour. The minimum wage at that time was $1.65 an hour. 
-
 It was a privilege to gain experience with the PDP-8, a machine that [everybody loved](http://homepage.cs.uiowa.edu/~dwjones/pdp8/). 
 
-### My year in industry
+### My year in the finance industry
 
 During the four years I spent at Caltech, I went home every summer to work at a local company
 called ICDC, Inc. They were an insurance premium finance house: 
@@ -117,24 +116,27 @@ were actually 32-bit integers, since you can't use floating-point for accounting
 Without going into details, let's just say the programming environment was delicate.
 If [Edsger W Dijkstra](https://www.computer.org/profiles/edsger-dijkstra) were to enter the machine room, he would probably perish within minutes.
 
-During my first summer, a major insurance group called Gateway went bankrupt.
+During my first summer, a local insurance company called 
+[Gateway](https://www.nytimes.com/1974/11/23/archives/insurance-claims-against-gateway-to-be-paid-soon.html) went bankrupt.
 This was a crisis: suddenly a big chunk of loans lacked collateral.
 I was given the task of determining ICDC's exposure to Gateway and of generating letters
 to the affected customers informing them that they would have to pay off the full balance
 of their loans even though their insurance was gone
 (today it would be a haircut for the lender) and that ICDC, Inc.
-was prepared to refinance their existing balance and new insurance
+would be delighted to refinance their existing balance and new insurance
 on generous terms.
 
 To run a program, you had to mount a tape holding its object code along with other tapes
 for its inputs and outputs.
-(I also recall a small library of paper tapes but I have forgotten what they were for.)
-Just about every program they ran was nothing but a database query, 
-reading successive records from the master file and performing some action
-(such as printing a letter) for every record that satisfied certain criteria.
+(I also recall a small library of paper tapes.)
+Just about every program they ran was a simple loop and performed essentially a database query, 
+reading successive records from the master file and 
+for some of them, doing a basic action such as printing a letter.
+A more sophisticated programme would involve two nested loops.
 Databases that could do these tasks were surely available by the 1970s
 and data processing services powered by mainframes probably could have
-replaced our team. As I discovered a few years later, this actually happened:
+replaced our entire data processing department. 
+As I discovered a few years later, this actually happened:
 something broke beyond repair and the company was forced temporarily
 to return to manual processing.
 But when I was working there, rather than outsourcing their data processing needs,

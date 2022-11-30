@@ -2,7 +2,7 @@
 layout: post
 title:  "Sledgehammer: some history, some tips"
 usemathjax: true
-tags: general sledgehammer automation
+tags: general sledgehammer automation memories
 ---
 
 Sledgehammer is the subsystem that links Isabelle/HOL to automatic theorem provers like Vampire and Z3. It is so much part of the Isabelle user's everyday experience that it can be hard to remember a time before it was there. Let's see if I can dig up some memories, and also come up with some usage tips relevant today.

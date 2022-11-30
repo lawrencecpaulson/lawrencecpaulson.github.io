@@ -2,7 +2,7 @@
 layout: post
 title:  "Memories: Edinburgh ML to Standard ML"
 usemathjax: true
-tags: [general, Robin Milner, Standard ML]
+tags: [general, Robin Milner, Standard ML, memories]
 ---
 
 Dave MacQueen (with Robert Harper and John Reppy) has written a 100-page [History of Standard ML](https://doi.org/10.1145/3386336).
