@@ -132,7 +132,7 @@ for its inputs and outputs.
 Just about every program they ran was a simple loop and performed essentially a database query, 
 reading successive records from the master file and 
 for some of them, doing a basic action such as printing a letter.
-A more sophisticated programme would involve two nested loops.
+A more sophisticated program would involve two nested loops.
 Databases that could do these tasks were surely available by the 1970s
 and data processing services powered by mainframes probably could have
 replaced our entire data processing department. 
@@ -144,6 +144,6 @@ the company was building a small business software suite with the aim of satisfy
 the data processing needs of others. Something tells me they never got a single client.
 
 Academics are often urged to learn about the real world of industrial computing,
-but something tells me that the four summers I spent don't count.
+but probably the four summers I spent don't count.
 Yet I learned a lot. And I earned about $2.50 per hour.
 
