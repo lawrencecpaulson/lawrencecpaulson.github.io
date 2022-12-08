@@ -31,7 +31,7 @@ suggested by one of my teachers, using the formula
 $$ \pi/4 = 1−\frac{1}{3}+\frac{1}{5}−\frac{1}{7}+\cdots $$
 
 I think we used just the four terms above, which we pointlessly stored in an array before adding them, and I was disappointed with the result (about 2.9).
-The series converges as slowly as possible.
+The series converges more slowly than you can imagine.
 There are [better methods](https://cloud.google.com/blog/products/compute/calculating-100-trillion-digits-of-pi-on-google-cloud).
 
 As I was an avid fan of [Martin Gardner](https://martin-gardner.org)'s 
@@ -132,7 +132,7 @@ for its inputs and outputs.
 Just about every program they ran was a simple loop and performed essentially a database query, 
 reading successive records from the master file and 
 for some of them, doing a basic action such as printing a letter.
-A more sophisticated programme would involve two nested loops.
+A more sophisticated program would involve two nested loops.
 Databases that could do these tasks were surely available by the 1970s
 and data processing services powered by mainframes probably could have
 replaced our entire data processing department. 
@@ -144,6 +144,6 @@ the company was building a small business software suite with the aim of satisfy
 the data processing needs of others. Something tells me they never got a single client.
 
 Academics are often urged to learn about the real world of industrial computing,
-but something tells me that the four summers I spent don't count.
+but probably the four summers I spent don't count.
 Yet I learned a lot. And I earned about $2.50 per hour.
 
