@@ -83,7 +83,7 @@ $$
 
 Thus, we are free to use the excluded middle as much as we like provided the claim being proved is *negative*. 
 Many important results are positive: for example, both the [completensss theorem](https://plato.stanford.edu/entries/goedel/#ComThe)
-and [König's infinity lemma](https://en.wikipedia.org/wiki/Kőnig%27s_lemma)
+and [Kőnig's infinity lemma](https://en.wikipedia.org/wiki/Kőnig%27s_lemma)
 make non-constructive existential claims.
 Are any interesting statements negative? Here are some:
 
