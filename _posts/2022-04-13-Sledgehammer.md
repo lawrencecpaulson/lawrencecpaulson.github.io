@@ -40,7 +40,7 @@ Resolution provers were incredibly powerful, but earlier ideas to use theorem-pr
 
 Around that time, I had been using Isabelle to [verify cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205) (also [here](https://www.cl.cam.ac.uk/~lp15/papers/Auth/jcs.pdf)), with considerable success. I was quietly pleased to see an attempt to replicate my work using a Certain Other Ballyhooed System (not type theory based) fail utterly.
 There then appeared an automatic protocol verifier called
-[TAPS](https://doi.org/10.3233/JCS-2003-11203) (alternative [link](http://laser.inf.ethz.ch/2004/papers/cohen/paper2.pdf)).
+[TAPS](https://doi.org/10.3233/JCS-2003-11203) (alternative [link](/papers/Cohen-TAPS.pdf)).
 Its results were too good to be true, and I'm sorry to confess that I was suspicious. I asked the author, Ernie Cohen, a series of technical questions designed to find out whether TAPS really was giving the right answers.
 It was: Cohen possessed some sort of magic bullet. I could not understand his translation from protocol models to first-order logic. But I did note that his system proved theorems using [SPASS](https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/spass-workbench).
 

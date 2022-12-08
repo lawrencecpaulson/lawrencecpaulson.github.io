@@ -84,7 +84,7 @@ However, here we need large models, typically given by large cardinals.
 
 TG set theory is ZF set theory plus Tarski's axiom, which basically states that every set belongs to some Grothendieck universe.
 This axiom may sound unreasonably strong, since even the members of these universes imply the existence of further universes.
-However, set theorists are used to such assumptions. Through the gateway drug of an inaccessible cardinal (which guarantees the existence of one universe), set theorists have become addicted to a [vast pharmacopoeia](http://cantorsattic.info/Upper_attic) of unimaginably stronger assumptions. Tarski's axiom turns out to be pretty tame compared with the others.
+However, set theorists are used to such assumptions. Through the gateway drug of an inaccessible cardinal (which guarantees the existence of one universe), set theorists have become addicted to a [vast pharmacopoeia](http://neugierde.github.io/cantors-attic/Upper_attic) of unimaginably stronger assumptions. Tarski's axiom turns out to be pretty tame compared with the others.
 Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_Choice %}).
 
 ### The proof assistant Mizar

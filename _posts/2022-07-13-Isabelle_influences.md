@@ -124,7 +124,7 @@ Martin-Löf fans will note that the constant "true" above is serving as a *form 
 The two levels are also evident in Martin-Löf type theory, where "arities" govern the form of the arguments to a symbol such as $\Pi$ and are types in all but name. Moreover, $\Pi$ by itself is a function in the syntactic sense (it takes two arguments), but it certainly is not a function in MLTT.
 The exact same separation exists in Isabelle **except**
 in the case of Isabelle/HOL, where the [identification of
-meta-level types](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.386.6171) with higher-order logic types turns out to be
+meta-level types](https://www21.in.tum.de/~nipkow/pubs/lf91.html) with higher-order logic types turns out to be
 essential in order to make things work.
 
 [David Schmidt](https://people.cs.ksu.edu/~schmidt/), who was my fellow postdoc (1982–4) on an Edinburgh/Cambridge joint project on LCF, wrote some reports advocating the broader adoption of natural deduction.

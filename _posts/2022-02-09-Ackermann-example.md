@@ -169,7 +169,8 @@ I have published a [more thorough treatment](https://doi.org/10.1017/bsl.2021.47
 
 You'll find the Isabelle proof text at `src/HOL/Examples/Ackermann.thy` in your downloaded copy of Isabelle, and can also [browse it online](https://isabelle.in.tum.de/dist/library/HOL/HOL-Examples/Ackermann.html).
 
-The Isabelle/HOL libraries also contain a [formal proof](https://isabelle.in.tum.de/dist/library/HOL/HOL-ex/Primrec.html)  that Ackermann's function is not primitive recursive. The set of primitive recursive functions is defined inductively and the development is straightforward.
+The Isabelle/HOL libraries also contain a [formal proof](https://www.isa-afp.org/entries/Ackermanns_not_PR.html)  
+that Ackermann's function is not primitive recursive. The set of primitive recursive functions is defined inductively and the development is straightforward.
 
 Finally, see [Rosetta code](https://rosettacode.org/wiki/Ackermann_function) for implementations of Ackermann's function in hundreds of programming languages, such as SNOBOL4.
 
