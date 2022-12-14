@@ -5,7 +5,7 @@ usemathjax: true
 tags: [general, jEdit, LCF]
 ---
 
-The era of the modern user interface can be dated from 1973, when the legendary Xerox
+The era of the modern user interface can be dated from 1973, when the legendary
 [Palo Alto Research Center](https://www.parc.com) (PARC) announced the 
 [Xerox Alto](https://www.computerhistory.org/revolution/input-output/14/347).
 Its unique combination of windows, icons, menus and a pointer (i.e. mouse)
@@ -18,7 +18,8 @@ Specific suggestions were made: above all, to let people select a subexpression
 and a rewrite rule in order to transform it.
 This is actually a dumb idea, since the computer can match rewrite rules to subexpressions 
 automatically and apply them a thousand times per second. 
-Verification is difficult because formal proofs tend to be extremely long
+Verification is hard because specifications can be complex,
+formal proofs tend to be extremely long
 and the formalisation of intuitive mathematical ideas often requires great ingenuity.
 It's not obvious what a mouse can do for you here.
 Forty years on, we have a clearer idea what a good user interface can do for verification,
@@ -27,21 +28,21 @@ but the situation is by no means settled.
 ### LCF and its metalanguage
 
 Robin Milner's key insight in his design of Edinburgh LCF—as noted [previously]({% post_url 2022-09-28-Cambridge_LCF %})—was that no fixed
-set of commands could offer an adequate user experience when formal proofs
-tended to include "common patterns of inferences"
+set of commands could offer an adequate user experience.
+Formal proofs tended to include "common patterns of inferences"
 that couldn't easily be captured by any fixed command set.
 Hence, interaction with LCF should take place through a fully fledged programming language,
-which he called ML to abbreviate "metalanguage".
+which Robin called ML to abbreviate "metalanguage".
 This metalanguage could itself be seen as a kind of user interface.
 
 Actual interaction with LCF and its descendants such as HOL involved the crudest possible
 user interface: a split [Emacs](https://en.wikipedia.org/wiki/Emacs) window 
 with the top pane containing the proof being developed
 and the bottom pane a UNIX shell running the theorem prover.
-People rolled their own macros to streamline the step of copying material from the proof
+People wrote Emacs macros to streamline the step of copying material from the proof
 into the prover and executing it.
 Such habits persisted even after the 
-[X Window System](https://en.wikipedia.org/wiki/X_Window_System) became available;
+[X Window System](https://en.wikipedia.org/wiki/X_Window_System) became available:
 I can still remember Mike Gordon allowing a single Emacs window to take up his entire screen
 (and he liked really big screens).
 We got a lot of criticism from people who insisted that we should be using WIMP
@@ -50,7 +51,7 @@ ideas much more.
 I have even heard people claim that doing a machine proof
 should resemble playing a computer game. This is absolutely the wrong metaphor.
 The killer apps of the modern WIMP interface involve the creation of **documents**:
-spreadsheets and word processors are as valuable to Microsoft as Windows.
+spreadsheets and word processors are as valuable to Microsoft as Windows is.
 User interaction with a proof assistant must likewise yield a document, namely a proof script.
 This script needs to be at least maintainable, if not actually legible,
 with no requirement to spend countless hours playing through the "game" all over again.
@@ -67,7 +68,7 @@ can be undone. An internal protocol communicates between Proof General and the p
 Access to other prover features can also be provided through menus.
 
 The name Proof General emphasises that this interface is intended to work
-with a variety of proof assistants. For quite some years it was the only way
+with a variety of proof assistants. For years it was the only way
 to use Isabelle, until jEdit came along.
 It still supports Coq and has in the past supported a dozen other tools. 
 
@@ -114,7 +115,7 @@ with a request expressed in natural language:
 * "How can I make the indexing of these two summations match up?"
 * "How can I show that this function is continuous?"
 
-The reply itself might be a natural language, suggesting a proof strategy,
+The reply might itself be in natural language, suggesting a proof strategy,
 or perhaps it could be bit of proof script, or a skeleton.
 AI-powered proof completion, analogous to 
 [GitHub Copilot](https://github.blog/2022-06-21-github-copilot-is-generally-available-to-all-developers/),
