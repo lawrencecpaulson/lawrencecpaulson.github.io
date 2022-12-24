@@ -30,8 +30,8 @@ Can we do better?
 The most important fact about the non-standard real numbers (*hyperreals*) is that they satisfy **exactly the same** first-order axioms as the standard real numbers.
 That is literally what ["non-standard model"](https://plato.stanford.edu/entries/model-theory) means: fixing a particular set of axioms, then choosing a model other than the obvious one.
 Models of arbitrarily large cardinality are guaranteed to exist by [upward Löwenheim–Skolem theorem](https://en.wikipedia.org/wiki/Löwenheim–Skolem_theorem).
-The hyperreals contain infinitesimals and infinities, but they satisfy the usual first-order axioms for a complete ordered field.
-So how can we even know they are there?
+The hyperreals contain infinitesimals and infinities, but they satisfy the usual first-order axioms for an ordered field.
+So how can we even know that those infinitesimals are there?
 
 In order to make use of our richer domain, we need to enrich our vocabulary.
 
@@ -41,7 +41,7 @@ In order to make use of our richer domain, we need to enrich our vocabulary.
 * every finite hyperreal $x$ has a *standard part* $\textrm{st}(x)\in\mathbb{R}$ with $x\approx\textrm{st}(x)$
 
 There's not enough space here to go through everything. Suffice it to say that things work reasonably. The infinite numbers turn out to be the reciprocals of nonzero infinitesimals.
-Division by zero is still undefined, not ``infinity''. If two quantities are infinitely close then so are the results if you add or multiply them by the same thing. It's all coherent, while at the same time we can construct the infinitesimal $\epsilon$ as well as its (infinite) reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
+Division by zero is still undefined, not ``infinity''. If two quantities are infinitely close then so are the results if you add them to the same thing (or multiply them by the same **finite** thing). It's all coherent, while at the same time we can construct the infinitesimal $\epsilon$ as well as its (infinite) reciprocal $\omega$ such that $\lvert\epsilon\rvert<1/n$ and $n<\omega$ for all natural numbers $n$.
 We get a limitless supply of infinitesimals and infinities.
 
 "What do you mean, *construct*?"
@@ -101,4 +101,4 @@ Instead, sadly, the Isabelle/HOL theory of the hyperreals lies neglected.
 I live in hope that somebody will decide to give it a try, if only out of curiosity.
 [Bair et al. claim](https://rdcu.be/cSXiN) that infinitesimals, on their current rigorous basis, are still the best framework for understanding Euler's work.
 
-
+*Corrected 24-12-2022 in response to comments by Pedro Sánchez Terraf.*
