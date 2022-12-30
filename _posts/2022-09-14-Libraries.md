@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Porting Libraries of Mathematics Between Proof Assistants"
+title:  "Porting libraries of mathematics between proof assistants"
 usemathjax: true 
 tags: [general, Isabelle, Archive of Formal Proofs, HOL system, HOL Light, Coq]
 ---
