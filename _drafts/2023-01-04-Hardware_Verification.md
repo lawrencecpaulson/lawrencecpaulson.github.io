@@ -33,35 +33,104 @@ I said I would prefer to follow my own path (which at the time meant
 the automation of type theory), and it's intriguing to speculate what 
 might have happened if I had said yes. 
 We never published a single joint paper.
-Gordon's fundamental discovery, which he had worked towards methodically
+
+Mike's fundamental discovery, which he had worked towards methodically
 for a decade, was that hardware circuits could be modelled easily
-using higher order logic. And his approach worked exactly the same
+[using higher order logic](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-77.html). 
+And his approach worked exactly the same
 whether the components being combined for individual transistors
 or were built of thousands of transistors.
 
 His idea was simply this: 
 
-* every device modelled by a **relation** on its ports
+* every device modelled by a **relation** on its ports, describing which combinations of port values are possible
 * no distinction between inputs and outputs
 * port values could be **anything**: bits, words, vectors, functions (for time-indexed signals)
-* relation describing which combinations of port values are possible
+* all in a standard formalism, **higher-order logic**
 
+Here is a device with four ports. We may imagine that $a$ and $b$ are the
+inputs and $c$ and $d$ are the outputs, but this is not modelled.
 
 <img src="/images/hw-device.png" alt="hardware device" width="200"/>
 
+The simplest devices include power and ground (represented by T and F),
+and transistors, such as the following N-channel:
+
 <img src="/images/transistor.png" alt="n-channel transistor" width="200"/>
+
+Here we see why the relational model is ideal. The formula for this
+transistor is $g\to d=s$ and while $g$ is obviously an input, 
+$d$ and $s$ cannot be called either inputs or outputs.
+
+### Building circuits from components
+
+The following figure shows two devices connected by a wire.
+Such a connection forces the corresponding ports to have the same value,
+while the other ports each device are constrained by that device alone;
+we specify this by the conjunction of the two formulas, identifying the
+connected ports.
+Now suppose that we wish to hide the connected ports (or indeed any ports).
+Hiding means the port is no longer visible and can be accomplished by
+existential quantification over the corresponding variable
+(since some value certainly "exists").
+
+<img src="/images/compose-devices.png" alt="composing devices" width="800"/>
+
+So here is the plan for verifying any hardware device.
+We *specify* it by a formula Spec over the variables $a$, $b$, $c$, $d$ 
+describing the behaviour we want.
+We *implement* it by means of a circuit consisting of simpler components;
+from this implementation and the specifications of the simpler components,
+we obtain (as described above) a formula Imp for the behaviour delivered by the implementation.
+Then the formula Imp$\to$Spec expresses (for $a$, $b$, $c$, $d$)
+that every behaviour exhibited by the implementation is allowed by the 
+specification. Now, just prove it.
+We can go on to implement the simpler components in terms of even simpler
+ones, for development by refinement.
+
+### Short circuits and other issues
+
+The simplicity of this modelling approach is obvious, but is it too simple?
+Mike always called Imp$\to$Spec *partial correctness* (which for software
+verification refers to correctness under the assumption of termination)
+because it degenerates to triviality in the presence of a *short circuit*:
+an implementation that connects power to ground (because Imp itself would
+then be F). While nobody would create a short circuit on purpose, it's not
+hard to imagine a combination of transistors that could produce one for
+certain inputs. Given such an input, a real-life implementation would melt,
+but at least it wouldn't deliver the wrong answer! 
+Mike Fourman suggests addressing this 
+issue by proving "termination" through some formula of the form $\forall\exists$Imp,
+asserting that **every** combination of "inputs" (as we regard them)
+can be satisfied by some values on the remaining ports.
+An [early paper](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-91.html) 
+devotes its final section to this issue.
+
+That aside, every hardware designer can easily see that these models
+ignore many important design criteria: fan-out (the number of inputs that can be driven by an output), gate delays, capacitance effects, overheating.
+Designers must continue to rely on their other tools to deal with those, 
+relying on verification for the logical functionality alone.
+Mike's models have held up well, while more elaborate models
+such as
+[Glunn Winskel's](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-105.html) 
+(incorporating signal strength) seem not to have caught on.
 
 In a [previous post]({% post_url 2022-07-27-Truth_Models %})
 I stated some general principles about modelling.
+To repeat: models approximate reality, focussing on some particular aspect
+(in this case, logic) that we need to reason about.
+Models need to be simple enough that we can understand them, which 
+also means understanding what they can't do.
 
 ### Postscript
 
 I have written a [scientific biography](http://doi.org/10.1098/rsbm.2018.0019) 
 of Mike Gordon (also [here](https://arxiv.org/abs/1806.04002))
-covering his discovery of hardware models, among much else. 
-He never mentioned the thesis of
-Todd Wagner and doesn't appear to have cited it either.
-Mike's simple hardware models have held up well, while Glynn Winskel's
-[more detailed models](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-105.html) 
-(incorporating signal strength) seem not to have caught on.
-
+outlining the history of his work on hardware verification, among much else. 
+It's interest that Todd Wagner also suggested using logic, but only
+first-order logic. Mike never mentioned Wagner to me and 
+[doesn't cite him](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-91.html) either.
+And what about software verification?
+Mike told me that it's clearly much more difficult than hardware, 
+where interfaces are simple and large devices often consist of a few
+component types, massively replicated.
