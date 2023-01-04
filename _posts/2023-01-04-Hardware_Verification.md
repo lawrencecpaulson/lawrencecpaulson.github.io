@@ -34,7 +34,7 @@ the automation of type theory), and it's intriguing to speculate what
 might have happened if I had said yes. 
 We never published a single joint paper.
 
-Mike's fundamental discovery, which he had worked towards methodically
+Mike's fundamental discovery, which he had [worked towards methodically](https://arxiv.org/abs/1806.04002)
 for a decade, was that hardware circuits could be modelled easily
 [using higher order logic](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-77.html). 
 And his approach worked exactly the same
@@ -43,7 +43,7 @@ or were built of thousands of transistors.
 
 His idea was simply this: 
 
-* every device modelled by a **relation** on its ports, describing which combinations of port values are possible
+* every device modelled by a **relation** on its ports, describing which combinations of port values were possible
 * no distinction between inputs and outputs
 * port values could be **anything**: bits, words, vectors, functions (for time-indexed signals)
 * all in a standard formalism, **higher-order logic**
@@ -65,14 +65,16 @@ $d$ and $s$ cannot be called either inputs or outputs.
 ### Building circuits from components
 
 The following figure shows two devices connected by a wire.
-Such a connection forces the corresponding ports to have the same value,
-while the other ports each device are constrained by that device alone;
+The connected ports must have the same value,
+while the other ports of each device are constrained by that device alone;
 we specify this by the conjunction of the two formulas, identifying the
 connected ports.
 Now suppose that we wish to hide the connected ports (or indeed any ports).
-Hiding means the port is no longer visible and can be accomplished by
+Hiding means the port is no longer available for connection.
+It's accomplished by
 existential quantification over the corresponding variable
 (since some value certainly "exists").
+Relational composition in mathematics is done in exactly the same way.
 
 <img src="/images/compose-devices.png" alt="composing devices" width="800"/>
 
@@ -90,8 +92,8 @@ ones, for development by refinement.
 
 ### Short circuits and other issues
 
-The simplicity of this modelling approach is obvious, but is it too simple?
-Mike always called Imp$\to$Spec *partial correctness* (which for software
+This modelling approach is obviously simple, but is it too simple?
+Mike called Imp$\to$Spec *partial correctness* (which for software
 verification refers to correctness under the assumption of termination)
 because it degenerates to triviality in the presence of a *short circuit*:
 an implementation that connects power to ground (because Imp itself would
@@ -108,11 +110,11 @@ devotes its final section to this issue.
 
 That aside, every hardware designer can easily see that these models
 ignore many important design criteria: fan-out (the number of inputs that can be driven by an output), gate delays, capacitance effects, overheating.
-Designers must continue to rely on their other tools to deal with those, 
+Designers must continue to rely on their other tools to deal with those issues, 
 relying on verification for the logical functionality alone.
 Mike's models have held up well, while more elaborate models
 such as
-[Glunn Winskel's](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-105.html) 
+[Glynn Winskel's](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-105.html) 
 (incorporating signal strength) seem not to have caught on.
 
 In a [previous post]({% post_url 2022-07-27-Truth_Models %})
