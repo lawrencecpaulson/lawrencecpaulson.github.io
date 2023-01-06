@@ -46,7 +46,7 @@ which led to [severe funding cuts](https://en.wikipedia.org/wiki/AI_winter) in b
 
 ### Stanford AI Lab, 1977
 
-In the 1970s, the Stanford AI Lab (SAIL) was located some distance
+In the 1970s, the [Stanford AI Lab](https://web.stanford.edu/~learnest/sail/)(SAIL) was located some distance
 from the main campus, in the DC Power Building, a wooden semicircular structure that was slowly decaying. I can't recall precisely why I used to
 go there, since I wasn't doing AI. 
 But it was well worth the half hour bike ride.
@@ -75,13 +75,13 @@ from other sites on the ARPAnet (that's another story).
 
 [John McCarthy](https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)), 
 the legendary inventor of Lisp, was the scientific director, 
-with Lester Earnest as manager.
+with [Lester Earnest](https://web.stanford.edu/~learnest/) as manager.
 Strangely enough, McCarthy was only 50 when I arrived,
-but seemed to have left research largely behind him,
+but seemed to have left research behind him,
 and I'm left with the impression that his main interest was
 the promotion of nuclear power.
-But exciting things were happening, including the robot shaky
-and other robotics work. 
+But exciting things were happening, 
+[especially in robotics](https://news.stanford.edu/2019/01/16/stanfords-robotics-legacy/). 
 Key researchers including Mike Gordon and Robin Milner
 also spent time there.
 
@@ -105,10 +105,13 @@ With machine learning we do not need the laborious manual curation
 date and can work with vastly larger knowledge sources,
 but lose this accountability.
 
+### Is theorem proving AI?
 
+[Logic Theorist](https://en.wikipedia.org/wiki/Logic_Theorist), 
+regarded by many as the very first AI program, was designed
+to prove theorems from Whitehead and Russell's *[Principia Mathematica](https://www.cambridge.org/gb/academic/subjects/mathematics/logic-categories-and-sets/principia-mathematica-56-2nd-edition)*.
 
-
- 
+Hao Wang. [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002).
 
 [survey of early AI](https://projects.csail.mit.edu/films/aifilms/AIFilms.html)
 
@@ -123,3 +126,9 @@ he wrote in response to the Lighthill Report.
 > Artificial Intelligence is a rather pernicious label to attach to a very mixed bunch of activities, and one could argue that the sooner we forget it the better. It would be disastrous to conclude that AI was a Bad Thing and should not be supported, and it would be disastrous to conclude that it was a Good Thing and should have privileged access to the money tap. The former would tend to penalise well-based efforts to make computers do complicated things which had not been programmed before, and the latter would be a great waste of resources. AI does not refer to anything definite enough to have a coherent policy about in this way.
 
 The term AI still refers to a very mixed bunch of things.
+
+[Paper by Darwiche](https://doi.org/10.1145/3271625)
+also [here](https://arxiv.org/abs/1707.04327)
+
+
+
