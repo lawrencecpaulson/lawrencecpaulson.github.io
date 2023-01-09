@@ -91,6 +91,7 @@ also spent time there.
 Robin created [Stanford LCF](https://apps.dtic.mil/sti/pdfs/AD0785072.pdf),
 which [as described elsewhere]({% post_url 2022-09-28-Cambridge_LCF %}) later became Edinburgh LCF, 
 the first modern proof assistant.
+Robin returned to give a seminar on ML, which I attended, only to ask an extremely stupid question.
 
 [^2]: To be fair, his [DBLP page](https://dblp.org/pid/m/JohnMcCarthy.html) shows a continuous record of publications up to 2009.
 
@@ -145,14 +146,14 @@ with so many people applying machine learning to it.
 
 ### Postscript
 
-When I arrived at the computer laboratory in 1982, its Head
-was Prof Roger Needham. I was amused to stumble upon 
-[some comments](http://www.chilton-computing.org.uk/inf/literature/reports/lighthill_report/p003.htm) 
-he wrote in response to the Lighthill Report.
+I was amused to stumble upon 
+[Roger Needham's response](http://www.chilton-computing.org.uk/inf/literature/reports/lighthill_report/p003.htm) 
+to the Lighthill Report.
 
 > Artificial Intelligence is a rather pernicious label to attach to a very mixed bunch of activities, and one could argue that the sooner we forget it the better. It would be disastrous to conclude that AI was a Bad Thing and should not be supported, and it would be disastrous to conclude that it was a Good Thing and should have privileged access to the money tap. The former would tend to penalise well-based efforts to make computers do complicated things which had not been programmed before, and the latter would be a great waste of resources. AI does not refer to anything definite enough to have a coherent policy about in this way.
 
-The term AI still refers to a very mixed bunch of things.
+Roger could always see to the heart of any matter. 
+"AI" still refers to a very mixed bunch of things.
 This thoughtful 
 [paper](https://doi.org/10.1145/3271625) 
 (also [here](https://arxiv.org/abs/1707.04327))
@@ -160,5 +161,5 @@ considers the relationship between the exciting progress
 accomplished using neural networks and more classical AI techniques.
 And there's an interesting
 [survey of early AI](https://projects.csail.mit.edu/films/aifilms/AIFilms.html).
-
+See also this [1969-1974 Stanford AI Lab photo album](https://www.saildart.org/allow/saildart_pix_1974/).
 
