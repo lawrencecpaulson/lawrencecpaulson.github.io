@@ -9,7 +9,7 @@ These days, artificial intelligence (AI) is synonymous with machine learning (ML
 but old-timers can remember when symbolic approachs were king,
 with the wonderful acronym [GOFAI](https://en.wikipedia.org/wiki/GOFAI).
 I was at Stanford University from 1977 until 1982, and can vividly recall
-the unique atmosphere of the Stanford AI Lab at that time.
+the unique atmosphere of the Stanford Artificial Intelligence Laboratory.
 
 ### AI in the 1960s
 
@@ -84,8 +84,11 @@ Strangely enough, McCarthy was only 50 when I arrived,
 but seemed to have left research behind him,[^2]
 and I was left with the impression that his main interest was
 the promotion of nuclear power.
-But exciting things were happening, 
-[especially in robotics](https://news.stanford.edu/2019/01/16/stanfords-robotics-legacy/). 
+But exciting things were happening.
+Donald Knuth released the [first version of TeX](/papers/Knuth-TEX.pdf), 
+written in [SAIL's eponymous programming language](https://exhibits.stanford.edu/ai/catalog/np036rx9092) (a heavily extended Algol).
+Early [robots](https://news.stanford.edu/2019/01/16/stanfords-robotics-legacy/)
+were put through their paces. 
 Key researchers, including Mike Gordon and Robin Milner,
 also spent time there.
 Robin created [Stanford LCF](https://apps.dtic.mil/sti/pdfs/AD0785072.pdf),
