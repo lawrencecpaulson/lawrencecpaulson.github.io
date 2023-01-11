@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Memories: artificial intelligence at Stamford in the 70s"
+title:  "Memories: artificial intelligence at Stanford in the 70s"
 usemathjax: true 
 tags: [memories,LCF,Stanford]
 ---
