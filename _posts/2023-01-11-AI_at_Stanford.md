@@ -104,7 +104,7 @@ Robin returned to give a seminar on ML, which I attended, only to ask an extreme
 
 ### Expert systems
 
-AI has a field seems particularly prone to schisms.
+AI as a field seems particularly prone to schisms.
 [Expert systems](http://i.stanford.edu/pub/cstr/reports/cs/tr/81/837/CS-TR-81-837.pdf) 
 work at Stanford was, as far as I could tell,
 entirely separate from McCarthy's world, and not even conducted
@@ -159,7 +159,8 @@ to the Lighthill Report.
 
 > Artificial Intelligence is a rather pernicious label to attach to a very mixed bunch of activities, and one could argue that the sooner we forget it the better. It would be disastrous to conclude that AI was a Bad Thing and should not be supported, and it would be disastrous to conclude that it was a Good Thing and should have privileged access to the money tap. The former would tend to penalise well-based efforts to make computers do complicated things which had not been programmed before, and the latter would be a great waste of resources. AI does not refer to anything definite enough to have a coherent policy about in this way.
 
-Roger could always see to the heart of any matter. 
+[Roger](https://www.cl.cam.ac.uk/archive/ksj21/RogerNeedhamMemoir.pdf) 
+could always see to the heart of any matter. 
 "AI" still refers to a very mixed bunch of things.
 This thoughtful 
 [paper](https://doi.org/10.1145/3271625) 
