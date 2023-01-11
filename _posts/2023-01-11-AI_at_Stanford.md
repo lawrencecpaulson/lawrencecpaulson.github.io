@@ -5,10 +5,11 @@ usemathjax: true
 tags: [memories,LCF,Stanford]
 ---
 
-These days, artificial intelligence (AI) is synonymous with machine learning (ML),
-but old-timers can remember when symbolic approachs were king,
-with the wonderful acronym [GOFAI](https://en.wikipedia.org/wiki/GOFAI).
-I was at Stanford University from 1977 until 1982, and can vividly recall
+These days, artificial intelligence (AI) is synonymous with neural networks
+and machine learning (ML),
+but old-timers can remember when symbolic approachs were king:
+we now have the wonderful acronym [GOFAI](https://en.wikipedia.org/wiki/GOFAI).
+I was at Stanford University from 1977 until 1982 and can vividly recall
 the unique atmosphere of the Stanford Artificial Intelligence Laboratory.
 
 ### AI in the 1960s
@@ -31,9 +32,11 @@ that it was largely bogus:
 [^1]: MIT's computing department was at that time called [Project MAC](https://en.wikipedia.org/wiki/MIT_Computer_Science_and_Artificial_Intelligence_Laboratory#Project_MAC): it's a mystery how they never heard from the McDonald's legal department.
 
 The film *2001: A Space Odyssey* had come out in 1968, envisaging
-that within 32 years, computers would be capable of carrying out intelligent dialogue. One of its scientific advisers was MIT's
+that within 32 years, computers would be capable of carrying out intelligent dialogue
+(and committing murder). 
+One of its scientific advisers was MIT's
 [Marvin Minsky](https://en.wikipedia.org/wiki/Marvin_Minsky),
-the de facto leader of the AI community.
+the de facto leader of the global AI community.
 
 I had the opportunity attend MIT, having been offered an 
 undergraduate place in 1973.
@@ -44,7 +47,8 @@ The year 1973 also saw the highly critical
 in Britain, 
 which led to [severe funding cuts](https://en.wikipedia.org/wiki/AI_winter) in both the USA and the UK.
 MIT philosopher Hubert Dreyfus published his influential 
-[critique of AI](https://en.wikipedia.org/wiki/Hubert_Dreyfus%27s_views_on_artificial_intelligence).
+[critique of AI](https://en.wikipedia.org/wiki/Hubert_Dreyfus%27s_views_on_artificial_intelligence)
+(at least, the prevailing practice of AI).
 
 ### Stanford AI Lab, 1977
 
@@ -54,7 +58,7 @@ from the main campus, in the DC Power Building, a wooden semicircular structure 
 go there, since I wasn't doing AI. 
 But it was well worth the half hour bike ride. It had a unique vibe.
 
-It had one of the world's first laser printers, then called the XGP
+It had one of the world's first laser printers, called the XGP
 (Xerox Graphics Printer). It was the size of a refrigerator and printed
 on thermal paper that came in rolls. It cut the paper
 into pages using an automatic guillotine, and the last page was typically
@@ -62,7 +66,7 @@ a little strip (waste not want not). This printer supported Stanford's
 [modified version](https://en.wikipedia.org/wiki/Stanford_Extended_ASCII) of the ASCII character set,
 extended with logical and mathematical symbols. 
 An ancient line printer also supported this character set—its outstanding
-quality can be seen in the text of this report—and somehow the weird green terminals did too.
+quality can be seen in the text of [this report](https://apps.dtic.mil/sti/pdfs/AD0785072.pdf)—and somehow the weird green terminals did too.
 
 A PDP-10 ran a bespoke operating system based on an old version of DEC's
 [TOPS-10](https://en.wikipedia.org/wiki/TOPS-10). 
@@ -75,7 +79,7 @@ in source form, unthinkable now.
 The advantages of rolling your own OS
 had to be weighed against the security updates they didn't get,
 which already in the 1970s left them vulnerable to hacker 
-attacks from across the ARPAnet (that's another story).
+attacks from across the ARPAnet. That's another story.
 
 [John McCarthy](https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)), 
 the legendary inventor of Lisp, was the scientific director, 
@@ -89,7 +93,7 @@ Donald Knuth released the [first version of TeX](/papers/Knuth-TEX.pdf),
 written in [SAIL's eponymous programming language](https://exhibits.stanford.edu/ai/catalog/np036rx9092) (a heavily extended Algol).
 Early [robots](https://news.stanford.edu/2019/01/16/stanfords-robotics-legacy/)
 were put through their paces. 
-Key researchers, including Mike Gordon and Robin Milner,
+Key verification researchers, including Mike Gordon and Robin Milner,
 also spent time there.
 Robin created [Stanford LCF](https://apps.dtic.mil/sti/pdfs/AD0785072.pdf),
 which [as described elsewhere]({% post_url 2022-09-28-Cambridge_LCF %}) later became Edinburgh LCF, 
