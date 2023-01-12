@@ -58,8 +58,9 @@ from the main campus, in the DC Power Building, a wooden semicircular structure 
 go there, since I wasn't doing AI. 
 But it was well worth the half hour bike ride. It had a unique vibe.
 
-It had one of the world's first laser printers, called the XGP
-(Xerox Graphics Printer). It was the size of a refrigerator and printed
+It had one of the world's first laser printers,[^2]
+called the XGP (Xerox Graphics Printer). 
+It was the size of a refrigerator and printed
 on thermal paper that came in rolls. It cut the paper
 into pages using an automatic guillotine, and the last page was typically
 a little strip (waste not want not). This printer supported Stanford's
@@ -67,6 +68,8 @@ a little strip (waste not want not). This printer supported Stanford's
 extended with logical and mathematical symbols. 
 An ancient line printer also supported this character set—its outstanding
 quality can be seen in the text of [this report](https://apps.dtic.mil/sti/pdfs/AD0785072.pdf)—and somehow the weird green terminals did too.
+
+[^2]: But see the comments.
 
 A PDP-10 ran a bespoke operating system based on an old version of DEC's
 [TOPS-10](https://en.wikipedia.org/wiki/TOPS-10). 
@@ -85,7 +88,7 @@ attacks from across the ARPAnet. That's another story.
 the legendary inventor of Lisp, was the scientific director, 
 with [Lester Earnest](https://web.stanford.edu/~learnest/) as lab manager.
 Strangely enough, McCarthy was only 50 when I arrived,
-but seemed to have left research behind him,[^2]
+but seemed to have left research behind him,[^3]
 and I was left with the impression that his main interest was
 the promotion of nuclear power.
 But exciting things were happening.
@@ -100,7 +103,7 @@ which [as described elsewhere]({% post_url 2022-09-28-Cambridge_LCF %}) later be
 the first modern proof assistant.
 Robin returned to give a seminar on ML, which I attended, only to ask an extremely stupid question.
 
-[^2]: To be fair, his [DBLP page](https://dblp.org/pid/m/JohnMcCarthy.html) shows a continuous record of publications up to 2009.
+[^3]: To be fair, his [DBLP page](https://dblp.org/pid/m/JohnMcCarthy.html) shows a continuous record of publications up to 2009.
 
 ### Expert systems
 
