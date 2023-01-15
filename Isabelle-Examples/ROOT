@@ -12,6 +12,7 @@ session "Isabelle-Examples" = "HOL-Analysis" +
     "Calculus"
     "Baby"
     "AckermannM"
+    "Sqrt2_Irrational"
   document_files
     "root.tex"
     "examples.bib"
