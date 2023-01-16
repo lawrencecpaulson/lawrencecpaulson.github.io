@@ -220,4 +220,4 @@ It looks quite a bit like the machine proof above.
 The [CTT development](https://isabelle.in.tum.de/dist/library/Misc/CTT/CTT.html) contains both the Martin-Löf type theory rules
 presented in the [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %}) and a tiny development of elementary arithmetic:
 addition, multiplication, division and remainder.
-You can download the examples in this post (plus others) [here](/Isabelle-Examples/CTT_Examples.thy).
+You can [download](/Isabelle-Examples/CTT_Examples.thy) the examples in this post (plus others).

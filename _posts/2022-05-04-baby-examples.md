@@ -156,7 +156,7 @@ The proof continues with the expected argument of showing that 2 is a divisor of
 **Every step** in this proof was obtained by sledgehammer. The main skill involves thinking up the right intermediate goals when sledgehammer fails, and typing them in.
 Yes, formal proof really is just another sort of coding.
 
-You can download the theory file `Baby.thy` [here](/Isabelle-Examples/Baby.thy).
+You can download the [theory file `Baby.thy`](/Isabelle-Examples/Baby.thy).
 You might want to generalise the example to show that the square root of every prime is irrational. The `prime` predicate and supporting theory can be imported from
 `HOL-Computational_Algebra.Primes`.
 
