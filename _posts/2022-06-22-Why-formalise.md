@@ -35,7 +35,7 @@ In actual fact, I have never verified anything resembling a real computer system
 
 ### Views from the AUTOMATH project
 
-NG de Bruijn has [written at length](https://www.win.tue.nl/automath/) on AUTOMATH and his philosophical thoughts on mathematics. Curiously, his early papers (such as [AUT001](https://www.win.tue.nl/automath/archive/webversion/aut001/aut001.html): "AUTOMATH, a language for mathematics"
+NG de Bruijn has [written at length](https://www.win.tue.nl/automath/) on AUTOMATH and his thoughts on mathematics. Curiously, his early papers (such as [AUT001](https://www.win.tue.nl/automath/archive/webversion/aut001/aut001.html): "AUTOMATH, a language for mathematics"
 and [AUT002](https://www.win.tue.nl/automath/archive/webversion/aut002/aut002.html), "The mathematical language AUTOMATH"), give away little by means of motivation.
 The former paper begins "AUTOMATH is a language intended for expressing detailed mathematical thoughts." Fortunately, his student van Benthem Jutting, in [his PhD thesis](https://pure.tue.nl/ws/files/1710991/23183.pdf), gives some specific reasons:
 

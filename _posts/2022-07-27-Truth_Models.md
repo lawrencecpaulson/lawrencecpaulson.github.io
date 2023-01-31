@@ -2,7 +2,7 @@
 layout: post
 title:  "Mathematical truth, mathematical modelling and axioms"
 usemathjax: true 
-tags: [general, logic, Imre Lakatos]
+tags: [general, logic, Imre Lakatos, philosophy]
 ---
 
 The recent COVID-19 pandemic has given us a striking demonstration of science in action.
