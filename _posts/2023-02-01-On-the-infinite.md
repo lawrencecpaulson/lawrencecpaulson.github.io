@@ -16,7 +16,7 @@ it has been switched on and off infinitely many times: after which, will it be o
 Ninety-nine years ago, [David Hilbert](https://en.wikipedia.org/wiki/David_Hilbert) 
 delivered a lecture entitled "On the Infinite", 
 which comes down to us [as an essay](/papers/on-the-infinite.pdf).
-The famous Hilton Hotel, with its infinitely many rooms, which even when full
+The famous Hilbert Hotel, with its infinitely many rooms, which even when full
 can make space for infinitely many additional guests, 
 was [apparently described](https://arxiv.org/abs/1403.0059)
 in this lecture, although Hilbert left it out of his essay.
