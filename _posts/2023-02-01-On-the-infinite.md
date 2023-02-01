@@ -2,7 +2,7 @@
 layout: post
 title:  "On the Infinite"
 usemathjax: true 
-tags: [philosophy,general]
+tags: [philosophy, general, David Hilbert]
 ---
 
 One can't do mathematics without thinking about 
