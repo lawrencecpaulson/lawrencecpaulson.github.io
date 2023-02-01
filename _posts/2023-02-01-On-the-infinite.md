@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "On the Infinite"
+title:  "On the infinite"
 usemathjax: true 
 tags: [philosophy, general, David Hilbert]
 ---

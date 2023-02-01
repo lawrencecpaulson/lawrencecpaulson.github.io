@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising a new proof that the square root of two is irrational"
 usemathjax: true 
-tags: [examples,newbies]
+tags: [examples, newbies, Isabelle, Isar]
 ---
 
 Recently, somebody shared on Twitter a 
