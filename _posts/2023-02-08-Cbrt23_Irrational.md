@@ -117,3 +117,5 @@ is a nonzero rational) to conclude that $3x\sqrt[3]6$ is irrational.
 The point of moreover/ultimately is to reduce our reliance on labels.
 
 The Isabelle theory file is [available to download](/Isabelle-Examples/Cbrt23_Irrational.thy).
+You can also check out a much more sophisticated proof, 
+that [exponentials are irrational]({% post_url 2022-02-16-Irrationals %}).
