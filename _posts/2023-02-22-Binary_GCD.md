@@ -176,6 +176,8 @@ And as noted above, that result is the GCD.
   </span><span class="keyword1 command">using</span> bgcd_defined_aux bgcd_unique <span class="keyword1 command">by</span> <span class="operator">auto</span>
 </pre>
 
+This example is based on an assignment set in 2010 for my late,
+lamented MPhil course, [Interactive Formal Verification](https://www.cl.cam.ac.uk/teaching/2122/L21/).
 The Isabelle theory file [can be downloaded](/Isabelle-Examples/Binary_Euclidean_Algorithm.thy).
 
 
