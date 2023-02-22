@@ -14,6 +14,7 @@ session "Isabelle-Examples" = "HOL-Analysis" +
     "AckermannM"
     "Sqrt2_Irrational"
     "Cbrt23_Irrational"
+    "Binary_Euclidean_Algorithm"
   document_files
     "root.tex"
     "examples.bib"
