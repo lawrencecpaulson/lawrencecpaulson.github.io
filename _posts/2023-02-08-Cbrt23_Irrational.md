@@ -8,19 +8,18 @@ tags: [examples, newbies, Isabelle, Isar]
 According to myth, the discovery that √2 was irrational so horrified the students of Pythagoras
 that it was kept secret [upon pain of death](https://nrich.maths.org/2671). Its irrationality was thought to be paradoxical
 because √2 could be constructed as the hypotenuse of a right triangle, 
+and therefore definitely "existed",
 while all numbers were assumed to be rational.
 A while back, I [formalised a new proof]({% post_url 2023-01-18-Sqrt2_irrational %})
 of the irrationality of √2. Just recently, I stumbled upon an exam question: 
 to prove the irrationality of ∛2+∛3.
 Its proof uses different techniques, but it's not at all hard.
-Why don't you pause for a moment to prove it for yourself 
+Why not pause for a moment to prove it for yourself 
 before looking at the formal treatment below?
 
 ### The informal proof
 
-Proofs of rationality always seem to begin with the assumption 
-that the given number is rational, leading to a contradiction.
-So let's begin by defining $x = \sqrt[3]2+\sqrt[3]3$.
+Let's begin by defining $x = \sqrt[3]2+\sqrt[3]3$.
 It's natural to see what happens if we cube both sides.
 Multiplying out and collecting the terms on the right hand side, we find that
 $x^3 = 5 + 3x\sqrt[3]6$.
@@ -28,13 +27,13 @@ But this can't be right: if $x$ is rational then so is $x^3$,
 which equals the right hand side, which must also be rational.
 In that case, $\sqrt[3]6$ is a rational number. It obviously isn't.
 
-Formalising this in Isabelle/HOL, we get a nice Isar proof.
+Formalising this argument in Isabelle/HOL, we get a nice Isar proof.
 
 ### The calculation
 
 We begin by stating the desired claim. A rather obscure feature of Isar syntax
 is the ability to make a definition right in the theorem statement.
-Any such definitions will be fully expanded in the final theorem, once we have proved it.
+Any such definitions will be expanded in the final theorem, once we have proved it.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> cuberoot_irrational<span class="main">:</span><span>
@@ -117,3 +116,5 @@ is a nonzero rational) to conclude that $3x\sqrt[3]6$ is irrational.
 The point of moreover/ultimately is to reduce our reliance on labels.
 
 The Isabelle theory file is [available to download](/Isabelle-Examples/Cbrt23_Irrational.thy).
+You can also check out a much more sophisticated proof, 
+that [exponentials are irrational]({% post_url 2022-02-16-Irrationals %}).
