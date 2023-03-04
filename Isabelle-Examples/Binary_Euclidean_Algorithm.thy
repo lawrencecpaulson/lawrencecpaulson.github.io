@@ -81,7 +81,7 @@ theorem bgcd_defined: "\<exists>!g. (a, b, g) \<in> bgcd"
   using bgcd_defined_aux bgcd_unique by auto
 
 text \<open>Alternative proof suggested by YawarRaza7349\<close>
-lemma "a+b = n \<Longrightarrow> \<exists>g. (a, b, g) \<in> bgcd"
+lemma bgcd_defined_aux': "a+b = n \<Longrightarrow> \<exists>g. (a, b, g) \<in> bgcd"
 proof (induction n arbitrary: a b rule: less_induct)
   case (less n a b)
   then show ?case

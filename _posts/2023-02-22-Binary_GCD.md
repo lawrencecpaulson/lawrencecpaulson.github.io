@@ -160,7 +160,9 @@ or alternatively $b = b'+1$ for some $b'$
 (where obviously $b'=b-1$, a fact that doesn't need to be used).
 We note that $a+b'<n$, allowing use of the induction hypothesis.
 It's reasonable to ask, why not just do mathematical induction on $b$?
-And the answer is, I couldn't get a proof that way, but maybe you will.
+And the answer is, I couldn't get a proof that way, but maybe you will.[^1]
+
+[^1]: See the comments below for a simplification suggested by YawarRaza7349.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> bgcd_defined<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃!</span><span class="bound">g</span><span class="main">.</span> <span class="main">(</span><span class="free">a</span><span class="main">,</span> <span class="free">b</span><span class="main">,</span> <span class="bound">g</span><span class="main">)</span> <span class="main">∈</span></span> bgcd</span><span>"</span><span>
