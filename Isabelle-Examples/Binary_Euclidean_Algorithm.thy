@@ -80,5 +80,23 @@ qed
 theorem bgcd_defined: "\<exists>!g. (a, b, g) \<in> bgcd"
   using bgcd_defined_aux bgcd_unique by auto
 
+text \<open>Alternative proof suggested by YawarRaza7349\<close>
+lemma "a+b = n \<Longrightarrow> \<exists>g. (a, b, g) \<in> bgcd"
+proof (induction n arbitrary: a b rule: less_induct)
+  case (less n a b)
+  then show ?case
+  proof (cases "b \<le> a")
+    case True
+    with less obtain g where "(a-b, b, g) \<in> bgcd"
+      by (metis add_cancel_right_right bgcd.simps le_add1 le_add_diff_inverse nat_less_le)
+    thus ?thesis
+      using True bgcd.bgcdStep by blast
+  next
+    case False
+    with less show ?thesis
+      by (metis bgcd.simps le_add_diff_inverse less_add_same_cancel2 nle_le zero_less_iff_neq_zero)
+  qed
+qed
+
 end 
 
