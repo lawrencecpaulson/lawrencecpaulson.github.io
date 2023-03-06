@@ -37,6 +37,11 @@ inductive_simps TP_IF [simp]: "TP (IF p x y) t"
 inductive_simps TP_Succ [simp]: "TP (Succ x) t"
 inductive_simps TP_EQ [simp]: "TP (EQ x y) t"
 
+proposition type_preservation:
+  assumes "x \<Rrightarrow> y" "TP x t" shows "TP y t"
+  using assms
+  by (induction x y arbitrary: t rule: Eval.induct) (auto simp: TP.intros)
+
 fun evl :: "exp \<Rightarrow> nat"
   where
     "evl T = 1"
@@ -45,11 +50,6 @@ fun evl :: "exp \<Rightarrow> nat"
   | "evl (Succ x) = evl x + 1"
   | "evl (IF x y z) = (if evl x = 1 then evl y else evl z)"
   | "evl (EQ x y) = (if evl x = evl y then 1 else 0)"
-
-proposition type_preservation:
-  assumes "x \<Rrightarrow> y" "TP x t" shows "TP y t"
-  using assms
-  by (induction x y arbitrary: t rule: Eval.induct) (auto simp: TP.intros)
 
 lemma
   assumes "TP x t" "t = bool" shows "evl x < 2"
@@ -69,9 +69,6 @@ lemma
 inductive EvalStar :: "exp \<Rightarrow> exp \<Rightarrow> bool" (infix "\<Rrightarrow>*" 50) where
     Id: "x \<Rrightarrow>* x"
   | Step: "x \<Rrightarrow> y \<Longrightarrow> y \<Rrightarrow>* z \<Longrightarrow> x \<Rrightarrow>* z"
-
-inductive_simps T_EvalStar [simp]: "T \<Rrightarrow>* u"
-inductive_simps F_EvalStar [simp]: "F \<Rrightarrow>* u"
 
 proposition type_preservation_Star:
   assumes "x \<Rrightarrow>* y" "TP x t" shows "TP y t"
@@ -93,9 +90,6 @@ lemma EQ_EvalStar2:
   assumes "y \<Rrightarrow>* z" shows "EQ x y \<Rrightarrow>* EQ x z "
   using assms by induction (auto intro: EQ_Eval2 EvalStar.intros)
 
-lemma Succ_neq_Zero [iff]: "EQ (Succ x) Zero \<Rrightarrow>* F" "EQ Zero (Succ x) \<Rrightarrow>* F"
-  using EQ_S0 EQ_0S Id Step by blast+
-
 proposition diamond:
   assumes "x \<Rrightarrow> y" "x \<Rrightarrow> z" shows "\<exists>u. y \<Rrightarrow>* u \<and> z \<Rrightarrow>* u"
   using assms
@@ -106,7 +100,7 @@ proof (induction x y arbitrary: z)
 next
   case (EQ_SS x y)
   then show ?case
-    by (simp; meson EQ_Eval1 EQ_Eval2 EQ_same Eval.EQ_SS Id Step)
+    by (simp; meson Eval.intros EvalStar.intros)
 next
   case (EQ_Eval1 x u y)
   then show ?case
