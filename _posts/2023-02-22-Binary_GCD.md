@@ -110,7 +110,7 @@ is even or not.
 #### Proving uniqueness and existence
 
 The two results just proved are enough to show that the relation `bgcd`
-it is indeed a function, in the sense that it yields at most one result:
+is indeed a function, in the sense that it yields at most one result:
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> bgcd_unique<span class="main">:</span><span> 
@@ -119,7 +119,7 @@ it is indeed a function, in the sense that it yields at most one result:
 </pre>
 
 Our final task is to show that this function is total, that some result
-this is always determined. 
+is always determined. 
 (Strictly speaking, we don't have an operational semantics,
 so this is not quite the termination of an actual algorithm.)
 The proof is by complete induction, using the observation that
