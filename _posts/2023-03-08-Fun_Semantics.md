@@ -239,7 +239,7 @@ We show that the type is preserved even over a string of evaluation steps.
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">x</span> <span class="quoted free">y</span><span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> type_preservation<span class="main">)</span>
 </pre>
 
-On the other hand, the following for lemmas are essential.
+On the other hand, the following four lemmas are essential.
 Each of them transforms a string of evaluation steps into the analogous string of steps
 within an argument of some function.
 All these proofs are trivial inductions.
@@ -307,7 +307,7 @@ and see if you can do it better.
 There is a myth that you need dependent types to do semantics.
 This is ridiculous; the heyday of denotational semantics was the 1970s,
 before most people had even heard of dependent types.
-Tobias Nipkow and Gerwin KleinHave written an entire book,
+Tobias Nipkow and Gerwin Klein have written an entire book,
 [*Concrete Semantics*](http://www.concrete-semantics.org),
 on how to do semantics in Isabelle/HOL. It has many advanced examples.
 You can either [buy a copy](https://link.springer.com/book/10.1007/978-3-319-10542-0) 
