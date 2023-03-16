@@ -6,7 +6,8 @@ session "Isabelle-Examples" = "HOL-Analysis" +
     "HOL-Library"
     "HOL-Analysis"
     "HOL-Decision_Procs"
-  theories
+    "HOL-Number_Theory"
+theories
     "Fibonacci"
     "CauchySchwarz"
     "Calculus"
@@ -16,6 +17,7 @@ session "Isabelle-Examples" = "HOL-Analysis" +
     "Cbrt23_Irrational"
     "Binary_Euclidean_Algorithm"
     "Fun_Semantics"
+    "Binomial_Coeffs"
   document_files
     "root.tex"
     "examples.bib"
