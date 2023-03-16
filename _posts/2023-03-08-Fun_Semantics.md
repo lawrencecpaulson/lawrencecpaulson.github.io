@@ -7,21 +7,24 @@ tags: [examples, Isabelle, inductive definitions]
 
 The simplest way to precisely specify the meanings of programming language expressions
 is through an [operational semantics](https://en.wikipedia.org/wiki/Operational_semantics).
-Such a definition consists of a set of what appear to be the inference rules
+Such a definition consists of a set of what look like the inference rules
 of a logic, stating the conditions under which a given expression
-can be reduced to a value (or at least evaluated a further step).
-Formally, this sort of specification is an inductive definition,
-coming equipped with an induction principle through which desired properties
-can be proved to hold of all executions, one step at a time.
-Such inductive proofs are extremely tedious to write out by hand,
-but fortunately, often trivial to prove the help of a little automation.
+can be reduced to a value, or at least evaluated one step more.
+Formally, this sort of specification is an *inductive definition*,
+equipped with an induction principle for proving that a property
+holds for all executions.
+Such proofs are conceptually trivial—they involve checking
+that the property holds
+initially and that it is preserved 
+by each execution step—but are extremely tedious to write out by hand.
+Fortunately, they are often trivial with the help of a little automation.
 Let's prove a [Church--Rosser property](https://en.wikipedia.org/wiki/Church–Rosser_theorem):
-that expression evaluation always leads to a unique final result
+that expression evaluation always leads to a unique final result.
 
 ### A simple functional language
 
-Our language is insufficient to write an airline reservation system — it isn't even
-Turing-complete — but it is sufficient to illustrate some of the core themes of operational semantics.
+Our language is insufficient to write an airline reservation system—it isn't even
+Turing-complete—but it is sufficient to illustrate some of the core themes of operational semantics.
 
 Let's begin with the syntax. An expression can be a Boolean
 (true or false), or a natural number given by zero or successor,
@@ -36,7 +39,8 @@ of a reduction relation (⇛). We use an Isabelle/HOL inductive definition.
 The first two rules cover the true and false cases of a conditional expression,
 while the third case takes care of a single reduction within the condition.
 The fourth rule covers the evaluation of the argument of `Succ`.
-So this is a small-step semantics; in a big-step semantics, every rule would be formulated
+So this is a [small-step semantics](https://en.wikipedia.org/wiki/Operational_semantics#Small-step_semantics); 
+in a big-step semantics, every rule would be formulated
 to deliver the final result.
 
 <pre class="source">
@@ -54,14 +58,15 @@ to deliver the final result.
 </pre>
 
 The remaining six rules concern the evaluation of equality tests.
+I specifically designed them to be messy.
 
 ### Rule inversion
 
-The language admits nonsensical terms such as `Succ T`, but they cannot be reduced to anything.
-How do we know that? Intuitively, it's because there is only one rule for evaluation
-of `Succ`, and that rule evaluates the argument and there is no rule for evaluation of `T`.
-That reasoning is straightforward and fortunately it can be automated.
-The following declarations inform Isabelle's simplifier about the possibilities
+The language admits nonsensical terms such as `Succ T`, which cannot be reduced to anything.
+How do we know that? Intuitively, it's because there is only one rule for evaluating`Succ`; 
+that rule evaluates the argument, and there is no rule for evaluating `T`.
+This straightforward reasoning can fortunately be automated.
+The following declarations inform Isabelle's simplifier about the possibilities of
 various reductions occurring. In particular, the first three
 generate theorems stating that the quoted reductions are impossible.
 In other cases, the resulting theorems state conditions under which the reduction can take place,
@@ -80,6 +85,8 @@ In other cases, the resulting theorems state conditions under which the reductio
 
 Such declarations are useful in any inductive definition where the conclusions of the rules
 allow most of the cases to be excluded on syntactic grounds.
+If your proofs seem to require a lot of explicit case analysis, 
+see whether this sort of declaration could help you.
 
 ### Types and type preservation
 
@@ -92,11 +99,11 @@ Our language has Booleans and natural numbers, so let's define the corresponding
 
 The great thing about operational semantics is its flexibility.
 Above, we defined the evaluation of expressions, which is their dynamic behaviour;
-now we can define their type checking relation, which is static behaviour.
-The same techniques are employed for both.
+now we can define their typing relation, which is static behaviour.
+The same techniques work for both.
 
 True and false have the Boolean type, while zero is a number.
-`Succ` has the type of numbers if its argument does.
+`Succ` yields a number if its argument does.
 For conditional expressions and equality, the use of types has to be consistent.
 
 <pre class="source">
@@ -109,7 +116,8 @@ For conditional expressions and equality, the use of types has to be consistent.
 </span><span class="main">|</span> EQ<span class="main">:</span>   <span class="quoted"><span class="quoted"><span>"</span><span class="main">⟦</span><span class="free">TP</span> <span class="free bound entity">x</span> <span class="free bound entity">t</span><span class="main">;</span> <span class="free">TP</span> <span class="free bound entity">y</span> <span class="free bound entity">t</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="free">TP</span> <span class="main">(</span>EQ</span> <span class="free bound entity">x</span> <span class="free bound entity">y</span><span class="main">)</span> bool</span><span>"</span>
 </pre>
 
-And rule inversion for the above.
+Rule inversion for the above lets us reason easility about
+the type-checking possibilities for expressions.
 
 <pre class="source">
 <span class="keyword1 command">inductive_simps</span> TP_IF <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>TP</span> <span class="main">(</span>IF</span> <span class="free">p</span> <span class="free">x</span> <span class="free">y</span><span class="main">)</span> <span class="free">t</span><span>"</span><span>
@@ -117,7 +125,8 @@ And rule inversion for the above.
 </span><span class="keyword1 command">inductive_simps</span> TP_EQ <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>TP</span> <span class="main">(</span>EQ</span> <span class="free">x</span> <span class="free">y</span><span class="main">)</span> <span class="free">t</span><span>"</span>
 </pre>
 
-Type preservation claims that the evaluation of an expression does not change its type.
+[*Type preservation*](https://en.wikipedia.org/wiki/Subject_reduction) 
+claims that the evaluation of an expression does not change its type.
 Formally, we state that if `x ⇛ y` and `x` has some type `T`, then `y` will have the same type.
 Induction on the assumption `x ⇛ y` produces 10 gruesome-looking subgoals:
 
@@ -142,7 +151,7 @@ Induction on the assumption `x ⇛ y` produces 10 gruesome-looking subgoals:
 >  `10. ⋀y z x t. ⟦y ⇛ z; ⋀t. TP y t ⟹ TP z t; TP (EQ x y) t⟧ ⟹ TP (EQ x z) t`
 
 Some courses in operational semantics expect students to be able to carry out 
-such proofs by hand. But even writing out the subgoals correctly by hand is next to impossible.
+such proofs by hand. But even writing out the subgoals perfectly by hand is next to impossible.
 Fortunately they are trivial to prove, with the help of rule inversion.
 The Isabelle/HOL proof takes a single line, which executes instantly:
 
@@ -230,9 +239,10 @@ We show that the type is preserved even over a string of evaluation steps.
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">x</span> <span class="quoted free">y</span><span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> type_preservation<span class="main">)</span>
 </pre>
 
-On the other hand, the following for lemmas are essential.
+On the other hand, the following four lemmas are essential.
 Each of them transforms a string of evaluation steps into the analogous string of steps
 within an argument of some function.
+All these proofs are trivial inductions.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> Succ_EvalStar<span class="main">:</span><span>
@@ -286,16 +296,21 @@ then the evaluation strings can be extended to reunite at some common `u`.
 </span><span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">force</span> <span class="quasi_keyword">intro</span><span class="main main">:</span> Succ_EvalStar Eval.intros EvalStar.intros<span class="main">)</span><span class="main keyword3">+</span>
 </pre>
 
+Finally, a nontrivial proof! I've tried to make it neat, but it's 
+a mess. You could download the
+[Isabelle theory file](/Isabelle-Examples/Fun_Semantics.thy)
+and see if you can do it better.
+
+
 ### Postscript
 
 There is a myth that you need dependent types to do semantics.
-This is ridiculous; in fact the heyday of denotational semantics was the 1970s,
+This is ridiculous; the heyday of denotational semantics was the 1970s,
 before most people had even heard of dependent types.
-Tobias Nipkow and Gerwin KleinHave written an entire book,
+Tobias Nipkow and Gerwin Klein have written an entire book,
 [*Concrete Semantics*](http://www.concrete-semantics.org),
-on how to do semantics in Isabelle/HOL. It has many advanced examples
-and you can either buy a copy or download it for free.
+on how to do semantics in Isabelle/HOL. It has many advanced examples.
+You can either [buy a copy](https://link.springer.com/book/10.1007/978-3-319-10542-0) 
+or download it for free.
 
 This is another example from my old MPhil course, [Interactive Formal Verification](https://www.cl.cam.ac.uk/teaching/2122/L21/).
-The Isabelle theory file [is available](/Isabelle-Examples/Fun_Semantics.thy).
-
