@@ -30,31 +30,32 @@ qed
 
 lemma fact_fact_dvd_fact_m:
     fixes k::nat
-    shows "k \<le> n \<Longrightarrow> fact k * fact (n - k) dvd fact n"
+    shows "k \<le> n \<Longrightarrow> fact k * fact(n - k) dvd fact n"
   by (metis binomial_fact_lemma dvd_def of_nat_fact of_nat_mult)
 
 lemma fact_fact_dvd_fact:
     fixes k::nat
-    shows "fact k * fact n dvd fact (n + k)"
+    shows "fact k * fact n dvd fact(n+k)"
   by (metis fact_fact_dvd_fact_m diff_add_inverse2 le_add2)
 
 lemma choose_mult_lemma:
-  "((m + r + k) choose (m + k)) * ((m + k) choose k) = ((m + r + k) choose k) * ((m + r) choose m)"
+  "((m+r+k) choose (m+k)) * ((m+k) choose k) = ((m+r+k) choose k) * ((m+r) choose m)"
   (is "?lhs = _")
 proof -
   have "?lhs =
-      fact (m + r + k) div (fact (m + k) * fact (m + r - m)) * (fact (m + k) div (fact k * fact m))"
+      fact(m+r+k) div (fact(m+k) * fact(m+r-m)) * (fact(m+k) div (fact k * fact m))"
     by (simp add: binomial_altdef_nat)
-  also have "\<dots> = fact (m + r + k) * fact (m + k) div
-                 (fact (m + k) * fact (m + r - m) * (fact k * fact m))"
-    by (metis add_implies_diff add_le_mono1 choose_dvd diff_cancel2 div_mult_div_if_dvd le_add1 le_add2)
-  also have "\<dots> = fact (m + r + k) div (fact r * (fact k * fact m))"
+  also have "\<dots> = fact(m+r+k) * fact(m+k) div
+                 (fact(m+k) * fact(m+r-m) * (fact k * fact m))"
+    by (metis add_implies_diff add_le_mono1 choose_dvd diff_cancel2 div_mult_div_if_dvd
+        le_add1 le_add2)
+  also have "\<dots> = fact(m+r+k) div (fact r * (fact k * fact m))"
     by (auto simp: algebra_simps fact_fact_dvd_fact)
-  also have "\<dots> = (fact (m + r + k) * fact (m + r)) div (fact r * (fact k * fact m) * fact (m + r))"
+  also have "\<dots> = (fact(m+r+k) * fact(m+r)) div (fact r * (fact k * fact m) * fact(m+r))"
     by simp
   also have "\<dots> =
-      (fact (m + r + k) div (fact k * fact (m + r)) * (fact (m + r) div (fact r * fact m)))"
-    by (smt (verit) Binomial.fact_fact_dvd_fact div_mult_div_if_dvd mult.assoc mult.commute)
+      (fact(m+r+k) div (fact k * fact(m+r)) * (fact(m+r) div (fact r * fact m)))"
+    by (smt (verit) fact_fact_dvd_fact div_mult_div_if_dvd mult.assoc mult.commute)
   finally show ?thesis
     by (simp add: binomial_altdef_nat mult.commute)
 qed
