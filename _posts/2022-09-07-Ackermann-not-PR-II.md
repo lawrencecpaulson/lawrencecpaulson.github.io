@@ -2,7 +2,7 @@
 layout: post
 title:  "Ackermann's function is not primitive recursive, II"
 usemathjax: true
-tags: [examples, Isabelle, Ackermann's function, inductive definitions]
+tags: [examples, Isar, Ackermann's function, inductive definitions]
 ---
 
 The [previous post]({% post_url 2022-08-31-Ackermann-not-PR-I %})

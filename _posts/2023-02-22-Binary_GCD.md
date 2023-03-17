@@ -2,7 +2,7 @@
 layout: post
 title:  "Verifying the binary algorithm for greatest common divisors"
 usemathjax: true 
-tags: [examples, Isabelle, Isar]
+tags: [examples, gcd, Isar]
 ---
 The [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm) 
 for the GCD is generally regarded as

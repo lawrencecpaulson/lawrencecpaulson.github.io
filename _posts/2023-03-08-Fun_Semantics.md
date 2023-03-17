@@ -2,7 +2,7 @@
 layout: post
 title:  "The semantics of a simple functional language"
 usemathjax: true
-tags: [examples, Isabelle, inductive definitions]
+tags: [examples, inductive definitions]
 ---
 
 The simplest way to precisely specify the meanings of programming language expressions

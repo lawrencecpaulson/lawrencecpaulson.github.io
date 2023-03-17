@@ -2,7 +2,7 @@
 layout: post
 title:  "An irrationality proof involving cube roots"
 usemathjax: true 
-tags: [examples, newbies, Isabelle, Isar]
+tags: [examples, newbies, Isar]
 ---
 
 According to myth, the discovery that √2 was irrational so horrified the students of Pythagoras

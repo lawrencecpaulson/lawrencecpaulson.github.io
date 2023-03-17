@@ -2,7 +2,7 @@
 layout: post
 title:  "An Experiment: The Cauchy–Schwarz inequality"
 usemathjax: true
-tags: [examples, Isabelle, Archive of Formal Proofs, analysis, Isar]
+tags: [examples, Archive of Formal Proofs, analysis, Isar]
 ---
 
 The [Cauchy–Schwarz inequality](https://en.wikipedia.org/wiki/Cauchy–Schwarz_inequality) is a well-known fact about vector inner products. It comes in various forms that any mathematician is expected to recognise.
