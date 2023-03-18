@@ -2,7 +2,7 @@
 layout: post
 title:  "Ackermann's function is not primitive recursive, I"
 usemathjax: true
-tags: [examples, Isar, Ackermann's function]
+tags: [examples, Isar, recursion, Ackermann's function]
 ---
 
 A university-level course on computation theory will invariably cover [recursive functions](https://plato.stanford.edu/entries/recursive-functions/): the model of computation developed by Gödel and Kleene.

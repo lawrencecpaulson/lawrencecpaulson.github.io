@@ -2,7 +2,7 @@
 layout: post
 title:  "Proving termination with multiset orderings"
 usemathjax: true
-tags: [examples, Ackermann's function, Stanford]
+tags: [examples, Ackermann's function, recursion, Stanford]
 ---
 
 The title of this post is identical to the title of a [seminal paper](https://doi.org/10.1145/359138.359142)

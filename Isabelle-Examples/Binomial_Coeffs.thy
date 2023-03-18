@@ -97,7 +97,7 @@ next
         (\<Sum>k\<le>Suc n. (Suc n - k choose k) + (if k=0 then 0 else (Suc n - k choose (k - 1))))"
     by (rule sum.cong) (simp_all add: choose_reduce_nat)
   also have "\<dots> = (\<Sum>k\<le>Suc n. Suc n - k choose k) +
-                   (\<Sum>k\<le>Suc n. if k=0 then 0 else (Suc n - k choose (k - 1)))"
+                  (\<Sum>k\<le>Suc n. if k=0 then 0 else (Suc n - k choose (k - 1)))"
     by (simp add: sum.distrib)
   also have "\<dots> = (\<Sum>k\<le>Suc n. Suc n - k choose k) + (\<Sum>j\<le>n. n - j choose j)"
     by (metis sum_choose_drop_zero)
