@@ -19,16 +19,16 @@ Let's prove some of them using Isabelle/HOL.
 
 Let's recall the definition of the binomial coefficient "*n* choose *k*": 
 
-$$ \binom{n}{k} = \frac{n!}{k!(n-k)!}. $$
+$$\begin{gather*} \binom{n}{k} = \frac{n!}{k!(n-k)!}. \end{gather*}$$
 
 There follow a number of trivial properties, such as
 
-$$ (n-k)\binom{n}{k} = n\binom{n-1}{k}. $$
+$$\begin{gather*} (n-k)\binom{n}{k} = n\binom{n-1}{k}. \end{gather*}$$
 
 Slightly deeper is the following claim, 
 that the sum of a row of Pascal's triangle is a power of 2:
 
-$$ \sum_{k\le n} \binom{n}{k} = 2^n. $$
+$$\begin{gather*} \sum_{k\le n} \binom{n}{k} = 2^n. \end{gather*}$$
 
 It's trivial to prove because the binomial theorem—already available in Isabelle/HOL—expresses $(x+y)^n$ in terms of binomial coefficients.
 We can express the desired sum by putting $x=y=1$ in that theorem.
@@ -133,13 +133,23 @@ $\binom{n}{m} \binom{m}{k} = \binom{n}{k} \binom{n-k}{m-k}$.
 
 ### An easy tricky proof
 
+In *Concrete Mathematics*, the authors remark 
 
-oncrete Mathematics, 5.18: "this formula is easily verified by induction on *m*"
+> there is a way to partially sum the row elements [of Pascal's triangle] if they have been multiplied by their distance from the centre
 
-the following theorem, which relates to a weighted sum of a row of Pascal's triangle.
-It involves arithmetic on type @{typ real} as well as @{typ nat}, so the function @{const real}
-is implicitly inserted at multiple points.
+They give the following formula (numbered 5.18):
 
+$$\begin{gather*}
+\sum_{k\le m}\binom{r}{k}\left(\frac{r}{2}-k\right) 
+= \frac{m+1}{2}\binom{r}{m+1}.
+\end{gather*}$$
+
+And they remark, "this formula is easily verified by induction on *m*".
+Dangerous words. They certainly provoked me to try formulaic 
+induction/simplification steps that exploded the formula into chaos.
+When that happens, it's best to try to work out the steps on paper
+first. I eventually arrived at the following, which quite possibly
+is the proof that they omitted.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> choose_row_sum_weighted<span class="main">:</span><span>
@@ -161,6 +171,12 @@ is implicitly inserted at multiple points.
   </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?case</span> <span class="keyword1 command">.</span><span>
 </span><span class="keyword1 command">qed</span>
 </pre>
+
+I can't help but remark that with Certain Other Proof Assistants, 
+working out the proof first on paper is standard practice.
+Then what value are they getting from their so-called assistant?
+
+### An identity involving Fibonacci numbers
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> sum_drop_zero<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">∑</span><span class="bound">k</span><span class="main">≤</span>Suc</span> <span class="free">n</span><span class="main">.</span> <span class="keyword1">if</span></span> <span class="main">0</span><span class="main">&lt;</span><span class="bound">k</span> <span class="keyword1">then</span> <span class="main">(</span><span class="free">f</span> <span class="main">(</span><span class="bound">k</span> <span class="main">-</span> <span class="main">1</span><span class="main">)</span><span class="main">)</span> <span class="keyword1">else</span> <span class="main">0</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">∑</span><span class="bound">j</span><span class="main">≤</span><span class="free">n</span><span class="main">.</span> <span class="free">f</span> <span class="bound">j</span><span class="main">)</span><span>"</span><span>
