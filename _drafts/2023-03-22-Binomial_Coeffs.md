@@ -2,7 +2,7 @@
 layout: post
 title:  "Small examples involving binomial coefficients"
 usemathjax: true
-tags: examples Isar Fibonacci
+tags: [newbies, recursion, examples, Isar, Fibonacci]
 ---
 
 The [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient) 
@@ -178,6 +178,26 @@ Then what value are they getting from their so-called assistant?
 
 ### An identity involving Fibonacci numbers
 
+Every time you turn around, the [Fibonacci numbers](https://www.techtarget.com/whatis/definition/Fibonacci-sequence) 
+pop up again:
+
+$$\begin{gather*}
+\sum_{k\le m}\binom{n-k}{k} = F_{n+1}
+\end{gather*}$$
+
+We've seen Fibonacci numbers in a previous post.
+Isabelle accepts the recursive definition,
+
+$$\begin{align} F_0 &= 0\\ F_1 &= 1\\ F_{n+2} &= F_n + F_{n+1}, \end{align}$$
+
+[more-or-less verbatim]({% post_url 2021-10-13-Fib-example %}).
+
+We have also seen that when you have to prove something about a recursive function, it's often best to use the induction rule that Isabelle supplies with your function definition. And that is the case here. 
+
+First, we need a couple of trivial lemmas to let us 
+adjust the upper bound of the sum, 
+deleting a null term and shifting everything down. 
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> sum_drop_zero<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">∑</span><span class="bound">k</span><span class="main">≤</span>Suc</span> <span class="free">n</span><span class="main">.</span> <span class="keyword1">if</span></span> <span class="main">0</span><span class="main">&lt;</span><span class="bound">k</span> <span class="keyword1">then</span> <span class="main">(</span><span class="free">f</span> <span class="main">(</span><span class="bound">k</span> <span class="main">-</span> <span class="main">1</span><span class="main">)</span><span class="main">)</span> <span class="keyword1">else</span> <span class="main">0</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="main">∑</span><span class="bound">j</span><span class="main">≤</span><span class="free">n</span><span class="main">.</span> <span class="free">f</span> <span class="bound">j</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">induction</span> <span class="quoted free">n</span><span class="main">)</span> <span class="operator">auto</span>
@@ -189,6 +209,8 @@ Then what value are they getting from their so-called assistant?
     </span><span class="main">(</span><span class="main">∑</span><span class="bound">j</span><span class="main">≤</span><span class="free">n</span><span class="main">.</span> <span class="main">(</span><span class="free">n</span><span class="main">-</span><span class="bound">j</span><span class="main">)</span> <span class="keyword1">choose</span> <span class="bound">j</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> trans <span class="main main">[</span><span class="operator">OF</span> sum.cong sum_drop_zero<span class="main main">]</span><span class="main">)</span> <span class="operator">auto</span>
 </pre>
+
+Armed with this fact, the identity is easy to prove.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> ne_diagonal_fib<span class="main">:</span><span>
@@ -212,30 +234,11 @@ Then what value are they getting from their so-called assistant?
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-choose your induction rule with care
-The precise statement of the induction formula is also important
-å
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
 ### Postscript
 
 As usual, the Isabelle  theory is [available to download](/Isabelle-Examples/Binomial_Coeffs.thy).
 
-
 Knuth notes that we can generalise binomial coefficients so that the top number is real or complex,
-and this version is also available in Isabelle/HOL.
+and this general version is also available in Isabelle/HOL.
 
-An [introduction to binomial coefficients](https://nrich.maths.org/7713) aimed at teenagers
+There's even an [introduction to binomial coefficients](https://nrich.maths.org/7713) aimed at teenagers.
