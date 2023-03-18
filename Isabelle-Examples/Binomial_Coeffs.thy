@@ -28,16 +28,6 @@ proof -
   finally show ?thesis . 
 qed
 
-lemma fact_fact_dvd_fact_m:
-    fixes k::nat
-    shows "k \<le> n \<Longrightarrow> fact k * fact(n - k) dvd fact n"
-  by (metis binomial_fact_lemma dvd_def of_nat_fact of_nat_mult)
-
-lemma fact_fact_dvd_fact:
-    fixes k::nat
-    shows "fact k * fact n dvd fact(n+k)"
-  by (metis fact_fact_dvd_fact_m diff_add_inverse2 le_add2)
-
 lemma choose_mult_lemma:
   "((m+r+k) choose (m+k)) * ((m+k) choose k) = ((m+r+k) choose k) * ((m+r) choose m)"
   (is "?lhs = _")

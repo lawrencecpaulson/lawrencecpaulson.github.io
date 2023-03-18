@@ -11,29 +11,27 @@ but they have numerous other applications in combinatorics and the analysis of a
 [Donald E Knuth](https://www-cs-faculty.stanford.edu/~knuth/) 
 has written extensively about them, especially in his book 
 [*Concrete Mathematics*](https://en.wikipedia.org/wiki/Concrete_Mathematics).
-At their most basic, they are concerned with how many *k*-element subsets there exist
-of an arbitrary *n*-element set.
+At their most basic, they are concerned with how many *k*-element subsets can be chosen from an *n*-element set.
 They are the elements of Pascal's triangle and satisfy a great many mathematical identities.
-Below, we examine some of these. 
+Let's prove some of them using Isabelle/HOL. 
 
 ### Warming up
 
-Let's recall the basic definition: 
+Let's recall the definition of the binomial coefficient "*n* choose *k*": 
 
 $$ \binom{n}{k} = \frac{n!}{k!(n-k)!}. $$
 
-From this follow a number of trivial properties, such as
+There follow a number of trivial properties, such as
 
 $$ (n-k)\binom{n}{k} = n\binom{n-1}{k}. $$
 
-More interesting is the following, stating that the sum of a row of Pascal's triangle
-equals power 2:
+Slightly deeper is the following claim, 
+that the sum of a row of Pascal's triangle is a power of 2:
 
 $$ \sum_{k\le n} \binom{n}{k} = 2^n. $$
 
-It's trivial to prove because the binomial theorem is already available in Isabelle/HOL,
-which as we recall expresses $(x+y)^n$ in terms of binomial coefficients,
-and we can express the desired sum by putting $x=y=1$ in that theorem.
+It's trivial to prove because the binomial theorem—already available in Isabelle/HOL—expresses $(x+y)^n$ in terms of binomial coefficients.
+We can express the desired sum by putting $x=y=1$ in that theorem.
 Observe the syntax for instantiating variables in a theorem.
 
 <pre class="source">
@@ -89,24 +87,14 @@ elements out of the original, unwanted $n-k$ elements. Or something.
 Such intuitive arguments are a nightmare to formalise, but fortunately
 this proof is a fairly simple calculation.
 
-We begin by showing basic divisibility properties involving factorials.
+It relies on a basic divisibility property: 
+that $k!(n-k)!$ divides $n!$ provided
+$k\le n$. The divisor is precisely $\binom{n}{k}$, a fact proved
+in the main library. (And it doesn't follow from the definition
+of $\binom{n}{k}$, but rather justifies that definition.)
 
-<pre class="source">
-<span class="keyword1 command">lemma</span> fact_fact_dvd_fact_m<span class="main">:</span><span>
-    </span><span class="keyword2 keyword">fixes</span> <span class="free">k</span><span class="main">::</span><span class="quoted">nat</span><span>
-    </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">k</span> <span class="main">≤</span></span> <span class="free">n</span> <span class="main">⟹</span> fact</span> <span class="free">k</span> <span class="main">*</span> fact <span class="main">(</span><span class="free">n</span> <span class="main">-</span> <span class="free">k</span><span class="main">)</span> <span class="keyword1">dvd</span> fact <span class="free">n</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> binomial_fact_lemma dvd_def of_nat_fact of_nat_mult<span class="main">)</span>
-</pre>
-
-<pre class="source">
-<span class="keyword1 command">lemma</span> fact_fact_dvd_fact<span class="main">:</span><span>
-    </span><span class="keyword2 keyword">fixes</span> <span class="free">k</span><span class="main">::</span><span class="quoted">nat</span><span>
-    </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span>fact</span> <span class="free">k</span> <span class="main">*</span></span> fact <span class="free">n</span> <span class="keyword1">dvd</span> fact <span class="main">(</span><span class="free">n</span> <span class="main">+</span> <span class="free">k</span><span class="main">)</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> fact_fact_dvd_fact_m diff_add_inverse2 le_add2<span class="main">)</span>
-</pre>
-
-Now we can prove our identity by expressing binomial coefficients in terms of factorials. But we avoid subtraction in favour of addition,
-a trick that frequently leads to simpler proofs.
+Now we can prove our identity by expressing binomial coefficients in terms of factorials. It's just a chain of identities, called in Isar a
+*calculational proof*.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> choose_mult_lemma<span class="main">:</span><span>
@@ -131,7 +119,9 @@ a trick that frequently leads to simpler proofs.
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> binomial_altdef_nat mult.commute<span class="main">)</span><span>
 </span><span class="keyword1 command">qed</span></pre>
 
-Finally we get the "subset of a subset" identity in its
+Above, we avoided subtraction in favour of addition,
+a trick that frequently simplifies our work.
+Now it's trivial to derive the "subset of a subset" identity in its
 traditional form, 
 $\binom{n}{m} \binom{m}{k} = \binom{n}{k} \binom{n-k}{m-k}$.
 
@@ -140,6 +130,11 @@ $\binom{n}{m} \binom{m}{k} = \binom{n}{k} \binom{n-k}{m-k}$.
   </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">k</span> <span class="main">≤</span></span> <span class="free">m</span> <span class="main">⟹</span> <span class="free">m</span> <span class="main">≤</span></span> <span class="free">n</span> <span class="main">⟹</span> <span class="main">(</span><span class="free">n</span> <span class="keyword1">choose</span> <span class="free">m</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="free">m</span> <span class="keyword1">choose</span> <span class="free">k</span><span class="main">)</span> <span class="main">=</span> <span class="main">(</span><span class="free">n</span> <span class="keyword1">choose</span> <span class="free">k</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="main">(</span><span class="free">n</span> <span class="main">-</span> <span class="free">k</span><span class="main">)</span> <span class="keyword1">choose</span> <span class="main">(</span><span class="free">m</span> <span class="main">-</span> <span class="free">k</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">using</span> choose_mult_lemma <span class="main">[</span><span class="operator">of</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">m</span><span class="main">-</span></span><span class="free">k</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">n</span><span class="main">-</span></span><span class="free">m</span><span>"</span></span> <span class="quoted free">k</span><span class="main">]</span> <span class="keyword1 command">by</span> <span class="operator">simp</span>
 </pre>
+
+### An easy tricky proof
+
+
+oncrete Mathematics, 5.18: "this formula is easily verified by induction on *m*"
 
 the following theorem, which relates to a weighted sum of a row of Pascal's triangle.
 It involves arithmetic on type @{typ real} as well as @{typ nat}, so the function @{const real}
