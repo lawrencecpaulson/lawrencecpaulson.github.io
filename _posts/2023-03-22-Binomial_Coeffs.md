@@ -5,19 +5,19 @@ usemathjax: true
 tags: [newbies, recursion, examples, Isar, Fibonacci]
 ---
 
-The [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient) 
-are so called because of their prominence in the [binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem),
-but they have numerous other applications in combinatorics and the analysis of algorithms.
+The [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient),
+which appear in the [binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem),
+have numerous applications in combinatorics and the analysis of algorithms.
 [Donald E Knuth](https://www-cs-faculty.stanford.edu/~knuth/) 
-has written extensively about them, especially in his book 
+wrote extensively about them in his book 
 [*Concrete Mathematics*](https://en.wikipedia.org/wiki/Concrete_Mathematics).
-At their most basic, they are concerned with how many *k*-element subsets can be chosen from an *n*-element set.
 They are the elements of Pascal's triangle and satisfy a great many mathematical identities.
-Let's prove some of them using Isabelle/HOL. 
+Let's prove some of them using Isabelle/HOL. These and many more
+are available built-in.
 
 ### Warming up
 
-Let's recall the definition of the binomial coefficient "*n* choose *k*": 
+Let's recall the definition of the binomial coefficient "*n* choose *k*", which denotes how many *k*-element subsets can be chosen from an *n*-element set:
 
 $$\begin{gather*} \binom{n}{k} = \frac{n!}{k!(n-k)!}. \end{gather*}$$
 
@@ -30,7 +30,7 @@ that the sum of a row of Pascal's triangle is a power of 2:
 
 $$\begin{gather*} \sum_{k\le n} \binom{n}{k} = 2^n. \end{gather*}$$
 
-It's trivial to prove because the binomial theorem—already available in Isabelle/HOL—expresses $(x+y)^n$ in terms of binomial coefficients.
+It's trivial for us to prove because the binomial theorem—already available in Isabelle/HOL—expresses $(x+y)^n$ in terms of binomial coefficients.
 We can express the desired sum by putting $x=y=1$ in that theorem.
 Observe the syntax for instantiating variables in a theorem.
 
@@ -76,13 +76,13 @@ frequently require the user to tear out their hair.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-### Proving the *Subset of a Subset* identity
+### Proving the *subset of a subset* identity
 
 Intuitively, the identity $\binom{n}{m} \binom{m}{k} = \binom{n}{k} \binom{n-k}{m-k}$ 
-is counting the number of ways to choose $k$ elements out of $m$ elements 
+concerns the number of ways to choose $k$ elements out of $m$ elements 
 that were originally chosen out of $n$. 
-It's equivalent to the number of ways that simply
-choosing $k$ out of $n$ times the number of ways of choosing the leftover $m-k$
+It's equivalent to the number of ways of
+immediately choosing $k$ out of $n$ times the number of ways of choosing the leftover $m-k$
 elements out of the original, unwanted $n-k$ elements. Or something.
 Such intuitive arguments are a nightmare to formalise, but fortunately
 this proof is a fairly simple calculation.
@@ -135,7 +135,7 @@ $\binom{n}{m} \binom{m}{k} = \binom{n}{k} \binom{n-k}{m-k}$.
 
 In *Concrete Mathematics*, the authors remark 
 
-> there is a way to partially sum the row elements [of Pascal's triangle] if they have been multiplied by their distance from the centre
+> There is a way to partially sum the row elements [of Pascal's triangle] if they have been multiplied by their distance from the centre.
 
 They give the following formula (numbered 5.18):
 
@@ -149,7 +149,7 @@ Dangerous words. They certainly provoked me to try formulaic
 induction/simplification steps that exploded the formula into chaos.
 When that happens, it's best to try to work out the steps on paper
 first. I eventually arrived at the following, which quite possibly
-is the proof that they omitted.
+is the proof they omitted.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> choose_row_sum_weighted<span class="main">:</span><span>
@@ -241,4 +241,4 @@ As usual, the Isabelle  theory is [available to download](/Isabelle-Examples/Bin
 Knuth notes that we can generalise binomial coefficients so that the top number is real or complex,
 and this general version is also available in Isabelle/HOL.
 
-There's even an [introduction to binomial coefficients](https://nrich.maths.org/7713) aimed at teenagers.
+There's even an [introduction to binomial coefficients](https://nrich.maths.org/7713) aimed at younger mathematicians.
