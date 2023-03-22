@@ -3,7 +3,7 @@ imports Complex_Main "HOL-Number_Theory.Fib"
 begin
 
 lemma choose_row_sum: "(\<Sum>k\<le>n. n choose k) = 2^n"
-  using binomial [of 1 "1" n] by (simp add: numeral_2_eq_2)
+  using binomial [of 1 1 n] by (simp add: numeral_2_eq_2)
 
 text\<open>sums of binomial coefficients.\<close>
 lemma sum_choose_lower:

@@ -9,7 +9,7 @@ The [binomial coefficients](https://en.wikipedia.org/wiki/Binomial_coefficient),
 which appear in the [binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem),
 have numerous applications in combinatorics and the analysis of algorithms.
 [Donald E Knuth](https://www-cs-faculty.stanford.edu/~knuth/) 
-wrote extensively about them in his book 
+wrote extensively about them in the book 
 [*Concrete Mathematics*](https://en.wikipedia.org/wiki/Concrete_Mathematics).
 They are the elements of Pascal's triangle and satisfy a great many mathematical identities.
 Let's prove some of them using Isabelle/HOL. These and many more
@@ -36,7 +36,7 @@ Observe the syntax for instantiating variables in a theorem.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> choose_row_sum<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">∑</span><span class="bound">k</span><span class="main">≤</span><span class="free">n</span><span class="main">.</span> <span class="free">n</span> <span class="keyword1">choose</span></span> <span class="bound">k</span><span class="main">)</span> <span class="main">=</span></span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span>"</span><span>
-  </span><span class="keyword1 command">using</span> binomial <span class="main">[</span><span class="operator">of</span> <span class="quoted main">1</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">1</span></span><span>"</span></span> <span class="quoted free">n</span><span class="main">]</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> numeral_2_eq_2<span class="main">)</span>
+  </span><span class="keyword1 command">using</span> binomial <span class="main">[</span><span class="operator">of</span> <span class="quoted main">1</span> <span class="quoted"><span class="quoted"><span class="main">1</span></span></span> <span class="quoted free">n</span><span class="main">]</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> numeral_2_eq_2<span class="main">)</span>
 </pre>
 
 Many other identities are trivial inductions. These two are hardly worth a discussion.
@@ -238,7 +238,8 @@ Armed with this fact, the identity is easy to prove.
 
 As usual, the Isabelle  theory is [available to download](/Isabelle-Examples/Binomial_Coeffs.thy).
 
-Knuth notes that we can generalise binomial coefficients so that the top number is real or complex,
-and this general version is also available in Isabelle/HOL.
+Knuth notes that we can generalise binomial coefficients so that the top number is real or complex.
+This generalisation (accomplished via type classes) 
+is also available in Isabelle/HOL.
 
 There's even an [introduction to binomial coefficients](https://nrich.maths.org/7713) aimed at younger mathematicians.
