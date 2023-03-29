@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Wittgenstein on natural science, mathematics and logic
-tags: [general]
+tags: [general,David Hilbert]
 ---
 In a blog devoted to mathematics and logic, it's hard to avoid Wittgenstein.
 Wittgenstein saw his main contributions being to the philosophy of mathematics
@@ -82,12 +82,15 @@ who had a point, because his own field of study — combinatorial logic —
 was indeed concerned with meaningless symbol strings.
 He can be compared to a ballerina declaring that work is nothing but dancing.
 
-Hilbert was also a proponent of formalism, in my opinion as a response
+David Hilbert was also a proponent of formalism, in my opinion as a response
 to the numerous paradoxes that had rocked mathematics since the beginning of the 20th century.
-He was making a desperate attempt to salvage from the wreckage 
+Having declared that Cantor had created paradise, 
+he obviously did find meaning in mathematics.
+His formalism was a desperate attempt to 
+[salvage from the wreckage]({% post_url 2023-02-01-On-the-infinite %}) 
 as much mathematics as possible.
-His chosen tool was *formalisation*: 
-reducing everything to axiom systems that could be proved be consistent.
+His chosen tool–*Hilbert's programme*–was to
+reduce everything to a formal, provably consistent axiom system.
 But the very need for such a programme shows 
 that mathematics had not been conducted formally before.
 How did Wittgenstein get the idea that it had?
