@@ -80,10 +80,12 @@ Although Wittgenstein's view is particularly extreme, he's not alone.
 One of the main proponents of formalism was [Haskell B Curry](https://en.wikipedia.org/wiki/Haskell_Curry),
 who had a point, because his own field of study — combinatorial logic — 
 was indeed concerned with meaningless symbol strings.
-He can be compared to a ballerina declaring that work is nothing but dancing.
+He might be compared to a ballerina declaring that work is nothing but dancing.
 
 David Hilbert was also a proponent of formalism, in my opinion as a response
 to the numerous paradoxes that had rocked mathematics since the beginning of the 20th century.
+A hedgehog, confronted with mortal danger, rolls up into a ball,
+but Hilbert was no hedgehog.
 Having declared that Cantor had created paradise, 
 he obviously did find meaning in mathematics.
 His formalism was a desperate attempt to 
