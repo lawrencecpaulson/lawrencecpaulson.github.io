@@ -16,7 +16,9 @@ Here we look at an Isabelle/HOL proof that the exponential function yields irrat
 Let's be precise about that claim: $\exp r$ is irrational for all rational, nonzero $r$.
 Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive rational $r≠1$.
 
-The authors present a simple 19th-century [proof](https://proofsfromthebook.github.io/7) (alternative [source](https://planetmath.org/erisirrationalforrinmathbbqsetminus0)) that relies on nothing other than differentiation and integration.
+The authors present a simple 19th-century 
+[proof](https://planetmath.org/erisirrationalforrinmathbbqsetminus0) 
+that relies on nothing other than differentiation and integration.
 I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs and we can look at some highlights here.
 
 The proof begins by defining the function
