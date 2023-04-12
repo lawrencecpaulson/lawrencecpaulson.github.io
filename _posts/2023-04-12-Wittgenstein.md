@@ -72,7 +72,8 @@ that's something. But on to mathematics.
 
 ### Mathematics
 
-It's the easiest to quote from the *Stanford Encyclopaedia of Philosophy*:
+It's the easiest to quote from [relevant entry](https://plato.stanford.edu/entries/wittgenstein-mathematics/) 
+of the *Stanford Encyclopaedia of Philosophy*:
 
 > The *core idea* of Wittgenstein’s formalism from 1929 (if not 1918) through 1944 is that mathematics is essentially syntactical, devoid of reference and semantics. The most obvious aspect of this view, which has been noted by numerous commentators who do not refer to Wittgenstein as a ‘formalist’ ... is that, *contra Platonism*, the signs and propositions of a mathematical calculus do not *refer* to anything. ... When we prove a theorem or decide a proposition, we operate in a *purely formal*, syntactical manner. 
 
@@ -83,7 +84,8 @@ was indeed concerned with meaningless symbol strings.
 He might be compared to a ballerina declaring that work is nothing but dancing.
 
 David Hilbert was also a proponent of formalism, in my opinion as a response
-to the numerous paradoxes that had rocked mathematics since the beginning of the 20th century.
+to the [numerous paradoxes](https://plato.stanford.edu/entries/settheory-early/#CritPeri) 
+that had rocked mathematics since the beginning of the 20th century.
 A hedgehog, confronted with mortal danger, rolls up into a ball,
 but Hilbert was no hedgehog.
 Having declared that Cantor had created paradise, 
@@ -108,14 +110,25 @@ Unsound and intuitive techniques dominated until the mid-nineteenth century,
 when a concentrated effort was undertaken by Cauchy and Weierstrass
 (getting rid of infinitesimals) and later Frege, Whitehead, Russell
 (the first serious effort at formalisation).
-The 20th century saw a concerted effort to purge intuition from mathematics,
-and there is no need to purge something that never existed.
+The 20th century saw a concerted effort to purge intuition from mathematics.
+There is no need to purge something that never existed.
 
-I have particular knowledge about this topic, since my very field of research is the 
-formalisation of mathematics.  I'm aware of many instances were a mathematical proof
+I have particular knowledge about the formalist philosphy: my field of research is the 
+formalisation of mathematics. I'm aware of many instances were a mathematical proof
 was incorrect, yet the actual claim of the theorem still held. If proofs
-are mere calculations how do mathematicians perceive the truth of of claims
-for which they have no proof?
+are mere calculations, then how do mathematicians perceive the truth of of claims
+for which they have no proof? If mathematics is meaningless, 
+then why have so many mathematical conceptions aroused such visceral emotions?
+
+* [irrational numbers](https://nrich.maths.org/2671)
+* [non-Riemannian geometry](https://mathshistory.st-andrews.ac.uk/HistTopics/Non-Euclidean_geometry/)
+* [infinitesimals](https://en.wikipedia.org/wiki/The_Analyst), 
+* [Cantor's set theory](https://infinityplusonemath.wordpress.com/2017/02/11/no-one-liked-cantor/)
+* [the axiom of choice](https://plato.stanford.edu/entries/axiom-choice/)
+
+The vivid language that mathematicians used to debate these points does not suggest 
+meaninglessness. Contrast with something that's really meaningless, like a Sudoku;
+try to imagine a Sudoku causing outrage or scandal.
 
 But the really big problem with Wittgenstein's calculational view
 is his apparent belief that mathematics consists entirely of proving things.
@@ -136,7 +149,7 @@ But there was no calculation involved in arriving at the concept of a group.
 The same could be said of many other mathematical conceptions that we take for granted, 
 such as measure theory or Latin squares.
 
-One of the most intriguing of these is conic sections.
+One of the most intriguing of these is [conic sections](https://en.wikipedia.org/wiki/Conic_section).
 These were central to Greek geometry, and we might well wonder why.
 Certain kinds of mathematics were of obvious value to ancient people: 
 arithmetic, for counting; plane geometry, for land surveying;
@@ -184,10 +197,19 @@ Guys, 99% of the time, not even set theorists refer to those axioms.
 Their mode of working is as intuitive as anybody else's.
 Other mathematicians are unlikely to be thinking about set theory at all.
 
+While on the subject of intuition, let's have 
+[Gödel describing Russell's discovery](https://doi.org/10.1017/CBO9781139171519.024) of his famous paradox:
+
+> By analyzing the paradoxes to which Cantor's set theory had led, [Russell] freed them from all mathematical technicalities, thus bringing to light the amazing fact that our logical intuitions (i.e., intuitions concerning such notions as: truth, concept, being, class, etc.) are self-contradictory.[^2]
+
+And this was no meaningless calculation, but a cataclysm that seemed to threaten mathematics itself.
+
+[^2]: Kurt Gödel, Russell's mathematical logic. *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447-469
+
 ### Postscript
 
 Wittgenstein served in World War I. His diaries and letters are powerful:
 
 > Life is a form of torture from which there is only temporary reprieve until one can be subjected to further torments. A terrible assortment of torments. An exhausting march, a cough-filled night, a company of drunks, a company of mean and stupid people. Do good and be happy about your virtue. I am sick and lead a bad life. God help me. I am a poor unlucky being. God deliver me and grant me peace! Amen.
 
-Without doubt, he could write clearly and with plain language when he had something to say.
+Without doubt, he could write clearly and in plain language when he had something to say.
