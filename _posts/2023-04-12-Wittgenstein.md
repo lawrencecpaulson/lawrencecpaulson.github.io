@@ -157,7 +157,7 @@ three-dimensional geometry, for architecture. But what could possibly be the use
 
 ![Types of conic sections](/images/TypesOfConicSections.jpg)
 
-[^1]: JensVyff, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons
+[^1]: JensVyff, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons
 
 Somebody long ago fixated on cones and their sections: the circle, the ellipse, the parabola
 and the hyperbola. We don't know why, but we know it wasn't a calculation.
@@ -198,13 +198,13 @@ Their mode of working is as intuitive as anybody else's.
 Other mathematicians are unlikely to be thinking about set theory at all.
 
 While on the subject of intuition, let's have 
-[Gödel describing Russell's discovery](https://doi.org/10.1017/CBO9781139171519.024) of his famous paradox:
+[Gödel describing Russell's discovery](/papers/Russells-mathematical-logic.pdf) of his famous paradox:
 
 > By analyzing the paradoxes to which Cantor's set theory had led, [Russell] freed them from all mathematical technicalities, thus bringing to light the amazing fact that our logical intuitions (i.e., intuitions concerning such notions as: truth, concept, being, class, etc.) are self-contradictory.[^2]
 
 And this was no meaningless calculation, but a cataclysm that seemed to threaten mathematics itself.
 
-[^2]: Kurt Gödel, Russell's mathematical logic. *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447-469
+[^2]: Kurt Gödel, [Russell's mathematical logic](https://doi.org/10.1017/CBO9781139171519.024). *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447-469
 
 ### Postscript
 
