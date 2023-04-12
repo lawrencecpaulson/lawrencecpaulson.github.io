@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising Gödel's incompleteness theorems, II: Σ-formulas"
 usemathjax: true
-tags: [Isar, incompleteness, nominal package]
+tags: [Isar, incompleteness, nominal package, Kurt Gödel]
 ---
 
 Gödel's theorem, more than other deep results, is burdened with numerous tiresome definitions and lemmas. It's necessary to codify in full the axioms and inference rules of HF, the [internal logic]({% post_url 2022-05-18-Formalising-Incompleteness-I %}), as well as a toolbox of derived syntactic primitives needed for expressing and proving HF statements. (It's also necessary to prove that the primitives actually work, a particularly tiresome step that most authors omit.)

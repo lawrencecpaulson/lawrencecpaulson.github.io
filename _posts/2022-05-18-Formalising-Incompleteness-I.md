@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising Gödel's incompleteness theorems, I"
 usemathjax: true
-tags: [incompleteness, nominal package, Archive of Formal Proofs]
+tags: [incompleteness, nominal package, Archive of Formal Proofs, Kurt Gödel]
 ---
 
 [Gödel's incompleteness theorems](https://plato.stanford.edu/entries/goedel-incompleteness/) state limits on formal systems.

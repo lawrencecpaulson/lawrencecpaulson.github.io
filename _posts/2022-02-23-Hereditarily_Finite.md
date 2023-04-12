@@ -2,7 +2,7 @@
 layout: post
 title:  "The hereditarily finite sets"
 usemathjax: true 
-tags: [logic, set theory]
+tags: [logic, set theory, Kurt Gödel]
 ---
 
 A set is *hereditarily finite* if it is finite and all of its elements are hereditarily finite. They satisfy the axioms of set theory with the negation of the axiom of infinity. There are countably many HF sets, and they are a natural domain for formalising computation. They also allow a straightforward treatment of Gödel's incompleteness theorems.

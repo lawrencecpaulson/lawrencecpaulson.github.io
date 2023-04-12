@@ -2,7 +2,7 @@
 layout: post
 title:  "Do Gödel's incompleteness theorems matter?"
 usemathjax: true
-tags: [general, logic, incompleteness, David Hilbert]
+tags: [general, logic, incompleteness, David Hilbert, Kurt Gödel]
 ---
 
 Gödel's incompleteness theorems are often regarded as placing strict limits on the power of logic. Don't they immediately imply that any project to formalise mathematics is doomed to fail?
