@@ -190,7 +190,7 @@ to formalise more or less the *whole of mathematics*.
 
 The field as a whole has advanced tremendously, driven largely by the huge
 and enthusiastic Lean community. One sign of progress is the
-[famous list](https://www.cs.ru.nl/~freek/100/) of 100 rather arbitrarily chosen
+[famous list](https://www.cs.ru.nl/~freek/100/) of 100 rather arbitrary
 but notable theorems. It has taken a long time, but now 99 of the 100 theorems
-has been formalised in one system or another, with Isabelle and HOL Light
-tied at the top with 99. The only one left is Fermat's Last Theorem.
+have been formalised in one system or another, with Isabelle and HOL Light
+tied at the top with 87. There's only one left: Fermat's Last Theorem.
