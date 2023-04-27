@@ -121,7 +121,8 @@ offering a [great many search strategies](https://www.researchgate.net/publicati
 based on anything from simple keywords
 to abstract mathematical concepts. It is a complex area and we don't claim to have solved
 all the problems, but SErAPIS has quite a few users.
-
+And Yiannos has much more in the pipeline.
+ 
 ### Machine learning experiments
 
 The proposal included the task of Intelligent User Support.
