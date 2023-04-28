@@ -8,10 +8,11 @@ tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs, HOL Light]
 One of the [my first posts]({% post_url 2021-12-08-ALEXANDRIA %})
 described [ALEXANDRIA](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/),
 my [ERC Advanced Grant](https://cordis.europa.eu/project/id/742178) aiming to bring verification technology to professional mathematicians.
-This project ends on 30 August 2023 (extended by a year on account of the pandemic),
+This project ends on 31 August 2023 (extended by a year on account of the pandemic),
 so it's surely time to update the community on what has been accomplished.
 As outlined in the earlier post, our starting point was a growing acceptance
-of the prevalence of errors in mathematics, and a small body of formal mathematical developments
+of the prevalence of errors in mathematics, 
+along with a small body of formal mathematical developments
 that had been undertaken in a variety of proof assistants.
 We would mainly be using [Isabelle/HOL](https://isabelle.in.tum.de), which had been
 designed to be agnostic as to applications but strongly influenced
@@ -189,7 +190,7 @@ we reach the surprising conclusion
 that they were correct: their logic is indeed strong enough
 to formalise more or less the *whole of mathematics*.
 
-The field as a whole has advanced tremendously, driven largely by the huge
+The field as a whole has advanced tremendously, driven also by the huge
 and enthusiastic Lean community. One sign of progress is the
 [famous list](https://www.cs.ru.nl/~freek/100/) of 100 rather arbitrary
 but notable theorems. It has taken a long time, but now 99 of the 100 theorems
