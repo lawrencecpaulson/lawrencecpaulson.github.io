@@ -11,7 +11,7 @@ my [ERC Advanced Grant](https://cordis.europa.eu/project/id/742178) aiming to br
 This project ends on 30 August 2023 (extended by a year on account of the pandemic),
 so it's surely time to update the community on what has been accomplished.
 As outlined in the earlier post, our starting point was a growing acceptance
-the prevalence of errors in mathematics and a small body of formal mathematical developments
+of the prevalence of errors in mathematics, and a small body of formal mathematical developments
 that had been undertaken in a variety of proof assistants.
 We would mainly be using [Isabelle/HOL](https://isabelle.in.tum.de), which had been
 designed to be agnostic as to applications but strongly influenced
@@ -54,7 +54,7 @@ The root-counting results mentioned above were an early focus of Wenda
 they belong to
 [real algebraic geometry](https://en.wikipedia.org/wiki/Real_algebraic_geometry),
 and one objective of that work is an efficient, verified decision procedure for deciding
-inequalities and inequalities between polynomials.
+equalities and inequalities between polynomials.
 
 Angeliki wrote up her reactions to Isabelle/HOL from the perspective of a mathematician in her paper [Formalising Mathematics – in Praxis](https://link.springer.com/article/10.1365/s13291-020-00221-1).
 
@@ -62,8 +62,8 @@ Angeliki wrote up her reactions to Isabelle/HOL from the perspective of a mathem
  
 Around this time, Kevin Buzzard had launched 
 [his own project](https://xenaproject.wordpress.com) on formalising mathematics
-using Lean. As number theorist, he brought his own perspective.
-Earlier researchers had formalised huge proofs such as 
+using Lean. As a number theorist, he brought his own perspective.
+Earlier researchers had formalised huge proofs such as the
 [odd order theorem](https://hal.inria.fr/hal-00816699/document), 
 but on the whole they had been working
 with simple objects far removed from the sophistication of mathematical practice.
@@ -72,7 +72,7 @@ took the viewpoint that before you can even think about proving theorems,
 you need to show that you can capture some pretty intricate *definitions*.
 
 We also understood the need to tackle difficult material, preferably from a wide range
-our mathematical subdisciplines. Meanwhile, Angeliki noticed that that the journal
+of mathematical subdisciplines. Meanwhile, Angeliki noticed that that the journal
 *Experimental Mathematics* had announced a special issue on formalisation. We decided to aim for that, with substantial projects:
  
 * [Irrationality and transcendence criteria for infinite series in Isabelle/HOL](https://doi.org/10.1080/10586458.2021.1980465), formalising material from three different research papers: by Erdős and Straus, Hančl, and Hančl and Rucki
