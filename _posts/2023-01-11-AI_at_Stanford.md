@@ -2,7 +2,7 @@
 layout: post
 title:  "Memories: artificial intelligence at Stanford in the 70s"
 usemathjax: true 
-tags: [memories,LCF,Stanford]
+tags: [memories,LCF,Stanford,Hao Wang]
 ---
 
 These days, artificial intelligence (AI) is synonymous with neural networks

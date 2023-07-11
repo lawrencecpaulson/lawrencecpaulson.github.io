@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising mathematics in set theory"
 usemathjax: true 
-tags: [resolution, Mizar, QED project, set theory]
+tags: [resolution, Mizar, QED project, set theory, Hao Wang]
 ---
 
 [Last week's post]({% post_url 2022-01-26-Set_theory %}) mentioned the mechanisation of some major results of ZF set theory in proof assistants. In fact, the use of automated theorem provers with various forms of set theory goes back a long way. Two stronger set theories have attracted interest: von Neumann–Bernays–Gödel (NBG) and Tarski–Grothendieck (TG). All of this work was motivated by the goal of mechanising mathematics.
