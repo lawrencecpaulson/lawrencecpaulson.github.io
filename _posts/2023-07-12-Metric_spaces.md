@@ -7,9 +7,11 @@ tags: [general, Isabelle, sledgehammer, locales, HOL Light]
 
 I'm sorry that there have been no posts since April. I've been busy with a side project: porting the [HOL Light metric space library](https://doi.org/10.1007/s10817-017-9412-x
 ) 
-to Isabelle in time for the upcoming release. It was a big job: the chunk I grabbed initially comprised some 1335 lemmas, over 24K lines and nearly 1.2M bytes. Some of the lemmas turned out to have been ported previously, or otherwise turned out to be unnecessary; on the other hand, quite a few additional lemmas were needed. The material included metric spaces and many associated concepts, also advanced material about toplogical spaces, the relationships among different kinds of spaces, 
-and also closure properties, especially under general products. 
-Major contributions include Urysohn's lemma and the Tietze extension theorem, the Baire Category Theorem and the Banach Fixed-Point Theorem.
+to Isabelle in time for the upcoming release. It was a big job: the chunk I grabbed initially comprised some 1335 lemmas, over 24K lines and nearly 1.2M bytes. Some of the lemmas turned out to have been ported previously, or otherwise turned out to be unnecessary; on the other hand, quite a few additional lemmas were needed. The material included metric spaces and many associated concepts, advanced material about toplogical spaces, the relationships among different kinds of spaces, 
+and finally closure properties, especially under general products. 
+Major contributions include Urysohn's lemma and the [Tietze extension theorem](https://en.wikipedia.org/wiki/Tietze_extension_theorem), 
+the [Baire Category Theorem](https://en.wikipedia.org/wiki/Baire_category_theorem) 
+and the Banach Fixed-Point Theorem.
 
 ### But what about the existing typeclass for metric spaces?
 
@@ -33,7 +35,8 @@ The metric space locale declares the carrier set (M) and the distance function (
 </pre>
 
 
-Working within the locale, declaring concepts such as open balls is straightforward:
+Working within the locale, declaring concepts such as open balls is straightforward.
+We can treat `M` and `d` as constants, and their governing assumptions as axioms:
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">mball</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">mball</span> <span class="free bound entity">x</span> <span class="free bound entity">r</span> <span class="main">≡</span> <span class="main">{</span><span class="bound">y</span><span class="main">.</span> <span class="free bound entity">x</span> <span class="main">∈</span></span> <span class="free">M</span> <span class="main">∧</span></span> <span class="bound">y</span> <span class="main">∈</span> <span class="free">M</span> <span class="main">∧</span> <span class="free">d</span> <span class="free bound entity">x</span> <span class="bound">y</span> <span class="main">&lt;</span> <span class="free bound entity">r</span>"
 
@@ -58,7 +61,7 @@ by a single mouse click.
     </span><span class="keyword2 keyword">and</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">x</span> <span class="bound">y</span><span class="main">.</span> <span class="main">⟦</span><span class="bound">x</span> <span class="main">∈</span></span> <span class="free">M</span><span class="main">;</span> <span class="bound">y</span> <span class="main">∈</span></span> <span class="free">M</span><span class="main">⟧</span> <span class="main">⟹</span> <span class="free">d</span> <span class="main">(</span><span class="free">f</span> <span class="bound">x</span><span class="main">)</span> <span class="main">(</span><span class="free">f</span> <span class="bound">y</span><span class="main">)</span> <span class="main">≤</span> <span class="free">k</span> <span class="main">*</span> <span class="free">d</span> <span class="bound">x</span> <span class="bound">y"
     </span><span class="keyword2 keyword">and</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span></span> <span class="free">M"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">y</span> <span class="main">∈</span></span> <span class="free">M"</span>
   </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">=</span></span> <span class="free">y"</span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> ccfv_SIG<span class="main mdist_pos_less mult_le_cancel_right1 assms<span class="main">)</span>
+  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> ccfv_SIG) mdist_pos_less mult_le_cancel_right1 assms<span class="main">)</span>
 </pre>
 
 
@@ -129,8 +132,9 @@ Fortunately, such decisions are not committal, and I frequently started by provi
 
 Having declared the `Metric_space` locale, my development immediately
 interprets it using the type class version.
-What's going on not obvious; the clue is `dist`, which is the distance function for the type class. 
-We've just established that anything involving the `metric_space` type class now applies as well to the more general locale framework.
+What's going on not obvious; the clue is `dist`, which is the distance function for the 
+`metric_space` type class. 
+We've just established that anything involving the type class now applies as well to the more general locale framework.
 
 <pre class="source">
 <span class="keyword1 command">interpretation</span> Met_TC<span class="main">:</span> Metric_space <span class="quoted">UNIV</span> <span class="quoted">dist
@@ -152,9 +156,10 @@ Now the equivalence between the type class and locale concepts is proved trivial
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> Met_TC.mtopology_def<span class="main">)</span>
 </pre>
 
-And so, simplification alone will drop us from the locale level to the type class level whenever this is possible.
+And so, simplification alone will drop us from the locale level to the type class level whenever this is possible: that is, whenever the carrier set is actually a type.
 
-The role of type classes is a key difference between simply typed and dependent typed formalisms. Type classes play a bigger role in the latter (but with the risk of performance issues and problems with multiple inheritance); with the former, we may be stuck with having to duplicate some proofs.
+The role of type classes is a key difference between simply typed and dependent typed formalisms. Type classes play a bigger role in the latter (but with the risk of performance issues and the impossibility of multiple inheritance); 
+with the former, we may be stuck with having to duplicate some proofs.
 
 
 ### On the horrors of HOL Light proofs
@@ -173,11 +178,11 @@ A ubiquitous horror is [MP_TAC](https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/M
 introduced by yours truly around 1984. It stuffs a given theorem $T$ 
 into the current goal $G$ to create the implication $T\Longrightarrow G$.
 Typically $T$ would have been produced from something else, by instantiation at least, and is about to undergo rewriting and other transformations.
-(In HOL Light, as in its predecessors, the simplifier never altered a goal's *assumptions*, which is why we want $T$ in the goal formula itself.) 
-Having simplified $T$ to say $T_1\land T_2$, a proof might move one of them to the assumptions (via [ASSUME_TAC](https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME_TAC.html))
+(In HOL Light, as in its predecessors, the simplifier never alters a goal's *assumptions*, which is why we want $T$ in the goal formula itself.) 
+Having simplified $T$ to say $T_1\land T_2$, the following tactic might move one of them to the assumptions (via [ASSUME_TAC](https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME_TAC.html))
 and put back the other, via another MP_TAC call, to work on some more.
 It's basically a stack machine computation, slowly massaging the goal into `T` (true).
-Some of them are grimly incomprehensible.
+Some of these proofs are grimly incomprehensible.
 Then the next proof might consist of a pleasant string of [SUBGOAL_TAC](https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBGOAL_TAC.html) calls,
 almost as nice as an Isabelle proof.
 
