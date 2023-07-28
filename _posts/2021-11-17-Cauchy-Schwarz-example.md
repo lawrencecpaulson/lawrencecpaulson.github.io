@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "An Experiment: The Cauchy–Schwarz inequality"
+title:  "An Experiment: the Cauchy–Schwarz inequality"
 usemathjax: true
 tags: [examples, Archive of Formal Proofs, analysis, Isar]
 ---

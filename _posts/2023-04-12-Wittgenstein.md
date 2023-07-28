@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Wittgenstein on natural science, mathematics and logic
-tags: [general, David Hilbert, Kurt Gödel]
+tags: [philosophy, David Hilbert, Kurt Gödel]
 ---
 In a blog devoted to mathematics and logic, it's hard to avoid Wittgenstein.
 Wittgenstein saw his main contributions being to the philosophy of mathematics

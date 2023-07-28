@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Memories: First exposure to computers"
+title:  "Memories: first exposure to computers"
 usemathjax: true
 tags: [general, memories]
 ---

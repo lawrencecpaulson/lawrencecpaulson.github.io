@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The ALEXANDRIA Project: What has been accomplished?"
+title:  "The ALEXANDRIA Project: what has been accomplished?"
 usemathjax: true 
 tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs, HOL Light]
 ---
