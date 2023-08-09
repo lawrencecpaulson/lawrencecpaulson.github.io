@@ -122,6 +122,8 @@ Such a search was carried out and the question settled negatively in 1989,
 too late for Ryser, who had died in 1985.
 The result has major implications for combinatorics despite the absence
 of a surveyable proof. 
+It was [confirmed recently](https://arxiv.org/abs/2012.04715) with the help of a SAT solver,
+and therefore has been proved in logic, even though the proof is colossal.
 
 People are legitimately uneasy about being wholly dependent on 
 a piece of software. This cannot be compared to astronomers using a powerful telescope
