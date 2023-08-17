@@ -16,7 +16,7 @@ All of the main proof assistants in use today maintain a clear distinction
 between propositions and types.
 The principle is nevertheless elegant, beautiful and theoretically fruitful.
 
-### Material implication
+### Material implication versus intuitionistic truth
 
 The most natural route to propositions as types runs through *material implication*.
 "If it rained then the path will be muddy" sounds like a reasonable instance
@@ -28,7 +28,8 @@ $\neg A\lor B$.
 Many people have thought that $A\to B$ should hold only if there is some sort 
 of connection between $A$ and $B$, and many approaches have been tried.
 The most convincing explanation comes from the intuitionists,
-from their [conception of mathematical truth](https://plato.stanford.edu/entries/intuitionistic-logic-development/#ProoInte) itself:
+specifically, from Heyting's 
+[conception of mathematical truth](https://plato.stanford.edu/entries/intuitionistic-logic-development/#ProoInte) itself:
 
 > A proof of an atomic proposition $A$ is given by presenting a mathematical construction in Brouwer’s sense that makes $A$ true.
 
@@ -38,16 +39,18 @@ The word *proof* is often used in place of *mathematical construction*, but ther
 
 In the case of implication, we now have
 
-- evidence for $A\to B$ consists of a construction that transforms evidence for $A$ into evidence for $B$
+- evidence for $A\to B$ consists of a construction that effectively transforms evidence for $A$ into evidence for $B$
 
 This surely is the sought-for connection between $A$ and $B$.
-And it's enough to see prositions as types in action.
+
+### Prositions as types in action
+
 A simple proof system for intuitionistic propositional logic has just two axioms:
 
 - axiom K: $\quad A\to(B\to A)$
 - axiom S: $\quad(A\to(B\to C))\to ((A\to B)\to(A\to C))$
 
-And it has one inference rule, modus ponens, which from $A\to B$ and $A$
+And it has one inference rule, *modus ponens*, which from $A\to B$ and $A$
 infers $B$. Here is a proof of $A\to A$:
 
 $$
@@ -61,105 +64,82 @@ $$
 \end{align}
 $$
 
-As a proof system, it is terrible. But the propositions as types principle holds: this is essentially the same as the **S**-**K** system of combinators. Function application corresponds to modus ponens,
+As a proof system, it sucks. But the propositions as types principle holds: this is essentially the same as the **S**-**K** [system of combinators](https://en.wikipedia.org/wiki/Combinatory_logic). 
+Function application corresponds to modus ponens,
 The combinators correspond to the axioms (which give their types), 
 and the derivation of the identity combinator 
-as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). The system of combinators is equally terrible.
+as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). The system of combinators also sucks.
+It can be used to translate any λ-calculus term into combinators, but the blowup is exponential (as with the proof system).
 
-Now if we switch to a natural deduction system, where we can drive
+Now suppose we switch to a [natural deduction](https://plato.stanford.edu/entries/natural-deduction/) system, 
+where we can derive
 $A\to B$ provided we can prove $B$ from the assumption $A$,
 Then we have essentially the same system as the typing rules 
-for the λ-calculus, where 
+for the [λ-calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus), where 
 
 $$ \lambda x. b(x) : A\to B$$
 
 provided $b(x):B$ for arbitrary $x:A$.
 
-In a prior post I have described how other logical symbols are rendered as types, specifically in the context of Martin-Löf type theory.
+In a [prior post]({% post_url 2021-11-24-Intuitionism %}) I have described how other logical symbols are rendered as types, specifically in the context of Martin-Löf type theory.
+In particular, the type $(\Pi x:A) B(x)$ consists of functions $\lambda x. b(x)$ where $b(x):B(x)$ for all $x:A$. The function space $A\to B$ is the special case where $B$ does not depend on $x$. 
 
-### AUTOMATH
+We need additional types, namely $(\Sigma x:A) B(x)$ and $A+B$, 
+in order to obtain the full intuitionistic predicate calculus. 
+De Bruijn's AUTOMATH [provided the $\Pi$ type alone](https://pure.tue.nl/ws/files/4428179/597611.pdf),
+but that was enough to get propositions as types.
 
-De Bruijn's AUTOMATH, which I have written about earlier,
+### AUTOMATH and irrelevance of proofs
+
+De Bruijn's AUTOMATH, which I have 
+[written about earlier]({% post_url 2021-11-03-AUTOMATH %}),
 is the first proof checker to actually implement propositions as types.
 He did this in the literal sense of providing symbols TYPE and PROP,
-Which internally were anonymous.	 
+which internally were synonymous—at first. However
 
+> One of the forms of the logical double negation axiom, written by means of “prop”, turns into the axiom about Hilbert’s $\epsilon$-operator if we replace prop by type. So if we want to do classical logic and do not want to accept the axiom of choice, we need some distinction.[^1]
 
+[^1]: NG de Bruijn, [A Survey of the Project Automath](https://pure.tue.nl/ws/files/1892191/597622.pdf), in: Seldin, J.P. and Hindley, J.R.,eds., To H.B. Curry: Esaays on Combinatory Logic, Lambda Calculus and Formalism (Academic Press, 1980), 152.
 
-[Wadler article](https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf)
+But a more compelling reason is irrelevance of proofs:
 
+> If $x$ is a real number, then $P(x)$ stands for “proof of $x > 0$”. Now we define “$\log$” (the logarithm) in the context [x : real] [y : P(x)],and if we want to talk about $\log 3$ we have to write $\log(3,p)$, where $p$ is some proof for $3 > 0$. Now the $p$ is relevant, and we have some trouble in saying that $\log(3,p)$ does not depend on $p$. ... Some time and some annoyance can be saved if we extend the language by proclaiming that proofs of one and the same proposition are always definitionally equal.[^2]
 
+[^2]: Ibid, p. 159.
 
+As de Bruijn and others comment, irrelevance of proofs is 
+mainly pertinent to classical reasoning. For constructivists, it 
+utterly destroys Heyting's conception of intuitionistic truth. 
+But even proof assistants that are mostly used  constructively, such as Agda and Coq, provide
+[definitionally proof-irrelevant propositions](https://agda.readthedocs.io/en/v2.6.0/language/prop.html).
 
-- evidence for $A\lor B$ consists of evidence for $A$ or evidence for $B$ along with an indication of which. So in particular it rejects the *law of the excluded middle* (LEM), which claims $A\lor \neg A$ while providing no proof.
+### Intuitionistic predicate logic, continued
 
-- evidence for $\exists x. B(x)$ consists of a specific witnessing value $a$ paired with proof of $B(a)$. The formula $\neg (\forall x. \neg B(x))$ is not equivalent: refuting $\forall x. \neg B(x)$ does not yield such an $a$.
-
-Continuing the above table for [other connectives](https://plato.stanford.edu/entries/intuitionistic-logic-development/), we have
+Other logical connectives are easily represented by types.
+First, the intuitionistic interpretation:
 
 - evidence for $A\land B$ consists of evidence for $A$ paired with evidence for $B$
+- evidence for $\exists x. B(x)$ consists of a specific witnessing value $a$, paired with proof of $B(a)$. 
+- evidence for $A\lor B$ consists of evidence for $A$ or evidence for $B$ *along with an indication of which*. (So, we don't have $A\lor\neg A$ when we don't know which one holds.) 
 
-- evidence for $A\to B$ consists of a construction that transforms every proof of $A$ into evidence for $B$
+The first two cases are handled by type $(\Sigma x:A) B(x)$,
+which consists of pairs $\langle a,b \rangle$ where $a:A$ and $b:B(a)$, generalising the binary Cartesian product. The third case
+is handled by type $A+B$, the binary disjoint sum.
+The most faithful realisation of this scheme is 
+[Martin-Löf type theory](https://lawrencecpaulson.github.io/tag/Martin-Löf_type_theory).
 
-- evidence for $\forall x. B(x) $ consists of a construction that transforms every element $x$ into evidence for $B(a)$
+As soon as we impose irrelevance of proofs, this beautiful scheme falls apart. The point of the intuitionist interpretation is to capture the structure of proofs/evidence; with irrelevance, even
+$A+B$ can have at most one element.
 
-The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/entries/brouwer/), while the interpretation of logical connectives sketched above is largely the work of Arend Heyting. Brouwer accepted LEM for finite constructions, e.g. $n$ is prime or $n$ is not prime even for $n$ inconceivably large, because the decision can be calculated *in principle*, even if it's utterly unfeasible. On the other hand, there is no effective test of whether a given real number (like $z$ above) is rational. 
+Proof assistants do not actually use propositions as types
+for the same reason that functional programming languages do not 
+actually use the λ-calculus: because something that is beautiful in theory need not have any practical value whatever.
+It is still possible to take inspiration from the theory.
 
-The rejection of LEM implies the rejection of many other familiar laws of Boolean logic, such as $\neg \neg A \to A$ and $\neg(A\land B) \to \neg A \lor \neg B$.
-But for computable properties, LEM continues to hold along with those other Boolean laws.
-Because of this, proofs of simple properties about computable objects such as integers and lists are not impacted by intuitionism. Coq users will be fully aware that type `bool`, which is the type of booleans, enjoys the LEM and must not be confused with the type `prop` of propositions.
+### Postscript
 
-### Intuitionistic type theory
-
-Intuitionistic mathematics is clearly linked with computation and this link strengthens once we notice that both $\exists$ and $\land$ involve ordered pairs and $\forall$ and $\to$ involve computable functions. This suggests a system of types where standard structures also govern these collections of proofs: [propositions as types](https://plato.stanford.edu/entries/type-theory-intuitionistic/#PropType).
-
-- The type $(\Sigma x:A) B(x)$ consists of pairs $\langle a,b \rangle$ where $a:A$ and $b:B(a)$, generalising the binary Cartesian product. It represents proofs of both $(\exists x:A) B(x)$ and $A\land B$.
- 
-- The type $(\Pi x:A) B(x)$ consists of functions $f$ where $f(a):B(a)$ if $a:A$, generalising the function space. It represents proofs of both $(\forall x:A) B(x)$ and $A\to B$.
-
-- The type $A+B$, the binary disjoint sum, represents proofs of disjunctions.
-
-Continuing in this vein yields Martin-Löf [intuitionistic type theory](https://plato.stanford.edu/entries/type-theory-intuitionistic/), which proved highly influential since its first versions appeared during the 1970s. Today, it is realised in the form of [Agda](https://wiki.portal.chalmers.se/agda/pmwiki.php), which is both a programming language and a proof assistant based on this type theory.
-
-
-### The axiom of choice
-
-As we have seen in a [previous post]({% post_url 2021-11-10-Axiom_of_Choice%}), 
-the [axiom of choice](https://plato.stanford.edu/entries/mathematics-constructive/#AxioChoi)
-can be contentious.
-It was strongly opposed by a number of prominent mathematicians in the early days, but later gained acceptance even among intuitionists. Errett Bishop, who founded and developed the field of constructive analysis, wrote
-
-> A choice function exists in constructive mathematics, because a choice is *implied by the very meaning of existence*[^1]
-
-[^1]: Errett Bishop and Douglas Bridges, *Constructive Analysis* (Springer, 1985), p. 12. 
-
-Michael Dummett, Professor of Logic at Oxford, wrote (continuing for pages with extended examples) that
-
-> It might at first seem surprising that in a system of constructive mathematics we should adopt as an axiom the Axiom of Choice, which has been looked at askance on constructive grounds. The fact is, however, that the axiom is only dubious under a half-hearted platonistic interpretation of the quantifiers.[^2]
-
-[^2]: Michael Dummett, *Elements of Intuitionism* (Oxford, 1977), 52–54.
-
-Martin-Löf designed his type theory with the aim that AC should be provable and in his landmark [Constructive mathematics and computer programming](http://www.jstor.com/stable/37448) presented a detailed derivation of it as his only example. Briefly, if $(\forall x:A) (\exists y:B) C(x,y)$ then  $(\exists f:A\to B) (\forall x:A) C(x,f(x))$.
-
-Spoiling the party was [Diaconescu's proof](https://doi.org/10.2307/2039868) in 1975 that in a certain category-theoretic setting, the axiom of choice implied LEM and therefore classical logic.
-His proof is [reproducible](https://plato.stanford.edu/entries/axiom-choice/#AxiChoLog) in the setting of intuitionistic set theory and seems to have driven today's intuitionists to oppose AC.
-
-It's striking that AC was seen not merely as acceptable but clear by the likes of Bishop, Bridges and Dummett. 
-Now it is being rejected and the various arguments against it have the look of post-hoc rationalisations. Of course, the alternative would be to reject intuitionism altogether. This is certainly what mathematicians have done: in my experience, the overwhelming majority of constructive mathematicians are not mathematicians at all. They are computer scientists. They are not shy about declaring that the entire world of mathematics is a house of cards. 
-
-Fermat's last theorem is an interesting point for discussion. It has a giant proof using sophisticated methods, classical reasoning throughout. If a constructive mathematician rejects this proof (and they do), then they believe it is possible that a counterexample might exist. Such a counterexample would simply consist of 
-positive integers $a$, $b$, $c$ and $n>2$ such that $a^n+b^n = c^n$. Then a finite calculation would yield an outright contradiction to classical mathematics. 
-
-I think they will be waiting a long time.
-
-
-
-
-
-
-
-
-
-
-
-
+Phil Wadler has written a hagiographic but still useful
+[article](https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf)
+about the principle. See in particular the appendix 
+for its informative discussion with William Howard, 
+who is often credited with discovering the entire idea.
