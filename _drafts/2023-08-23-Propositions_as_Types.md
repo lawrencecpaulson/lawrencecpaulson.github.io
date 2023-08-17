@@ -101,7 +101,14 @@ which internally were synonymous—at first. However
 
 [^1]: NG de Bruijn, [A Survey of the Project Automath](https://pure.tue.nl/ws/files/1892191/597622.pdf), in: Seldin, J.P. and Hindley, J.R.,eds., To H.B. Curry: Esaays on Combinatory Logic, Lambda Calculus and Formalism (Academic Press, 1980), 152.
 
-But a more compelling reason is irrelevance of proofs:
+It's not surprising that a primitive DN for double-negation,
+mapping $\neg\neg A \to A$, would also map a proof that $A$
+was nonempty into $A$ itself.
+This is the contrapositive of [Diaconescu's result](https://doi.org/10.2307/2039868)  that
+the axiom of choice implies the excluded middle (and therefore DN).
+
+But a more compelling reason to distinguish PROP from TYPE
+is *irrelevance of proofs*:
 
 > If $x$ is a real number, then $P(x)$ stands for “proof of $x > 0$”. Now we define “$\log$” (the logarithm) in the context [x : real] [y : P(x)],and if we want to talk about $\log 3$ we have to write $\log(3,p)$, where $p$ is some proof for $3 > 0$. Now the $p$ is relevant, and we have some trouble in saying that $\log(3,p)$ does not depend on $p$. ... Some time and some annoyance can be saved if we extend the language by proclaiming that proofs of one and the same proposition are always definitionally equal.[^2]
 
@@ -128,7 +135,7 @@ is handled by type $A+B$, the binary disjoint sum.
 The most faithful realisation of this scheme is 
 [Martin-Löf type theory](https://lawrencecpaulson.github.io/tag/Martin-Löf_type_theory).
 
-As soon as we impose irrelevance of proofs, this beautiful scheme falls apart. The point of the intuitionist interpretation is to capture the structure of proofs/evidence; with irrelevance, even
+As soon as we impose irrelevance of proofs, this beautiful scheme falls apart. The point of the intuitionist interpretation is to capture the structure of the proofs/evidence; with irrelevance, even
 $A+B$ can have at most one element.
 
 Proof assistants do not actually use propositions as types
