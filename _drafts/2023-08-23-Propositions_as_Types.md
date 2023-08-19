@@ -107,7 +107,14 @@ was nonempty into $A$ itself.
 This is the contrapositive of [Diaconescu's result](https://doi.org/10.2307/2039868)  that
 the axiom of choice implies the excluded middle (and therefore DN).
 
-But a more compelling reason to distinguish PROP from TYPE
+De Bruijn mentions another solution to this problem: to declare a type of Booleans and to set up the entire system of predicate logic for this new type BOOL, rather than at the level of propositions. 
+It's like how how predicate logic is formalised separately 
+from the 
+[logical framework in Isabelle]({% post_url 2022-07-13-Isabelle_influences %}). 
+This solution allows PROP and TYPE to be synonomous, 
+except that real propositions actually have type BOOL.
+
+A more compelling reason to distinguish PROP from TYPE
 is *irrelevance of proofs*:
 
 > If $x$ is a real number, then $P(x)$ stands for “proof of $x > 0$”. Now we define “$\log$” (the logarithm) in the context [x : real] [y : P(x)],and if we want to talk about $\log 3$ we have to write $\log(3,p)$, where $p$ is some proof for $3 > 0$. Now the $p$ is relevant, and we have some trouble in saying that $\log(3,p)$ does not depend on $p$. ... Some time and some annoyance can be saved if we extend the language by proclaiming that proofs of one and the same proposition are always definitionally equal.[^2]
