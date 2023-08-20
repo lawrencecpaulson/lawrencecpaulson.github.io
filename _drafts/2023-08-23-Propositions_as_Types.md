@@ -86,12 +86,13 @@ In particular, the type $(\Pi x:A) B(x)$ consists of functions $\lambda x. b(x)$
 
 We need additional types, namely $(\Sigma x:A) B(x)$ and $A+B$, 
 in order to obtain the full intuitionistic predicate calculus. 
-De Bruijn's AUTOMATH [provided the $\Pi$ type alone](https://pure.tue.nl/ws/files/4428179/597611.pdf),
-but that was enough to get propositions as types.
+AUTOMATH provided the $\Pi$ type alone,
+and de Bruijn even [wrote a paper](https://pure.tue.nl/ws/files/4428179/597611.pdf)
+cautioning against the complexity of subsequent logical frameworks.
 
 ### AUTOMATH and irrelevance of proofs
 
-De Bruijn's AUTOMATH, which I have 
+AUTOMATH, which I have 
 [written about earlier]({% post_url 2021-11-03-AUTOMATH %}),
 is the first proof checker to actually implement propositions as types.
 He did this in the literal sense of providing symbols TYPE and PROP,
