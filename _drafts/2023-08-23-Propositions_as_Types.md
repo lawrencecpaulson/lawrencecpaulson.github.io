@@ -80,12 +80,12 @@ for the [λ-calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
 $$ \lambda x. b(x) : A\to B$$
 
 provided $b(x):B$ for arbitrary $x:A$.
-
-In a [prior post]({% post_url 2021-11-24-Intuitionism %}) I have described how other logical symbols are rendered as types, specifically in the context of Martin-Löf type theory.
+Note by the way that we have not used dependent types. They are only needed if we want to have quantifiers.
+In a [prior post]({% post_url 2021-11-24-Intuitionism %}) I have described how other logical symbols are rendered as types, in the context of Martin-Löf type theory.
 In particular, the type $(\Pi x:A) B(x)$ consists of functions $\lambda x. b(x)$ where $b(x):B(x)$ for all $x:A$. The function space $A\to B$ is the special case where $B$ does not depend on $x$. 
 
-We need additional types, namely $(\Sigma x:A) B(x)$ and $A+B$, 
-in order to obtain the full intuitionistic predicate calculus. 
+We need further types, namely $(\Sigma x:A) B(x)$ and $A+B$, 
+to get the full intuitionistic predicate calculus. 
 AUTOMATH provided the $\Pi$ type alone,
 and de Bruijn even [wrote a paper](https://pure.tue.nl/ws/files/4428179/597611.pdf)
 cautioning against the complexity of subsequent logical frameworks.
