@@ -71,8 +71,7 @@ The combinators correspond to the axioms (which give their types),
 and the derivation of the identity combinator 
 as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). The system of combinators also sucks:
 it can be used to translate any λ-calculus term into combinators, but the blowup is exponential (exactly as with the proof system).
-These observations Howard for a couple of decades).
-Except that Curry thought that combinators were rather good.
+These observations are Curry's—except he thought combinators were rather good—and Howard would not come along for a couple of decades.
 
 Now suppose we switch to a [natural deduction](https://plato.stanford.edu/entries/natural-deduction/) system, 
 where we can derive
