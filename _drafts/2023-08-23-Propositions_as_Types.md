@@ -5,7 +5,8 @@ usemathjax: true
 tags: [logic, intuitionism, constructive logic, Martin-Löf type theory, NG de Bruijn]
 ---
 
-The principle of *propositions as types* is much discussed, but there's a lot of confusion and misinformation.
+The principle of *propositions as types* (a.k.a. [Curry-Howard isomorphism](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)), 
+is much discussed, but there's a lot of confusion and misinformation.
 For example, it is widely believed that propositions as types is the basis of most modern proof assistants; 
 even, that it is the necessary foundation 
 of any computer implementation of logic.
@@ -68,8 +69,10 @@ As a proof system, it sucks. But the propositions as types principle holds: this
 Function application corresponds to modus ponens,
 The combinators correspond to the axioms (which give their types), 
 and the derivation of the identity combinator 
-as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). The system of combinators also sucks.
-It can be used to translate any λ-calculus term into combinators, but the blowup is exponential (as with the proof system).
+as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). The system of combinators also sucks:
+it can be used to translate any λ-calculus term into combinators, but the blowup is exponential (exactly as with the proof system).
+These observations Howard for a couple of decades).
+Except that Curry thought that combinators were rather good.
 
 Now suppose we switch to a [natural deduction](https://plato.stanford.edu/entries/natural-deduction/) system, 
 where we can derive
@@ -152,6 +155,14 @@ actually use the λ-calculus: because something that is beautiful in theory need
 It is still possible to take inspiration from the theory.
 
 ### Postscript
+
+Two conclusions:
+1. You can have propositions as types without dependent types, but only for propositional logic.
+2. You can have dependent types without propositions as types.
+
+And maybe a third: propositions as types can render type checking undecidable 
+unless you adopt a strict system of type uniqueness, 
+but then you can no longer infer $\phi(y)$ from $\phi(x)$ and $x=y$.
 
 Phil Wadler has written a hagiographic but still useful
 [article](https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf)
