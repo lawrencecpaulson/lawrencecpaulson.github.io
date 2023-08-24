@@ -46,6 +46,18 @@ This function surely is the sought-for connection between $A$ and $B$.
 
 ### Prositions as types in action
 
+We can codify the principle above by asserting a rule of inference that derives
+$$ \lambda x. b(x) : A\to B$$
+provided $b(x):B$ for arbitrary $x:A$.
+If we regard $A\to B$ as a type, then this is one of the typing rules 
+for the [λ-calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus).
+And if we regard $A\to B$ as a formula, then 
+(ignoring the constructions) this is the introduction rule for implication
+in a standard system of [natural deduction](https://plato.stanford.edu/entries/natural-deduction/),
+proving $A\to B$ provided that $B$ can be proved assuming $A$.
+
+Setting aside natural deduction for the moment, we can codify
+the intuitionistic idea of implication rather differently.
 A simple proof system for intuitionistic propositional logic has just two axioms:
 
 - axiom K: $\quad A\to(B\to A)$
@@ -73,15 +85,8 @@ as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). 
 it can be used to translate any λ-calculus term into combinators, but the blowup is exponential (exactly as with the proof system).
 These observations are Curry's—except he thought combinators were rather good—and Howard would not come along for a couple of decades.
 
-Now suppose we switch to a [natural deduction](https://plato.stanford.edu/entries/natural-deduction/) system, 
-where we can derive
-$A\to B$ provided we can prove $B$ from the assumption $A$,
-Then we have essentially the same system as the typing rules 
-for the [λ-calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus), where 
 
-$$ \lambda x. b(x) : A\to B$$
 
-provided $b(x):B$ for arbitrary $x:A$.
 Note by the way that we have not used dependent types. They are only needed if we want to have quantifiers.
 In a [prior post]({% post_url 2021-11-24-Intuitionism %}) I have described how other logical symbols are rendered as types, in the context of Martin-Löf type theory.
 In particular, the type $(\Pi x:A) B(x)$ consists of functions $\lambda x. b(x)$ where $b(x):B(x)$ for all $x:A$. The function space $A\to B$ is the special case where $B$ does not depend on $x$. 
