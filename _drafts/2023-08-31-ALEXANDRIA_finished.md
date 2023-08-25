@@ -73,10 +73,14 @@ We arrived at some surprising conclusions:
 - Dependent types aren't necessary and probably aren't even advantageous.
 
 To be fair, [astonishing progress](https://xenaproject.wordpress.com/2020/12/05/liquid-tensor-experiment/) has also been made by the [Lean](https://leanprover.github.io) community.
+They have been extremely active over the same period 
+and formalised [mountains of material](https://leanprover-community.github.io).
 
 **We can safely conclude that proof assistants already offer value to mathematicians.**
 Although full formalisation is still not really affordable,
 neither is it necessary.
+You can forego proving the results that you feel confident about,
+focusing your formalisation efforts on the problematical parts.
 
 
 ### How it ended (AI techniques)
@@ -89,6 +93,7 @@ to attract people who were prepared to apply their specialised knowledge.
 That's how we got
 
 - the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/), a one-of-a-kind tool to search the libraries even on the basis of abstract mathematical concepts
+- a tremendous amount of infrastructure to analyse libraries and extract information
 - a string of advanced papers on proof synthesis, auto-formalisation, an Isabelle parallel corpus and more
 
 These projects are still at the research stage, but show great promise!
@@ -107,5 +112,5 @@ The team has worked hard to share the knowledge we discovered. We have written
 - 33 formal proof developments accepted to Isabelle’s [*Archive of Formal Proofs*](https://www.isa-afp.org)
 
 In addition, we've worked on formalisation projects with about two dozen interns and students,
-many of whom have gone on to do PhD research. We've given dozens of talks at variety of venues.
+many of whom have gone on to do PhD research. We've given dozens of talks at variety of venues. We are open to collaboration to take our work forward.
 
