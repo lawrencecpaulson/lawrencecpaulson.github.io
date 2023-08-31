@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "End of the ALEXANDRIA Project"
+title:  "The End (?) of the ALEXANDRIA Project"
 usemathjax: true 
 tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs,]
 ---
