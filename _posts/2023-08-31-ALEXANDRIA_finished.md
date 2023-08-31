@@ -6,7 +6,7 @@ tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs,]
 ---
 
 Today marks the final day of the [ALEXANDRIA](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) project.
-I outlined with the brief history of the project
+I outlined a brief history of the project
 [not long ago]({% post_url 2023-04-27-ALEXANDRIA_outcomes %}).
 It is nevertheless right to take a moment to thank
 the European Research Council
