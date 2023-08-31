@@ -40,25 +40,30 @@ I felt very lucky to get funding for a project involving simple type theory
 and  [Isabelle/HOL](https://isabelle.in.tum.de).
 
 During the programme, prior formalisation efforts were criticised as lacking sophistication.
-Researchers had formalised long proofs about simple objects, but no one had formalised
-even the definitions of more complicated objects used every day, 
+As Kevin Buzzard pointedly noted,
+researchers had formalised long proofs about simple objects, but no one had formalised
+*even the definitions* of more complicated objects used every day, 
 such as Grothendieck schemes.
-Much existing formalise mathematics dated from the 19th-century.
+Much existing work formalised 19th-century mathematics.
+
 These complaints would have to be tackled.
 
 
 ### How it went
 
 I  chronicled the project in my [previous post]({% post_url 2023-04-27-ALEXANDRIA_outcomes %}).
+Briefly: we formalised heaps of mathematics. 
+We also did groundbreaking work on applications of information retrieval and machine learning
+to formalisation.
 A longer and more formal account can be found [on arXiv](https://arxiv.org/abs/2305.14407).
 
 ### How it ended (formalisation of mathematics)
 
 The sheer amount of new formalised material is impressive (and the quality is also high):
 
-- numerous formalisations of advanced material, including the first ever on topics such as additive combinatorics, combinatorial block designs and ordinal partition theory
+- formalisations of advanced mathematics, including the first ever on topics such as additive combinatorics, combinatorial block designs and ordinal partition theory
 - showing that dependent types aren't necessary to have sophisticated objects like Grothendieck schemes or ω-categories
-- tens of thousands of lines of material on metric and topological spaces imported from HOL Light, and tons of other new general material
+- tens of thousands of lines of more basic but necessary library material, e.g. on metric and topological spaces (imported from HOL Light)
 - we formalised advanced work from some of the leading mathematicians of the age: Erdős, Gowers, Roth, Szemerédi
 
 We developed some highly fruitful techniques:
@@ -70,7 +75,7 @@ We arrived at some surprising conclusions:
 
 - Formalising even advanced mathematics is largely a matter of perseverance.
 - Combining material from different branches of mathematics, say probability theory and graph theory or complex analysis and set theory, works fine.
-- Dependent types aren't necessary and probably aren't even advantageous.
+- Dependent types aren't necessary and probably aren't even advantageous. We aren't the ones fighting our formalism.
 
 To be fair, [astonishing progress](https://xenaproject.wordpress.com/2020/12/05/liquid-tensor-experiment/) has also been made by the [Lean](https://leanprover.github.io) community.
 They have been extremely active over the same period 
@@ -88,12 +93,12 @@ focusing your formalisation efforts on the problematical parts.
 The proposal included a lot of speculative ideas about search
 and auto completion, in particular by somehow mining
 the existing libraries for "proof idioms".
-I had no idea how such things could be done, but was lucky enough eventually
-to attract people who were prepared to apply their specialised knowledge.
+Writing the proposal in 2016, I had no idea how such things could be done.
+I was lucky to attract people who were prepared to apply their specialised knowledge.
 That's how we got
 
 - the [SErAPIS search engine](https://behemoth.cl.cam.ac.uk/search/), a one-of-a-kind tool to search the libraries even on the basis of abstract mathematical concepts
-- a tremendous amount of infrastructure to analyse libraries and extract information
+- a tremendous amount of infrastructure to analyse the Isabelle libraries and extract information
 - a string of advanced papers on proof synthesis, auto-formalisation, an Isabelle parallel corpus and more
 
 These projects are still at the research stage, but show great promise!
@@ -106,11 +111,12 @@ or read the [project summary](https://arxiv.org/abs/2305.14407).
 
 The team has worked hard to share the knowledge we discovered. We have written
 
-- 13 journal articles, including half (3/6) of a special issue of *Experimental Mathematics*
+- 13 journal articles, including half (3 out of 6) of a special issue of *Experimental Mathematics*
 - 15 articles in conference proceedings
 - 2 refereed chapters in a [*Synthese Library* volume](https://link.springer.com/book/10.1007/978-3-030-15655-8)
 - 33 formal proof developments accepted to Isabelle’s [*Archive of Formal Proofs*](https://www.isa-afp.org)
 
+More are forthcoming. 
 In addition, we've worked on formalisation projects with about two dozen interns and students,
 many of whom have gone on to do PhD research. We've given dozens of talks at variety of venues. We are open to collaboration to take our work forward.
 
