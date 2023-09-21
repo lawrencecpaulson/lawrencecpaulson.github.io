@@ -158,7 +158,8 @@ and has been building the first formalisation
 of combinatorial block design theory. 
 
 Many of the projects described above (and others not mentioned) involved
-the work of interns who visited the Computer Laboratory, financially supported by the project.
+the work of interns who visited the Computer Laboratory, financially supported by the project
+and in many cases by [Cambridge Mathematics Placements](https://www.maths.cam.ac.uk/opportunities/careers-for-mathematicians/summer-research-mathematics/cambridge-mathematics-placements-cmp).
 
 Angeliki has pointed out that "we have formalised results by two Fields medalists 
 (Roth and Gowers), an Abel prize winner (Szemerédi) 
