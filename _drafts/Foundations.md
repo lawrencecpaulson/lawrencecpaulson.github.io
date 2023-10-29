@@ -37,7 +37,17 @@ often look like mathematics while saying nothing.
 The foundations of mathematics is concerned with questions of the form
 "does this even make sense"? It seems to be triggered by periodic crises:
 
-* the probably mythical scandal involving Pythagoras and the existence of irrational numbers
+* the probably mythical scandal involving Pythagoras and the existence of irrational numbers 
 * Berkeley's criticism of infinitesimals
-* Russell's paradox (1901)
+* Russell's paradox (1901) and many others
+
+The Greeks’ response to this startling discovery culminated in Eudoxos’ theory of ratios and proportionality, presented in Chapter V of Euclid’s Elements (Mueller 1981, ch. 3, Corry, ch. 3).
+
+*Was Sind und Was Sollen die Zahlen* 
+by [Richard Dedekind](https://plato.stanford.edu/entries/dedekind-foundations/), 
+build up of set theory
+
+constructions of the reals by "cuts" (Dedekind) and Cauchy sequences (Cantor)
+
+Landau's *Grundlagen der Analysis* – five axioms, natural numbers starting from 1, the integers and positive rationals as equivalence classes, 
 
