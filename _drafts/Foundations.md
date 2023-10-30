@@ -41,11 +41,12 @@ The foundations of mathematics is concerned with questions of the form
 * the existence of irrational numbers 
 * Berkeley's [criticism of infinitesimals](https://plato.stanford.edu/entries/continuity/)
 * the infinite
+* the discovery of non-Euclidean geometries
 * Russell's paradox (1901) and many others
 
 The story of Pythagoras trying to suppress the shocking 
 discovery of irrational numbers such as $\sqrt2$, 
-the hypotenuse of a right triangle, is probably mythical. 
+the ratio of the diagonal of a square to its side, is probably mythical. 
 But it seems that [they noticed](https://plato.stanford.edu/entries/dedekind-foundations):
 
 > The Greeks’ response to this startling discovery culminated in Eudoxos’ theory of ratios and proportionality, presented in Chapter V of Euclid’s Elements.
