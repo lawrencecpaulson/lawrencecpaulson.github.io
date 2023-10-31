@@ -70,7 +70,7 @@ challenge-response protocols. As I've [noted previously]({% post_url 2022-08-10-
 today – thanks to set theory _ we have the theoretical tools to place infinitesimals
 on a completely rigorous basis.
 
-### The paradoxes
+### The paradoxes and the solutions
 
 The [paradoxes of set theory](https://plato.stanford.edu/entries/settheory-early/#CritPeri),
 discovered around the turn of the 20th century, aroused huge disquiet. Although I have
@@ -80,20 +80,59 @@ posted this quotation [previously]({% post_url 2023-04-12-Wittgenstein %}), ther
 
 [^1]: Kurt Gödel, [Russell's mathematical logic](https://doi.org/10.1017/CBO9781139171519.024). *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447-469
 
+Russell's paradox was seen as a potentially fatal blow to much of the 19th century
+foundational work, including that of Frege, Dedekind and Cantor.
+Russell (and Whitehead) decided to continue in the spirit of Frege's *Logicist*
+programme of reducing mathematics to logic. But does this make sense? I can imagine
+De Bruijn saying 
+
+> We do not possess a workable definition of the word "logic". 
+
+The system they created in the multivolume 
+[*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/)
+was needlessly complicated and in some respects curiously imprecise.
+But it led to today's first-order logic and especially higher-order logic.
+Russell and Whitehead formalised some chunks of mathematics in great detail
+and with immense tedium, but they could not have predicted how powerful
+their system would turn out to be.
+
+Many philosphers had devoted some thought to the essence of mathematics in prior centuries,
+but the crisis brought the issue out into the open. Roughly speaking, there are three main viewpoints:
+
+* The *Platonist* or *realist* viewpoint: ideal mathematical objects, such as the complex plane, exist objectively and independently of us, though we may deduce their properties. Gödel held this view.
+* The *formalist* viewpoint: mathematics is concerned with symbols. For Hilbert,
+I think that [his programme](https://plato.stanford.edu/entries/hilbert-program/)
+was a technical approach to abolish the paradoxes rather than
+an expression of his true beliefs. How can one person adhere to
+a [finitary point of view](https://plato.stanford.edu/entries/hilbert-program/#2)
+and simultaneously describe Cantor's world of transfinite ordinals and cardinals
+as a paradise? But it seems that others, such as Curry, regarded mathematics
+as nothing but a symbolic game.
+* The [*intuitionists*](https://plato.stanford.edu/entries/intuitionism/) held that mathematical objects were nothing but creations of the human mind.
+This gave them a radical attitude to proof and the wholesale rejection of many techniques and concepts regarded by others as indispensable.
+Their rejection of the reality of mathematical objects and their stance against
+formulas as a mere mechanism for communication set them firmly against other schools.
+
 It seems clear from the reactions of Frege, Russell, Hilbert, Brouwer and many others
-that this was an emergency. I see Russell's "vicious circle principle"
+that the paradoxes represented an emergency. I see Russell's "vicious circle principle"
 and his solution, namely ramified type theory, Brouwer's intuitionism and Hilbert's formalism
 as the equivalent of burning all your clothes and furniture upon the discovery of bedbugs.
-That the solution could lie in something as simple as Zermelo's separation axiom
+That the solution could lie in something as simple as 
+[Zermelo's separation axiom](https://plato.stanford.edu/entries/zermelo-set-theory/)
 and the conception of the cumulative hierarchy of sets was seemingly not anticipated.
 It was a miracle.
 
-### On the existence of mathematical objects
+### Modern foundations of mathematics
 
-Many had devoted some thought to the meaning of mathematics in prior centuries,
-but the crisis brought the issue out into the open. Roughly speaking, there are three main viewpoints:
+* category theory
+* Martin-Lof type theory (and HoTT)
 
-* The Platonist or realist view: ideal mathematical objects, such as the complex plane, exist objectively and independently of us, though we may deduce their properties. Gödel held this view.
-* The intuitionist view: mathematical objects are creations of the human mind.
-* The formalist view: mathematics is concerned with symbols, and symbols alone.
+They tell us rather little about the critical issues that people worked so hard on
+in the 19th century: the role of the real numbers, the role of infinity,
+the status of infinitesimals, the consistency of mathematics.
+And the reason is simple: because 19th and early 20th century work largely banished
+those issues from our minds. 
+Certainly, ordinary mathematicians are not worried about these topics.
 
+Gödel's essay, [Russell's mathematical logic](/papers/Russells-mathematical-logic.pdf), 
+is an indispensable source on these topics.
