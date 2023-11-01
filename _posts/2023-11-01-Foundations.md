@@ -65,8 +65,8 @@ Their aim was finally to pin down the precise meaning of concepts such as functi
 relation and class, and how to make sense of infinite collections and infinite constructions.
 
 Berkeley's attack on infinitesimals resulted in a concerted effort to banish them
-in favour of $\epsilon$-$\delta$, which although frequently hated remind me of
-challenge-response protocols. As I've [noted previously]({% post_url 2022-08-10-Nonstandard_Analysis %}) on this blog,
+in favour of $\epsilon$-$\delta$ arguments (hated by many), which remind me of
+challenge-response protocols in computer science. As I've [noted previously]({% post_url 2022-08-10-Nonstandard_Analysis %}) on this blog,
 today – thanks to set theory – we have the theoretical tools to place infinitesimals
 on a completely rigorous basis.
 
@@ -114,9 +114,9 @@ Their rejection of the reality of mathematical objects and their stance against
 formulas as a mere mechanism for communication set them firmly against other schools.
 
 It seems clear from the reactions of Frege, Russell, Hilbert, Brouwer and many others
-that the paradoxes represented an emergency. I see Russell's "vicious circle principle"
+that the paradoxes constituted an emergency. Russell's "vicious circle principle"
 and his solution, namely ramified type theory, Brouwer's intuitionism and Hilbert's formalism
-as the equivalent of burning all your clothes and furniture upon the discovery of bedbugs.
+– these were the equivalent of burning all your clothes and furniture upon the discovery of bedbugs.
 That the solution could lie in something as simple as 
 [Zermelo's separation axiom](https://plato.stanford.edu/entries/zermelo-set-theory/)
 and the conception of the cumulative hierarchy of sets was seemingly not anticipated.

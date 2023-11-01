@@ -122,7 +122,7 @@ then why have so many mathematical conceptions aroused such visceral emotions?
 
 * [irrational numbers](https://nrich.maths.org/2671)
 * [non-Euclidean geometry](https://mathshistory.st-andrews.ac.uk/HistTopics/Non-Euclidean_geometry/)
-* [infinitesimals](https://en.wikipedia.org/wiki/The_Analyst), 
+* [infinitesimals](https://en.wikipedia.org/wiki/The_Analyst)
 * [Cantor's set theory](https://infinityplusonemath.wordpress.com/2017/02/11/no-one-liked-cantor/)
 * [the axiom of choice](https://plato.stanford.edu/entries/axiom-choice/)
 
