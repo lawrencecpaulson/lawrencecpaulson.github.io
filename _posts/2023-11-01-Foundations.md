@@ -2,7 +2,7 @@
 layout: post
 title:  What do we mean by "the foundations of mathematics"?
 usemathjax: true 
-tags: [philosophy, logic, type theory]
+tags: [philosophy, logic, type theory, Principia Mathematica]
 ---
 The phrase "foundations of mathematics" is bandied about frequently these days,
 but it's clear that there is widespread confusion about what it means.
