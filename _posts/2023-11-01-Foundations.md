@@ -2,7 +2,7 @@
 layout: post
 title:  What do We Mean by "The Foundations of Mathematics"?
 usemathjax: true 
-tags: [philosophy]
+tags: [philosophy, logic, type theory]
 ---
 The phrase "foundations of mathematics" is bandied about frequently these days,
 but it's clear that there is widespread confusion about what it means.
@@ -51,13 +51,13 @@ But it seems that [they noticed](https://plato.stanford.edu/entries/dedekind-fou
 
 > The Greeks’ response to this startling discovery culminated in Eudoxos’ theory of ratios and proportionality, presented in Chapter V of Euclid’s Elements.
 
-But the nature of the real numbers was not clear in the 19th century.
+The nature of the real numbers was still not clear in the 19th century.
 Richard Dedekind devoted himself to this problem, 
 inventing the famous [Dedekind cuts](https://en.wikipedia.org/wiki/Dedekind_cut):
 downwards-closed sets of rational numbers. Cantor independently chose to define
 real numbers as equivalence classes of Cauchy sequences.
-The point is not that a real number either of those things, but simply that
-we can present specific constructions exhibiting the behaviour expect of the real numbers.
+The point is not that a real number *is* either of those things, but simply that
+we can present specific constructions exhibiting the behaviour expected of the real numbers.
 
 Cantor's work on set theory is well known. Dedekind also made major contributions, in his
 by [*Was Sind und Was Sollen die Zahlen* ](https://plato.stanford.edu/entries/dedekind-foundations/).
@@ -67,14 +67,14 @@ relation and class, and how to make sense of infinite collections and infinite c
 Berkeley's attack on infinitesimals resulted in a concerted effort to banish them
 in favour of $\epsilon$-$\delta$, which although frequently hated remind me of
 challenge-response protocols. As I've [noted previously]({% post_url 2022-08-10-Nonstandard_Analysis %}) on this blog,
-today – thanks to set theory _ we have the theoretical tools to place infinitesimals
+today – thanks to set theory – we have the theoretical tools to place infinitesimals
 on a completely rigorous basis.
 
 ### The paradoxes and the solutions
 
 The [paradoxes of set theory](https://plato.stanford.edu/entries/settheory-early/#CritPeri),
 discovered around the turn of the 20th century, aroused huge disquiet. Although I have
-posted this quotation [previously]({% post_url 2023-04-12-Wittgenstein %}), there is no better description than Gödel's:
+posted this exact quote [previously]({% post_url 2023-04-12-Wittgenstein %}), there is no better description than Gödel's:
 
 > By analyzing the paradoxes to which Cantor's set theory had led, he freed them from all mathematical technicalities, thus bringing to light the amazing fact that our logical intuitions (i.e., intuitions concerning such notions as: truth, concept, being, class, etc.) are self-contradictory.[^1]
 
@@ -96,8 +96,8 @@ Russell and Whitehead formalised some chunks of mathematics in great detail
 and with immense tedium, but they could not have predicted how powerful
 their system would turn out to be.
 
-Many philosphers had devoted some thought to the essence of mathematics in prior centuries,
-but the crisis brought the issue out into the open. Roughly speaking, there are three main viewpoints:
+Many philosphers had contemplated the essence of mathematics in prior centuries,
+but the crisis gave the issues urgency. Roughly speaking, there are three main viewpoints:
 
 * The *Platonist* or *realist* viewpoint: ideal mathematical objects, such as the complex plane, exist objectively and independently of us, though we may deduce their properties. Gödel held this view.
 * The *formalist* viewpoint: mathematics is concerned with symbols. For Hilbert,
@@ -124,17 +124,40 @@ It was a miracle.
 
 ### Modern foundations of mathematics
 
+Today one commonly sees all kinds of things described as "foundations of mathematics",
+especially category theory and type theory. Foundational work has definitely been done
+within the framework of category theory, but that is not the same thing as saying that
+category theory itself is foundational. The objects in category theory are equipped with
+structure and the morphisms between objects are structure preserving, just as we have homomorphisms between groups and continuous maps between topological spaces. 
+By contrast, classical sets have no notion of structure beyond the membership relation, 
+which we might regard as bare metal.
+Since a large part of mathematics is concerned with structure, 
+category theory is a natural fit. 
+That does not mean, however, that it addresses foundational issues.
+It tends rather to introduce new ones, especially because of its unfortunate and 
+needless habit of assuming the existence of proper classes everywhere. 
+Far from replacing set theory, it relies on it.
 
+As to whether type theory is foundational, we need to ask which type theory you are talking about:
 
-* category theory
-* Martin-Lof type theory (and HoTT)
+* Principia Mathematica: of course, that was its precise purpose. Gödel's essay, [Russell's mathematical logic](/papers/Russells-mathematical-logic.pdf), 
+is an indispensable source on this and related topics.
+* Church's simple type theory: the granddaughter of PM, it is equally expressive and a lot simpler.
+* AUTOMATH: absolutely not. De Bruijn consistently referred to it as "a *language* for mathematics". He moreover said it was like a restaurant where you could order any sort of 
+food: vegetarian, kosher or anything else. AUTOMATH was, by design, neutral to foundational choices. Isabelle/Pure is in the same spirit.
+* Martin-Löf type theory: he himself said it was intended as a vehicle for formalising Bishop-style analysis, clearly a foundational claim. But one that rejects the vast majority of modern mathematics.  
+* Calculus of inductive constructions (Coq, Lean): the original paper (describing a weaker system) begins "The calculus of constructions is a higher-order formalism for constructive proofs in natural deduction style," and the paper makes no foundational claims. 
+Coquand's [retrospective paper](http://www.cse.chalmers.se/~coquand/v1.pdf) makes no such claims either. 
+Since it turns out to be significantly stronger than ZF set theory, one could even say it makes foundational assumptions. 
 
-They tell us rather little about the critical issues that people worked so hard on
-in the 19th century: the role of the real numbers, the role of infinity,
-the status of infinitesimals, the consistency of mathematics.
-And the reason is simple: because 19th and early 20th century work largely banished
-those issues from our minds. 
-Certainly, ordinary mathematicians are not worried about these topics.
-
-Gödel's essay, [Russell's mathematical logic](/papers/Russells-mathematical-logic.pdf), 
-is an indispensable source on these topics.
+The world has moved on. People no longer worry about the issues that were 
+critical in the 19th century: the role of the real numbers, the role of infinity,
+the status of infinitesimals, the very consistency of mathematics.
+And the reason is simple: because Herculean work in the 19th and 20th centuries 
+largely banished those issues from our minds. 
+This achievement doesn't seem to be much appreciated today: 
+instead of "each real number can be understood as a set of rational numbers, and more generally, the most sophisticated mathematical constructions can be reduced 
+to a handful of simple principles"
+people say "we are asked to believe that everything is a set" 
+and even "set theory is just another formal system". 
+I give up.
