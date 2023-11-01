@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  What do We Mean by "The Foundations of Mathematics"?
+title:  What do we mean by "the foundations of mathematics"?
 usemathjax: true 
 tags: [philosophy, logic, type theory]
 ---
