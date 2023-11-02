@@ -78,7 +78,7 @@ posted this exact quote [previously]({% post_url 2023-04-12-Wittgenstein %}), th
 
 > By analyzing the paradoxes to which Cantor's set theory had led, he freed them from all mathematical technicalities, thus bringing to light the amazing fact that our logical intuitions (i.e., intuitions concerning such notions as: truth, concept, being, class, etc.) are self-contradictory.[^1]
 
-[^1]: Kurt Gödel, [Russell's mathematical logic](https://doi.org/10.1017/CBO9781139171519.024). *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447-469
+[^1]: Kurt Gödel, [Russell's mathematical logic](https://doi.org/10.1017/CBO9781139171519.024). *In*: P Benacerraf, H Putnam (eds), *Philosophy of Mathematics: Selected Readings* (CUP, 1984), 447–469
 
 Russell's paradox was seen as a potentially fatal blow to much of the 19th century
 foundational work, including that of Frege, Dedekind and Cantor.
@@ -119,8 +119,11 @@ and his solution, namely ramified type theory, Brouwer's intuitionism and Hilber
 – these were the equivalent of burning all your clothes and furniture upon the discovery of bedbugs.
 That the solution could lie in something as simple as 
 [Zermelo's separation axiom](https://plato.stanford.edu/entries/zermelo-set-theory/)
-and the conception of the cumulative hierarchy of sets was seemingly not anticipated.
+and the conception of the [cumulative hierarchy of sets](/papers/Boolos-iterative-concept-of-set.pdf)[^2]
+was seemingly not anticipated.
 It was a miracle.
+
+[^2]: George Boolos, [The iterative concept of set](https://doi.org/10.1017/CBO9781139171519.026). *Ibid*, 486–502
 
 ### Modern foundations of mathematics
 
@@ -155,8 +158,8 @@ critical in the 19th century: the role of the real numbers, the role of infinity
 the status of infinitesimals, the very consistency of mathematics.
 And the reason is simple: because Herculean work in the 19th and 20th centuries 
 largely banished those issues from our minds. 
-This achievement doesn't seem to be much appreciated today: 
-instead of "each real number can be understood as a set of rational numbers, and more generally, the most sophisticated mathematical constructions can be reduced 
+This achievement doesn't seem to be much appreciated today.
+Instead of "each real number can be understood as a set of rational numbers, and more generally, the most sophisticated mathematical constructions can be reduced 
 to a handful of simple principles"
 people say "we are asked to believe that everything is a set" 
 and even "set theory is just another formal system". 
