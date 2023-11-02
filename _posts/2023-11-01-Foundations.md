@@ -97,7 +97,7 @@ and with immense tedium, but they could not have predicted how powerful
 their system would turn out to be.
 
 Many philosphers had contemplated the essence of mathematics in prior centuries,
-but the crisis gave the issues urgency. Roughly speaking, there are three main viewpoints:
+but the crisis gave the issues urgency. Roughly speaking, there are three main schools of thought:
 
 * The *Platonist* or *realist* viewpoint: ideal mathematical objects, such as the complex plane, exist objectively and independently of us, though we may deduce their properties. Gödel held this view.
 * The *formalist* viewpoint: mathematics is concerned with symbols. For Hilbert,
@@ -111,7 +111,8 @@ as nothing but a symbolic game.
 * The [*intuitionists*](https://plato.stanford.edu/entries/intuitionism/) held that mathematical objects were nothing but creations of the human mind.
 This gave them a radical attitude to proof and the wholesale rejection of many techniques and concepts regarded by others as indispensable.
 Their rejection of the reality of mathematical objects and their stance against
-formulas as a mere mechanism for communication set them firmly against other schools.
+symbolic formulas (other than as a means of communicating ideas) 
+set them firmly against the other schools.
 
 It seems clear from the reactions of Frege, Russell, Hilbert, Brouwer and many others
 that the paradoxes constituted an emergency. Russell's "vicious circle principle"
