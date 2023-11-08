@@ -2,7 +2,7 @@
 layout: post
 title:  "Fun with Ackermann's function"
 usemathjax: true
-tags: [examples, Isabelle, recursion, Ackermann's function]
+tags: [examples, Isabelle, recursion, Ackermann's function, Alan Turing]
 ---
 
 An undergraduate course on recursion theory typically introduces [Turing machines](https://plato.stanford.edu/entries/turing-machine/), register machines, general recursive functions and possibly the λ-calculus. They learn about the principle of primitive recursion, which is easy to grasp, and the minimisation operator, which is less so. Ackermann's function is invariably mentioned as an example of a function that is obviously computable but not computable by primitive recursion alone. Unfortunately, it is not easily expressible in the familiar models of computation, although its definition is simplicity itself.
