@@ -145,7 +145,9 @@ definition pick :: "('a ⇒ 'a ⇒ bool) ⇒ 'a ⇒ 'a ⇒ 'a list" where
 Here, `llist_of` converts finite lists to lazy lists, which allows us to reuse the `chain`
 predicate. The `pick` function is characterized by the following property:
 
+```
 lemma "R⇧+⇧+ x y ⟹ chain R (llist_of (x # pick x y @ [y]))"
+```
 
 Going back to `wit`'s definition, we may wonder why Isabelle accepts it in the first place. The
 definition is not obviously productive, a requirement that would ensure its totality. Productive
