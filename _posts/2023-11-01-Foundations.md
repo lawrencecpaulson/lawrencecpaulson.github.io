@@ -2,7 +2,7 @@
 layout: post
 title:  What do we mean by "the foundations of mathematics"?
 usemathjax: true 
-tags: [philosophy, logic, type theory, Principia Mathematica]
+tags: [philosophy, logic, type theory, Principia Mathematica, AUTOMATH]
 ---
 The phrase "foundations of mathematics" is bandied about frequently these days,
 but it's clear that there is widespread confusion about what it means.
@@ -147,12 +147,13 @@ As to whether type theory is foundational, we need to ask which type theory you 
 * Principia Mathematica: of course, that was its precise purpose. Gödel's essay, [Russell's mathematical logic](/papers/Russells-mathematical-logic.pdf), 
 is an indispensable source on this and related topics.
 * Church's simple type theory: the granddaughter of PM, it is equally expressive and a lot simpler.
-* AUTOMATH: absolutely not. De Bruijn consistently referred to it as "a *language* for mathematics". He moreover said it was like a restaurant where you could order any sort of 
-food: vegetarian, kosher or anything else. AUTOMATH was, by design, neutral to foundational choices. Isabelle/Pure is in the same spirit.
+* Automath: absolutely not. De Bruijn consistently referred to it as "a *language* for mathematics". He moreover said it was "like a big restaurant that serves all sorts of food: vegetarian, kosher, or anything else the customer wants".[^3] Automath was, by design, neutral to foundational choices. (Isabelle/Pure is in the same spirit.)
 * Martin-Löf type theory: he himself said it was intended as a vehicle for formalising Bishop-style analysis, clearly a foundational claim. But one that rejects the vast majority of modern mathematics.  
 * Calculus of inductive constructions (Coq, Lean): the original paper (describing a weaker system) begins "The calculus of constructions is a higher-order formalism for constructive proofs in natural deduction style," and the paper makes no foundational claims. 
 Coquand's [retrospective paper](http://www.cse.chalmers.se/~coquand/v1.pdf) makes no such claims either. 
 Since it turns out to be significantly stronger than ZF set theory, one could even say it makes foundational assumptions. 
+
+[^3]: N.G. de Bruijn. A Survey of the Project Automath. *In*: R. P. Nederpelt, J. H. Geuvers, & R. C. Vrijer, de (Eds.), *Selected Papers on Automath* (North-Holland, 1994), 144
 
 The world has moved on. People no longer worry about the issues that were 
 critical in the 19th century: the role of the real numbers, the role of infinity,

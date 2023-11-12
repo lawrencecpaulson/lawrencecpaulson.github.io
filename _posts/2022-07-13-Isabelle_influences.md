@@ -184,7 +184,7 @@ What did I do in my four and a bit years at Stanford?
 * I picked up Derek Oppen's [pretty printer](https://www.cs.tufts.edu/~nr/cs257/archive/derek-oppen/prettyprinting.pdf), which found its way into Cambridge LCF and Isabelle
 * ... and Nelson and Oppen's [congruence closure](https://dl.acm.org/doi/10.1145/322186.322198) and decision procedure work, which was cool, though I never used it
 
-People at the Stanford AI Lab had a bizarre obsession with first-order logic, which I, familiar with AUTOMATH, recognised as trivial. They in turn would have scorned AUTOMATH's punched card interaction model. Much of the work I did at Stanford was genuinely lousy.
+People at the Stanford AI Lab had a bizarre obsession with first-order logic, which I, familiar with AUTOMATH, recognised as trivial. They in turn would have scorned AUTOMATH's cryptic syntax. Much of the work I did at Stanford was genuinely lousy.
 
 I must have learned *something* during the course of my PhD at Stanford,
 but little of it seems to have ended up in Isabelle.
