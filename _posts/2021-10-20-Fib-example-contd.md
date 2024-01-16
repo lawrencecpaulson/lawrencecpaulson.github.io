@@ -30,7 +30,7 @@ The lemma below is proved by cases on whether the natural number *m* equals zero
 <span class="keyword1"><span class="command">qed</span></span>
 </pre>
 
-Less usual but convenient is equational reasoning within another expression. In the little proof below, the left hand side of the desired identity is transformed using the addition law proved in the [previous post]({% post_url 2021-10-13-Fib-example %}). Then a subexpression of the result is simplified to *n*. Chaining the two steps (which is the purpose of `finally`) yield the desired result.
+Less usual but convenient is equational reasoning within another expression. In the little proof below, the left hand side of the desired identity is transformed using the addition law proved above. Then a subexpression of the result is simplified to *n*. Chaining the two steps (which is the purpose of `finally`) yield the desired result.
 
 <pre class="source">
 <span class="keyword1"><span class="command">lemma</span></span> gcd_fib_diff<span class="main">:</span> <span class="quoted"><span class="quoted">"gcd <span class="main">(</span>fib <span class="free">m</span><span class="main">)</span> <span class="main">(</span>fib <span class="main">(</span><span class="free">n</span> <span class="main">-</span> <span class="free">m</span><span class="main">)</span><span class="main">)</span> <span class="main">=</span> gcd <span class="main">(</span>fib <span class="free">m</span><span class="main">)</span> <span class="main">(</span>fib <span class="free">n</span><span class="main">)</span>"</span></span> <span class="keyword2"><span class="keyword">if</span></span> <span class="quoted"><span class="quoted">"<span class="free">m</span> <span class="main">≤</span> <span class="free">n</span>"</span></span>
@@ -76,3 +76,4 @@ A clever step below is the use of `gcd_nat_induct`, which refers to an induction
 </pre>
 
 The proofs presented in this post are due to Gertrud Bauer.
+[Post corrected 2024-01-08 as suggested by suzuyu1729.]
