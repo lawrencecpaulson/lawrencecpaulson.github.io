@@ -2,7 +2,7 @@
 layout: post
 title:  "Why are you being constructive?"
 usemathjax: true 
-tags: [logic, Russell, intuitionism, constructive logic, Martin-Löf type theory, law of excluded middle, philosophy]
+tags: [logic, Bertrand Russell, intuitionism, constructive logic, Martin-Löf type theory, law of excluded middle, philosophy]
 ---
 
 Four decades ago, I was in a hi-fi shop looking at portable cassette players. Metal tapes had just come out, and metal-compatible cassette players were marketed with METAL emblazoned on the packaging. Three boys aged about 12 rushed into the shop. "That one's got metal!", shouted one. "This one's got metal too!" shouted another. The third boy kept asking, "But does that make it sound better?" They ignored him.
