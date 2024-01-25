@@ -33,16 +33,21 @@ This is a big hint that the universal set is the root of the problem,
 but this insight does not show us the way out. 
 Two very different solutions emerged: 
 
-* *Axiomatic set theory*. There is no universal set. More generally, you cannot just form a set from an arbitrary property; instead, axioms are provided allowing the construction of sets according to certain specific principles. This prevents the construction of $R$. 
+* *Axiomatic set theory*. Unrestricted comprehension is replaced by the *separation axiom*. 
+You cannot just form the set $\{x\mid\phi(x)\}$ from an arbitrary property $\phi(x)$; 
+you can only form **subsets** of some existing set $A$ as $\{x\in A\mid\phi(x)\}$. 
+Axioms are provided allowing the construction of sets according to certain specific principles.
+Now $R$ cannot be constructed, and there is no universal set. 
 For technical purposes, a further axiom is usually assumed, to forbid 
 sets being members of themselves and moreover **all** nonterminating membership chains,
 such as $x\in y\in x$ and  $\cdots \in x_3\in x_2\in x_1$. 
 This route is due to [Zermelo](https://plato.stanford.edu/entries/zermelo-set-theory/) 
 and Fraenkel.
 
-* *Type theory*. It is forbidden to write $x\in x$. 
+* *Type theory*. 
 A type hierarchy is introduced to classify all values, and $x\in y$
 can only be written if the type of $y$ is higher than that of $x$.
+It is thus forbidden to write $x\in x$. 
 With types there is no universal set either, but there are universal sets for each type. 
 This route is due to Whitehead and Russell, who further complicated their type theory 
 to enforce the "vicious circle principle", which they saw as the root of all paradoxes. 
@@ -95,12 +100,41 @@ Frege's work in any significant way. Frege had indeed assumed
 *unrestricted set comprehension*, the fatal principle that leads to Russell's paradox.
 But he used it only once, to derive a much weaker consequence 
 that could have been assumed as an axiom instead. The paradox
-did not damage Frege's written work, but it devastated his entire intellectual framework. 
+did not damage Frege's work, but it devastated his entire intellectual framework. 
 
 ### Wider ramifications
 
-XXXX
+Russell's paradox was about as welcome as a bomb at a wedding reception. 
+Decades later, the dust still had not settled.
+Russell published a list of other paradoxes, the most notable being 
+Burali-Forti's: the set $\Omega$ of ordinal numbers is itself an ordinal number, 
+and therefore $\Omega\in \Omega$, which implies $\Omega<\Omega$. 
 
-Y
+The first part of the 20th century saw the publication of Zermelo's
+axioms for set theory, in which he introduced his separation axiom, and much more controversially, his axiom of choice. 
+In that febrile time, many had no appetite for further risk-taking 
+in the form of this radical new axiom.
+Whitehead and Russell formalised a significant chunk of mathematics using their type theory. 
+Hilbert announced his program for proving the consistency of mathematics, 
+but the incompleteness and undecidability results of the 1930s put an end to such ideas. 
+By the 1960s, we had learned that fundamental questions – such as the status of the axiom of choice and the continuum hypothesis – could not be settled 
+using the axioms of Zermelo-Fraenkel set theory. 
 
- 
+Russell's paradox also made its appearance in Alonzo Church's $\lambda$-calculus. 
+Church originally conceived his system as a new approach to logic, 
+in which sets were encoded by their characteristic functions: $MN$
+meant that $N$ was an element of $M$, 
+while $\lambda x. M$ denoted unrestricted set comprehension over the predicate $M$.
+Curry noticed that the Russell sat $R$ could be expressed as $\lambda x. \neg (x x)$.
+He thereby obtained a contradiction, $RR = \neg(RR)$.
+Generalising from negation to an arbitrary function symbol, 
+Curry obtained he's famous $Y$-combinator.
+
+### However
+
+Ludwig Wittgenstein wasn't much bothered by contradictions. He wrote, with his usual lucidity, 
+
+> If a contradiction were now actually found in arithmetic that would only prove that an arithmetic with such a contradiction in it could render very good service; and it will be better for us to modify our concept of the certainty required, than to say that it would really not yet have been a proper arithmetic.
+
+This means apparently that what you don't know can't hurt you. 
+However, that is not actually true. 

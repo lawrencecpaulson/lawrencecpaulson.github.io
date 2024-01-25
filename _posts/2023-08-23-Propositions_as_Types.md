@@ -85,8 +85,6 @@ as **SKK** corresponds to the proof above (with $A\to A$ as the type of **I**). 
 it can be used to translate any λ-calculus term into combinators, but the blowup is exponential (exactly as with the proof system).
 These observations are Curry's—except he thought combinators were rather good—and Howard would not come along for a couple of decades.
 
-
-
 Note by the way that we have not used dependent types. They are only needed if we want to have quantifiers.
 In a [prior post]({% post_url 2021-11-24-Intuitionism %}) I have described how other logical symbols are rendered as types, in the context of Martin-Löf type theory.
 In particular, the type $(\Pi x:A) B(x)$ consists of functions $\lambda x. b(x)$ where $b(x):B(x)$ for all $x:A$. The function space $A\to B$ is the special case where $B$ does not depend on $x$. 
