@@ -7,7 +7,7 @@ tags: [logic, Bertrand Russell, Principia Mathematica, philosophy]
 
 The story of Russell's paradox is well known. 
 [Gottlob Frege](https://plato.stanford.edu/entries/frege/) had written a treatise 
-on the foundations of arithmetic, a formal logic and a
+on the foundations of arithmetic, presenting a formal logic and a
 development of elementary mathematics from first principles. 
 Bertrand Russell, upon reading it, wrote to Frege mostly to praise the work, but asking a critical question. Frege replied to express his devastation at seeing his life's work ruined. 
 Some later commentators went further, saying that Russell's paradox refuted the entire [logicist approach](https://plato.stanford.edu/entries/logicism/#) 
@@ -23,17 +23,18 @@ Then, $R$ is a member of itself if and only if it is not a member of itself.
 (In symbols, define $R$ as $\\{x \mid x\not\in x\\}$; then $R\in R$ iff $R\not\in R$.)
 Both possibilities lead to a contradiction. 
 
-Faced with such a situation, we need to scrutinise every assumption to identify where the problem lies. The key assumption is clearly the notion of a *set*.
+Faced with such a situation, we need to locate the problem: to scrutinise every assumption. 
+At the centre is clearly the notion of a *set*.
 It is an abstraction of various collective nouns in common use, 
-such as nation, clan, family. In each of these we deal with units composed of smaller units,
+such as nation, clan, family. Each of these is a unit composed of smaller units,
 And we even have a hierarchy: a nation can be a collection of clans, 
 each of which is a collection of families. 
-For further examples we have herds, also armies (with their hierarchy of divisions, regiments, etc).
-None of these can be members of themselves, so maybe **that** idea is suspect. 
+For further examples we have herds, and armies (with their hierarchy of divisions, regiments, etc).
+None of these collections can be members of themselves. 
 But if we accept the *universal set* $V$, to which everything belongs, 
 then surely $V\in V$: it belongs to itself. 
-So maybe the universal set is the root of the problem,
-but this insight does not show us the way out. 
+So maybe the universal set is the root of the problem.
+However, this insight does not show us the way out. 
 Two very different solutions emerged: 
 
 * *Axiomatic set theory*. Unrestricted set comprehension is replaced by the *separation axiom*. 
@@ -57,7 +58,7 @@ This route is due to Whitehead and Russell, who further complicated their type t
 to enforce the "[vicious circle principle](https://plato.stanford.edu/entries/russell-paradox/#ERP)", 
 which they saw as the root of all paradoxes. 
 Their [ramified type theory](https://plato.stanford.edu/entries/type-theory/#RamiHierImprPrin) 
-turned out to be unworkable; 
+turned out to be unworkable.
 Simplified by [Frank Ramsey](https://plato.stanford.edu/entries/ramsey/) 
 and formalised by Alonzo Church, 
 it became *higher-order logic* as used today. 
@@ -112,9 +113,9 @@ that Russell's paradox did not impact
 Frege's work in any significant way. Frege had indeed assumed 
 unrestricted set comprehension, the fatal principle that leads to Russell's paradox.
 But he used it only once, to derive a much weaker consequence 
-that could have been assumed as an axiom instead. The paradox
+that he could have taken as an axiom instead. The paradox
 did not damage Frege's work, which survives today as the predicate calculus. 
-However, it devastated his intellectual framework. 
+However, it laid waste to his intellectual worldview. 
 
 ### Wider ramifications
 
@@ -156,4 +157,3 @@ Ludwig Wittgenstein wasn't much bothered by contradictions. He wrote, with his u
 > If a contradiction were now actually found in arithmetic that would only prove that an arithmetic with such a contradiction in it could render very good service; and it will be better for us to modify our concept of the certainty required, than to say that it would really not yet have been a proper arithmetic.
 
 This means apparently that what you don't know can't hurt you. 
-However, that is not actually true. 
