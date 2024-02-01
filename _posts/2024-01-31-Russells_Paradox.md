@@ -62,7 +62,8 @@ turned out to be unworkable.
 Simplified by [Frank Ramsey](https://plato.stanford.edu/entries/ramsey/) 
 and formalised by Alonzo Church, 
 it became *higher-order logic* as used today. 
-Modern constructive type theories, such as Martin-Löf's, 
+
+Modern constructive type theories, such as Martin-Löf's, 
 amalgamate ideas from both approaches,
 providing a richer language of types and giving them a prominent role.
 
@@ -142,7 +143,7 @@ meant that $N$ was an element of $M$,
 while $\lambda x. M$ denoted unrestricted set comprehension over the predicate $M$.
 Church devised techniques for encoding Boolean values and operations 
 within the $\lambda$-calculus.
-However, Haskell Curry noticed that the Russell sat $R$ 
+However, Haskell Curry noticed that the Russell set $R$ 
 could be expressed as $\lambda x. \neg (x x)$.
 He thereby obtained a contradiction, $RR = \neg(RR)$.
 Generalising from negation to an arbitrary function symbol, 
