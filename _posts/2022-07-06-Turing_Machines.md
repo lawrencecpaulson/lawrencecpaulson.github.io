@@ -41,7 +41,7 @@ Since the very point of a TM was to simulate a clerk working at a desk, and the 
 Turing's paper is a bit sketchy about how the details of the constrution, but it seems that nobody minded.
 (After all, Gödel never did get around to publishing any proof of his second incompleteness theorem; people thought it obvious, although the details [turned out to be fiendish](https://www.jstor.org/stable/43046506).)
 
-Today we have universal machines that have been worked out to the last detail. Here at Cambridge, decades ago, [Dr Ken Moody](https://www.cl.cam.ac.uk/~km10/) felt the itch to "hack", so he coded a universal [Minsky register machine](http://www.igblan.free-online.co.uk/igblan/ca/minsky.html).
+Today we have universal machines that have been worked out to the last detail. Here at Cambridge, decades ago, [Dr Ken Moody](https://www.cl.cam.ac.uk/~km10/) felt the itch to "hack", so he coded a universal *Minsky register machine*.
 Such a machine has finitely many registers, each of which can hold an arbitrarily large non-negative integer.
 It has a finite program consisting of labelled instructions, of three different kinds: 
 

@@ -18,7 +18,7 @@ A key definition in extremal graph theory is that of an
 > $\epsilon$-regular pair (in $G$) if for all $A \subset X$, $B \subset Y$ with $|A| \geq \epsilon|X|$, $|B| \geq\epsilon|Y|$, one has
 > $|\mathrm{d}(A,B) − \mathrm{d}(X,Y) | \leq \epsilon$.
 
-Here $\mathrm{d}(X,Y)$ is a measure of the density of the edges between the vertex sets $X$ and $Y$. The definition is from the [lecture notes](https://yufeizhao.com/gtac/gtac.pdf)
+Here $\mathrm{d}(X,Y)$ is a measure of the density of the edges between the vertex sets $X$ and $Y$. The definition is from the lecture notes
 for Yufei Zhao's course "[Graph Theory and Additive Combinatorics](https://yufeizhao.com/gtac/)".
 (Fields Medallist Tim Gowers, a leading expert on Szemerédi's regularity lemma, uses the same definition; see §3 of [his notes](https://www.dpmms.cam.ac.uk/~par31/notes/tic.pdf).)
 At issue is the use of the strict subset, as in $A \subset X$.

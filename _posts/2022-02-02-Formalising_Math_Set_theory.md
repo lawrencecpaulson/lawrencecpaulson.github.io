@@ -22,7 +22,7 @@ Here is Hao Wang in 1958:
 [^1]: Hao Wang. [Toward Mechanical Mathematics](https://doi.org/10.1147/rd.41.0002). *IBM Journal of Research and Development* **4**:1 (1960), 15.
 
 What he actually accomplished was impressive enough. He implemented a proof procedure for first-order logic with equality, which he claimed to be complete. He demonstrated its power by proving nearly 400 of the purely logical theorems
-of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/). While thinking about that accomplishment, take a moment to examine the specifications of the computer used, an [IBM 704](https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PP704.html).
+of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/). While thinking about that accomplishment, take a moment to examine the specifications of the computer used, an [IBM 704](https://en.wikipedia.org/wiki/IBM_704).
 It's notable that the first book mentioned by Wang was Landau’s [Foundations of Analysis](https://homepages.math.uic.edu/~kauffman/Landau.pdf). 
 As [already described]({% post_url 2021-11-03-AUTOMATH %}), that book would soon be formalised, using
 [AUTOMATH](https://www.win.tue.nl/automath/).

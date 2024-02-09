@@ -31,8 +31,7 @@ My ambition was to handle a formula that could fill a couple of screens; never i
 ([This one](https://www.isa-afp.org/entries/Hermite_Lindemann.html) too.)
 
 There I was, applying the LCF architecture to Martin-Löf type theory as it was in the early 1980s, still with extensional equality.
-I wanted to apply a powerful technique invented by
-[Stefan Sokołowski](http://iis.pwsz.elblag.pl/~stefan/).
+I wanted to apply a powerful technique invented by Stefan Sokołowski.
 His modestly entitled "Note on tactics in LCF" was never published anywhere but he did manage to publish [an application of it](https://doi.org/10.1145/9758.11326).
 He had discovered a way to extend the LCF tactic mechanism with unification and combine it with backtracking search. I wanted this too.
 

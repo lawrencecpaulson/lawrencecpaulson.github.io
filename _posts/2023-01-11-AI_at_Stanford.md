@@ -21,7 +21,7 @@ in *Scientific American*
 and to a hagiographic article probably in *National Geographic*, 
 also focused on MIT.[^1] (Can't find it, sorry.)
 I also saw a [filmed demo](https://youtu.be/bo4RvYJYOzI)
-of Terry Winograd's [SHRDLU](https://hci.stanford.edu/~winograd/shrdlu/).
+of Terry Winograd's SHRDLU.
 The dialogue that Winograd carried out with his robot 
 about blocks in a virtual world  gave a strong impression of sentience.
 [Winograd himself later admitted](https://en.wikipedia.org/wiki/SHRDLU)
