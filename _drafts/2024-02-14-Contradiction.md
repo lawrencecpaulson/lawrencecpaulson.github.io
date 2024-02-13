@@ -47,15 +47,16 @@ allows you to derive other identities by adding or multiplying the two sides by 
 It's trivial to obtain $m=n$ for all pairs of numbers. 
 Conversely, the assumption $m=n$ can be transformed by subtraction and division into 1=0.
 On the other hand, it is possible postulate something like 5=0 
-if the other axioms are weak enough, and then you have simply specified 
+if the other axioms are weak enough, and then you have simply supplied the axioms for 
 a version of modular arithmetic. 
 
 ### The explosion in the λ-calculus 
 
 The λ-calculus is an extremely simple formalism in which a great many 
 computational notions can be encoded.
-Familiar data types such as the Booleans, natural numbers and integers, lists and trees 
-(even infinite data structures) can be represented, as well as algorithms operating on them.
+Familiar data types such as the Booleans, natural numbers, integers, lists and trees 
+can be represented, as well as algorithms operating on them.
+We can even have infinite lists and trees operated on by "lazy" algorithms. 
 The standard representations of true and false are 
 $\lambda x y.x$ and $\lambda x y.y$, respectively. 
 So what happens if we are given that true equals false? Then
@@ -67,17 +68,48 @@ for any two given λ-terms, $M$ and $N$.
 Here things get a little more technical. And with all due respect to Bertrand Russell,  
 he is not a set, and neither is the Pope. 
 In set theory, 0 is the empty set and 1 is $\\{0\\}$, which implies $0\in 1$.
-So 1=0 then we have big problems: $0\in 1$ is true but also false 
+So 1=0 then we have big problems: $0\in 1$ is both true and false 
 (because nothing can belong to the empty set).
 And so, for any given set $A$, the set $\\{x\in A\mid 0\in 1\\}$ equals $A$
 if we take $0\in 1$ to be true, but otherwise the resulting set is empty. 
 It follows that $A$ equals the empty set for all $A$, so all sets are equal. 
+
+### Deriving the explosion in natural deduction logic 
+
+The rule of disjunction elimination in natural deduction allows us to derive 
+an arbitrary conclusion $R$ from the following three promises: 
+* $P\lor Q$
+* a proof of $R$ that may assume $P$ 
+* a proof of $R$ that may assume $Q$ 
+
+The idea behind this rule is that one of $P$ or $Q$ must be true, and therefore, 
+$R$ is derivable using the corresponding premise. 
+The rule incorporates the key idea of natural deduction, 
+namely permission to make specified assumptions locally 
+that are *discharged* ("paid off", so to speak) further on. 
+
+This rule can obviously be generalised to an $n$-ary disjunction. We may derive $R$
+from the following $n+1$ promises: 
+* $P_1\lor \cdots \lor P_n$
+* a proof of $R$ that may assume $P_i$, for $i=1$, ..., $n$ 
+
+Obviously, if $n=2$, we get the same rule as before. 
+If $n=1$, it degenerates to a tautology. 
+And what happens if $n=0$? 
+Then the rule says that $R$ follows from the empty disjunction alone. 
+The empty disjunction is falsity.[^1]
+If our calculus further arranges that falsity follows from $P$ and $\neg P$,
+then it has the principle of explosion built in. 
+
+[^1]: I hope you can see this: $P_1\lor \cdots \lor P_n$ is true precisely if some $P_i$ is true, $i=1$, ..., $n$. If $n=0$ then it must always be false.
+
 
 ### Final remarks
 
 As promised, in specific formal systems, the principle of explosion arises all by itself. 
 It doesn't have to be assumed. Taking it as a general logical principle 
 is then simply a form of abstraction.  
+But it also arises naturally in logical formalisms from the basic principles of natural deduction. 
 
 [Paraconsistent logics](https://plato.stanford.edu/entries/logic-paraconsistent/) 
 are formal systems in which the impact of a contradiction is contained. 
@@ -88,6 +120,6 @@ to be inconsistent, and you don't want everything to collapse.
 I would argue however that you should never be using formal logic 
 to reason directly about real-world situations. 
 And indeed, the symbolic/logical tendency that was so prominent in early AI work
-has pretty much vanished in favour of techniques based on neural networks.
-There, the problem doesn't arise because nothing is being proved,
-but rather calculated statistically. 
+has pretty much vanished in favour of essentially statistical techniques 
+based on neural networks.
+There, the problem doesn't arise because nothing is being proved. 
