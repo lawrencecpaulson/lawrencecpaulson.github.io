@@ -5,19 +5,19 @@ usemathjax: true
 tags: [logic, Bertrand Russell, philosophy]
 ---
 
-That logic should be [free from contradiction](https://plato.stanford.edu/entries/contradiction/#) probably its most basic principle, 
+That logic should be [free from contradiction](https://plato.stanford.edu/entries/contradiction/#) is probably its most fundamental principle, 
 dating back to Aristotle. As described [last time]({% post_url 2024-01-31-Russells_Paradox %}), 
 the emergence of a contradiction in set theory – in the form of Russell's paradox – was catastrophic. Few question the claim that no statement can be both true and false 
 at the same time.
 But the law of contradiction is widely associated with something else, 
 the [*principle of explosion*](https://plato.stanford.edu/entries/logic-paraconsistent/#BrieHistExContQuod):
 *ex contradictione quodlibet*, a contradiction implies everything. 
-This principle has been disputed. One can formulate predicate logic without it 
-(it's called *minimal logic*).  
+This principle has been disputed. One can formulate predicate logic without it: 
+*minimal logic*.  
 And allegedly a student challenged Bertrand Russell
 by saying "suppose 1=0; prove that you are the Pope". 
 Russell is said to have replied that if 1=0 then 2=1 and therefore 
-the 2-element set containing himself and the Pope actually contains one element. 
+the 2-element set consisting of himself and the Pope actually contains only one element. 
 It's an amusing tale, but is the argument rigorous? 
 
 ### Origins
@@ -36,14 +36,14 @@ The proof turns out to rely on the principle of explosion itself,
 which is built into most formalisms: the reasoning would be circular.
 I think the informal version of the proof is pretty convincing, 
 but we can look for other evidence. 
-(And yes, evidence is what we should be looking for when trying to justify a principle 
+(And yes, **evidence** is what we should be looking for when trying to justify a principle 
 too fundamental to be proved.)
 In many specific contexts, a contradicting fact leads to an explosion by calculation. 
 
 ### The explosion in arithmetic 
 
-As we saw in the argument attributed to Russell, 1=0 in arithmetic setting 
-allows you to derive other identities by adding or multiplying the two sides by a constant.
+As we saw in the argument attributed to Russell, 1=0 in an arithmetic setting 
+allows other identities to be derived by adding or multiplying the two sides by a constant.
 It's trivial to obtain $m=n$ for all pairs of numbers. 
 Conversely, the assumption $m=n$ can be transformed by subtraction and division into 1=0.
 On the other hand, it is possible postulate something like 5=0 
@@ -62,6 +62,10 @@ $\lambda x y.x$ and $\lambda x y.y$, respectively.
 So what happens if we are given that true equals false? Then
 $M = (\lambda x y.x)MN = (\lambda x y.y)MN = N$. Therefore we can show $M=N$
 for any two given λ-terms, $M$ and $N$.
+The same sort of thing happens given 1=0 and the standard representation of natural numbers,
+though the details are complicated.[^1]
+
+[^1]: $M = 0(\textbf{K}N)M = 1(\textbf{K}N)M = \textbf{K}NM = N$
 
 ### The explosion in axiomatic set theory 
 
@@ -97,11 +101,11 @@ Obviously, if $n=2$, we get the same rule as before.
 If $n=1$, it degenerates to a tautology. 
 And what happens if $n=0$? 
 Then the rule says that $R$ follows from the empty disjunction alone. 
-The empty disjunction is falsity.[^1]
-If our calculus further arranges that falsity follows from $P$ and $\neg P$,
+The empty disjunction is falsity.[^2]
+If our calculus can derive falsity from $P$ and $\neg P$,
 then it has the principle of explosion built in. 
 
-[^1]: I hope you can see this: $P_1\lor \cdots \lor P_n$ is true precisely if some $P_i$ is true, $i=1$, ..., $n$. If $n=0$ then it must always be false.
+[^2]: I hope you can see this: $P_1\lor \cdots \lor P_n$ is true precisely if some $P_i$ is true, $i=1$, ..., $n$. If $n=0$ then it must always be false.
 
 
 ### Final remarks
