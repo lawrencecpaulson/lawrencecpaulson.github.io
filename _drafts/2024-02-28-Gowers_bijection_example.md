@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  A fact about bijections proved by Tim Gowers
+title:  Two Small Examples by Fields Medallists
 usemathjax: true 
 tags: []
 ---
@@ -8,7 +8,9 @@ tags: []
 A couple of weeks ago, Tim Gowers posted on Twitter an unusual characterisation of bijective functions: that they preserve set complements. 
 Alex Kontorovich re-tweeted his post accompanied by a Lean proof detailing Gowers' argument. 
 I took a look, and lo and behold! Isabelle can prove it with a single sledgehammer call. 
-The one line proof isn't necessarily the best proof however; there's lots to discuss here.
+The one line proof isn't necessarily the best proof however.
+And Terrence Tao published a small example on Mastodon; 
+let's look at that one too.
 
 ### Gowers' original tweet
 
