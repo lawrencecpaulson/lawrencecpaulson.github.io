@@ -18,6 +18,7 @@ theories
     "Binary_Euclidean_Algorithm"
     "Fun_Semantics"
     "Binomial_Coeffs"
+    "Gowers_Bijection"
   document_files
     "root.tex"
     "examples.bib"
