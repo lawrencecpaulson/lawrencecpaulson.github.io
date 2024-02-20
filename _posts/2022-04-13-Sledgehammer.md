@@ -80,7 +80,8 @@ So the objective of delivering proofs to the user in source form boiled down to 
 ### The next generation
 
 I know much less about what happened since 2007. It happened at [TU Munich](https://www.in.tum.de/en/cover-page/), and I was distracted by [other research projects](https://www.cl.cam.ac.uk/~lp15/papers/Arith/).
-It's not surprising that others wanted to create a new version of sledgehammer: the original was a prototype, and frankly it was a mess. The single greatest flaw: its translation from Isabelle/HOL into first-order logic was unsound, so "proofs" were regularly returned that could not be run.
+It's not surprising that others wanted to create a new version of sledgehammer: the original was a prototype, and frankly it was a mess. The single greatest flaw: its translation from Isabelle/HOL into first-order logic 
+[was unsound](https://doi.org/10.29007/36dt), so "proofs" were regularly returned that could not be run.
 
 The Munich group conducted a big [empirical evaluation](https://rdcu.be/cKr5t) and only a year later it had been extended to also call [SMT solvers](https://rdcu.be/cKr74).
 These projects were done by Jasmin Blanchette, Sascha Böhme and Tobias Nipkow.
