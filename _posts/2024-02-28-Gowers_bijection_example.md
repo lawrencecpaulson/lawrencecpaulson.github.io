@@ -9,7 +9,7 @@ A couple of weeks ago, Tim Gowers posted on Twitter an unusual characterisation 
 Alex Kontorovich re-tweeted that post accompanied by a Lean proof detailing Gowers' argument. 
 I took a look, and lo and behold! Isabelle can prove it with a single sledgehammer call. 
 That one line proof isn't necessarily the best proof, however.
-Remember, we want proofs that are easy to read and easy to maintain. 
+Remember, we want proofs that are easy to read and maintain. 
 And Terrence Tao published a small example on Mastodon; let's look at that one too.
 
 ### Gowers' original tweet
