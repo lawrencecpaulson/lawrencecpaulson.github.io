@@ -8,8 +8,8 @@ tags: [examples,sledgehammer]
 A couple of weeks ago, Tim Gowers posted on Twitter an unusual characterisation of bijective functions: that they preserve set complements. 
 Alex Kontorovich re-tweeted that post accompanied by a Lean proof detailing Gowers' argument. 
 I took a look, and lo and behold! Isabelle can prove it with a single sledgehammer call. 
-That one line proof isn't necessarily the best proof, however.
-Remember, we want proofs that are easy to read and maintain. 
+(That one line proof isn't necessarily the best proof, however.
+Remember, we want proofs that are easy to read and maintain.) 
 And Terrence Tao published a small example on Mastodon; let's look at that one too.
 
 ### Gowers' original tweet
@@ -48,6 +48,7 @@ on the subgoals that are produced.
 
 The proof you get this way is likely to be horrible. 
 However, once you have your first proof, it's easy to get a nicer proof. 
+(And you should take the trouble.)
 For the current problem, if you type `auto`, you get four ugly subgoals, each of which sledgehammer proves automatically. 
 I don't want to show this, but you can try it for yourself. 
 The Isabelle theory file is [here](/Isabelle-Examples/Gowers_Bijection.thy).
@@ -87,8 +88,8 @@ It leaves us completely in the dark as to why the claim holds.
 Moreover, if you want your development to be maintainable, 
 it needs to be resilient in the presence of change. 
 I'm always having to make corrections and adjustments (because I'm always making mistakes), 
-And while rerunning the proofs can be an anxious moment, usually they all work fine,
-or can be fixed by another sledgehammer call. 
+And while rerunning the proofs can be an anxious moment, usually they all work fine.
+At worst, they can be fixed by another sledgehammer call. 
 Opaque proofs like the one above will be hard to fix when they break. 
 
 
@@ -159,7 +160,7 @@ Isabelle's calculational style is perfect for this sort of inequality chain.
 
 ### Final remarks 
 
-Please note: **always** break up your problem 
+**Always** break up your problem 
 into its constituents – probably by calling `auto` – before calling sledgehammer.
 The effort needed to prove all the separate parts 
 is generally much less than that needed prove the whole in one go. 
