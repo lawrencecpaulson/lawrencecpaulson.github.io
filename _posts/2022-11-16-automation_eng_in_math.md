@@ -2,7 +2,7 @@
 layout: post
 title:  "Automation and engineering in mathematics, by Pedro Sánchez Terraf"
 usemathjax: true
-tags: [Isar, formal mathematics, proof documents, automation]
+tags: [Isar, formalised mathematics, proof documents, automation]
 ---
 
 The interaction between Mathematics and Computer Science has grown

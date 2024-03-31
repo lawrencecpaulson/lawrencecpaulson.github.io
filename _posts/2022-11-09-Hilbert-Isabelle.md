@@ -2,7 +2,7 @@
 layout: post
 title:  "(Hilbert, Isabelle) and more universal pairs, by Marco David"
 usemathjax: true
-tags: [Isabelle, David Hilbert, recruitment]
+tags: [Isabelle, David Hilbert, recruitment, formalised mathematics]
 ---
 
 Interest in formalizing the mathematics around [Hilbert's Tenth Problem](https://en.wikipedia.org/wiki/Hilbert%27s_tenth_problem) was sparked almost simultaneously in Coq, Mizar, and Isabelle around five years ago. The problem, which demands an algorithm to decide the solvability of any Diophantine equation, is connected to a myriad problems in all fields of mathematics. For instance, the ABC and Goldbach conjectures as well as Fermat's Last Theorem and the Four Color Theorem can be expressed in terms of Diophantine equations. The question posed by Hilbert is at the heart of the interface between computability theory and number theory.

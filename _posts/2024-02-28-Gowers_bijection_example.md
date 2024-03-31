@@ -2,7 +2,7 @@
 layout: post
 title:  Two Small Examples by Fields Medallists
 usemathjax: true 
-tags: [examples,sledgehammer]
+tags: [examples, sledgehammer]
 ---
 
 A couple of weeks ago, Tim Gowers posted on Twitter an unusual characterisation of bijective functions: that they preserve set complements. 

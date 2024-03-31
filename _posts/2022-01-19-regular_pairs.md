@@ -2,7 +2,7 @@
 layout: post
 title:  "Formalising extremal graph theory, I"
 usemathjax: true 
-tags: [Szemerédi’s regularity lemma]
+tags: [Szemerédi’s regularity lemma, formalised mathematics]
 ---
 
 [Chelsea Edmonds](https://www.cst.cam.ac.uk/people/cle47), [Angeliki Koutsoukou-Argyraki](https://www.cst.cam.ac.uk/people/ak2110) and I recently formalised [Roth's theorem on arithmetic progressions](https://www.isa-afp.org/entries/Roth_Arithmetic_Progressions.html).
