@@ -18,7 +18,7 @@ At Caltech I had learnt about [AUTOMATH](https://www.cs.ru.nl/~freek/aut/) from 
 Through [Mike Gordon](https://www.cl.cam.ac.uk/archive/mjcg/) I established connections with Inria's [Gérard Huet](https://pauillac.inria.fr/~huet/) and the Chalmers group.
 
 During the early 80s I was busy with a variety of projects, including a [reimplementation of LCF](https://www.cambridge.org/gb/academic/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf?format=PB).
-But I was deeply taken by [Martin-Löf type theory](http://www.jstor.com/stable/37448) and devoted perhaps a year of intensive work in order to produce [a paper](https://doi.org/10.1016/S0747-7171(86)80002-5) on well-founded recursion that nobody noticed:
+But I was deeply taken by [Martin-Löf type theory](http://www.jstor.org/stable/37448) and devoted perhaps a year of intensive work in order to produce [a paper](https://doi.org/10.1016/S0747-7171(86)80002-5) on well-founded recursion that nobody noticed:
 I hadn't understood that in intuitionistic type theory, if you wanted a thing, and you didn't fancy [Russell's "honest toil"](https://www.azquotes.com/quote/568414), it was perfectly okay to consult your intuition and simply add the thing you wanted.
 Of course, you had to have the *right* intuition or your addition would never get the official imprimatur.
 
@@ -147,7 +147,7 @@ Such a proof strategy is neither natural nor practical.
 
 ### Natural deduction in Martin-Löf type theory
 
-[Martin-Löf type theory](http://www.jstor.com/stable/37448)
+[Martin-Löf type theory](http://www.jstor.org/stable/37448)
 is notable for many things, but few mention that it is a
 perfect exemplar of natural deduction.
 The various type symbols are defined in a purely modular way:

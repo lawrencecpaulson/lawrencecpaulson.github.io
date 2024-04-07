@@ -65,7 +65,7 @@ Around this time, Kevin Buzzard had launched
 [his own project](https://xenaproject.wordpress.com) on formalising mathematics
 using Lean. As a number theorist, he brought his own perspective.
 Earlier researchers had formalised huge proofs such as the
-[odd order theorem](https://hal.inria.fr/hal-00816699/document), 
+[odd order theorem](https://inria.hal.science/hal-00816699/document), 
 but on the whole they had been working
 with simple objects far removed from the sophistication of mathematical practice.
 His paper [Formalising perfectoid spaces](https://arxiv.org/abs/1910.12320)

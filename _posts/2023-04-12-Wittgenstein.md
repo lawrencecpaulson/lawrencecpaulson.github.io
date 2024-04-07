@@ -157,7 +157,7 @@ three-dimensional geometry, for architecture. But what could possibly be the use
 
 ![Types of conic sections](/images/TypesOfConicSections.jpg)
 
-[^1]: JensVyff, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), via Wikimedia Commons
+[^1]: JensVyff, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), via Wikimedia Commons
 
 Somebody long ago fixated on cones and their sections: the circle, the ellipse, the parabola
 and the hyperbola. We don't know why, but we know it wasn't a calculation.

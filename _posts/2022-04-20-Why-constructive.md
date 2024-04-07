@@ -114,7 +114,7 @@ If one asks why, the response is typically that "constructive" is simply better,
 in a tone laden with moral condescension. But it isn't actually better without specific reasons, and the original philosophical basis for intuitionism has been jettisoned. The new Intuitionism looks a lot like the old Formalism.
 
 And yet there are plenty of situations where constructive reasoning really does yield concrete dividends.
-One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](http://math.andrej.com/data/synthetic.pdf)):
+One example is [synthetic computability theory](https://www.sciencedirect.com/science/article/pii/S1571066106001861) (also available [here](https://math.andrej.com/data/synthetic.pdf)):
 
 > Our goal is to develop a theory of computability synthetically: we work in a mathematical universe in which all sets and functions come equipped with intrinsic computability structure. Precisely because computability is omnipresent, we never have to speak about it—there will be no mention of Turing machines, or any other notion of computation.
 

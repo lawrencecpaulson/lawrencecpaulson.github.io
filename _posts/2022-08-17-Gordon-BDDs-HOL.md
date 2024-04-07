@@ -38,7 +38,7 @@ What to do?
 
 ### BDDs in HOL
 
-One answer came from the [Prototype Verification System](http://pvs.csl.sri.com/) (PVS) community.
+One answer came from the [Prototype Verification System](https://pvs.csl.sri.com/) (PVS) community.
 They undertook verification projects that attempted combine interactive proof with model checking.
 PVS had included "a BDD-based tautology checker" from the very beginning.
 Unfortunately, tautology checking isn't particularly useful in interactive theorem proving, and BDDs are capable of much more.

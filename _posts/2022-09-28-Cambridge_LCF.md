@@ -109,12 +109,12 @@ The code did not die, however: helped by Gerard I had achieved decent performanc
 Cambridge LCF thus became the basis of many other proof assistants.
 Mike Gordon used it in his hardware verification developments, first [LCF_LSM](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-41.pdf) and then HOL88 ([source code](https://www.repository.cam.ac.uk/handle/1810/265031) available!), keeping the extended tactic library.
 Gerard Huet used it in early experiments with the calculus of constructions, which ultimately become Coq.
-The ML subsystem, known as Cambridge ML, was also the basis of the [original version of Nuprl](https://www.nuprl.org/book/Metalanguage.html).
+The ML subsystem, known as Cambridge ML, was also the basis of the [original version of Nuprl](https://nuprl-web.cs.cornell.edu/book/).
 
 ### Postscript
 
 You'll find more details in Mike's paper "From LCF to HOL: a short history",
-*[Proof, Language, and Interaction: Essays in Honour of Robin Milner](https://mitpress.mit.edu/books/proof-language-and-interaction)* 169–185.
+*[Proof, Language, and Interaction: Essays in Honour of Robin Milner](https://mitpress.mit.edu/9780262161886/)* 169–185.
 Available for free [here](https://www.cl.cam.ac.uk/archive/mjcg/papers/HolHistory.pdf).)
 
 

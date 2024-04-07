@@ -47,7 +47,7 @@ The foundations of mathematics is concerned with questions of the form
 The story of Pythagoras trying to suppress the shocking 
 discovery of irrational numbers such as $\sqrt2$, 
 the ratio of the diagonal of a square to its side, is probably mythical. 
-But it seems that [they noticed](https://plato.stanford.edu/entries/dedekind-foundations):
+But it seems that [they noticed](https://plato.stanford.edu/entries/dedekind-foundations/):
 
 > The Greeks’ response to this startling discovery culminated in Eudoxos’ theory of ratios and proportionality, presented in Chapter V of Euclid’s Elements.
 
@@ -150,7 +150,7 @@ is an indispensable source on this and related topics.
 * Automath: absolutely not. De Bruijn consistently referred to it as "a *language* for mathematics". He moreover said it was "like a big restaurant that serves all sorts of food: vegetarian, kosher, or anything else the customer wants".[^3] Automath was, by design, neutral to foundational choices. (Isabelle/Pure is in the same spirit.)
 * Martin-Löf type theory: he himself said it was intended as a vehicle for formalising Bishop-style analysis, clearly a foundational claim. But one that rejects the vast majority of modern mathematics.  
 * Calculus of inductive constructions (Coq, Lean): the original paper (describing a weaker system) begins "The calculus of constructions is a higher-order formalism for constructive proofs in natural deduction style," and the paper makes no foundational claims. 
-Coquand's [retrospective paper](http://www.cse.chalmers.se/~coquand/v1.pdf) makes no such claims either. 
+Coquand's [retrospective paper](https://www.cse.chalmers.se/~coquand/v1.pdf) makes no such claims either. 
 Since it turns out to be significantly stronger than ZF set theory, one could even say it makes foundational assumptions. 
 
 [^3]: N.G. de Bruijn. A Survey of the Project Automath. *In*: R. P. Nederpelt, J. H. Geuvers, & R. C. Vrijer, de (Eds.), *Selected Papers on Automath* (North-Holland, 1994), 144

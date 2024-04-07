@@ -159,7 +159,7 @@ It follows directly that Ackermann's function can be computed with the help of `
 </pre>
 
 This example is unusual in that the formal proofs are all one-liners. More commonly, formal proofs are horrible. And yet there is nothing trivial about the termination of `ackloop`.
-The system of rewrite rules for Ackermann's function has been added to the [Termination Problems Data Base](http://termination-portal.org/wiki/TPDB) (TPDB) as 
+The system of rewrite rules for Ackermann's function has been added to the [Termination Problems Data Base](https://termination-portal.org/wiki/TPDB) (TPDB) as 
 [`Paulson_20/ackermann_iterative.xml`](https://termcomp.github.io/tpdb.html?ver=11.2&path=TRS_Standard%2FPaulson_20%2Fackermann_iterative.xml).
 As of this writing, no termination checker can handle it.
 

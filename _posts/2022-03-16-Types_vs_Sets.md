@@ -58,7 +58,7 @@ The $\lambda$-calculus existed for decades with no imagined model.
 
 ### Some thoughts from scientific colleagues
 
-Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Coq and Lean, [stated his view](http://www.cse.chalmers.se/~coquand/v1.pdf) clearly:
+Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Coq and Lean, [stated his view](https://www.cse.chalmers.se/~coquand/v1.pdf) clearly:
 
 > One main theme of this work is the importance of *notations* in mathematics and computer science: new questions were asked and solved only because of the use of AUTOMATH notation, itself a variation of λ-notation introduced by A. Church for representing functions. 
 
@@ -98,7 +98,7 @@ intuitionistic bounded ZF can be interpreted in any topos.
 
 In other words, your types can be interpreted in many weird and wonderful ways.
 But we need interpretations that make intuitive sense.
-Neel informs me that the original calculus of constructions was modified (during the transition to the [calculus of inductive constructions](https://hal.inria.fr/hal-01094195)) in order to make standard set-theoretic models possible.
+Neel informs me that the original calculus of constructions was modified (during the transition to the [calculus of inductive constructions](https://inria.hal.science/hal-01094195)) in order to make standard set-theoretic models possible.
 
 
 ### What set theory does and what it doesn't
