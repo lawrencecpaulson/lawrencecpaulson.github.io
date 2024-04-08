@@ -92,7 +92,7 @@ However, such an attitude makes no sense for an intuitionist, for whom mathemati
 
 Axioms are not supposed to assert facts.
 It's normal mathematics to explore the consequences of AC on Monday, and those of the 
-[axiom of determinacy](http://neugierde.github.io/cantors-attic/Axiom_of_determinacy) (which contradicts AC) on Tuesday.
+[axiom of determinacy](https://neugierde.github.io/cantors-attic/Axiom_of_determinacy) (which contradicts AC) on Tuesday.
 As we explore the consequences of different axioms, at issue isn't whether they are true or even useful:
 only whether they are interesting.
 
