@@ -133,6 +133,9 @@ For more detail on how to prove the correctness of a simple consensus algorithm 
 
 <iframe width="550" height="315" src="https://www.youtube-nocookie.com/embed/7w4KC6i9Yac" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-If you want to work on this kind of thing, I will soon be looking for a PhD student to work with me on formalising distributed algorithms in Isabelle, based at [TU Munich](https://www.in.tum.de/en/in/cover-page/). If this sounds like something you want to do, please [get in touch](https://martin.kleppmann.com/contact.html)!
+If you want to work on this kind of thing, I will soon be looking for a PhD student to work with me on formalising distributed algorithms in Isabelle. If this sounds like something you want to do, please [get in touch](https://martin.kleppmann.com/contact.html)!
 
 *This is a guest post by [Martin Kleppmann](https://martin.kleppmann.com/). Please let me know if you are interested in contributing a post of your own.*
+
+*Postscript added 10 April 2024*: Martin has since moved from TU Munich
+to the University of Cambridge, and looks forward to supervising students there.
