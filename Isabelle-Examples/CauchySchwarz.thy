@@ -1,13 +1,8 @@
 theory CauchySchwarz imports "HOL-Analysis.Analysis"
 begin
 
-definition concave_on :: "'a::real_vector set \<Rightarrow> ('a \<Rightarrow> real) \<Rightarrow> bool"
-  where "concave_on S f \<equiv> convex_on S (\<lambda>x. - f x)"
-
-lemma concave_on_iff:
-  "concave_on S f \<longleftrightarrow>
-    (\<forall>x\<in>S. \<forall>y\<in>S. \<forall>u\<ge>0. \<forall>v\<ge>0. u + v = 1 \<longrightarrow> f (u *\<^sub>R x + v *\<^sub>R y) \<ge> u * f x + v * f y)"
-  by (auto simp: concave_on_def convex_on_def algebra_simps)
+text \<open>Remark: the predicate @{term concave_on} is now to be found in the standard analysis library, 
+as is indeed much of the material below.\<close>
 
 lemma ln_concave: "concave_on {0<..} ln"
   unfolding concave_on_def

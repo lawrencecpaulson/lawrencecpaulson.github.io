@@ -1,6 +1,6 @@
 session "Isabelle-Examples" = "HOL-Analysis" +
   description \<open>Simple Isabelle examples for Machine Logic.
-        Run using "isabelle build -o browser_info -d Isabelle-Examples Isabelle-Examples"\<close>
+        Run using "isabelle build -d PATH -o browser_info Isabelle-Examples", where PATH refers to this directory\<close>
   options [quick_and_dirty, document = pdf, document_output = "output"]
   sessions
     "HOL-Library"
