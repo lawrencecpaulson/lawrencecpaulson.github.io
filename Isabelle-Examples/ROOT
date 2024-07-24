@@ -19,6 +19,7 @@ theories
     "Fun_Semantics"
     "Binomial_Coeffs"
     "Gowers_Bijection"
+    "Numeric"
   document_files
     "root.tex"
     "examples.bib"
