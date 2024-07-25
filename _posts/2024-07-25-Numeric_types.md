@@ -49,7 +49,7 @@ Isabelle can perform arithmetic on constants efficiently thanks to its internal 
 Already in the 1990s I had devised a symbolic representation of numerals that worked well; the one used today is a clever refinement of that, but I have no idea whom to credit. *If anybody is aware of a publication on this topic, I would be happy to cite it here.*
 The original version is still used for Isabelle/ZF; it is a two's complement format, eliminating the ugly case-analyses associated with signed arithmetic.
 
-Isabelle/HOL has over the years accumulated some capabilities that are cool although perhaps a little practical value. For example, `root 100 1267650600228229401496703205376` is quickly and automatically simplified to 2.
+Isabelle/HOL has over the years accumulated some capabilities that are cool although perhaps of little practical value. For example, `root 100 1267650600228229401496703205376` is quickly and automatically simplified to 2.
     
 ### Unary notation and the horror of 1  
 
