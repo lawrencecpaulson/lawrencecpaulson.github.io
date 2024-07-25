@@ -21,7 +21,8 @@ If you ask Isabelle to prove 2+2=4, thankfully it will do it.
 
 What kind of numbers are we talking about here? [Remember]({% post_url 2022-05-11-jEdit-tricks %}), you can inspect any Isabelle syntactic element using CTRL-hover (CMD-hover on a Mac). 
 Hover over any of the numbers and Isabelle will display the type `'a`. Hover over that type variable to inspect its type class, which is `numeral`. 
-This is the class of all types for which numerals work, and Isabelle knows how to add numerals. It works just as well for large numerals, say to calculate 123456789 + 987654321 = 1111111110. But such super abstract calculations do not work for 2*3=6: this time, if we inspect the type it is again `'a`, but the type class is `{times,numeral}.` That means Isabelle has detected that multiplication is involved but nothing more: no ring laws. 
+This is the class of all types for which numerals work, and Isabelle knows how to add numerals. It works just as well for large numerals, say to calculate 123456789 + 987654321 = 1111111110. But such super abstract calculations do not work for 2*3=6: this time, if we inspect the type it is again `'a`, but the type class is `{times,numeral}.` 
+That means Isabelle has detected that multiplication is involved but nothing more: it does not assume any ring laws. 
 Another example that fails is 0+2=2; here the relevant type class is `{zero,numeral}`, which does not include the identity law for 0. 
 
 <pre class="source">
