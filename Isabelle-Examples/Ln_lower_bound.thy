@@ -6,7 +6,7 @@ theory Ln_lower_bound imports
 begin
 
 (*example: prove this lower bound for all x>0.
-The problem is, it's not differential at 0. 
+The problem is, it's not differentiable at 0. 
 It is continuous, but that's nontrivial to prove.*)
 
 (*The derivative of x * ln(x) is ln(x)+1. It's zero at 1/e and the minimum value is -1/e.
