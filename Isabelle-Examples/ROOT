@@ -20,6 +20,7 @@ theories
     "Binomial_Coeffs"
     "Gowers_Bijection"
     "Numeric"
+    "Ln_lower_bound"
   document_files
     "root.tex"
     "examples.bib"
