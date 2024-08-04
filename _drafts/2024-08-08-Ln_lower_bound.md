@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Proving a lower bound where the derivative is undefined at an endpoint
+title: A tricky lower bound proof
 usemathjax: true 
 tags: [examples, Isar, formalised mathematics]
 ---
-The previous post concerned exact numerical calculations, culminating in an example of establishing a numerical lower bound for a simple mathematical formula, fully automatically.
-Although automation is **the** key to the success of formal verification,
+The previous post concerned exact numerical calculations, culminating in an example of establishing – automatically – 
+a numerical lower bound for a simple mathematical formula.
+Although automation is the key to the success of formal verification,
 a numerical approach is not always good enough. In that example,
 we could get three significant digits quickly, four significant digits slowly
 and the exact lower bound never.
@@ -19,14 +20,15 @@ Let's do it!
 
 Our task is simply to find the minimum of the function $x\ln x$
 for $x\ge0$. And the first question is whether $x\ln x$ is even **defined**
-when $x=0$. A stickler would say that it is not, because $\ln 0$ is undefined
-and multiplying $\ln 0$ by $0$ does not help matters. 
-And yet, this function certainly **looks** continuous:
+when $x=0$. A purist would say that it is not, because $\ln 0$ is undefined
+and multiplying $\ln 0$ by $0$ does not help matters.
+However, most mathematicians would say that $x\ln x$ has a *removable singularity* at zero.
+The function certainly looks continuous:
 
 FIGURE
 
 The derivative of $x\ln x$ is $\ln x+1$, which goes to zero when
-$x=1/e$. At that point, $x\ln x$ achieves its minimum, $-1/e$.
+$x=1/e$. At that point, $x\ln x$ achieves its minimum, namely $-1/e$.
 Proving this fact formally is tricky because 
 that derivative is certainly undefined when $x=0$.
 The way around the problem involves proving that $x\ln x$ is continuous even at zero:
@@ -37,10 +39,13 @@ The way around the problem involves proving that $x\ln x$ is continuous even at 
   </span><span class="keyword1 command">unfolding</span> continuous_within <span class="keyword1 command">by</span> <span class="operator">real_asymp</span>
 </pre>
 
-Unfolding `continuous_within` reduces the continuity claim to $x\ln x \ longrightarrow0 0\ln 0$, which of course is simply $x\ln x\longrightarrow0$. This goal is trivial by
+Unfolding `continuous_within` reduces the continuity claim to the limit claim
+$x\ln x \longrightarrow 0\ln 0$, which of course is simply 
+$x\ln x\longrightarrow0$. Such limits are trivially proved by
 Manuel Eberl's wonderful [`real_asymp` proof method](http://cl-informatik.uibk.ac.at/users/meberl//pubs/real_asymp.html), 
 which will surely be the subject
 of a future blogpost.
+From this result, we can quickly prove continuity for all $x\ge0$.
 
 
 <pre class="source">
@@ -54,14 +59,23 @@ of a future blogpost.
 </span><span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">intro</span><span class="main main">!</span><span class="main main">:</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span>
 </pre>
 
+This result is then repackaged in a more convenient form for later use,
+replacing the "at-within" filter by the obvious closed half-interval.
+It would be preferable to incorporate the two lemmas above into the body
+of `continuous_on_x_ln`; I split them up here simply to ease the presentation.
+
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> continuous_on_x_ln<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>continuous_on</span> <span class="main">{</span></span><span class="main">0</span><span class="main">..}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> <span class="bound">x</span> <span class="main">*</span> ln <span class="bound">x</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">unfolding</span> continuous_on_eq_continuous_within<span>
   </span><span class="keyword1 command">using</span> continuous_nonneg <span class="keyword1 command">by</span> <span class="operator">blast</span>
 </pre>
 
-*Remark*: essentially the same proof works for the function $x\sin(1/x)$, 
-but not for $x\exp(1/x)$. Why?
+*Remark*: the identical proof works for the function $x\sin(1/x)$, 
+but not for $x\exp(1/x)$, even though all three functions are seemingly 
+undefined when $x=0$. Why?
+
+xxxx
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> xln_deriv<span class="main">:</span><span>
@@ -70,6 +84,8 @@ but not for $x\exp(1/x)$. Why?
   </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">u</span><span class="main">.</span> <span class="bound">u</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="bound">u</span><span class="main">)</span><span class="main">)</span> <span class="keyword1">has_real_derivative</span> ln <span class="free">x</span> <span class="main">+</span> <span class="main">1</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="free">x</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> refl <span class="main keyword3">|</span> <span class="operator">use</span> assms <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">force</span><span class="main">)</span><span class="main keyword3">+</span>
 </pre>
+
+### Proving the lower bound 
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> x_ln_lowerbound<span class="main">:</span><span>
