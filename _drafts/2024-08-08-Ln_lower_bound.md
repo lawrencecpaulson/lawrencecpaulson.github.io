@@ -7,11 +7,13 @@ tags: [examples, Isar, formalised mathematics]
 The previous post concerned exact numerical calculations, culminating in an example of establishing a numerical lower bound for a simple mathematical formula, fully automatically.
 Although automation is **the** key to the success of formal verification,
 a numerical approach is not always good enough. In that example,
-We could get three significant digits quickly, four significant digits slowly
+we could get three significant digits quickly, four significant digits slowly
 and the exact lower bound never.
-As every calculus student knows, to locate a minimum or maximum, you take the derivative
+As every calculus student knows, 
+to locate a minimum or maximum you take the derivative
 and solve for the point at which it vanishes. 
 The desired property can then be shown using the main value theorem.
+Let's do it!
 
 ### A simple problem with surprising complications
 
@@ -19,17 +21,30 @@ Our task is simply to find the minimum of the function $x\ln x$
 for $x\ge0$. And the first question is whether $x\ln x$ is even **defined**
 when $x=0$. A stickler would say that it is not, because $\ln 0$ is undefined
 and multiplying $\ln 0$ by $0$ does not help matters. 
-And yet, this function is continuous:
+And yet, this function certainly **looks** continuous:
 
 FIGURE
+
+The derivative of $x\ln x$ is $\ln x+1$, which goes to zero when
+$x=1/e$. At that point, $x\ln x$ achieves its minimum, $-1/e$.
+Proving this fact formally is tricky because 
+that derivative is certainly undefined when $x=0$.
+The way around the problem involves proving that $x\ln x$ is continuous even at zero:
+
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> continuous_at_0<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>continuous</span> <span class="main">(</span>at_right</span> <span class="main">0</span><span class="main">)</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> <span class="bound">x</span> <span class="main">*</span> ln <span class="bound">x</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">unfolding</span> continuous_within <span class="keyword1 command">by</span> <span class="operator">real_asymp</span>
 </pre>
 
+Unfolding `continuous_within` reduces the continuity claim to $x\ln x \ longrightarrow0 0\ln 0$, which of course is simply $x\ln x\longrightarrow0$. This goal is trivial by
+Manuel Eberl's wonderful [`real_asymp` proof method](http://cl-informatik.uibk.ac.at/users/meberl//pubs/real_asymp.html), 
+which will surely be the subject
+of a future blogpost.
+
+
 <pre class="source">
-</span><span class="keyword1 command">lemma</span> continuous_nonneg<span class="main">:</span><span> 
+<span class="keyword1 command">lemma</span> continuous_nonneg<span class="main">:</span><span> 
   </span><span class="keyword2 keyword">fixes</span> <span class="free">x</span><span class="main">::</span><span class="quoted">real</span><span>
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">≥</span></span> <span class="main">0</span></span><span>"</span><span>
   </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span>continuous</span> <span class="main">(</span><span class="keyword1">at</span></span> <span class="free">x</span> <span class="keyword1">within</span> <span class="main">{</span><span class="main">0</span><span class="main">..}</span><span class="main">)</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="bound">x</span> <span class="main">*</span> ln <span class="bound">x</span><span class="main">)</span><span>"</span><span>
@@ -44,6 +59,9 @@ FIGURE
   </span><span class="keyword1 command">unfolding</span> continuous_on_eq_continuous_within<span>
   </span><span class="keyword1 command">using</span> continuous_nonneg <span class="keyword1 command">by</span> <span class="operator">blast</span>
 </pre>
+
+*Remark*: essentially the same proof works for the function $x\sin(1/x)$, 
+but not for $x\exp(1/x)$. Why?
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> xln_deriv<span class="main">:</span><span>
@@ -149,3 +167,4 @@ FIGURE
 <pre class="source">
 </pre>
 
+Many thanks to Manuel Eberl for the continuity proof!
