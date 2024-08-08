@@ -16,7 +16,6 @@ And you've got a problem if you think it's not even DEFINED at 0. (It is, of cou
 text \<open>Thanks to Manuel Eberl\<close>
 
 (*real_asymp proves ((\<lambda>x. x * ln x) \<longlongrightarrow> 0 * ln 0) (at_right 0)*)
-
 lemma continuous_at_0: "continuous (at_right 0) (\<lambda>x::real. x * ln x)"
   unfolding continuous_within by real_asymp
 
@@ -89,6 +88,10 @@ proof -
   with x_ln_lowerbound show ?thesis
     using assms by force
 qed
+
+text \<open>The same proof works for a quite different function\<close>
+lemma continuous_at_0_sin: "continuous (at_right 0) (\<lambda>x::real. x * sin(1/x))"
+  unfolding continuous_within by real_asymp
 
 end
 

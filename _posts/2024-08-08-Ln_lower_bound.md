@@ -30,7 +30,7 @@ The function certainly looks continuous:
 
 The derivative of $x\ln x$ is $\ln x+1$, which goes to zero when
 $x=1/e$. At that point, $x\ln x$ achieves its minimum, namely $-1/e$.
-Proving this fact formally is tricky because 
+Proving this fact formally, for all $x\ge0$, is tricky because 
 that derivative is certainly undefined when $x=0$.
 The way around the problem involves proving that $x\ln x$ is continuous for all $x\ge0$.
 
@@ -50,6 +50,7 @@ Manuel Eberl's wonderful [`real_asymp` proof method](http://cl-informatik.uibk.a
 which will surely be the subject
 of a future blogpost.
 From this result, we can quickly prove continuity for all $x\ge0$.
+Incorporating the zero case requires a little black magic (the topological definition of continuity), while the non-zero case is straightforward.
 
 
 <pre class="source">
@@ -66,7 +67,7 @@ From this result, we can quickly prove continuity for all $x\ge0$.
 This result is then repackaged in a more convenient form for later use,
 replacing the "at-within" filter by the obvious closed half-interval.
 It would be preferable to incorporate the two lemmas above into the body
-of `continuous_on_x_ln`; I split them up here simply to ease the presentation.
+of `continuous_on_x_ln`; I have split them up here simply to ease the presentation.
 
 
 <pre class="source">
@@ -75,15 +76,14 @@ of `continuous_on_x_ln`; I split them up here simply to ease the presentation.
   </span><span class="keyword1 command">using</span> continuous_nonneg <span class="keyword1 command">by</span> <span class="operator">blast</span>
 </pre>
 
-*Remark*: the identical proof works to prove the continuity of the function $x\sin(1/x)$, 
-but not of $x\exp(1/x)$, even though all three functions are seemingly 
-undefined when $x=0$. Why?
+*Remark*: the identical proof works for the continuity of the function $x\sin(1/x)$, 
+but not of $x\exp(1/x)$, even though all three functions 
+have a singularity at $x=0$. What is the essential difference?
 
-### Proving the lower bound 
+### Proving the lower bound claim
 
 The first step is to prove that the derivative of $x\ln x$
 is indeed $\ln x+1$.
-
 In Isabelle/HOL, calculating a derivative is easy.
 If you know the derivative already (perhaps from a computer algebra system), 
 then verifying the result is even easier.
@@ -163,16 +163,15 @@ In both cases, continuity is a requirement.
 </pre>
 
 If $x=1/e$, then the minimum value equals $-1/e$.
-Note how the previous results are combined using the keyword `moreover`.
+Note how the previous results are collected using the keyword `moreover`.
 
 <pre class="source">
-  <span class="keyword1 command">moreover
-  </span><span class="keyword1 command">have <span class="quoted"><span>"</span><span class="skolem">xmin</span> <span class="main">*</span> ln<span class="main">(</span><span class="skolem">xmin</span><span class="main">) <span class="main">= <span class="main">-</span></span><span class="main">1</span></span> <span class="main">/</span> exp <span class="main">1</span></span>"
+  <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">xmin</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="skolem">xmin</span><span class="main">)</span> <span class="main">=</span> <span class="main">-</span><span class="main">1</span> <span class="main">/</span> exp <span class="main">1</span><span>"</span><span>
     </span><span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> xmin_def ln_div<span class="main">)</span>
 </pre>
 
 The keyword `ultimately` takes the previous result and the earlier two saved by `moreover`, delivering them to the following proof.
-As we have covered all the cases for $x$, the conclusion followed immediately.
+As we have covered all the cases for $x$, the conclusion follows immediately.
 
 <pre class="source">
   <span class="keyword1 command">ultimately</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis
@@ -182,7 +181,8 @@ As we have covered all the cases for $x$, the conclusion followed immediately.
 
 ### Finally, a numerical conclusion
 
-In the previous post, we used the approximation proof method (which operates by interval arithmetic) to calculate the minimum as -0.3679, 
+In the [previous post]({% post_url 2024-07-25-Numeric_types%}), 
+we used the `approximation` proof method (which operates by interval arithmetic) to calculate the minimum as -0.3679, 
 and it was slow (19 seconds on my zippy laptop).
 Now we can get 17 significant figures more or less instantaneously.
 
@@ -201,8 +201,11 @@ Now we can get 17 significant figures more or less instantaneously.
 
 
 If you fancy a challenge, try the same exercise with the function $x\sin(1/x)$.
-In many ways it's similar, but the derivative hits zero infinitely often.
+In many ways it's similar, but the derivative hits zero infinitely often
+and the formula, $\sin(1/x) - \cos(1/x)/x$, doesn't look easy to work with.
+If any of you tackle this problem, send it to me: 
+the first nice solution will be posted here.
 
-The examples are online [here](/Isabelle-Examples/Ln_lower_bound.thy).
+The examples for this post are online [here](/Isabelle-Examples/Ln_lower_bound.thy).
 
 Many thanks to Manuel Eberl for the continuity proof!
