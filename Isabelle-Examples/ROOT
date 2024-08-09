@@ -5,6 +5,7 @@ session "Isabelle-Examples" = "HOL-Analysis" +
   sessions
     "HOL-Library"
     "HOL-Analysis"
+    "HOL-Probability"
     "HOL-Decision_Procs"
     "HOL-Number_Theory"
 theories
@@ -21,6 +22,7 @@ theories
     "Gowers_Bijection"
     "Numeric"
     "Ln_lower_bound"
+    "Probabilistic_Example_Erdos"
   document_files
     "root.tex"
     "examples.bib"

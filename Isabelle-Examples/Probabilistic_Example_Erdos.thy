@@ -1,7 +1,10 @@
 section \<open>A Simple Probabilistic Proof by Paul Erdős.\<close>
 
+text \<open>Actual source is the webpage here: \url{https://www.cut-the-knot.org/Probability/ProbabilisticMethod.shtml}.
+Could not find the Erdős article and he wrote a dozen in 1963, in four languages.\<close>
+
 theory Probabilistic_Example_Erdos
-  imports "HOL-Library.Ramsey" "HOL-Probability.Probability" "HOL-ex.Sketch_and_Explore"
+  imports "HOL-Library.Ramsey" "HOL-Probability.Probability"
 
 begin
 
@@ -12,7 +15,8 @@ theorem Erdos_1963:
 proof -
   have "finite \<F>"
     using X finite_imp_finite_nsets finite_subset by blast
-  define \<Omega> where "\<Omega> \<equiv> X \<rightarrow>\<^sub>E {..<2::nat}"
+  let ?two = "{..<2::nat}"
+  define \<Omega> where "\<Omega> \<equiv> X \<rightarrow>\<^sub>E ?two"
   define M where "M \<equiv> uniform_count_measure \<Omega>"
   have space_eq: "space M = \<Omega>"
     by (simp add: M_def space_uniform_count_measure)
@@ -26,42 +30,38 @@ proof -
     unfolding M_def by (intro prob_space_uniform_count_measure \<Omega>)
   define mchrome where "mchrome \<equiv> \<lambda>c F. {f \<in> \<Omega>. f ` F \<subseteq> {c}}"
       \<comment>\<open>the event to avoid: monochromatic sets\<close>
-  have mchrome_ev: "mchrome c F \<in> P.events" if "c<2" for F c
+  have mchrome: "mchrome c F \<in> P.events" "mchrome c F \<subseteq> \<Omega>" for F c
     by (auto simp: sets_eq mchrome_def \<Omega>_def)
-  have mchrome_sub_\<Omega>: "mchrome c F \<subseteq> \<Omega>" if "c<2" for F c
-    using mchrome_ev sets_eq that by auto
   have card_mchrome: "card (mchrome c F) = 2 ^ (card X - n)" if "F \<in> \<F>" "c<2" for F c
   proof -
     have F: "finite F" "card F = n"
       using X nsets_def that by auto
     have "F \<subseteq> X"
       using assms that by (force simp: nsets_def)
-    with F \<open>finite X\<close> have "card ((X-F) \<rightarrow>\<^sub>E {..<2::nat}) = 2 ^ (card X - n)"
+    with F \<open>finite X\<close> have "card ((X-F) \<rightarrow>\<^sub>E ?two) = 2 ^ (card X - n)"
       by (simp add: card_funcsetE card_Diff_subset)
     moreover
-    have "bij_betw (\<lambda>f. restrict f (X-F)) (mchrome c F) (X-F \<rightarrow>\<^sub>E {..<2::nat})"
+    have "bij_betw (\<lambda>f. restrict f (X-F)) (mchrome c F) (X-F \<rightarrow>\<^sub>E ?two)"
     proof (intro bij_betwI)
-      show "(\<lambda>g x. if x\<in>F then c else g x) \<in> (X - F \<rightarrow>\<^sub>E {..<2::nat}) \<rightarrow> mchrome c F"
+      show "(\<lambda>g x. if x\<in>F then c else g x) \<in> (X-F \<rightarrow>\<^sub>E ?two) \<rightarrow> mchrome c F"
         using that \<open>F \<subseteq> X\<close> by (auto simp: mchrome_def \<Omega>_def)
     qed (fastforce simp: mchrome_def \<Omega>_def)+
     ultimately show ?thesis
       by (metis bij_betw_same_card)
   qed
-
-  have emeasure_eq: "emeasure M C = (if C \<subseteq> \<Omega> then ennreal (card C / card \<Omega>) else 0)" for C
-    by (simp add: M_def emeasure_uniform_count_measure_if \<open>finite \<Omega>\<close>)
-
   have prob_mchrome: "P.prob (mchrome c F) = 1 / 2^n"  
     if "F \<in> \<F>" "c<2" for F c
   proof -
+    have emeasure_eq: "emeasure M U = (if U \<subseteq> \<Omega> then ennreal (card U / card \<Omega>) else 0)" for U
+      by (simp add: M_def emeasure_uniform_count_measure_if \<open>finite \<Omega>\<close>)
     have "emeasure M (mchrome c F) = ennreal (2 ^ (card X - n) / card \<Omega>)"
-      using that mchrome_sub_\<Omega> by (simp add: emeasure_eq card_mchrome)
+      using that mchrome by (simp add: emeasure_eq card_mchrome)
     also have "\<dots> = ennreal (1 / 2^n)"
     proof -
       have eq: "(1 / 2 ^ n) = real (2 ^ card X div 2 ^ n) * (1 / 2 ^ card X)"
-        using n by (simp add: power_diff card_mchrome card\<Omega> le_imp_power_dvd real_of_nat_div)
+        by (simp add: n power_diff card_mchrome card\<Omega> le_imp_power_dvd real_of_nat_div)
       show ?thesis
-        by (simp add: eq assms(6) card\<Omega> power_diff_power_eq) 
+        by (simp add: eq n card\<Omega> power_diff_power_eq) 
     qed
     finally have "emeasure M (mchrome c F) = ennreal (1 / 2^n)" .
     then show ?thesis
@@ -73,9 +73,9 @@ proof -
   moreover have "(\<Union>F\<in>\<F>. \<Union>c<2. mchrome c F) \<noteq> \<Omega>"
   proof -
     have "P.prob (\<Union>F\<in>\<F>. \<Union>c<2. mchrome c F) \<le> (\<Sum>F\<in>\<F>. P.prob (\<Union>c<2. mchrome c F))"
-      by (metis \<open>finite \<F>\<close> mchrome_ev measure_UNION_le countable_Un_Int(1) lessThan_iff)
+      by (intro measure_UNION_le) (auto simp: countable_Un_Int mchrome \<open>finite \<F>\<close>)
     also have "\<dots> \<le> (\<Sum>F\<in>\<F>. \<Sum>c<2. P.prob (mchrome c F))"
-      by (smt (verit, best) mchrome_ev sum_mono measure_UNION_le finite_lessThan lessThan_iff)
+      by (intro sum_mono measure_UNION_le) (auto simp: mchrome)
     also have "\<dots> = m * 2 * (1 / 2^n)"
       by (simp add: prob_mchrome \<open>card \<F> = m\<close>)
     also have "\<dots> < 1"
