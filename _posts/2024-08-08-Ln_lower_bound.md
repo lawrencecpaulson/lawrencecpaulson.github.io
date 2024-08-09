@@ -72,8 +72,8 @@ of `continuous_on_x_ln`; I have split them up here simply to ease the presentati
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> continuous_on_x_ln<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>continuous_on</span> <span class="main">{</span></span><span class="main">0</span><span class="main">..}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">x</span><span class="main">::</span>real<span class="main">.</span> <span class="bound">x</span> <span class="main">*</span> ln <span class="bound">x</span><span class="main">)"
-  </span><span class="keyword1 command">unfolding</span> continuous_on_eq_continuous_within<span>
-  </span><span class="keyword1 command">using</span> continuous_nonneg <span class="keyword1 command">by</span> <span class="operator">blast</span>
+  </span><span class="keyword1 command">unfolding</span> continuous_on_eq_continuous_within
+  <span class="keyword1 command">using</span> continuous_nonneg <span class="keyword1 command">by</span> <span class="operator">blast</span>
 </pre>
 
 *Remark*: the identical proof works for the continuity of the function $x\sin(1/x)$, 
@@ -133,8 +133,8 @@ with $x\ln x$ decreasing in value to its minimum.
     </span><span class="keyword3 command">fix</span> <span class="skolem">u</span> <span class="main">::</span> <span class="quoted">real
     </span><span class="keyword3 command">assume</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">&lt;</span></span> <span class="skolem">u"</span></span> <span class="keyword2 keyword">and</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">u</span> <span class="main">&lt;</span></span> <span class="skolem">xmin"</span> 
     </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>ln</span> <span class="skolem">u</span> <span class="main">+</span></span> <span class="main">1</span> <span class="main">&lt;</span> ln <span class="main">1"
-      </span><span class="keyword1 command">unfolding</span> xmin_def<span>
-      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> del_insts<span class="main main">)</span> assms exp_diff exp_less_cancel_iff exp_ln_iff<span class="main">)
+      </span><span class="keyword1 command">unfolding</span> xmin_def
+      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> del_insts<span class="main main">)</span> assms exp_diff exp_less_cancel_iff exp_ln_iff<span class="main">)
     </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span>ln</span> <span class="skolem">u</span> <span class="main">+</span></span> <span class="main">1</span> <span class="main">&lt;</span> <span class="main">0"
       </span><span class="keyword1 command">by</span> <span class="operator">simp
   </span><span class="keyword1 command">next
@@ -154,8 +154,8 @@ In both cases, continuity is a requirement.
     </span><span class="keyword3 command">fix</span> <span class="skolem">u
     </span><span class="keyword3 command">assume</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">&gt;</span></span> <span class="skolem">u"</span></span> <span class="keyword2 keyword">and</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">u</span> <span class="main">&gt;</span></span> <span class="skolem">xmin"</span> 
     </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span>ln</span> <span class="skolem">u</span> <span class="main">+</span></span> <span class="main">1</span> <span class="main">&gt;</span> <span class="main">0"
-      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> del_insts<span class="main main">)</span> <span class="quoted"><span class="quoted"><span>‹</span><span class="main">0</span></span> <span class="main">&lt;</span></span> <span class="skolem">xmin›</span> exp_minus inverse_eq_divide<span> 
-          </span>ln_less_cancel_iff ln_unique xmin_def<span class="main">)
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">smt</span> <span class="main main">(</span>verit<span class="main main">,</span> del_insts<span class="main main">)</span> <span class="quoted"><span class="quoted"><span>‹</span><span class="main">0</span></span> <span class="main">&lt;</span></span> <span class="skolem">xmin›</span> exp_minus inverse_eq_divide 
+          ln_less_cancel_iff ln_unique xmin_def<span class="main">)
   </span><span class="keyword1 command">next
     </span><span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span>continuous_on</span> <span class="main">{</span></span><span class="skolem">xmin</span><span class="main">..</span><span class="free">x</span><span class="main">}</span> <span class="main">(</span><span class="main">λ</span><span class="bound">u</span><span class="main">.</span> <span class="bound">u</span> <span class="main">*</span> ln <span class="bound">u</span><span class="main">)"
       </span><span class="keyword1 command">using</span> continuous_on_x_ln continuous_on_subset xmin_def <span class="keyword1 command">by</span> <span class="operator">fastforce
@@ -166,8 +166,8 @@ If $x=1/e$, then the minimum value equals $-1/e$.
 Note how the previous results are collected using the keyword `moreover`.
 
 <pre class="source">
-  <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">xmin</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="skolem">xmin</span><span class="main">)</span> <span class="main">=</span> <span class="main">-</span><span class="main">1</span> <span class="main">/</span> exp <span class="main">1</span><span>"</span><span>
-    </span><span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> xmin_def ln_div<span class="main">)</span>
+  <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">xmin</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="skolem">xmin</span><span class="main">)</span> <span class="main">=</span> <span class="main">-</span><span class="main">1</span> <span class="main">/</span> exp <span class="main">1</span><span>"</span>
+    <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> xmin_def ln_div<span class="main">)</span>
 </pre>
 
 The keyword `ultimately` takes the previous result and the earlier two saved by `moreover`, delivering them to the following proof.

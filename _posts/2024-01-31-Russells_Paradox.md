@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Russell's Paradox: Myth and Fact"
+title:  "Russell's Paradox: myth and fact"
 usemathjax: true 
 tags: [logic, Bertrand Russell, Principia Mathematica, philosophy]
 ---

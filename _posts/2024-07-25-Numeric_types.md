@@ -15,8 +15,8 @@ with the need to work with decimal constants or large integers? Let's see how it
 If you ask Isabelle to prove 2+2=4, thankfully it will do it. 
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">2</span><span class="main">+</span></span><span class="numeral">2</span><span class="main">=</span></span><span class="numeral">4</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="operator">auto</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">2</span><span class="main">+</span></span><span class="numeral">2</span><span class="main">=</span></span><span class="numeral">4</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="operator">auto</span>
 </pre>
 
 What kind of numbers are we talking about here? [Remember]({% post_url 2022-05-11-jEdit-tricks %}), you can inspect any Isabelle syntactic element using CTRL-hover (CMD-hover on a Mac). 
@@ -26,11 +26,11 @@ That means Isabelle has detected that multiplication is involved but nothing mor
 Another example that fails is 0+2=2; here the relevant type class is `{zero,numeral}`, which does not include the identity law for 0. 
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">2</span><span class="main">*</span></span><span class="numeral">3</span><span class="main">=</span></span><span class="numeral">6</span><span>"</span><span>
-  </span><span class="keyword1 command">oops</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">2</span><span class="main">*</span></span><span class="numeral">3</span><span class="main">=</span></span><span class="numeral">6</span><span>"</span>
+  <span class="keyword1 command">oops</span>
 
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">0</span></span><span class="main">+</span></span><span class="numeral">2</span><span class="main">=</span><span class="numeral">2</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">1</span></span><span class="main">*</span></span><span class="numeral">3</span><span class="main">=</span><span class="numeral">3</span><span>"</span><span>
-  </span><span class="keyword1 command">oops</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">0</span></span><span class="main">+</span></span><span class="numeral">2</span><span class="main">=</span><span class="numeral">2</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">1</span></span><span class="main">*</span></span><span class="numeral">3</span><span class="main">=</span><span class="numeral">3</span><span>"</span>
+  <span class="keyword1 command">oops</span>
 </pre>
 
 The way to avoid all such problems is simply to ensure that the type is constrained somehow. In most cases, the use of a variable declared previously will be enough. Sometimes a variable declaration will need a type constraint: `fix x :: real`. But you can always write an explicit type constraint within an expression, as in 123456789 * (987654321::int). 
@@ -38,11 +38,11 @@ Isabelle will happily simplify that to 121932631112635269.
 Also, the function `Suc` implies type `nat`.
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">123456789</span> <span class="main">*</span></span> <span class="main">(</span><span class="numeral">987654321</span><span class="main">::</span>int</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">121932631112635269</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="operator">simp</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="numeral">123456789</span> <span class="main">*</span></span> <span class="main">(</span><span class="numeral">987654321</span><span class="main">::</span>int</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">121932631112635269</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="operator">simp</span>
 
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>Suc</span> <span class="main">(</span>Suc</span> <span class="main">0</span><span class="main">)</span> <span class="main">*</span> <span class="free">n</span> <span class="main">=</span> <span class="free">n</span><span class="main">*</span><span class="numeral">2</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="operator">simp</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>Suc</span> <span class="main">(</span>Suc</span> <span class="main">0</span><span class="main">)</span> <span class="main">*</span> <span class="free">n</span> <span class="main">=</span> <span class="free">n</span><span class="main">*</span><span class="numeral">2</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="operator">simp</span>
 </pre>
 
 Isabelle can perform arithmetic on constants efficiently thanks to its internal representation: a form of symbolic binary notation. Positional notation is necessary to handle large integers, binary (as opposed to say decimal) makes the formal theory of arithmetic compact. 
@@ -61,8 +61,8 @@ When working with natural numbers (type `nat` in Isabelle/HOL), we sometimes hav
 Simplest is to rewrite with `eval_nat_numeral`:
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span><span class="main">^</span></span><span class="numeral">5</span> <span class="main">=</span></span> <span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="main">(</span><span class="free">x</span><span class="main">::</span>real<span class="main">)</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> eval_nat_numeral<span class="main">)</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span><span class="main">^</span></span><span class="numeral">5</span> <span class="main">=</span></span> <span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="free">x</span><span class="main">*</span><span class="main">(</span><span class="free">x</span><span class="main">::</span>real<span class="main">)</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> eval_nat_numeral<span class="main">)</span>
 </pre>
 
 Please note: 0 and 1 are constants, overloaded on all numeric types. They are separate from the system of symbolic binary notation mentioned above. The constant 1, when it has type `nat`, will automatically be simplified to `Suc 0`. We would much have preferred to treat the two expressions as symbolically identical, but couldn't think of a clean way to do it. If you are working with natural numbers, especially as a beginner, it would be best to avoid the symbol 1 altogether.
@@ -74,8 +74,8 @@ This expands to the fraction 31416 / 10^4.
 After simplification, this fraction will be simplified and the denominator may get multiplied out; you may not recognise your real constant anymore.
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">1</span></span> <span class="main">-</span></span> <span class="numeral">0.3</span><span class="main">*</span><span class="keyword1">𝗂</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="numeral">2.7</span> <span class="main">+</span> <span class="numeral">5</span><span class="main">*</span><span class="keyword1">𝗂</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">4.2</span> <span class="main">+</span> <span class="numeral">4.19</span><span class="main">*</span><span class="keyword1">𝗂</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="dynamic dynamic">algebra_simps</span><span class="main">)</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">1</span></span> <span class="main">-</span></span> <span class="numeral">0.3</span><span class="main">*</span><span class="keyword1">𝗂</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="numeral">2.7</span> <span class="main">+</span> <span class="numeral">5</span><span class="main">*</span><span class="keyword1">𝗂</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">4.2</span> <span class="main">+</span> <span class="numeral">4.19</span><span class="main">*</span><span class="keyword1">𝗂</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="dynamic dynamic">algebra_simps</span><span class="main">)</span>
 </pre>
   
 For complex numbers, the imaginary constant `𝗂` can be chosen from the Symbols palette under Letters, or typed directly as `\<i>`
@@ -90,11 +90,11 @@ We can compute factorials and test primality with reasonable efficiency.
 The proof method `eval` calls for the computational evaluation of expressions in the goal statement. These cannot be done using `auto`!
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>fact</span> <span class="numeral">20</span> <span class="main">&lt;</span></span> <span class="main">(</span><span class="numeral">2432902008176640001</span><span class="main">::</span>nat<span class="main">)</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="operator">eval</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>fact</span> <span class="numeral">20</span> <span class="main">&lt;</span></span> <span class="main">(</span><span class="numeral">2432902008176640001</span><span class="main">::</span>nat<span class="main">)</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="operator">eval</span>
 
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>prime</span> <span class="main">(</span><span class="numeral">179424673</span><span class="main">::</span>nat</span><span class="main">)</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="operator">eval</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span>prime</span> <span class="main">(</span><span class="numeral">179424673</span><span class="main">::</span>nat</span><span class="main">)</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="operator">eval</span>
 </pre>
 
 It must be noted that computational reflection provides a weaker standard of proof, as we are required to trust the translation from higher-order logic into Standard ML and then to machine code for execution.
@@ -108,21 +108,21 @@ It can perform calculations that otherwise would be beyond tedious.
 Its argument specifies the required precision.
 
 <pre class="source">
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span>pi</span> <span class="main">-</span> <span class="numeral">355</span><span class="main">/</span><span class="numeral">113</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="main">1</span><span class="main">/</span><span class="numeral">10</span><span class="main">^</span><span class="numeral">6</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 25<span class="main">)</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span>pi</span> <span class="main">-</span> <span class="numeral">355</span><span class="main">/</span><span class="numeral">113</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="main">1</span><span class="main">/</span><span class="numeral">10</span><span class="main">^</span><span class="numeral">6</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 25<span class="main">)</span>
 
-<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span>sqrt</span> <span class="numeral">2</span> <span class="main">-</span> <span class="numeral">1.4142135624</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="main">1</span><span class="main">/</span><span class="numeral">10</span><span class="main">^</span><span class="numeral">10</span><span>"</span><span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 35<span class="main">)</span>
+<span class="keyword1 command">lemma</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span>sqrt</span> <span class="numeral">2</span> <span class="main">-</span> <span class="numeral">1.4142135624</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="main">1</span><span class="main">/</span><span class="numeral">10</span><span class="main">^</span><span class="numeral">10</span><span>"</span>
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 35<span class="main">)</span>
 </pre>
 
 Remarkably, `approximation` is not confined to single values but can also prove numerical results on closed intervals, via the `splitting` option.
  
 <pre class="source">
-<span class="keyword1 command">lemma</span><span>
-  </span><span class="keyword2 keyword">fixes</span> <span class="free">x</span><span class="main">::</span><span class="quoted">real</span><span>
-  </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="numeral">0.1</span> <span class="main">..</span> <span class="main">1</span><span class="main">}</span><span>"</span><span>
-  </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="free">x</span><span class="main">)</span> <span class="main">≥</span> <span class="main">-</span><span class="numeral">0.368</span><span>"</span><span>
-  </span><span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 17 <span class="quasi_keyword">splitting</span><span class="main main">:</span> <span class="quoted free">x</span><span class="main main">=</span>13<span class="main">)</span>
+<span class="keyword1 command">lemma</span>
+  <span class="keyword2 keyword">fixes</span> <span class="free">x</span><span class="main">::</span><span class="quoted">real</span>
+  <span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="numeral">0.1</span> <span class="main">..</span> <span class="main">1</span><span class="main">}</span><span>"</span>
+  <span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="free">x</span><span class="main">)</span> <span class="main">≥</span> <span class="main">-</span><span class="numeral">0.368</span><span>"</span>
+  <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 17 <span class="quasi_keyword">splitting</span><span class="main main">:</span> <span class="quoted free">x</span><span class="main main">=</span>13<span class="main">)</span>
 </pre>
 
 This particular example is problematical because $x\ln x$ is undefined when $x=0$.
@@ -132,12 +132,12 @@ The example above takes a couple of seconds even though it is not that close to 
 If we try to get even a little bit closer, the `approximation` tactic takes much more than a couple of seconds.
 
 <pre class="source">
-<span class="keyword1 command">lemma</span><span>
-  </span><span class="keyword2 keyword">fixes</span> <span class="free">x</span><span class="main">::</span><span class="quoted">real</span><span>
-  </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="numeral">0.1</span> <span class="main">..</span> <span class="main">1</span><span class="main">}</span><span>"</span><span>
-  </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="free">x</span><span class="main">)</span> <span class="main">≥</span> <span class="main">-</span><span class="numeral">0.3679</span><span>"</span><span>
-</span><span class="keyword1 command">using</span> assms<span>
-  </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 18 <span class="quasi_keyword">splitting</span><span class="main main">:</span> <span class="quoted free">x</span><span class="main main">=</span>16<span class="main">)</span>
+<span class="keyword1 command">lemma</span>
+  <span class="keyword2 keyword">fixes</span> <span class="free">x</span><span class="main">::</span><span class="quoted">real</span>
+  <span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="numeral">0.1</span> <span class="main">..</span> <span class="main">1</span><span class="main">}</span><span>"</span>
+  <span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="free">x</span><span class="main">)</span> <span class="main">≥</span> <span class="main">-</span><span class="numeral">0.3679</span><span>"</span>
+<span class="keyword1 command">using</span> assms
+  <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 18 <span class="quasi_keyword">splitting</span><span class="main main">:</span> <span class="quoted free">x</span><span class="main main">=</span>16<span class="main">)</span>
 </pre>
 
 I hope to treat this example precisely in a future post.
