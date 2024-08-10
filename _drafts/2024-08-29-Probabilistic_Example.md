@@ -46,6 +46,20 @@ and therefore forms a non-empty set.
 
 ### The formalisation
 
+The theorem statement assumes the family $\cal F$ of $n$-sets
+of the finite set $X$. The family has cardinality 
+$\vert \cal F \vert = m<2^{2-1}$.
+Necessary is the constraint $0<n\le\vert X\vert$, 
+omitted from the problem statement.
+As for the conclusion, the required 2-colouring is expressed
+as a function from $X$ to the set $\\{0,1\\}$.
+The *extensional* function space
+<span class="keyword1">→<span class="hidden">⇩</span><sub>E</sub></span>
+is required: by constraining the functions outside their domain ($X$)
+to some arbitrary fixed value, 
+this operator accurately represents the set $X\to\\{0,1\\}$.
+It's vital because we are actually counting these functions.
+
 <pre class="source">
 <span class="keyword1 command">theorem</span> Erdos_1963<span class="main">:</span>
   <span class="keyword2 keyword">assumes</span> X<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">𝓕</span> <span class="main">⊆</span></span> nsets</span> <span class="free">X</span> <span class="free">n</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span>finite</span> <span class="free">X</span><span>"</span></span>
@@ -54,6 +68,13 @@ and therefore forms a non-empty set.
 <span class="keyword1 command">proof</span> <span class="operator">-</span>
 </pre>
 
+Now we have to set up the probabilities. 
+The *sample space* $\Omega$ is the set of all 2-colourings of $X$.
+Then the *probability space* $M$ is the corresponding measure space,
+when all colourings have the same probability. 
+A non-uniform probability distribution would be a little more work, 
+e.g. we'd have to show that the probabilities summed to 1.
+
 <pre class="source">
   <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>finite</span> <span class="free">𝓕</span><span>"</span></span>
     <span class="keyword1 command">using</span> X finite_imp_finite_nsets finite_subset <span class="keyword1 command">by</span> <span class="operator">blast</span>
@@ -61,6 +82,8 @@ and therefore forms a non-empty set.
   <span class="keyword3 command">define</span> <span class="skolem skolem">Ω</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">Ω</span> <span class="main">≡</span> <span class="free">X</span> <span class="keyword1">→<span class="hidden">⇩</span><sub>E</sub></span></span> <span class="var">?two</span><span>"</span></span>
   <span class="keyword3 command">define</span> <span class="skolem skolem">M</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">M</span> <span class="main">≡</span> uniform_count_measure</span> <span class="skolem">Ω</span><span>"</span></span>
 </pre>
+
+xxxx
 
 <pre class="source">
   <span class="keyword1 command">have</span> space_eq<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>space</span> <span class="skolem">M</span> <span class="main">=</span></span> <span class="skolem">Ω</span><span>"</span>
@@ -193,5 +216,9 @@ is claimed to be Erdős's "[Some remarks on the theory of graphs](https://www.am
 This paper indeed presents a proof of a lower bound for Ramsey numbers,
 but it makes no reference to probability and instead 
 enumerates the total number of graphs satisfying certain properties.
+
+A recent [paper](/papers/Edmonds-CPP2024.pdf) by Chelsea Edmonds
+describes the formalisation of probabilistic proofs in 
+considerably more detail.
 
 The examples for this post are online [here](/Isabelle-Examples/Probabilistic_Example_Erdos.thy).
