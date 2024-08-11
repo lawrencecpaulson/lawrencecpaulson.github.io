@@ -163,14 +163,14 @@ In both cases, continuity is a requirement.
 </pre>
 
 If $x=1/e$, then the minimum value equals $-1/e$.
-Note how the previous results are collected using the keyword `moreover`.
+Note how the previous results are collected using the keyword <span class="keyword1 command">moreover</span>.
 
 <pre class="source">
   <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">xmin</span> <span class="main">*</span></span> ln</span><span class="main">(</span><span class="skolem">xmin</span><span class="main">)</span> <span class="main">=</span> <span class="main">-</span><span class="main">1</span> <span class="main">/</span> exp <span class="main">1</span><span>"</span>
     <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> xmin_def ln_div<span class="main">)</span>
 </pre>
 
-The keyword `ultimately` takes the previous result and the earlier two saved by `moreover`, delivering them to the following proof.
+The keyword <span class="keyword1 command"> ultimately </span> takes the previous result and the earlier two saved by `moreover`, delivering them to the following proof.
 As we have covered all the cases for $x$, the conclusion follows immediately.
 
 <pre class="source">

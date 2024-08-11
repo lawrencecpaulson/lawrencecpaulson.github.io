@@ -34,11 +34,9 @@ proof -
     by (auto simp: sets_eq mchrome_def \<Omega>_def)
   have card_mchrome: "card (mchrome c F) = 2 ^ (card X - n)" if "F \<in> \<F>" "c<2" for F c
   proof -
-    have F: "finite F" "card F = n"
-      using X nsets_def that by auto
-    have "F \<subseteq> X"
-      using assms that by (force simp: nsets_def)
-    with F \<open>finite X\<close> have "card ((X-F) \<rightarrow>\<^sub>E ?two) = 2 ^ (card X - n)"
+    have F: "finite F" "card F = n" "F \<subseteq> X"
+      using assms that by (auto simp: nsets_def)
+    with \<open>finite X\<close> have "card (X-F \<rightarrow>\<^sub>E ?two) = 2 ^ (card X - n)"
       by (simp add: card_funcsetE card_Diff_subset)
     moreover
     have "bij_betw (\<lambda>f. restrict f (X-F)) (mchrome c F) (X-F \<rightarrow>\<^sub>E ?two)"
@@ -52,19 +50,13 @@ proof -
   have prob_mchrome: "P.prob (mchrome c F) = 1 / 2^n"  
     if "F \<in> \<F>" "c<2" for F c
   proof -
-    have emeasure_eq: "emeasure M U = (if U \<subseteq> \<Omega> then ennreal (card U / card \<Omega>) else 0)" for U
+    have emeasure_eq: "emeasure M U = (if U\<subseteq>\<Omega> then ennreal(card U / card \<Omega>) else 0)" for U
       by (simp add: M_def emeasure_uniform_count_measure_if \<open>finite \<Omega>\<close>)
     have "emeasure M (mchrome c F) = ennreal (2 ^ (card X - n) / card \<Omega>)"
       using that mchrome by (simp add: emeasure_eq card_mchrome)
     also have "\<dots> = ennreal (1 / 2^n)"
-    proof -
-      have eq: "(1 / 2 ^ n) = real (2 ^ card X div 2 ^ n) * (1 / 2 ^ card X)"
-        by (simp add: n power_diff card_mchrome card\<Omega> le_imp_power_dvd real_of_nat_div)
-      show ?thesis
-        by (simp add: eq n card\<Omega> power_diff_power_eq) 
-    qed
-    finally have "emeasure M (mchrome c F) = ennreal (1 / 2^n)" .
-    then show ?thesis
+      by (simp add: n power_diff card\<Omega>)
+    finally show ?thesis
       by (simp add: P.emeasure_eq_measure)
   qed
 
@@ -90,7 +82,7 @@ proof -
     then show ?thesis
       using P.prob_space space_eq by force
   qed
-  ultimately obtain f where f:"f \<in> \<Omega> - (\<Union>F\<in>\<F>. \<Union>c<2. mchrome c F)"
+  ultimately obtain f where f: "f \<in> \<Omega> - (\<Union>F\<in>\<F>. \<Union>c<2. mchrome c F)"
     by blast
   with that show ?thesis
     by (fastforce simp: mchrome_def \<Omega>_def)

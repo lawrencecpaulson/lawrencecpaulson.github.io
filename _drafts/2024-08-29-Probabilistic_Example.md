@@ -44,7 +44,7 @@ we have shown that the probability of a certain outcome is less than one.
 So the opposite outcome has nonzero probability 
 and therefore forms a non-empty set.
 
-### The formalisation
+### Formalising the probability space
 
 The theorem statement assumes the family $\cal F$ of $n$-sets
 of the finite set $X$. The family has cardinality 
@@ -83,7 +83,9 @@ e.g. we'd have to show that the probabilities summed to 1.
   <span class="keyword3 command">define</span> <span class="skolem skolem">M</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">M</span> <span class="main">≡</span> uniform_count_measure</span> <span class="skolem">Ω</span><span>"</span></span>
 </pre>
 
-xxxx
+Next comes some boilerplate relating $\Omega$ and $M$,
+allowing the interpretation of the `prob_space` locale.
+The tools of probability reasoning are now at our disposal.
 
 <pre class="source">
   <span class="keyword1 command">have</span> space_eq<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>space</span> <span class="skolem">M</span> <span class="main">=</span></span> <span class="skolem">Ω</span><span>"</span>
@@ -98,20 +100,34 @@ xxxx
     <span class="keyword1 command">unfolding</span> M_def <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> prob_space_uniform_count_measure Ω<span class="main">)</span>
 </pre>
 
+The idea of a colouring being monochromatic on a set is easily expressed in terms of set image.
+For any given colour $c$ and set $F$, 
+the set of monochromatic maps is an *event* of the probability space.
+
 <pre class="source">
   <span class="keyword3 command">define</span> <span class="skolem skolem">mchrome</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">mchrome</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">c</span> <span class="bound">F</span><span class="main">.</span> <span class="main">{</span><span class="bound bound">f</span> <span class="main">∈</span> <span class="skolem">Ω</span><span class="main">.</span> <span class="bound">f</span> <span class="main">`</span></span> <span class="bound">F</span> <span class="main">⊆</span></span> <span class="main">{</span><span class="bound">c</span><span class="main">}</span><span class="main">}</span><span>"</span>
   <span class="keyword1 command">have</span> mchrome<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span> <span class="main">∈</span></span> P.events</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span> <span class="main">⊆</span></span> <span class="skolem">Ω</span><span>"</span></span> <span class="keyword2 keyword">for</span> <span class="skolem">F</span> <span class="skolem">c</span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> sets_eq mchrome_def Ω_def<span class="main">)</span>
 </pre>
 
+### The probability of a monochrome map
+
+The cardinality of a monochrome map 
+(for a given $F\in\cal F$ and any fixed colour $c$)
+is $2^{\vert X\vert-n}$.
+That's because each element of $X$ not in $F$ could
+be given either colour. 
+The proof defines a bijection between colourings mapping 
+the whole of $F$ to $c$ and those that don't colour $F$ at all.
+This sort of calculation can get quite a bit more complicated
+when the probability distribution is nonuniform.
+
 <pre class="source">
   <span class="keyword1 command">have</span> card_mchrome<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>card</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span></span> <span class="numeral">2</span> <span class="main">^</span> <span class="main">(</span>card <span class="free">X</span> <span class="main">-</span> <span class="free">n</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">if</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">F</span> <span class="main">∈</span></span> <span class="free">𝓕</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">c</span><span class="main">&lt;</span></span><span class="numeral">2</span><span>"</span></span> <span class="keyword2 keyword">for</span> <span class="skolem">F</span> <span class="skolem">c</span>
   <span class="keyword1 command">proof</span> <span class="operator">-</span>
-    <span class="keyword1 command">have</span> F<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>finite</span> <span class="skolem">F</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span>card</span> <span class="skolem">F</span> <span class="main">=</span></span> <span class="free">n</span><span>"</span>
-      <span class="keyword1 command">using</span> X nsets_def that <span class="keyword1 command">by</span> <span class="operator">auto</span>
-    <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">F</span> <span class="main">⊆</span></span> <span class="free">X</span><span>"</span></span>
-      <span class="keyword1 command">using</span> assms that <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">force</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> nsets_def<span class="main">)</span>
-    <span class="keyword1 command">with</span> F <span class="quoted"><span class="quoted"><span>‹</span>finite</span> <span class="free">X</span><span>›</span></span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>card</span> <span class="main">(</span><span class="main">(</span><span class="free">X</span><span class="main">-</span></span><span class="skolem">F</span><span class="main">)</span> <span class="keyword1">→<span class="hidden">⇩</span><sub>E</sub></span> <span class="var">?two</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">2</span> <span class="main">^</span> <span class="main">(</span>card <span class="free">X</span> <span class="main">-</span> <span class="free">n</span><span class="main">)</span><span>"</span>
+    <span class="keyword1 command">have</span> F<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>finite</span> <span class="skolem">F</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span>card</span> <span class="skolem">F</span> <span class="main">=</span></span> <span class="free">n</span><span>" <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">F</span> <span class="main">⊆</span></span> <span class="free">X</span><span>"</span></span>
+      <span class="keyword1 command">using</span> assms that <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> nsets_def<span class="main">)</span>
+    <span class="keyword1 command">with</span> F <span class="quoted"><span class="quoted"><span>‹</span>finite</span> <span class="free">X</span><span>›</span></span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>card</span> <span class="main">(</span><span class="free">X</span><span class="main">-</span></span><span class="skolem">F</span></span> <span class="keyword1">→<span class="hidden">⇩</span><sub>E</sub></span> <span class="var">?two</span><span class="main">)</span> <span class="main">=</span> <span class="numeral">2</span> <span class="main">^</span> <span class="main">(</span>card <span class="free">X</span> <span class="main">-</span> <span class="free">n</span><span class="main">)</span><span>"</span>
       <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> card_funcsetE card_Diff_subset<span class="main">)</span>
     <span class="keyword1 command">moreover</span>
     <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>bij_betw</span> <span class="main">(</span><span class="main">λ</span><span class="bound">f</span><span class="main">.</span> restrict</span> <span class="bound">f</span> <span class="main">(</span><span class="free">X</span><span class="main">-</span><span class="skolem">F</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">(</span><span class="free">X</span><span class="main">-</span><span class="skolem">F</span> <span class="keyword1">→<span class="hidden">⇩</span><sub>E</sub></span> <span class="var">?two</span><span class="main">)</span><span>"</span>
@@ -124,32 +140,37 @@ xxxx
   <span class="keyword1 command">qed</span>
 </pre>
 
+The probability calculation is simply $2^{\vert X\vert-n} / 2^{\vert X\vert} = 1 / 2^n$.
+
 <pre class="source">
-  <span class="keyword1 command">have</span> prob_mchrome<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>P.prob</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span></span> <span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span>"</span>  
-    <span class="keyword2 keyword">if</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">F</span> <span class="main">∈</span></span> <span class="free">𝓕</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">c</span><span class="main">&lt;</span></span><span class="numeral">2</span><span>"</span></span> <span class="keyword2 keyword">for</span> <span class="skolem">F</span> <span class="skolem">c</span>
+  have prob_mchrome<span class="main">:</span> <span class="quoted quoted"><span>"</span>P.prob</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span> <span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span>"</span>  
+    <span class="keyword2 keyword">if</span> <span class="quoted quoted"><span>"</span><span class="skolem">F</span> <span class="main">∈</span></span> <span class="free">ℱ</span><span>"</span> <span class="quoted quoted"><span>"</span><span class="skolem">c</span><span class="main">&lt;</span></span><span class="numeral">2</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">F</span> <span class="skolem">c</span>
   <span class="keyword1 command">proof</span> <span class="operator">-</span>
-    <span class="keyword1 command">have</span> emeasure_eq<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>emeasure</span> <span class="skolem">M</span> <span class="skolem">U</span> <span class="main">=</span></span> <span class="main">(</span><span class="keyword1">if</span> <span class="skolem">U</span> <span class="main">⊆</span> <span class="skolem">Ω</span> <span class="keyword1">then</span> ennreal <span class="main">(</span>card <span class="skolem">U</span> <span class="main">/</span> card <span class="skolem">Ω</span><span class="main">)</span> <span class="keyword1">else</span> <span class="main">0</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">U</span>
-      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> M_def emeasure_uniform_count_measure_if <span class="quoted"><span class="quoted"><span>‹</span>finite</span> <span class="skolem">Ω</span><span>›</span></span><span class="main">)</span>
-    <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>emeasure</span> <span class="skolem">M</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span></span> ennreal <span class="main">(</span><span class="numeral">2</span> <span class="main">^</span> <span class="main">(</span>card <span class="free">X</span> <span class="main">-</span> <span class="free">n</span><span class="main">)</span> <span class="main">/</span> card <span class="skolem">Ω</span><span class="main">)</span><span>"</span>
+    <span class="keyword1 command">have</span> emeasure_eq<span class="main">:</span> <span class="quoted quoted"><span>"</span>emeasure</span> <span class="skolem">M</span> <span class="skolem">U</span> <span class="main">=</span> <span class="main">(</span><span class="keyword1">if</span> <span class="skolem">U</span><span class="main">⊆</span><span class="skolem">Ω</span> <span class="keyword1">then</span> ennreal<span class="main">(</span>card <span class="skolem">U</span> <span class="main">/</span> card <span class="skolem">Ω</span><span class="main">)</span> <span class="keyword1">else</span> <span class="main">0</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">U</span>
+      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> M_def emeasure_uniform_count_measure_if <span class="quoted quoted"><span>‹</span>finite</span> <span class="skolem">Ω</span><span>›</span><span class="main">)</span>
+    <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span>emeasure</span> <span class="skolem">M</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span> ennreal <span class="main">(</span><span class="numeral">2</span> <span class="main">^</span> <span class="main">(</span>card <span class="free">X</span> <span class="main">-</span> <span class="free">n</span><span class="main">)</span> <span class="main">/</span> card <span class="skolem">Ω</span><span class="main">)</span><span>"</span>
       <span class="keyword1 command">using</span> that mchrome <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> emeasure_eq card_mchrome<span class="main">)</span>
-    <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">…</span> <span class="main">=</span></span> ennreal</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span class="main">)</span><span>"</span>
-    <span class="keyword1 command">proof</span> <span class="operator">-</span>
-      <span class="keyword1 command">have</span> eq<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">1</span></span> <span class="main">/</span></span> <span class="numeral">2</span> <span class="main">^</span> <span class="free">n</span><span class="main">)</span> <span class="main">=</span> real <span class="main">(</span><span class="numeral">2</span> <span class="main">^</span> card <span class="free">X</span> <span class="keyword1">div</span> <span class="numeral">2</span> <span class="main">^</span> <span class="free">n</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span> <span class="main">^</span> card <span class="free">X</span><span class="main">)</span><span>"</span>
-        <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> n power_diff card_mchrome cardΩ le_imp_power_dvd real_of_nat_div<span class="main">)</span>
-      <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
-        <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> eq n cardΩ power_diff_power_eq<span class="main">)</span> 
-    <span class="keyword1 command">qed</span>
-    <span class="keyword1 command">finally</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>emeasure</span> <span class="skolem">M</span> <span class="main">(</span><span class="skolem">mchrome</span> <span class="skolem">c</span> <span class="skolem">F</span><span class="main">)</span> <span class="main">=</span></span> ennreal <span class="main">(</span><span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span class="main">)</span><span>"</span> <span class="keyword1 command">.</span>
-    <span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
+    <span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">…</span> <span class="main">=</span></span> ennreal <span class="main">(</span><span class="main">1</span> <span class="main">/</span> <span class="numeral">2</span><span class="main">^</span><span class="free">n</span><span class="main">)</span><span>"</span>
+      <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> n power_diff cardΩ<span class="main">)</span>
+    <span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
       <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> P.emeasure_eq_measure<span class="main">)</span>
   <span class="keyword1 command">qed</span>
 </pre>
+
+### Finishing up the argument
+
+The rest of the proof should be straightforward,
+but needs to be annoyingly detailed in Isabelle.
+We begin by showing that the union is a subset of $\Omega$, 
+and therefore an event.
 
 <pre class="source">
   <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">⋃</span><span class="bound">F</span><span class="main">∈</span><span class="free">𝓕</span><span class="main">.</span> <span class="main">⋃</span><span class="bound">c</span><span class="main">&lt;</span><span class="numeral">2</span><span class="main">.</span> <span class="skolem">mchrome</span> <span class="bound">c</span> <span class="bound">F</span><span class="main">)</span> <span class="main">⊆</span></span> <span class="skolem">Ω</span><span>"</span></span>
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> mchrome_def Ω_def<span class="main">)</span>
 </pre>
 
+To show that the union is actually a **strict** subset
+involves formalising the proof that $P(\bigcup_{A\in\cal F} E_A) < 1$.
 <pre class="source">
   <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">⋃</span><span class="bound">F</span><span class="main">∈</span><span class="free">𝓕</span><span class="main">.</span> <span class="main">⋃</span><span class="bound">c</span><span class="main">&lt;</span><span class="numeral">2</span><span class="main">.</span> <span class="skolem">mchrome</span> <span class="bound">c</span> <span class="bound">F</span><span class="main">)</span> <span class="main">≠</span></span> <span class="skolem">Ω</span><span>"</span></span>
   <span class="keyword1 command">proof</span> <span class="operator">-</span>
@@ -167,14 +188,17 @@ xxxx
       <span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
         <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="dynamic dynamic">divide_simps</span><span class="main">)</span>
     <span class="keyword1 command">qed</span>
-</pre>
-
-<pre class="source">
     <span class="keyword1 command">finally</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>P.prob</span> <span class="main">(</span><span class="main">⋃</span><span class="bound">F</span><span class="main">∈</span><span class="free">𝓕</span><span class="main">.</span> <span class="main">⋃</span><span class="bound">c</span><span class="main">&lt;</span><span class="numeral">2</span><span class="main">.</span> <span class="skolem">mchrome</span> <span class="bound">c</span> <span class="bound">F</span><span class="main">)</span> <span class="main">&lt;</span></span> <span class="main">1</span><span>"</span> <span class="keyword1 command">.</span>
     <span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span>
       <span class="keyword1 command">using</span> P.prob_space space_eq <span class="keyword1 command">by</span> <span class="operator">force</span>
   <span class="keyword1 command">qed</span>
 </pre>
+
+The conclusion of the theorem is now immediate.
+Recall that <span class="keyword1 command">moreover</span> 
+accumulates prior lemmas, 
+which <span class="keyword1 command">ultimately</span> 
+makes available to the next proof.
 
 <pre class="source">
   <span class="keyword1 command">ultimately</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> f<span class="main">:</span><span class="quoted"><span class="quoted"><span>"</span><span class="skolem">f</span> <span class="main">∈</span></span> <span class="skolem">Ω</span> <span class="main">-</span></span> <span class="main">(</span><span class="main">⋃</span><span class="bound">F</span><span class="main">∈</span><span class="free">𝓕</span><span class="main">.</span> <span class="main">⋃</span><span class="bound">c</span><span class="main">&lt;</span><span class="numeral">2</span><span class="main">.</span> <span class="skolem">mchrome</span> <span class="bound">c</span> <span class="bound">F</span><span class="main">)</span><span>"</span>
@@ -184,38 +208,16 @@ xxxx
 <span class="keyword1 command">qed</span>
 </pre>
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
 ### Postscript
 
 The probabilistic method is simply a more intuitive way of presenting
-a proof by counting. Indeed, the original example of such a proof
+a proof by counting. The original example of such a proof
 is claimed to be Erdős's "[Some remarks on the theory of graphs](https://www.ams.org/journals/bull/1947-53-04/S0002-9904-1947-08785-1/S0002-9904-1947-08785-1.pdf)" (1947).
 This paper indeed presents a proof of a lower bound for Ramsey numbers,
 but it makes no reference to probability and instead 
 enumerates the total number of graphs satisfying certain properties.
+Presumably he published a probabilistic version of that proof
+at a later date.
 
 A recent [paper](/papers/Edmonds-CPP2024.pdf) by Chelsea Edmonds
 describes the formalisation of probabilistic proofs in 
