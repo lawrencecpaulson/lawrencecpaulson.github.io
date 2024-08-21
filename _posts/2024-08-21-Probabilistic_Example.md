@@ -8,11 +8,10 @@ tags: [Paul Erdős, example, Isar]
 Many are the pitfalls awaiting anybody trying to formalise a proof,
 but the worst are appeals to intuition.
 These are typically a sign that the author can't be bothered to outline 
-a calculation or argument, perhaps because the claim is obvious
-(to them and maybe not to you).
+a calculation or argument. Perhaps the claim is obvious
+(to them, not to you).
 Probabilistic claims, say about drawing coloured balls from a sack, may look particularly dubious.
-But as [Paul Erdős](https://www.scientificamerican.com/article/this-nomadic-eccentric-was-the-most-prolific-mathematician-in-history/) has shown, such arguments are both powerful
-and absolutely rigorous.
+But as [Paul Erdős](https://www.scientificamerican.com/article/this-nomadic-eccentric-was-the-most-prolific-mathematician-in-history/) has shown, such arguments can yield short, intuitive proofs that are absolutely rigorous.
 To formalise them simply requires a bit of measure theory boilerplate.
 
 ### A simple example
@@ -20,13 +19,14 @@ To formalise them simply requires a bit of measure theory boilerplate.
 Let's consider an example from the website [Cut the Knot](https://www.cut-the-knot.org/Probability/ProbabilisticMethod.shtml), 
 created by Alexander Bogomolny.
 He credits the example to a 1963 paper by Erdős 
-(I could not work out which one). It goes as follows:
+(I could not work out which one; your hint would be welcome). 
+It goes as follows:
 
 > Let $A_k$, for $k = 1, \ldots, m$, 
 > be a family of $n$-element subsets of a set $X$. If $m < 2^{n-1}$, 
 > then there exists a bichromatic colouring[^1] of $X$ such that no $A_k$ is monochromatic.
 
-[^1]: A *bichromatic colouring* of $X$ means to imagine each element of $X$ to be coloured red or blue, and a monochromatic subset would be entirely one colour.
+[^1]: A *bichromatic colouring* of $X$ is a map taking each element of $X$ to either red or blue, and $Y\subseteq X$ is *monochromatic* if all its elements have the same colour.
 
 And here's the proof, as presented by Bogomolny:
 
@@ -38,7 +38,7 @@ And here's the proof, as presented by Bogomolny:
 
 This example is clearly a simplified version 
 of [Erdős's celebrated proof](https://theoremoftheweek.wordpress.com/2010/05/02/theorem-25-erdoss-lower-bound-for-the-ramsey-numbers/) of a lower bound for Ramsey numbers,
-which this often claimed to be the first application of the probabilistic method.
+which is often claimed to be the first application of the probabilistic method.
 Note that the existence claim is nonconstructive: 
 we have shown that the probability of a certain outcome is less than one.
 So the opposite outcome has nonzero probability 
@@ -48,7 +48,7 @@ and therefore forms a non-empty set.
 
 The theorem statement assumes the family $\cal F$ of $n$-sets
 of the finite set $X$. The family has cardinality 
-$\vert \cal F \vert = m<2^{2-1}$.
+$\vert \cal F \vert = m<2^{n-1}$.
 Necessary is the constraint $0<n\le\vert X\vert$, 
 omitted from the problem statement.
 As for the conclusion, the required 2-colouring is expressed
@@ -58,7 +58,8 @@ The *extensional* function space
 is required: by constraining the functions outside their domain ($X$)
 to some arbitrary fixed value, 
 this operator accurately represents the set $X\to\\{0,1\\}$.
-It's vital because we are actually counting these functions.
+It's vital because we are actually counting these functions
+and their values outside $X$ are irrelevant.
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> Erdos_1963<span class="main">:</span>
@@ -69,11 +70,13 @@ It's vital because we are actually counting these functions.
 </pre>
 
 Now we have to set up the probabilities. 
+Our "colours" are actually 0 and 1, constrained to type `nat`.
 The *sample space* $\Omega$ is the set of all 2-colourings of $X$.
-Then the *probability space* $M$ is the corresponding measure space,
-when all colourings have the same probability. 
+Then the *probability space* $M$ is the corresponding measure space
+where all colourings have the same probability. 
 A non-uniform probability distribution would be a little more work, 
 e.g. we'd have to show that the probabilities summed to 1.
+
 
 <pre class="source">
   <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span>finite</span> <span class="free">𝓕</span><span>"</span></span>
@@ -85,7 +88,7 @@ e.g. we'd have to show that the probabilities summed to 1.
 
 Next comes some boilerplate relating $\Omega$ and $M$,
 allowing the interpretation of the `prob_space` locale.
-The tools of probability reasoning are now at our disposal.
+Isabelle/HOL's tools of probability reasoning are now at our disposal.
 
 <pre class="source">
   <span class="keyword1 command">have</span> space_eq<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span>space</span> <span class="skolem">M</span> <span class="main">=</span></span> <span class="skolem">Ω</span><span>"</span>
@@ -110,10 +113,10 @@ the set of monochromatic maps is an *event* of the probability space.
     <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> sets_eq mchrome_def Ω_def<span class="main">)</span>
 </pre>
 
-### The probability of a monochrome map
+### The probability that a map is monochrome on some $F\in\cal F$
 
-The cardinality of a monochrome map 
-(for a given $F\in\cal F$ and any fixed colour $c$)
+Given $F\in\cal F$ and any fixed colour $c$,
+the number of maps monochrome on $\cal F$ (coloured $c$)
 is $2^{\vert X\vert-n}$.
 That's because each element of $X$ not in $F$ could
 be given either colour. 
