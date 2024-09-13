@@ -5,43 +5,47 @@ theory Ln_lower_bound imports
    
 begin
 
-(*example: prove this lower bound for all x>0.
-The problem is, it's not differentiable at 0. 
-It is continuous, but that's nontrivial to prove.*)
+(*example: prove this lower bound of x*ln(x) for all x>0.
+It's not differentiable at 0. It is continuous at 0, but that's nontrivial to prove.
+And you've got a problem if you think it's not even DEFINED at 0. (It is, of course.)*)
 
 (*The derivative of x * ln(x) is ln(x)+1. It's zero at 1/e and the minimum value is -1/e.
 [minimum = -0.3678794412, [x = 0.3678794412]]
 *)
 
-text \<open>Thanks to Manuel Eberl: some trickery required\<close>
-lemma continuous_on_x_ln: "continuous_on {0..} (\<lambda>x::real. x * ln x)"
-proof -
-  have "continuous (at x within {0..}) (\<lambda>x. x * ln x)"
-    if "x \<ge> 0" for x :: real
-  proof (cases "x = 0")
-    case True
-    have "continuous (at_right 0) (\<lambda>x::real. x * ln x)"
-      unfolding continuous_within by real_asymp
-    then show ?thesis
-      by (force simp add: continuous_within_topological less_eq_real_def True)
-  qed (auto intro!: continuous_intros)
-  thus ?thesis
-    by (simp add: continuous_on_eq_continuous_within)
-qed
+text \<open>Thanks to Manuel Eberl\<close>
 
+(*real_asymp proves ((\<lambda>x. x * ln x) \<longlongrightarrow> 0 * ln 0) (at_right 0)*)
+lemma continuous_at_0: "continuous (at_right 0) (\<lambda>x::real. x * ln x)"
+  unfolding continuous_within by real_asymp
+
+lemma continuous_nonneg: 
+  fixes x::real
+  assumes "x \<ge> 0"
+  shows "continuous (at x within {0..}) (\<lambda>x. x * ln x)"
+proof (cases "x = 0")
+  case True with continuous_at_0 show ?thesis
+    by (force simp add: continuous_within_topological less_eq_real_def)
+qed (auto intro!: continuous_intros)
+
+lemma continuous_on_x_ln: "continuous_on {0..} (\<lambda>x::real. x * ln x)"
+  unfolding continuous_on_eq_continuous_within
+  using continuous_nonneg by blast
+
+lemma xln_deriv:
+  fixes x::real
+  assumes "x > 0"
+  shows "((\<lambda>u. u * ln(u)) has_real_derivative ln x + 1) (at x)"
+  by (rule derivative_eq_intros refl | use assms in force)+
 
 theorem x_ln_lowerbound:
   fixes x::real
-  assumes "x > 0"
+  assumes "x \<ge> 0"
   shows "x * ln(x) \<ge> -1 / exp 1"
 proof -
-  have D: "((\<lambda>u. u * ln(u)) has_real_derivative ln x + 1) (at x)" if "x>0" for x
-    by (rule derivative_eq_intros refl | use that in force)+
   define xmin::real where "xmin \<equiv> 1 / exp 1"
   have "xmin > 0"
     by (auto simp: xmin_def)
-  have eq: "-1 / exp 1 = xmin * ln(xmin)"
-    using assms by (simp add: xmin_def ln_div)
   have "x * ln(x) > xmin * ln(xmin)" if "x < xmin"
   proof (intro DERIV_neg_imp_decreasing_open [OF that] exI conjI)
     fix u :: real
@@ -54,7 +58,7 @@ proof -
   next
     show "continuous_on {x..xmin} (\<lambda>u. u * ln u)"
       using continuous_on_x_ln continuous_on_subset assms by fastforce
-  qed (use assms D in auto)
+  qed (use assms xln_deriv in auto)
   moreover
   have "x * ln(x) > xmin * ln(xmin)" if "x > xmin"
   proof (intro DERIV_pos_imp_increasing_open [OF that] exI conjI)
@@ -66,15 +70,17 @@ proof -
   next
     show "continuous_on {xmin..x} (\<lambda>u. u * ln u)"
       using continuous_on_x_ln continuous_on_subset xmin_def by fastforce
-  qed (use \<open>0 < xmin\<close> D in auto)
+  qed (use \<open>0 < xmin\<close> xln_deriv in auto)
+  moreover have "xmin * ln(xmin) = -1 / exp 1"
+    using assms by (simp add: xmin_def ln_div)
   ultimately show ?thesis
-    using eq by fastforce
+    by force
 qed
 
 
 corollary
   fixes x::real
-  assumes "x > 0"
+  assumes "x \<ge> 0"
   shows "x * ln(x) \<ge> -0.36787944117144233"  (is "_ \<ge> ?rhs")
 proof -
   have "(-1::real) / exp 1 \<ge> ?rhs"
@@ -82,6 +88,10 @@ proof -
   with x_ln_lowerbound show ?thesis
     using assms by force
 qed
+
+text \<open>The same proof works for a quite different function\<close>
+lemma continuous_at_0_sin: "continuous (at_right 0) (\<lambda>x::real. x * sin(1/x))"
+  unfolding continuous_within by real_asymp
 
 end
 

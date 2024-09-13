@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Two Small Examples by Fields Medallists
+title:  Two small examples by Fields medallists
 usemathjax: true 
 tags: [examples, sledgehammer]
 ---
