@@ -38,6 +38,9 @@ But do you really want to rely on some overblown 19th-century result when a [cut
 The proof involves assuming the contrary, defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
 This sounds like the same technique used to prove that exponentials were irrational in my [earlier post.]({% post_url 2022-02-16-Irrationals %})
 
+*Note added 2024-09-13*: this challenge has [now been fulfilled](https://www.isa-afp.org/entries/Pi_Irrational.html),
+by Manuel himself!
+
 ### Impossibility of cubing the cube
 
 Littlewood, in his *Mathematician's Miscellany*, posed the question
