@@ -176,7 +176,7 @@ and hence $M=M'$ (by η-reduction).
 
 One thing is still missing: 
 if it turned out that we could prove $M=N$ for all terms $M$ and $N$,
-The whole setup would be useless. 
+the whole setup would be useless. 
 That equality in the λ-calculus is nontrivial was proved by Church and Rosser,
 and it was painful.[^3]
 
