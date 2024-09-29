@@ -35,11 +35,17 @@ to be one of the following, where $M$ and $N$ are already existing λ-terms:
 - $(\lambda x.M)$ is the *abstraction* of $M$ over the variable $x$.
 - $(M N)$ is the *combination* of $M$ and $N$.
 
-Functions take only one argument.
+This may seem too simple.
+*Where are the basic values like numbers and booleans?*
+Believe it or not, they can be encoded, 
+even advanced data structures such as infinite lists.
+*Why can functions take only one argument?*
 Frege and Schönfinkel had both noticed that 
 multiple arguments are formally unnecessary:
 a technique now known as *[currying](https://en.wikipedia.org/wiki/Currying)* 
 (according to one rumour, because Dana Scott was fond of curry).
+Our tiny formal calculus is sufficient to encode the full world 
+of computation.
 
 Some parentheses can be omitted.
 We can write $\lambda xyz.M$ instead of $(\lambda x.(\lambda y.(\lambda z.M)))$
@@ -66,9 +72,9 @@ must perform at least one iteration.
 
 What does it mean for a variable to be "used"?
 For that, we need the notions of bound and free variables.
-In $\lambda x.M$, the variable $x$ is *bound*.
-Variables in a term that are not bound are said to be *free*,
-such as the $y$ in $\lambda x.xy$.
+In $\lambda x.M$, all occurrences of the variable $x$ are *bound*.
+Variable occurrences that are not bound are said to be *free*,
+such as the $y$ in $\lambda x.xy$ or even the first $x$ in $x(\lambda x.x)$.
 To be precise, let's define the sets BV and FV:
 
 $$\newcommand\BV{\mathop{\rm BV}}
@@ -93,7 +99,7 @@ the λ-calculus has given us another basic programming language concept:
 *local variables*.
 
 The operation of substituting $L$ for all
-free occurrences of $y$ in $M$ is written $M[L/y]$, and is defined as follows:
+free occurrences of $y$ in $M$ is written $M[L/y]$ and is defined as follows:
 
 * For a variable: $x[L/y]$ is $L$ if $x=y$, otherwise $x$.
 * For an abstraction: $(\lambda x.M)[L/y]$ is simply $\lambda x.M$ if $x=y$, otherwise $\lambda x.M[L/y]$
@@ -153,13 +159,13 @@ enjoy the property that $MN=M'N$ for all $N$.
 If we really regard them as rules of correspondence,
 and they behave identically, then we must insist that $M=M'$.
 (Note that we have not yet defined equality, but rather are trying to do so now.)
-This principle is sometimes called *extensionality of functions*.
+This fundamental principle is sometimes called *extensionality of functions*.
 
 The *η-reduction* $(\lambda x.(Mx)) \to_\eta M$ replaces the
-trivial function $(\lambda x.(Mx))$ — where $M$ does not depend on $x$ — by $M$. 
+trivial function $\lambda x.Mx$ — where $M$ does not depend on $x$ — by $M$. 
 Formally, the condition above is $x\not\in\FV(M)$: the
 abstraction does nothing but apply $M$ to its argument.
-For example,  $(\lambda x.((zy)x)) \to_\eta (zy)$.
+For example,  $(\lambda x.((zy)x)) \to_\eta zy$.
 
 We write $M=N$ if it is possible to transform $M$ into $N$
 through any series of α, β or η steps, 
@@ -168,17 +174,15 @@ Most of the desirable properties of equality can be shown to hold quite easily.
 It is an equivalence relation and has the natural substitutivity properties,
 for example, if $M'=M$ then $M'N=MN$.
 
-As a small demonstration, here is a proof that extensionality
-is derivable. Suppose we have $M$ and $M'$ such that $MN=M'N$ for all $N$.
-Then pick a fresh variable $x$ (that is, $x\not\in\FV(M)\cup\FV(M\)$.
+As a small demonstration, here is a proof that η implies extensionality. 
+Suppose we have $M$ and $M'$ such that $MN=M'N$ for all $N$.
+Then pick a fresh variable $x$ (that is, $x\not\in\FV(MM'\)$.
 We have $Mx=M'x$, hence $\lambda x.Mx = \lambda x. M'x$ (by substitutivity)
-and hence $M=M'$ (by η-reduction).
+and hence $M=M'$ (by two η-reductions).
 
-One thing is still missing: 
-if it turned out that we could prove $M=N$ for all terms $M$ and $N$,
-the whole setup would be useless. 
-That equality in the λ-calculus is nontrivial was proved by Church and Rosser,
-and it was painful.[^3]
+One thing is still missing: a consistency proof.
+A theory where $M=N$ for all terms $M$ and $N$ is useless. 
+That equality in the λ-calculus is nontrivial was proved by Church and Rosser, through a process both protrected and painful.[^3]
 
 [^3]: J. Barkley Rosser. [Highlights of the History of the Lambda-Calculus](/papers/Rosser-Lambda-Calculus.pdf).
 
