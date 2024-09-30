@@ -4,13 +4,13 @@ title:  Introduction to the λ-calculus
 usemathjax: true 
 tags: [general, logic, lambda calculus]
 ---
-The [λ-calculus](https://plato.stanford.edu/entries/lambda-calculus/) has had a pervasive impact on computer science.
-Most functional programming languages can be viewed as extended λ-calculi.
-Its impact is evident even
-in modern systems programming languages such as [Rust](https://www.rust-lang.org).
+The [λ-calculus](https://plato.stanford.edu/entries/lambda-calculus/) has had a pervasive impact on computer science – 
+and not just in functional programming languages,
+most of which can be viewed as extended λ-calculi,
+but even in modern systems programming languages such as [Rust](https://www.rust-lang.org).
 [Polymorphic type checking](http://lucacardelli.name/Papers/BasicTypechecking.pdf) emerged in the context of the typed λ-calculus
 and now exists (to some extent) in many modern languages.
-Turning to theory, denotational semantics is normally expressed within
+Turning to theory, [denotational semantics](https://www.cl.cam.ac.uk/teaching/1112/DenotSem/dens-notes-bw.pdf) is normally expressed within
 a form of λ-calculus.
 Both higher-order logic and dependent type theories 
 are extensions of the λ-calculus.
@@ -31,7 +31,7 @@ especially because a function can be applied to itself.[^1]
 A *λ-term* is defined inductively
 to be one of the following, where $M$ and $N$ are already existing λ-terms:
 
-- $x$, $y$, ... are the *variables*, which we assume to be given.
+- $x$, $y$, ... are the *variables*: we assume infinitely many to be available.
 - $(\lambda x.M)$ is the *abstraction* of $M$ over the variable $x$.
 - $(M N)$ is the *combination* of $M$ and $N$.
 
@@ -105,18 +105,21 @@ free occurrences of $y$ in $M$ is written $M[L/y]$ and is defined as follows:
 * For an abstraction: $(\lambda x.M)[L/y]$ is simply $\lambda x.M$ if $x=y$, otherwise $\lambda x.M[L/y]$
 * For a combination: $(M N)[L/y]$ is done recursively as $M[L/y]\; N[L/y]$.
 
+There is enough λ-calculus theory to fill 
+[a large book](https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/103/suppl/C).
+
 Using the theoretical notions defined above, 
-which are not themselves part of the λ-calculus,
 we can define computation: the famous *λ-conversions*.
 
 ### Computation in the λ-calculus
 
 The 1930s saw growing interest in the concept of a computable function.
-Alan Turing's paper on computable numbers appeared in 1936 and 
+Alan Turing's paper on 
+[computable numbers](https://jdh.hamkins.org/alan-turing-on-computable-numbers/) appeared in 1936 and 
 Church was working on related questions at the same time.
 The [Church-Turing thesis](https://plato.stanford.edu/entries/church-turing/), 
 which identifies the computable functions
-as those computable using a Turing machine, or (equivalently!!) the λ-calculus, dates from that year.
+as those computable using a Turing machine, or (equivalently!) the λ-calculus, dates from that year.
 
 However, Church's early writings do not stress computability.
 Here is an excerpt from the introduction to his monograph on the λ-calculus.
@@ -159,7 +162,7 @@ enjoy the property that $MN=M'N$ for all $N$.
 If we really regard them as rules of correspondence,
 and they behave identically, then we must insist that $M=M'$.
 (Note that we have not yet defined equality, but rather are trying to do so now.)
-This fundamental principle is sometimes called *extensionality of functions*.
+This fundamental principle is sometimes called *extensionality of functions*.[^3]
 
 The *η-reduction* $(\lambda x.(Mx)) \to_\eta M$ replaces the
 trivial function $\lambda x.Mx$ — where $M$ does not depend on $x$ — by $M$. 
@@ -182,7 +185,8 @@ and hence $M=M'$ (by two η-reductions).
 
 One thing is still missing: a consistency proof.
 A theory where $M=N$ for all terms $M$ and $N$ is useless. 
-That equality in the λ-calculus is nontrivial was proved by Church and Rosser, through a process both protrected and painful.[^3]
+That equality in the λ-calculus is nontrivial was proved by Church and Rosser, in a saga both protracted and painful.[^4]
 
-[^3]: J. Barkley Rosser. [Highlights of the History of the Lambda-Calculus](/papers/Rosser-Lambda-Calculus.pdf).
+[^3]: Extensionality fails in most dependent type theories: a serious limitation.
 
+[^4]: J. Barkley Rosser. [Highlights of the History of the Lambda-Calculus](/papers/Rosser-Lambda-Calculus.pdf).
