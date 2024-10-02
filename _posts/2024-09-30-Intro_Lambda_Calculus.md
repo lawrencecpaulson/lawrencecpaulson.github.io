@@ -172,7 +172,8 @@ For example,  $(\lambda x.((zy)x)) \to_\eta zy$.
 
 We write $M=N$ if it is possible to transform $M$ into $N$
 through any series of α, β or η steps, 
-possibly within a term (not just at top level).
+possibly within a term (not just at top level)
+and possibly backwards (*β-expansion* and *η-expansion*).
 Most of the desirable properties of equality can be shown to hold quite easily.
 It is an equivalence relation and has the natural substitutivity properties,
 for example, if $M'=M$ then $M'N=MN$.
