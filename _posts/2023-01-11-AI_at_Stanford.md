@@ -52,7 +52,7 @@ MIT philosopher Hubert Dreyfus published his influential
 
 ### Stanford AI Lab, 1977
 
-In the 1970s, the [Stanford AI Lab](https://web.stanford.edu/~learnest/sail/)
+In the 1970s, the [Stanford AI Lab](http://infolab.stanford.edu/pub/voy/museum/pictures/AIlab/list.html)
 (SAIL) was located some distance
 from the main campus, in the DC Power Building, a wooden semicircular structure that was slowly decaying. I can't recall precisely why I used to
 go there, since I wasn't doing AI. 
@@ -86,7 +86,7 @@ attacks from across the ARPAnet. That's another story.
 
 [John McCarthy](https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)), 
 the legendary inventor of Lisp, was the scientific director, 
-with [Lester Earnest](https://web.stanford.edu/~learnest/) as lab manager.
+with Lester Earnest as lab manager.
 Strangely enough, McCarthy was only 50 when I arrived,
 but seemed to have left research behind him,[^3]
 and I was left with the impression that his main interest was

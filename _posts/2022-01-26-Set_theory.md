@@ -48,7 +48,9 @@ Category theory goes beyond even ZF simply because it adopts, as its starting po
 above the world of ordinary mathematics.
 It's like the kid saying he'd be fine with just $10 extra.
 
-It is tempting to wonder how category theory would have developed ([consistently](https://preprints.ihes.fr/2009/M/M-09-37.pdf), at least!) if Mac Lane had adopted his own modest set theory as the basis for his category of sets. Would it have affected any applications of category theory?
+It is tempting to wonder how category theory would have developed (consistently, perhaps?) 
+if Mac Lane had adopted his own modest set theory as the basis for his category of sets. 
+Would it have affected any applications of category theory?
 Also, I'd be interested to hear of mathematical domains that require more than the Zermelo universe of sets without referring to topics explicitly connected with set theory.
 
 ### ZF and proof assistants

@@ -50,7 +50,7 @@ Presumably this is how I got into the frame of mind for doing research.
 ### Experiments with PDP-8 assembly language
 
 The [PDP-8](https://www.pdp8online.com) was a legendary minicomputer built by a legendary company,
-the [Digital Equipment Corporation](https://digital.com/digital-equipment-corporation/) (or DEC).
+the [Digital Equipment Corporation](https://www.computerhistory.org/brochures/d-f/digital-equipment-corporation-dec/) (or DEC).
 The University of Pennsylvania's [Moore School of Electrical Engineering](https://www.facilities.upenn.edu/maps/locations/moore-school-building)
 had two of them slowly decaying in a basement. My mother got me access
 by calling people there and telling them what a genius I was for so long that

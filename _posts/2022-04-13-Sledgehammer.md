@@ -11,7 +11,7 @@ Sledgehammer is the subsystem that links Isabelle/HOL to automatic theorem prove
 
 My memories are hazy, but I was at a conference (very likely IJCAR 2001, in Siena) sitting on some steps and talking to a representative from Springer. He said something like "How can we increase the circulation of [*Journal of Automated Reasoning*](https://www.springer.com/journal/10817)?" Is it profitable?, I recall asking. "Oh yes!" Then perhaps you could try to hold down the cost of a subscription?
 
-That conversation went nowhere, but I recall bumping into [Andrei Voronkov](http://voronkov.com), the architect of the [Vampire prover](https://vprover.github.io) and one of the tiny elite group of people who know how to make [resolution theorem proving](/papers/bachmair-hbar-resolution.pdf) actually work. It was his idea to see if we could combine our technologies and build something that was greater than both. I forget what happened in the interim, but by the time I received the [relevant grant](https://www.cl.cam.ac.uk/~lp15/Grants/Automation/), I found myself also working with [Christoph Weidenbach](https://www.mpi-inf.mpg.de/departments/automation-of-logic/people/christoph-weidenbach) and his [SPASS prover](https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/spass-workbench).
+That conversation went nowhere, but I recall bumping into [Andrei Voronkov](https://dblp.org/pid/v/AndreiVoronkov.html), the architect of the [Vampire prover](https://vprover.github.io) and one of the tiny elite group of people who know how to make [resolution theorem proving](/papers/bachmair-hbar-resolution.pdf) actually work. It was his idea to see if we could combine our technologies and build something that was greater than both. I forget what happened in the interim, but by the time I received the [relevant grant](https://www.cl.cam.ac.uk/~lp15/Grants/Automation/), I found myself also working with [Christoph Weidenbach](https://www.mpi-inf.mpg.de/departments/automation-of-logic/people/christoph-weidenbach) and his [SPASS prover](https://www.mpi-inf.mpg.de/departments/automation-of-logic/software/spass-workbench).
 The Cambridge team included Jia Meng and Claire Quigley, and we already had a [preliminary paper](https://rdcu.be/cKaYp) ready for IJCAR 2004.
 
 ### Why automation?
@@ -85,7 +85,7 @@ It's not surprising that others wanted to create a new version of sledgehammer: 
 
 The Munich group conducted a big [empirical evaluation](https://rdcu.be/cKr5t) and only a year later it had been extended to also call [SMT solvers](https://rdcu.be/cKr74).
 These projects were done by Jasmin Blanchette, Sascha Böhme and Tobias Nipkow.
-[Blanchette](https://www.cs.vu.nl/~jbe248/) has gone on to pursue an [extended project](https://matryoshka-project.github.io) related to sledgehammer, including efficient, sound translations (unsoundness is completely gone now), vastly improved proof reconstruction and better support for higher-order logic theorem proving (e.g. through [Zipperposition](https://github.com/sneeuwballen/zipperposition)).
+[Blanchette](https://www.tcs.ifi.lmu.de/mitarbeiter/jasmin-blanchette_de.html) has gone on to pursue an [extended project](https://matryoshka-project.github.io) related to sledgehammer, including efficient, sound translations (unsoundness is completely gone now), vastly improved proof reconstruction and better support for higher-order logic theorem proving (e.g. through [Zipperposition](https://github.com/sneeuwballen/zipperposition)).
 
 ### Usage tips
 

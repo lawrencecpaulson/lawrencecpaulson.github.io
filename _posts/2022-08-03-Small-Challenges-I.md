@@ -57,7 +57,7 @@ The analogous cube dissection is impossible. Here is Littlewood:
 > In a square dissection the smallest square is not at an edge (for obvious reasons). Suppose now a cube dissection does exist. The cubes standing on the bottom face induce a square dissection of that face, and the smallest of the cubes at the face stands on an internal square. The top face of this cube is enclosed by walls; cubes must stand on this top face; take the smallest—the process continues indefinitely.”
 
 This is not much of a proof.
-Floris van Doorn [managed to formalise it](https://github.com/leanprover-community/mathlib/blob/master/archive/100-theorems-list/82_cubing_a_cube.lean) within 24 hours, in Lean.
+Floris van Doorn [managed to formalise it](https://florisvandoorn.com/talks/LMF21lean.pdf) within 24 hours, in Lean.
 An Isabelle version is still lacking.
 
 This problem is of interest because it belongs to the famous [list of 100 "top" theorems](https://www.cs.ru.nl/~freek/100/), maintained by Freek Wiedijk.
