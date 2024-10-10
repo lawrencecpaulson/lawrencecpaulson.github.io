@@ -5,19 +5,37 @@ usemathjax: true
 tags: [general, lambda calculus]
 ---
 A well-known technique to speed up computer code is to re-order some steps,
-for example to lift some operation out of a loop.
-In logic, sometimes we can choose what inference to do next
-where making the right choices gives us an exponentially shorter proof.
+for example to lift a costly operation out of a loop.
+In logic, when we can choose what inference to do next,
+making the right choices yields an exponentially shorter proof.
 Also in the λ-calculus we sometimes have a choice of reduction steps
-Where the possible outcomes include, at one extreme,
+where the possible outcomes include, at one extreme,
 terminating exponentially faster or at the opposite extreme, 
 not terminating at all.
-But it would certainly be vexing if our computation could terminate 
-with different answers, depending on our choices.
+But it would certainly be vexing if our computation 
+could return different final results.
 Church and Rosser proved that that outcome was impossible,
 implying the consistency of the λ-calculus 
 and giving us some of the tools needed
 to study this question in other situations.
+
+### Final values in the λ-calculus
+
+As mentioned last time, basic things like numbers and lists 
+are not built into the λ-calculus, but can be encoded.
+We'll look at these tricky but rather cool encodings in a later post.
+But here is a teaser: it's conventional to represent true and false by
+$\lambda x y.x$ and $\lambda xy.y$, respectively.
+
+Note that no reductions can be applied to either of these: 
+they are in *normal form*.
+(Remember, a reduction is a β or η step; the α-conversions, 
+which just rename bound variables, do not count.)
+If $M$ is in normal form, then we regarde it as a **value**
+rather than as a **computation**.
+Conversely, if it is not in normal form then further reductions are possible.
+There exist more nuanced notions of value 
+that make sense of infinite computations.
 
 ### Equality in the λ-calculus
 
@@ -27,26 +45,13 @@ through any series of α, β or η steps,
 possibly within a term and possibly backwards.
 So we have the following picture:
 
-$$
-\let\redd=\twoheadrightarrow
-\let\se\searrow
-\let\sw\swarrow
-\def\arraycolsep{0pt} 
-\begin{equation*}
-\begin{array}{cccccccccccccccc}
-M&   &   &   &M_1&   &   &   &M_2&\cdots&M_{k-1}&   &   &   &M_k=M'\\
- &\se&   &\sw&   &\se&   &\sw&   &      &       &\se&   &\sw  \\
- &   &N_1&   &   &   &N_2&   &   &\cdots&       &   &N_k
-  \end{array}
-\end{equation*}
-$$
+$$\let\redd=\twoheadrightarrow$$
+<img src="/images/equality-in-lambda-calc.png" alt="chain of reductions for λ-calculus equality" width="500"/>
 
-(In fact, all of the arrows above should really be written $\redd$
-to indicate possibly multiple reductions, but I don't know how to get a diagonal multi-headed arrow.)
-
+Note that $\redd$ above indicates possibly multiple reductions.
 From the picture alone, it should be easy to see that equality
 satisfies many of the basic properties we expect, such as being reflexive, symmetric and transitive.
-But how can we show that some things are not equal, 
+But how can we show that some things are not equal:
 for example, that $\lambda x y.x \not= \lambda xy.y$?
 
 ### The Church-Rosser Theorem
@@ -55,6 +60,13 @@ The theorem states that if two terms are equal
 then they can be made identical using reductions alone.
 More formally, if $M=N$ then $M\redd L$ and $N\redd L$ for some $L$.
 
-I am not going to try to prove it here. (I cited a paper by Rosser last time.)
-Many early proofs were wrong, tripping up over clashes in bound variables.
-But let's look at some of the consequences.
+If you really want the gory details of the proof, see the paper by Rosser
+that I cited last time.
+Many early proofs were wrong, tripping up over 
+Substitution and free/bound variable clashes.
+Let's first look at some of the consequences.
+* If $M=N$ and $N$ is in normal form, then $M\redd N$: reductions
+  alone are enough to reach that normal form.
+* If $M$ and $N$ are distinct terms in normal form, then $M\not=N$. For example, $\lambda xy.x\not=\lambda xy.y$.
+
+The latter point above (which ignores bound variable renaming, incidentally) implies the consistency of the λ-calculus and gives us a simple way to recognise that two final values are distinct.
