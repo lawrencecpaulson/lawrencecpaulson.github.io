@@ -16,7 +16,11 @@ The crucial *axiom of separation* allowed the specification of a subset of an ex
 Remarkably, Zermelo proposed this axiom before we possessed any means to express the specification; *Principia Mathematica* would not appear until 1910, and first-order logic [arrived even later](https://plato.stanford.edu/entries/logic-firstorder-emergence/).
 
 A slightly restricted version of Zermelo set theory due to Mac Lane turns out to be [equal in expressiveness and strength](https://doi.org/10.1016/S0168-0072(00)00031-2) to higher-order logic. Also notable is that the authors of Bourbaki chose Zermelo set theory, not ZF, as the foundation of their project (as indignantly [pointed out](https://rdcu.be/cJtBL) by A. R. D. Mathias). Upon this basis, the Bourbaki group wrote careful if not strictly formal developments of great swathes of mathematics.
-Therefore, a formalism as strong as Zermelo set theory—such as higher-order logic—might just be adequate for the vast bulk of "ordinary" mathematics. The wide variety of topics [already formalised](https://www.cs.ru.nl/~freek/100/) in Isabelle/HOL and HOL Light is evidence for this view. See also under Mathematics and Logic in the [Archive of Formal Proofs](https://www.isa-afp.org/topics.html).
+Therefore, a formalism as strong as Zermelo set theory—such as higher-order logic—might just be adequate 
+for the vast bulk of "ordinary" mathematics. 
+The wide variety of topics [already formalised](https://www.cs.ru.nl/~freek/100/) 
+in Isabelle/HOL and HOL Light is evidence for this view. 
+See also under Mathematics and Logic in the [Archive of Formal Proofs](https://www.isa-afp.org/topics/).
 
 ### The remaining axioms of ZFC
 
