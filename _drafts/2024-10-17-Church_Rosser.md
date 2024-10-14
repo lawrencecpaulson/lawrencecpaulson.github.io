@@ -8,22 +8,23 @@ A well-known technique to speed up computer code is to re-order some steps,
 for example to lift a costly operation out of a loop.
 In logic, when we can choose what inference to do next,
 making the right choices yields an exponentially shorter proof.
-Also in the λ-calculus we sometimes have a choice of reduction steps
-where the possible outcomes include, at one extreme,
+Also in the λ-calculus we sometimes have a choice of reduction steps:
+the possible outcomes include, at one extreme,
 terminating exponentially faster or at the opposite extreme, 
 not terminating at all.
-But it would certainly be vexing if our computation 
-could return different final results.
-Church and Rosser proved that that outcome was impossible,
+But it would certainly be vexing if two terminating computations 
+could return different final values.
+Church and Rosser proved that couldn't happen,
 implying the consistency of the λ-calculus 
 and giving us some of the tools needed
 to study this question in other situations.
 
 ### Final values in the λ-calculus
 
-As mentioned last time, basic things like numbers and lists 
+As mentioned [last time]({% post_url 2024-09-30-Intro_Lambda_Calculus %}), 
+basic things like numbers and lists 
 are not built into the λ-calculus, but can be encoded.
-We'll look at these tricky but rather cool encodings in a later post.
+We'll look at these ingenious encodings in a later post.
 But here is a teaser: it's conventional to represent true and false by
 $\lambda x y.x$ and $\lambda xy.y$, respectively.
 The latter term also represents zero.
@@ -32,11 +33,11 @@ Note that no reductions can be applied to either of these:
 they are in *normal form*.
 (Remember, a reduction is a β or η step; the α-conversions, 
 which just rename bound variables, do not count.)
-If $M$ is in normal form, then we regard it as a **value**
-rather than as a **computation**.
+If $M$ is in normal form, then we regard it as a *value*
+rather than as a *computation*.
 Conversely, if it is not in normal form then further reductions are possible.
 There exist more nuanced notions of value 
-that make sense of infinite computations.
+that make sense of some infinite computations.
 
 If we define
 $$ \let\red=\rightarrow
@@ -48,14 +49,14 @@ Note that $\redd$ allows zero or many reduction steps.
 Now the term $\K x \Omega$ can be reduced in various ways, 
 including $\K x \Omega \redd x$ and $\K x \Omega\red\K x \Omega$.
 The latter reduction can be continued indefinitely, 
-or terminated at any point using the former reduction, yielding simply $x$.
+or terminated at any point using the former reduction yielding simply $x$.
 
 And a pro tip: if you intend to do λ-calculus derivations, I strongly recommend using abbreviations, like here.
 Working out λ-terms in full, you are bound to go wrong.
 
 ### Equality in the λ-calculus
 
-As remarked [last time]({% post_url 2024-09-30-Intro_Lambda_Calculus %}),
+As remarked last time,
 $M=M'$ means it is possible to transform $M$ into $M'$
 through any series of α, β or η steps, 
 possibly within a term and possibly backwards 
@@ -76,15 +77,17 @@ then they can be made identical by a series of reductions.
 More formally, if $M=N$ then $M\redd L$ and $N\redd L$ for some $L$.
 
 If you really want the gory details of the proof, see the paper by Rosser
-that I cited last time.
+cited last time.
 Many early proofs were wrong, tripping up over 
 substitution and free/bound variable clashes.
-Let's first look at some of the consequences.
+But let's forget the proof for a moment and 
+first look at some of the consequences.
 * If $M=N$ and $N$ is in normal form, then $M\redd N$: reductions
   alone are enough to reach that normal form.
 * If $M$ and $N$ are distinct terms in normal form, then $M\not=N$. For example, $\lambda xy.x\not=\lambda xy.y$.
 
-The latter point above (which ignores bound variable renaming, incidentally) implies the consistency of the λ-calculus and gives us a simple way to recognise that two final values are distinct.
+The latter point above implies the consistency of the λ-calculus and gives us a simple way to recognise when two final values are equal.
+(Of course, "distinct" ignores irrelevant differences in bound variable names.) 
 
 ### The Diamond Property
 
