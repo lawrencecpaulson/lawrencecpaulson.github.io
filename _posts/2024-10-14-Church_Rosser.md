@@ -49,7 +49,7 @@ Note that $\redd$ allows zero or many reduction steps.
 Now the term $\K x \Omega$ can be reduced in various ways, 
 including $\K x \Omega \redd x$ and $\K x \Omega\red\K x \Omega$.
 The latter reduction can be continued indefinitely, 
-or terminated at any point using the former reduction yielding simply $x$.
+or terminated at any point using the former reduction to yield simply $x$.
 
 And a pro tip: if you intend to do λ-calculus derivations, I strongly recommend using abbreviations, like here.
 Working out λ-terms in full, you are bound to go wrong.
