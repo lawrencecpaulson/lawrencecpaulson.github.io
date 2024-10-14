@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The λ-calculus, 2: Church-Rosser theorem"
+title:  "The λ-calculus, 2: the Church-Rosser theorem"
 usemathjax: true 
 tags: [general, lambda calculus]
 ---
