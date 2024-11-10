@@ -49,7 +49,7 @@ It has a finite program consisting of labelled instructions, of three different 
 * test/decrement register $R$ and jump to label $L_0$/$L_1$, or $L_0 \twoheadleftarrow R^{-}\to L_1$
 * halt.
 
-They are easier than Turing mahines to program, although they still don't resemble real computers.
+They are easier than Turing machines to program, although they still don't resemble real computers.
 
 Moody used a standard bijection between $\mathbb{N}$ and $\mathbb{N}\times\mathbb{N}$ to pack lists of integers into a single integer.
 He coded a small library of little register machines to perform operations such as push on stack and pop from stack and created a design reminiscent of the fetch-execute cycle of a real processor.
@@ -122,3 +122,6 @@ These days, computation is typically interwoven with communication, and none of 
 The situation regarding models of concurrency remains messy.
 
 *Postscript*: I would like to thank Ken Moody and Andrew Pitts for their helpful remarks.
+
+*Postscript added November 2024*: See also the paper
+[Did Turing Prove the Undecidability of the Halting Problem?](https://arxiv.org/pdf/2407.00680), by Hamkins and Nenu
