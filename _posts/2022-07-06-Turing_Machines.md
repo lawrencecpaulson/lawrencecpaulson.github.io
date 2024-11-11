@@ -124,4 +124,4 @@ The situation regarding models of concurrency remains messy.
 *Postscript*: I would like to thank Ken Moody and Andrew Pitts for their helpful remarks.
 
 *Postscript added November 2024*: See also the paper
-[Did Turing Prove the Undecidability of the Halting Problem?](https://arxiv.org/pdf/2407.00680), by Hamkins and Nenu
+[Did Turing Prove the Undecidability of the Halting Problem?](https://arxiv.org/pdf/2407.00680), by Hamkins and Nenu. They note that Turing also proved the undecidability of what they call the symbol-printing problem: it is closely related to the halting problem, although Turing's proof is like nothing given today.

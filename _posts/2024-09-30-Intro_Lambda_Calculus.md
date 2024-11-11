@@ -2,7 +2,7 @@
 layout: post
 title:  Introduction to the λ-calculus
 usemathjax: true 
-tags: [general, logic, lambda calculus]
+tags: [general, logic, Alan Turing, lambda calculus]
 ---
 The [λ-calculus](https://plato.stanford.edu/entries/lambda-calculus/) has had a pervasive impact on computer science – 
 and not just in functional programming languages,
