@@ -178,7 +178,7 @@ Then what value are they getting from their so-called assistant?
 
 ### An identity involving Fibonacci numbers
 
-Every time you turn around, the [Fibonacci numbers](https://www.techtarget.com/whatis/definition/Fibonacci-sequence) 
+Every time you turn around, the [Fibonacci numbers](https://science.howstuffworks.com/math-concepts/fibonacci-nature.htm) 
 pop up again:
 
 $$\begin{gather*}
