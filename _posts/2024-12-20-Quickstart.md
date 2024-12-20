@@ -9,7 +9,7 @@ I am often asked, "how do I get started with Isabelle?"
 For example, why don't we have an analogue of Kevin Buzzard's excellent 
 [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/) for Lean?
 Well, maybe I am lazy, but it's impossible to re-create the Isabelle experience in a web browser.
-Instead, we make it incredibly easy for you to install Isabelle on your own machine,
+Instead, we make it easy for you to install Isabelle on your own machine,
 be it Windows, Linux or Mac, and provide lots of examples to play with.
 An 8GB Raspberry Pi should be enough to get started.
 
