@@ -23,6 +23,7 @@ theories
     "Numeric"
     "Ln_lower_bound"
     "Probabilistic_Example_Erdos"
+    "Index_ex"
   document_files
     "root.tex"
     "examples.bib"
