@@ -137,6 +137,8 @@ To try these examples for yourself, simply
 [download](/Isabelle-Examples/Fibonacci.thy) the original theory file,
 which contains the definition of Fibonacci.
 You can play around with the existing proofs or write your own.
+The proofs presented in this post 
+can be [downloaded directly](/Isabelle-Examples/Fibonacci_Newbie.thy).
 You might also look in the directory `HOL/Examples`
 for examples such as Ackermann's function 
 (discussed in [this post]({% post_url 2022-02-09-Ackermann-example %})

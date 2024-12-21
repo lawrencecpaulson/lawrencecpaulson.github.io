@@ -21,5 +21,4 @@ next
     by (metis coprime_def dvd_add_left_iff fib.simps(3))
 qed auto
 
-
 end
