@@ -27,7 +27,7 @@ But then what? You need some small examples to get a hang of the syntax and then
 and [Isabelle](https://lawrencecpaulson.github.io/tag/Isabelle) tags.
 
 But now I see that even the simplest example, on Fibonacci numbers, is not really for newbies.
-the proofs are simple but polished, hiding the trial and error that a beginner would inevitably go through. They are in the structured 
+The proofs are simple but polished, hiding the trial and error that a beginner would inevitably go through. They are in the structured 
 [Isar](https://lawrencecpaulson.github.io/tag/Isar) style,
 where every claim has a single-line proof, although most real proofs (especially big ones)
 involve chains of tactic steps such as one finds in other proof assistants 

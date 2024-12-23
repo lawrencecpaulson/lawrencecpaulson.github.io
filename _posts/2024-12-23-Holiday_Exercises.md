@@ -27,7 +27,8 @@ To reason about the maximum exponent of a prime divisor,
 we need to show that this maximum exists.
 It might be helpful to consider the set of all
 $k$ such that $p^k$ divides $n$.
-A structured proof that establishes basic facts about this set leads to the conclusion.
+A structured proof that establishes a natural series of 
+basic facts about this set leads to the conclusion.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> maximum_index<span class="main">:</span><span>
@@ -38,8 +39,9 @@ A structured proof that establishes basic facts about this set leads to the conc
 </pre>
 
 Having proved that the maximum index exists, 
-we could refer to the maximum directly.
-Instead the definition below refers to
+we could refer to the maximum directly, 
+using the function `Max`.
+Instead, the definition below refers to
 the cardinality of the set of possible non-zero indices.
 The practical effect of this choice is probably insignificant.
 
