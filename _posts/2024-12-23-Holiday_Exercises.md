@@ -63,7 +63,7 @@ dealing with the degenerate cases separately.
   </span><span class="keyword1 command">sorry</span>
 </pre>
 
-From that key result, a couple of coronaries follow directly:
+From that key result, a couple of corollaries follow directly:
 
 <pre class="source">
 <span class="keyword1 command">corollary</span> le_index<span class="main">:</span><span>
