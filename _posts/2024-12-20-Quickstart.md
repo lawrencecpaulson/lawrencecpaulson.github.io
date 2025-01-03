@@ -3,7 +3,7 @@ layout: post
 title:  Isabelle quick start guide
 usemathjax: true 
 full-width: true 
-tags: [newbies, Isabelle]
+tags: [newbies, Isabelle, Fibonacci]
 ---
 I am often asked, "how do I get started with Isabelle?"
 For example, why don't we have an analogue of Kevin Buzzard's excellent 
@@ -109,7 +109,7 @@ A long or messy sequence of tactics that does not lend itself to a structured pr
 
 For the third example, let's see how to write an induction in structured form.
 Here we want to show that $F_n$ and $F_{n+1}$ are coprime.
-To start a structured proof, use the keyword **prove**.
+To start a structured proof, use the keyword **proof**.
 
 <img src="/images/Fib-newbie/f9.png" width="1000"/>
 
