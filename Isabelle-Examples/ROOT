@@ -25,6 +25,7 @@ theories
     "Probabilistic_Example_Erdos"
     "Index_ex"
     "Fib_Iter"
+    "Dirichlet_approx_thm"
 document_files
     "root.tex"
     "examples.bib"
