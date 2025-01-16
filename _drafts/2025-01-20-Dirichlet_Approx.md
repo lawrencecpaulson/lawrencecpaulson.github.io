@@ -40,6 +40,9 @@ by Tom M. Apostol, page 143.
 We begin with a precise formation of the theorem statement.
 To avoid possible issues involving [numeric types]({% post_url 2024-07-25-Numeric_types %}),
 the types of θ and $N$ are given explicitly.
+Some type coercions are also explicit: `int`, which injects from type `nat` to `int`, 
+and `of_int`, which injects from type `int` into any numeric type that contains the integers,
+in this case `real`.
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> Dirichlet_approx<span class="main">:</span><span>
@@ -48,6 +51,13 @@ the types of θ and $N$ are given explicitly.
   </span><span class="keyword2 keyword">obtains</span> <span class="free">h</span> <span class="free">k</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">0</span></span> <span class="main">&lt;</span></span> <span class="free">k</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">k</span> <span class="main">≤</span></span> </span><span class="const">int</span> <span class="free">N</span><span>"</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">of_int</span> <span class="free">k</span><span class="main"> * </span><span class="free">θ</span> <span class="main">-</span> <span class="const">of_int</span> <span class="free">h</span><span class="main">¦</span> <span class="main">&lt;</span> <span class="main">1</span><span class="main">/</span><span class="free">N</span><span>"</span><span>
 </span><span class="keyword1 command">proof</span> <span class="operator">-</span>
 </pre>
+
+Next, we define <span class="skolem skolem">X</span> 
+to be the set of $N+1$ real numbers mentioned at the start of the proof,
+while <span class="skolem skolem">Y</span>
+denotes the division of the half-open unit interval into $N$ parts.
+Note that the image of a function is written in Isabelle/HOL using
+the ` operator, and the formal syntax for integer ranges is also helpful.
 
 <pre class="source">
   <span class="keyword3 command">define</span> <span class="skolem skolem">X</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">X</span> <span class="main">≡</span> <span class="main">(</span><span class="main">λ</span><span class="bound">k</span><span class="main">.</span> </span><span class="const">frac</span> <span class="main">(</span><span class="bound">k</span><span class="main">*</span><span class="free">θ</span><span class="main">)</span><span class="main">)</span> <span class="main">`</span> <span class="main">{..</span><span class="free">N</span><span class="main">}</span><span>"</span><span>
