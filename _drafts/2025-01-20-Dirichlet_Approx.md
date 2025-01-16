@@ -27,9 +27,13 @@ there exist integers $h$ and $k$ with $0<k \le N$ such that
 $\vert k\theta-h\vert < 1/N$.
 Thus, $h/k$ is a good approximation to $\theta$.
 
+Here is the proof, which comes from 
+*Modular Functions and Dirichlet Series in Number Theory* 
+by Tom M. Apostol, page 143.
+
 <img src="/images/Dirichlet-approx-thm.png" width="650"/>
 
-This proof comes from the graduate textbook *Modular Functions and Dirichlet Series in Number Theory* by Tom M. Apostol, page 143.
+<img src="/images/Dirichlet-approx-thm.png" width="650"/>
 
 ### Starting the formalisation
 
