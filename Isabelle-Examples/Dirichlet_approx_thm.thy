@@ -7,7 +7,7 @@ begin
 theorem Dirichlet_approx:
   fixes \<theta>::real and N::nat
   assumes "N > 0" 
-  obtains h k where "0 < k" "k \<le> int N" "\<bar>of_int k*\<theta> - of_int h\<bar> < 1/N"
+  obtains h k where "0 < k" "k \<le> int N" "\<bar>of_int k * \<theta> - of_int h\<bar> < 1/N"
 proof -
   define X where "X \<equiv> (\<lambda>k. frac (k*\<theta>)) ` {..N}"
   define Y where "Y \<equiv> (\<lambda>k::nat. {k/N..< Suc k/N}) ` {..<N}"
@@ -50,7 +50,7 @@ proof -
   proof
     have "frac (b*\<theta>) - frac (a*\<theta>) = ?k*\<theta> - ?h"
       using \<open>a < b\<close> by (simp add: frac_def left_diff_distrib of_nat_diff)
-    with * show "\<bar>of_int ?k*\<theta> - ?h\<bar> < 1/N"
+    with * show "\<bar>of_int ?k * \<theta> - ?h\<bar> < 1/N"
       by (metis of_int_of_nat_eq)
   qed (use * in auto)
 qed
