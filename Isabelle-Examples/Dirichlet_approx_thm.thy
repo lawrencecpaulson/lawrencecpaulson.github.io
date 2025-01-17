@@ -37,7 +37,7 @@ proof -
       using assms by (auto simp: divide_simps xeq) linarith
     have i': "x' \<in> {i/N ..< Suc i/N}" 
       using eq assms unfolding f_def Let_def xeq' i_def
-      by (simp add:  divide_simps) linarith
+      by (simp add: divide_simps) linarith
     with assms i have "\<bar>frac (d*\<theta>) - frac (c*\<theta>)\<bar> < 1 / N"
       by (simp add: xeq xeq' abs_if add_divide_distrib)
     with c show False
