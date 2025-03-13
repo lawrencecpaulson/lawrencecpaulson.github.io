@@ -14,7 +14,7 @@ A proof's acceptance by the mathematical community took place through
 a social, consensual process and not through some sort of mechanical checking.
 Proofs of programs are too long, tedious and shallow 
 to be checked through such a social process.
-Many of their points were right, but their main argument was completely wrong.
+Some of their points were right, but their main argument was laughably wrong.
 
 ### Background
 
@@ -28,14 +28,19 @@ such as [Gypsy](https://doi.org/10.1145/390019.808306)
 and the [Stanford Pascal Verifier](https://purl.stanford.edu/nh154bt5645)
 (which I have experimented with).
 These early tools were not very capable and some lacked a sound logical basis.
+When I was working at the Stanford AI Lab in 1979,
+the main computer (shared by all faculty and students)
+had just over one megabyte of memory and we were asked 
+not to burden it by using the arrow keys when editing.
+So I'm amused to see the authors complain about 
+"the lack at this late date of even a single verification of a working system".
 
 ### Their argument
 
 The authors' argument rests on two pillars:
 
-* Formal proofs are extremely low-level, "literally unspeakable" and 
-(apart from trivial cases) infeasibly long.
-* Mathematicians' traditional method of validating a proof through discussion is the right way to establish a proof of any proposition.
+* Formal proofs are extremely low-level, "literally unspeakable" and infeasibly long.
+* Mathematicians' traditional method of validating a proof through discussion is the right way to establish the truth of any proposition.
 
 The first pillar rests on their claim that Whitehead and Russell's 
 *Principia Mathematica* was a "deathblow" for the idea of formalisation, because it 
@@ -43,6 +48,9 @@ The first pillar rests on their claim that Whitehead and Russell's
 (Indeed, 362 pages were needed to prove 1+1=2.)
 They also mention a logician's claim that the formalisation of a certain result 
 by Ramanujan would take 2000 pages "assuming set theory and elementary analysis" and would be of inconceivable length if derived "from first principles". 
+Not satisfied with this, they speculate that "ordinary, workaday mathematical proofs"
+would require a computer large enough to "fill the entire observable universe"
+even assuming "the luxury of a technology that will produce proton-size electronic components connected by infinitely thin wires".
 
 Regarding the second pillar, the authors remark that 
 the vast majority of theorems published by mathematicians
@@ -103,14 +111,68 @@ devoted the summer of 2017 to a workshop programme
 entitled [Big Proof](https://www.newton.ac.uk/event/bpr/).
 Aimed at "the challenges of bringing [formal] proof technology 
 into mainstream mathematical practice", it was attended by a great many mathematicians.
+Recently, Fields medallist Peter Scholze asked the verification community to confirm a key lemma of his prior to its publication.
+[It was completed](https://leanprover-community.github.io/blog/posts/lte-final/) 
+in 18 months.
 
-### But what about verification of computer programs?
+### But what about the verification of computer systems?
 
-### Hindsight?
+Although the authors' arguments are founded on proofs in mathematics 
+and the alleged limitations of formal logic, 
+we also need to talk about the point of all this, namely program verification.
+The authors are correct that real programs can be millions of lines long,
+with messy and complicated specifications. 
+We are never going to see a verification of Microsoft Word.
+Nevertheless, a number of substantial programs have been formally verified,
+such as the [seL4 secure operating system kernel](https://doi.org/10.1145/3230627)
+and the [CakeML verifiably bootstrapped compiler](https://cakeml.org).
+Hardware verification was not on the authors' radar in 1979,
+but it has been even more successful.
+Michael Gordon and his team proved the correctness of a 
+[simple minicomputer](https://doi.org/10.48456/tr-42) in 1983
+of a [network interface chip](https://doi.org/10.48456/tr-66) in 1985
+and of a [commercial, military grade microprocessor](https://doi.org/10.48456/tr-134) in 1988.
 
-On the reduction in size of formal logical proofs: consider computers reduced from the size of a room to the size of a desk to the size of a shoebox by 1979; consider that a computer program consisting of many pages of assembly language could also be expressed in a couple of lines of akw.
+Today, verification techniques are embedded in the development process of
+companies like Nvidia and Intel.
+And yes, all of these systems are modified 
+from time to time and their formal proofs adjusted as necessary.
+The old assumption that verification was only affordable for safety critical applications was exploded 30 years ago, with the 
+[Pentium 5 division bug](https://www.righto.com/2024/12/this-die-photo-of-pentium-shows.html). Nobody likes to lose half a billion dollars.
+These days, any mission-critical software or hardware is a candidate for verification.
+
+### On the benefit of hindsight
+
+I have struggled to understand what motivated the authors to write this paper in the first place. The 1970s had seen a push to eliminate assembly language programming.
+There were two trends in programming language design:
+
+* Pascal and its derivatives such as Modula-2 and Ada.
+* Unsafe systems programming languages such as BLISS, BCPL and C.
+
+The UNIX operating system, coded in C, was announced in 1971,
+and the Xerox Alto workstation, coded in BCPL, appeared a couple of years later.
+Both of these would become hugely influential to the future of computer science.
+
+The authors declare (in the last sentence of the abstract)
+
+> It is felt that ease of formal verification should not dominate program language design.
+
+They got their wish: C took over and the type-safe languages 
+(strongly preferred by the program verification community) were abandoned.
+The authors conclude by arguing that we all should aim for reliable software.
+But we ended up in a world where every non-trivial program performed pointer arithmetic
+and where buffer overruns and the link have cost trillions of dollars.
+
+### What they got right
+
+> Since the requirement for a program is informal and the program is formal, there must be a transition, and the transition itself must necessarily be informal.
 
 
+
+
+
+Cohn, A. The notion of proof in hardware verification. J Autom Reasoning 5, 127–139 (1989). 
+https://rdcu.be/edr5n
 
 
 I quote the exact same footnotes 
@@ -119,15 +181,6 @@ to obtain funding for verification research.
 So I owe the authors a debt of gratitude for giving me this example,
 for although I had seen it elsewhere they must be the original source.
 
-A lot of code was still being written in assembly language,
-but new programming languages were emerging regularly:
-Pascal and its derivatives, Modula and Ada, 
-alongside systems programming languages such as BLISS, BCPL and C.
-The UNIX operating system, coded in C, was announced in 1971,
-and the Xerox Alto workstation, coded in BCPL, appeared a couple of years later.
-Both of these would become hugely influential to the future of computer science.
-I'm trying to understand why anyone working in this era would write a paper
-asserting (in the abstract)
-"It is felt that ease of formal verification should not dominate program language design."
+
 
 "So far, there has been little philosophical discussion of making software reliable rather than verifiable."
