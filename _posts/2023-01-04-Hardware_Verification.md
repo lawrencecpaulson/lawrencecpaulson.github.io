@@ -6,7 +6,7 @@ tags: [MJC Gordon, verification, HOL system, Stanford]
 ---
 
 In the late 1960s, breakthrough papers by
-[Robert W Floyd](https://people.eecs.berkeley.edu/~necula/Papers/FloydMeaning.pdf)
+[Robert W Floyd](/papers/FloydMeaning.pdf)
 and [Tony Hoare](https://dl.acm.org/doi/10.1145/363235.363259)
 seemed to herald the advent of fully-verified software.
 Progress soon slowed however. 

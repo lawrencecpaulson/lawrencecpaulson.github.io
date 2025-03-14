@@ -6,21 +6,21 @@ tags: [verification,philosophy,formalised_mathematics,Principia_Mathematica]
 ---
 In 1979, a paper appeared that challenged the emerging field of program verification:
 "[Social Processes and Proofs of Theorems and Programs](https://doi.org/10.1145/359104.359106)", 
-by Richard De Millo, Richard Lipton and Alan Perlis.
+by Richard De Millo, Richard Lipton and Alan Perlis (simply *the authors*, below).
 They pointed out that proofs in mathematics bore no resemblance
 to the formalisms being developed to verify computer programs.
 A mathematical proof, they argued, was an argument intended to persuade other mathematicians.
 A proof's acceptance by the mathematical community took place through 
 a social, consensual process and not through some sort of mechanical checking.
-Proofs of programs are too long, tedious and shallow 
-to be checked through such a social process.
-Some of their points were right, but their main argument was laughably wrong.
+Proofs of programs were too long, tedious and shallow 
+to be checked through a social process.
+Some of their points were right, but their main argument was, well, incredibly wrong.
 
 ### Background
 
 Program verification emerged at the end of the 1960s
 with the publication of Robert W Floyd's 
-"Assigning Meanings to Programs" 
+"[Assigning Meanings to Programs](/papers/FloydMeaning.pdf)" 
 and Tony Hoare's "[An axiomatic basis for computer programming](https://doi.org/10.1145/363235.363259)".
 In his 1971 "[Proof of a Program: FIND](https://doi.org/10.1145/362452.362489)", Hoare worked through the correctness conditions for a subtle algorithm by hand.
 Automated program verification tools slowly started to appear,
@@ -31,7 +31,7 @@ These early tools were not very capable and some lacked a sound logical basis.
 When I was working at the Stanford AI Lab in 1979,
 the main computer (shared by all faculty and students)
 had just over one megabyte of memory and we were asked 
-not to burden it by using the arrow keys when editing.
+not to overburden it by using the arrow keys when editing.
 So I'm amused to see the authors complain about 
 "the lack at this late date of even a single verification of a working system".
 
@@ -57,9 +57,9 @@ the vast majority of theorems published by mathematicians
 are never accepted by the community, being
 contradicted, thrown into doubt or simply ignored.
 They proceed to quote verbatim a series of footnotes 
-they found on a single page of a monograph on the axiom of choice:[^1]
+they found on page 118 of Jech's monograph on the axiom of choice:[^1]
 
-[^1]: T J Jech, *The Axiom of Choice* (North-Holland, 1973), 118.
+[^1]: T J Jech, *The Axiom of Choice* (North-Holland, 1973).
 
 ![Footnotes from Jech](/images/Jech-118-footnotes.png)
 
@@ -84,7 +84,7 @@ and [Quadratic Reciprocity](https://rdcu.be/edqIJ) in 1990.
 All of this work was done using 
 [Nqthm](https://www.cs.utexas.edu/~moore/best-ideas/nqthm/), 
 more popularly known as the Boyer–Moore theorem prover.
-By 1994, enough mathematics had been formalised for Robert S Boyer
+By 1994, enough mathematics had been formalised for Robert Boyer
 to [propose the QED project](https://rdcu.be/edp1P): 
 to build a machine-checked encyclopedia of mathematics.
 Today, a vast amount of mathematics has been formalised 
@@ -92,11 +92,14 @@ Today, a vast amount of mathematics has been formalised
 and other systems – including
 [one of Ramanujan's theorems](https://www.isa-afp.org/entries/Rogers_Ramanujan.html), 
 (proved in 20 pages, not 2000).
+The challenge of [formalising the "100 famous theorems"](https://www.cs.ru.nl/~freek/100/)
+has been met – except for Fermat's last theorem,
+and Kevin Buzzard [is working on that](https://leanprover-community.github.io/blog/posts/FLT-announcement/).
 
 The situation regarding the second pillar is more interesting.
 [A paper](https://www.ias.edu/ideas/2014/voevodsky-origins) published in 2014 
 would seem at first sight to buttress the authors' arguments,
-in that it provided numerous further examples of errors in mathematics papers
+providing many further examples of errors in mathematics papers
 being corrected by the community:
 
 > I was giving a series of lectures, and Pierre Deligne (Professor in the School of Mathematics) was taking notes and checking every step of my arguments. Only then did I discover that the proof of a key lemma in my paper contained a mistake and that the lemma, as stated, could not be salvaged. Fortunately, I was able to prove a weaker and more complicated lemma, which turned out to be sufficient for all applications. A corrected sequence of arguments was published in 2006.
@@ -115,72 +118,110 @@ Recently, Fields medallist Peter Scholze asked the verification community to con
 [It was completed](https://leanprover-community.github.io/blog/posts/lte-final/) 
 in 18 months.
 
-### But what about the verification of computer systems?
+### Verifying computer systems
 
 Although the authors' arguments are founded on proofs in mathematics 
 and the alleged limitations of formal logic, 
 we also need to talk about the point of all this, namely program verification.
 The authors are correct that real programs can be millions of lines long,
 with messy and complicated specifications. 
-We are never going to see a verification of Microsoft Word.
-Nevertheless, a number of substantial programs have been formally verified,
+We are never going to see a verified Microsoft Word.
+Nevertheless, a number of substantial, useful programs have been formally verified,
 such as the [seL4 secure operating system kernel](https://doi.org/10.1145/3230627)
 and the [CakeML verifiably bootstrapped compiler](https://cakeml.org).
-Hardware verification was not on the authors' radar in 1979,
+
+[Hardware verification]({% post_url 2023-01-04-Hardware_Verification %}) was not on the authors' radar in 1979,
 but it has been even more successful.
 Michael Gordon and his team proved the correctness of a 
-[simple minicomputer](https://doi.org/10.48456/tr-42) in 1983
-of a [network interface chip](https://doi.org/10.48456/tr-66) in 1985
+[simple minicomputer](https://doi.org/10.48456/tr-42) in 1983,
+of a [network interface chip](https://doi.org/10.48456/tr-66) in 1985,
 and of a [commercial, military grade microprocessor](https://doi.org/10.48456/tr-134) in 1988.
+Software verification turned out to be a tougher challenge, 
+but 1989 saw a [proof of a code generator](https://rdcu.be/edxMn) 
+for a subset of the Gypsy language.
 
 Today, verification techniques are embedded in the development process of
 companies like Nvidia and Intel.
-And yes, all of these systems are modified 
-from time to time and their formal proofs adjusted as necessary.
 The old assumption that verification was only affordable for safety critical applications was exploded 30 years ago, with the 
 [Pentium 5 division bug](https://www.righto.com/2024/12/this-die-photo-of-pentium-shows.html). Nobody likes to lose half a billion dollars.
 These days, any mission-critical software or hardware is a candidate for verification.
 
-### On the benefit of hindsight
+And they cope with the frequent modifications that are inherent in all system development:
 
-I have struggled to understand what motivated the authors to write this paper in the first place. The 1970s had seen a push to eliminate assembly language programming.
-There were two trends in programming language design:
+> There is no reason to believe that verifying a modified program is any easier than verifying the original the first time around. 
 
-* Pascal and its derivatives such as Modula-2 and Ada.
-* Unsafe systems programming languages such as BLISS, BCPL and C.
+You just have to tweak the proof you have already.
 
-The UNIX operating system, coded in C, was announced in 1971,
-and the Xerox Alto workstation, coded in BCPL, appeared a couple of years later.
-Both of these would become hugely influential to the future of computer science.
+### What was the point?
 
-The authors declare (in the last sentence of the abstract)
+I have struggled to understand what motivated the authors 
+to write such a vitriolic polemic in the first place. 
+Here is a brief extract from the paper's two pages of conclusions:
 
-> It is felt that ease of formal verification should not dominate program language design.
+> The concept of verifiable software has been with us too long to be easily displaced. For the practice of programming, however, verifiability must not be allowed to overshadow reliability. Scientists should not confuse mathematical models with reality--and verification is nothing but a model of believability. Verifiability is not and cannot be a dominating concern in software design.
 
-They got their wish: C took over and the type-safe languages 
-(strongly preferred by the program verification community) were abandoned.
-The authors conclude by arguing that we all should aim for reliable software.
-But we ended up in a world where every non-trivial program performed pointer arithmetic
-and where buffer overruns and the link have cost trillions of dollars.
+Were we living on the same planet? Although the 1970s did see attempts
+to promote high-level languages – Alphard, CLU, Euclid – they went nowhere.
+Unsafe languages such as BLISS, BCPL and C rapidly took over.
+The UNIX operating system (coded in C) was announced in 1971.
+The hugely influential Xerox Alto workstation (coded in BCPL) appeared slightly later.
+
+As for program verification tools, I have wracked my brain and consulted contemporary literature, coming up with only this (by 1979):
+
+* a PhD thesis from Carnegie Mellon University
+* Donald Good's group at Austin (the Gypsy verification system)
+* David Luckham's group at Stanford (the Stanford Pascal verifier)
+* Robert Constable's group at Cornell (PL/CV)
+
+Robert Boyer and J Moore's work on program verification lay in the future.
+Other work on automatic theorem proving and logic programming was focused on AI, not verification.
+Where was the dragon that they were so desperate to slay?
 
 ### What they got right
 
+Credit must be given where due. 
+The authors did make a couple of extremely important points, which continue to be overlooked to this day.
+
 > Since the requirement for a program is informal and the program is formal, there must be a transition, and the transition itself must necessarily be informal.
 
+Even with a perfect verification tool, 
+it is essential to take responsibility for your formal specifications.
+This is often easy, since today we typically verify some sort of component
+(say, a secure enclave) whose natural specification is already mathematical.
+Nobody can prove that a car's electronic control panel is ergonomic, 
+but formal tools are used to ensure that it behaves correctly.
 
+> A good proof is one that makes us wiser.
 
+The paper repeatedly emphasises attributes of good proofs such as simplicity and clarity.
+They stress the crucial role of intuition in understanding mathematical concepts.
+This is absolutely right.
+Regular readers of this blog will have seen the 
+many [examples](https://lawrencecpaulson.github.io/tag/examples)
+where I walk through Isabelle proofs step-by-step.
+Perfectly readable they are not – they are code – but with practice they are understandable.
+They are understandable enough that 
+people clip out chunks of proofs to adapt for use elsewhere,
+which is analogous to how mathematicians borrow from one another.
 
+> It seems to us that the scenario envisioned by the proponents of verification goes something like this: The programmer inserts his 300-line input/output package into the verifier. Several hours later, he returns. There is his 20,000-line verification and the message "VERIFIED."
 
-Cohn, A. The notion of proof in hardware verification. J Autom Reasoning 5, 127–139 (1989). 
-https://rdcu.be/edr5n
+Although this is another straw man, many people claim to have verified something,
+offering as evidence a formal proof using their favourite tool
+that cannot be checked except by running that very tool again,
+or possibly some other automatic tool.
+A legible formal proof allows a human reader to check and understand the reasoning.
+We must insist on this.
 
+### Coda
 
-I quote the exact same footnotes 
-in [my grant proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/Part-B2.pdf) 
-to obtain funding for verification research.
-So I owe the authors a debt of gratitude for giving me this example,
-for although I had seen it elsewhere they must be the original source.
+I owe the authors a debt of gratitude for finding that page in
+Jech's *The Axiom of Choice* listing all those errors.
+I included the exact same page 
+in my successful [grant proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/Part-B2.pdf) 
+for verifying mathematics.
+Although I had stumbled across it elsewhere, they are surely the original source.
 
-
-
-"So far, there has been little philosophical discussion of making software reliable rather than verifiable."
+The authors' attitude to mathematical errors reminds me of anti-vaxxers who say
+"getting measles and mumps is simply a part of childhood".
+It was, and children died. Let's do something about it.
