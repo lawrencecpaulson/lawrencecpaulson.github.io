@@ -32,7 +32,7 @@ is the same as the one for $x\ln x$. However, this function is a horror:
 Its derivative, namely $\sin(1/x) - \cos(1/x)/x$, doesn't look nice either.
 The lower bound does not appear to be expressible by a simple formula,
 so Alexander set up a framework for proving that a given number was a lower bound.
-He then calculated it to 81 decimal places!
+He then calculated it to 78 decimal places!
 
 -0.21723362821122165740827932556247073422304491543558748236544902771450534358906339
 
