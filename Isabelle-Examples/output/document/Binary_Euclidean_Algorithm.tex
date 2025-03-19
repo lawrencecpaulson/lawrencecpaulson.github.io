@@ -1,0 +1,523 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Binary{\isacharunderscore}{\kern0pt}Euclidean{\isacharunderscore}{\kern0pt}Algorithm}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordONE{theory}\isamarkupfalse%
+\ Binary{\isacharunderscore}{\kern0pt}Euclidean{\isacharunderscore}{\kern0pt}Algorithm\ \isanewline
+\ \ \isakeywordTWO{imports}\ {\isachardoublequoteopen}HOL{\isacharminus}{\kern0pt}Computational{\isacharunderscore}{\kern0pt}Algebra{\isachardot}{\kern0pt}Primes{\isachardoublequoteclose}\ \isanewline
+\isakeywordTWO{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{The binary GCD algorithm%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isakeywordONE{inductive{\isacharunderscore}{\kern0pt}set}\isamarkupfalse%
+\ \ bgcd\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}nat\ {\isasymtimes}\ nat\ {\isasymtimes}\ nat{\isacharparenright}{\kern0pt}\ set{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ bgcdZero{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}u{\isacharcomma}{\kern0pt}\ {\isadigit{0}}{\isacharcomma}{\kern0pt}\ u{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ bgcdEven{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlbrakk}\ {\isacharparenleft}{\kern0pt}u{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymrbrakk}\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharasterisk}{\kern0pt}u{\isacharcomma}{\kern0pt}\ {\isadigit{2}}{\isacharasterisk}{\kern0pt}v{\isacharcomma}{\kern0pt}\ {\isadigit{2}}{\isacharasterisk}{\kern0pt}g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ bgcdOdd{\isacharcolon}{\kern0pt}\ \ {\isachardoublequoteopen}{\isasymlbrakk}\ {\isacharparenleft}{\kern0pt}u{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isacharsemicolon}{\kern0pt}\ {\isasymnot}\ {\isadigit{2}}\ dvd\ v\ {\isasymrbrakk}\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharasterisk}{\kern0pt}u{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ bgcdStep{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlbrakk}\ {\isacharparenleft}{\kern0pt}u\ {\isacharminus}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isacharsemicolon}{\kern0pt}\ v\ {\isasymle}\ u\ {\isasymrbrakk}\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}u{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ bgcdSwap{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlbrakk}\ {\isacharparenleft}{\kern0pt}v{\isacharcomma}{\kern0pt}\ u{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymrbrakk}\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}u{\isacharcomma}{\kern0pt}\ v{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Proving that the algorithm is correct%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+Show that the bgcd of \isa{x} und \isa{y} is
+really a divisor of both numbers%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}divides{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}x{\isacharcomma}{\kern0pt}y{\isacharcomma}{\kern0pt}g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymLongrightarrow}\ g\ dvd\ x\ {\isasymand}\ g\ dvd\ y{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induct\ rule{\isacharcolon}{\kern0pt}\ bgcd{\isachardot}{\kern0pt}induct{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}bgcdStep\ u\ v\ g{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{with}\isamarkupfalse%
+\ dvd{\isacharunderscore}{\kern0pt}diffD\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+The bgcd of \isa{x} und \isa{y} really is the greatest common divisor
+ of both numbers, with respect to the divides relation.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}greatest{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}x{\isacharcomma}{\kern0pt}y{\isacharcomma}{\kern0pt}g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymLongrightarrow}\ d\ dvd\ x\ {\isasymLongrightarrow}\ d\ dvd\ y\ {\isasymLongrightarrow}\ d\ dvd\ g{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induct\ arbitrary{\isacharcolon}{\kern0pt}\ d\ rule{\isacharcolon}{\kern0pt}\ bgcd{\isachardot}{\kern0pt}induct{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}bgcdEven\ u\ v\ g\ d{\isacharparenright}{\kern0pt}\ \isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}cases\ {\isachardoublequoteopen}{\isadigit{2}}\ dvd\ d{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isanewline
+\ \ \ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ True\ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\ \isakeywordONE{using}\isamarkupfalse%
+\ bgcdEven\ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}force\ simp\ add{\isacharcolon}{\kern0pt}\ dvd{\isacharunderscore}{\kern0pt}def{\isacharparenright}{\kern0pt}\ \isanewline
+\ \ \ \ \isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\ \isakeywordONE{using}\isamarkupfalse%
+\ bgcdEven\isanewline
+\ \ \ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ coprime{\isacharunderscore}{\kern0pt}dvd{\isacharunderscore}{\kern0pt}mult{\isacharunderscore}{\kern0pt}right{\isacharunderscore}{\kern0pt}iff{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}bgcdOdd\ u\ v\ g\ d{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}coprime\ d\ {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ fastforce\isanewline
+\ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\ \isakeywordONE{using}\isamarkupfalse%
+\ bgcdOdd\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ coprime{\isacharunderscore}{\kern0pt}dvd{\isacharunderscore}{\kern0pt}mult{\isacharunderscore}{\kern0pt}right{\isacharunderscore}{\kern0pt}iff{\isacharparenright}{\kern0pt}\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Proving uniqueness and existence%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+despite its apparent non-determinism, the relation \isa{bgcd} is deterministic 
+  and therefore defines a function%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}unique{\isacharcolon}{\kern0pt}\ \isanewline
+\ \ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}x{\isacharcomma}{\kern0pt}y{\isacharcomma}{\kern0pt}g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymLongrightarrow}\ {\isacharparenleft}{\kern0pt}x{\isacharcomma}{\kern0pt}y{\isacharcomma}{\kern0pt}g{\isacharprime}{\kern0pt}{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd\ {\isasymLongrightarrow}\ g\ {\isacharequal}{\kern0pt}\ g{\isacharprime}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}meson\ bgcd{\isacharunderscore}{\kern0pt}divides\ bgcd{\isacharunderscore}{\kern0pt}greatest\ gcd{\isacharunderscore}{\kern0pt}nat{\isachardot}{\kern0pt}strict{\isacharunderscore}{\kern0pt}iff{\isacharunderscore}{\kern0pt}not{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}defined{\isacharunderscore}{\kern0pt}aux{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}a{\isacharplus}{\kern0pt}b\ {\isasymle}\ n\ {\isasymLongrightarrow}\ {\isasymexists}g{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ b{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induction\ n\ arbitrary{\isacharcolon}{\kern0pt}\ a\ b\ rule{\isacharcolon}{\kern0pt}\ less{\isacharunderscore}{\kern0pt}induct{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}less\ n\ a\ b{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}cases\ b{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isadigit{0}}\isanewline
+\ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ bgcdZero{\isacharparenright}{\kern0pt}\ \isanewline
+\ \ \isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Suc\ b{\isacharprime}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isacharasterisk}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}a\ {\isacharplus}{\kern0pt}\ b{\isacharprime}{\kern0pt}\ {\isacharless}{\kern0pt}\ n{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ Suc{\isacharunderscore}{\kern0pt}le{\isacharunderscore}{\kern0pt}eq\ add{\isacharunderscore}{\kern0pt}Suc{\isacharunderscore}{\kern0pt}right\ less{\isachardot}{\kern0pt}prems\ \isakeywordONE{by}\isamarkupfalse%
+\ presburger\isanewline
+\ \ \ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}cases\ {\isachardoublequoteopen}b\ {\isasymle}\ a{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ bgcd{\isachardot}{\kern0pt}simps\ le{\isacharunderscore}{\kern0pt}add{\isadigit{1}}\ le{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}inverse\ less{\isachardot}{\kern0pt}IH\ {\isacharbrackleft}{\kern0pt}OF\ {\isacharasterisk}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ less{\isachardot}{\kern0pt}IH\ {\isacharbrackleft}{\kern0pt}OF\ {\isacharasterisk}{\kern0pt}{\isacharbrackright}{\kern0pt}\ Suc\ Suc{\isacharunderscore}{\kern0pt}leI\ bgcd{\isachardot}{\kern0pt}simps\ le{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}inverse\ \isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ less{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}same{\isacharunderscore}{\kern0pt}cancel{\isadigit{2}}\ nle{\isacharunderscore}{\kern0pt}le\ zero{\isacharunderscore}{\kern0pt}less{\isacharunderscore}{\kern0pt}iff{\isacharunderscore}{\kern0pt}neq{\isacharunderscore}{\kern0pt}zero{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{theorem}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}defined{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymexists}{\isacharbang}{\kern0pt}g{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ b{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{using}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}defined{\isacharunderscore}{\kern0pt}aux\ bgcd{\isacharunderscore}{\kern0pt}unique\ \isakeywordONE{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Alternative proof suggested by YawarRaza7349%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ bgcd{\isacharunderscore}{\kern0pt}defined{\isacharunderscore}{\kern0pt}aux{\isacharprime}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}a{\isacharplus}{\kern0pt}b\ {\isacharequal}{\kern0pt}\ n\ {\isasymLongrightarrow}\ {\isasymexists}g{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ b{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induction\ n\ arbitrary{\isacharcolon}{\kern0pt}\ a\ b\ rule{\isacharcolon}{\kern0pt}\ less{\isacharunderscore}{\kern0pt}induct{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}less\ n\ a\ b{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}case\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}cases\ {\isachardoublequoteopen}b\ {\isasymle}\ a{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ True\isanewline
+\ \ \ \ \isakeywordONE{with}\isamarkupfalse%
+\ less\ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ g\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}a{\isacharminus}{\kern0pt}b{\isacharcomma}{\kern0pt}\ b{\isacharcomma}{\kern0pt}\ g{\isacharparenright}{\kern0pt}\ {\isasymin}\ bgcd{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ add{\isacharunderscore}{\kern0pt}cancel{\isacharunderscore}{\kern0pt}right{\isacharunderscore}{\kern0pt}right\ bgcd{\isachardot}{\kern0pt}simps\ le{\isacharunderscore}{\kern0pt}add{\isadigit{1}}\ le{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}inverse\ nat{\isacharunderscore}{\kern0pt}less{\isacharunderscore}{\kern0pt}le{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ True\ bgcd{\isachardot}{\kern0pt}bgcdStep\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \isakeywordONE{with}\isamarkupfalse%
+\ less\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ bgcd{\isachardot}{\kern0pt}simps\ le{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}diff{\isacharunderscore}{\kern0pt}inverse\ less{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}same{\isacharunderscore}{\kern0pt}cancel{\isadigit{2}}\ nle{\isacharunderscore}{\kern0pt}le\ zero{\isacharunderscore}{\kern0pt}less{\isacharunderscore}{\kern0pt}iff{\isacharunderscore}{\kern0pt}neq{\isacharunderscore}{\kern0pt}zero{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordTWO{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Internet/MachineLogic/Isabelle-Examples/Binary_Euclidean_Algorithm.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%27=5%:%
+%:%37=7%:%
+%:%38=7%:%
+%:%39=8%:%
+%:%40=9%:%
+%:%41=10%:%
+%:%42=11%:%
+%:%43=12%:%
+%:%50=14%:%
+%:%62=16%:%
+%:%63=17%:%
+%:%65=18%:%
+%:%66=18%:%
+%:%73=19%:%
+%:%74=19%:%
+%:%75=20%:%
+%:%76=20%:%
+%:%77=21%:%
+%:%78=21%:%
+%:%79=21%:%
+%:%80=22%:%
+%:%81=22%:%
+%:%82=23%:%
+%:%83=23%:%
+%:%92=25%:%
+%:%93=26%:%
+%:%95=27%:%
+%:%96=27%:%
+%:%97=28%:%
+%:%104=29%:%
+%:%105=29%:%
+%:%106=30%:%
+%:%107=30%:%
+%:%108=31%:%
+%:%109=31%:%
+%:%110=32%:%
+%:%111=32%:%
+%:%112=33%:%
+%:%113=33%:%
+%:%114=33%:%
+%:%115=33%:%
+%:%116=33%:%
+%:%117=34%:%
+%:%118=34%:%
+%:%119=35%:%
+%:%120=35%:%
+%:%121=36%:%
+%:%122=36%:%
+%:%123=36%:%
+%:%124=37%:%
+%:%125=37%:%
+%:%126=38%:%
+%:%127=38%:%
+%:%128=39%:%
+%:%129=39%:%
+%:%130=40%:%
+%:%131=40%:%
+%:%132=41%:%
+%:%133=41%:%
+%:%134=42%:%
+%:%135=42%:%
+%:%136=43%:%
+%:%137=43%:%
+%:%138=43%:%
+%:%139=44%:%
+%:%140=44%:%
+%:%141=45%:%
+%:%142=45%:%
+%:%156=47%:%
+%:%168=49%:%
+%:%169=50%:%
+%:%171=51%:%
+%:%172=51%:%
+%:%173=52%:%
+%:%176=53%:%
+%:%180=53%:%
+%:%181=53%:%
+%:%186=53%:%
+%:%189=54%:%
+%:%190=55%:%
+%:%191=55%:%
+%:%198=56%:%
+%:%199=56%:%
+%:%200=57%:%
+%:%201=57%:%
+%:%202=58%:%
+%:%203=58%:%
+%:%204=59%:%
+%:%205=59%:%
+%:%206=60%:%
+%:%207=60%:%
+%:%208=61%:%
+%:%209=61%:%
+%:%210=61%:%
+%:%211=62%:%
+%:%212=62%:%
+%:%213=63%:%
+%:%214=63%:%
+%:%215=64%:%
+%:%216=64%:%
+%:%217=64%:%
+%:%218=65%:%
+%:%219=65%:%
+%:%220=65%:%
+%:%221=66%:%
+%:%222=66%:%
+%:%223=67%:%
+%:%224=67%:%
+%:%225=68%:%
+%:%226=68%:%
+%:%227=69%:%
+%:%228=69%:%
+%:%229=70%:%
+%:%230=70%:%
+%:%231=71%:%
+%:%232=71%:%
+%:%233=72%:%
+%:%234=72%:%
+%:%235=73%:%
+%:%236=73%:%
+%:%237=73%:%
+%:%238=74%:%
+%:%239=74%:%
+%:%240=75%:%
+%:%241=76%:%
+%:%242=76%:%
+%:%243=77%:%
+%:%244=77%:%
+%:%245=78%:%
+%:%251=78%:%
+%:%254=79%:%
+%:%255=80%:%
+%:%256=80%:%
+%:%259=81%:%
+%:%263=81%:%
+%:%264=81%:%
+%:%265=81%:%
+%:%274=83%:%
+%:%276=84%:%
+%:%277=84%:%
+%:%284=85%:%
+%:%285=85%:%
+%:%286=86%:%
+%:%287=86%:%
+%:%288=87%:%
+%:%289=87%:%
+%:%290=87%:%
+%:%291=88%:%
+%:%292=88%:%
+%:%293=89%:%
+%:%294=89%:%
+%:%295=90%:%
+%:%296=90%:%
+%:%297=90%:%
+%:%298=91%:%
+%:%299=91%:%
+%:%300=92%:%
+%:%301=92%:%
+%:%302=93%:%
+%:%303=93%:%
+%:%304=93%:%
+%:%305=94%:%
+%:%306=94%:%
+%:%307=95%:%
+%:%308=95%:%
+%:%309=96%:%
+%:%310=96%:%
+%:%311=96%:%
+%:%312=97%:%
+%:%313=97%:%
+%:%314=98%:%
+%:%315=98%:%
+%:%316=99%:%
+%:%322=99%:%
+%:%327=100%:%
+%:%332=101%:%

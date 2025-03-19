@@ -1,0 +1,276 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{AckermannM}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{A Tail-Recursive, Stack-Based Ackermann's Function%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+Unlike the other Ackermann example, this termination proof uses the argument from
+Nachum Dershowitz and Zohar Manna. Proving termination with multiset orderings.
+Communications of the ACM 22 (8) 1979, 465–476.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordONE{theory}\isamarkupfalse%
+\ AckermannM\ \isakeywordTWO{imports}\ {\isachardoublequoteopen}HOL{\isacharminus}{\kern0pt}Library{\isachardot}{\kern0pt}Multiset{\isacharunderscore}{\kern0pt}Order{\isachardoublequoteclose}\ {\isachardoublequoteopen}HOL{\isacharminus}{\kern0pt}Library{\isachardot}{\kern0pt}Product{\isacharunderscore}{\kern0pt}Lexorder{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordTWO{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+This theory investigates a stack-based implementation of Ackermann's function.
+Let's recall the traditional definition,
+as modified by R{\'o}zsa P\'eter and Raphael Robinson.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{fun}\isamarkupfalse%
+\ ack\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharbrackleft}{\kern0pt}nat{\isacharcomma}{\kern0pt}nat{\isacharbrackright}{\kern0pt}\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}ack\ {\isadigit{0}}\ n\ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharequal}{\kern0pt}\ Suc\ n{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ack\ {\isacharparenleft}{\kern0pt}Suc\ m{\isacharparenright}{\kern0pt}\ {\isadigit{0}}\ \ \ \ \ \ \ {\isacharequal}{\kern0pt}\ ack\ m\ {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ack\ {\isacharparenleft}{\kern0pt}Suc\ m{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Suc\ n{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ ack\ m\ {\isacharparenleft}{\kern0pt}ack\ {\isacharparenleft}{\kern0pt}Suc\ m{\isacharparenright}{\kern0pt}\ n{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Setting up the termination proof for the stack-based version.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{fun}\isamarkupfalse%
+\ ack{\isacharunderscore}{\kern0pt}mset\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ {\isacharparenleft}{\kern0pt}nat{\isasymtimes}nat{\isacharparenright}{\kern0pt}\ multiset{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}ack{\isacharunderscore}{\kern0pt}mset\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ack{\isacharunderscore}{\kern0pt}mset\ {\isacharbrackleft}{\kern0pt}x{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ack{\isacharunderscore}{\kern0pt}mset\ {\isacharparenleft}{\kern0pt}z{\isacharhash}{\kern0pt}y{\isacharhash}{\kern0pt}l{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ \ mset\ {\isacharparenleft}{\kern0pt}{\isacharparenleft}{\kern0pt}y{\isacharcomma}{\kern0pt}z{\isacharparenright}{\kern0pt}\ {\isacharhash}{\kern0pt}\ map\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}Suc\ x{\isacharcomma}{\kern0pt}\ {\isadigit{0}}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ case{\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}ack{\isacharunderscore}{\kern0pt}mset\ {\isacharparenleft}{\kern0pt}Suc\ n\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}\ {\isacharless}{\kern0pt}\ add{\isacharunderscore}{\kern0pt}mset\ {\isacharparenleft}{\kern0pt}{\isadigit{0}}{\isacharcomma}{\kern0pt}\ n{\isacharparenright}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharparenleft}{\kern0pt}Suc\ x{\isacharcomma}{\kern0pt}\ {\isadigit{0}}{\isacharparenright}{\kern0pt}{\isachardot}{\kern0pt}\ x\ {\isasymin}{\isacharhash}{\kern0pt}\ mset\ l{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}cases\ l{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{case}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}Cons\ m\ list{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharparenleft}{\kern0pt}m{\isacharcomma}{\kern0pt}\ Suc\ n{\isacharparenright}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}\ {\isacharless}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharparenleft}{\kern0pt}Suc\ m{\isacharcomma}{\kern0pt}\ {\isadigit{0}}{\isacharparenright}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isakeywordONE{also}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymdots}\ {\isasymle}\ {\isacharbraceleft}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharparenleft}{\kern0pt}Suc\ m{\isacharcomma}{\kern0pt}\ {\isadigit{0}}{\isacharparenright}{\kern0pt}{\isacharcomma}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isadigit{0}}{\isacharcomma}{\kern0pt}n{\isacharparenright}{\kern0pt}{\isacharhash}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isakeywordONE{finally}\isamarkupfalse%
+\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ Cons{\isacharparenright}{\kern0pt}\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Here is the stack-based version, which uses lists.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{function}\isamarkupfalse%
+\ ackloop\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}nat\ list\ {\isasymRightarrow}\ nat{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}ackloop\ {\isacharparenleft}{\kern0pt}n\ {\isacharhash}{\kern0pt}\ {\isadigit{0}}\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}\ \ \ \ \ \ \ \ \ {\isacharequal}{\kern0pt}\ ackloop\ {\isacharparenleft}{\kern0pt}Suc\ n\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ackloop\ {\isacharparenleft}{\kern0pt}{\isadigit{0}}\ {\isacharhash}{\kern0pt}\ Suc\ m\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}\ \ \ \ \ {\isacharequal}{\kern0pt}\ ackloop\ {\isacharparenleft}{\kern0pt}{\isadigit{1}}\ {\isacharhash}{\kern0pt}\ m\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ackloop\ {\isacharparenleft}{\kern0pt}Suc\ n\ {\isacharhash}{\kern0pt}\ Suc\ m\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ ackloop\ {\isacharparenleft}{\kern0pt}n\ {\isacharhash}{\kern0pt}\ Suc\ m\ {\isacharhash}{\kern0pt}\ m\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ackloop\ {\isacharbrackleft}{\kern0pt}m{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ m{\isachardoublequoteclose}\isanewline
+{\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}ackloop\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ \ {\isadigit{0}}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ pat{\isacharunderscore}{\kern0pt}completeness\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{termination}\isamarkupfalse%
+\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}relation\ {\isachardoublequoteopen}inv{\isacharunderscore}{\kern0pt}image\ {\isacharbraceleft}{\kern0pt}{\isacharparenleft}{\kern0pt}x{\isacharcomma}{\kern0pt}y{\isacharparenright}{\kern0pt}{\isachardot}{\kern0pt}\ x{\isacharless}{\kern0pt}y{\isacharbraceright}{\kern0pt}\ ack{\isacharunderscore}{\kern0pt}mset{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}auto\ simp{\isacharcolon}{\kern0pt}\ wf\ case{\isadigit{1}}{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Unlike the other Ackermann theory, no extra function is needed to prove equivalence%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ ackloop{\isacharunderscore}{\kern0pt}ack{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}ackloop\ {\isacharparenleft}{\kern0pt}n\ {\isacharhash}{\kern0pt}\ m\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ ackloop\ {\isacharparenleft}{\kern0pt}ack\ m\ n\ {\isacharhash}{\kern0pt}\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induction\ m\ n\ arbitrary{\isacharcolon}{\kern0pt}\ l\ rule{\isacharcolon}{\kern0pt}\ ack{\isachardot}{\kern0pt}induct{\isacharparenright}{\kern0pt}\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{theorem}\isamarkupfalse%
+\ ack{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}ack\ m\ n\ {\isacharequal}{\kern0pt}\ ackloop\ {\isacharbrackleft}{\kern0pt}n{\isacharcomma}{\kern0pt}m{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ ackloop{\isacharunderscore}{\kern0pt}ack{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordTWO{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Internet/MachineLogic/Isabelle-Examples/AckermannM.thy%:%
+%:%11=5%:%
+%:%23=7%:%
+%:%24=8%:%
+%:%25=9%:%
+%:%33=11%:%
+%:%34=11%:%
+%:%35=12%:%
+%:%36=13%:%
+%:%45=15%:%
+%:%46=16%:%
+%:%47=17%:%
+%:%49=19%:%
+%:%50=19%:%
+%:%51=20%:%
+%:%52=21%:%
+%:%53=22%:%
+%:%55=24%:%
+%:%57=26%:%
+%:%58=26%:%
+%:%59=27%:%
+%:%60=28%:%
+%:%61=29%:%
+%:%62=30%:%
+%:%63=31%:%
+%:%64=31%:%
+%:%71=32%:%
+%:%72=32%:%
+%:%73=33%:%
+%:%74=33%:%
+%:%75=34%:%
+%:%76=34%:%
+%:%77=35%:%
+%:%78=35%:%
+%:%79=36%:%
+%:%80=36%:%
+%:%81=36%:%
+%:%82=37%:%
+%:%83=37%:%
+%:%84=38%:%
+%:%85=38%:%
+%:%86=38%:%
+%:%87=39%:%
+%:%88=39%:%
+%:%89=40%:%
+%:%90=40%:%
+%:%99=42%:%
+%:%101=44%:%
+%:%102=44%:%
+%:%103=45%:%
+%:%104=46%:%
+%:%105=47%:%
+%:%106=48%:%
+%:%107=49%:%
+%:%110=50%:%
+%:%114=50%:%
+%:%115=50%:%
+%:%120=50%:%
+%:%123=51%:%
+%:%124=52%:%
+%:%125=52%:%
+%:%128=53%:%
+%:%132=53%:%
+%:%133=53%:%
+%:%142=55%:%
+%:%144=56%:%
+%:%145=56%:%
+%:%148=57%:%
+%:%152=57%:%
+%:%153=57%:%
+%:%158=57%:%
+%:%161=58%:%
+%:%162=59%:%
+%:%163=59%:%
+%:%166=60%:%
+%:%170=60%:%
+%:%171=60%:%
+%:%176=60%:%
+%:%181=61%:%
+%:%186=62%:%

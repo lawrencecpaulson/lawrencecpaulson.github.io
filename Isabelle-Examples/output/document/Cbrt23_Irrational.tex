@@ -1,0 +1,237 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{Cbrt{\isadigit{2}}{\isadigit{3}}{\isacharunderscore}{\kern0pt}Irrational}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordONE{theory}\isamarkupfalse%
+\ Cbrt{\isadigit{2}}{\isadigit{3}}{\isacharunderscore}{\kern0pt}Irrational\ \isanewline
+\ \ \isakeywordTWO{imports}\ Complex{\isacharunderscore}{\kern0pt}Main\isanewline
+\ \ \ \isanewline
+\isakeywordTWO{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ cuberoot{\isacharunderscore}{\kern0pt}irrational{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{defines}\ {\isachardoublequoteopen}x\ {\isasymequiv}\ root\ {\isadigit{3}}\ {\isadigit{2}}\ {\isacharplus}{\kern0pt}\ root\ {\isadigit{3}}\ {\isadigit{3}}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}x\ {\isasymnotin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}x\ {\isasymin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{moreover}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}root\ {\isadigit{3}}\ {\isadigit{8}}\ {\isacharequal}{\kern0pt}\ {\isadigit{2}}{\isachardoublequoteclose}\ {\isachardoublequoteopen}root\ {\isadigit{3}}\ {\isadigit{2}}{\isadigit{7}}\ {\isacharequal}{\kern0pt}\ {\isadigit{3}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ xcubed{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}x{\isacharcircum}{\kern0pt}{\isadigit{3}}\ {\isacharequal}{\kern0pt}\ {\isadigit{5}}\ {\isacharplus}{\kern0pt}\ {\isadigit{3}}\ {\isacharasterisk}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ root\ {\isadigit{3}}\ {\isadigit{6}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ x{\isacharunderscore}{\kern0pt}def\ algebra{\isacharunderscore}{\kern0pt}simps\ eval{\isacharunderscore}{\kern0pt}nat{\isacharunderscore}{\kern0pt}numeral\ flip{\isacharcolon}{\kern0pt}\ real{\isacharunderscore}{\kern0pt}root{\isacharunderscore}{\kern0pt}mult{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{ultimately}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ Q{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isadigit{5}}\ {\isacharplus}{\kern0pt}\ {\isadigit{3}}\ {\isacharasterisk}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ root\ {\isadigit{3}}\ {\isadigit{6}}\ {\isasymin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ Rats{\isacharunderscore}{\kern0pt}power\ {\isacartoucheopen}x\ {\isasymin}\ {\isasymrat}{\isacartoucheclose}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}root\ {\isadigit{3}}\ {\isadigit{6}}\ {\isasymnotin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\ \isanewline
+\ \ \ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}root\ {\isadigit{3}}\ {\isadigit{6}}\ {\isasymin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ a\ b\ \isakeywordTWO{where}\ {\isachardoublequoteopen}a\ {\isacharslash}{\kern0pt}\ b\ {\isacharequal}{\kern0pt}\ root\ {\isadigit{3}}\ {\isadigit{6}}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ cop{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}coprime\ a\ b{\isachardoublequoteclose}\ {\isachardoublequoteopen}b{\isasymnoteq}{\isadigit{0}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}smt\ {\isacharparenleft}{\kern0pt}verit{\isacharcomma}{\kern0pt}\ best{\isacharparenright}{\kern0pt}\ Rats{\isacharunderscore}{\kern0pt}cases{\isacharprime}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}a{\isacharslash}{\kern0pt}b{\isacharparenright}{\kern0pt}{\isacharcircum}{\kern0pt}{\isadigit{3}}\ {\isacharequal}{\kern0pt}\ {\isadigit{6}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ eq{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}a{\isacharcircum}{\kern0pt}{\isadigit{3}}\ {\isacharequal}{\kern0pt}\ {\isadigit{2}}{\isacharasterisk}{\kern0pt}{\isadigit{3}}\ {\isacharasterisk}{\kern0pt}\ b{\isacharcircum}{\kern0pt}{\isadigit{3}}{\isachardoublequoteclose}\ \isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ of{\isacharunderscore}{\kern0pt}int{\isacharunderscore}{\kern0pt}eq{\isacharunderscore}{\kern0pt}iff\ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}fastforce\ simp{\isacharcolon}{\kern0pt}\ divide{\isacharunderscore}{\kern0pt}simps\ {\isacartoucheopen}b{\isasymnoteq}{\isadigit{0}}{\isacartoucheclose}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ p{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isadigit{2}}\ dvd\ a{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ coprime{\isacharunderscore}{\kern0pt}left{\isacharunderscore}{\kern0pt}{\isadigit{2}}{\isacharunderscore}{\kern0pt}iff{\isacharunderscore}{\kern0pt}odd\ coprime{\isacharunderscore}{\kern0pt}power{\isacharunderscore}{\kern0pt}right{\isacharunderscore}{\kern0pt}iff\ dvd{\isacharunderscore}{\kern0pt}triv{\isacharunderscore}{\kern0pt}left\ mult{\isachardot}{\kern0pt}assoc{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ c\ \isakeywordTWO{where}\ {\isachardoublequoteopen}a\ {\isacharequal}{\kern0pt}\ {\isadigit{2}}{\isacharasterisk}{\kern0pt}c{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \ \ \isakeywordONE{with}\isamarkupfalse%
+\ eq\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{2}}\ dvd\ b{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}simp\ add{\isacharcolon}{\kern0pt}\ eval{\isacharunderscore}{\kern0pt}nat{\isacharunderscore}{\kern0pt}numeral{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}metis\ even{\isacharunderscore}{\kern0pt}mult{\isacharunderscore}{\kern0pt}iff\ even{\isacharunderscore}{\kern0pt}numeral\ odd{\isacharunderscore}{\kern0pt}numeral{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordONE{with}\isamarkupfalse%
+\ p\ \isakeywordTWO{and}\ cop\ \isakeywordTHREE{show}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ fastforce\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordONE{moreover}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}{\isacharasterisk}{\kern0pt}x\ {\isasymin}\ {\isasymrat}\ {\isacharminus}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isadigit{0}}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ xcubed\ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}force\ simp{\isacharcolon}{\kern0pt}\ {\isacartoucheopen}x\ {\isasymin}\ {\isasymrat}{\isacartoucheclose}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordONE{ultimately}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isadigit{3}}\ {\isacharasterisk}{\kern0pt}\ x\ {\isacharasterisk}{\kern0pt}\ root\ {\isadigit{3}}\ {\isadigit{6}}\ {\isasymnotin}\ {\isasymrat}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ Rats{\isacharunderscore}{\kern0pt}divide\ \isakeywordONE{by}\isamarkupfalse%
+\ force\isanewline
+\ \ \isakeywordONE{with}\isamarkupfalse%
+\ Q\ \isakeywordTHREE{show}\isamarkupfalse%
+\ False\isanewline
+\ \ \ \ \isakeywordONE{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ Rats{\isacharunderscore}{\kern0pt}diff\ Rats{\isacharunderscore}{\kern0pt}number{\isacharunderscore}{\kern0pt}of\ add{\isachardot}{\kern0pt}commute\ add{\isacharunderscore}{\kern0pt}uminus{\isacharunderscore}{\kern0pt}conv{\isacharunderscore}{\kern0pt}diff\ diff{\isacharunderscore}{\kern0pt}add{\isacharunderscore}{\kern0pt}cancel{\isacharparenright}{\kern0pt}\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordTWO{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/Internet/MachineLogic/Isabelle-Examples/Cbrt23_Irrational.thy%:%
+%:%10=1%:%
+%:%11=1%:%
+%:%12=2%:%
+%:%13=3%:%
+%:%14=4%:%
+%:%19=4%:%
+%:%22=5%:%
+%:%23=6%:%
+%:%24=6%:%
+%:%25=7%:%
+%:%26=8%:%
+%:%33=9%:%
+%:%34=9%:%
+%:%35=10%:%
+%:%36=10%:%
+%:%37=11%:%
+%:%38=11%:%
+%:%39=12%:%
+%:%40=12%:%
+%:%41=13%:%
+%:%42=13%:%
+%:%43=14%:%
+%:%44=14%:%
+%:%45=14%:%
+%:%46=15%:%
+%:%47=15%:%
+%:%48=16%:%
+%:%49=16%:%
+%:%50=16%:%
+%:%51=17%:%
+%:%52=17%:%
+%:%53=18%:%
+%:%54=18%:%
+%:%55=19%:%
+%:%56=19%:%
+%:%57=20%:%
+%:%58=20%:%
+%:%59=21%:%
+%:%60=21%:%
+%:%61=21%:%
+%:%62=22%:%
+%:%63=22%:%
+%:%64=23%:%
+%:%65=23%:%
+%:%66=23%:%
+%:%67=24%:%
+%:%68=24%:%
+%:%69=25%:%
+%:%70=25%:%
+%:%71=25%:%
+%:%72=26%:%
+%:%73=26%:%
+%:%74=26%:%
+%:%75=27%:%
+%:%76=27%:%
+%:%77=27%:%
+%:%78=28%:%
+%:%79=28%:%
+%:%80=29%:%
+%:%81=29%:%
+%:%82=29%:%
+%:%83=30%:%
+%:%84=30%:%
+%:%85=31%:%
+%:%86=31%:%
+%:%87=31%:%
+%:%88=32%:%
+%:%89=32%:%
+%:%90=33%:%
+%:%91=33%:%
+%:%92=33%:%
+%:%93=34%:%
+%:%94=34%:%
+%:%95=35%:%
+%:%96=35%:%
+%:%97=36%:%
+%:%98=36%:%
+%:%99=36%:%
+%:%100=37%:%
+%:%101=37%:%
+%:%102=37%:%
+%:%103=38%:%
+%:%104=38%:%
+%:%105=38%:%
+%:%106=39%:%
+%:%107=39%:%
+%:%108=39%:%
+%:%109=40%:%
+%:%110=40%:%
+%:%111=40%:%
+%:%112=41%:%
+%:%113=41%:%
+%:%114=42%:%
+%:%120=42%:%
+%:%125=43%:%
+%:%130=44%:%

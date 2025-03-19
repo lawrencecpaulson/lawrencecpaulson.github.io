@@ -4,7 +4,7 @@ title: A tricky lower bound proof
 usemathjax: true 
 tags: [examples, Isar, formalised mathematics, analysis]
 ---
-The [previous post]({% post_url 2024-07-25-Numeric_types%}) concerned exact numerical calculations, culminating in an example of establishing – automatically – 
+The [previous post]({% post_url 2024-07-25-Numeric_types %}) concerned exact numerical calculations, culminating in an example of establishing – automatically – 
 a numerical lower bound for a simple mathematical formula.
 Although automation is the key to the success of formal verification,
 a numerical approach is not always good enough. In that example,
@@ -181,7 +181,7 @@ As we have covered all the cases for $x$, the conclusion follows immediately.
 
 ### Finally, a numerical conclusion
 
-In the [previous post]({% post_url 2024-07-25-Numeric_types%}), 
+In the [previous post]({% post_url 2024-07-25-Numeric_types %}), 
 we used the `approximation` proof method (which operates by interval arithmetic) to calculate the minimum as -0.3679, 
 and it was slow (19 seconds on my zippy laptop).
 Now we can get 17 significant figures more or less instantaneously.
@@ -204,7 +204,8 @@ If you fancy a challenge, try the same exercise with the function $x\sin(1/x)$.
 In many ways it's similar, but the derivative hits zero infinitely often
 and the formula, $\sin(1/x) - \cos(1/x)/x$, doesn't look easy to work with.
 If any of you tackle this problem, send it to me: 
-the first nice solution will be posted here.
+the first nice solution will be posted here. 
+[*Note added 2025-03-19: it is in its [own post]({% post_url 2025-03-19-Trickier_lower_bound %}).]*
 
 The examples for this post are online [here](/Isabelle-Examples/Ln_lower_bound.thy).
 

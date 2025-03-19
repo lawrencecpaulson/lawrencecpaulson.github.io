@@ -22,6 +22,7 @@ theories
     "Gowers_Bijection"
     "Numeric"
     "Ln_lower_bound"
+    "XsinX_lower_bounds"
     "Probabilistic_Example_Erdos"
     "Index_ex"
     "Fib_Iter"
