@@ -6,7 +6,7 @@ tags: [verification,philosophy,formalised_mathematics,Principia_Mathematica]
 ---
 In 1979, a paper appeared that challenged the emerging field of program verification:
 "[Social Processes and Proofs of Theorems and Programs](https://doi.org/10.1145/359104.359106)", 
-by Richard De Millo, Richard Lipton and Alan Perlis (simply *the authors*, below).
+by Richard DeMillo, Richard Lipton and Alan Perlis (simply *the authors*, below).
 They pointed out that proofs in mathematics bore no resemblance
 to the formalisms being developed to verify computer programs.
 A mathematical proof, they argued, was an argument intended to persuade other mathematicians.
