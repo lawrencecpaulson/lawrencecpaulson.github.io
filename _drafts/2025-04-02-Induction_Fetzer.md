@@ -111,8 +111,9 @@ validating them is a separate task.
 
 ### Enter a philosopher and his critique
 
-In 1988, a followup to the DeMillo, Lipton and Perlis paper was published by
-James H Fetzer. (Sorry, no link.)
+In 1988, a followup to the 
+[DeMillo, Lipton and Perlis paper]({% post_url 2025-03-14-revisiting_demillo %}) 
+was published by James H Fetzer. (Sorry, no link.)
 He largely set aside their arguments to substitute his own,
 to say that program verification was impossible in principle due to a "category error":
 mixing the two kinds of knowledge outlined above.
