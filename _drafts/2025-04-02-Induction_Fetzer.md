@@ -64,19 +64,22 @@ And these two realms of knowledge are utterly divorced, or are they?
 
 In 1687, Isaac Newton published his
 [Philosophiae Naturalis Principia Mathematica](https://plato.stanford.edu/entries/newton-principia/),
-a mathematical treatise outlining his theory of gravity and specifically about the motions of the planets.
+a treatise outlining his theory of gravity.
+People like to say that he "discovered gravity"; actually,
+he derived a mathematical theory that covered
+everything from the motions of the planets 
+to Galileo's [Leaning Tower of Pisa experiment](https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment).
 And in the 1970s, Stephen Hawking proved that 
 [black holes can evaporate](https://www.scientificamerican.com/article/this-is-the-way-the-universe-ends-by-evaporating/).
+
 What does it mean to prove theorems about the real world when, as we have just seen,
 mathematics is about objects that do not exist?
-It means to prove theorems about **mathematical models** of the real world.
-We do not escape the problem of induction: no matter how accurate our model may seem to be,
-the universe could simply go rogue tomorrow.
-Unless we assume that the universe is lawful, we cannot do science at all.
+It means to prove theorems about **mathematical models** of the real world, which we can use to make and verify predictions.
+We do not escape the problem of induction: no matter how accurate our model may be today, things could go rogue tomorrow.
 
 Popular accounts of relativity or quantum mechanics 
 often begin by mentioning Newton's laws and adding "but Newton was wrong".
-Unfortunately, all models are wrong, or at best, cannot be shown to be right.
+Actually, all models are wrong, or at best, cannot be shown to be right.
 Newton's laws are accurate enough to land a man on the moon 
 but they cannot explain the behaviour of an electron or a black hole.
 Everywhere we look in the natural world, from gas pressure (Boyle's Law)
