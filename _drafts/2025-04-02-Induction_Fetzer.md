@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The philosophical problem of induction and the problem of Fetzer"
+title:  "The philosophical problem of induction, and the problem of Fetzer"
 usemathjax: true 
 tags: [philosophy]
 ---
@@ -60,21 +60,24 @@ directly from our brains without observing the world is called
 and is contrasted with *a posteriori* (empirical) *knowledge*.
 And these two realms of knowledge are utterly divorced, or are they?
 
-### How can there be theorems about black holes?
+### How can there be theorems about planets and black holes?
 
-In 1687, Isaac Newton published his
-[Philosophiae Naturalis Principia Mathematica](https://plato.stanford.edu/entries/newton-principia/),
-a treatise outlining his theory of gravity.
-People like to say that he "discovered gravity"; actually,
-he derived a mathematical theory that covered
+People like to say that Isaac Newton discovered gravity.
+Actually, he derived a **mathematical theory** that covered
 everything from the motions of the planets 
 to Galileo's [Leaning Tower of Pisa experiment](https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment).
-And in the 1970s, Stephen Hawking proved that 
+In 1687, Newton published his theory in his book
+[Philosophiae Naturalis Principia Mathematica](https://plato.stanford.edu/entries/newton-principia/).
+He presents his three laws of motion followed by a series of propositions proved from them.
+He thereby inaugurated the field of theoretical physics, 
+which continues to the present day
+with (among much else) Einstein's theory of general relativity
+and Stephen Hawking's proof that 
 [black holes can evaporate](https://www.scientificamerican.com/article/this-is-the-way-the-universe-ends-by-evaporating/).
 
 What does it mean to prove theorems about the real world when, as we have just seen,
 mathematics is about objects that do not exist?
-It means to prove theorems about **mathematical models** of the real world, which we can use to make and verify predictions.
+It means to prove theorems about **mathematical models** of the real world, which we can use to make predictions and check them.
 We do not escape the problem of induction: no matter how accurate our model may be today, things could go rogue tomorrow.
 
 Popular accounts of relativity or quantum mechanics 
@@ -107,7 +110,8 @@ Computer programmers have a mental model of their machine
 that covers specific aspects such as word length (32-bit or 64-bit)
 and memory capacity, while assuming that it executes C and other languages correctly.
 Most of the time they are not planning for failures in the hardware, 
-the operating system or the C compiler.
+the operating system or the C compiler,
+even though computers can overheat and components melt.
 When verifying a security architecture, 
 the underlying encryption primitives are typically assumed to be unbreakable:
 validating them is a separate task.
@@ -146,6 +150,7 @@ As noted above, all models incorporate simplifying assumptions;
 moreover, given the cost of verification, 
 less critical functions are sometimes simply assumed to be okay.
 
+
 ### The role of testing in a verified system
 
 I asked a colleague, Gerwin Klein, about how they tested the 
@@ -161,14 +166,18 @@ Although it is fully verified in all its functions, there are still things to te
 For other products, one could imagine testing for overheating, 
 vulnerability to [low voltage attacks](https://link.springer.com/chapter/10.1007/BFb0028165)
 and other real world risks.
+Gerwin mentioned [another paper](https://doi.org/10.1145/1993316.1993532), 
+concerning C compilers, where the authors found bugs in
+unverified parts of the CompCert compiler.
+The evidence suggests that bugs are not discovered in verified code.
 
 Testing may seem to be the perfect response to Fetzer's challenge, 
 since it is definitely empirical.
 Unfortunately, testing a computer system is not like taking a car for a test drive.
-If you spend a little while driving a car, you can get an idea 
-how it might perform in conditions you haven't tested,
+An experienced motorist can spend a little while driving a car 
+and be able to predict how it might perform in conditions not tested,
 like a steep climb, a dirt road or foul weather.
-The equivalent situation with computers would be a car that drove beautifully
+The analogous situation with computers would be a car that drove beautifully
 but might explode if exactly 26 leaves happened to blow underneath it.
 
 ### Epilogue
@@ -178,7 +187,8 @@ it may be because of his notoriety as a conspiracy theorist.
 A co-founder of [Scholars for 9/11 Truth](https://en.wikipedia.org/wiki/9/11_truth_movement#Scholars_for_9/11_Truth),
 his claims that no aircraft were involved and 
 that the towers were destroyed by nuclear weapons
-were so outlandish that most of the group's members left to form a new truther group.
+were so outlandish that most of the group's members left 
+to form a new, less crazy truther group.
 He also co-authored the book *Nobody Died at Sandy Hook*,
 provoking a defamation suit that [awarded $450,000](https://www.bbc.co.uk/news/world-us-canada-50074652) to the father of a child 
 killed in the Sandy Hook School shooting.
