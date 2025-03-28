@@ -10,7 +10,7 @@ This remarkable question takes us to the [*philosophical problem of induction*](
 and then to another "proof" that formal verification is not merely impossible 
 but absurd and pointless.
 
-[^1]: Yes, philosophical induction has nothing to do with mathematical induction.
+[^1]: Yes indeed, philosophical induction has nothing to do with mathematical induction.
 
 ### On drawing conclusions from observations
 
@@ -22,6 +22,8 @@ Animals too: they return to places where they have found food
 and shun places where they have been attacked.
 Even plants grow towards sources of water and light.
 All of them assume that the future will resemble the past.
+In evolutionary terms, this ability to learn from the past
+seems to be indispensable for survival.
 
 Scientists working to discover the laws of nature are making a crucial assumption:
 that there **are** laws of nature, as opposed to chaos.
@@ -47,14 +49,16 @@ They are not about the real world but about mathematical entities.
 There is no past, no future, no observations.
 If something is a theorem, it will always be a theorem.
 
-It is also misleading to refer to axioms or theorems as being true:
-As I mentioned in [an earlier post]({% post_url 2022-07-27-Truth_Models %}),
+It is also misleading to refer to axioms or theorems as being true.
+As I remarked in [an earlier post]({% post_url 2022-07-27-Truth_Models %}),
 the Greeks knew that the Earth was round and yet created the field of geometry
 on the assumption of infinite flat planes.
 Axioms typically create an abstract, simple representation of some more complex phenomenon.
-The calculation *2+2 = 4* is a different kind of truth from *the Earth is round*.
+The Pythagorean theorem is a different kind of truth 
+from *the Earth is round*:
+the former can be shown on paper, while the latter requires observing the world.
 
-In philosophy, mathematical and other knowledge derived 
+In philosophy, knowledge derived 
 directly from our brains without observing the world is called
 [*a priori knowledge*](https://plato.stanford.edu/entries/apriori/)
 and is contrasted with *a posteriori* (empirical) *knowledge*.
@@ -68,7 +72,7 @@ everything from the motions of the planets
 to Galileo's [Leaning Tower of Pisa experiment](https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment).
 In 1687, Newton published his theory in his book
 [Philosophiae Naturalis Principia Mathematica](https://plato.stanford.edu/entries/newton-principia/).
-He presents his three laws of motion followed by a series of propositions proved from them.
+He presented his three laws of motion, followed by a series of propositions proved from them.
 He thereby inaugurated the field of theoretical physics, 
 which continues to the present day
 with (among much else) Einstein's theory of general relativity
@@ -111,10 +115,10 @@ that covers specific aspects such as word length (32-bit or 64-bit)
 and memory capacity, while assuming that it executes C and other languages correctly.
 Most of the time they are not planning for failures in the hardware, 
 the operating system or the C compiler,
-even though computers can overheat and components melt.
+not to mention covert channels, overheating or melted components.
 When verifying a security architecture, 
-the underlying encryption primitives are typically assumed to be unbreakable:
-validating them is a separate task.
+the underlying encryption primitives are typically assumed to be unbreakable.
+Every such assumption needs to be addressed somehow, though not necessarily by formal verification.
 
 ### Enter a philosopher and his critique
 
@@ -145,7 +149,7 @@ means we can completely abandon testing.
 Ironically, a [well argued critique](https://rdcu.be/eeQ4E) of over extravagant claims
 about verification was published by one of my colleagues (Avra Cohn)
 only a year later. She steers clear of philosophical gobbledygook
-and focuses on misleading marketing that exaggerates what had been verified.
+and focuses on misleading claims that exaggerate what had been verified.
 As noted above, all models incorporate simplifying assumptions; 
 moreover, given the cost of verification, 
 less critical functions are sometimes simply assumed to be okay.
@@ -174,7 +178,7 @@ The evidence suggests that bugs are not discovered in verified code.
 Testing may seem to be the perfect response to Fetzer's challenge, 
 since it is definitely empirical.
 Unfortunately, testing a computer system is not like taking a car for a test drive.
-An experienced motorist can spend a little while driving a car 
+An experienced motorist can drive a car for a short while
 and be able to predict how it might perform in conditions not tested,
 like a steep climb, a dirt road or foul weather.
 The analogous situation with computers would be a car that drove beautifully
@@ -192,3 +196,4 @@ to form a new, less crazy truther group.
 He also co-authored the book *Nobody Died at Sandy Hook*,
 provoking a defamation suit that [awarded $450,000](https://www.bbc.co.uk/news/world-us-canada-50074652) to the father of a child 
 killed in the Sandy Hook School shooting.
+Fits.
