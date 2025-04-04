@@ -2,7 +2,7 @@
 layout: post
 title:  "The philosophical problem of induction, and the problem of Fetzer"
 usemathjax: true 
-tags: [philosophy]
+tags: [philosophy,verification]
 ---
 Bertrand Russell has written [an essay](https://www.gutenberg.org/files/5827/5827-h/5827-h.htm#link2HCH0006) that asks,
 "We are all convinced that the sun will rise to-morrow. Why?"
