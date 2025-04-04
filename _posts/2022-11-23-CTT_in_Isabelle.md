@@ -10,7 +10,7 @@ how Isabelle emerged from a jumble of influences: AUTOMATH, LCF and Martin-Löf.
 I stated that Isabelle had originated as a proof assistant for
 [Martin-Löf type theory](http://www.jstor.org/stable/37448).
 Eventually I realised that the type theory community wasn't interested in this work,
-just as it wasn't much interested in [Nuprl](https://www.nuprl.org), which was
+just as it wasn't much interested in [Nuprl](https://nuprl-web.cs.cornell.edu), which was
 by far the most developed type theory implementation out there.
 Both implementations had been left behind by the sudden change to intensional equality.
 As I mentioned in the earlier post, the type theory influence remains strong
@@ -233,7 +233,7 @@ The sort of people who (incorrectly) refer to a ∑-type as a dependent sum
 may refer to a ∏-type as a dependent product (also incorrectly), 
 although you can't count on consistency here.
 If memory serves, this terminology is due to [Robert Constable](https://www.cs.cornell.edu/home/rc/), 
-who led the [Nuprl project](https://www.nuprl.org) and wrote a lot of expository material about type theory. 
+who led the [Nuprl project](https://nuprl-web.cs.cornell.edu) and wrote a lot of expository material about type theory. 
 If you find yourself getting confused, just refer to "Pi and Sigma types".
 
 <pre class="source">

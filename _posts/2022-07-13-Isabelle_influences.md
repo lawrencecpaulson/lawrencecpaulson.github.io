@@ -26,7 +26,7 @@ At Chalmers, people were working on an implementation of type theory.
 I had a copy of their code and I wasn't impressed. I was sure I could do a better job.
 I would follow the LCF approach, but I would take care to be efficient.
 In particular, I would definitely represent $\lambda$-binding with de Bruijn indices,
-a technique that hadn't caught on yet. ([Nuprl](https://www.nuprl.org) didn't use it either.)
+a technique that hadn't caught on yet. ([Nuprl](https://nuprl-web.cs.cornell.edu) didn't use it either.)
 My ambition was to handle a formula that could fill a couple of screens; never in my wildest dreams did I imagine the [huge developments](https://www.isa-afp.org/entries/DPRM_Theorem.html) we have now.
 ([This one](https://www.isa-afp.org/entries/Hermite_Lindemann.html) too.)
 
