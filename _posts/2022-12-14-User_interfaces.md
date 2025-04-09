@@ -2,9 +2,22 @@
 layout: post
 title:  "Thoughts on user interfaces for theorem provers"
 usemathjax: true 
-tags: [general, jEdit, LCF]
+tags: [general, AUTOMATH, jEdit, LCF]
 ---
 
+People born after 1980 will struggle to imagine what it was like
+to use computers in earlier times.
+We would type in a program using 
+a [punched-card machine](https://www.ibm.com/history/punched-card), 
+drop off a deck of cards to be processed, 
+and come back later – only to discover that our job had failed due to a misplaced comma.
+Luckier souls could sign into a *time-sharing system* 
+where they had immediate interaction through a command-line interface.
+To get the computer to do anything, we would type some command
+and wait for the computer to type its response.
+A text editor from that era would typically display one line at a time,
+and to specify which line you had to provide a search string:
+even a "full-screen editor" would not offer you the luxury of a mouse.
 The era of the modern user interface can be dated from 1973, when the legendary
 [Palo Alto Research Center](https://www.parc.com) (PARC) announced the 
 [Xerox Alto](https://www.computerhistory.org/revolution/input-output/14/347).
@@ -12,8 +25,9 @@ Its unique combination of windows, icons, menus and a pointer (i.e. mouse)
 would eventually become ubiquitous. 
 Suddenly everybody could master a computer, just as the rapidly shrinking cost of processors
 put one on everybody's desk.
+
 When I joined the world of interactive theorem proving in 1982, there was much talk
-how verification would be easy if only implementors would adopt WIMP interfaces.
+how verification would be easy if only implementers would adopt WIMP interfaces.
 Specific suggestions were made: above all, to let people select a subexpression
 and a rewrite rule in order to transform it.
 This is actually a dumb idea, since the computer can match rewrite rules to subexpressions 
@@ -24,6 +38,20 @@ and the formalisation of intuitive mathematical ideas often requires great ingen
 It's not obvious what a mouse can do for you here.
 Forty years on, we have a clearer idea what a good user interface can do for verification,
 but the situation is by no means settled.
+
+### AUTOMATH: the first proof assistant?
+
+Some people say that [AUTOMATH](https://lawrencecpaulson.github.io/tag/AUTOMATH) 
+was the first proof assistant.
+My impression (from hearing NG de Bruijn lecture at Caltech)
+is that punched cards were used, but the early papers refer to an interactive mode.
+Either way, the proof text was checked one line at a time, 
+each line representing a claim based on previous lines.
+Your proof text was everything: 
+AUTOMATH did not keep track of what you were trying to prove
+and there was no "proof state" to display.
+In this it was quite different from the proof assistants it inspired, 
+such as Coq and Lean.
 
 ### LCF and its metalanguage
 
@@ -122,3 +150,5 @@ AI-powered proof completion, analogous to
 would make life much easier for us.
 And there would be no need to trust any auto-completed material,
 since it would all be checked by Isabelle.
+
+#### *[New material added 2025-04-09]*
