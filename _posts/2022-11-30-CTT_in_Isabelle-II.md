@@ -175,7 +175,7 @@ the function to return the *second* component of an ordered pair
 ### Structured proofs in constructive type theory
 
 As far as I can tell, nobody in the type theory world took the slightest interest in this implementation. I gave it up as a bad job. The material distributed with Isabelle
-represents work that is 30 years old.
+represents work that is over 35 years old.
 However, those CTT experiments were the starting point
 of all the automation provided now for Isabelle/ZF and Isabelle/HOL.
 
@@ -215,7 +215,6 @@ And yet the one derivation he himself supplied in that paper does not show a sin
 It looks quite a bit like the machine proof above.
 
 ### Final remarks
-
 
 The [CTT development](https://isabelle.in.tum.de/dist/library/Misc/CTT/CTT.html) contains both the Martin-Löf type theory rules
 presented in the [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %}) and a tiny development of elementary arithmetic:
