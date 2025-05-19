@@ -1,19 +1,19 @@
 ---
 layout: post
-title:  The concept of definition in mathematics and computational logic
+title:  "The concept of definition: in mathematics, and in computational logic"
 usemathjax: true 
 tags: [MJC Gordon, HOL system, Isabelle, philosophy, Imre Lakatos]
 ---
 Definitions are ubiquitous in mathematics, but we don't tend to think about 
-the concept of definition until one gets us into trouble.
+them until one gets us into trouble.
 For example, Kevin Buzzard has [recently written](https://arxiv.org/pdf/2405.10387)
-about defining something to be the *canonical* such-and-such,
-when the word canonical turns out to be ambiguous or meaningless.
+about mathematicians who define something to be the *canonical* such-and-such,
+when "canonical" turns out to be ambiguous or meaningless.
 When using a proof assistant, definitions also raise practical issues.
 In some situations, complicated definitions can impact performance.
 More embarrassingly, a formal proof that *all widgets are stable*
 isn't good for much if it turns out that there are no widgets 
-or that everything is stable: it's essential to check that your definitions are right at the start of a big proof.
+or that everything is stable: it's essential to check that your definitions are correct at the start of a big proof.
 There was even a case, years ago, where a particularly fiendish definition
 could allow an Isabelle user to prove 1=0.
 (We will take a look at this below.)
@@ -26,17 +26,18 @@ it will at least not introduce inconsistency.
 
 A *pentagon* is a five-sided polygon. 
 That's pretty simple, and although it builds on the notion of a polygon,
-hence on the notion of a line segment etc., 
+hence on the notion of a line segment, etc., 
 it isn't hard to reduce everything to the primitives 
-(points and lines) given by the axioms.
+(points and lines) given by Euclid's axioms.
 
 There are many decisions to be made and some of them may seem arbitrary.
-Can the length of a side equal zero?
-But then every triangle and square could also be seen a pentagon: 
+If we allow the length of a side to be zero,
+then every triangle and square could also be seen a pentagon: 
 what good would that be?
 Also, often we care about the angle between adjacent sides, 
 which for a zero-length side would be undefined.
-And yet the standard definition does allow the sides to cross:
+So every side of a polygon must have positive length,
+although the standard definition does allow the sides to cross:
 a five pointed star is also a pentagon.
 
 On this theme, recall yet again the study of
@@ -44,11 +45,24 @@ On this theme, recall yet again the study of
 by [Imre Lakatos](https://plato.stanford.edu/entries/lakatos/),
 mentioned [here before](https://lawrencecpaulson.github.io/tag/Imre_Lakatos),
 where what at first sight appears to be a flaw in a proof
-turns out to be a dispute about the very concept of a polyhedron.
+turns out to be a dispute about the definition of "polyhedron".
 He considers freakish cases such as cylinders and polyhedra containing holes.
-Euler’s formula can be generalised to holes, 
+Euler’s formula can be generalised 
+to [account for holes](https://momath.org/mathmonday/hole-new-polyhedra/), 
 but modern treatments prefer alternative generalisations (to multiple dimensions) 
 where the objects must be convex.
+
+Definitions of abstractions like groups or topological spaces 
+play a huge role in mathematics.
+A *group* is a set equipped with product and inverse operations
+along with an identity element.
+A *topological space* defines the notion of an open set, 
+and in terms of that, limits and continuity.
+The set of real numbers is a group (although not an interesting one)
+and also is a topological space.
+Such definitions capture just one aspect of a mathematical entity.
+The set of permutations over a space and a set of rotations in three dimensions
+might seem to have little in common, but both are groups.
 
 I can't resist mentioning the generalisation of division to $x/0=0$,
 which is common in proof assistants.
@@ -65,7 +79,11 @@ provided safe principles where an entity could be defined
 in terms of already existing entities. Edinburgh LCF made no distinction
 between definitions and arbitrary axioms, 
 but for its successor, the HOL system, Mike Gordon
-introduced definitional principles, also for types.
+introduced principles for defining 
+
+* a constant to abbreviate a term
+* a type comprising of every element of a some other type satisfying a given predicate.
+
 Gordon noted the need for careful checks to ensure that making a definition
 preserved consistency.
 Most other proof assistants developed around that time also provided for definitions, so LCF was the odd man out here.
@@ -75,18 +93,31 @@ simply by expanding the definitions of the things mentioned therein.
 Best is to appeal to previously established high-level facts, 
 avoiding any dependency on the possibly arbitrary technicalities 
 of a particular definition.
-It's therefore odd that many proof assistants expand definitions aggressively,
-and in one not-to-be-named case, actually treated definitions like macros.
+It's therefore odd that many proof assistants expand definitions aggressively.
+One notable, not-to-be-named system, actually treated definitions like macros.
+They were kept expanded internally, 
+but contracted (if you were lucky) by the pretty printer.
 With [such an approach](https://doi.org/10.1023/A:1020827725055), 
-you will be lucky if any proof step ever terminates, 
+their users were lucky if any proof step ever terminated, 
 and they had enviable hardware too.
 
-### The consistency found in Isabelle 2015
+### A circular definition accepted by Isabelle 2015
 
-Early version of Isabelle following the idea that users should take responsibility 
-for their definitions, allowed constants to be declared in one place 
-and defined somewhere else, any circularities being the user's fault.
+Early versions of Isabelle, following the idea that users should take responsibility 
+for their own definitions, allowed constants to be declared in one place 
+and defined somewhere else. Any circularities would be the user's fault.
 Over time, the definitional principles were made more restrictive,
 but in 2015, Kunčar and Popescu 
-[found a way](https://eprints.whiterose.ac.uk/id/eprint/191505/1/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf) 
+[found a number of ways](https://eprints.whiterose.ac.uk/id/eprint/191505/1/Consistent_Foundation_IsabelleHOL_JAR_2019.pdf) 
 to combine several advanced definitional principles to obtain a circularity.
+
+Since the definition is highly technical, let's skip the Isabelle syntax
+and see how it worked:
+
+* Introduce the overloaded constant $c : \alpha$, 
+which Isabelle will allow to be defined later, different definitions
+for different instances of $\alpha$.
+* Define the type $\tau$ to contain the values True and $c:{}$bool.
+* Finally, $c:{}$bool is defined to denote the value of $\neg(\forall x_\tau y.\,x=y)$.
+
+> How many elements does τ have? It has either one, in case c bool is True, or two, otherwise. Finally, one deﬁnes the instance c bool to stand in contrast with the above cardinality analysis for τ: c bool will be the truth value of “the type τ does not have precisely one element.” This immediately yield a proof of False:
