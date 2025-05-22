@@ -6,11 +6,8 @@ tags: [MJC Gordon, HOL system, Isabelle, philosophy, Imre Lakatos]
 ---
 Definitions are ubiquitous in mathematics, but we don't tend to think about 
 them until one gets us into trouble.
-For example, Kevin Buzzard has [recently written](https://arxiv.org/pdf/2405.10387)
-about mathematicians who define something to be the *canonical* such-and-such,
-when "canonical" turns out to be ambiguous or meaningless.
-When using a proof assistant, definitions also raise practical issues.
-In some situations, complicated definitions can impact performance.
+When using a proof assistant, definitions can raise practical issues.
+Complicated definitions can sometimes impact performance.
 More embarrassingly, a formal proof that *all widgets are stable*
 isn't good for much if it turns out that there are no widgets 
 or that everything is stable: it's essential to check that your definitions are correct at the start of a big proof.
@@ -36,8 +33,8 @@ then every triangle and square could also be seen a pentagon:
 what good would that be?
 Also, often we care about the angle between adjacent sides, 
 which for a zero-length side would be undefined.
-So every side of a polygon must have positive length,
-although the standard definition does allow the sides to cross:
+So every side of a polygon must have positive length.
+The standard definition does allow the sides to cross:
 a five pointed star is also a pentagon.
 
 On this theme, recall yet again the study of
@@ -59,10 +56,22 @@ along with an identity element.
 A *topological space* defines the notion of an open set, 
 and in terms of that, limits and continuity.
 The set of real numbers is a group (although not an interesting one)
-and also is a topological space.
-Such definitions capture just one aspect of a mathematical entity.
+and is also a topological space:
+such abstract concepts capture just one aspect of a mathematical entity.
 The set of permutations over a space and a set of rotations in three dimensions
 might seem to have little in common, but both are groups.
+
+By the way, saying "**the** set of real numbers" implies that it is unique,
+and yet there are many constructions representing a real number variously as 
+a Dedekind cut or a Cauchy sequence. 
+The resulting sets of real numbers are not equal, just isomorphic.
+Kevin Buzzard has [recently written](https://arxiv.org/pdf/2405.10387)
+about mathematicians who define something to be the *canonical* such-and-such,
+when "canonical" turns out to be ambiguous or meaningless.
+It turns out that the real numbers can be characterised as
+a complete Archimedean ordered field, 
+where abstract concepts combine to determine something that is unique
+(but only up to isomorphism!).
 
 I can't resist mentioning the generalisation of division to $x/0=0$,
 which is common in proof assistants.
@@ -96,10 +105,12 @@ of a particular definition.
 It's therefore odd that many proof assistants expand definitions aggressively.
 One notable, not-to-be-named system, actually treated definitions like macros.
 They were kept expanded internally, 
-but contracted (if you were lucky) by the pretty printer.
+but were contracted by the pretty printer (if you were lucky).
 With [such an approach](https://doi.org/10.1023/A:1020827725055), 
 their users were lucky if any proof step ever terminated, 
 and they had enviable hardware too.
+
+**XXXXX SCHEMES monster definitions taking months XXXXX**
 
 ### A circular definition accepted by Isabelle 2015
 
@@ -114,10 +125,22 @@ to combine several advanced definitional principles to obtain a circularity.
 Since the definition is highly technical, let's skip the Isabelle syntax
 and see how it worked:
 
-* Introduce the overloaded constant $c : \alpha$, 
+* Introduce the *overloaded* constant $c : \alpha$, 
 which Isabelle will allow to be defined later, different definitions
 for different instances of $\alpha$.
 * Define the type $\tau$ to contain the values True and $c:{}$bool.
 * Finally, $c:{}$bool is defined to denote the value of $\neg(\forall x_\tau y.\,x=y)$.
 
-> How many elements does τ have? It has either one, in case c bool is True, or two, otherwise. Finally, one deﬁnes the instance c bool to stand in contrast with the above cardinality analysis for τ: c bool will be the truth value of “the type τ does not have precisely one element.” This immediately yield a proof of False:
+Now we get a contradiction:
+
+* if $c:{}$bool is true then $\tau$ has one element, 
+thus $\forall x_\tau y.\,x=y$ is true
+* if $c:{}$bool is false then $\tau$ has two elements
+thus $\forall x_\tau y.\,x=y$ is false
+
+This and similar examples made it clear that Isabelle was too freewheeling
+in allowing overloaded constants to be defined at any point.
+Kunčar and Popescu's paper defines sufficient conditions to detect 
+circularities in definitions and proves that they are adequate.
+The stricter regime was implemented from Isabelle2016 
+and no user developments were lost along the way.
