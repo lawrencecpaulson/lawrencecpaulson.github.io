@@ -70,8 +70,8 @@ about mathematicians who define something to be the *canonical* such-and-such,
 when "canonical" turns out to be ambiguous or meaningless.
 It turns out that the real numbers can be characterised as
 a complete Archimedean ordered field, 
-where abstract concepts combine to determine something that is unique
-(but only up to isomorphism!).
+where abstract concepts combine to determine something that is unique.
+But only up to isomorphism!
 
 I can't resist mentioning the generalisation of division to $x/0=0$,
 which is common in proof assistants.
@@ -97,6 +97,21 @@ Gordon noted the need for careful checks to ensure that making a definition
 preserved consistency.
 Most other proof assistants developed around that time also provided for definitions, so LCF was the odd man out here.
 
+Definitions need to be handled robustly because they can become gigantic.
+When specifying a computer architecture or programming language semantics,
+we might expect this.
+But even in pure mathematics, key definitions sometimes involve
+so many layers, they take months to formalise.
+Consider Grothendieck schemes: they are vital to the study of algebraic geometry,
+and when Kevin Buzzard first took an interest in formalising mathematics,
+they had not been defined in any proof assistant.
+He set a student on the task, Ramon Fernández Mir,
+who completed it and wrote up his work as a 56-page [Master's dissertation](https://www.imperial.ac.uk/media/imperial-college/faculty-of-engineering/computing/public/1819-ug-projects/Fernandez-I-MirR-Schemes-in-Lean.pdf)
+and later as a [journal article](https://www.tandfonline.com/doi/full/10.1080/10586458.2021.1983489).
+In response to various claims that such a feat would be impossible
+in Isabelle/HOL, we had to [do it too](https://doi.org/10.1080/10586458.2022.2062073),
+despite having no use for schemes.
+
 Mathematicians know that you seldom prove a theorem
 simply by expanding the definitions of the things mentioned therein.
 Best is to appeal to previously established high-level facts, 
@@ -109,8 +124,6 @@ but were contracted by the pretty printer (if you were lucky).
 With [such an approach](https://doi.org/10.1023/A:1020827725055), 
 their users were lucky if any proof step ever terminated, 
 and they had enviable hardware too.
-
-**XXXXX SCHEMES monster definitions taking months XXXXX**
 
 ### A circular definition accepted by Isabelle 2015
 
@@ -133,10 +146,10 @@ for different instances of $\alpha$.
 
 Now we get a contradiction:
 
-* if $c:{}$bool is true then $\tau$ has one element, 
-thus $\forall x_\tau y.\,x=y$ is true
-* if $c:{}$bool is false then $\tau$ has two elements
-thus $\forall x_\tau y.\,x=y$ is false
+* if $c:{}$bool is True then $\tau$ has one element, 
+thus $\forall x_\tau y.\,x=y$ is True, making $c$ False
+* if $c:{}$bool is False then $\tau$ has two elements
+thus $\forall x_\tau y.\,x=y$ is False, making $c$ True
 
 This and similar examples made it clear that Isabelle was too freewheeling
 in allowing overloaded constants to be defined at any point.
@@ -144,3 +157,51 @@ Kunčar and Popescu's paper defines sufficient conditions to detect
 circularities in definitions and proves that they are adequate.
 The stricter regime was implemented from Isabelle2016 
 and no user developments were lost along the way.
+
+### Definitions in the real world
+
+In previous posts I've commented on the philosophical
+[problem of induction]({% post_url 2025-03-28-Induction_Fetzer %})
+and on [mathematical truth]({% post_url 2022-07-27-Truth_Models %}).
+Both of them contrast the empirical world of our senses
+With the world of mathematics and how the former can be modelled within the latter.
+So we can look at the scene from Dickens' novel 
+[*Hard Times*](https://www.victorianlondon.org/etexts/dickens/hard_times-0002.shtml),
+where Mr Gradgrind demands of "girl number twenty":
+
+> Give me your definition of a horse.
+
+The girl being rendered speechless, although her father works with horses,
+Mr Gradgrind calls upon a boy named Bitzer:
+
+> 'Bitzer,' said Thomas Gradgrind. 'Your definition of a horse.'
+
+The boy replies:
+
+> 'Quadruped. Graminivorous. Forty teeth, namely twenty-four grinders, four eye-teeth, and twelve incisive. Sheds coat in the spring; in marshy countries, sheds hoofs, too. Hoofs hard, but requiring to be shod with iron. Age known by marks in mouth.' Thus (and much more) Bitzer.
+
+The scene ends:
+
+> 'Now girl number twenty,' said Mr. Gradgrind. 'You know what a horse is.'
+
+What's different here compared with mathematical definitions
+is that horses exist whether we define them or not.
+And what we have here is not so much a definition as a description.
+If we consult a modern dictionary we again get a description, e.g.
+"a large plant-eating domesticated mammal with solid hoofs and a flowing mane and tail". This is not like a pentagon, which we imagine constructing, and it is certainly not like a group, which is an abstract structure not even dreamt of
+until Galois came along. The empirical world being complex and messy,
+It can be hard to arrive at a definition that adequately distinguishes horses from donkeys, mules, zebras, etc. Sometimes this sort of precision is necessary, 
+which is one way lawyers make a living.
+
+On the subject of the existence of mathematical objects,
+I am in disagreement with some extremely smart people, such as Kurt Gödel
+and Roger Penrose. Gödel claims at mathematical objects enjoy objective existence, and Penrose  in his bestselling *The Emperor's New Mind*, 
+declares that the complex plane definitely exists somewhere.
+One problem with this view is that there is no canonical complex plane, 
+just as there is no canonical set of real numbers.
+Once you start looking at constructions, they multiply endlessly.
+Perhaps there are no constructions in the Platonic universe,
+but just the ideas of the real line and the complex plane.
+But then it is natural to ask which **sets** of numbers exist.
+We could find ourselves in difficulties 
+even if we restricted our question to sets of natural numbers.

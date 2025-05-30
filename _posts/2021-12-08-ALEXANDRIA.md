@@ -54,7 +54,7 @@ Here I would prefer to highlight the work of the Isabelle community. And I'd lik
 1. [Szemerédi's Regularity Lemma](https://www.isa-afp.org/entries/Szemeredi_Regularity.html), a landmark result concerning the structure of very large graphs
 2. [Irrationality Criteria for Series by Erdős and Straus](https://www.isa-afp.org/entries/Irrational_Series_Erdos_Straus.html) formalises a paper published in 1974 about certain infinite series
 2. [Combinatorial Design Theory](https://www.isa-afp.org/entries/Design_Theory.html), apparently the first formalisation of block designs, due to Chelsea Edmunds, one of my PhD students
-3. [Grothendieck's Schemes in Algebraic Geometry](https://www.isa-afp.org/entries/Grothendieck_Schemes.html) answers the [challenge set by the Lean community]() to formalise those objects
+3. [Grothendieck's Schemes in Algebraic Geometry](https://www.isa-afp.org/entries/Grothendieck_Schemes.html) answers the challenge set by the Lean community to formalise those objects
 
 The last achievement mentioned above is particularly important, as it refutes the commonly repeated claim that simple type theory (used by Isabelle/HOL) is insufficient to do real-world mathematics. Other notable work (not funded by ALEXANDRIA) includes a [formalisation of forcing](https://www.isa-afp.org/entries/Forcing.html) and a sophisticated algorithm to [factor real and complex polynomials](https://www.isa-afp.org/entries/Factor_Algebraic_Polynomial.html) with algebraic coefficients. Finally, please allow me to plug my own [formalisation of Gödel's incompleteness theorems](https://www.isa-afp.org/entries/Incompleteness.html), including the only formalisation of the second theorem.
 
