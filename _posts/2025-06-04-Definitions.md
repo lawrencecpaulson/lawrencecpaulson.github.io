@@ -119,7 +119,7 @@ This leads to the question, how can we check whether a formal definition is corr
 Good practice is to develop a theory of its basic properties
 within your proof assistant, capturing both positive and negative properties
 (e.g. *X* is a group but *Y* is not a group) and attempting some non-trivial constructions.
-Your theory will perform the useful function of providing a of library of basic facts.
+Your work will have the useful additional benefit of providing a library of basic facts.
 
 Mathematicians know that you seldom prove a theorem
 simply by expanding the definitions of the things mentioned therein.
