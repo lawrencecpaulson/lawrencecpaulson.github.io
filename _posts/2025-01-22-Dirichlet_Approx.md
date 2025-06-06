@@ -207,3 +207,6 @@ A generalisation of the proof to demonstrate the simultaneous approximation
 of finitely many real numbers is 
 [proved in the distribution](https://isabelle.in.tum.de/dist/library/HOL/HOL-Analysis/Kronecker_Approximation_Theorem.html).
 
+*Note added in June 2025*: 
+Following the suggestion of YawarRaza7349 below, a shorter Isabelle proof is available
+[too](/Isabelle-Examples/Dirichlet_approx_thm1.thy).
