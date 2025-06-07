@@ -7,7 +7,7 @@ tags: [inductive definitions]
 The [previous post]({% post_url 2025-06-04-Definitions %}) 
 discussed the simplest sort of definitions,
 those that are essentially abbreviations.
-An *inductive* definition is conceptionally quite different.
+An [*inductive definition*](https://lawrencecpaulson.github.io/tag/inductive_definitions) is conceptionally quite different.
 The simplest example is to say that a natural number can be 0
 or the successor of another natural number, and that **there are
 no other natural numbers**.
@@ -21,6 +21,28 @@ Proof by induction the axiom of infinitycorresponds (respectively) to
 structural induction, induction on program executions, induction over derivations.
 Proofs involving inductive definitions are often easy,
 with automation taking care of most of the work.
+
+### A tiny example
+
+The very simplest example of an inductive definition would be the natural numbers themselves, but recursive datatypes are treated as a special case with their own syntax.
+Instead, let's look at the Isabelle equivalent of the Prolog program 
+to append two lists:
+
+```
+append([],X,X).
+append([X|Y],Z,[X|W]) :- append(Y,Z,W).  
+```
+In case you don't know Prolog, this defines a ternary relation, `append`.
+The first two arguments are the lists to be joined 
+and the third argument is the result.
+In Prolog, you do not define functions but rather relations that specify
+how the output is derived from the inputs.[^1]
+The first clause is for joining an empty list, 
+while the second joins a list with head $X$ and tail $Y$ to some other list, $Z$.
+
+[^1]: In fact, Prolog does not force us to distinguish inputs from outputs. But that's another story.
+
+
 
 ### Core ideas
 
@@ -41,7 +63,3 @@ and the minimality property can be obtained by a least fixed-point construction,
 ultimately a set intersection.
 The situation is similar in higher-order logic.
 However, dependent-typed theories such as used in Lean need the concept of inductive definition to be primitive to the formalism itself.
-
-
-In traditional mathematical practice, 
-set theory is available (if only in the background)
