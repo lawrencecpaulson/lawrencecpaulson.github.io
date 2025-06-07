@@ -8,10 +8,19 @@ inductive Append :: "['a list, 'a list, 'a list] \<Rightarrow> bool" where
     Append_Nil:  "Append [] X X"
   | Append_Cons: "Append Y Z W \<Longrightarrow> Append (X#Y) Z (X#W)"
 
+lemma Append_function: "\<lbrakk>Append X Y Z; Append X Y Z'\<rbrakk> \<Longrightarrow> Z' = Z"
+proof (induction arbitrary: Z' rule: Append.induct)
+  show "\<And>X Z'. Append [] X Z' \<Longrightarrow> Z' = X"
+    using Append.cases by blast
+  show "\<And>Y Z W X Z'. \<lbrakk>\<And>Z'. Append Y Z Z' \<Longrightarrow> Z'=W; Append (X#Y) Z Z'\<rbrakk>
+       \<Longrightarrow> Z' = X#W"
+    by (metis Append.cases list.inject neq_Nil_conv)
+qed
+
 inductive_simps Append_Nil_simp [simp]: "Append [] X Y"
 inductive_simps Append_Cons_simp: "Append (X#Y) Z V"
 
-lemma Append_function: "\<lbrakk>Append X Y Z; Append X Y Z'\<rbrakk> \<Longrightarrow> Z' = Z"
+lemma "\<lbrakk>Append X Y Z; Append X Y Z'\<rbrakk> \<Longrightarrow> Z' = Z"
 proof (induction arbitrary: Z' rule: Append.induct)
   case Append_Nil
   then show ?case
@@ -25,8 +34,8 @@ qed
 lemma Append_function2: "\<lbrakk>Append X Y Z; Append X Y' Z\<rbrakk> \<Longrightarrow> Y' = Y"
   by (induction rule: Append.induct) (auto simp: Append_Cons_simp)
 
-lemma "\<lbrakk>Append T U V; Append V W X; Append U W Y\<rbrakk> \<Longrightarrow> Append T Y X"
-proof (induction arbitrary: W X Y rule: Append.induct)
+lemma Append_assoc: "\<lbrakk>Append T U V; Append V W X; Append U W Y\<rbrakk> \<Longrightarrow> Append T Y X"
+proof (induction arbitrary: X rule: Append.induct)
   case Append_Nil
   then show ?case
     by (simp add: Append_function)
@@ -65,3 +74,4 @@ lemma Append_iff_append: "Append X Y Z \<longleftrightarrow> Z = X@Y"
 lemma Append_function1: "\<lbrakk>Append X Y Z; Append X' Y Z\<rbrakk> \<Longrightarrow> X' = X"
   by (simp add: Append_iff_append)
 
+end

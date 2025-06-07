@@ -27,6 +27,9 @@ theories
     "Index_ex"
     "Fib_Iter"
     "Dirichlet_approx_thm"
+    "Dirichlet_approx_thm1"
+    "Append"
+
 document_files
     "root.tex"
     "examples.bib"
