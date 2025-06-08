@@ -10,10 +10,10 @@ inductive Append :: "['a list, 'a list, 'a list] \<Rightarrow> bool" where
 
 lemma Append_function: "\<lbrakk>Append X Y Z; Append X Y Z'\<rbrakk> \<Longrightarrow> Z' = Z"
 proof (induction arbitrary: Z' rule: Append.induct)
-  show "\<And>X Z'. Append [] X Z' \<Longrightarrow> Z' = X"
+  show "\<And>Y Z'. Append [] Y Z' \<Longrightarrow> Z' = Y"
     using Append.cases by blast
-  show "\<And>Y Z W X Z'. \<lbrakk>\<And>Z'. Append Y Z Z' \<Longrightarrow> Z'=W; Append (X#Y) Z Z'\<rbrakk>
-       \<Longrightarrow> Z' = X#W"
+  show "\<And>X Y W A Z'. \<lbrakk>\<And>Z'. Append X Y Z' \<Longrightarrow> Z'=W; Append (A#X) Y Z'\<rbrakk>
+       \<Longrightarrow> Z' = A#W"
     by (metis Append.cases list.inject neq_Nil_conv)
 qed
 
@@ -39,9 +39,9 @@ lemma Append_assoc: "\<lbrakk>Append T U V; Append V W X; Append U W Y\<rbrakk> 
 
 lemma Append_imp_append: "Append X Y Z \<Longrightarrow> Z = X@Y"
 proof (induction rule: Append.induct)
-  show "\<And>X. X = [] @ X" 
+  show "\<And>Y. Y = [] @ Y" 
     by simp
-  show "\<And>Y Z W X. W = Y@Z \<Longrightarrow> X # W = (X # Y) @ Z"
+  show "\<And>X Y Z A. Z = X@Y \<Longrightarrow> A # Z = (A # X) @ Y"
     by simp
 qed
 
@@ -49,7 +49,7 @@ lemma Append_append: "Append X Y (X@Y)"
 proof (induction X)
   show "Append [] Y ([] @ Y)"
     by (auto simp: Append.intros)
-  show "\<And>U X. Append X Y (X @ Y) \<Longrightarrow> Append (U # X) Y ((U # X) @ Y)"
+  show "\<And>A X. Append X Y (X @ Y) \<Longrightarrow> Append (A # X) Y ((A # X) @ Y)"
     by (auto simp: Append.intros)
 qed
 
