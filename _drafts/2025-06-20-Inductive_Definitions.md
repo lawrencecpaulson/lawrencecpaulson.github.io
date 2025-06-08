@@ -196,13 +196,16 @@ The inductive definition of a logical calculus may contain *introduction rules* 
 as these:
 
 * if $A\to B$ and $A$ are theorems then so is $B$
-* if $A$ is a theorem then so is $A\lor B$
+* if $\neg\neg A$ is a theorem then so is $A$
 * $x=x$ is a theorem
 
 Note that the preconditions, if any, of an introduction rule may refer to
 the relation being defined, but only positively. We cannot have a rule 
 containing a negative reference,
-such as if $A$ is **not** a theorem then $\neg A$ is a theorem.
+such as this:
+
+* if $A$ is **not** a theorem then $\neg A$ is a theorem
+
 Precoditions not referring to the relation being defined may have any form.
 
 In typical usage, an inductive definition carves out
