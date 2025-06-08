@@ -18,7 +18,7 @@ proof (induction arbitrary: Z' rule: Append.induct)
 qed
 
 inductive_simps Append_Nil_simp [simp]: "Append [] X Y"
-inductive_simps Append_Cons_simp: "Append (X#Y) Z V"
+inductive_simps Append_Cons_simp [simp]: "Append (X#Y) Z V"
 
 lemma "\<lbrakk>Append X Y Z; Append X Y Z'\<rbrakk> \<Longrightarrow> Z' = Z"
 proof (induction arbitrary: Z' rule: Append.induct)
@@ -32,18 +32,10 @@ next
 qed
 
 lemma Append_function2: "\<lbrakk>Append X Y Z; Append X Y' Z\<rbrakk> \<Longrightarrow> Y' = Y"
-  by (induction rule: Append.induct) (auto simp: Append_Cons_simp)
+  by (induction rule: Append.induct) auto
 
 lemma Append_assoc: "\<lbrakk>Append T U V; Append V W X; Append U W Y\<rbrakk> \<Longrightarrow> Append T Y X"
-proof (induction arbitrary: X rule: Append.induct)
-  case Append_Nil
-  then show ?case
-    by (simp add: Append_function)
-next
-  case Append_Cons
-  then show ?case
-    by (metis Append_Cons_simp)
-qed
+  by (induction arbitrary: X rule: Append.induct) (auto simp add: Append_function)
 
 lemma Append_imp_append: "Append X Y Z \<Longrightarrow> Z = X@Y"
 proof (induction rule: Append.induct)
