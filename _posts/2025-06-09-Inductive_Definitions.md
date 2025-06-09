@@ -213,7 +213,7 @@ establishing any particular instance of the inductively defined relation.
 (Even if the precondition involves a universal quantifier, 
 it will still be well behaved!)
 Precoditions not referring to the relation being defined can be anything,
-and can even refer negatively to an inductive relation to defined earlier.
+and can even refer negatively to an inductive relation defined earlier.
 
 In mathematics (and in Isabelle), an inductive definition carves out
 a distinguished subset of something we have already.
