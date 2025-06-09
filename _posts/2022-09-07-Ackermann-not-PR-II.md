@@ -170,7 +170,10 @@ It's notable that Szasz did in fact formalise a language of PR functions, which 
 This declaration causes Isabelle to define the named predicate, expressing the recursion through a fixed point construction. The given closure properties, regarded as introduction rules, are derived automatically. The corresponding induction principle, an elimination rule, Is also proved.
 A basic introduction and examples are available in the [documentation](https://isabelle.in.tum.de/dist/Isabelle/doc/prog-prove.pdf).
 
-XXX
+*Note added June 2025*:
+there is now a [tutorial post]({% post_url 2025-06-09-Inductive_Definitions %}) 
+on inductive defintions.
+
 
 ### Now for the inductive proof itself
 
