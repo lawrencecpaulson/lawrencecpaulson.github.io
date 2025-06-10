@@ -2,7 +2,7 @@
 layout: post
 title:  Inductive definitions
 usemathjax: true 
-tags: [inductive definitions]
+tags: [inductive definitions, examples, newbies]
 ---
 The [previous post]({% post_url 2025-06-04-Definitions %}) 
 discussed the simplest sort of definitions,
@@ -211,7 +211,7 @@ Mathematically speaking, an inductive definition has to be *monotone*.
 There is always a construction of finite depth
 establishing any particular instance of the inductively defined relation.
 (Even if the precondition involves a universal quantifier, 
-it will still be well behaved!)
+it will still be well behaved)
 Precoditions not referring to the relation being defined can be anything,
 and can even refer negatively to an inductive relation defined earlier.
 
@@ -237,4 +237,4 @@ Documentation is available in Section 3.5 of [Programming and Proving](https://i
 For those of you interested in the full abstract theory of inductive definitions,
 Peter Aczel's [chapter](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [here](/papers/Aczel-Inductive-Defs.pdf)) in the *Handbook of Mathematical Logic* is the ultimate account.
 
-And there are [*plenty of examples*](https://lawrencecpaulson.github.io/tag/inductive_definitions) right here on this blog.
+And there are [plenty of examples](https://lawrencecpaulson.github.io/tag/inductive_definitions) right here on this blog.

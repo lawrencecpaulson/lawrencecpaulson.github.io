@@ -2,7 +2,7 @@
 layout: post
 title:  "Revisiting an early critique of formal verification"
 usemathjax: true 
-tags: [verification,philosophy,formalised_mathematics,Principia_Mathematica]
+tags: [verification, philosophy, formalised mathematics, Principia Mathematica]
 ---
 In 1979, a paper appeared that challenged the emerging field of program verification:
 "[Social Processes and Proofs of Theorems and Programs](https://doi.org/10.1145/359104.359106)", 
