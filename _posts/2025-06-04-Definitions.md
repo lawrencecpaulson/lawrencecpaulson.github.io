@@ -83,6 +83,7 @@ Such a step is safe because it cannot affect the meaning or truth
 of a formula not containing the division symbol.
 In particular, it cannot introduce inconsistency.
 To be sure of this, we need to know that a definition in a proof assistant can always be eliminated.
+[See also [this post]({% post_url 2021-12-01-Undefined %}).]
 
 ### Definitions in proof assistants
 
