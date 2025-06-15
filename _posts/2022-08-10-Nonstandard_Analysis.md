@@ -69,7 +69,7 @@ People like to question the legitimacy of everything but the counting numbers: p
 The Romans had numerals for nothing else.
 But why not zero, when it was possible to own no cattle, and why not negative integers, 
 when the Romans were familiar with the concept of debt?
-The Greeks, meanwhile, are alleged to have [had a freakout](https://nrich.maths.org/2671)
+The Greeks, meanwhile, are alleged to have [had a freakout](https://nrich.maths.org/articles/dangerous-ratio)
 over the discovery of irrational numbers.
 Even today we have to live with the silly terminology of the *real numbers*, as contrasted with *imaginary numbers*.
 When we see the complex numbers diagrammed on a plane, they all look equally "real".

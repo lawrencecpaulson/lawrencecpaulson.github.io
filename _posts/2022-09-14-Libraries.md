@@ -18,7 +18,7 @@ Why was that? And what is the right way to achieve interoperability between proo
 Just as the significance of a platform is determined by its application base, the significance of a proof assistant is largely determined by its libraries:
 
 * [Mathematical Components](https://math-comp.github.io)
-(among others) for [Coq](https://coq.inria.fr); 
+(among others) for [Rocq](https://rocq-prover.org/); 
 * [mathlib](https://leanprover-community.github.io) for
 [Lean](https://leanprover.github.io);
 * the [Archive of Formal Proofs](https://www.isa-afp.org)
@@ -26,7 +26,7 @@ for [Isabelle](https://isabelle.in.tum.de).
 * John Harrison's [Euclidean spaces](https://rdcu.be/cJtGW) 
 and ["top 100 theorems"](https://www.cs.ru.nl/~freek/100/)
 for [HOL Light](https://www.cl.cam.ac.uk/~jrh13/hol-light/) 
-* Although [Mizar](http://mizar.org) introduced a groundbreaking mathematical language, for many researchers the real attraction was the huge Mizar Mathematical Library.
+* Although [Mizar](https://mizar.uwb.edu.pl/) introduced a groundbreaking mathematical language, for many researchers the real attraction was the huge Mizar Mathematical Library.
 
 Many people thought it wasteful to have so many overlapping but incompatible libraries.
 The proprietors of newer systems were naturally covetous of the accumulated wealth of older systems. This feeling was particularly strong among the various implementations of higher-order logic, one single formalism if we ignore each implementation's bells and whistles.

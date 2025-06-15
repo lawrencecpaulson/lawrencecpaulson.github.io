@@ -120,7 +120,7 @@ are mere calculations, then how do mathematicians perceive the truth of of claim
 for which they have no proof? If mathematics is meaningless, 
 then why have so many mathematical conceptions aroused such visceral emotions?
 
-* [irrational numbers](https://nrich.maths.org/2671)
+* [irrational numbers](https://nrich.maths.org/articles/dangerous-ratio)
 * [non-Euclidean geometry](https://mathshistory.st-andrews.ac.uk/HistTopics/Non-Euclidean_geometry/)
 * [infinitesimals](https://en.wikipedia.org/wiki/The_Analyst)
 * [Cantor's set theory](https://infinityplusonemath.wordpress.com/2017/02/11/no-one-liked-cantor/)

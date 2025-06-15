@@ -8,7 +8,7 @@ tags: [general, ALEXANDRIA, Mizar, AUTOMATH, type theory, verification, NG de Br
 Vladimir Voevodsky was a leading proponent of the formalisation of mathematics. Until his death in 2017, he lectured frequently on the risks of errors in complicated technical arguments and the necessity to start using computers to verify the work of mathematicians. The opinions of a Fields Medallist naturally carried weight.
 From the other side, the verification world, a major impetus for the formalisation of mathematics was the [floating point division bug](https://en.wikipedia.org/wiki/Pentium_FDIV_bug) in the Pentium, back in 1994.
 (See my [prior post]({% post_url 2021-12-08-ALEXANDRIA %}) on the ALEXANDRIA project.)
-However, Trybulec started his [Mizar](http://mizar.org) project in 1973,
+However, Trybulec started his [Mizar](https://mizar.uwb.edu.pl/) project in 1973,
 de Bruijn had created the first version of [AUTOMATH]({% post_url 2021-11-03-AUTOMATH %}) by 1968, 
 and [Wang had built an automatic theorem prover]({% post_url 2022-02-02-Formalising_Math_Set_theory %}) already in 1958, in hope of eventually formalising mathematics.
 People have been dreaming about this for a long time.
@@ -35,8 +35,8 @@ In actual fact, I have never verified anything resembling a real computer system
 
 ### Views from the AUTOMATH project
 
-NG de Bruijn has [written at length](https://www.win.tue.nl/automath/) on AUTOMATH and his thoughts on mathematics. Curiously, his early papers (such as [AUT001](https://www.win.tue.nl/automath/archive/webversion/aut001/aut001.html): "AUTOMATH, a language for mathematics"
-and [AUT002](https://www.win.tue.nl/automath/archive/webversion/aut002/aut002.html), "The mathematical language AUTOMATH"), give away little by means of motivation.
+NG de Bruijn has [written at length](https://automath.win.tue.nl/) on AUTOMATH and his thoughts on mathematics. Curiously, his early papers (such as [AUT001](https://automath.win.tue.nl/archive/webversion/aut001/aut001.html): "AUTOMATH, a language for mathematics"
+and [AUT002](https://automath.win.tue.nl/archive/webversion/aut002/aut002.html), "The mathematical language AUTOMATH"), give away little by means of motivation.
 The former paper begins "AUTOMATH is a language intended for expressing detailed mathematical thoughts." Fortunately, his student van Benthem Jutting, in [his PhD thesis](https://pure.tue.nl/ws/files/1710991/23183.pdf), gives some specific reasons:
 
 * "Mechanical verification will increase the reliability of certain kinds of proofs. A need for this may be felt where a proof is extremely long, complicated and tedious."

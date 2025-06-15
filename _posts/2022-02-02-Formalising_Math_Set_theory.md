@@ -25,7 +25,7 @@ What he actually accomplished was impressive enough. He implemented a proof proc
 of [*Principia Mathematica*](https://plato.stanford.edu/entries/principia-mathematica/). While thinking about that accomplishment, take a moment to examine the specifications of the computer used, an [IBM 704](https://en.wikipedia.org/wiki/IBM_704).
 It's notable that the first book mentioned by Wang was Landau’s [Foundations of Analysis](https://homepages.math.uic.edu/~kauffman/Landau.pdf). 
 As [already described]({% post_url 2021-11-03-AUTOMATH %}), that book would soon be formalised, using
-[AUTOMATH](https://www.win.tue.nl/automath/).
+[AUTOMATH](https://automath.win.tue.nl/).
 I presented here an example from "Hardy on the calculus" [not long ago]({% post_url 2021-12-22-MVT-example %}).
 
 Here is Art Quaife in 1989:
@@ -90,7 +90,7 @@ Somehow, it also implies the [axiom of choice]({% post_url 2021-11-10-Axiom_of_C
 ### The proof assistant Mizar
 
 During the Cold War, those of us working in the West seldom noticed what was going on in the East not involving missiles and tanks, so the advocates of the QED Project were astonished to discover how much mathematics had already been formalised using a system that they had never heard of:
-[Mizar](http://mizar.org), from the University of Białystok in Poland.
+[Mizar](https://mizar.uwb.edu.pl/), from the University of Białystok in Poland.
 It had been created in 1973 by Andrzej Trybulec. 
 It offered a highly flexible language, based on Tarski–Grothendieck set theory,
 for mathematical concepts and proofs.
@@ -98,7 +98,7 @@ for mathematical concepts and proofs.
 The Mizar language was designed to be readable by mathematicians while being strictly formal. Isabelle's [Isar](https://rdcu.be/cIPdi) language borrows heavily from Mizar.
 They are also pronounced similarly (if you [are German](https://www.muenchen.de/int/en/culture-leisure/sport-fitness/lakes-munich/isar.html)).
 
-The [Mizar Mathematical Library](http://mizar.org/library/)
+The [Mizar Mathematical Library](https://mizar.uwb.edu.pl/library/)
 accumulated contributions by a great many authors.
 Isabelle's Archive of Formal Proofs is one of several modern-day imitators of the MML.
 There's a [Historical outline](https://doi.org/10.1007/s10817-017-9440-6) by Bancerek.

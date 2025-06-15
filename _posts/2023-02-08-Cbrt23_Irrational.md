@@ -6,7 +6,7 @@ tags: [examples, newbies, Isar]
 ---
 
 According to myth, the discovery that √2 was irrational so horrified the students of Pythagoras
-that it was kept secret [upon pain of death](https://nrich.maths.org/2671). Its irrationality was thought to be paradoxical
+that it was kept secret [upon pain of death](https://nrich.maths.org/articles/dangerous-ratio). Its irrationality was thought to be paradoxical
 because √2 could be constructed as the hypotenuse of a right triangle, 
 and therefore definitely "existed",
 while all numbers were assumed to be rational.

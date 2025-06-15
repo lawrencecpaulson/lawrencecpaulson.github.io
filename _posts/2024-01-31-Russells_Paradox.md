@@ -55,7 +55,7 @@ can only be written if the type of $y$ is higher than that of $x$.
 It is thus forbidden to write $x\in x$. 
 With types there is no universal set either, but there are universal sets for each type. 
 This route is due to Whitehead and Russell, who further complicated their type theory 
-to enforce the "[vicious circle principle](https://plato.stanford.edu/entries/russell-paradox/#ERP)", 
+to enforce the "[vicious circle principle](https://plato.stanford.edu/entries/russell-paradox/)", 
 which they saw as the root of all paradoxes. 
 Their [ramified type theory](https://plato.stanford.edu/entries/type-theory/#RamiHierImprPrin) 
 turned out to be unworkable.

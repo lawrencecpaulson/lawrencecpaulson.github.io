@@ -19,7 +19,7 @@ A text editor from that era would typically display one line at a time,
 and to specify which line you had to provide a search string:
 even a "full-screen editor" would not offer you the luxury of a mouse.
 The era of the modern user interface can be dated from 1973, when the legendary
-[Palo Alto Research Center](https://www.parc.com) (PARC) announced the 
+[Palo Alto Research Center](https://www.sri.com/research/future-concepts-division/) (PARC) announced the 
 [Xerox Alto](https://www.computerhistory.org/revolution/input-output/14/347).
 Its unique combination of windows, icons, menus and a pointer (i.e. mouse)
 would eventually become ubiquitous. 
