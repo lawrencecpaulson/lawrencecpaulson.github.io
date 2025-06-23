@@ -7,9 +7,9 @@ tags: [general, memories]
 Everybody knows that [Bill Gates dropped out of Harvard](https://www.cnbc.com/2025/01/29/bill-gates-harvard-professor-wasnt-surprised-he-dropped-out.html) 
 to found Microsoft. 
 Mark Zuckerberg [dropped out of Harvard](https://technologymagazine.com/digital-transformation/mark-zuckerberg-college-dropout-billionaire) too.
-Both of them changed the world, and both went on to become billionaires,
+Both of them changed the world — and both went on to become billionaires,
 all without a university education.
-Besides, AI is going to automate most professions, especially programming.
+And now we know that AI is going to automate most professions, especially programming.
 Why hang around and get a degree when there is so much money to be made?
 
 ### The emergence of computer science degrees
@@ -27,23 +27,26 @@ Trained in theoretical physics, the experience
 
 Cambridge [was a pioneer](https://www.cl.cam.ac.uk/events/EDSAC99/history.html) in computer science teaching:
 
-* In 1953, Cambridge launched the first ever degree level course in computer science anywhere in the world:
+* In 1953, Cambridge launched the first ever degree-level course in computer science anywhere in the world:
 the one-year *Diploma in Numerical Analysis and Automatic Computing*.
 Designed as a conversion course for a graduate with a degree 
-in an appropriate subject (such as mathematics),
+in a cognate subject (such as mathematics),
 and later rebranded the *Diploma in Computer Science*,
 it [continued until 2008](https://www.cl.cam.ac.uk/admissions/diploma/).
 * In 1971, Cambridge introduced the first computer science undergraduate degree:
 the *Computer Sciences Tripos* (where *Tripos* is the Cambridge term for an undergraduate degree programme). It was a final-year course,
-which students could transfer into having completed two years on some other Tripos.
+which students could join after completing two years on some other Tripos.
 * In 1978, a two-year Computer Science Tripos was introduced. It ran alongside the one-year Tripos, which would continue for decades.
-* in 1989, the two-year course was extended to a three-year course.
+* in 1989, the two-year course was extended to a full three-year course.
 
 People from overseas may need reminding that a degree course in England
 typically runs for three years only, 
-and that it is focused on a single subject,
-without including any of the literary or cultural canon 
-that forms the basis of a "liberal education".
+and that it is focused on a single subject.
+It does not include any of the literary or cultural canon 
+that forms the basis of a "liberal education",
+which would be expected in the USA.
+The Tripos in History, English or Philosophy is 
+equally specialised and focused. 
 However, some students can encounter multiple subjects
 by switching from one Tripos to another 
 at the end of an academic year.
@@ -61,7 +64,8 @@ also computer science theory including operational and denotational semantics,
 automata theory, formal languages, computation theory, concurrency theory;
 also programming paradigms including OOP, functional programming, 
 logic programming, process management and synchronisation.
-We at Cambridge were already teaching much of this.
+We at Cambridge were already teaching much of this,
+and it's essential knowledge for any computing professional.
 
 By the way, the course Gates dropped out of was Mathematics.
 Let's be honest, Mathematics (and Physics) are both tougher than Computer Science. Gates wasn't sure he was good enough.
@@ -104,10 +108,11 @@ all the while researching
 the chemistry of blood testing or whatever your dream is about.
 Eventually you may achieve a breakthrough that will help to achieve your dream,
 if only somewhat, over decades, and probably without making you a billionaire.
-Kind of like my case.
+(Kind of like my case.) Or you might get bitten by the startup bug later.
 
 Why do people envy great wealth?
-I can't see the attraction of needing a bodyguard 24/7.
+I can't see the attraction 
+of [needing a bodyguard](https://www.npr.org/2025/05/23/nx-s1-5408561/kim-kardashian-robbery-trial-verdict-paris) 24/7.
 They need
 [bigger and bigger thrills](https://www.bbc.co.uk/news/articles/c51yp353g0ro) 
 just to stave off boredom: they get
@@ -125,7 +130,7 @@ A lot of people are afraid that AI will take their jobs,
 and a lot of CEOs are hoping that AI will eliminate a lot of jobs.
 That leads immediately to a joke (sorry): 
 
-> *Alice*: They are going to replace our CEO by AI! A soulless entity will be making heartless decisions! 
+> *Alice*: They are going to replace our CEO by AI! Soon, a soulless entity will be making heartless decisions! 
 
 > *Bob*: But how is that different from now?
 
@@ -159,24 +164,24 @@ This would require creating specialist tools, as opposed to expecting
 an LLM to solve the problem out of the box.
 
 I have lived long enough to know that you *never say never* about new technology.
-nevertheless, if AI is unsuitable not just for legal affidavits
-but even for "hi Josephine, how are you today?" 
+Nevertheless, if AI is unsuitable not just for legal affidavits
+but even for "hi Natasha, have you seen Professor Pavlov?" 
 dialogues for learning a foreign language, 
 we don't need to worry about them replacing 
 professionals who know their subject thoroughly through a decent degree course.
 
 ### Getting paid to drop out
 
-Billionaire Peter Thiel seems to have decided that avoiding university
+However, Billionaire Peter Thiel seems to have decided that avoiding university
 is such a good thing, 
-he will be [offering selected dropouts](https://thielfellowship.org) $200,000.
+he [offers selected dropouts](https://thielfellowship.org) $200,000.
 When he and his colleagues founded PayPal in the late 1990s,
 they got for free the fruits of research from across the academic world.
 The Internet arose from government funded academic research, 
 as did many of the supporting technologies,
 and the World Wide Web concept itself came from CERN,
 a publicly funded research institution.
-He turned that freely given research into billions,
+Thiel turned that freely given research into billions,
 but turned his back on the source.
 Bill Gates learned a different lesson from his life trajectory,
 and has given [lavish gifts](https://en.wikipedia.org/wiki/William_Gates_Building) 
@@ -184,8 +189,14 @@ to computer science departments in the USA
 and also here in Cambridge, and I write these very words 
 in a William Gates Building.
 
+### Lesson
+
 My message to young people is simple: learn when you have the opportunity.
 It is still possible to learn when you get older, but you seldom get the time.
 My entire career has rested on material I learned when I was under 30.
 Choose wisely: trends come and go quickly, 
 but foundational material stays valid and pertinent forever.
+
+The alternative is to become the sort of ignorant fool who
+[misuses Excel](https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england) because he has never heard of databases.
+
