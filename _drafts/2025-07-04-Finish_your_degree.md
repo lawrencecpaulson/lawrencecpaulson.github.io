@@ -88,18 +88,17 @@ succeeding in the case of email.
 
 At least Gates and Zuckerberg had a good grasp of the technology
 they would need when they dropped out of their degree courses.
-[Elizabeth Holmes](https://www.justice.gov/usao-ndca/pr/elizabeth-holmes-sentenced-more-11-years-defrauding-theranos-investors-hundreds) 
-had nothing but a teenage dream.
+Elizabeth Holmes had nothing but a teenager's dream.
 She wanted to change the world by revolutionising blood testing.
 Dropping out of Stanford at 19, 
 she came up with a brand – Theranos – and a Star Wars themed slogan.
 But she didn't have a new technology for blood testing,
-or any scientific basis for such a technology.
-She did not even know what the scientific challenges were.
+or any scientific basis for such a technology;
+she did not even know what the scientific challenges were.
 Remarkably, her fervour and commitment were enough to persuade
 a number of scientifically illiterate investors, including George Shultz,
 Henry Kissinger, Betsy DeVos and Rupert Murdoch, to part with large sums.
-They lost their money and Holmes went to jail for fraud.
+They lost their money and Holmes [went to jail](https://www.justice.gov/usao-ndca/pr/elizabeth-holmes-sentenced-more-11-years-defrauding-theranos-investors-hundreds) for fraud.
 
 In such a case, where you have a dream that no one knows how to realise,
 you have to change the world the slow way.
@@ -107,7 +106,7 @@ That means finishing your degree, continuing to a PhD,
 all the while researching
 the chemistry of blood testing or whatever your dream is about.
 Eventually you may achieve a breakthrough that will help to achieve your dream,
-if only somewhat, over decades, and probably without making you a billionaire.
+if only somewhat, over decades, and without making you a billionaire.
 (Kind of like my case.) Or you might get bitten by the startup bug later.
 
 Why do people envy great wealth?
@@ -166,23 +165,25 @@ an LLM to solve the problem out of the box.
 I have lived long enough to know that you *never say never* about new technology.
 Nevertheless, if AI is unsuitable not just for legal affidavits
 but even for "hi Natasha, have you seen Professor Pavlov?" 
-dialogues for learning a foreign language, 
+language drills, 
 we don't need to worry about them replacing 
-professionals who know their subject thoroughly through a decent degree course.
+professionals who can think and know their subject thoroughly.
 
 ### Getting paid to drop out
 
-However, Billionaire Peter Thiel seems to have decided that avoiding university
+However, billionaire Peter Thiel seems to have decided that avoiding university
 is such a good thing, 
-he [offers selected dropouts](https://thielfellowship.org) $200,000.
+he [offers selected candidates](https://thielfellowship.org) $200,000 each to drop out.
 When he and his colleagues founded PayPal in the late 1990s,
 they got for free the fruits of research from across the academic world.
 The Internet arose from government funded academic research, 
 as did many of the supporting technologies,
 and the World Wide Web concept itself came from CERN,
 a publicly funded research institution.
-Thiel turned that freely given research into billions,
-but turned his back on the source.
+Tim Berners-Lee gave us the Web for nothing.
+Thiel turned all that freely given research into billions
+of dollars and unquantifiable political influence,
+but turned his back on the source of his power.
 Bill Gates learned a different lesson from his life trajectory,
 and has given [lavish gifts](https://en.wikipedia.org/wiki/William_Gates_Building) 
 to computer science departments in the USA
@@ -193,9 +194,13 @@ in a William Gates Building.
 
 My message to young people is simple: learn when you have the opportunity.
 It is still possible to learn when you get older, but you seldom get the time.
-My entire career has rested on material I learned when I was under 30.
+For most of my career, I've relied on material I learned when I was under 30.
 Choose wisely: trends come and go quickly, 
 but foundational material stays valid and pertinent forever.
+Finish that PhD, and if your [music career](https://en.wikipedia.org/wiki/Dan_Snaith)
+ever falters, 
+you can always fall back on your thesis on
+Overconvergent Siegel Modular Symbols.
 
 The alternative is to become the sort of ignorant fool who
 [misuses Excel](https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england) because he has never heard of databases.
