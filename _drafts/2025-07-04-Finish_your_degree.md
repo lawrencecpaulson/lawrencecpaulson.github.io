@@ -10,7 +10,27 @@ Mark Zuckerberg [dropped out of Harvard](https://technologymagazine.com/digital-
 Both of them changed the world — and both went on to become billionaires,
 all without a university education.
 And now we know that AI is going to automate most professions, especially programming.
-Why hang around and get a degree when there is so much money to be made?
+Why hang around and get a degree when there is so much money to be made right now?
+
+### Some history: the emergence of computers
+
+There are many candidates for the first computer.
+Here are a few of them:
+
+* the [Harvard Mark I](https://en.wikipedia.org/wiki/Harvard_Mark_I) (Harvard University and IBM)
+* the [ENIAC](https://en.wikipedia.org/wiki/ENIAC) (University of Pennsylvania)
+* the [Manchester Baby](https://en.wikipedia.org/wiki/Manchester_Baby) (University of Manchester)
+* the [EDSAC](https://www.whipplemuseum.cam.ac.uk/explore-whipple-collections/calculating-devices/edsac-and-computing-cambridge) (University of Cambridge) 
+
+See the pattern? They all emerged in a university context.
+But what about Charles Babbage's [Analytical Engine](https://www.computerhistory.org/babbage/engines/),
+the Bletchley Park [Colossus](https://www.tnmoc.org/colossus)
+or Konrad Zuse's [Z3](https://en.wikipedia.org/wiki/Z3_(computer))? All had the support of national governments.
+Computers originated in the public sector, 
+as did countless further innovations 
+in all aspects of computer technology and applications.
+A computer science student at a good research university
+is immersed in this dynamic environment.
 
 ### The emergence of computer science degrees
 
@@ -41,13 +61,13 @@ which students could join after completing two years on some other Tripos.
 
 People from overseas may need reminding that a degree course in England
 typically runs for three years only, 
-and that it is focused on a single subject.
+focused on a single subject.
 It does not include any of the literary or cultural canon 
 that forms the basis of a "liberal education",
-which would be expected in the USA.
-The Tripos in History, English or Philosophy is 
+as in the USA.
+A degree course in History, English or Philosophy is 
 equally specialised and focused. 
-However, some students can encounter multiple subjects
+At Cambridge, some students can encounter multiple subjects
 by switching from one Tripos to another 
 at the end of an academic year.
 
@@ -91,7 +111,7 @@ they would need when they dropped out of their degree courses.
 Elizabeth Holmes had nothing but a teenager's dream.
 She wanted to change the world by revolutionising blood testing.
 Dropping out of Stanford at 19, 
-she came up with a brand – Theranos – and a Star Wars themed slogan.
+she came up with a brand – [Theranos](https://www.theguardian.com/technology/theranos) – and a Star Wars themed slogan.
 But she didn't have a new technology for blood testing,
 or any scientific basis for such a technology;
 she did not even know what the scientific challenges were.
@@ -109,7 +129,14 @@ Eventually you may achieve a breakthrough that will help to achieve your dream,
 if only somewhat, over decades, and without making you a billionaire.
 (Kind of like my case.) Or you might get bitten by the startup bug later.
 
-Why do people envy great wealth?
+By the way, as a result of the EDSAC, 
+four people got Nobel Prizes.
+They all were users of the EDSAC, not its developers.
+([Maurice Wilkes](https://history.computer.org/pioneers/wilkes.html) did receive quite a few other honours.)
+None of the original team got rich 
+and I never heard any of them complain about that.
+
+Anyway – why do people envy great wealth?
 I can't see the attraction 
 of [needing a bodyguard](https://www.npr.org/2025/05/23/nx-s1-5408561/kim-kardashian-robbery-trial-verdict-paris) 24/7.
 They need
@@ -121,7 +148,7 @@ or down to [visit the Titanic](https://www.bbc.co.uk/news/articles/c5yg5qggvwjo)
 If they survive such dangerous adventures, 
 they might yet [die in mysterious circumstances](https://www.theguardian.com/us-news/2024/jan/22/jeffrey-epstein-mark-epstein-interview)
 in prison or in their grandiose palace or [their yacht](https://www.theguardian.com/us-news/2019/aug/22/the-murky-life-and-death-of-robert-maxwell-and-how-it-shaped-his-daughter-ghislaine).
-No thank you.
+No, thank you.
 
 ### AI is taking your job
 
@@ -157,8 +184,7 @@ make it essential to scrutinise every word and every reference.
 The question is whether AI is still saving time 
 once you count the time spent verifying its output.
 Certainly a lot of lawyers [are not bothering](https://www.linkedin.com/pulse/ais-legal-lies-exposed-combatting-hallucination-epidemic-harkess-v812c) to do that.
-I wonder whether AI could be used to help search in databases of real cases
-for language or arguments of the required sort.
+Perhaps AI could be used to search databases of real cases for genuinely relevant legal arguments.
 This would require creating specialist tools, as opposed to expecting
 an LLM to solve the problem out of the box.
 
@@ -167,7 +193,8 @@ Nevertheless, if AI is unsuitable not just for legal affidavits
 but even for "hi Natasha, have you seen Professor Pavlov?" 
 language drills, 
 we don't need to worry about them replacing 
-professionals who can think and know their subject thoroughly.
+professionals who can use their knowledge and skills
+to find real, practical solutions to problems.
 
 ### Getting paid to drop out
 
@@ -175,15 +202,15 @@ However, billionaire Peter Thiel seems to have decided that avoiding university
 is such a good thing, 
 he [offers selected candidates](https://thielfellowship.org) $200,000 each to drop out.
 When he and his colleagues founded PayPal in the late 1990s,
-they got for free the fruits of research from across the academic world.
-The Internet arose from government funded academic research, 
-as did many of the supporting technologies,
-and the World Wide Web concept itself came from CERN,
+they got for free the fruits of research from across the academic world. 
+As we saw, the computer was created through by universities
+and public funding, as was the the Internet.
+The World Wide Web concept itself came from CERN,
 a publicly funded research institution.
 Tim Berners-Lee gave us the Web for nothing.
 Thiel turned all that freely given research into billions
 of dollars and unquantifiable political influence,
-but turned his back on the source of his power.
+but turned his back on the source of his wealth and power.
 Bill Gates learned a different lesson from his life trajectory,
 and has given [lavish gifts](https://en.wikipedia.org/wiki/William_Gates_Building) 
 to computer science departments in the USA
