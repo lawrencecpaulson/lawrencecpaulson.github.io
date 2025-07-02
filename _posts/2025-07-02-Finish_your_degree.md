@@ -14,6 +14,7 @@ Why hang around and get a degree when there is so much money to be made right no
 
 ### Some history: the emergence of computers
 
+But first, let's recall how we got here in the first place.
 There are many candidates for the first computer.
 Here are a few of them:
 
@@ -22,7 +23,7 @@ Here are a few of them:
 * the [Manchester Baby](https://en.wikipedia.org/wiki/Manchester_Baby) (University of Manchester)
 * the [EDSAC](https://www.whipplemuseum.cam.ac.uk/explore-whipple-collections/calculating-devices/edsac-and-computing-cambridge) (University of Cambridge) 
 
-See the pattern? They all emerged in a university context.
+As we see, they all emerged in a university context.
 But what about Charles Babbage's [Analytical Engine](https://www.computerhistory.org/babbage/engines/),
 the Bletchley Park [Colossus](https://www.tnmoc.org/colossus)
 or Konrad Zuse's [Z3](https://en.wikipedia.org/wiki/Z3_(computer))? All had the support of national governments.
@@ -31,6 +32,9 @@ as did countless further innovations
 in all aspects of computer technology and applications.
 A computer science student at a good research university
 is immersed in this dynamic environment.
+With a few notable exceptions, this cannot be said of
+the private sector, which quite reasonably is fixated
+on the short term bottom line.
 
 ### The emergence of computer science degrees
 
@@ -38,7 +42,7 @@ Like many aspiring computer scientists of my generation,
 I took a degree in mathematics. I went to Caltech for a variety of reasons,
 but their strength in computer science wasn't one of them.
 Computer science degrees were slow to take off, 
-perhaps because they seemed unnecessary: in the 1970s, no leading computer scientist had a computer science degree.
+perhaps because they seemed unnecessary: in the 1970s, no leading computer scientist had one.
 Most had studied mathematics, physics, or in the case of
 Tony Hoare, classics and philosophy (that is, "Greats" at Oxford).
 However, Edsger Dijkstra did take a programming course at Cambridge — in 1951!
@@ -80,7 +84,7 @@ than studying Spinoza and Schopenhauer.
 Most of what is taught in an undergraduate computer science course today was already known four decades ago:
 computer architecture, operating systems, compiler design, 
 user interface design, the key data structures and algorithms;
-also computer science theory including operational and denotational semantics,
+also theory including operational and denotational semantics,
 automata theory, formal languages, computation theory, concurrency theory;
 also programming paradigms including OOP, functional programming, 
 logic programming, process management and synchronisation.
@@ -88,7 +92,8 @@ We at Cambridge were already teaching much of this,
 and it's essential knowledge for any computing professional.
 
 By the way, the course Gates dropped out of was Mathematics.
-Let's be honest, Mathematics (and Physics) are both tougher than Computer Science. Gates wasn't sure he was good enough.
+Let's be honest, Mathematics (and Physics) are both tougher than Computer Science. Gates wasn't sure he was good enough,
+and what are Lie Algebras good for anyway?
 
 ### Do you want to change the world?
 
@@ -129,12 +134,12 @@ Eventually you may achieve a breakthrough that will help to achieve your dream,
 if only somewhat, over decades, and without making you a billionaire.
 (Kind of like my case.) Or you might get bitten by the startup bug later.
 
-By the way, as a result of the EDSAC, 
-four people got Nobel Prizes.
+Anyway: as a result of the EDSAC, 
+four people at Cambridge got Nobel Prizes.
 They all were users of the EDSAC, not its developers.
-([Maurice Wilkes](https://history.computer.org/pioneers/wilkes.html) did receive quite a few other honours.)
-None of the original team got rich 
-and I never heard any of them complain about that.
+(Project lead [Maurice Wilkes](https://history.computer.org/pioneers/wilkes.html) did receive quite a few other honours.)
+None of the original team got rich.
+I never heard any of them complain about that.
 
 Anyway – why do people envy great wealth?
 I can't see the attraction 
@@ -190,7 +195,7 @@ an LLM to solve the problem out of the box.
 
 I have lived long enough to know that you *never say never* about new technology.
 Nevertheless, if AI is unsuitable not just for legal affidavits
-but even for "hi Natasha, have you seen Professor Pavlov?" 
+but even for "Hi Natasha, have you seen Professor Pavlov?" 
 language drills, 
 we don't need to worry about them replacing 
 professionals who can use their knowledge and skills
@@ -204,13 +209,15 @@ he [offers selected candidates](https://thielfellowship.org) $200,000 each to dr
 When he and his colleagues founded PayPal in the late 1990s,
 they got for free the fruits of research from across the academic world. 
 As we saw, the computer was created through by universities
-and public funding, as was the the Internet.
+and public funding, as was the Internet.
 The World Wide Web concept itself came from CERN,
 a publicly funded research institution.
 Tim Berners-Lee gave us the Web for nothing.
 Thiel turned all that freely given research into billions
 of dollars and unquantifiable political influence,
 but turned his back on the source of his wealth and power.
+We are now witnessing the [defunding of American science](https://thebulletin.org/2025/06/time-for-congress-to-save-american-scienceand-the-nation/)
+and I would not be surprised to learn that Thiel had a hand in that.
 Bill Gates learned a different lesson from his life trajectory,
 and has given [lavish gifts](https://en.wikipedia.org/wiki/William_Gates_Building) 
 to computer science departments in the USA
@@ -227,8 +234,9 @@ but foundational material stays valid and pertinent forever.
 Finish that PhD, and if your [music career](https://en.wikipedia.org/wiki/Dan_Snaith)
 ever falters, 
 you can always fall back on your thesis on
-Overconvergent Siegel Modular Symbols.
+*Overconvergent Siegel Modular Symbols*.
 
 The alternative is to become the sort of ignorant fool who
 [misuses Excel](https://www.theguardian.com/politics/2020/oct/05/how-excel-may-have-caused-loss-of-16000-covid-tests-in-england) because he has never heard of databases.
+You're welcome.
 
