@@ -61,6 +61,7 @@ also computer science theory including operational and denotational semantics,
 automata theory, formal languages, computation theory, concurrency theory;
 also programming paradigms including OOP, functional programming, 
 logic programming, process management and synchronisation.
+Plus my favourite obscure topic: queueing theory.
 We at Cambridge were already teaching much of this.
 
 By the way, the course Gates dropped out of was Mathematics.
@@ -104,20 +105,21 @@ all the while researching
 the chemistry of blood testing or whatever your dream is about.
 Eventually you may achieve a breakthrough that will help to achieve your dream,
 if only somewhat, over decades, and probably without making you a billionaire.
-Kind of like my case.
+(Kind of like my case.) Or launch your startup in your 30s, 
+equipped with knowledge, experience and the emotional maturity 
+you did not have at 19.
 
 Why do people envy great wealth?
 I can't see the attraction of needing a bodyguard 24/7.
-They need
+The wealthy crave
 [bigger and bigger thrills](https://www.bbc.co.uk/news/articles/c51yp353g0ro) 
 just to stave off boredom: they get
-[blasted into space](https://www.theguardian.com/commentisfree/2025/apr/15/lauren-sanchez-katy-perry-space-blue-origin-female-flight), 
+[blasted into space](https://www.theguardian.com/commentisfree/2025/apr/15/lauren-sanchez-katy-perry-space-blue-origin-female-flight)
 or taken up Mount Everest 
 or down to [visit the Titanic](https://www.bbc.co.uk/news/articles/c5yg5qggvwjo).
 If they survive such dangerous adventures, 
 they might yet [die in mysterious circumstances](https://www.theguardian.com/us-news/2024/jan/22/jeffrey-epstein-mark-epstein-interview)
 in prison or in their grandiose palace or [their yacht](https://www.theguardian.com/us-news/2019/aug/22/the-murky-life-and-death-of-robert-maxwell-and-how-it-shaped-his-daughter-ghislaine).
-No thank you.
 
 ### AI is taking your job
 
@@ -136,7 +138,7 @@ That is to say, AI resembles previous technologies such as
 word processors and spreadsheets, 
 which somehow did not eliminate the jobs of secretaries and accountants.
 Regarding what AI is capable of right now, 
-I suggest that you Google `AI ruined Duolingo`.
+do a Google search for `AI ruined Duolingo`.
 Practice dialogues for learning a foreign language were never thrilling, 
 and are surely the perfect task to automate using AI:
 you can control the subject matter and vocabulary through your prompt.
@@ -172,11 +174,11 @@ is such a good thing,
 he will be [offering selected dropouts](https://thielfellowship.org) $200,000.
 When he and his colleagues founded PayPal in the late 1990s,
 they got for free the fruits of research from across the academic world.
-The Internet arose from government funded academic research, 
+The Internet arose from government-funded academic research, 
 as did many of the supporting technologies,
 and the World Wide Web concept itself came from CERN,
-a publicly funded research institution.
-He turned that freely given research into billions,
+a publicly-funded research institution.
+Thiel turned that freely given research into billions,
 but turned his back on the source.
 Bill Gates learned a different lesson from his life trajectory,
 and has given [lavish gifts](https://en.wikipedia.org/wiki/William_Gates_Building) 
@@ -185,7 +187,7 @@ and also here in Cambridge, and I write these very words
 in a William Gates Building.
 
 My message to young people is simple: learn when you have the opportunity.
-It is still possible to learn when you get older, but you seldom get the time.
+You can still learn when you get older, but you seldom get the time.
 My entire career has rested on material I learned when I was under 30.
 Choose wisely: trends come and go quickly, 
-but foundational material stays valid and pertinent forever.
+but core material stays sound and pertinent forever.
