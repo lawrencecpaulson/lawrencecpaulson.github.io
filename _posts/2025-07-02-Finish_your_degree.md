@@ -92,7 +92,7 @@ We at Cambridge were already teaching much of this,
 and it's essential knowledge for any computing professional.
 
 By the way, the course Gates dropped out of was Mathematics.
-Let's be honest, Mathematics (and Physics) are both tougher than Computer Science. Gates wasn't sure he was good enough,
+Let's be honest: Mathematics and Physics are both tougher than Computer Science. Gates wasn't sure he was good enough,
 and what are Lie Algebras good for anyway?
 
 ### Do you want to change the world?
@@ -132,7 +132,9 @@ all the while researching
 the chemistry of blood testing or whatever your dream is about.
 Eventually you may achieve a breakthrough that will help to achieve your dream,
 if only somewhat, over decades, and without making you a billionaire.
-(Kind of like my case.) Or you might get bitten by the startup bug later.
+(Kind of like my case.) Or launch your startup in your 30s, 
+equipped with knowledge, experience and the emotional maturity 
+you did not have at 19.
 
 Anyway: as a result of the EDSAC, 
 four people at Cambridge got Nobel Prizes.
@@ -141,10 +143,10 @@ They all were users of the EDSAC, not its developers.
 None of the original team got rich.
 I never heard any of them complain about that.
 
-Anyway – why do people envy great wealth?
+Anyway – why do people desire great wealth?
 I can't see the attraction 
 of [needing a bodyguard](https://www.npr.org/2025/05/23/nx-s1-5408561/kim-kardashian-robbery-trial-verdict-paris) 24/7.
-They need
+The wealthy crave
 [bigger and bigger thrills](https://www.bbc.co.uk/news/articles/c51yp353g0ro) 
 just to stave off boredom: they get
 [blasted into space](https://www.theguardian.com/commentisfree/2025/apr/15/lauren-sanchez-katy-perry-space-blue-origin-female-flight)
