@@ -88,6 +88,7 @@ also theory including operational and denotational semantics,
 automata theory, formal languages, computation theory, concurrency theory;
 also programming paradigms including OOP, functional programming, 
 logic programming, process management and synchronisation.
+Plus my favourite obscure topic: queueing theory.
 We at Cambridge were already teaching much of this,
 and it's essential knowledge for any computing professional.
 
