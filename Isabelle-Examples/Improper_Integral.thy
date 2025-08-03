@@ -76,12 +76,10 @@ proof -
     by (simp add: integrable_on_Icc_iff_Ioo set_borel_integral_eq_integral)
 qed
 
-
-
-(*TRY THIS*)
+(*TRY THIS?*)
 thm interval_integral_Icc_approx_integrable
 
-text \<open>This lemma packages up a reference to @{thm[source]monotone_convergence_increasing}}\<close>
+(*ADDED TO DISTRIBUTION*)
 lemma has_integral_to_inf:
   fixes h ::"real \<Rightarrow> real"
   assumes int: "\<And>y::real. h integrable_on {a..y}"
@@ -160,47 +158,5 @@ next
   ultimately show "((\<lambda>y. integral {1..y} ?g) \<longlongrightarrow> 1) at_top"
     by (simp add: filterlim_cong)
 qed auto
-
-thm has_integral_exp_minus_to_infinity
-lemma has_integral_exp_minus_to_infinity:
-  assumes "a > 0"
-  shows   "((\<lambda>x::real. exp (-a*x)) has_integral exp (-a*c)/a) {c..}"
-proof (intro has_integral_to_inf integrable_continuous_interval continuous_intros)
-  have "((\<lambda>x. exp (-a*x)) has_integral (-exp (-a*y)/a - (-exp (-a*c)/a))) {c..y}"
-    if "y \<ge> c" for y
-    using that \<open>a > 0\<close>
-      by (intro fundamental_theorem_of_calculus)
-         (auto intro!: derivative_eq_intros
-               simp flip: has_real_derivative_iff_has_vector_derivative)    
-  then have "\<forall>\<^sub>F y in at_top. integral {c..y} (\<lambda>x. exp (-a*x)) = -exp (-a*y)/a + exp (-a*c)/a"
-    using eventually_at_top_linorder[of
-        "\<lambda>y. integral {c..y} (\<lambda>x. exp (-a*x)) = -exp (-a*y)/a + exp (-a*c)/a"]
-    by auto
-  moreover have "((\<lambda>y::real. -exp (-a*y)/a + exp (-a*c)/a) \<longlongrightarrow> exp (-a*c)/a) at_top"
-    using \<open>a > 0\<close> by real_asymp
-  ultimately show "((\<lambda>y. integral {c..y} (\<lambda>x. exp (-a*x))) \<longlongrightarrow> exp (-a*c)/a) at_top"
-    by (simp add: filterlim_cong)
-qed auto
-
-thm has_integral_powr_to_inf
-lemma has_integral_powr_to_inf:
-  fixes a e :: real
-  assumes "e < -1" "a > 0"
-  shows   "((\<lambda>x. x powr e) has_integral -(a powr (e+1)) / (e+1)) {a..}"
-proof (intro has_integral_to_inf integrable_continuous_interval continuous_intros)
-  define F where "F \<equiv> \<lambda>x. x powr (e+1) / (e+1)"
-  have "((\<lambda>x. x powr e) has_integral (F y - F a)) {a..y}" if "y \<ge> a" for y
-    unfolding F_def using assms
-    by (intro fundamental_theorem_of_calculus that)
-       (auto intro!: derivative_eq_intros
-               simp flip: has_real_derivative_iff_has_vector_derivative)
-  then have "\<forall>\<^sub>F y in at_top. integral {a..y} (\<lambda>x. x powr e) = F y - F a"
-    by (meson eventually_at_top_linorderI integral_unique)
-  moreover have "((\<lambda>y::real. F y - F a) \<longlongrightarrow> - F a) at_top"
-    using assms unfolding F_def by real_asymp
-  ultimately show "((\<lambda>y. integral {a..y} (\<lambda>x. x powr e)) 
-              \<longlongrightarrow> - (a powr (e+1)) / (e+1)) at_top"
-    by (simp add: F_def filterlim_cong)
-qed (use assms in auto)
 
 end
