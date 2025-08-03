@@ -1,8 +1,8 @@
-section \<open>Misc experiments\<close>
+section \<open>Definite and finite improper integrals\<close>
 
 theory Improper_Integral 
-  imports "HOL-Analysis.Analysis" "HOL-Decision_Procs.Approximation"
-    "HOL-ex.Sketch_and_Explore" 
+  imports "HOL-Analysis.Analysis"
+
 begin
 
 lemma "((\<lambda>x. 1 / sqrt(1-x\<^sup>2)) has_integral pi) {-1..1}"
@@ -40,6 +40,7 @@ qed
 lemma power2_gt_1_iff: "x\<^sup>2 > 1 \<longleftrightarrow> x < (-1 :: 'a :: linordered_idom) \<or> x > 1"
   using power2_ge_1_iff [of x] power2_eq_1_iff [of x] by auto
 
+text \<open>As above but not using @{term arcsin}, so continuity issues\<close>
 lemma "((\<lambda>x. 1 / sqrt(1-x\<^sup>2)) has_integral pi) {-1..1}"
 proof -
   note one_ereal_def [simp] power2_eq_1_iff [simp] power2_gt_1_iff [simp]
@@ -75,6 +76,12 @@ proof -
     by (simp add: integrable_on_Icc_iff_Ioo set_borel_integral_eq_integral)
 qed
 
+
+
+(*TRY THIS*)
+thm interval_integral_Icc_approx_integrable
+
+text \<open>This lemma packages up a reference to @{thm[source]monotone_convergence_increasing}}\<close>
 lemma has_integral_to_inf:
   fixes h ::"real \<Rightarrow> real"
   assumes int: "\<And>y::real. h integrable_on {a..y}"
@@ -91,8 +98,7 @@ proof -
   then have int_le_l: "integral {a..y} h \<le> l" for y
     using order_tendstoD [OF lim, of "integral {a..y} h"]
     by (smt (verit) eventually_at_top_linorder monotoneD nle_le)
-
-  define f where "f = (\<lambda>n x. if x \<in> {a..of_nat n} then h x else 0)"
+  define f where "f \<equiv> \<lambda>n x. if x \<in> {a..of_nat n} then h x else 0"
   have has_integral_f: "\<And>n. (f n has_integral (integral {a..of_nat n} h)) {a..}"
     unfolding f_def
     by (metis (no_types, lifting) ext Icc_subset_Ici_iff order.refl
@@ -132,6 +138,7 @@ proof -
     using "*" LIMSEQ_unique by blast
 qed
 
+text \<open>example\<close>
 lemma "((\<lambda>x::real. 1 / x\<^sup>2) has_integral 1) {1..}"  (is "(?g has_integral _) _")
 proof (intro has_integral_to_inf)
   fix y
