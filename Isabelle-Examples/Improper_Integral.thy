@@ -76,7 +76,37 @@ proof -
     by (simp add: integrable_on_Icc_iff_Ioo set_borel_integral_eq_integral)
 qed
 
+lemma
+  defines "f \<equiv> \<lambda>t. 1 / (t\<^sup>2+1)"
+  shows
+    "set_integrable lborel (einterval (-\<infinity>) \<infinity>) f"
+    "(LBINT t=-\<infinity>..\<infinity>. f t) = pi"
+proof -
+  define u where "u \<equiv> \<lambda>i. real (Suc i)"
+  define l where "l \<equiv> \<lambda>i. - (real i)"
+  have approx: "einterval (-\<infinity>) \<infinity> = (\<Union>i. {l i .. u i})"
+    sorry
+  moreover have "incseq u" "decseq l" "\<And>i. l i < u i" "\<And>i. -\<infinity> < l i" "\<And>i. u i < \<infinity>"
+    "l \<longlonglongrightarrow> -\<infinity>"
+    by (auto simp: l_def u_def incseq_def decseq_def ereal_minus_real_tendsto_MInf)
+  moreover have "u \<longlonglongrightarrow> \<infinity>"
+    unfolding u_def
+    using LIMSEQ_Suc id_nat_ereal_tendsto_PInf by blast
+  moreover have f_integrable: "\<And>i. set_integrable lborel {l i..u i} f"
+    sorry
+  moreover have f_nonneg: "AE x in lborel. -\<infinity> < ereal x \<longrightarrow> ereal x < \<infinity> \<longrightarrow> 0 \<le> f x"
+    sorry
+  moreover have f_measurable: "set_borel_measurable lborel (einterval (-\<infinity>) \<infinity>) f"
+    sorry
+  moreover have lbint_lim: "(\<lambda>i. LBINT x=l i.. u i. f x) \<longlonglongrightarrow> pi"
+    sorry
+  ultimately show "set_integrable lborel (einterval (-\<infinity>) \<infinity>) f"
+    using interval_integral_Icc_approx_nonneg [of "-\<infinity>" \<infinity> l u f pi]
+    apply (simp add: )
+
+
 (*TRY THIS?*)
+  thm interval_integral_Icc_approx_nonneg
 thm interval_integral_Icc_approx_integrable
 
 (*ADDED TO DISTRIBUTION*)
