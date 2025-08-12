@@ -5,6 +5,8 @@ theory Improper_Integral
 
 begin
 
+subsection \<open>Examples for Part I\<close>
+
 text \<open>Simplest example: continuous antiderivative and integrand\<close>
 lemma "((\<lambda>x. 1 / sqrt(1-x\<^sup>2)) has_integral pi) {-1..1}"
 proof -
@@ -39,13 +41,14 @@ proof -
     by auto
 qed
 
+subsection \<open>Examples for Part II\<close>
+text \<open>We switch to Lebesgue integration\<close>
 
 lemma power2_gt_1_iff: "x\<^sup>2 > 1 \<longleftrightarrow> x < (-1 :: 'a :: linordered_idom) \<or> x > 1"
   using power2_ge_1_iff [of x] power2_eq_1_iff [of x] by auto
 
 text \<open>Handling a discontinuous antiderivative. Actually the same
-  problem as the first, but not using @{term arcsin}. We switch to Lebesgue
-  integration\<close>
+  problem as the first, but not using @{term arcsin}.\<close>
 lemma "set_integrable lborel {-1<..<1} (\<lambda>x. 1 / sqrt (1-x\<^sup>2))"
       "(LBINT x=-1..1. 1 / sqrt (1-x\<^sup>2)) = pi"
 proof -
@@ -84,7 +87,7 @@ lemma
     "set_integrable lborel (einterval (-\<infinity>) \<infinity>) f'"
     "(LBINT t=-\<infinity>..\<infinity>. f' t) = pi"
 proof -
-  have "(arctan has_real_derivative f' x) (at x)" for x
+  have "(arctan has_real_derivative f' t) (at t)" for t
     unfolding f'_def 
     by (rule derivative_eq_intros | force simp: divide_simps)+
   moreover
