@@ -5,7 +5,7 @@ usemathjax: true
 tags: [examples, formalised mathematics, Isar, analysis]
 ---
 On occasion, your Isabelle proof may require you to work with a *definite integral*.
-(That is, the area under a curve, bounded to the left and right.)
+(That is, the area under a curve between two points on the *x*-axis.)
 In the simplest case, all we have to do is
 integrate the given function to obtain its *antiderivative*, which we then evaluate at the endpoints, returning the difference.
 But things are not always simple. There could be discontinuities in the integrand
@@ -24,7 +24,7 @@ $$\begin{equation*} \int_{-1}^1 \frac{1}{\sqrt{1-x^2}}\, dx = \pi \end{equation*
 $$
 
 Here is a graph of the integrand. 
-It goes to infinity at both endpoints. Nevertheless, the integral is defined.
+It goes to infinity at both endpoints. Still, the integral is defined.
 
 <p style="text-align: center;">
  <img src="/images/integral-1.png" alt="graph of 1st integral, 1 / sqrt(1-x^2)" width="300"/>
@@ -36,14 +36,15 @@ The integral is $\sin^{-1}(1) - \sin^{-1}(-1) = \frac{\pi}{2} - (-\frac{\pi}{2})
 To do this in Isabelle, our first task is to carry out the integration.
 Isabelle has no such capability, but that doesn't matter: 
 Isabelle can differentiate, so we simply use some external tool to integrate,
-confirming its result by formally proving in Isabelle that the resulting derivative matches the original integrand. 
+confirming its answer by formally proving that its derivative matches the original integrand. 
 This is an appeal to the *Fundamental Theorem of Calculus* (FTC),
 which says that integration and differentiation are inverse operations of each other.
 The Isabelle libraries provide numerous variants of this fact.
 
 As for the external tool:
 [WolframAlpha](https://www.wolframalpha.com), which is free, can often do the job,
-but here I needed Maple to find out that the antiderivative was simply the inverse sine.
+but here I needed [Maple](https://www.maplesoft.com/products/maple/index.aspx) 
+to find out that the antiderivative was simply the inverse sine.
 
 The Isabelle proof is so simple, there is almost nothing to say.
 The key point is the form of the FTC chosen: `fundamental_theorem_of_calculus_interior`,
@@ -106,6 +107,10 @@ avoiding the discontinuity at zero.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+If the integrand is differentiable over the closed interval, 
+then the proof can be done using `fundamental_theorem_of_calculus`,
+a version of the FTC that does not require a separate proof of continuity.
+
 ### Taking derivatives in Isabelle
 
 It's easy to take the derivative of a function or to prove that it is continuous.
@@ -128,6 +133,7 @@ The point is that both $f'$ and $g'$ will be logical variables (in the Prolog se
 so the repetitive application of `derivative_eq_intros` can calculate the derivatives of the subterms into them. We alternate with simplifier calls because the result of the raw process produces terms like $0\cdot x^1 + 1\cdot x^0$. But if the simplifier alters the outer form of the equations, say by moving a term across the equals sign, then the process probably won't work. A little tinkering is sometimes necessary.
 
 To prove that a function is continuous, use the theorem list `continuous_intros`.
-The idea is similar and indeed a lot simpler, because there is nothing to calculate.
+The idea is similar to differentiation: in fact a lot simpler, 
+because there is nothing to calculate.
 Therefore there is no need to call the simplifier.
 We shall see several continuity proofs in the forthcoming Part II.
