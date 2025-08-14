@@ -7,7 +7,8 @@ begin
 
 subsection \<open>Examples for Part I\<close>
 
-text \<open>Simplest example: continuous antiderivative and integrand\<close>
+text \<open>In both of these, the antiderivative is continuous, but the integrand diverges at an endpoint\<close>
+
 lemma "((\<lambda>x. 1 / sqrt(1-x\<^sup>2)) has_integral pi) {-1..1}"
 proof -
   have "(arcsin has_real_derivative 1 / sqrt (1-x\<^sup>2)) (at x)"
@@ -18,8 +19,6 @@ proof -
     by (auto simp: has_real_derivative_iff_has_vector_derivative)
 qed
 
-text \<open>Slightly harder: continuous antiderivative, 
-  but the integrand diverges at one endpoint\<close>
 lemma "((\<lambda>x. 1 / sqrt x) has_integral 2) {0..1}"
 proof -
   define f where "f \<equiv> \<lambda>x. 2 * sqrt x"
@@ -34,11 +33,8 @@ proof -
   have "((\<lambda>x. 1 / sqrt x) has_integral (f 1 - f 0)) {0..1}"
     by (intro fundamental_theorem_of_calculus_interior)
        (auto simp: has_real_derivative_iff_has_vector_derivative)
-  moreover
-  have "f 0 = 0" "f 1 = 2"
-    unfolding f_def by auto
-  ultimately show ?thesis 
-    by auto
+  then show ?thesis 
+    by (auto simp: f_def)
 qed
 
 subsection \<open>Examples for Part II\<close>
@@ -48,7 +44,8 @@ lemma power2_gt_1_iff: "x\<^sup>2 > 1 \<longleftrightarrow> x < (-1 :: 'a :: lin
   using power2_ge_1_iff [of x] power2_eq_1_iff [of x] by auto
 
 text \<open>Handling a discontinuous antiderivative. Actually the same
-  problem as the first, but not using @{term arcsin}.\<close>
+  problem as the first, but not using @{term arcsin}.
+  The given antiderivative comes from WolframAlpha\<close>
 lemma "set_integrable lborel {-1<..<1} (\<lambda>x. 1 / sqrt (1-x\<^sup>2))"
       "(LBINT x=-1..1. 1 / sqrt (1-x\<^sup>2)) = pi"
 proof -

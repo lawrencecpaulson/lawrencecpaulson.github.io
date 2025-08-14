@@ -29,6 +29,7 @@ theories
     "Dirichlet_approx_thm"
     "Dirichlet_approx_thm1"
     "Append"
+    "Improper_Integral"
 
 document_files
     "root.tex"
