@@ -52,23 +52,24 @@ proof -
   note one_ereal_def [simp] power2_eq_1_iff [simp] power2_gt_1_iff [simp]
   define f where "f \<equiv> \<lambda>x. arctan (x / sqrt(1-x\<^sup>2))"
   have "(f has_real_derivative 1 / sqrt (1-x\<^sup>2)) (at x)"
-    if "- 1 < ereal x" "ereal x < 1" for x
+    if "-1 < x" "x < 1" for x
     unfolding f_def 
     apply (rule refl derivative_eq_intros | use that in force)+
     apply (simp add: power2_eq_square divide_simps)
     done
   moreover
   have "isCont (\<lambda>x. 1 / sqrt (1-x\<^sup>2)) x"
-    if "- 1 < ereal x" "ereal x < 1" for x
+    if "-1 < x" "x < 1" for x
     using that by (intro continuous_intros) auto
   moreover
-  have "AE x in lborel. - 1 < ereal x \<longrightarrow> ereal x < 1 \<longrightarrow> 0 \<le> 1 / sqrt (1-x\<^sup>2)"
-    by (auto simp: square_le_1)
+  have "0 \<le> 1 / sqrt (1-x\<^sup>2)"
+    if "-1 < x" "x < 1" for x
+    using that by (auto simp: square_le_1)
   moreover
-  have "(f \<longlongrightarrow> - pi/2) (at_right (- 1))"  "(f \<longlongrightarrow> pi/2) (at_left 1)"
+  have "(f \<longlongrightarrow> -pi/2) (at_right (-1))"  "(f \<longlongrightarrow> pi/2) (at_left 1)"
     unfolding f_def by real_asymp+
-  then have "((f \<circ> real_of_ereal) \<longlongrightarrow> - pi/2) (at_right (- 1))"
-    "((f \<circ> real_of_ereal) \<longlongrightarrow> pi/2) (at_left 1)"
+  then have "((f \<circ> real_of_ereal) \<longlongrightarrow> - pi/2) (at_right (-1))"
+            "((f \<circ> real_of_ereal) \<longlongrightarrow> pi/2) (at_left 1)"
     by (simp_all add: ereal_tendsto_simps1)
   ultimately show 
     "set_integrable lborel {-1<..<1} (\<lambda>x. 1 / sqrt (1-x\<^sup>2))"
