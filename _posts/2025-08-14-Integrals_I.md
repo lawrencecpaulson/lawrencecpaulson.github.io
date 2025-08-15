@@ -83,7 +83,7 @@ which fortunately is continuous for all $x\ge0$.
 As for the formal proof,
 we use a little Isar to introduce the abbreviation `f` for the antiderivative, 
 which is referred to a number of times.
-We proof that `f` is continuous over the closed interval and verify
+We prove that `f` is continuous over the closed interval and verify
 that it has the correct derivative over the open interval, 
 avoiding the discontinuity at zero.
 
