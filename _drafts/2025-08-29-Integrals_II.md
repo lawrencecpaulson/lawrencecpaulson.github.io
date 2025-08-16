@@ -163,66 +163,124 @@ This works because in the previous steps we proved all of its pre-conditions.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-### An example of integration over the entire real line
+### Integration over the entire real line
+
+Our next example is properly improper, because the endpoints are infinite.
+Once again, Lebesgue integration is the way to go: 
+the necessary machinery has not been set up for gauge integrals.
 
 $$\begin{equation*} \int_{-\infty}^\infty \frac{1}{t^2+1}\, dt = \pi \end{equation*}$$
 
-antiderivative is $\tan^{-1}t$
-
+Here is its graph. Once again we have a non-negative integrand.
 
 <p style="text-align: center;">
   <img src="/images/integral-3.png" alt="graph of 3rd integral, 1 / (t^2+1)" width="300"/>
 </p>
 
+Maple tells us that the antiderivative is $\tan^{-1}t$.
+(I have also used Maple for all the graphs in these examples.)
+
+The formal proof has the same structure as in the previous example.
+We verify the antiderivative, show continuity of the integrand
+and also show the integrand to be nonnegative.
+Finally reapply the FTC to obtain the two conclusions.
 
 <pre class="source">
+<span class="keyword1 command">lemma</span><span>
+  </span><span class="keyword2 keyword">defines</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">f'</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="main">1</span></span> <span class="main">/</span></span> <span class="main">(</span><span class="bound">t</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span><span class="main">+</span><span class="main">1</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span><span>
+    </span><span class="quoted quoted">"</span><span class="const">set_integrable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">(</span><span class="main">-</span><span class="main">∞</span><span class="main">)</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
+    </span><span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">-</span><span class="main">∞</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="const">pi</span><span>"</span><span>
+</span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">(</span></span><span class="const">arctan</span> <span class="keyword1">has_real_derivative</span> <span class="free">f'</span> <span class="skolem">t</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="skolem">t</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">t</span><span>
+    </span><span class="keyword1 command">unfolding</span> f'_def<span> 
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> <span class="main keyword3">|</span> <span class="operator">force</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> <span class="dynamic dynamic">divide_simps</span><span class="main">)</span><span class="main keyword3">+</span><span>
+  </span><span class="keyword1 command">moreover</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted quoted">"</span><span class="const">isCont</span> <span class="free">f'</span> <span class="skolem">x</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">x</span><span>
+    </span><span class="keyword1 command">unfolding</span> f'_def<span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> add_nonneg_eq_0_iff<span class="main">)</span><span> 
+  </span><span class="keyword1 command">moreover</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span></span><span class="const">arctan</span> <span class="main">∘</span> <span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">-</span><span class="const">pi</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span> <span class="main">(</span><span class="const">at_right</span> <span class="main">(</span><span class="main">-</span><span class="main">∞</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
+       </span><span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span></span><span class="const">arctan</span> <span class="main">∘</span> <span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="const">pi</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span> <span class="main">(</span><span class="const">at_left</span> <span class="main">∞</span><span class="main">)</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span><span class="main keyword3">+</span><span>
+  </span><span class="keyword1 command">ultimately</span> <span class="keyword3 command">show</span> <span class="quoted quoted">"</span><span class="const">set_integrable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">(</span><span class="main">-</span><span class="main">∞</span><span class="main">)</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
+    </span><span class="quoted quoted">"</span><span class="const">interval_lebesgue_integral</span> <span class="const">lborel</span> <span class="main">(</span><span class="main">-</span><span class="main">∞</span><span class="main">)</span> <span class="main">∞</span> <span class="free">f'</span> <span class="main">=</span> <span class="const">pi</span><span>"</span><span>
+    </span><span class="keyword1 command">using</span> interval_integral_FTC_nonneg <span class="main">[</span><span class="operator">of</span> <span class="quoted quoted quoted">"</span><span class="main">-</span><span class="main">∞</span><span>"</span> <span class="quoted main">∞</span> <span class="const">arctan</span><span class="main">]</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> f'_def<span class="main">)</span><span>
+</span><span class="keyword1 command">qed</span>
 </pre>
 
-<pre class="source">
-</pre>
+There are a couple of differences from the previous proof.
+We do not need an abbreviation for the antiderivative because it is simply
+`arctan`.
+But this proof features a local definition of the integrand
+as `f'`, and we could've done something similar last time.
 
-<pre class="source">
-</pre>
+### Integration of a sign-changing function
 
+If you are unsure as to why a sign-changing function 
+needs a different version of the FTC, consider that $\sin t$
+is both differentiable and continuous. 
+Without the non-negative condition, the FTC would tell us that
+$\sin t$ could be integrated over the real line, which is ridiculous.
 
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-
+And so our final example is to integrate a [damped sinusoid](https://www.statisticshowto.com/calculus-definitions/damped-sine-wave/) 
+over the non-negative real numbers.
 
 $$\begin{equation*} \int_0^\infty e^{-t}\cos t\, dt = \frac{1}{2} \end{equation*}$$
 
-antiderivative is $$ e^{-t}\frac{\sin t - \cos t}{2} $$
+Here is the graph. There are functions that wiggle more, 
+but they would be a little more complicated.
 
 <p style="text-align: center;">
   <img src="/images/integral-4.png" alt="graph of 4th integral, exp(-t)cos(t)" width="300"/>
 </p>
+
+Because its sign changes, the integration proof involves two steps: 
+1. Show that the integral exists. Since $\lvert e^{-t}\cos t\rvert \le e^{-t}$, 
+we need to show that the latter function is integrable.
+It is non-negative, so we apply the previous version of the FTC.
+2. We apply a signed version of the FTC to verify what the value of the integral
+actually is.
+
+The antiderivative is $$ e^{-t}\frac{\sin t - \cos t}{2} $$, 
+so let's do the formal proof.
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+<pre class="source">
+</pre>
+
+

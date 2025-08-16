@@ -8,7 +8,7 @@ On occasion, your Isabelle proof may require you to work with a *definite integr
 (That is, the area under a curve between two points on the *x*-axis.)
 In the simplest case, all we have to do is
 integrate the given function to obtain its *antiderivative*, which we then evaluate at the endpoints, returning the difference.
-But things are not always simple. There could be discontinuities in the integrand
+But things are not always simple. There could be discontinuities in the *integrand* (the function being integrated)
 or in its antiderivative. Either or both of the endpoints could be infinite.
 And while we say "area under a curve", our notion of area is in fact signed,
 going negative when the curve crosses the *x*-axis.
