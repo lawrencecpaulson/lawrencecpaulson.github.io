@@ -243,13 +243,26 @@ It is non-negative, so we apply the previous version of the FTC.
 2. We apply a signed version of the FTC to verify what the value of the integral
 actually is.
 
-The antiderivative is $$ e^{-t}\frac{\sin t - \cos t}{2} $$, 
-so let's do the formal proof.
+Let's do the formal proof.
+We start with the theorem statement, including as before
+a local definition of the integrand.
 
 <pre class="source">
+<span class="keyword1 command">lemma</span><span>
+  </span><span class="keyword2 keyword">defines</span> <span class="quoted quoted"><span>"</span><span class="free">f'</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">.</span> </span><span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">*</span><span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
+</span><span class="keyword1 command">proof</span> <span class="operator">-</span>
 </pre>
 
+Now we insert a local definition of the antiderivative,
+which is is $$ e^{-t}\frac{\sin t - \cos t}{2} $$.
+To prove the conclusion, we express the integral as the difference
+between two values at the endpoints and apply the more general version of the FTC.
+
 <pre class="source">
+  <span class="keyword3 command">define</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">*</span><span class="main">(</span><span class="const">sin</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span> <span class="main">-</span> <span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">0</span> <span class="main">-</span> <span class="main">(</span><span class="main">-</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">intro</span> interval_integral_FTC_integrable<span class="main">)</span>
 </pre>
 
 <pre class="source">

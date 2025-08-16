@@ -116,6 +116,7 @@ proof -
       by (rule derivative_eq_intros | force simp: field_simps)+
     show "isCont f' t"
       unfolding f'_def by (intro continuous_intros)
+  next
     have "set_integrable lborel (einterval 0 \<infinity>) (\<lambda>t. exp(-t))"
     proof (rule interval_integral_FTC_nonneg)
       show "((\<lambda>t. -exp(-t)) has_real_derivative exp(-t)) (at t)" for t
