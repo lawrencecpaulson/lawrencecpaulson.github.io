@@ -105,9 +105,30 @@ qed
 text \<open>Infinite endpoints, mixed-sign integrand\<close>
 lemma
   defines "f' \<equiv> \<lambda>t. exp(-t)*cos(t)"
-  shows "(LBINT t=0..\<infinity>. f' t) = 1/2"
+  shows  "set_integrable lborel (einterval 0 \<infinity>) f'"
+         "(LBINT t=0..\<infinity>. f' t) = 1/2"
 proof -
   define f where "f \<equiv> \<lambda>t::real. exp(-t)*(sin(t) - cos(t))/2"
+  have "set_integrable lborel (einterval 0 \<infinity>) (\<lambda>t. exp(-t))"
+  proof (rule interval_integral_FTC_nonneg)
+    show "((\<lambda>t. -exp(-t)) has_real_derivative exp(-t)) (at t)" for t
+      unfolding f_def f'_def has_real_derivative_iff_has_vector_derivative [symmetric]
+      by (rule derivative_eq_intros | force simp: field_simps)+
+    have "(((\<lambda>t. -exp (-t)) \<circ> real_of_ereal) \<longlongrightarrow> -1) (at_right (ereal 0))"
+      by (simp add: ereal_tendsto_simps1, real_asymp)
+    then show "(((\<lambda>t. -exp (-t)) \<circ> real_of_ereal) \<longlongrightarrow> -1) (at_right 0)"
+      by (simp add: zero_ereal_def)
+    show "(((\<lambda>t. - exp (- t)) \<circ> real_of_ereal) \<longlongrightarrow> 0) (at_left \<infinity>)"
+      by (simp add: ereal_tendsto_simps1 f_def, real_asymp)
+  qed auto
+  moreover have "set_borel_measurable lborel (einterval 0 \<infinity>) f'"
+    using borel_measurable_continuous_on_indicator 
+    by (simp add: f'_def set_borel_measurable_def)
+  moreover have "\<And>t. \<bar>f' t\<bar> \<le> exp(-t)"
+    by (simp add: f'_def abs_mult)
+  ultimately show int: "set_integrable lborel (einterval 0 \<infinity>) f'"
+    by (metis (mono_tags, lifting) abs_exp_cancel always_eventually
+        real_norm_def set_integrable_bound set_integrable_bound)
   have "(LBINT t=0..\<infinity>. f' t) = 0 - (- 1/2)"
   proof (intro interval_integral_FTC_integrable)
     fix t
@@ -117,26 +138,6 @@ proof -
     show "isCont f' t"
       unfolding f'_def by (intro continuous_intros)
   next
-    have "set_integrable lborel (einterval 0 \<infinity>) (\<lambda>t. exp(-t))"
-    proof (rule interval_integral_FTC_nonneg)
-      show "((\<lambda>t. -exp(-t)) has_real_derivative exp(-t)) (at t)" for t
-        unfolding f_def f'_def has_real_derivative_iff_has_vector_derivative [symmetric]
-        by (rule derivative_eq_intros | force simp: field_simps)+
-      have "(((\<lambda>t. -exp (-t)) \<circ> real_of_ereal) \<longlongrightarrow> -1) (at_right (ereal 0))"
-        by (simp add: ereal_tendsto_simps1, real_asymp)
-      then show "(((\<lambda>t. -exp (-t)) \<circ> real_of_ereal) \<longlongrightarrow> -1) (at_right 0)"
-        by (simp add: zero_ereal_def)
-      show "(((\<lambda>t. - exp (- t)) \<circ> real_of_ereal) \<longlongrightarrow> 0) (at_left \<infinity>)"
-        by (simp add: ereal_tendsto_simps1 f_def, real_asymp)
-    qed auto
-    moreover have "set_borel_measurable lborel (einterval 0 \<infinity>) f'"
-      using borel_measurable_continuous_on_indicator 
-      by (simp add: f'_def set_borel_measurable_def)
-    moreover have "\<And>t. \<bar>f' t\<bar> \<le> exp(-t)"
-      by (simp add: f'_def abs_mult)
-    ultimately show "set_integrable lborel (einterval 0 \<infinity>) f'"
-      by (metis (mono_tags, lifting) abs_exp_cancel always_eventually
-          real_norm_def set_integrable_bound set_integrable_bound)
     have "((f \<circ> real_of_ereal) \<longlongrightarrow> -1/2) (at_right (ereal 0))"
          "((f \<circ> real_of_ereal) \<longlongrightarrow> 0)   (at_left \<infinity>)"
       by (simp add: ereal_tendsto_simps1 f_def, real_asymp)+
@@ -146,8 +147,8 @@ proof -
       by (simp add: zero_ereal_def)
     show "((f \<circ> real_of_ereal) \<longlongrightarrow> 0) (at_left \<infinity>)"
       by (simp add: ereal_tendsto_simps1 f_def, real_asymp)
-  qed auto
-  then show ?thesis
+  qed (use int in auto)
+  then show "(LBINT t=0..\<infinity>. f' t) = 1/2"
     by simp
 qed 
 
