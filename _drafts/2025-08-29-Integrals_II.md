@@ -133,8 +133,8 @@ In a moment, we'll look at another example where it isn't.
 </pre>
 
 Our version of the FTC deals with discontinuity at the endpoints
-Through explicit limits. It is stated for the extended reals throughout,
-but I've managed to conceal this so far because in most cases Isabelle can mediate
+using limits. The theorem refers to the extended reals throughout,
+which I've managed to conceal so far: Isabelle can usually mediate
 between the reals and the extended reals.
 They become explicit here. The actual limit reasoning is done by the `real_asymp`
 proof method, demonstrated in a [previous post]({% post_url 2024-08-08-Ln_lower_bound %}).
@@ -222,15 +222,14 @@ If you are unsure as to why a sign-changing function
 needs a different version of the FTC, consider that $\sin t$
 is both differentiable and continuous. 
 Without the non-negative condition, the FTC would tell us that
-$\sin t$ could be integrated over the real line, which is ridiculous.
+$\sin t$ could be integrated over the whole real line, which is ridiculous.
 
 And so our final example is to integrate a [damped sinusoid](https://www.statisticshowto.com/calculus-definitions/damped-sine-wave/) 
 over the non-negative real numbers.
 
 $$\begin{equation*} \int_0^\infty e^{-t}\cos t\, dt = \frac{1}{2} \end{equation*}$$
 
-Here is the graph. There are functions that wiggle more, 
-but they would be a little more complicated.
+Here is the graph. It's hard to see, but this function crosses the $x$-axis infinitely often.
 
 <p style="text-align: center;">
   <img src="/images/integral-4.png" alt="graph of 4th integral, exp(-t)cos(t)" width="300"/>
@@ -249,51 +248,115 @@ a local definition of the integrand.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span>
-  </span><span class="keyword2 keyword">defines</span> <span class="quoted quoted"><span>"</span><span class="free">f'</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">.</span> </span><span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">*</span><span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span>"</span><span>
-  </span><span class="keyword2 keyword">shows</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
-</span><span class="keyword1 command">proof</span> <span class="operator">-</span>
+  </span><span class="keyword2 keyword">defines</span> <span class="quoted quoted"><span>"</span><span class="free">f'</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">.</span> </span><span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main"> * </span><span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span>  <span class="quoted quoted">"</span><span class="const">set_integrable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">0</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
+         </span><span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span>"</span>
+<span class="keyword1 command">proof</span> <span class="operator">-</span>
 </pre>
 
-Now we insert a local definition of the antiderivative,
-which is is $$ e^{-t}\frac{\sin t - \cos t}{2} $$.
-To prove the conclusion, we express the integral as the difference
+#### The first result
+
+Concerning step 1 above, we show that $e^{-t}$ is integrable.
+The proof relies on the FTC for non-negative functions, just as we've already.
+Our task this time is slightly simpler because we don't care what the integral actually is.
+(It's 1.)
+We can therefore ignore the second conclusion of `interval_integral_FTC_nonneg`
+and write the proof as follows:
+
+<pre class="source">
+  <span class="keyword1 command">have</span> <span class="quoted quoted">"</span><span class="const">set_integrable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">0</span> <span class="main">∞</span><span class="main">)</span> <span class="main">(</span><span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
+  </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">rule</span> interval_integral_FTC_nonneg<span class="main">)</span><span>
+    </span><span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="main">-</span></span><span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span> <span class="keyword1">has_real_derivative</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="skolem">t</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="skolem">t</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">t</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> <span class="main keyword3">|</span> <span class="operator">force</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> <span class="dynamic dynamic">field_simps</span><span class="main">)</span><span class="main keyword3">+</span><span>
+    </span><span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="main">-</span></span><span class="const">exp</span> <span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span> <span class="main">∘</span> <span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">-</span><span class="main">1</span><span class="main">)</span> <span class="main">(</span><span class="const">at_right</span> <span class="main">(</span><span class="const">ereal</span> <span class="main">0</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span><span>
+    </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="main">-</span></span><span class="const">exp</span> <span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span> <span class="main">∘</span> <span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">-</span><span class="main">1</span><span class="main">)</span> <span class="main">(</span><span class="const">at_right</span> <span class="main">0</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> zero_ereal_def<span class="main">)</span><span>
+    </span><span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="main">(</span><span class="main">λ</span><span class="bound">t</span><span class="main">.</span> <span class="main">-</span></span> </span><span class="const">exp</span> <span class="main">(</span><span class="main">-</span> <span class="bound">t</span><span class="main">)</span><span class="main">)</span> <span class="main">∘</span> <span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">0</span><span class="main">)</span> <span class="main">(</span><span class="const">at_left</span> <span class="main">∞</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">qed</span> <span class="operator">auto</span>
+</pre>
+
+Setting this fact aside, we prove that the integrand is a *measurable function*
+on the closed interval $[0,\infty]$. This technical condition turns out to be necessary.
+
+<pre class="source">
+  <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted quoted">"</span><span class="const">set_borel_measurable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">0</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
+    </span><span class="keyword1 command">using</span> borel_measurable_continuous_on_indicator<span> 
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> f'_def set_borel_measurable_def<span class="main">)</span>
+</pre>
+
+We store this fact as well, and then prove that the integrand is
+absolutely bounded by $e^{-t}$.
+
+<pre class="source">
+  <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">⋀</span><span class="bound">t</span><span class="main">.</span> <span class="main">¦</span></span><span class="free">f'</span> <span class="bound">t</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> f'_def abs_mult<span class="main">)</span>
+</pre>
+
+Combining the facts proved above, we find that `f'` is indeed integrable over $[0,\infty]$.
+This is the first conclusion of the theorem, 
+but we also label it because it's needed to prove the second conclusion.
+
+<pre class="source">
+  <span class="keyword1 command">ultimately</span> <span class="keyword3 command">show</span> *<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">set_integrable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">0</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> <span class="main main">(</span>mono_tags<span class="main main">,</span> lifting<span class="main main">)</span> abs_exp_cancel always_eventually<span>
+        </span>real_norm_def set_integrable_bound set_integrable_bound<span class="main">)</span>
+</pre>
+
+#### The second result
+
+Now we turn to step 2. We insert a local definition of the antiderivative,
+which happens to be $$ e^{-t}\frac{\sin t - \cos t}{2} $$.
+To prove the second conclusion, we express the integral as the difference
 between two values at the endpoints and apply the more general version of the FTC.
 
 <pre class="source">
-  <span class="keyword3 command">define</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span><span class="main">*</span><span class="main">(</span><span class="const">sin</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span> <span class="main">-</span> <span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
+  <span class="keyword3 command">define</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="const">sin</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span> <span class="main">-</span> <span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
   </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">0</span> <span class="main">-</span> <span class="main">(</span><span class="main">-</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">intro</span> interval_integral_FTC_integrable<span class="main">)</span>
 </pre>
 
-<pre class="source">
-</pre>
+The next steps should be familiar by now. For an arbitrary real number `t`,
+we verify the antiderivative by differentiation and prove the integrand to be continuous.
 
 <pre class="source">
+    <span class="keyword3 command">fix</span> <span class="skolem">t</span><span>
+    </span><span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="skolem">f</span> <span class="keyword1">has_vector_derivative</span></span> <span class="free">f'</span> <span class="skolem">t</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span></span> <span class="skolem">t</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">unfolding</span> f_def f'_def has_real_derivative_iff_has_vector_derivative <span class="main">[</span><span class="operator">symmetric</span><span class="main">]</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> <span class="dynamic dynamic">derivative_eq_intros</span> <span class="main keyword3">|</span> <span class="operator">force</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> <span class="dynamic dynamic">field_simps</span><span class="main">)</span><span class="main keyword3">+</span><span>
+    </span><span class="keyword3 command">show</span> <span class="quoted quoted">"</span><span class="const">isCont</span> <span class="free">f'</span> <span class="skolem">t</span><span>"</span><span>
+      </span><span class="keyword1 command">unfolding</span> f'_def <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span>
 </pre>
+
+The FTC requires us to verify the values attained by the antiderivative at the endpoints.
+Which we do using the techniques we've seen before, 
+in particular, a couple of awkward tricks needed because everything has to be proved in terms of the extended real numbers.
 
 <pre class="source">
+  <span class="keyword1 command">next</span><span>
+    </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="skolem">f</span> <span class="main">∘</span></span> </span><span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">-</span><span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span> <span class="main">(</span><span class="const">at_right</span> <span class="main">(</span><span class="const">ereal</span> <span class="main">0</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1 f_def<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span><span>
+    </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="skolem">f</span> <span class="main">∘</span></span> </span><span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">-</span><span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span> <span class="main">(</span><span class="const">at_right</span> <span class="main">0</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> zero_ereal_def<span class="main">)</span><span>
+    </span><span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="main">(</span><span class="skolem">f</span> <span class="main">∘</span></span> </span><span class="const">real_of_ereal</span><span class="main">)</span> <span class="main">⤏</span> <span class="main">0</span><span class="main">)</span> <span class="main">(</span><span class="const">at_left</span> <span class="main">∞</span><span class="main">)</span><span>"</span><span>
+      </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1 f_def<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span>
 </pre>
 
-
+Now `auto` (given the first result, `*`) wraps up the proof.
 
 <pre class="source">
+  <span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">use</span> * <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">auto</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
+    </span><span class="keyword1 command">by</span> <span class="operator">simp</span><span>
+</span><span class="keyword1 command">qed</span>
 </pre>
 
-<pre class="source">
-</pre>
+### A few concluding remarks
 
-<pre class="source">
-</pre>
+*Something about different kinds of infinities*
 
-
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
+The Isabelle theory file for this and the previous post 
+[is available](/Isabelle-Examples/Improper_Integral.thy) right here.
 
 
