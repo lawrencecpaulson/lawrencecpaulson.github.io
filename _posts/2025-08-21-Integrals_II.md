@@ -88,7 +88,7 @@ expresses both that the integral is defined and its value.)
 </pre>
 
 We make three lemmas available to the simplifier (including the one proved above),
-And define `f` to abbreviate the antiderivative.
+and define `f` to abbreviate the antiderivative.
 
 <pre class="source">
   <span class="keyword1 command">note</span> one_ereal_def <span class="main">[</span><span class="operator">simp</span><span class="main">]</span> power2_eq_1_iff <span class="main">[</span><span class="operator">simp</span><span class="main">]</span> power2_gt_1_iff <span class="main">[</span><span class="operator">simp</span><span class="main">]</span><span>
@@ -97,7 +97,7 @@ And define `f` to abbreviate the antiderivative.
 
 Next, we formally verify the antiderivative by taking its derivative again.
 Recall that this is an appeal to the *fundamental theorem of calculus* (FTC).
-We use a variation on the technique 
+We use a variation on the differentiation technique 
 described [last time]({% post_url 2025-08-14-Integrals_I %}),
 showing that the extracted derivative equals $\frac{1}{\sqrt{1-x^2}}\$.
 
@@ -112,7 +112,7 @@ showing that the extracted derivative equals $\frac{1}{\sqrt{1-x^2}}\$.
 
 Setting aside this result using `moreover`, we prove continuity of the integrand
 on the **open** interval $(-1,1)$. (We shall deal with the endpoints later.)
-As mentioned last time, proving continuity is trivial, 
+As mentioned last time, proving continuity is trivial 
 with the help of the theorem list `continuous_intros`.
 The final call to `auto` is to prove that the divisor is nonzero.
 
