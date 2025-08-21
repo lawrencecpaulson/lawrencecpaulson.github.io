@@ -9,8 +9,8 @@ we worked out a couple of definite integrals involving discontinuities at the en
 They were easy because the antiderivatives were continuous.
 Let's make things harder by looking at (apparent) discontinuities
 and infinite endpoints, both of which require limit reasoning.
-We will take a look at the mysteries of the extended real numbers
-and Lebesgue integration.
+We begin by taking a look at the mysteries of the *extended real numbers*
+and *Lebesgue integration*.
 
 ### Lebesgue integration; the extended real numbers
 
@@ -22,8 +22,8 @@ The Isabelle/HOL analysis library provides two forms of integration:
 Although technically messy, the gauge integral can handle a strict superset of the Lebesgue integrable functions.
 However, Lebesgue integration, with its associated measure theory and probability theory,
 is the elegant foundation upon which much of analysis has been built.
-For Isabelle/HOL users, the overlap may be confusing and
-it may seem ugly to use both kinds of integral in a single proof.
+For Isabelle/HOL users, the overlap may be confusing, and
+I think it's ugly to use both kinds of integral in a single proof.
 It's best not to worry about such trivia.
 For difficult improper integrals, Lebesgue is the way to go:
 everything you are likely to need is already in the library.
@@ -35,39 +35,41 @@ an integral over an unbounded interval.
 The extended reals have type `ereal`, which is also the name of the function
 that embeds real numbers into the extended reals.
 
-It's important to stress the extended reals do not give any meaningful treatment of infinity,
+It's important to stress the extended reals do not give any meaningful treatment of [infinity]({% post_url 2023-02-01-On-the-infinite %}),
 such as we get with the [non-standard reals]({% post_url 2022-08-10-Nonstandard_Analysis %}).
-The latter is a field and the expected algebraic laws 
+The latter is a field and algebraic facts like $x+y - x = y$ 
 hold even for infinite and infinitesimal quantities.
-That is not what we need just now: instead, simply two tokens $\infty$ and $-\infty$
-satisfying the obvious ordering relations so that we can specify various kinds of
-infinite intervals just by giving the lower and upper bound, 
+With the extended reals,  $\infty+1 - \infty = \infty - \infty = 0$.
+All we get (and want) from the extended reals are two tokens $\infty$ and $-\infty$
+satisfying the obvious ordering relations. Then we can express various kinds of
+infinite intervals just by giving the lower and upper bounds, 
 such as $(-\infty,0]$ or $(1,\infty)$ or $(-\infty,\infty)$.
 
 ### Redoing the baby example
 
-Our first example is actually the same as last time: 
+We actually saw this example in the [previous post]({% post_url 2025-08-14-Integrals_I %}): 
+
 $$\begin{equation*} \int_{-1}^1 \frac{1}{\sqrt{1-x^2}}\, dx = \pi \end{equation*}.
 $$
+
 The first time I did this, I obtained the antiderivative
 through WolframAlpha as 
 
 $$\begin{equation*}\displaystyle \tan^{-1} \Bigl({\frac{x}{\sqrt{1-x^2}}}\Bigr)  \end{equation*}.$$
 
 This is the same as $\sin^{-1}(x)$ except for the division by zero at the endpoints.
-Moreover, it converges to $\pi/2$ as $x$ tends to $1$ and to $-\pi/2$ as $x$ tends to $-1$,
-or in other words, the singularities are removable.
+Moreover, it converges continuously to $\pi/2$ as $x$ tends to $1$ and to $-\pi/2$ as $x$ tends to $-1$:
+in other words, the singularities are removable.
 
 Because the solution using $\sin^{-1}$ is so simple, 
 my first plan was to abandon this example, 
-but in every simple exercise I looked at, the removable singularity
+but in every simple alternative I looked at, the removable singularity
 had already been removed by others: 
-for example, $\sin x/x$ is the [sinc function](https://en.wikipedia.org/wiki/Sinc_function).
+for example, $\sin x/x$ is called the [sinc function](https://en.wikipedia.org/wiki/Sinc_function).
 And yet, in harder problems, you may have to tackle removable singularities yourself.
 
 So here is how we deal with this one.
-
-To begin, we'll need a lemma to replace $x^2>1$ by the disjunction $x<{-1}$ or $x>1$.
+To begin, we need a lemma to replace $x^2>1$ by the disjunction $x<{-1}$ or $x>1$.
 (The library already includes the analogous lemma for $x^2=1$.)
 
 <pre class="source">
@@ -94,7 +96,7 @@ And define `f` to abbreviate the antiderivative.
 </pre>
 
 Next, we formally verify the antiderivative by taking its derivative again.
-Recall that this is an appeal to the fundamental theorem of calculus (FTC).
+Recall that this is an appeal to the *fundamental theorem of calculus* (FTC).
 We use a variation on the technique 
 described [last time]({% post_url 2025-08-14-Integrals_I %}),
 showing that the extracted derivative equals $\frac{1}{\sqrt{1-x^2}}\$.
@@ -166,8 +168,6 @@ This works because in the previous steps we proved all of its pre-conditions.
 ### Integration over the entire real line
 
 Our next example is properly improper, because the endpoints are infinite.
-Once again, Lebesgue integration is the way to go: 
-the necessary machinery has not been set up for gauge integrals.
 
 $$\begin{equation*} \int_{-\infty}^\infty \frac{1}{t^2+1}\, dt = \pi \end{equation*}$$
 
@@ -178,12 +178,14 @@ Here is its graph. Once again we have a non-negative integrand.
 </p>
 
 Maple tells us that the antiderivative is $\tan^{-1}t$.
-(I have also used Maple for all the graphs in these examples.)
+(I have also used Maple for all these graphs.)
 
+Once again, Lebesgue integration is the way to go,
+since the necessary machinery has not been set up for gauge integrals.
 The formal proof has the same structure as in the previous example.
 We verify the antiderivative, show continuity of the integrand
 and also show the integrand to be nonnegative.
-Finally reapply the FTC to obtain the two conclusions.
+Finally, we apply the FTC to obtain the two conclusions.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span><span>
@@ -214,15 +216,15 @@ There are a couple of differences from the previous proof.
 We do not need an abbreviation for the antiderivative because it is simply
 `arctan`.
 But this proof features a local definition of the integrand
-as `f'`, and we could've done something similar last time.
+as `f'`, and we could have done something similar last time.
 
 ### Integration of a sign-changing function
 
-If you are unsure as to why a sign-changing function 
-needs a different version of the FTC, consider that $\sin t$
+If you are unsure why a sign-changing function 
+needs a different version of the FTC, consider that $\cos$
 is both differentiable and continuous. 
 Without the non-negative condition, the FTC would tell us that
-$\sin t$ could be integrated over the whole real line, which is ridiculous.
+$\cos$ could be integrated over the whole real line, which is ridiculous.
 
 And so our final example is to integrate a [damped sinusoid](https://www.statisticshowto.com/calculus-definitions/damped-sine-wave/) 
 over the non-negative real numbers.
@@ -277,8 +279,9 @@ and write the proof as follows:
   </span><span class="keyword1 command">qed</span> <span class="operator">auto</span>
 </pre>
 
-Setting this fact aside, we prove that the integrand is a *measurable function*
-on the closed interval $[0,\infty]$. This technical condition turns out to be necessary.
+Setting this fact aside, we prove a necessary technical condition: 
+that the integrand is a *measurable function*
+on the closed interval $[0,\infty]$.
 
 <pre class="source">
   <span class="keyword1 command">moreover</span> <span class="keyword1 command">have</span> <span class="quoted quoted">"</span><span class="const">set_borel_measurable</span> <span class="const">lborel</span> <span class="main">(</span><span class="const">einterval</span> <span class="main">0</span> <span class="main">∞</span><span class="main">)</span> <span class="free">f'</span><span>"</span><span>
@@ -312,7 +315,7 @@ To prove the second conclusion, we express the integral as the difference
 between two values at the endpoints and apply the more general version of the FTC.
 
 <pre class="source">
-  <span class="keyword3 command">define</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="const">sin</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span> <span class="main">-</span> <span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span>
+  <span class="keyword3 command">define</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="skolem">f</span> <span class="main">≡</span> <span class="main">λ</span><span class="bound">t</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="const">exp</span><span class="main">(</span><span class="main">-</span><span class="bound">t</span><span class="main">)</span> <span class="main">*</span> <span class="main">(</span><span class="const">sin</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span> <span class="main">-</span> <span class="const">cos</span><span class="main">(</span><span class="bound">t</span><span class="main">)</span><span class="main">)</span><span class="main"> / </span><span class="numeral">2</span><span>"</span><span>
   </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">(</span><span class="keyword1">LBINT</span></span> <span class="bound">t</span><span class="main">=</span></span><span class="main">0</span><span class="main">..</span><span class="main">∞</span><span class="main">.</span> <span class="free">f'</span> <span class="bound">t</span><span class="main">)</span> <span class="main">=</span> <span class="main">0</span> <span class="main">-</span> <span class="main">(</span><span class="main">-</span> <span class="main">1</span><span class="main">/</span><span class="numeral">2</span><span class="main">)</span><span>"</span><span>
   </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">intro</span> interval_integral_FTC_integrable<span class="main">)</span>
 </pre>
@@ -343,7 +346,7 @@ in particular, a couple of awkward tricks needed because everything has to be pr
       </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> ereal_tendsto_simps1 f_def<span class="main keyword3">,</span> <span class="operator">real_asymp</span><span class="main">)</span>
 </pre>
 
-Now `auto` (given the first result, `*`) wraps up the proof.
+Now `auto` (given the first result, namely `*`) wraps up the proof.
 
 <pre class="source">
   <span class="keyword1 command">qed</span> <span class="main">(</span><span class="operator">use</span> * <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">auto</span><span class="main">)</span><span>
@@ -354,9 +357,16 @@ Now `auto` (given the first result, `*`) wraps up the proof.
 
 ### A few concluding remarks
 
-*Something about different kinds of infinities*
+As we have seen, an Isabelle theorem declaration can have multiple conclusions.
+In the case of `interval_integral_FTC_nonneg`, it makes sense because
+both conclusions depend on the same premises and much of the same reasoning.
+In the last example, I did this simply for the sake of uniformity.
+In the case of gauge integrals, Isabelle provides `has_integral`
+to express that the integral exists and has the given value.
+Somewhat similarly, `has_bochner_integral` refers to Lebesgue integrals,
+but it is a bit clunky for integrating over the real line.
 
-The Isabelle theory file for this and the previous post 
-[is available](/Isabelle-Examples/Improper_Integral.thy) right here.
+The Isabelle theory file formalising the examples in this and the previous post 
+are [online](/Isabelle-Examples/Improper_Integral.thy).
 
 
