@@ -80,7 +80,9 @@ Here are a few examples:
 * various cryptographic protocols, such as [TLS](https://doi.org/10.1145/322510.322530)
 * the seL4 operating system kernel 
 
-None of these verification projects can be called 100% complete.
+Each of these verification projects consisted of milestones that could be proved one at a time,
+our knowledge growing at each step.
+None of can be called 100% complete.
 In the case of VIPER, Avra Cohn felt the need to [point out the limitations](https://rdcu.be/eEkVV) 
 of her proof, which she felt was being oversold. The design had not been verified down to its lowest level,
 and the initialisation phase not at all.
