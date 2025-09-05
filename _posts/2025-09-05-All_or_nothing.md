@@ -82,13 +82,13 @@ Here are a few examples:
 
 Each of these verification projects consisted of milestones that could be proved one at a time,
 our knowledge growing at each step.
-None of can be called 100% complete.
+None can be called 100% complete.
 In the case of VIPER, Avra Cohn felt the need to [point out the limitations](https://rdcu.be/eEkVV) 
-of her proof, which she felt was being oversold. The design had not been verified down to its lowest level,
+of her proof, which she felt was being oversold. The design had not been verified down to its lowest level
 and the initialisation phase not at all.
 In the case of cryptographic protocols, essentially all verification work regards 
 the actual cryptographic primitives as abstract and perfect;
-TLS has [numerous vulnerabilities](https://www.cloudflare.com/en-gb/learning/ssl/why-use-tls-1.3/).
+real-world TLS has [numerous vulnerabilities](https://www.cloudflare.com/en-gb/learning/ssl/why-use-tls-1.3/).
 As for seL4, the [project page](https://sel4.systems/Verification/) helpfully lists the underlying assumptions:
 "assembly code, boot code, machine interface, hardware, and DMA".
 
