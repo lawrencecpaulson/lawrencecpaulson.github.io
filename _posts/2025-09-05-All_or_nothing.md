@@ -24,7 +24,7 @@ you didn't make it: all those brutal weeks of high-altitude climbing,
 all that danger and hardship, for nothing.
 Despite having performed a truly stupendous feat, 
 you may not want to talk about how you got only 99% of the way, 
-especially if other people climbed past you and summitted.
+especially if other people climbed past you and summited.
 
 A similar attitude prevails in mathematics.
 Consider [Fermat's Last Theorem](https://www.maths.cam.ac.uk/features/fermats-last-theorem-history-new-mathematics): 
@@ -119,7 +119,7 @@ It's not that long ago that computer crashes were an almost daily occurrence.
 Things are better now because of [automated verification tools](https://doi.org/10.1145/1218063.1217943).
 Even the mighty Microsoft could not achieve stability through testing alone.
 
-But testing will alway have a role to play.
+But testing will always have a role to play.
 The real world will have to be approximated by some sort of mathematical model.
 In the case of verified code, the purpose of testing is to test the model itself.
 Increasingly we shall be running verified code on verified hardware designs
