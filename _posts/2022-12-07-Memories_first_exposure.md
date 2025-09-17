@@ -104,7 +104,7 @@ and stamped them with the correct postage.
 
 The computing environment was less impressive: a 
 [Varian 620/i](http://www.bitsavers.org/pdf/varian/620i/98A9902003C_620iSyRef_Mar69.pdf)
-with 16K of memory, several tape drives and several cartridge drives.
+with 32K of memory, several tape drives and several cartridge drives.
 You could always count on some of the tape drives being out of action.
 There was no disc, and you had to become an expert on splicing paper tapes.
 Here too, the ASR-33 was king, and in this era of gigabit Internet in the home,
