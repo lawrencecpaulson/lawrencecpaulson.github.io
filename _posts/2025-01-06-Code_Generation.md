@@ -21,7 +21,7 @@ Here's an example using Fibonacci numbers.
 ### Evaluating Fibonacci numbers efficiently
 
 We've now seen the Fibonacci numbers 0, 1, 1, 2, 3 ... 
-[several times](https://lawrencecpaulson.github.io/tag/Fibonacci).
+[several times](/tag/Fibonacci).
 Their traditional definition, with its two recursive calls, 
 yields an exponential computation.
 That's because, e.g., to get $F_9$ you need $F_7$ and $F_8$,

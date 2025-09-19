@@ -41,7 +41,9 @@ see in a moment.
 
 Let us review some useful vocabulary for lazy lists. First, the selectors `lhd : 'a llist -> 'a` and
 `ltl : 'a llist -> 'a llist` return the head and the tail, respectively, of an `LCons` value. For an
-`LNil` value, `lhd` returns a [fixed arbitrary value](https://lawrencecpaulson.github.io/2021/12/01/Undefined.html) and `ltl` returns `LNil`. Then
+`LNil` value, 
+`lhd` returns a [fixed arbitrary value]({% post_url 2021-12-01-Undefined %}) 
+and `ltl` returns `LNil`. Then
 the function `llast : 'a llist -> 'a` returns the last value of a finite lazy list. If there is no
 such value, because the lazy list is either empty or infinite, `llast` returns a fixed arbitrary
 value. Next, the function `prepend` concatenates a finite list and a lazy list:

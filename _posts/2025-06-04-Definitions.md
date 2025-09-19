@@ -39,7 +39,7 @@ a five pointed star is also a pentagon.
 On the theme of definitional choices, recall yet again the study of
 [Euler’s polyhedron formula](https://www.ams.org/publicoutreach/feature-column/fcarc-eulers-formula)
 by [Imre Lakatos](https://plato.stanford.edu/entries/lakatos/),
-mentioned [here before](https://lawrencecpaulson.github.io/tag/Imre_Lakatos),
+mentioned [here before](/tag/Imre_Lakatos),
 where what first looks like a flaw in a proof
 turns out to be a dispute about the definition of *polyhedron*.
 He considers freakish cases such as cylinders and polyhedra containing holes.

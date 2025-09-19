@@ -2,7 +2,7 @@
 layout: post
 title:  "Mike Gordon and hardware verification"
 usemathjax: true 
-tags: [MJC Gordon, verification, HOL system, Stanford]
+tags: [MJC Gordon, verification, HOL system, Stanford, higher-order logic]
 ---
 
 In the late 1960s, breakthrough papers by

@@ -33,7 +33,7 @@ Although their suggestion was simply for a programming language feature—it was
 
 ### Type classes and Isabelle/HOL
 
-Isabelle had Milner style polymorphism from the beginning, but it wasn't available for defining logics. For that to make sense, some mechanism was needed to distinguish between a many sorted first-order logic and higher order logic. [Tobias Nipkow](https://www21.in.tum.de/~nipkow/) recognised that type classes could be this mechanism, governing whether or not quantification was permitted over truth values and functions. Doing this right required a partial ordering on type classes, so-called order-sorted polymorphism, and his paper (with Prehofer) "[Type checking type classes](https://doi.org/10.1145/158511.158698)" appeared in 1993.
+Isabelle had Milner style polymorphism from the beginning, but it wasn't available for defining logics. For that to make sense, some mechanism was needed to distinguish between a many sorted first-order logic and higher-order logic. [Tobias Nipkow](https://www21.in.tum.de/~nipkow/) recognised that type classes could be this mechanism, governing whether or not quantification was permitted over truth values and functions. Doing this right required a partial ordering on type classes, so-called order-sorted polymorphism, and his paper (with Prehofer) "[Type checking type classes](https://doi.org/10.1145/158511.158698)" appeared in 1993.
 
 It then fell to [Wenzel](https://sketis.net) to realise Wadler and Blott's remark quoted above.
 His 1997 [Type classes and overloading in higher-order logic](https://rdcu.be/cJtGs)

@@ -131,7 +131,7 @@ and with the proof done by repetition.
 
 The following example is much more complicated. 
 Addition of natural numbers is expressed using the *eliminator* for type `N`,
-which is a higher order primitive recursion combinator.
+which is a higher-order primitive recursion combinator.
 Type inference here requires inferring the types of the zero and successor cases, which need to be the same, well-formed type.
 The task requires many steps, but they are routine and can be performed by a mindless
 repetition of the type formation, introduction and elimination rules.

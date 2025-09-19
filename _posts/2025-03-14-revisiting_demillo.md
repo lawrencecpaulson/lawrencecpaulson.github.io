@@ -196,8 +196,7 @@ but formal tools are used to ensure that it behaves correctly.
 The paper repeatedly emphasises attributes of good proofs such as simplicity and clarity.
 They stress the crucial role of intuition in understanding mathematical concepts.
 This is absolutely right.
-Regular readers of this blog will have seen the 
-many [examples](https://lawrencecpaulson.github.io/tag/examples)
+Regular readers of this blog will have seen the many [examples](/tag/examples)
 where I walk through Isabelle proofs step-by-step.
 Perfectly readable they are not – they are code – but with practice they are understandable.
 They are understandable enough that 

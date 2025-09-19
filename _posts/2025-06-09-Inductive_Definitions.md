@@ -7,7 +7,7 @@ tags: [inductive definitions, examples, newbies]
 The [previous post]({% post_url 2025-06-04-Definitions %}) 
 discussed the simplest sort of definitions,
 those that are essentially abbreviations.
-An [*inductive definition*](https://lawrencecpaulson.github.io/tag/inductive_definitions) is conceptionally quite different.
+An [*inductive definition*](/tag/inductive_definitions) is conceptionally quite different.
 The simplest example is to say that a natural number can be either 0
 or the successor of another natural number, and that **there are
 no other natural numbers**.
@@ -237,4 +237,4 @@ Documentation is available in Section 3.5 of [Programming and Proving](https://i
 For those of you interested in the full abstract theory of inductive definitions,
 Peter Aczel's [chapter](https://doi.org/10.1016/S0049-237X(08)71120-0) (also [here](/papers/Aczel-Inductive-Defs.pdf)) in the *Handbook of Mathematical Logic* is the ultimate account.
 
-And there are [plenty of examples](https://lawrencecpaulson.github.io/tag/inductive_definitions) right here on this blog.
+And there are [plenty of examples](/tag/inductive_definitions) right here on this blog.

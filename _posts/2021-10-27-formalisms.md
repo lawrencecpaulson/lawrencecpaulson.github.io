@@ -2,7 +2,7 @@
 layout: post
 title:  "On logical formalisms"
 usemathjax: true 
-tags: [general, logic, Bertrand Russell, Ernst Zermelo, NG de Bruijn, Principia Mathematica]
+tags: [general, logic, Bertrand Russell, Ernst Zermelo, NG de Bruijn, Principia Mathematica, higher-order logic]
 ---
 
 Looking at the [previous example]({% post_url 2021-10-13-Fib-example %}), on Fibonacci numbers, you may be wondering, *how we can be sure that a machine proof corresponds to actual mathematics?* This question raises complex issues in the foundations of mathematics and logic.

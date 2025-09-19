@@ -23,12 +23,11 @@ It's this easy:
 you can also launch Isabelle from the UNIX command line
 
 But then what? You need some small examples to get a hang of the syntax and then bigger ones to learn how to scale. On this blog, visit the 
-[newbies](https://lawrencecpaulson.github.io/tag/newbies) 
-and [Isabelle](https://lawrencecpaulson.github.io/tag/Isabelle) tags.
+[newbies](/tag/newbies) and [Isabelle](/tag/Isabelle) tags.
 
 But now I see that even the simplest example, on Fibonacci numbers, is not really for newbies.
 The proofs are simple but polished, hiding the trial and error that a beginner would inevitably go through. They are in the structured 
-[Isar](https://lawrencecpaulson.github.io/tag/Isar) style,
+[Isar](/tag/Isar) style,
 where every claim has a single-line proof, although most real proofs (especially big ones)
 involve chains of tactic steps such as one finds in other proof assistants 
 such as Lean, Coq and HOL4: so-called *apply-style* proofs.

@@ -68,7 +68,7 @@ $\Sigma$ and $\Pi$ constructions are valuable.
 However, the 1986 version of Isabelle used a form of Skolemization for quantifiers.
 It seemed ad-hoc, and it was also inefficient. Inspired by the
 [Edinburgh Logical Framework](https://doi.org/10.1145/138027.138060), I decided to create my own version, free of space-wasting proof objects.
-I showed my effort to [Thierry Coquand](http://www.cse.chalmers.se/~coquand/), who informed me that I had simply re-invented intuitionistic higher order logic.
+I showed my effort to [Thierry Coquand](http://www.cse.chalmers.se/~coquand/), who informed me that I had simply re-invented intuitionistic higher-order logic.
 That was perfect, because I wouldn't have to puzzle out its theoretical properties.
 (Though I also wouldn't get anything published in *Journal of the ACM*.)
 I simply invested in a copy of [Lambek and Scott](https://www.cambridge.org/gb/academic/subjects/mathematics/logic-categories-and-sets/introduction-higher-order-categorical-logic?format=PB&isbn=9780521356534).

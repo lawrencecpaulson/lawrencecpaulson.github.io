@@ -79,7 +79,7 @@ in proof assistants!
 
 In short, formal proofs, provided that they are written to be legible, easily satisfy
 all three criteria. Unfortunately, the great majority of formal proofs are not legible.
-But as I have shown by [numerous examples](https://lawrencecpaulson.github.io/tag/examples), 
+But as I have shown by [numerous examples](/tag/examples), 
 they can be.
 
 ### What do we do about super-long proofs?

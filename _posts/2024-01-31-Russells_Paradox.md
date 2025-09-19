@@ -2,7 +2,7 @@
 layout: post
 title:  "Russell's Paradox: myth and fact"
 usemathjax: true 
-tags: [logic, Bertrand Russell, Principia Mathematica, philosophy, lambda calculus]
+tags: [logic, Bertrand Russell, Principia Mathematica, philosophy, lambda calculus, higher-order logic]
 ---
 
 The story of Russell's paradox is well known. 

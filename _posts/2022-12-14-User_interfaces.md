@@ -41,7 +41,7 @@ but the situation is by no means settled.
 
 ### AUTOMATH: the first proof assistant?
 
-Some people say that [AUTOMATH](https://lawrencecpaulson.github.io/tag/AUTOMATH) 
+Some people say that [AUTOMATH](/tag/AUTOMATH) 
 was the first proof assistant.
 My impression (from hearing NG de Bruijn lecture at Caltech)
 is that punched cards were used, but the early papers refer to an interactive mode.

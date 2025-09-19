@@ -146,7 +146,7 @@ The first two cases are handled by type $(\Sigma x:A) B(x)$,
 which consists of pairs $\langle a,b \rangle$ where $a:A$ and $b:B(a)$, generalising the binary Cartesian product. The third case
 is handled by type $A+B$, the binary disjoint sum.
 The most faithful realisation of this scheme is 
-[Martin-Löf type theory](https://lawrencecpaulson.github.io/tag/Martin-Löf_type_theory).
+[Martin-Löf type theory](/tag/Martin-Löf_type_theory).
 
 As soon as we impose irrelevance of proofs, this beautiful scheme falls apart. The point of the intuitionist interpretation is to capture the structure of the constructions; 
 with irrelevance, all constructions are identical and even $A+B$ can have at most one element.
