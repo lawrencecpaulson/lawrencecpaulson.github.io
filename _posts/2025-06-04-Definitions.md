@@ -87,11 +87,11 @@ To be sure of this, we need to know that a definition in a proof assistant can a
 
 ### Definitions in proof assistants
 
-The earliest systems, such as [AUTOMATH](http://localhost:4000/tag/AUTOMATH) and [Boyer–Moore](https://dl.acm.org/doi/10.1145/321864.321875),
+The earliest systems, such as [AUTOMATH](https://lawrencecpaulson.github.io/tag/AUTOMATH) and [Boyer–Moore](https://dl.acm.org/doi/10.1145/321864.321875),
 provided safe principles where an entity could be defined
-in terms of already existing entities. [Edinburgh LCF](http://localhost:4000/tag/LCF) made no distinction
+in terms of already existing entities. [Edinburgh LCF](https://lawrencecpaulson.github.io/tag/LCF) made no distinction
 between definitions and arbitrary axioms, 
-but for its successor, the [HOL system](http://localhost:4000/tag/HOL_system), 
+but for its successor, the [HOL system](https://lawrencecpaulson.github.io/tag/HOL_system), 
 Mike Gordon introduced principles for defining 
 
 * a constant to abbreviate a term
@@ -110,7 +110,7 @@ Consider Grothendieck schemes: they are vital to the study of algebraic geometry
 and when Kevin Buzzard first took an interest in formalising mathematics,
 they had not been defined in any proof assistant.
 He set a student on the task, Ramon Fernández Mir,
-who completed it and wrote up his work as a 56-page [Master's dissertation](https://www.imperial.ac.uk/media/imperial-college/faculty-of-engineering/computing/public/1819-ug-projects/Fernandez-I-MirR-Schemes-in-Lean.pdf)
+who completed it and wrote up his work as a 56-page Master's dissertation
 and later as a [journal article](https://www.tandfonline.com/doi/full/10.1080/10586458.2021.1983489).
 In response to various claims that such a feat would be impossible
 in Isabelle/HOL, we had to [do it too](https://doi.org/10.1080/10586458.2022.2062073),

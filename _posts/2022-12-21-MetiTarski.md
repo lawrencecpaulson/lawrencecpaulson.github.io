@@ -136,7 +136,7 @@ a proof in its extended resolution calculus.
 ### Continued fractions
 
 After presenting the [2008 paper](https://rdcu.be/c119i) at CICM in Birmingham,
-I met [Annie Cuyt](https://www.uantwerpen.be/en/staff/annie-cuyt/),
+I met [Annie Cuyt](https://www.stir.ac.uk/people/1868593),
 who stated that continued fractions would yield upper/lower bounds
 far superior than the ones I was using, which were mostly based on Taylor expansions.
 She referred me to her then recent [Handbook of Continued Fractions](https://link.springer.com/book/10.1007/978-1-4020-6949-9)

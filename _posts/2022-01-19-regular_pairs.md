@@ -5,7 +5,7 @@ usemathjax: true
 tags: [Szemerédi’s regularity lemma, formalised mathematics]
 ---
 
-[Chelsea Edmonds](https://www.cst.cam.ac.uk/people/cle47), [Angeliki Koutsoukou-Argyraki](https://www.cst.cam.ac.uk/people/ak2110) and I recently formalised [Roth's theorem on arithmetic progressions](https://www.isa-afp.org/entries/Roth_Arithmetic_Progressions.html).
+[Chelsea Edmonds](https://cledmonds.github.io), [Angeliki Koutsoukou-Argyraki](https://www.cst.cam.ac.uk/people/ak2110) and I recently formalised [Roth's theorem on arithmetic progressions](https://www.isa-afp.org/entries/Roth_Arithmetic_Progressions.html).
 The project required first formalising [Szemerédi’s regularity lemma](https://www.isa-afp.org/entries/Szemeredi_Regularity.html), which "states that the vertices of every large enough graph can be partitioned into a bounded number of parts so that the edges between different parts behave almost randomly" ([Wikipedia](https://en.wikipedia.org/wiki/Szemerédi_regularity_lemma)).
 The mathematics is elementary enough. Our main difficulties were caused by ambiguities, not merely in the proofs but in the statements of the theorems and even the definitions.
 

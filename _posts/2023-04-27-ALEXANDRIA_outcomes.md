@@ -151,7 +151,7 @@ It actually becomes tedious to list all the results proved.
 (There is a complete list on the [ALEXANDRIA website](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/).)
 For example, we formalised [Szemerédi’s Regularity Lemma](https://doi.org/10.1007/s10817-022-09650-2) 
 and the [Balog–Szemerédi–Gowers](https://doi.org/10.1145/3573105.3575680) theorem
-with the help of [Chelsea Edmonds](https://www.cst.cam.ac.uk/people/cle47), a PhD student.
+with the help of [Chelsea Edmonds](https://cledmonds.github.io), a PhD student.
 She also formalised [Lucas's theorem](https://files.sketis.net/Isabelle_Workshop_2020/Isabelle_2020_paper_10.pdf) 
 and [Fisher's inequality](https://doi.org/10.4230/LIPIcs.ITP.2022.11),
 and has been building the first formalisation
