@@ -2,7 +2,7 @@
 layout: post
 title:  Most proofs are trivial
 usemathjax: true 
-tags: [general,verification,philosophy]
+tags: [general,verification,philosophy,Isar]
 ---
 Perhaps I have to begin with an apology. 
 I am not asserting that mathematics is trivial,
@@ -55,7 +55,7 @@ can be proved automatically by Isabelle/HOL. And if you don't believe me, here i
 
 > the “abridged edition” of Principia Mathematica (the one that ends at §56) does not contain any “difficult” theorems in the sense of being mathematically deep or challenging; rather, it consists entirely of extremely elementary logical and propositional results, all proved in excruciating detail.
 
-Full disclosure: I also noticed errors in ChatGPT's output, 
+Full disclosure: my experience with ChatGPT is patchy, 
 but I'm sure that this bit is right.
 
 ### Foundations of Analysis
@@ -103,16 +103,42 @@ which expresses the completeness of the reals
 and has a detailed proof covering three pages.
 But Landau's style is extremely detailed and even this proof cannot be called hard.
 
-One fault with Landau's approach is that he obtains the real numbers 
+Landau's obtains the real numbers 
 from the positive reals by a signed-magnitude approach
-that causes a massive explosion of case analyses.
+that complicates proofs with a massive explosion of cases.
 Equivalence classes of pairs of positive reals (representing their difference)
 is the elegant way to introduce zero and the negative reals.
+It's hard to see why Landau made such an error.
 
 Few modern textbooks are as detailed as *Grundlagen*.
-Authors prefer to present only the hard proofs, leaving the easy ones as exercises.
+Authors prefer to present only the hard proofs, 
+leaving the easy ones (the majority) as exercises.
+Don't be fooled!
 
 ### Cantor’s theorem
+
+Cantor’s theorem states that, for any set $A$, 
+there exists no surjective function $f : A \to \mathcal{P}(A)$.
+The proof, via Russell's paradox, is easy 
+and was first [generated automatically](https://www.ijcai.org/Proceedings/77-1/Papers/100.pdf) way back in 1977.
+The proof in Isabelle is just a few lines of Isar text.
+
+<pre class="source">
+<span class="keyword1 command">theorem</span> Cantors_theorem<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∄</span></span><span class="bound">f</span><span class="main">.</span></span> <span class="bound">f</span> <span class="main">`</span> <span class="free">A</span> <span class="main">=</span> <span class="const">Pow</span> <span class="free">A</span><span>"</span><span>
+</span><span class="keyword1 command">proof</span><span>
+  </span><span class="keyword3 command">assume</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">f</span><span class="main">.</span></span> <span class="bound">f</span> <span class="main">`</span> <span class="free">A</span> <span class="main">=</span> <span class="const">Pow</span> <span class="free">A</span><span>"</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">f</span> <span class="keyword2 keyword">where</span> f<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">f</span> <span class="main">`</span></span> <span class="free">A</span> <span class="main">=</span></span> <span class="const">Pow</span> <span class="free">A</span><span>"</span> <span class="keyword1 command">..</span><span>
+  </span><span class="keyword1 command">let</span> <span class="var quoted var">?X</span> <span class="main">=</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">{</span><span class="bound bound">a</span> <span class="main">∈</span> <span class="free">A</span><span class="main">.</span> <span class="bound">a</span> <span class="main">∉</span></span> <span class="skolem">f</span> <span class="bound">a</span><span class="main">}</span><span>"</span></span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="var">?X</span> <span class="main">∈</span></span> </span><span class="const">Pow</span> <span class="free">A</span><span>"</span> <span class="keyword1 command">by</span> <span class="operator">blast</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="var">?X</span> <span class="main">∈</span></span> <span class="skolem">f</span> <span class="main">`</span></span> <span class="free">A</span><span>"</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">only</span><span class="main main">:</span> f<span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">x</span> <span class="keyword2 keyword">where</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">x</span> <span class="main">∈</span></span> <span class="free">A</span><span>"</span></span> <span class="keyword2 keyword">and</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">f</span> <span class="skolem">x</span> <span class="main">=</span></span> <span class="var">?X</span><span>"</span></span> <span class="keyword1 command">by</span> <span class="operator">blast</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="const">False</span> <span class="keyword1 command">by</span> <span class="operator">blast</span><span>
+</span><span class="keyword1 command">qed</span>
+</pre>
+
+Cantor's theorem is profound and has wide-ranging implications.
+It implies that there is no universal set and no greatest cardinal number.
+So the *theorem* is not trivial, but methinks the *proof* kinda is.
 
 ### Operational semantics of programming languages
 
