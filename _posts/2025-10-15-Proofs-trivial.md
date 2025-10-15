@@ -10,7 +10,7 @@ nor am I belittling students who struggle with elementary exercises.
 I know how it feels to be told that a problem I cannot solve is trivial.
 Nevertheless, the claim of this post is on the one hand obvious and on the other hand profound.
 It suggests new ways of thinking about proof assistants and program verification.
-But first, I had better prove my point. This step will be trivial.
+But first, I had better prove my point. 
 
 ### Discrete mathematics
 
@@ -29,10 +29,10 @@ X \in \mathcal{P} (A\cap B) \iff X \subseteq A\cap B \iff X \subseteq A \land X 
 \end{align*}
 $$
 
-Yup, trivial. (Even if some of those steps could have been expanded out a bit more.)
+Yup, it's trivial, even if some of those steps could have been expanded out a bit more.
 
 Many facts of discrete mathematics can be proved by following your nose.
-And perhaps this gives us a definition of *trivial*: 
+And this gives us a definition of *trivial*: 
 results that follow more or less mechanically from the definitions.
 The *fundamental theorem of arithmetic*, which states that every natural number
 has a unique factorisation into primes, is a good example of a non-trivial result.
@@ -56,12 +56,12 @@ these assertions were used as exercises in early theorem proving experiments.
 Newell and Simon's heuristic *Logic Theorist* proved 38 theorems from the first two chapters in 1958. 
 Shortly afterwards, Hao Wang used his knowledge of logic to implement an algorithm that proved
 hundreds of theorems from *PM* in minutes, on a IBM 704.
-It is no disparagement of Wang's work to say that he demonstrated that PM presents a list of trivial proofs.
+It is no disparagement of Wang's work to say that he demonstrated that *PM* presents a list of trivial proofs.
 And if you don't believe me, here is ChatGPT:
 
 > the “abridged edition” of Principia Mathematica (the one that ends at §56) does not contain any “difficult” theorems in the sense of being mathematically deep or challenging; rather, it consists entirely of extremely elementary logical and propositional results, all proved in excruciating detail.
 
-Wang's level of automation is utterly unattainable – even with today's technology – 
+Wang's level of automation is utterly unattainable – even after seven decades of technological advances – 
 for a typical mathematics textbook.
 
 ### Foundations of Analysis
@@ -77,7 +77,7 @@ Most of Landau's proofs are trivial.
 He introduces the positive natural numbers axiomatically,
 including the usual definitions of addition, ordering and multiplication.
 The algebraic laws that they enjoy are important mathematical facts, 
-but nevertheless their proofs are all trivial inductions.
+but their proofs are all trivial inductions.
 
 Next, he introduces fractions as equivalence classes 
 of pairs of natural numbers.
