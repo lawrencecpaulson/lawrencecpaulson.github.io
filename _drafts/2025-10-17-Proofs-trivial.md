@@ -142,13 +142,48 @@ So the *theorem* is not trivial, but methinks the *proof* kinda is.
 
 ### Operational semantics of programming languages
 
+Since the 1980s, we have had highly sophisticated techniques
+for specifying the semantics of programming languages, both
+*static semantics* such as type checking and name resolution, and
+*dynamic semantics* or what happens at runtime (including concurrency).
+Using such techniques, we can prove that a proposed programming language satisfies
+key properties such as 
+*progress* (a well typed expression make another step of evaluation)
+*type preservation* (such an evaluation step will not change its type),
+and *determinacy* (the next evaluation step is unique).
+
+The techniques rely on specifying typing, reduction, etc. as relations 
+[defined inductively]({% post_url 2025-06-09-Inductive_Definitions %})),
+as I have illustrated in a [previous blogpost]({% post_url 2023-03-08-Fun_Semantics %}).
+As mentioned in that blogpost, these proofs are simultaneously highly intricate and trivial: 
+
+* They are intricate because simply to apply the relevant induction rule correctly
+generates pages of formulas. They are almost impossible to write out flawlessly by hand.
+
+* They are trivial because the sorts of properties typically proved hold because the language was designed that they would hold. 
+Languages are designed such that the type system makes sense, 
+evaluation steps don't change integers into strings and 
+(in the absence of concurrency) there is only one possible next step.
+
+It's true that some program properties have deep and difficult proofs.
+The quintessential example is the Church-Rosser theorem,
+which says that different evaluation paths for a particular
+λ-calculus expression cannot lead to different values.
+This obviously desirable property cannot be said to hold by design
+and the first attempts to prove it were incorrect.
+
+This was the category of proofs that led to this blogpost in the first place.
+The point is that people feel ripped off if they have to struggle 
+to prove something obvious.
+
 ### Program verification
 
 DeMillo Lipton and Perlis disenchantment with a lengthy proof of something trivial
 
+e.g. for worst case thinking
+
 ### implications
 
-e.g. for worst case thinking
 
 For proof assistants
 
