@@ -15,7 +15,7 @@ But first, I had better prove my point.
 ### Discrete mathematics
 
 Many students hate discrete mathematics and find the problems hard.
-Consider for example $\mathcal{P} (A\cap B) = \mathcal{P} (A) \cap \mathcal{P} (B)$.
+Consider for example the powerset identity $\mathcal{P} (A\cap B) = \mathcal{P} (A) \cap \mathcal{P} (B)$.
 A typical student will ask, "how do I even begin?".
 But for many of these problems there is just one thing you can do:
 some obvious step that doesn't yield an immediate solution, 
@@ -210,7 +210,8 @@ Somehow they confused program proofs – mechanical and tedious to write out, bu
 with genuinely deep results. In proof theory, it's possible to show
 that there exist pathological theorems whose proofs are unimaginably large,
 hence the authors' claim that verification would require a computer large enough to fill the observable universe.
-That claim was ridiculous, but we do need verification tools that can cope with huge formulas.
+That claim is a ridiculous example of worst-case reasoning.
+But we do need verification tools that can cope with huge formulas.
 
 ### What is the point of proving trivial facts?
 
