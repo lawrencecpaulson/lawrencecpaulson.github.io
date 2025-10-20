@@ -204,7 +204,7 @@ DeMillo et al. actually did understand that program proofs were generally trivia
 Recall that for them, *social processes* were how mathematical results were confirmed,
 and they noted that program proofs were too boring to gain the attention of the mathematical community.
 Again we see the distinction between boring program proofs and deep proofs about algorithms,
-such as the fascinating [Burrows–Wheeler transform](https://doi.org/10.5281/zenodo.14279882).
+such as the fascinating [Burrows–Wheeler transform](https://doi.org/10.1145/3703595.3705883).
 
 Somehow they confused program proofs – mechanical and tedious to write out, but shallow –
 with genuinely deep results. In proof theory, it's possible to show
