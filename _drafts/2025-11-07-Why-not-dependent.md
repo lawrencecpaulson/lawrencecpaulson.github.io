@@ -109,6 +109,7 @@ But eventually I felt what seemed to me as a rigid and doctrinaire attitude,
 if not a literal cult of personality around Martin-Löf,
 and the sudden switch to intentional equality 
 (people were not allowed to disagree) wrecked most of my work.
+Screw that.
 
 You might ask, what about the calculus of constructions,
 which arose during that time and eventually gave us Rocq and Lean?
@@ -119,3 +120,35 @@ It's clear that I am being fussy, because thousands of people
 find these formalisms perfectly natural and believable.
 But it is also true that the calculus of constructions 
 underwent numerous changes over the past four decades.
+We can still see it as a turbocharged version of AUTOMATH.
+
+### Decisions, decisions
+
+We can see all this as an example of the choices we make in research.
+People were developing new formalisms. This specific fact was the impetus
+for making Isabelle generic in the first place.
+But we have to choose whether to spend our time developing formalisms 
+or instead to choose a fixed formalism and see how far you can push it.
+Both are legitimate research goals.
+
+For example, already in 1985, Mike Gordon 
+was using higher-order logic [to verify hardware](https://doi.org/10.48456/tr-77).
+He was not distracted by the idea that some dependent type theory might work better
+For dealing with *n*-bit words and the like.
+The formalism that he implemented was essentially the same as the 
+[simple theory of types](https://plato.stanford.edu/entries/type-theory-church/) 
+outlined by Alonzo Church in 1940.
+He made verification history using this venerable formalism, 
+and John Harrison later found
+a clever way to [encode the dimension](https://doi.org/10.1007/11541868_8)
+of a vector type.
+Isabelle/HOL also implements Church's simple type theory,
+with one extension: [axiomatic type classes]({% post_url 2022-03-02-Type_classes %}).
+
+During all this time, both Martin-Löf type theory and the calculus of constructions
+went through several stages of evolution. Legitimate research,
+but a distraction from the task of seeing what existing formalisms
+are capable of.
+
+### Pushing higher-order logic to its limit
+
