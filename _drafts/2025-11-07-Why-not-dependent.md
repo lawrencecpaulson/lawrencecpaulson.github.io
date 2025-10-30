@@ -1,21 +1,20 @@
 ---
 layout: post
-title:  Why don't I use dependent types?
+title:  "\"Why don't you use dependent types?\""
 usemathjax: true 
 tags: [memories, AUTOMATH, LCF, type theory, Martin-Löf type theory, NG de Bruijn]
 ---
-To be fair, nobody asks this question.
-But people have regularly asked why there are (in normal usage) 
-no proof objects in Isabelle.
+To be fair, nobody asks me this exact question.
+But people have regularly asked why Isabelle dispenses with proof objects.
 The two questions are essentially the same, 
 because proof objects are intrinsic to all the usual type theories.
-They are also a completely unnecessary and therefore a waste of space.
+They are also completely unnecessary and therefore a waste of space.
 As described in a [previous post]({% post_url 2022-01-05-LCF %}),
-type checking in the *programming language* (not the formalism) 
+type checking in the *implementation language* (not in the logic)
 can ensure that only legitimate proof steps are executed.
 Robin Milner had this fundamental insight 50 years ago,
-giving us the LCF architecture.
-But the best answer to the original question is, 
+giving us the LCF architecture with its proof kernel.
+But the best answer to the original question is simply this: 
 I did use dependent types, for years.
 
 ### My time with AUTOMATH
@@ -23,7 +22,7 @@ I did use dependent types, for years.
 I was lucky enough to get some personal time with N G de Bruijn
 when he came to Caltech in 1977 to lecture about
 [AUTOMATH]({% post_url 2021-11-03-AUTOMATH %}).
-I never actually used this system.
+I never actually got to use this system.
 Back then, researchers used the nascent Internet (the ARPAnet)
 not to download software so much as 
 to run software directly on the host computer.
@@ -106,16 +105,16 @@ Yes, Isabelle began as an implementation of Martin-Löf type theory,
 which is [still included]({% post_url 2022-11-30-CTT_in_Isabelle-II %}) 
 in the distribution even today as Isabelle/CTT.
 But eventually I felt what seemed to me as a rigid and doctrinaire attitude,
-if not a literal cult of personality around Martin-Löf,
-and the sudden switch to intentional equality 
-(people were not allowed to disagree) wrecked most of my work.
+if not a literal cult of personality around Martin-Löf.
+The sudden switch to intensional equality 
+(everyone was expected to adopt the new approach) wrecked most of my work.
 Screw that.
 
 You might ask, what about the calculus of constructions,
 which arose during that time and eventually gave us Rocq and Lean?
 To me they raised, and continue to raise, the same question I had put to de Bruijn.
 Gérard Huet said something like "it is nothing but function application",
-which did not convince me (you can say the exact same thing about the λ-calculus).
+which did not convince me.
 It's clear that I am being fussy, because thousands of people
 find these formalisms perfectly natural and believable.
 But it is also true that the calculus of constructions 
@@ -152,3 +151,49 @@ are capable of.
 
 ### Pushing higher-order logic to its limit
 
+I felt exceptionally lucky to have won 
+[funding from the European Research Council](https://cordis.europa.eu/project/id/742178)
+for my advanced grant [ALEXANDRIA]({% post_url 2021-12-08-ALEXANDRIA %}).
+When I put [my proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/Part-B2.pdf) 
+in, homotopy type theory was still all the rage,
+so I emphasised Isabelle's specific advantages: its automation,
+its huge libraries and the legibility of its proofs.
+
+The team started work with enthusiasm.
+Nevertheless, I fully expected that we would hit a wall, 
+reaching mathematical material
+that could not easily be formalised in higher-order logic.
+A number of my research colleagues were fully convinced
+that higher-logic was not adequate for serious mathematics.
+But Anthony Bordg took up the challenge, leading some of our team
+to [formalise Grothendieck schemes](https://doi.org/10.1080/10586458.2022.2062073).
+
+For some reason I had a particular fear of the field extension $F[a]$,
+which extends the field $F$ with some $a$ postulated to be 
+a root of some polynomial over $F$.
+(For example, the field of complex numbers is $\mathbb{R}[i]$, 
+where $i$ is postulated to be a root a root of $x^2+1=0$.)
+And yet an early outcome of ALEXANDRIA was[ a proof](https://rdcu.be/cIK3W),
+by Paulo Emílio de Vilhena and Martin Baillon,
+that every field admits an algebraically closed extension. 
+This was the first proof of that theorem in any proof assistant, 
+and its proof involves an infinite series of field extensions.
+
+We never hit any wall.
+As our group went on to formalise 
+[more and more advanced results](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/),
+people stopped saying "you can't formalise mathematics without dependent types"
+and switched to saying "dependent types give you nicer proofs".
+But they never proved this claim.
+
+Now that dependent type theory has attained maturity 
+and has an excellent tool in the form of Lean, shall I go back to dependent types?
+I am not tempted. The only aspects of Lean that I envy are its huge community and
+the [Blueprint tool](https://github.com/PatrickMassot/leanblueprint).
+I hear too many complaints about Lean's performance.
+I've heard of too many cases where dependent types played badly 
+with intensional equality or otherwise made life difficult. 
+Quite a few people have told me that 
+the secret of dependent types is knowing when **not** to use them.
+And so, to me, they have too much in common 
+with Tesla's [Full Self-Driving](https://electrek.co/2025/10/29/tesla-full-self-driving-v14-disappoints-with-hallucinations-brake-stabbing-speeding/).
