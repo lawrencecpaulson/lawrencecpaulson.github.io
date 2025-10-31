@@ -8,7 +8,7 @@ To be fair, nobody asks me this exact question.
 But people have regularly asked why Isabelle dispenses with proof objects.
 The two questions are essentially the same, 
 because proof objects are intrinsic to all the usual type theories.
-They are also completely unnecessary and therefore a waste of space.
+They are also completely unnecessary and therefore a huge waste of space.
 As described in a [previous post]({% post_url 2022-01-05-LCF %}),
 type checking in the *implementation language* (not in the logic)
 can ensure that only legitimate proof steps are executed.
@@ -49,26 +49,25 @@ it did not embody the
 (sometimes wrongly called the Curry–Howard–de Bruijn correspondence).
 That correspondence involves having a type theory strong enough
 to represent the predicate calculus directly in the form of types.
-AUTOMATH did not do this, and it is clear that de Bruijn
-[did not approve](https://pure.tue.nl/ws/portalfiles/portal/4428179/597611.pdf) 
-of the increasingly powerful type theories being developed.
-Rather, AUTOMATH was a [logical framework](https://pure.tue.nl/ws/files/1892191/597622.pdf):
+In AUTOMATH you had to introduce the symbols and inference rules 
+of your desired calculus in the form of axioms, much as you do with Isabelle.
+In short, AUTOMATH was a [logical framework](https://pure.tue.nl/ws/files/1892191/597622.pdf):
 
 > like a big restaurant that serves all sorts of food: vegetarian, kosher, or anything else the customer wants
 
-AUTOMATH provided a weak language, 
+De Bruijn
+[did not approve](https://pure.tue.nl/ws/portalfiles/portal/4428179/597611.pdf) 
+of the increasingly powerful type theories being developed in the 1990s.
+AUTOMATH was a weak language, 
 including a generalised product construction just
 powerful enough to express the inference rules of a variety of formalisms
-and to make simple definitions.
-Its influence on Isabelle should be obvious, 
-because it too provides a weak logical framework 
-for expressing inference rules
-and aims to be [*generic*](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-130.html), like the big AUTOMATH restaurant.
-It is not my fault that everybody prefers the same cuisine,
-higher-order logic, so that Isabelle/HOL has become dominant.
-It is also a pity that I last spoke to Dick (as he was known to friends)
+and to make simple definitions, again much like Isabelle.
+Isabelle aims to be [*generic*](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-130.html), like the big AUTOMATH restaurant.
+Only these days everybody prefers the same cuisine,
+higher-order logic, so Isabelle/HOL has become dominant.
+Unfortunately, I last spoke to Dick (as he was known to friends)
 when I was putting all my effort into Isabelle/ZF.
-He simply loathed set theory and was convinced that mathematics was essentially typed.
+He simply loathed set theory and saw mathematics as essentially typed.
 He never lived to see the enormous amount of advanced mathematics
 that would be formalised using types in Isabelle/HOL.
 
@@ -104,10 +103,10 @@ of Isabelle.
 Yes, Isabelle began as an implementation of Martin-Löf type theory,
 which is [still included]({% post_url 2022-11-30-CTT_in_Isabelle-II %}) 
 in the distribution even today as Isabelle/CTT.
-But eventually I felt what seemed to me as a rigid and doctrinaire attitude,
-if not a literal cult of personality around Martin-Löf.
+But eventually I tired of what seemed to me a doctrinaire attitude
+bordering on a cult of personality around Martin-Löf.
 The sudden switch to intensional equality 
-(everyone was expected to adopt the new approach) wrecked most of my work.
+(and everyone was expected to adopt the new approach) wrecked most of my work.
 Screw that.
 
 You might ask, what about the calculus of constructions,
@@ -115,11 +114,14 @@ which arose during that time and eventually gave us Rocq and Lean?
 To me they raised, and continue to raise, the same question I had put to de Bruijn.
 Gérard Huet said something like "it is nothing but function application",
 which did not convince me.
-It's clear that I am being fussy, because thousands of people
-find these formalisms perfectly natural and believable.
+It's clear that I am being fussy,[^1]
+because thousands of people find these formalisms perfectly natural and believable.
 But it is also true that the calculus of constructions 
 underwent numerous changes over the past four decades.
-We can still see it as a turbocharged version of AUTOMATH.
+There seem to be several optional axioms that one adopt
+while attempting to minimise their use, as if on a diet.
+
+[^1]: Especially as regards constructive mathematics. To its founders, intuitionism is a philosophy suspicious of language, which it relegates to the purpose of recording and communicating mathematical ideas. To many today, "constructive mathematics" refers the use of a formalism satisfying certain syntactic properties.
 
 ### Decisions, decisions
 
@@ -143,35 +145,39 @@ a clever way to [encode the dimension](https://doi.org/10.1007/11541868_8)
 of a vector type.
 Isabelle/HOL also implements Church's simple type theory,
 with one extension: [axiomatic type classes]({% post_url 2022-03-02-Type_classes %}).
+Isabella users also derive much power from the [locale concept](https://doi.org/10.1007/s10817-019-09537-9), 
+which lies outside any particular logic.
 
 During all this time, both Martin-Löf type theory and the calculus of constructions
-went through several stages of evolution. Legitimate research,
-but a distraction from the task of seeing what existing formalisms
-are capable of.
+went through several stages of evolution. It's remarkable how the Lean community
+ran with a certain version of the calculus 
+and quickly formalised a [vast amount of mathematics](https://leanprover-community.github.io/mathlib-overview.html).
 
 ### Pushing higher-order logic to its limit
 
-I felt exceptionally lucky to have won 
+I felt exceptionally lucky to win 
 [funding from the European Research Council](https://cordis.europa.eu/project/id/742178)
-for my advanced grant [ALEXANDRIA]({% post_url 2021-12-08-ALEXANDRIA %}).
-When I put [my proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/Part-B2.pdf) 
-in, homotopy type theory was still all the rage,
-so I emphasised Isabelle's specific advantages: its automation,
+for the advanced grant [ALEXANDRIA]({% post_url 2021-12-08-ALEXANDRIA %}).
+When I applied, homotopy type theory was still all the rage,
+so [the proposal](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/Part-B2.pdf)  emphasised Isabelle's specific advantages: its automation,
 its huge libraries and the legibility of its proofs.
 
 The team started work with enthusiasm.
 Nevertheless, I fully expected that we would hit a wall, 
 reaching mathematical material
 that could not easily be formalised in higher-order logic.
-A number of my research colleagues were fully convinced
+Too much of Isabelle's analysis library identified topological spaces
+with types.
+Isabelle's abstract algebra library was old and crufty.
+A number of my research colleagues were convinced
 that higher-logic was not adequate for serious mathematics.
-But Anthony Bordg took up the challenge, leading some of our team
+But Anthony Bordg took up the challenge, leading a subproject
 to [formalise Grothendieck schemes](https://doi.org/10.1080/10586458.2022.2062073).
 
 For some reason I had a particular fear of the field extension $F[a]$,
 which extends the field $F$ with some $a$ postulated to be 
 a root of some polynomial over $F$.
-(For example, the field of complex numbers is $\mathbb{R}[i]$, 
+(For example, the field of complex numbers is precisely $\mathbb{R}[i]$, 
 where $i$ is postulated to be a root a root of $x^2+1=0$.)
 And yet an early outcome of ALEXANDRIA was[ a proof](https://rdcu.be/cIK3W),
 by Paulo Emílio de Vilhena and Martin Baillon,
@@ -192,7 +198,7 @@ I am not tempted. The only aspects of Lean that I envy are its huge community an
 the [Blueprint tool](https://github.com/PatrickMassot/leanblueprint).
 I hear too many complaints about Lean's performance.
 I've heard of too many cases where dependent types played badly 
-with intensional equality or otherwise made life difficult. 
+with intensional equality – I sat through an entire talk on this topic – or otherwise made life difficult. 
 Quite a few people have told me that 
 the secret of dependent types is knowing when **not** to use them.
 And so, to me, they have too much in common 
