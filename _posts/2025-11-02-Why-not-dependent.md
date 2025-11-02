@@ -184,7 +184,7 @@ For some reason I had a particular fear of the field extension $F[a]$,
 which extends the field $F$ with some $a$ postulated to be 
 a root of some polynomial over $F$.
 (For example, the field of complex numbers is precisely $\mathbb{R}[i]$, 
-where $i$ is postulated to be a root a root of $x^2+1=0$.)
+where $i$ is postulated to be a root of $x^2+1=0$.)
 And yet an early outcome of ALEXANDRIA was[ a proof](https://rdcu.be/cIK3W),
 by Paulo Emílio de Vilhena and Martin Baillon,
 that every field admits an algebraically closed extension. 
@@ -210,3 +210,17 @@ Quite a few people have told me that
 the secret of dependent types is knowing when **not** to use them.
 And so, to me, they have too much in common 
 with Tesla's [Full Self-Driving](https://electrek.co/2025/10/29/tesla-full-self-driving-v14-disappoints-with-hallucinations-brake-stabbing-speeding/).
+
+*Addendum*: somebody commented on Hacker News that higher-order logic is too weak 
+(in terms of proof-theoretic strength) to formalise post-WWII mathematics.
+This is not quite right.
+It is true that higher-order logic is much, much weaker than ZF set theory.
+But one of the most striking findings of ALEXANDRIA is that this is no obstacle
+to doing advanced mathematics, say to formalise Grothendieck schemes.
+Such elaborate towers of definitions do not seem to ascend especially high
+in the set-theoric hierarchy. I can only recall a couple of proofs
+([this one]([https://doi.org/10.1080/10586458.2021.1980464](https://doi.org/10.1080/10586458.2021.1980464)), 
+and [that one](https://rdcu.be/eNVb6)) 
+that required strengthening higher-order logic with the ZF axioms 
+(which is easily done). 
+These were theorems that referred to ZF entities in their very statements.
