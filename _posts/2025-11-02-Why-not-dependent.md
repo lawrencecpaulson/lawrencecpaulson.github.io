@@ -8,9 +8,9 @@ To be fair, nobody asks me this exact question.
 But people have regularly asked why Isabelle dispenses with proof objects.
 The two questions are essentially the same, 
 because proof objects are intrinsic to all the usual type theories.
-They are also completely unnecessary and therefore a huge waste of space.
-As described in a [previous post]({% post_url 2022-01-05-LCF %}),
-type checking in the *implementation language* (not in the logic)
+They are also completely unnecessary and a huge waste of space.
+As described in an [earlier post]({% post_url 2022-01-05-LCF %}),
+type checking in the *implementation language* (rather than in the logic)
 can ensure that only legitimate proof steps are executed.
 Robin Milner had this fundamental insight 50 years ago,
 giving us the LCF architecture with its proof kernel.
@@ -25,8 +25,10 @@ when he came to Caltech in 1977 to lecture about
 I never actually got to use this system.
 Back then, researchers used the nascent Internet (the ARPAnet)
 not to download software so much as 
-to run software directly on the host computer.
-Most software was not portable, and AUTOMATH was configured to run on 
+to run software directly on the host computer, 
+since most software was not portable.
+Eindhoven University was not on the ARPAnet,
+and AUTOMATH was configured to run on 
 [a computer we did not have](https://automath.win.tue.nl/archive/pdf/aut034.pdf):
 
 > Until September 1973, the computer was the Electrologica X8, after that
@@ -38,10 +40,11 @@ the [PhD dissertation](https://automath.win.tue.nl/archive/pdf/aut046.pdf) by LS
 This dissertation presents his translation 
 of Landau's text *Grundlagen der Analysis* (described [last time]({% post_url 2025-10-15-Proofs-trivial %}))
 from German into AUTOMATH.
-It is no coincidence that one of my earliest papers
-copied the idea of 
-[formalising a text](https://doi.org/10.1016/0167-6423(85)90009-7) 
-and attempting to be faithful to it
+It is no coincidence that many of my papers, from the
+[earliest](https://doi.org/10.1016/0167-6423(85)90009-7)
+to the [latest](https://doi.org/10.4230/LIPIcs.ITP.2025.18),
+copied the idea of formalising a text
+and attempting to be faithful to it, if possible line by line.
 
 As an aside, note that while AUTOMATH was a system of dependent types,
 it did not embody the 
@@ -59,9 +62,9 @@ De Bruijn
 [did not approve](https://pure.tue.nl/ws/portalfiles/portal/4428179/597611.pdf) 
 of the increasingly powerful type theories being developed in the 1990s.
 AUTOMATH was a weak language, 
-including a generalised product construction just
+a form of λ-calculus including a general product construction just
 powerful enough to express the inference rules of a variety of formalisms
-and to make simple definitions, again much like Isabelle.
+and to make simple definitions, again clearly the inspiration for Isabelle.
 Isabelle aims to be [*generic*](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-130.html), like the big AUTOMATH restaurant.
 Only these days everybody prefers the same cuisine,
 higher-order logic, so Isabelle/HOL has become dominant.
@@ -86,9 +89,10 @@ In response to kind invitations from Bengt Nordström and Kent Petersson,
 I paid a number of visits to Chalmers University in Gothenburg
 to learn about Martin-Löf type theory.
 I was particularly impressed by its promise 
-of a systematic and formal approach to program synthesis,
-and had already encountered [intuitionism]({% post_url 2021-11-24-Intuitionism %})
-through a course on the philosophy of mathematics at Stanford University.
+of a systematic and formal approach to program synthesis.
+I had already encountered [intuitionism]({% post_url 2021-11-24-Intuitionism %})
+through a course on the philosophy of mathematics at Stanford University,
+as I recall taught by [Ian Hacking](https://www.pet.cam.ac.uk/news/professor-ian-macdougall-hacking-1936-2023).
 The "rightness" of Martin-Löf type theory was obvious, 
 because it directly embodied the principles of intuition truth
 as outlined by Heyting: for example, that
@@ -100,17 +104,18 @@ This included a whole year of intricate hand derivations to produce a
 that I once thought would be important,
 and the [very first version]({% post_url 2022-07-13-Isabelle_influences %}) 
 of Isabelle.
-Yes, Isabelle began as an implementation of Martin-Löf type theory,
+Yes: Isabelle began as an implementation of Martin-Löf type theory,
 which is [still included]({% post_url 2022-11-30-CTT_in_Isabelle-II %}) 
 in the distribution even today as Isabelle/CTT.
 But eventually I tired of what seemed to me a doctrinaire attitude
-bordering on a cult of personality around Martin-Löf.
+bordering on a cult of personality around Per Martin-Löf.
 The sudden switch to intensional equality 
-(and everyone was expected to adopt the new approach) wrecked most of my work.
+(everyone was expected to adopt the new approach) wrecked most of my work.
 Screw that.
 
 You might ask, what about the calculus of constructions,
 which arose during that time and eventually gave us Rocq and Lean?
+(Not to mention [LEGO](https://www.lfcs.inf.ed.ac.uk/reports/92/ECS-LFCS-92-211/).)
 To me they raised, and continue to raise, the same question I had put to de Bruijn.
 Gérard Huet said something like "it is nothing but function application",
 which did not convince me.
@@ -118,8 +123,9 @@ It's clear that I am being fussy,[^1]
 because thousands of people find these formalisms perfectly natural and believable.
 But it is also true that the calculus of constructions 
 underwent numerous changes over the past four decades.
-There seem to be several optional axioms that one adopt
-while attempting to minimise their use, as if on a diet.
+There seem to be several optional axioms that people sometimes adopt
+while attempting to minimise their use, 
+like dieters enjoying an occasional croissant.
 
 [^1]: Especially as regards constructive mathematics. To its founders, intuitionism is a philosophy suspicious of language, which it relegates to the purpose of recording and communicating mathematical ideas. To many today, "constructive mathematics" refers the use of a formalism satisfying certain syntactic properties.
 
@@ -135,23 +141,23 @@ Both are legitimate research goals.
 For example, already in 1985, Mike Gordon 
 was using higher-order logic [to verify hardware](https://doi.org/10.48456/tr-77).
 He was not distracted by the idea that some dependent type theory might work better
-For dealing with *n*-bit words and the like.
+for *n*-bit words and the like.
 The formalism that he implemented was essentially the same as the 
 [simple theory of types](https://plato.stanford.edu/entries/type-theory-church/) 
 outlined by Alonzo Church in 1940.
 He made verification history using this venerable formalism, 
 and John Harrison later found
 a clever way to [encode the dimension](https://doi.org/10.1007/11541868_8)
-of a vector type.
+of vector types including words.
 Isabelle/HOL also implements Church's simple type theory,
 with one extension: [axiomatic type classes]({% post_url 2022-03-02-Type_classes %}).
 Isabella users also derive much power from the [locale concept](https://doi.org/10.1007/s10817-019-09537-9), 
-which lies outside any particular logic.
+a kind of module sysstem that lies outside any particular logic.
 
 During all this time, both Martin-Löf type theory and the calculus of constructions
-went through several stages of evolution. It's remarkable how the Lean community
-ran with a certain version of the calculus 
-and quickly formalised a [vast amount of mathematics](https://leanprover-community.github.io/mathlib-overview.html).
+went through several stages of evolution. It's remarkable how the Lean community,
+by running with a certain version of the calculus,
+quickly formalised a [vast amount of mathematics](https://leanprover-community.github.io/mathlib-overview.html).
 
 ### Pushing higher-order logic to its limit
 
@@ -188,6 +194,7 @@ and its proof involves an infinite series of field extensions.
 We never hit any wall.
 As our group went on to formalise 
 [more and more advanced results](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/),
+such as the [Balog–Szemerédi–Gowers theorem](https://doi.org/10.1145/3573105.3575680),
 people stopped saying "you can't formalise mathematics without dependent types"
 and switched to saying "dependent types give you nicer proofs".
 But they never proved this claim.
