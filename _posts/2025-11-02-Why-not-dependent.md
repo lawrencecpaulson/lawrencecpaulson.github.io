@@ -2,7 +2,7 @@
 layout: post
 title:  "\"Why don't you use dependent types?\""
 usemathjax: true 
-tags: [memories, AUTOMATH, LCF, type theory, Martin-Löf type theory, NG de Bruijn]
+tags: [memories, AUTOMATH, LCF, type theory, Martin-Löf type theory, NG de Bruijn, ALEXANDRIA]
 ---
 To be fair, nobody asks me this exact question.
 But people have regularly asked why Isabelle dispenses with proof objects.
@@ -27,7 +27,7 @@ Back then, researchers used the nascent Internet (the ARPAnet)
 not to download software so much as 
 to run software directly on the host computer, 
 since most software was not portable.
-Eindhoven University was not on the ARPAnet,
+But Eindhoven University was not on the ARPAnet,
 and AUTOMATH was configured to run on 
 [a computer we did not have](https://automath.win.tue.nl/archive/pdf/aut034.pdf):
 
@@ -36,8 +36,8 @@ and AUTOMATH was configured to run on
 > required the use of ALGOL 60.
 
 I did however read many of the research reports, including 
-the [PhD dissertation](https://automath.win.tue.nl/archive/pdf/aut046.pdf) by LS Jutting.
-This dissertation presents his translation 
+the [PhD dissertation](https://automath.win.tue.nl/archive/pdf/aut046.pdf) by LS Jutting,
+where he presents his translation 
 of Landau's text *Grundlagen der Analysis* (described [last time]({% post_url 2025-10-15-Proofs-trivial %}))
 from German into AUTOMATH.
 It is no coincidence that many of my papers, from the
@@ -127,7 +127,7 @@ There seem to be several optional axioms that people sometimes adopt
 while attempting to minimise their use, 
 like dieters enjoying an occasional croissant.
 
-[^1]: Especially as regards constructive mathematics. To its founders, intuitionism is a philosophy suspicious of language, which it relegates to the purpose of recording and communicating mathematical ideas. To many today, "constructive mathematics" refers the use of a formalism satisfying certain syntactic properties.
+[^1]: Especially as regards constructive mathematics. To its founders, intuitionism is a philosophy suspicious of language, which it relegates to the purpose of recording and communicating mathematical thoughts. This is the opposite of today's "constructive mathematics", which refers the use of a formalism satisfying certain syntactic properties.
 
 ### Decisions, decisions
 
