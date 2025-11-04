@@ -107,7 +107,7 @@ of Isabelle.
 Yes: Isabelle began as an implementation of Martin-Löf type theory,
 which is [still included]({% post_url 2022-11-30-CTT_in_Isabelle-II %}) 
 in the distribution even today as Isabelle/CTT.
-But eventually I tired of what seemed to me a doctrinaire attitude
+But eventually I got tired of what seemed to me a doctrinaire attitude
 bordering on a cult of personality around Per Martin-Löf.
 The sudden switch to intensional equality 
 (everyone was expected to adopt the new approach) wrecked most of my work.
@@ -152,7 +152,7 @@ of vector types including words.
 Isabelle/HOL also implements Church's simple type theory,
 with one extension: [axiomatic type classes]({% post_url 2022-03-02-Type_classes %}).
 Isabella users also derive much power from the [locale concept](https://doi.org/10.1007/s10817-019-09537-9), 
-a kind of module sysstem that lies outside any particular logic.
+a kind of module system that lies outside any particular logic.
 
 During all this time, both Martin-Löf type theory and the calculus of constructions
 went through several stages of evolution. It's remarkable how the Lean community,
