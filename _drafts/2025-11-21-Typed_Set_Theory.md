@@ -131,7 +131,8 @@ In typed set theory, we often need to talk about
 the set of all functions that have domain $A$ and codomain $B$,
 and occasionally the greater precision 
 of the dependent product is helpful.
-Both are trivial to define using set comprehension.
+Both are trivial to define using set comprehension;
+in fact, $f\in A\to B$ if and only if $f(A)\subseteq B$.
 There is a complication concerning function extensionality,
 which I will not discuss here.
 Another complication is that the inverse image 
@@ -139,7 +140,14 @@ involving a function in $A\to B$ is generally expected to be a
 subset of $A$; the Isabelle/HOL inverse image operator does not 
 and cannot accomplish that.
 
-Sigma not so much
+Analogously, we need the binary product space $A\times B$. 
+Its generalisation to the general sum, $\sum_{x\in A}\,B(x)$
+(Constable's "dependent product") is not especially important 
+but does have its uses.
+Both are again trivial to define using set comprehension, 
+and exactly as in type theory, the "non-dependent"
+versions $A\to B$ and $A\times B$ are not even defined separately
+but are simply degenerate cases of the full versions.
 
 inj_on, surjective, bij_betw
 
