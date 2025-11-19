@@ -151,7 +151,7 @@ a clever way to [encode the dimension](https://doi.org/10.1007/11541868_8)
 of vector types including words.
 Isabelle/HOL also implements Church's simple type theory,
 with one extension: [axiomatic type classes]({% post_url 2022-03-02-Type_classes %}).
-Isabella users also derive much power from the [locale concept](https://doi.org/10.1007/s10817-019-09537-9), 
+Isabelle users also derive much power from the [locale concept](https://doi.org/10.1007/s10817-019-09537-9), 
 a kind of module system that lies outside any particular logic.
 
 During all this time, both Martin-Löf type theory and the calculus of constructions

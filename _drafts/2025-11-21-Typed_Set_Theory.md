@@ -77,3 +77,75 @@ and we also have the option to "take a type SET and provide it with Zermelo–Fr
 
 ### Sets in higher-order logic
 
+Higher-order logic is descended from the mysterious, 
+never-properly-formalised system of
+[Principia Mathematica](https://plato.stanford.edu/entries/principia-mathematica/) (PM).
+Whitehead and Russell wrote extensively about *classes*,
+which were clearly the same thing as typed sets,
+though they were never clear about what their type system actually was.
+Higher-order logic as [formalised by Church](https://plato.stanford.edu/entries/type-theory-church/)
+is PM done right.
+A set is nothing but a boolean-valued function, exactly the same thing as a logical predicate, and the phrase "predicate sets"
+is fairly common in the [HOL literature](https://rdcu.be/eQa72).
+Nevertheless, we think about sets differently 
+from how we think about predicates, 
+even in the trivial case of unions and intersections.
+Often I have looked at an HOL Light proof and seen a prediate $Q(x)$
+defined by $\exists y. P(y) \land x = f(y)$,
+which is simply the image under the function $f$ of a set.
+
+### The elements of typed set theory
+
+Typed set theory has everything that you would expect, only typed.
+As de Bruijn would wish, we exclude $x\in x$:
+we can write $x\in A$ only if the types agree.
+That means, if $x$ has type $\tau$ then $A$ has type $\tau\,\texttt{set}$, 
+which is also the type of the *comprehension* $\\{x.\,P(x)\\}$ 
+if $x$ has type $\tau$. Union, intersection and difference combine two sets of the same type in the obvious way.
+We have the universal set and therefore set complement
+because our sets are typed:
+we have the set of all integers, say,
+or of all sets of integers, but never the set of *all* sets.
+The power set operator 
+(which denotes the set of all subsets of its argument)
+takes type $\tau\,\texttt{set}$ to type $(\tau\,\texttt{set})\,\texttt{set}$.
+
+The *image* operator is the set-theoretic version of the "apply to all" operator that's called `map` in programming languages 
+from [Standard ML](https://doi.org/10.1145/3386336) to Perl, except in LISP where it's called [`MAPCAR`](https://www.gnu.org/software/emacs/manual/html_node/elisp/Mapping-Functions.html); 
+their `MAP` does something weird. 
+In Isabelle/HOL, the image of a set `A` under the function `f` is written ``f ` A`` and please accept my apologies for a syntax influenced by PM.
+But mathematicians often write $f(A)$ for the set of all $f(x)$ 
+for $x\in A$, relying on the presence of a capital letter,
+which would never do.
+The *inverse image* is written ``f -` A`` and denotes the set of all $x$ 
+such that $f(x)\in A$.
+Both operators are typed in the obvious way.
+
+This brings us to something crucial: the function space
+$A\to B$ and its generalisation to the general product, $\prod_{x\in A}\,B(x)$.
+The latter was described as a "dependent function space" 
+by Robert Constable but is called the "dependent product"
+by people who never bothered to read Constable's papers.
+It has been around for much longer than dependent type theory.
+In typed set theory, we often need to talk about 
+the set of all functions that have domain $A$ and codomain $B$,
+and occasionally the greater precision 
+of the dependent product is helpful.
+Both are trivial to define using set comprehension.
+There is a complication concerning function extensionality,
+which I will not discuss here.
+Another complication is that the inverse image 
+involving a function in $A\to B$ is generally expected to be a
+subset of $A$; the Isabelle/HOL inverse image operator does not 
+and cannot accomplish that.
+
+Sigma not so much
+
+inj_on, surjective, bij_betw
+
+Ideas of cardinality (through eqpollence)
+
+The [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %})
+
+
+Incorporating [full ZF set theory]({% post_url 2022-04-06-ZFC_in_HOL %})
