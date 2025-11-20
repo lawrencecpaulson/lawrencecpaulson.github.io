@@ -6,10 +6,12 @@ tags: [AUTOMATH, NG de Bruijn, type theory, set theory]
 ---
 It is known that mathematics is heavily reliant on set theory,
 but no one can agree on what set theory is.
-Many people today understand that we have a choice between set theory 
-and type theory, but they don't know what type theory is either.
-Many think that "type theory" refers to 
+Many people today understand that we have 
+a [choice between set theory and type theory]({% post_url 2022-03-16-Types_vs_Sets %}), 
+but they don't know what type theory is either.
+Many think that type theory refers to 
 some sort of dependent type theory, as found in Lean or Agda,
+while everything else is set theory.
 But prior to 1980 or so, "type theory" generally referred 
 to higher order logic and related systems.
 In 1973, NG de Bruijn wrote a paper called 
@@ -126,11 +128,13 @@ $A\to B$ and its generalisation to the general product, $\prod_{x\in A}\,B(x)$.
 The latter was described as a "dependent function space" 
 by Robert Constable but is called the "dependent product"
 by people who never bothered to read Constable's papers.
-It has been around for much longer than dependent type theory.
+It has been around for more than a century
+due to its close association with the axiom of choice,
+which can be expressed as "$\prod_{x\in A}\,B(x)$ is nonempty provided
+$B(x)$ is nonempty for all $x\in A$.
 In typed set theory, we often need to talk about 
 the set of all functions that have domain $A$ and codomain $B$,
-and occasionally the greater precision 
-of the dependent product is helpful.
+and occasionally the greater precision of the dependent product is helpful.
 Both are trivial to define using set comprehension;
 in fact, $f\in A\to B$ if and only if $f(A)\subseteq B$.
 There is a complication concerning function extensionality,
@@ -149,11 +153,41 @@ and exactly as in type theory, the "non-dependent"
 versions $A\to B$ and $A\times B$ are not even defined separately
 but are simply degenerate cases of the full versions.
 
-inj_on, surjective, bij_betw
+If $f\in A\to B$ then we may want to know whether $f$ is an *injective* on the set $A$ or
+whether it is *surjective* (the image $f(A)$ equals $B$).
+If $f$ is both then it is a *bijection* between the two sets.
+These properties also can give us an indication of the relative sizes of $A$ and $B$:
+if $f$ is an injection then $A$ is "smaller" than $B$ 
+(written $A\precsim B$ or $A\prec B$ for the strict version). 
+Then we can also talk about *countable* sets.
+Exhibiting a bijection between two sets is generally the easiest way 
+to show that they have the same *cardinality*.
+In the basic Isabelle/HOL library, the cardinality function for sets
+returns a natural number, so it is only useful for finite sets,
+but we can do much better if necessary.
 
-Ideas of cardinality (through eqpollence)
+### Incorporating all of Zermelo–Fraenkel set theory
+
+I'd like to claim that typed set theory as sketched above meets de Bruijn's desiderata.
+It is also simpler and more intuitive than AUTOMATH,
+and can express vast swathes of mathematics in a natural manner.
+But, for better or worse, set-theoretic notions such as transfinite ordinals and cardinals
+sometimes [pop up in odd places](https://rdcu.be/cWkY5).
+Once the actual language of set theory finds its way into your theorem statement,
+it becomes inescapable.
+I have [already written]({% post_url 2022-04-06-ZFC_in_HOL %}) on how to incorporate
+ZF set theory into higher-order logic. It is done exactly as de Bruijn
+suggested: by postulating a type of ZF sets and equipping it with all the ZF axioms.
+
+A possible annoyance with this approach is ending up with two separate mathematical worlds:
+the world built of higher-order logic and the vastly bigger world of ZF.
+As I [described earlier]({% post_url 2022-04-06-ZFC_in_HOL %}), 
+one can avoid this using Isabelle's type class system
+to set up a family of embeddings from the standard Isabelle/HOL type constructors
+to suitable ZF analogues. We then get, for free, things like 
+the set of real numbers in ZF, rather than having to construct it all over again.
+
 
 The [hereditarily finite sets]({% post_url 2022-02-23-Hereditarily_Finite %})
 
 
-Incorporating [full ZF set theory]({% post_url 2022-04-06-ZFC_in_HOL %})
