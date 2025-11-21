@@ -2,7 +2,7 @@
 layout: post
 title:  Set theory with types
 usemathjax: true 
-tags: [AUTOMATH, NG de Bruijn, type theory, set theory]
+tags: [AUTOMATH, NG de Bruijn, type theory, set theory, type classes, Principia Mathematica, Archive of Formal Proofs]
 ---
 It is known that mathematics is heavily reliant on set theory,
 but no one can agree on what set theory is.
@@ -225,7 +225,7 @@ from `nat` to `rat`.
 
 De Bruijn objects to the principle that "everything is a set", 
 but it comes in handy when you are trying to define spaces.
-Given any two sets $A$ and $B$, you can always construct the things mentioned above: 
+Given any two sets $A$ and $B$, you can always construct their 
 unions and intersections, the product $A\times B$, function space $A\to B$, 
 also the disjoint sum $A+B$, enumerations like $\\{A,B\\}$,
 the indexed sum and product and much more.
@@ -235,14 +235,14 @@ It also comes in handy when talking about finite state machines,
 where different ways of combining machines require analogous ways 
 of combining sets of machine states.
 If you are in a typed world like higher-order logic, 
-you may be tempted to reduce everything to natural numbers, 
-using embeddings of some sort to get the necessary structures. But that sucks.
+you may be tempted to just use the natural numbers 
+along with some encoding of the necessary structures. But that sucks.
 
 The [*hereditarily finite sets*](https://www.isa-afp.org/entries/HereditarilyFinite.html) (type `hf`)
 give us everything that ZF does, with the big exception of infinite sets.
 Hereditarily finite sets are finite all the way down.
 Finitary constructions such as integers, rationals, 
-and the obvious data structures are easily represented.
+and obvious data structures like pairs and lists are easily represented.
 But we have no real numbers (only floating point) 
 and cannot use infinite equivalence classes either.
 Still, `hf` has everything we need for modelling possible data in a programming language 
