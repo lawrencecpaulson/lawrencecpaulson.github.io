@@ -254,3 +254,5 @@ That means, if you use type `hf`, you are essentially using the natural numbers,
 but the structural embeddings are hidden 
 and you get to use those beloved set-theoretic constructions.
 And `hf` is definable in higher-order logic without additional axioms.
+
+*Addendum 2025-11-22*: I wrote above that the technicalities of set theory seldom mattered to anybody else, and on the same day, *Quanta Magazine* published [this article](https://www.quantamagazine.org/a-new-bridge-links-the-strange-math-of-infinity-to-computer-science-20251121/)!
