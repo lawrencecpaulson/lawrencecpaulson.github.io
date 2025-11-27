@@ -2,9 +2,12 @@
 layout: post
 title:  50 years of proof assistants
 usemathjax: true 
-tags: [memories, LCF, HOL, Isabelle, Coq]
+tags: [memories, LCF, HOL, Isabelle, Coq, MJC Gordon]
 ---
-Crackpots ranging from billionaire Peter Thiel to random YouTube influencers claim that science has been stagnating for the past 50 years. Of course they admit that computing is an exception: they don't pretend that my personal 32GB laptop is not an advance over the 16MB mainframe that served the whole Caltech community when I was there. Instead they claim that advances in computing were driven solely by industrial research, quite overlooking the role of academia in pushing the VLSI revolution, RISC processor design, networking, hypertext, virtual memory and indeed computers themselves. Most of what was industrial research came from just two "blue sky" institutes – [Bell Labs](https://sites.stat.columbia.edu/gelman/research/published/bell.pdf) 
+Crackpots ranging from billionaire Peter Thiel to random YouTube influencers claim that science has been stagnating for the past 50 years. They admit that computing is an exception: they don't pretend that my personal 32GB laptop is not an advance over the 16MB mainframe that served the whole Caltech community when I was there. Instead they claim that advances in computing were driven solely by industrial research, quite overlooking the role of academia 
+and government funding
+in pushing the VLSI revolution, RISC processor design, networking, hypertext, virtual memory and indeed computers themselves. As for the industrial research,
+most of it came from just two "blue sky" institutes – [Bell Labs](https://sites.stat.columbia.edu/gelman/research/published/bell.pdf) 
 and [Xerox PARC](https://spectrum.ieee.org/xerox-parc) – that closed a long time ago. Giving away the goods is no way to make a profit, but without academic give-and-take it is hard to make progress. Anyway, let's look at 50 years of progress in LCF-style proof assistants.
 
 ### Edinburgh LCF
@@ -38,13 +41,13 @@ a little simplification and other reasoning.
 The report includes a succinct description of Edinburgh LCF and
 is a nice snapshot of the state of the art in 1982.
 
-### Cambridge LCF
+### Cambridge LCF and HOL
 
-I arrived at Cambridge in 1982, idealistic and eager.
+I arrived at Cambridge in 1982, idealistic and eager, to work under Mike Gordon.
 I was disappointed that we only had $\forall$, $\land$ and $\to$,
 so I set out to put in the missing connectives of predicate logic. 
 I ended up changing so much 
-(backwards compatibility is overrated) that people eventually shamed me into writing my own [user manual](https://www.cambridge.org/fr/universitypress/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf).
+(backwards compatibility is overrated) that people eventually shamed me into writing my own [user manual](https://www.cambridge.org/gb/universitypress/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf).
 Cambridge LCF never caught on because, well, 
 nobody liked the LCF formalism.
 But I used it for a development that seemed big at the time: to [verify the unification algorithm](https://doi.org/10.1016/0167-6423(85)90009-7).
@@ -52,10 +55,64 @@ This development was later [ported to Isabelle](https://isabelle.in.tum.de/dist/
 It contains 36 inductions, so we were making progress.
 And this takes us to 1985, exactly 40 years ago;
 see also [this survey](https://doi.org/10.48456/tr-54) of the state of play.
-But there was almost no mathematics: no negative numbers, 
-and even to write 2+2=4 you had to use unary notation.
+But there was almost no mathematics: no negative numbers and no decimal notation, so you could not even write 2+2=4.
+
+Cambridge LCF was in itself a dead end, but because it included a much faster ML compiler,
+it ended up [being incorporated]({% post_url 2022-09-28-Cambridge_LCF %}) into a lot of other proof assistants, notably Mike's [HOL88](https://github.com/theoremprover-museum/HOL88). 
+And just like that, [hardware verification]({% post_url 2023-01-04-Hardware_Verification %}) became a reality. 
+Although software verification seemed stuck in the doldrums,
+a couple of production-ready chip designs were verified!
+Mike's explanation was that hardware verification was simply easier.
+Another reason, I think, is that code (as opposed to an algorithm) never gets 
+frozen the way a chip design does. 
+There's never a point you can say "right, this is our target".
+
+Also in 1985, I was working on the experiments that would [lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}), 
+but there was nothing definitive yet. And that was the state of play 40 years ago.
+
+### The golden age of HOL
+
+We confidently approached 1990 with tools that worked, 
+including a new standard for the ML language and two compilers for it.
+Isabelle was coded in [Standard ML](https://www.lfcs.inf.ed.ac.uk/software/ML/) from the start, while HOL88 was ported from the Cambridge LCF version of ML 
+to the new standard, emerging as HOL90.
+Versions of HOL were being used in institutes around the world. 
+But I am still not certain whether negative numbers were supported (can somebody help me?).
+Our weak support for arithmetic may seem odd 
+when our research community was aware that the real numbers 
+had been [formalised in AUTOMATH]({% post_url 2022-06-22-Why-formalise %}), 
+but we didn't seem to need them. 
+
+Then, in 1994, came the Pentium with its [FDIV bug](https://www.techradar.com/news/computing-components/processors/pentium-fdiv-the-processor-bug-that-shook-the-world-1270773): 
+a probably insignificant but detectable error in floating-point division that cost Intel nearly half a billion dollars.
+John Harrison, a student of Mike's, decided to devote his PhD research
+to the verification of floating-point arithmetic.
+By June 1996 he had submitted an extraordinary [thesis](https://doi.org/10.48456/tr-408), 
+*Theorem Proving with the Real Numbers*,
+which described a formidable series of achievements:
+
+* a formalisation of the real member system in HOL
+* formalised analysis including metric spaces, sequences and series, limits, continuity and differentiation, power series and transcendental functions, integration
+* proper numerals represented internally by symbolic binary, and calculations on them
+* computer algebra techniques including a decision procedure for real algebra
+* tools and techniques for floating-point verification by reference to the IEEE standard
+
+This thesis, which I had the privilege to examine, won a Distinguished Dissertation Award
+and was [published as a book](https://link.springer.com/book/10.1007/978-1-4471-1591-5) by Springer.
+
+So by the middle of the 1990s, which was 30 years ago, 
+we had gone from almost no arithmetic to a decent chunk of formalised real analysis
+that was good enough to verify actual floating-point algorithms.
+
+Stepping aside from HOL for a moment, other proof assistants had made great progress 
+by the mid 1990s.
+The addition of inductive definitions to the calculus of constructions
+gave us the [calculus of inductive constructions](https://rdcu.be/eR7e8),
+which in essence is the formalism used today by Rocq and Lean.
+The very first release of Isabelle/HOL [happened in 1991](https://rdcu.be/eR7gl), 
+primarily the work of Tobias Nipkow.
+Isabelle/ZF, which was my project, formalised axiomatic set theory 
+to some [quite deep results](https://arxiv.org/abs/cs/9612104).
 
 XXXX
 
-I've written much more about these developments 
-in an [earlier post]({% post_url 2022-09-28-Cambridge_LCF %}).
