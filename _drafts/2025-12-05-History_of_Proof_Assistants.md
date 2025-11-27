@@ -45,7 +45,7 @@ is a nice snapshot of the state of the art in 1982.
 
 I arrived at Cambridge in 1982, idealistic and eager, to work under Mike Gordon.
 I was disappointed that we only had $\forall$, $\land$ and $\to$,
-so I set out to put in the missing connectives of predicate logic. 
+so I set out to fix that and support full predicate logic. 
 I ended up changing so much 
 (backwards compatibility is overrated) that people eventually shamed me into writing my own [user manual](https://www.cambridge.org/gb/universitypress/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf).
 Cambridge LCF never caught on because, well, 
@@ -113,6 +113,16 @@ The very first release of Isabelle/HOL [happened in 1991](https://rdcu.be/eR7gl)
 primarily the work of Tobias Nipkow.
 Isabelle/ZF, which was my project, formalised axiomatic set theory 
 to some [quite deep results](https://arxiv.org/abs/cs/9612104).
+
+### The first great applications
+
+Floating point verification? Prime number theorem? My own ZF work
+
+ARM6
+
+Four colour theorem
+
+Cryptographic protocols
 
 XXXX
 
