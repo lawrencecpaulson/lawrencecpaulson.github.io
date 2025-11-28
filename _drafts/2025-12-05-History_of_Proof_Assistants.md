@@ -16,7 +16,9 @@ The first instance of LCF was Stanford LCF, developed by Robin Milner in 1972, b
 the ML programming language
 and provided a proof kernel, 
 encapsulated in an abstract type definition, to ensure that a theorem could only be generated 
-by applying inference rules to axioms or other theorems.
+by applying inference rules to axioms or other theorems:
+
+> … the ML type discipline is used… so that—whatever complex procedures are defined—all values of type `thm` must be theorems, as only inferences can compute such values…. This security releases us from the need to preserve whole proofs… — an important practical gain since large proofs tended to clog up the working space… [*Edinburgh LCF*, page IV]
 
 Edinburgh LCF was first announced in 1975, which conveniently is exactly 50 years ago, 
 at a *Conference on Proving and Improving Programs* held at Arc-et-Senans. 
@@ -43,9 +45,10 @@ is a nice snapshot of the state of the art in 1982.
 
 ### Cambridge LCF and HOL
 
-I arrived at Cambridge in 1982, idealistic and eager, to work under Mike Gordon.
-I was disappointed that we only had $\forall$, $\land$ and $\to$,
-so I set out to fix that and support full predicate logic. 
+I arrived at Cambridge in 1982, full of youthful enthusiasm, 
+to join a project run by Robin Milner and Mike Gordon.
+Disappointed to discover that we only had $\forall$, $\land$ and $\to$,
+I set out to fix that, to support full first-order logic. 
 I ended up changing so much 
 (backwards compatibility is overrated) that people eventually shamed me into writing my own [user manual](https://www.cambridge.org/gb/universitypress/subjects/computer-science/programming-languages-and-applied-logic/logic-and-computation-interactive-proof-cambridge-lcf).
 Cambridge LCF never caught on because, well, 
@@ -67,10 +70,12 @@ Another reason, I think, is that code (as opposed to an algorithm) never gets
 frozen the way a chip design does. 
 There's never a point you can say "right, this is our target".
 
-Also in 1985, I was working on the experiments that would [lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}), 
-but there was nothing definitive yet. And that was the state of play 40 years ago.
+Also in 1985, I was working on experiments that would [lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}).
+It would be like LCF but would support constructive type theory, 
+crucially allowing both unification and backtracking, like in Prolog.
+But there was no working system yet. And that was the state of play 40 years ago.
 
-### The golden age of HOL
+### Proof assistants come of age
 
 We confidently approached 1990 with tools that worked, 
 including a new standard for the ML language and two compilers for it.
@@ -99,7 +104,6 @@ which described a formidable series of achievements:
 
 This thesis, which I had the privilege to examine, won a Distinguished Dissertation Award
 and was [published as a book](https://link.springer.com/book/10.1007/978-1-4471-1591-5) by Springer.
-
 So by the middle of the 1990s, which was 30 years ago, 
 we had gone from almost no arithmetic to a decent chunk of formalised real analysis
 that was good enough to verify actual floating-point algorithms.
@@ -114,6 +118,22 @@ primarily the work of Tobias Nipkow.
 Isabelle/ZF, which was my project, formalised axiomatic set theory 
 to some [quite deep results](https://arxiv.org/abs/cs/9612104).
 
+This period also saw something of an arms race in automation.
+My earlier, Prolog-inspired vision of backtracking search
+had led to some [fairly general automation](https://doi.org/10.48456/tr-396) that was effective not just in standard predicate logic 
+but with any theorems were expressed in a form suitable for forward or backward chaining.
+I had also done experiments with classical automatic techniques such as model elimination, which, although pathetic compared with automatic provers of that era, 
+was good enough to troll users on the `hol-info` mailing list.
+Soon, I had provoked John Harrison to build superior automation for HOL Light.
+Later, Joe Hurd built his `metis` superposition prover, which found its way into HOL4.
+Not to be outdone, Tobias made Isabelle's simplifier the best in its class incorporating a number of sophisticated refinements, including some great ideas from Nqthm.
+
+Twenty years from the start of this chronology we now had several reasonably mature systems, including Isabelle/ZF, Isabelle/HOL, multiple versions of the HOL system,
+and Coq (now Rocq).[^1]
+We were all ready to do big things.
+
+[^1]: Cool things were also done in [LEGO](https://era.ed.ac.uk/handle/1842/504), another type theory proof assistant, but sadly it soon fell by the wayside. And they were sued by some crazy guys from Billund.
+
 ### The first great applications
 
 Floating point verification? Prime number theorem? My own ZF work
@@ -124,5 +144,5 @@ Four colour theorem
 
 Cryptographic protocols
 
-XXXX
+development continued e.g. Isar, quick check, sledgehammer
 
