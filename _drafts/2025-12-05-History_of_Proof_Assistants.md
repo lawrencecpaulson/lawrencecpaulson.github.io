@@ -8,9 +8,11 @@ Crackpots ranging from billionaire Peter Thiel to random YouTube influencers cla
 and government funding
 in pushing the VLSI revolution, RISC processor design, networking, hypertext, virtual memory and indeed computers themselves. As for the industrial research,
 most of it came from just two "blue sky" institutes – [Bell Labs](https://sites.stat.columbia.edu/gelman/research/published/bell.pdf) 
-and [Xerox PARC](https://spectrum.ieee.org/xerox-parc) – that closed a long time ago. Giving away the goods is no way to make a profit, but without academic give-and-take it is hard to make progress. Anyway, let's look at 50 years of progress in LCF-style proof assistants.
+and [Xerox PARC](https://spectrum.ieee.org/xerox-parc) – that closed a long time ago. Giving away the goods is no way to make a profit, but without academic give-and-take it is hard to make progress. Anyway, let's look at 50 years of progress in a scientific field 
+that is light-years away from mainstream computing: 
+LCF-style proof assistants.
 
-### Edinburgh LCF
+### 1975–1985: Edinburgh LCF
 
 The first instance of LCF was Stanford LCF, developed by Robin Milner in 1972, but it was not an LCF-style proof assistant. LCF meant "Logic for Computable Functions", a quirky formalism based on Scott domains and intended for reasoning about small functional programs. But "LCF-style proof assistant" means one that, like Edinburgh LCF, was coded in some form of 
 the ML programming language and provided a proof kernel, 
@@ -45,13 +47,9 @@ using Edinburgh LCF.
 The proof consists of one single induction followed by 
 a little simplification and other reasoning.
 The report includes a succinct description of Edinburgh LCF and
-is a nice snapshot of the state of the art in 1982.
-
-### Cambridge LCF and HOL
-
-I arrived at Cambridge in 1982, full of youthful enthusiasm, 
-to join a project run by Robin Milner and Mike Gordon.
-I remember telling Mike that it would be great 
+is a nice snapshot of the state of the art in 1982
+when Cambridge in 1982 to join a project run by Robin Milner and Mike Gordon.
+Full of youthful enthusiasm, I told Mike that it would be great 
 if one day we could formalise the Prime Number Theorem.
 I hardly knew what the theorem was about or how to prove it, 
 but my college roommate had told me it was really deep.
@@ -69,6 +67,8 @@ And this takes us to 1985, exactly 40 years ago;
 see also [this survey](https://doi.org/10.48456/tr-54) of the state of play.
 But there was almost no mathematics: no negative numbers and no decimal notation, so you could not even write 2+2=4.
 
+### 1985–1995: Cambridge LCF and HOL
+
 Cambridge LCF was in itself a dead end, but because it included a much faster ML compiler,
 it ended up [being incorporated]({% post_url 2022-09-28-Cambridge_LCF %}) into a lot of other proof assistants, notably Mike's [HOL88](https://github.com/theoremprover-museum/HOL88). 
 And just like that, [hardware verification]({% post_url 2023-01-04-Hardware_Verification %}) became a reality. 
@@ -79,25 +79,43 @@ Another reason, I think, is that code (as opposed to an algorithm) never gets
 frozen the way a chip design does. 
 There's never a point you can say "right, this is our target".
 
-Also in 1985, I was working on experiments that would [lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}).
+Also in 1985, 
+we got a new [standard for the ML language](https://doi.org/10.1145/3386336)
+and, soon, two compilers for it.
+So then I started working on experiments that would 
+[lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}).
 It would be like LCF but would support constructive type theory, 
 crucially allowing both unification and backtracking, like in Prolog.
-But there was no working system yet. And that was the state of play 40 years ago.
+But there was no working system yet, just a grant application. 
+And that was the state of play 40 years ago.
 
-### Proof assistants come of age
-
-We confidently approached 1990 with tools that worked, 
-including a new standard for the ML language and two compilers for it.
-Isabelle was coded in [Standard ML](https://www.lfcs.inf.ed.ac.uk/software/ML/) from the start, while HOL88 was ported from the Cambridge LCF version of ML 
-to the new standard, emerging as HOL90.
+Funding secured, Isabelle development started in earnest in 1986.
+It was coded in [Standard ML](https://www.lfcs.inf.ed.ac.uk/software/ML/) from the start, while HOL88 was ported from the Cambridge LCF version of ML 
+to Standard ML, emerging as HOL90.
+Mike acquired a bevy of energetic PhD students, 
+who engaged in verification projects or built extensions for HOL.
 Versions of HOL were being used in institutes around the world. 
+
+Stepping aside from HOL for a moment, other proof assistants had made great progress 
+by the mid 1990s.
+The addition of inductive definitions to the calculus of constructions
+gave us the [calculus of inductive constructions](https://rdcu.be/eR7e8),
+which in essence is the formalism used today by Rocq and Lean.
+The very first release of Isabelle/HOL [happened in 1991](https://rdcu.be/eR7gl), 
+primarily the work of Tobias Nipkow, though I was soon to
+[join in](https://www.cl.cam.ac.uk/~lp15/Grants/holisa.html).
+Isabelle/ZF, which was my pet project, formalised axiomatic set theory 
+to some [quite deep results](https://arxiv.org/abs/cs/9612104).
+
 But I am still not certain whether negative numbers were supported (can somebody help me?).
 Our weak support for arithmetic may seem odd 
 when our research community was aware that the real numbers 
 had been [formalised in AUTOMATH]({% post_url 2022-06-22-Why-formalise %}), 
-but we didn't seem to need them. 
+but we didn't seem to need them. This was about to change.
 
-Then, in 1994, came the Pentium with its [FDIV bug](https://www.techradar.com/news/computing-components/processors/pentium-fdiv-the-processor-bug-that-shook-the-world-1270773): 
+### 1995–2005: Proof assistants come of age
+
+In 1994, came the Pentium with its [FDIV bug](https://www.techradar.com/news/computing-components/processors/pentium-fdiv-the-processor-bug-that-shook-the-world-1270773): 
 a probably insignificant but detectable error in floating-point division that cost Intel nearly half a billion dollars.
 John Harrison, a student of Mike's, decided to devote his PhD research
 to the verification of floating-point arithmetic.
@@ -117,16 +135,6 @@ So by the middle of the 1990s, which was 30 years ago,
 we had gone from almost no arithmetic to a decent chunk of formalised real analysis
 that was good enough to verify actual floating-point algorithms.
 
-Stepping aside from HOL for a moment, other proof assistants had made great progress 
-by the mid 1990s.
-The addition of inductive definitions to the calculus of constructions
-gave us the [calculus of inductive constructions](https://rdcu.be/eR7e8),
-which in essence is the formalism used today by Rocq and Lean.
-The very first release of Isabelle/HOL [happened in 1991](https://rdcu.be/eR7gl), 
-primarily the work of Tobias Nipkow.
-Isabelle/ZF, which was my project, formalised axiomatic set theory 
-to some [quite deep results](https://arxiv.org/abs/cs/9612104).
-
 This period also saw something of an arms race in automation.
 My earlier, Prolog-inspired vision of backtracking search
 had led to some [fairly general automation](https://doi.org/10.48456/tr-396) that was effective not just in standard predicate logic 
@@ -140,13 +148,26 @@ Not to be outdone, Tobias made Isabelle's simplifier the best in its class incor
 Twenty years from the start of this chronology we now had 
 several reasonably mature and powerful systems, including Isabelle/ZF, Isabelle/HOL, 
 multiple versions of the HOL system, and Coq (now Rocq).[^1]
+Many of them used [Proof General](https://proofgeneral.github.io), 
+a common user interface for tactic-based proof assistants
+based on the Emacs editor.
+And we had 100MHz machines, some with 64MB of memory!
 As the 1990s moved towards their millennial end, we were ready to do big things.
 
 [^1]: Cool things were also done in [LEGO](https://era.ed.ac.uk/handle/1842/504), another type theory proof assistant, but sadly it soon fell by the wayside. And they were sued by some crazy guys from Billund.
 
-### The first great applications
+During this period, I did a lot of work on the 
+[verification of cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205), 
+also [here](https://doi.org/10.48550/arXiv.2105.06319).
+These secure Internet connections and other network communications;
+they are valuable when you need to know who is on the other end 
+and need to keep messaging secure from eavesdropping and tampering.
+Among the protocols investigated were the ubiquitous TLS
+and the late, unlamented SET protocol.
+These proofs were not at the level of code or bits;
+buggy implementations could and did emerge.
 
-Our next milestone is 2005, just 20 years ago, and the big thing that caught everyone's eye
+Twenty years ago (2005), the big thing that caught everyone's eye
 was [George Gonthier's formalisation](https://rdcu.be/eSgTy) (in Coq) 
 of the Four Colour Theorem.
 Most educated people had heard of the theorem already, 
@@ -164,14 +185,6 @@ when Jeremy Avigad [formalised](https://arxiv.org/abs/cs/0509025) the theorem in
 Somewhat later, John Harrison [formalised a different proof](https://rdcu.be/eShga) in HOL Light.
 And there was much more. Without any doubt, our systems were capable of serious mathematics.
 
-What about verification? During this period, 
-I did a lot of work on the 
-[verification of cryptographic protocols](https://doi.org/10.3233/JCS-1998-61-205), 
-also [here](https://doi.org/10.48550/arXiv.2105.06319).
-These secure Internet connections and other network communications;
-they are valuable when you need to know who is on the other end 
-and need to keep messaging secure from eavesdropping and tampering.
-
 Perhaps the most consequential achievement of this period was Mike Gordon's collaboration 
 with Graham Birtwistle and Anthony Fox to [verify the ARM6 processor](https://rdcu.be/eShzn).
 Graham, at Leeds, formally specified the instruction set architecture of the processor 
@@ -182,16 +195,107 @@ Without any doubt, our systems were capable of serious verification.
 Despite of the focus on applications in this section, 
 system development continued in the run-up to 2005.
 I am only familiar with Isabelle development, but they were tremendous:
-* the *Isar language* for structured, legible proofs
+
+* the *Isar language* for structured, legible proofs (a break with the LCF idea that the top level must be a programming language, i.e. ML)
 * *axiomatic type classes*, providing principled overloading
 * *counterexample finders*: [Quickcheck](https://doi.org/10.1109/SEFM.2004.1347524) and Refute (now Nitpick)
 * *code generation* from the executable fragment of higher-order logic, and reflection
 * *sledgehammer* was under active development, but only ready a couple of years later.
 
-### The March of formalised mathematics
+With so much going on, it's not surprising that people started doing big things.
 
-odd order theorem
+### 2005–2015: The first landmarks
+
+I am not used to phone calls from journalists:
+for most of my career, formal verification has been seen as (at best) niche.
+But the journalist on the end of the line was asking for information about
+[seL4](https://doi.org/10.1145/1629575.1629596), 
+the first operating system kernel ever to be formally verified.
+Tools for extended static checking were by then able to detect a lot of program faults, but the seL4 verification claimed to cover *full functional correctness*: 
+the code did exactly what it was supposed to do.
+There is now an [entire ecosystem](https://sel4.systems) around seL4, 
+backed by a million lines of Isabelle/HOL proofs.
+
+People have wanted to verify compilers 
+[since forever](https://doi.org/10.1007/3-540-10886-6).
+The task of fully specifying a programming language, target machine 
+and compiler already seemed impossible, let alone providing the actual proof.
+With [CompCert](https://inria.hal.science/hal-01238879v1), that task was finally fulfilled, for a large subset of the C language:
+
+> What sets CompCert apart from any other production
+> compiler, is that it is formally verified, using machine-
+> assisted mathematical proofs, to be exempt from mis-
+> compilation issues. In other words, the executable code
+> it produces is proved to behave exactly as specified by
+> the semantics of the source C program. 
+
+A seemingly intractable problem with compiler verification 
+was how to translate your verified compiler into machine code.
+For example, CompCert is mostly written in Rocq, 
+which is then extracted to OCaml code. 
+The OCaml compiler had never been verified, 
+so how do we know that its compiled code is correct?
+
+[CakeML](https://cakeml.org) squares this circle through [bootstrapping](https://doi.org/10.1145/3437992.3439915).
+CakeML translates from its source language (a dialect of ML) 
+to assembly language, accompanied by a proof that the two pieces of code are equivalent.
+This work was an outgrowth of the ARM6 project mentioned earlier.
+[Magnus Myreen](https://www.cse.chalmers.se/~myreen/) had developed techniques for
+verifiably translating between assembly language and functions in higher-order logic.
+At the start of the bootstrapping process, a tiny compiler was written in pure logic proved correct.
+It was now safe to run this compiler 
+and use its tiny language to implement a bigger language.
+At the end of this process we have a verified compiler in both source form 
+and assembly language form, with the proof of their equivalence.
+We also have [verified extraction](https://doi.org/10.1145/2364527.2364545) from higher-order logic to ML.
+
+The end of the decade also saw impressive results in the formalisation of mathematics:
+
+* [Gödel second incompleteness theorem](https://rdcu.be/eSZwv), by yours truly
+* the [Central Limit Theorem](https://arxiv.org/abs/1405.7012), by Avigad et al.
+* the [Flyspeck](https://github.com/flyspeck/flyspeck) project, by Hales et al.
+* the [odd order theorem](https://doi.org/10.1145/2480359.2429071)
 
 
 
-[Flyspeck](https://github.com/flyspeck/flyspeck) 2014
+
+### 2015–2025: Some big stuff
+
+Cheri & https://webassembly.org
+
+All the Lean stuff
+
+ALEXANDRIA
+
+AWS!
+
+### 2025– Becoming ordinary
+
+iPhone
+
+### Postscript
+
+I am well aware that there is much outstanding work adjacent to that
+described here, e.g. using other interactive tools, such as Nqthm and ACL2,
+PVS and Agda. There have been amazing advances 
+in the broader theorem proving world, also in model checking,
+SAT/SMT solving and their applications to extended static checking of software.
+I have related what I personally know about.
+And remember, the point of this post is not to boast 
+but to show how active our research community has been, 
+so the more achievements the better.
+
+This does not prove anything about other fields of science, such as particle physics, molecular biology or mathematics.
+But it's fair to assume that others have not been idle either. 
+People have proved Fermat's Last Theorem and the Poincaré conjecture, 
+and settled more obscure questions such as the projective plane of order 10.
+People have located the remains of King Richard III, who died in 1485, 
+excavating and positively identifying the body by its DNA.
+People have linked a piece of bloody cloth to Adolf Hitler and diagnosed  that he had a specific genetic condition.
+The immensely complex James Webb Space Telescope
+was successfully deployed;
+it is now revealing secrets about the early Universe.
+
+Sometimes I wonder about the motives of those who claim that science is moribund. Is it do with political ideology or unrealistic expectations?
+Were they expecting time travel or some sort of warp drive?
+People need to remember that movies are fiction.
