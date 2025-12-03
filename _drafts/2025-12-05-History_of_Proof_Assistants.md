@@ -66,6 +66,7 @@ It contains 36 inductions, so we were making progress.
 And this takes us to 1985, exactly 40 years ago;
 see also [this survey](https://doi.org/10.48456/tr-54) of the state of play.
 But there was almost no mathematics: no negative numbers and no decimal notation, so you could not even write 2+2=4.
+As far as the broader computer science community was concerned, we were a joke.
 
 ### 1985–1995: Cambridge LCF and HOL
 
@@ -111,7 +112,8 @@ But I am still not certain whether negative numbers were supported (can somebody
 Our weak support for arithmetic may seem odd 
 when our research community was aware that the real numbers 
 had been [formalised in AUTOMATH]({% post_url 2022-06-22-Why-formalise %}), 
-but we didn't seem to need them. This was about to change.
+but we didn't seem to want them. 
+To many, we were still a joke. This was about to change.
 
 ### 1995–2005: Proof assistants come of age
 
@@ -202,7 +204,8 @@ I am only familiar with Isabelle development, but they were tremendous:
 * *code generation* from the executable fragment of higher-order logic, and reflection
 * *sledgehammer* was under active development, but only ready a couple of years later.
 
-With so much going on, it's not surprising that people started doing big things.
+With so much going on, it's not surprising that our community started doing big things, 
+and other people were starting to notice.
 
 ### 2005–2015: The first landmarks
 
@@ -251,23 +254,33 @@ We also have [verified extraction](https://doi.org/10.1145/2364527.2364545) from
 
 The end of the decade also saw impressive results in the formalisation of mathematics:
 
-* [Gödel second incompleteness theorem](https://rdcu.be/eSZwv), by yours truly
-* the [Central Limit Theorem](https://arxiv.org/abs/1405.7012), by Avigad et al.
-* the [Flyspeck](https://github.com/flyspeck/flyspeck) project, by Hales et al.
-* the [odd order theorem](https://doi.org/10.1145/2480359.2429071)
+* [Gödel second incompleteness theorem](https://rdcu.be/eSZwv), by yours truly, in Isabelle/HOL
+* the [Central Limit Theorem](https://arxiv.org/abs/1405.7012), by Avigad et al., ditto
+* the [Flyspeck](https://github.com/flyspeck/flyspeck) project, by Hales et al., in Isabelle/HOL and HOL Light
+* the [odd order theorem](https://doi.org/10.1145/2480359.2429071), in Rocq
 
+Without going into details here, each of these was an ambitious proof, combining in various ways deep mathematics, intricate technicalities and sheer mass.
 
+Our community was proud of our achievements.
+We were no longer a joke, but what exactly we were good for? There was plenty of scepticism.
 
+### 2015–2025: Breaking through
 
-### 2015–2025: Some big stuff
-
-Cheri & https://webassembly.org
+This period brought something astonishing: 
+acceptance of our technology by mainstream mathematicians.
+For most of my career, mathematicians regarded computers 
+with something close to contempt. 
+Even some logicians regarded formalised mathematics as impossible, somehow fixating on the notorious proof of 1+1=2 on page 360.
 
 All the Lean stuff
 
 ALEXANDRIA
 
+Cheri & https://webassembly.org
+
 AWS!
+
+this field was the butt of jokes
 
 ### 2025– Becoming ordinary
 
@@ -276,7 +289,7 @@ iPhone
 ### Postscript
 
 I am well aware that there is much outstanding work adjacent to that
-described here, e.g. using other interactive tools, such as Nqthm and ACL2,
+described here, e.g. using other interactive tools, such as AUTOMATH, Nqthm and ACL2,
 PVS and Agda. There have been amazing advances 
 in the broader theorem proving world, also in model checking,
 SAT/SMT solving and their applications to extended static checking of software.
