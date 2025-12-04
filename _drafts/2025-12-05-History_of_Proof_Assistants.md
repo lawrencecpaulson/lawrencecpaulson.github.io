@@ -313,17 +313,20 @@ These concern the design and implementation of novel computer architectures
 with fine-grained memory protection, 
 and a design process with formal verification at its heart.
 
-https://webassembly.org
+[WebAssembly](https://webassembly.org)
 
-AWS!
+[Mechanising and verifying the WebAssembly specification](https://doi.org/10.1145/3167082)
 
+> Over three years, lots of hard work, and 260,000 lines of Isabelle/HOL code later, the Nitro Isolation Engine (NIE) [is finally announced](https://www.aboutamazon.com/news/aws/aws-graviton-5-cpu-amazon-ec2) alongside Graviton5. 
+> 
+> Working with our colleagues in EC2, Annapurna, and AWS AppSec, we have been working to rearchitect the Nitro system for Graviton5+ instances around a small, trusted separation kernel. Written from scratch in Rust, we have additionally specified the behaviour of a core subset of the Nitro Isolation Engine kernel, verified that the implementation meets this specification, and additionally proved deep security properties—confidentiality and integrity—of the implementation.
 
-### 2025– Becoming ordinary
+### 2025–2035 Becoming ordinary
 
-A couple of months ago, Apple announced new models in their iPhone range.
-No crowds formed around Apple Stores as a result.
-The iPhone was once regarded as revolutionary. Now, smartphones are a commodity.
-This is the final stage of a new technology, apart from obsolescence.
+A couple of months ago, Apple announced new models in their iPhone range,
+but no crowds formed around Apple Stores.
+They once did: the iPhone was regarded as revolutionary.
+Now, smartphones are a commodity, which is the final stage of a new technology.
 Formal verification is not ordinary yet. 
 But it's not hard to foresee a future in which 
 more and more software is regarded as too important to develop any other way, 
