@@ -191,7 +191,8 @@ Perhaps the most consequential achievement of this period was Mike Gordon's coll
 with Graham Birtwistle and Anthony Fox to [verify the ARM6 processor](https://rdcu.be/eShzn).
 Graham, at Leeds, formally specified the instruction set architecture of the processor 
 (i.e. the assembly language level), while Mike and Anthony at Cambridge verified the implementation of that architecture in terms of lower level hardware components.
-Eventually a number of other processors were similarly specified, and some verified.
+Eventually a [number of other processors](https://doi.org/10.1145/3290384) were similarly specified, 
+and some verified.
 Without any doubt, our systems were capable of serious verification.
 
 Despite of the focus on applications in this section, 
@@ -243,14 +244,17 @@ so how do we know that its compiled code is correct?
 CakeML translates from its source language (a dialect of ML) 
 to assembly language, accompanied by a proof that the two pieces of code are equivalent.
 This work was an outgrowth of the ARM6 project mentioned earlier.
-[Magnus Myreen](https://www.cse.chalmers.se/~myreen/) had developed techniques for
-verifiably translating between assembly language and functions in higher-order logic.
-At the start of the bootstrapping process, a tiny compiler was written in pure logic proved correct.
+[Magnus Myreen](https://www.cse.chalmers.se/~myreen/) 
+had [developed techniques](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-765.html) for
+automatically and verifiably translating between assembly language 
+and recursive functions in higher-order logic, in both directions.
+At the start of the bootstrapping process, 
+a tiny compiler was written in pure logic and proved correct.
 It was now safe to run this compiler 
 and use its tiny language to implement a bigger language.
-At the end of this process we have a verified compiler in both source form 
-and assembly language form, with the proof of their equivalence.
-We also have [verified extraction](https://doi.org/10.1145/2364527.2364545) from higher-order logic to ML.
+This process ultimately produced a verified compiler in both source form 
+and assembly language form, with a proof of their equivalence, 
+as well as [verified extraction](https://doi.org/10.1145/2364527.2364545) from higher-order logic to ML.
 
 The end of the decade also saw impressive results in the formalisation of mathematics:
 
@@ -259,47 +263,87 @@ The end of the decade also saw impressive results in the formalisation of mathem
 * the [Flyspeck](https://github.com/flyspeck/flyspeck) project, by Hales et al., in Isabelle/HOL and HOL Light
 * the [odd order theorem](https://doi.org/10.1145/2480359.2429071), in Rocq
 
-Without going into details here, each of these was an ambitious proof, combining in various ways deep mathematics, intricate technicalities and sheer mass.
-
+Without going into details here, each of these was an ambitious proof, combining in various ways deep mathematics, intricate technicalities and sheer bulk.
 Our community was proud of our achievements.
-We were no longer a joke, but what exactly we were good for? There was plenty of scepticism.
+We were no longer a joke, but what exactly we were good for? There was still plenty of scepticism.
 
 ### 2015–2025: Breaking through
 
 This period brought something astonishing: 
-acceptance of our technology by mainstream mathematicians.
-For most of my career, mathematicians regarded computers 
+acceptance of proof assistants by many mainstream mathematicians.
+I mostly recall mathematicians regardeding computers 
 with something close to contempt. 
-Even some logicians regarded formalised mathematics as impossible, somehow fixating on the notorious proof of 1+1=2 on page 360.
+Even some logicians regarded formalised mathematics as impossible, 
+somehow fixating on Gödel's incompleteness or the notorious proof of 1+1=2 on page 360.
+Regarding my work formalising big chunks of ZF theory, 
+someone commented "only for finite sets obviously".
+That's over.
 
-All the Lean stuff
+My EU-funded [ALEXANDRIA](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) project started in 2017. 
+My team formalised more advanced and deep mathematics 
+than I ever imagined to be possible, using Isabelle/HOL.
+(I have told this story in an [earlier blogpost]({% post_url 2023-08-31-ALEXANDRIA_finished %}).)
+But ALEXANDRIA alone would not have had much of an impact on mathematical practice.
+What made a difference was [Kevin Buzzard](https://xenaproject.wordpress.com/what-is-the-xena-project/) and his enthusiastic, tireless promotion of the idea of formalising mathematics 
+in [Lean](https://lean-lang.org).
+I got had the idea of blogging from him, though my blog has not had the same impact.
 
-ALEXANDRIA
+In 2022, for the first time ever, machine assistance 
+was [used to confirm](https://leanprover-community.github.io/blog/posts/lte-final/) 
+brand-new mathematics that a Fields Medallist had concerns about.
+Mathematicians will for the most part continue to work the way they always have done, 
+but proof assistants are getting better and better, 
+and they will encroach more and more on the everyday practice of mathematics.
 
-Cheri & https://webassembly.org
+Meanwhile, Isabelle continued to be useful for verification.
+I was amazed to hear that that the systems group here in the Computer Lab 
+had completed a [major verification](https://doi.org/10.1145/3133933) using Isabelle/HOL.
+The tradition is for systems people to despise verification tools 
+for sweeping aside ugly things like overflow and floating point errors, even though they no longer do.
+Besides, a research tool like Isabelle is only used by its own developer and his students.
+Times were changing.
+
+Isabelle is also one of the several proof assistants involved 
+with [CHERI](https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/), a large-scale project
+reviving the old idea of *capabilities* to ensure security at the hardware level.
+CHERI has produced numerous publications, some of which 
+(for example [this one](https://doi.org/10.1007/978-3-030-99336-8_7) 
+and [that one](https://doi.org/10.1109/SP40000.2020.00055)) describe very large proofs.
+These concern the design and implementation of novel computer architectures 
+with fine-grained memory protection, 
+and a design process with formal verification at its heart.
+
+https://webassembly.org
 
 AWS!
 
-this field was the butt of jokes
 
 ### 2025– Becoming ordinary
 
-iPhone
+A couple of months ago, Apple announced new models in their iPhone range.
+No crowds formed around Apple Stores as a result.
+The iPhone was once regarded as revolutionary. Now, smartphones are a commodity.
+This is the final stage of a new technology, apart from obsolescence.
+Formal verification is not ordinary yet. 
+But it's not hard to foresee a future in which 
+more and more software is regarded as too important to develop any other way, 
+as is already the case for hardware.
 
 ### Postscript
 
 I am well aware that there is much outstanding work adjacent to that
 described here, e.g. using other interactive tools, such as AUTOMATH, Nqthm and ACL2,
-PVS and Agda. There have been amazing advances 
+PVS and Agda, and much work not mentioned using Rocq. There have been amazing advances 
 in the broader theorem proving world, also in model checking,
 SAT/SMT solving and their applications to extended static checking of software.
 I have related what I personally know about.
-And remember, the point of this post is not to boast 
+And remember, the point of this post is not (simply) to boast 
 but to show how active our research community has been, 
-so the more achievements the better.
+so the more achievements the better. Feel free to add some in the comments!
 
-This does not prove anything about other fields of science, such as particle physics, molecular biology or mathematics.
-But it's fair to assume that others have not been idle either. 
+This post does not prove anything about other fields of science, 
+such as particle physics, molecular biology or mathematics.
+But it's fair to assume that such fields have not been idle either. 
 People have proved Fermat's Last Theorem and the Poincaré conjecture, 
 and settled more obscure questions such as the projective plane of order 10.
 People have located the remains of King Richard III, who died in 1485, 
@@ -309,6 +353,7 @@ The immensely complex James Webb Space Telescope
 was successfully deployed;
 it is now revealing secrets about the early Universe.
 
-Sometimes I wonder about the motives of those who claim that science is moribund. Is it do with political ideology or unrealistic expectations?
+Sometimes I wonder about the motives of those who claim that science is moribund. 
+Do they have political aims, or just unrealistic expectations?
 Were they expecting time travel or some sort of warp drive?
 People need to remember that movies are fiction.
