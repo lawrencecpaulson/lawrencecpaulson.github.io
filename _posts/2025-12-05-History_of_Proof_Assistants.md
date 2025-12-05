@@ -8,13 +8,13 @@ Crackpots ranging from billionaire Peter Thiel to random YouTube influencers cla
 and government funding
 in pushing the VLSI revolution, RISC processor design, networking, hypertext, virtual memory and indeed computers themselves. As for the industrial research,
 most of it came from just two "blue sky" institutes – [Bell Labs](https://sites.stat.columbia.edu/gelman/research/published/bell.pdf) 
-and [Xerox PARC](https://spectrum.ieee.org/xerox-parc) – that closed a long time ago. Giving away the goods is no way to make a profit, but without academic give-and-take it is hard to make progress. Anyway, let's look at 50 years of progress in a scientific field 
-that is light-years away from mainstream computing: 
-LCF-style proof assistants.
+and [Xerox PARC](https://spectrum.ieee.org/xerox-parc) – that closed a long time ago. 
+LCF-style proof assistants are a world away from mainstream computing,
+so let's look at 50 years of progress there.
 
 ### 1975–1985: Edinburgh LCF
 
-The first instance of LCF was Stanford LCF, developed by Robin Milner in 1972, but it was not an LCF-style proof assistant. LCF meant "Logic for Computable Functions", a quirky formalism based on Scott domains and intended for reasoning about small functional programs. But "LCF-style proof assistant" means one that, like Edinburgh LCF, was coded in some form of 
+The first instance of LCF was Stanford LCF, developed by Robin Milner in 1972, but it was **not** an LCF-style proof assistant! LCF meant "Logic for Computable Functions", a quirky formalism based on Scott domains and intended for reasoning about small functional programs. But "LCF-style proof assistant" means one that, like Edinburgh LCF, was coded in some form of 
 the ML programming language and provided a proof kernel, 
 encapsulated in an abstract type definition, to ensure that a theorem could only be generated 
 by applying inference rules to axioms or other theorems:
@@ -22,7 +22,7 @@ by applying inference rules to axioms or other theorems:
 > … the ML type discipline is used… so that—whatever complex procedures are defined—all values of type `thm` must be theorems, as only inferences can compute such values…. This security releases us from the need to preserve whole proofs… — an important practical gain since large proofs tended to clog up the working space… [*Edinburgh LCF*, page IV]
 
 Edinburgh LCF was first announced in 1975, which conveniently is exactly 50 years ago, 
-at a *Conference on Proving and Improving Programs* held at Arc-et-Senans. 
+at the almost mythical conference on *Proving and Improving Programs* held at Arc-et-Senans. 
 The [user manual](https://link.springer.com/book/10.1007/3-540-09724-4), published in the Springer lecture notes series, came out in 1979.
 Edinburgh LCF introduced some other principles that people still adhere to today:
 
@@ -76,12 +76,8 @@ And just like that, [hardware verification]({% post_url 2023-01-04-Hardware_Veri
 Although software verification seemed stuck in the doldrums,
 a couple of production-ready chip designs were verified!
 Mike's explanation was that hardware verification was simply easier.
-Another reason, I think, is that code (as opposed to an algorithm) never gets 
-frozen the way a chip design does. 
-There's never a point you can say "right, this is our target".
 
-Also in 1985, 
-we got a new [standard for the ML language](https://doi.org/10.1145/3386336)
+Also in 1985, we got a new [standard for the ML language](https://doi.org/10.1145/3386336)
 and, soon, two compilers for it.
 So then I started working on experiments that would 
 [lead to Isabelle]({% post_url 2022-07-13-Isabelle_influences %}).
@@ -118,7 +114,8 @@ To many, we were still a joke. This was about to change.
 ### 1995–2005: Proof assistants come of age
 
 In 1994, came the Pentium with its [FDIV bug](https://www.techradar.com/news/computing-components/processors/pentium-fdiv-the-processor-bug-that-shook-the-world-1270773): 
-a probably insignificant but detectable error in floating-point division that cost Intel nearly half a billion dollars.
+a probably insignificant but detectable error in floating-point division.
+The subsequent product recall cost Intel nearly half a billion dollars.
 John Harrison, a student of Mike's, decided to devote his PhD research
 to the verification of floating-point arithmetic.
 By June 1996 he had submitted an extraordinary [thesis](https://doi.org/10.48456/tr-408), 
@@ -154,7 +151,7 @@ Many of them used [Proof General](https://proofgeneral.github.io),
 a common user interface for tactic-based proof assistants
 based on the Emacs editor.
 And we had 100MHz machines, some with 64MB of memory!
-As the 1990s moved towards their millennial end, we were ready to do big things.
+We were ready to do big things.
 
 [^1]: Cool things were also done in [LEGO](https://era.ed.ac.uk/handle/1842/504), another type theory proof assistant, but sadly it soon fell by the wayside. And they were sued by some crazy guys from Billund.
 
@@ -169,12 +166,12 @@ and the late, unlamented SET protocol.
 These proofs were not at the level of code or bits;
 buggy implementations could and did emerge.
 
-Twenty years ago (2005), the big thing that caught everyone's eye
+In 2005, the big thing that caught everyone's eye
 was [George Gonthier's formalisation](https://rdcu.be/eSgTy) (in Coq) 
 of the Four Colour Theorem.
 Most educated people had heard of the theorem already, 
-and its history is fascinating. 
-Numerous proofs had been attempted and rejected since the mid 19th century.
+and its history is fascinating:
+numerous proofs had been attempted and rejected since the mid 19th century.
 The 1977 proof by Appel and Haken was questioned 
 because it relied on a lot of ad-hoc computer code.
 Suddenly, despite the still unwelcome involvement of computers, 
@@ -265,7 +262,7 @@ The end of the decade also saw impressive results in the formalisation of mathem
 
 Without going into details here, each of these was an ambitious proof, combining in various ways deep mathematics, intricate technicalities and sheer bulk.
 Our community was proud of our achievements.
-We were no longer a joke, but what exactly we were good for? There was still plenty of scepticism.
+We were no longer a joke, but what exactly we were good for?
 
 ### 2015–2025: Breaking through
 
@@ -274,10 +271,9 @@ acceptance of proof assistants by many mainstream mathematicians.
 I mostly recall mathematicians regardeding computers 
 with something close to contempt. 
 Even some logicians regarded formalised mathematics as impossible, 
-somehow fixating on Gödel's incompleteness or the notorious proof of 1+1=2 on page 360.
+somehow fixating on Gödel's incompleteness or that notorious proof of 1+1=2 on page 360.
 Regarding my work formalising big chunks of ZF theory, 
 someone commented "only for finite sets obviously".
-That's over.
 
 My EU-funded [ALEXANDRIA](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) project started in 2017. 
 My team formalised more advanced and deep mathematics 
@@ -286,7 +282,8 @@ than I ever imagined to be possible, using Isabelle/HOL.
 But ALEXANDRIA alone would not have had much of an impact on mathematical practice.
 What made a difference was [Kevin Buzzard](https://xenaproject.wordpress.com/what-is-the-xena-project/) and his enthusiastic, tireless promotion of the idea of formalising mathematics 
 in [Lean](https://lean-lang.org).
-I got had the idea of blogging from him, though my blog has not had the same impact.
+He recruited a veritable army.
+I got the idea of blogging from him, but my blog has not had the same impact. Where are you guys?
 
 In 2022, for the first time ever, machine assistance 
 was [used to confirm](https://leanprover-community.github.io/blog/posts/lte-final/) 
@@ -313,39 +310,47 @@ These concern the design and implementation of novel computer architectures
 with fine-grained memory protection, 
 and a design process with formal verification at its heart.
 
-[WebAssembly](https://webassembly.org)
+Isabelle has also contributed to the design of [WebAssembly](https://webassembly.org), 
+a relatively new platform for web applications.
+By subjecting the WebAssembly specification to [formal scrutiny](https://doi.org/10.1145/3167082), 
+Conrad Watt was able to identify a number of issues in time for them to be fixed.
 
-[Mechanising and verifying the WebAssembly specification](https://doi.org/10.1145/3167082)
+Finally, I'd like to mention this announcement (4 December 2025) by Dominic Mulligan of Amazon Web Services (AWS):
 
 > Over three years, lots of hard work, and 260,000 lines of Isabelle/HOL code later, the Nitro Isolation Engine (NIE) [is finally announced](https://www.aboutamazon.com/news/aws/aws-graviton-5-cpu-amazon-ec2) alongside Graviton5. 
 > 
 > Working with our colleagues in EC2, Annapurna, and AWS AppSec, we have been working to rearchitect the Nitro system for Graviton5+ instances around a small, trusted separation kernel. Written from scratch in Rust, we have additionally specified the behaviour of a core subset of the Nitro Isolation Engine kernel, verified that the implementation meets this specification, and additionally proved deep security properties—confidentiality and integrity—of the implementation.
 
+I am biased, since I've been working with AWS on this exact project, but this is a big deal.
+AWS has been using formal verification tools for a considerable time.
+A notable earlier accomplishment was verify tricky but efficient algorithms using HOL Light,
+[speeding up](https://www.amazon.science/blog/formal-verification-makes-rsa-faster-and-faster-to-deploy)
+RSA encryption by a massive factor. 
+
 ### 2025–2035 Becoming ordinary
 
 A couple of months ago, Apple announced new models in their iPhone range,
 but no crowds formed around Apple Stores.
-They once did: the iPhone was regarded as revolutionary.
+They once did: the iPhone was once regarded as revolutionary.
 Now, smartphones are a commodity, which is the final stage of a new technology.
 Formal verification is not ordinary yet. 
-But it's not hard to foresee a future in which 
-more and more software is regarded as too important to develop any other way, 
+But it's coming: more and more software will be seen as too important to develop any other way, 
 as is already the case for hardware.
 
 ### Postscript
 
 I am well aware that there is much outstanding work adjacent to that
-described here, e.g. using other interactive tools, such as AUTOMATH, Nqthm and ACL2,
-PVS and Agda, and much work not mentioned using Rocq. There have been amazing advances 
+described here, e.g. using other interactive tools, such as Nqthm and ACL2,
+PVS and Agda, and much else using Rocq. There have been amazing advances 
 in the broader theorem proving world, also in model checking,
 SAT/SMT solving and their applications to extended static checking of software.
-I have related what I personally know about.
+I have related what I personally know.
 And remember, the point of this post is not (simply) to boast 
-but to show how active our research community has been, 
+but to demonstrate the progress of our research community, 
 so the more achievements the better. Feel free to add some in the comments!
 
 This post does not prove anything about other fields of science, 
-such as particle physics, molecular biology or mathematics.
+such as solid-state physics, molecular biology or mathematics.
 But it's fair to assume that such fields have not been idle either. 
 People have proved Fermat's Last Theorem and the Poincaré conjecture, 
 and settled more obscure questions such as the projective plane of order 10.
