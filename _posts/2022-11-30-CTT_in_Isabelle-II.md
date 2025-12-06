@@ -204,7 +204,7 @@ In the structured proof shown below, some echoes of his proof can be seen.
 This version, however, takes the proof object as given.
 It's possible to write a line by line proof from which this object emerges.
 
-[^1]: Per Martin-Löf, [Constructive mathematics and computer programming](http://www.jstor.org/stable/37448). *Philosophical Transactions of the Royal Society of London*. Series A. **312**:1522 (1984), 501–518.
+[^1]: Per Martin-Löf, [Constructive mathematics and computer programming](https://www.jstor.org/stable/37448). *Philosophical Transactions of the Royal Society of London*. Series A. **312**:1522 (1984), 501–518.
 
 <img src="/images/CTT/struct-AC.png" alt="structured proof of LEM" height="450px" />
 

@@ -8,7 +8,7 @@ tags: [Martin-Löf type theory, Isabelle, constructive logic]
 Last July, [I described]({% post_url 2022-07-13-Isabelle_influences %})
 how Isabelle emerged from a jumble of influences: AUTOMATH, LCF and Martin-Löf.
 I stated that Isabelle had originated as a proof assistant for
-[Martin-Löf type theory](http://www.jstor.org/stable/37448).
+[Martin-Löf type theory](https://www.jstor.org/stable/37448).
 Eventually I realised that the type theory community wasn't interested in this work,
 just as it wasn't much interested in [Nuprl](https://nuprl-web.cs.cornell.edu), which was
 by far the most developed type theory implementation out there.

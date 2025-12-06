@@ -68,7 +68,7 @@ An outstanding application of Warner's correspondence was Han and van Doorn's [p
 
 Isabelle has supported first-order logic and set theory as early as the 1990s. Isabelle/ZF is a separate instance from Isabelle/HOL sharing its interface, proof language, simplifier, etc. It is based on a formalisation of classical first-order logic, asserting the usual ZF axioms and with AC kept optional. Experiments done at Cambridge in the 1990s include formal proofs of many [equivalents of AC](https://arxiv.org/abs/cs/9612104).
 Later, I used Gödel's [constructible universe](https://plato.stanford.edu/entries/goedel/#GodWorSetThe) in an [Isabelle/ZF proof](http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=6560756&fulltextType=RA&fileId=S1461157000000449) of the consistency of the continuum hypothesis.
-Isabelle/ZF then languished for many years, but lately a group at the University of Argentina has formalised [a string of major results](https://cs.famaf.unc.edu.ar/~pedro/forcing/) based on forcing.
+Isabelle/ZF then languished for many years, but lately a group at the University of Argentina has formalised [a string of major results](https://sanchezterraf.ar/home/forcing/) based on forcing.
 An astounding feat.
  
 The [development of modern set theory](https://plato.stanford.edu/entries/settheory-early/) 

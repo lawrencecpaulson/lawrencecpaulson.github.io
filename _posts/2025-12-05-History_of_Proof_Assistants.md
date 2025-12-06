@@ -2,7 +2,7 @@
 layout: post
 title:  50 years of proof assistants
 usemathjax: true 
-tags: [memories, LCF, HOL, Isabelle, Coq, MJC Gordon]
+tags: [memories, LCF, HOL system, Isabelle, Coq, MJC Gordon]
 ---
 Crackpots ranging from billionaire Peter Thiel to random YouTube influencers claim that science has been stagnating for the past 50 years. They admit that computing is an exception: they don't pretend that my personal 32GB laptop is not an advance over the 16MB mainframe that served the whole Caltech community when I was there. Instead they claim that advances in computing were driven solely by industrial research, quite overlooking the role of academia 
 and government funding
