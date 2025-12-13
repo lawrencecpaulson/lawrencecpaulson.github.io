@@ -46,9 +46,9 @@ on proving the correctness of a parsing algorithm
 using Edinburgh LCF. 
 The proof consists of one single induction followed by 
 a little simplification and other reasoning.
-The report includes a succinct description of Edinburgh LCF and
-is a nice snapshot of the state of the art in 1982
-when Cambridge in 1982 to join a project run by Robin Milner and Mike Gordon.
+The report includes a succinct description of Edinburgh LCF.
+It is a nice snapshot of the state of the art in 1982,
+when I arrived in Cambridge to join a project run by Robin Milner and Mike Gordon.
 Full of youthful enthusiasm, I told Mike that it would be great 
 if one day we could formalise the Prime Number Theorem.
 I hardly knew what the theorem was about or how to prove it, 
@@ -321,7 +321,7 @@ Finally, I'd like to mention this announcement (4 December 2025) by Dominic Mull
 > 
 > Working with our colleagues in EC2, Annapurna, and AWS AppSec, we have been working to rearchitect the Nitro system for Graviton5+ instances around a small, trusted separation kernel. Written from scratch in Rust, we have additionally specified the behaviour of a core subset of the Nitro Isolation Engine kernel, verified that the implementation meets this specification, and additionally proved deep security properties—confidentiality and integrity—of the implementation.
 
-I am biased, since I've been working with AWS on this exact project, but this is a big deal.
+I am biased, since I've been working with AWS on [this exact project](https://www.youtube.com/watch?v=hqqKi3E-oG8), but it's a big deal.
 AWS has been using formal verification tools for a considerable time.
 A notable earlier accomplishment was verify tricky but efficient algorithms using HOL Light,
 [speeding up](https://www.amazon.science/blog/formal-verification-makes-rsa-faster-and-faster-to-deploy)
