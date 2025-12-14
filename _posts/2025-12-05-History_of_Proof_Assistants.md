@@ -235,7 +235,9 @@ was how to translate your verified compiler into machine code.
 For example, CompCert is mostly written in Rocq, 
 which is then extracted to OCaml code. 
 The OCaml compiler had never been verified, 
-so how do we know that its compiled code is correct?
+so how do we know that its compiled code is correct?[^2]
+
+[^2]: In fact, the correctness of CompCert is delicate for [a number of reasons](https://doi.org/10.1007/978-3-030-99336-8_8).
 
 [CakeML](https://cakeml.org) squares this circle through [bootstrapping](https://doi.org/10.1145/3437992.3439915).
 CakeML translates from its source language (a dialect of ML) 
