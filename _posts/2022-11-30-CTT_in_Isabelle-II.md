@@ -2,7 +2,7 @@
 layout: post
 title:  "Martin-Löf type theory in Isabelle: examples"
 usemathjax: true
-tags: [Martin-Löf type theory, constructive logic, Isabelle, examples]
+tags: [Martin-Löf type theory, constructive logic, Isabelle, law of excluded middle, examples]
 ---
 
 The [previous post]({% post_url 2022-11-23-CTT_in_Isabelle %})

@@ -98,7 +98,7 @@ Definitions were not being checked for circularity
 because Isabelle was specialised research software and I couldn't be bothered to stop people from hanging themselves: that old UNIX spirit.
 But good computer systems do protect users.
 
-An early soundness bug in HOL88 was also concerned with definitions.
+An early soundness bug in HOL88 also involved definitions.
 It was omitting to check that all the variables on the right hand side 
 of the definition also appeared on the left-hand side.
 
