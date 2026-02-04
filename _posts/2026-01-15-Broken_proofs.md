@@ -65,11 +65,13 @@ If the definition is wrong, theorems mentioning it will not mean what you think 
 
 This is also the answer to those who complain that $x/0=0$ in Isabelle 
 (also, in HOL and Lean): 
-if your theorem does not mention the division symbol then it doesn't matter.
+if your theorem does not mention[^1] the division symbol then it doesn't matter.
 And if it does mention division, then the only possible discrepancy 
 between Isabelle's interpretation and the traditional one 
 involves division by zero; in that case, 
 there is no traditional interpretation to disagree with.
+
+[^1]: directly or indirectly (see the first comment below)
 
 ### Soundness bugs in proof assistants
 
