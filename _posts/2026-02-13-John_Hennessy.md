@@ -56,18 +56,18 @@ Somehow we arrived at a PhD project involving
 theory ([denotational semantics](https://podcasts.ox.ac.uk/keywords/denotational-semantics)) 
 and practice (in the form of compiler generation).
 Somehow I started building the thing. At first it wasn't working, then it was.
-I had created a [semantic-directed compiler generator](https://doi.org/10.1145/582153.582178) consisting of three components:
+I had built a [semantics-directed compiler generator](https://doi.org/10.1145/582153.582178) consisting of three components:
 
 * a *Grammar Analyser*, which took a programming language specification 
 in the form of an [attribute grammar](https://rdcu.be/e3PLO) 
 decorated with formulas of denotational semantics 
-* a *Universal Translator*, which functioned as a compiler for the specified language.
-* a *Stack Sachine* for executing the generated code
+* a *Universal Translator*, which functioned as a compiler for the specified language
+* a *Stack Sachine*, for executing the generated code
 
 The performance penalty for the generated object code was a factor of 1000, but who's counting?
 
 To support myself, generally I worked as a TA and 
-I gave the occasional lecture standing in for John, 
+gave the occasional lecture standing in for John, 
 but on the whole I was simply able to get on with my research.
 And at the end when I had finished too quickly to satisfy Stanford's residence requirement,
 John even found the money to pay the difference.
