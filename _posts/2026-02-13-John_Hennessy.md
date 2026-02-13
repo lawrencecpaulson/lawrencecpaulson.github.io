@@ -122,4 +122,4 @@ Think of a General Practitioner who has overall familiarity with their patient's
 
 John visited Cambridge during the 1990s, perhaps interested in 
 taking up a position here. So in a plausible alternative future, 
-perhaps he would now be the British Prime Minister.
+he might now be the British Prime Minister.
