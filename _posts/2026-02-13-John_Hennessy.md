@@ -103,7 +103,9 @@ John, with David Patterson, made fundamental contributions
 to the development of RISC technology and wrote two acclaimed textbooks.
 John was also a founder of [MIPS Computer Systems](https://en.wikipedia.org/wiki/MIPS_architecture_processors).
 His work has been recognised by the ACM's Turing Award and numerous other honours and prizes.
-If your computer is fast, one of the people you should thank is John.
+If your computer is fast, one of the people you should thank is John.[^1]
+
+[^1]: And if it is slow, probably you should be blaming Bill Gates.
 
 ### As an influence
 
