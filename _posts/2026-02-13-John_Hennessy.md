@@ -41,7 +41,9 @@ Unfortunately, David Luckham had a reputation for exploiting his PhD students;
 I was even taken aside, probably by the kind and lovely departmental secretary, Carolyn Tajnai, and advised to watch out.
 Unfortunately, I was by nature inattentive, so I didn't take heed 
 and I didn't even notice when (allegedly) Luckham told me that I should move on.
-But I did notice when my financial support disappeared. Enter John.
+But I did notice when my financial support disappeared.[^1] Enter John.
+
+[^1]: I was not unhappy to learn, years later, about an unfortunate situation involving airport security that got Luckham an invitation to spend a night in a police cell.
 
 ### Working with John Hennessy
 
@@ -103,9 +105,9 @@ John, with David Patterson, made fundamental contributions
 to the development of RISC technology and wrote two acclaimed textbooks.
 John was also a founder of [MIPS Computer Systems](https://en.wikipedia.org/wiki/MIPS_architecture_processors).
 His work has been recognised by the ACM's Turing Award and numerous other honours and prizes.
-If your computer is fast, one of the people you should thank is John.[^1]
+If your computer is fast, one of the people you should thank is John.[^2]
 
-[^1]: And if it is slow, probably you should be blaming Bill Gates.
+[^2]: And if it is slow, probably you should be blaming Bill Gates.
 
 ### As an influence
 
