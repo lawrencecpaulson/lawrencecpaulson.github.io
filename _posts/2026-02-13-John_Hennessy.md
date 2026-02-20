@@ -68,7 +68,7 @@ decorated with formulas of denotational semantics
 
 The performance penalty for the generated object code was a factor of 1000, but who's counting?
 
-To support myself, generally I worked as a TA and 
+To support myself, generally I worked as a Teaching Assistant and 
 gave the occasional lecture standing in for John, 
 but on the whole I was simply able to get on with my research.
 And at the end when I had finished too quickly to satisfy Stanford's residence requirement,
