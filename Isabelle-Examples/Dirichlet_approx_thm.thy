@@ -49,7 +49,7 @@ proof -
   show ?thesis
   proof
     have "frac (b*\<theta>) - frac (a*\<theta>) = ?k*\<theta> - ?h"
-      using \<open>a < b\<close> by (simp add: frac_def left_diff_distrib of_nat_diff)
+      using \<open>a < b\<close> by (simp add: frac_def left_diff_distrib)
     with * show "\<bar>of_int ?k * \<theta> - ?h\<bar> < 1/N"
       by (metis of_int_of_nat_eq)
   qed (use * in auto)

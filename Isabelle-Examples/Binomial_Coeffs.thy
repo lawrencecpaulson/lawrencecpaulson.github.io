@@ -34,7 +34,7 @@ lemma choose_mult_lemma:
 proof -
   have "?lhs =
       fact(m+r+k) div (fact(m+k) * fact(m+r-m)) * (fact(m+k) div (fact k * fact m))"
-    by (simp add: binomial_altdef_nat)
+    by (simp add: binomial_fact')
   also have "\<dots> = fact(m+r+k) * fact(m+k) div
                  (fact(m+k) * fact(m+r-m) * (fact k * fact m))"
     by (metis add_implies_diff add_le_mono1 choose_dvd diff_cancel2 div_mult_div_if_dvd
@@ -47,7 +47,7 @@ proof -
       (fact(m+r+k) div (fact k * fact(m+r)) * (fact(m+r) div (fact r * fact m)))"
     by (smt (verit) fact_fact_dvd_fact div_mult_div_if_dvd mult.assoc mult.commute)
   finally show ?thesis
-    by (simp add: binomial_altdef_nat mult.commute)
+    by (simp add: binomial_fact' mult.commute)
 qed
 
 text \<open>The "Subset of a Subset" identity.\<close>
