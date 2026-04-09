@@ -202,7 +202,7 @@ This principle additionally involves a generalization of the side condition `R y
 
 We successfully solved the coinductive puzzle that arose during our verification of an automatic
 theorem prover. At its core, the puzzle has little to do with theorem proving; instead, it is about
-refinement of possibly nonterminating transition systems. Our proof can be found in the [AFP](https://devel.isa-afp.org/sessions/ordered_resolution_prover/#Lazy_List_Chain.html#Lazy_List_Chain.chain_tranclp_imp_exists_chain|fact). On the plus side, Isabelle conveniently
+refinement of possibly nonterminating transition systems. Our proof can be found in the [AFP](https://www.isa-afp.org/sessions/ordered_resolution_prover/#Lazy_List_Chain.html#Lazy_List_Chain.chain_tranclp_imp_exists_chain|fact). On the plus side, Isabelle conveniently
 allowed us to define all the functions and predicates we needed to carry out the proof, including
 functions whose productivity relied on "friends". On the minus side, the proof of an easy-looking
 theorem required some ingenuity. In particular, we found ourselves deriving coinduction-up-to
