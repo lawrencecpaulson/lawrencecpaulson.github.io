@@ -2,7 +2,7 @@
 layout: post
 title:  "Propositions as types: explained (and debunked)"
 usemathjax: true 
-tags: [logic, intuitionism, constructive logic, Martin-Löf type theory, NG de Bruijn]
+tags: [logic, constructive logic, Martin-Löf type theory, NG de Bruijn]
 ---
 
 The principle of *propositions as types* (a.k.a. [Curry-Howard isomorphism](https://en.wikipedia.org/wiki/Curry–Howard_correspondence)), 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Intuitionism and constructive logic"
 usemathjax: true 
-tags: [logic, intuitionism, constructive logic, Martin-Löf type theory, axiom of choice]
+tags: [logic, constructive logic, Martin-Löf type theory, axiom of choice]
 ---
 
 Intuitionism was for most of the 20th century a recondite topic in the foundations of mathematics. But in the 1970s, the emergence of constructive type theories, and simultaneously, functional programming languages, brought these topics to the forefront of theoretical computer science. Many practitioners of machine logic 
