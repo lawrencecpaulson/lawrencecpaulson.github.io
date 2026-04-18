@@ -2,7 +2,7 @@
 layout: post
 title:  "Memories: doing my PhD at Stanford, under John L Hennessy"
 usemathjax: true 
-tags: [memories,general]
+tags: [memories, general, Standard ML]
 ---
 When young researchers get together, one topic of conversation is "who supervised your PhD?"
 Back in the day, Rod Burstall was often named. 
