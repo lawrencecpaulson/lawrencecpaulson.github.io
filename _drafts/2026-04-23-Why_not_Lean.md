@@ -109,22 +109,33 @@ I have seen "proof assistant" *defined* as a piece of software that checks proof
 And just like that, most of the research of the past half century is wiped away.
 Nothing would be left except Rocq, Lean and [Agda](https://hackage.haskell.org/package/Agda) 
 (which implements Martin-Löf type theory).
+
 Even AUTOMATH is not an instance of propositions as types.
 Although it has versions of $\Pi$ and $\to$, you set up logic
 using axioms resembling those in any logic text. 
 De Bruijn understood, 50 years ago, that the categories of 
-types and propositions needed to be kept distinct.
+types and propositions needed to be kept distinct:
+otherwise, the division operator would have to take three arguments,
+and the value of $x/y$ would actually depend on the proof of $y\not=0$.
 
-I have even heard people say 
+The other key difficulty with propositions as types is that,
+since equivalence of propositions is undecidable, 
+type checking must be undecidable.
+In the early days, this fact was taken for granted.
+However, around 1990, the consensus shifted to restrict the concept of type equivalence to make type checking decidable.
+This is why $T(i+1)$ and $T(1+i)$ are different types.
+
+I have even heard well-informed people say 
 "the LCF approach is the same thing as propositions as types".
 This is quite untrue, and I have devoted 
 [an entire blogpost]({% post_url 2022-01-05-LCF %}) to trying to make this clear.
 
 ### LCF (again): we don't need proof objects!
 
-Both Rocq and Lean include the category `Prop` of propositions.
+Both Rocq and Lean include the sort `Prop` of propositions.
 This recognises the necessity of proof irrelevance:
 different proofs of a proposition must be regarded as equal.
+In Lean, the value of every proof object is `True.intro`.
 So proof objects are unnecessary, but are kept anyway. Why?
 
 That proof objects are unnecessary was
@@ -143,10 +154,25 @@ This is an example of the insularity that I mentioned at the beginning.
 It is crazy, in the age of [RAMmageddon](https://www.nature.com/articles/d41586-026-00844-x),
 for people to waste megabytes or perhaps gigabytes 
 on giant terms that denote nothing and are good for nothing.
-There is even research on making these useless things "nice".
+There is even research on making these useless things "elegant".
+It's time to re-read the "The Emperor's New Clothes".
 
 ### Why should you use Isabelle?
 
 Let's get the obvious out of the way first: if your colleagues are using Lean, 
-have expertise in Lean, and if your key prerequisites are in Lean libraries, 
+have expertise in Lean, and if your key prerequisites are in the Lean libraries, 
 of course you should use Lean.
+
+But if you have more freedom than that, a key purpose of this blog is to give you reasons to consider Isabelle. They include
+
+* **the best automation anywhere**. Don't be fooled by people talking about "hammers" as everyday things: there is nothing comparable to sledgehammer.
+* **the best choice for legibility**. Of the others, Lean has the best potential, but it seems like the user community doesn't value this and there's an implicit limit of 50 lines per proof.
+* **no dependent types**, so no universe levels and none of the quirks that trap beginners, because type dependence does not really work.
+
+The rise of AI is making these differences starker.
+AI proofs tend to be messy, but it's easy to tidy them using sledgehammer.
+Since they are nicely structured, they are legible despite their excessive 
+detail, so you can see what is going on and look for ways to simplify them.
+There is also recent work where the language models themselves use sledgehammer 
+to support their own work.
+
