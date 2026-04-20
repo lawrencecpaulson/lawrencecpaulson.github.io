@@ -33,9 +33,8 @@ its complete lack of automation. Proofs would be too long and completely unreada
 And yet, for reasoning about equivalence classes, 
 it is **still** probably better than Rocq. For while users of the
 latter rail against "setoid hell", Jutting in his dissertation dispassionately describes his formalisation of equivalence classes.
-He even made an extra AUTOMATH section to improve on Landau:
-he based it on equivalence classes because he thought they were more elegant
-than Landau's treatment.
+He even formalised one of Landau's chapters a second time,
+adopting equivalence classes because he thought they were the right approach. 
 
 ### And just after, there were Boyer and Moore
 
@@ -101,7 +100,7 @@ the philosophy of [intuitionism]({% post_url 2021-11-24-Intuitionism %})
 arose in the aftermath of Russell's paradox.
 It had particular implications for the real numbers.
 While [Martin-Löf type theory](https://www.jstor.org/stable/37448) 
-was recognisably an intuitionistic formalism, Rocq never was and I'm not aware of any Rocq investigations into the key issues of intuitionistic mathematics.
+was recognisably an intuitionistic formalism, that's not so clear for Rocq.
 And yet, paper after paper mentioned "constructive proof" in contexts that were irrelevant and sometimes nonsensical.
 This obsession hindered the application of Rocq to mathematics, 
 leaving the field to Lean.
@@ -175,7 +174,7 @@ But if you are free to choose, a key purpose of this blog is to give you reasons
 
 * **the best automation anywhere**. Don't be fooled by people talking about "hammers" as everyday things: there is nothing comparable to sledgehammer.
 * **the best choice for legibility**. This blog presents [numerous examples](https://lawrencecpaulson.github.io/tag/Isar).
-* **no dependent types**, so no universe levels and none of the quirks that trap beginners. Dependent types are discouraged in Lean's mathlib and in Rocq's SSREFLECT and Mathematical Components.
+* **no dependent types**, so no universe levels and none of the quirks that trap beginners. Remember, dependent types are discouraged in Lean's mathlib and in Rocq's SSREFLECT and Mathematical Components.
 
 Lean has the potential to be legibile, even supporting nested proof blocks.
 Now its user community must take advantage of these features.
