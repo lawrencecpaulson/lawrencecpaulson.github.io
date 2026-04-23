@@ -117,7 +117,7 @@ It is beautiful, fascinating and theoretically fruitful,
 but it is not the only game out there.
 I have seen "proof assistant" *defined* as a piece of software that checks proofs according to the principle of propositions as types.
 And just like that, most of the research of the past half century is wiped away.
-Nothing would be left except Rocq, Lean and [Agda](https://hackage.haskell.org/package/Agda) 
+Nothing would be left except Rocq, Lean and [Agda](https://hackage.haskell.``org/package/Agda) 
 (which implements Martin-Löf type theory).
 
 Even AUTOMATH is not an instance of propositions as types.
@@ -179,7 +179,7 @@ To make type checking decidable,
 equality was downgraded to *definitional* or *intensional* equality.
 This is why $T(N+1)$ and $T(1+N)$ are different types.
 Although this limitation has real repercussions for proofs,
-testing definitional equality is a heavy computational burden.
+testing definitional equality is (still!) a heavy computational burden.
 
 To be fair, if you'd asked me back in 2017 what sort of mathematics
 Isabelle could handle, I'd have been much more cautious. 
@@ -207,7 +207,8 @@ AI proofs tend to be messy, but it's easy to tidy them using sledgehammer.
 Since they are nicely structured –– in my limited experience, using Claude –– 
 they are legible despite their often excessive detail. 
 You can see what is going on and look for ways to simplify them.
-There is also recent research where the language models themselves use sledgehammer to support their own efforts.
+There is also [recent research](https://arxiv.org/abs/2604.07455) 
+where the language models themselves call sledgehammer.
 Finally, AI can easily translate legible structured proofs from one proof
 assistant to another. Then, you no longer need to worry about which one
 you choose.
