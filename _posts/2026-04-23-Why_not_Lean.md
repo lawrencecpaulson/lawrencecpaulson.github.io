@@ -2,7 +2,7 @@
 layout: post
 title:  Why not use Lean?
 usemathjax: true 
-tags: [AUTOMATH, LCF, HOL system, HOL Light]
+tags: [AUTOMATH, LCF, HOL system, HOL Light, formalised mathematics]
 ---
 I have been told that when proposing to formalise mathematics these days, you have to explain why you are not using Lean.
 And that reminds me why I left the dependent-typed world 40 years ago:
@@ -20,15 +20,15 @@ Part of the hype mentioned above is the frequent claim "Lean has made the formal
 Sorry, we got there in 1968. 
 NG de Bruijn's [AUTOMATH](https://lawrencecpaulson.github.io/tag/AUTOMATH)
 already included most of the necessary ingredients.
-By 1977, Jutting had used it to formalise Landau's *Foundations of Analysis*, covering mathematical induction and typed set theory.
+By 1977, Jutting had used it to formalise Landau's *Foundations of Analysis*, which covers the construction of the complex numbers starting from pure logic.
 Jutting worked with equivalence classes and with sets of rational numbers. 
 He formally proved the Dedekind completeness of the real number line.
 His accomplishment would not be matched for 20 years, despite vast advances in computer power. Finally, in the mid-90s, 
 the real numbers were formalised again by John Harrison (using HOL Light) and Jacques Fleuriot (Isabelle/HOL).
 
 I believe that almost anything that has been formalised today in any system could have been formalised in AUTOMATH. 
-Its main drawbacks are its notation, which really is horrible, and
-its complete lack of automation. Proofs would be too long and completely unreadable. 
+Its main drawbacks were its notation, which really was horrible, and
+its complete lack of automation. Proofs were long and unreadable. 
 
 And yet, for reasoning about equivalence classes, 
 it is **still** probably better than Rocq. For while users of the
@@ -55,12 +55,13 @@ as the *metalanguage* (hence ML) of a proof assistant had a broad impact.
 Groups in Cambridge, INRIA, Cornell and further afield built tools using ML, including early versions of HOL, Coq (now Rocq) and Nuprl.
 The HOL group was firmly fixated on hardware verification, but the need to verify floating point hardware brought with it a need for real analysis.
 Soon, [John Harrison had proved](https://doi.org/10.1007/978-1-4471-1591-5) 
-some serious mathematics, such as the prime number theorem. 
+some serious mathematics, such as the prime number theorem
+via Cauchy’s integral formula. 
 He set himself the task of verifying as many of 
 the famous *[100 theorems](https://www.cs.ru.nl/~freek/100/)* as possible, 
 and HOL Light often tops the table.
 If Isabelle has sometimes surpassed HOL Light, 
-it is because I stole and ported so many of their formalisations.
+it is because I stole so many of their formalisations.
 
 By 2014, these systems had been used to formalise a string of advanced results. 
 Here is a fairly arbitrary list:
@@ -101,7 +102,8 @@ arose in the aftermath of Russell's paradox.
 It had particular implications for the real numbers.
 While [Martin-Löf type theory](https://www.jstor.org/stable/37448) 
 was recognisably an intuitionistic formalism, that's not so clear for Rocq.
-And yet, paper after paper mentioned "constructive proof" in contexts that were irrelevant and sometimes nonsensical.
+And yet, paper after paper mentioned "constructive proof" 
+where it was irrelevant and sometimes nonsensical.
 This obsession hindered the application of Rocq to mathematics, 
 leaving the field to Lean.
 
@@ -122,16 +124,10 @@ Even AUTOMATH is not an instance of propositions as types.
 Although it has versions of $\Pi$ and $\to$, you set up logic
 using axioms resembling those in any logic text. 
 De Bruijn understood, 50 years ago, that the categories of 
-types and propositions needed to be kept distinct:
-otherwise, the division operator would have to take three arguments,
-and the value of $x/y$ would actually depend on the proof of $y\not=0$.
-
-The other key difficulty with propositions as types is that,
-if you are strict about it, type checking must be undecidable:
-the equivalence of propositions is undecidable.
-In the early days, this fact was taken for granted.
-However, around 1990, the consensus shifted to restrict the concept of type equivalence to make type checking decidable.
-This is why $T(N+1)$ and $T(1+N)$ are different types.
+types and propositions needed to be kept distinct for a number of reasons.
+Most obviously, the division operator would have to take three arguments,
+and the value of $x/y$ would actually depend on the proof that $y\not=0$.
+He noted that we must have *irrelevance of proofs*.
 
 I have even heard well-informed people say 
 "the LCF approach is the same thing as propositions as types".
@@ -141,8 +137,8 @@ This is quite untrue, and there's
 ### LCF (again): we don't need proof objects!
 
 Both Rocq and Lean include the sort `Prop` of propositions.
-This recognises the necessity of proof irrelevance:
-different proofs of a proposition must be regarded as equal.
+This provides proof irrelevance, and in particular,
+all proof objects for a given proposition evaluate to the same value.
 So these massive terms are unnecessary, but are kept anyway. Why?
 
 That proof objects are unnecessary was
@@ -154,15 +150,13 @@ with the inference rules at the constructors, and bingo! the proofs are checked 
 I once had the surreal experience of trying to explain this 50-year-old idea 
 to somebody from the propositions as types world. This was no student
 but one of the world's leading experts on functional programming, 
-someone for whom the origin story of the ML language should be a core tenet.
+someone for whom the origin story of the ML language should be core knowledge.
 It took quite a while and I don't think he was convinced:
 an example of the insularity that I mentioned above.
 
-It is crazy, in the age of [RAMmageddon](https://www.nature.com/articles/d41586-026-00844-x),
-to waste tens of megabytes on giant terms that denote literally nothing.
-There is even research into making these useless things "elegant".
-It is like sending a fleet of container ships carrying a cargo of air.
-It's an "Emperor's New Clothes" level of absurdity.
+It is nuts, in the age of [RAMmageddon](https://www.nature.com/articles/d41586-026-00844-x),
+to waste tens of megabytes on giant terms that denote nothing.
+There is even research into making these useless things elegant.
 
 ### Why should you use Isabelle?
 
@@ -172,17 +166,47 @@ are in the Lean libraries, of course you should use Lean.
 
 But if you are free to choose, a key purpose of this blog is to give you reasons to consider Isabelle. They include
 
-* **the best automation anywhere**. Don't be fooled by people talking about "hammers" as everyday things: there is nothing comparable to sledgehammer.
+* **the best automation anywhere**. Don't be fooled by people talking about "hammers" as everyday things: there is nothing comparable to sledgehammer. Plus much more. I also need to write about computer algebra.
 * **the best choice for legibility**. This blog presents [numerous examples](https://lawrencecpaulson.github.io/tag/Isar).
-* **no dependent types**, so no universe levels and none of the quirks that trap beginners. Remember, dependent types are discouraged in Lean's mathlib and in Rocq's SSREFLECT and Mathematical Components.
+* **no dependent types**, so no universe levels and none of the quirks that trap beginners. Remember, dependent types are discouraged in Lean's mathlib and in Rocq's SSReflect and Mathematical Components.
 
-Lean has the potential to be legibile, even supporting nested proof blocks.
-Now its user community must take advantage of these features.
+A key difficulty with dependent types is that,
+if done properly, type checking must be undecidable.
+That's because equality is undecidable, 
+and in the early days, this fact was taken for granted.
+However, around 1990, the consensus shifted.
+To make type checking decidable, 
+equality was downgraded to *definitional* or *intensional* equality.
+This is why $T(N+1)$ and $T(1+N)$ are different types.
+Although this limitation has real repercussions for proofs,
+testing definitional equality is a heavy computational burden.
+
+To be fair, if you'd asked me back in 2017 what sort of mathematics
+Isabelle could handle, I'd have been much more cautious. 
+It's easy to imagine that dependent types are necessary to handle
+such things as
+
+* [field extensions](https://rdcu.be/cIK3W)
+* [p-adic numbers](https://www.isa-afp.org/entries/Padic_Field.html)
+* [Grothendieck schemes](https://doi.org/10.1080/10586458.2022.2062073)
+
+But a bunch of us [did some research](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) and learned a lot.
+The trick is to stop forcing everything to be a type.
+
+### To the future
+
+Lean gets a lot of things right. 
+And Lean has the potential to be legibile, even supporting nested proof blocks.
+Now its user community must take advantage of these features,
+as Isabelle users are mostly doing already.
+The ultimate transparency is not a proof object that a computer can check 
+but a proof text that a human being can actually read.
 
 The rise of AI is making these differences starker.
 AI proofs tend to be messy, but it's easy to tidy them using sledgehammer.
-Since they are nicely structured, they are legible despite their excessive 
-detail, so you can see what is going on and look for ways to simplify them.
+Since they are nicely structured –– in my limited experience, using Claude –– 
+they are legible despite their often excessive detail. 
+You can see what is going on and look for ways to simplify them.
 There is also recent research where the language models themselves use sledgehammer to support their own efforts.
 Finally, AI can easily translate legible structured proofs from one proof
 assistant to another. Then, you no longer need to worry about which one
