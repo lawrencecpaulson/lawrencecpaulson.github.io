@@ -212,3 +212,5 @@ where the language models themselves call sledgehammer.
 Finally, AI can easily translate legible structured proofs from one proof
 assistant to another. Then, you no longer need to worry about which one
 you choose.
+
+*[Many thanks to Wenda Li for comments!]*
