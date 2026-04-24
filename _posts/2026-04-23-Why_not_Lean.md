@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Why not use Lean?
+title:  Why not just use Lean?
 usemathjax: true 
 tags: [AUTOMATH, LCF, HOL system, HOL Light, formalised mathematics]
 ---
