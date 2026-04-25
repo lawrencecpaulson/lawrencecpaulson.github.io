@@ -214,3 +214,12 @@ assistant to another. Then, you no longer need to worry about which one
 you choose.
 
 *[Many thanks to Wenda Li for comments!]*
+
+### Mizar, with apologies
+
+*[Added 15 April 2026]*
+
+Somehow, I forgot Mizar again. No history of the formalisation of mathematics
+is complete without a discussion of [Mizar](https://mizar.uwb.edu.pl) and its extensive [mathematical library](https://mizar.uwb.edu.pl/library/).
+Making the omission worse, Isabelle's Isar language borrows heavily from Mizar.
+My next blogpost will be about Mizar, I promise!
