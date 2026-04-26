@@ -2,7 +2,7 @@
 layout: post
 title:  "The ALEXANDRIA Project: what has been accomplished?"
 usemathjax: true 
-tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs, HOL Light, Principia Mathematica]
+tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs, HOL Light, Lean, Principia Mathematica]
 ---
 
 One of the [my first posts]({% post_url 2021-12-08-ALEXANDRIA %})

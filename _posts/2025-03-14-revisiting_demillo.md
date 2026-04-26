@@ -2,7 +2,7 @@
 layout: post
 title:  "Revisiting an early critique of formal verification"
 usemathjax: true 
-tags: [verification, philosophy, formalised mathematics, Principia Mathematica]
+tags: [verification, philosophy, formalised mathematics, Principia Mathematica, Lean]
 ---
 In 1979, a paper appeared that challenged the emerging field of program verification:
 "[Social Processes and Proofs of Theorems and Programs](https://doi.org/10.1145/359104.359106)", 
@@ -114,7 +114,7 @@ devoted the summer of 2017 to a workshop programme
 entitled [Big Proof](https://www.newton.ac.uk/event/bpr/).
 Aimed at "the challenges of bringing [formal] proof technology 
 into mainstream mathematical practice", it was attended by a great many mathematicians.
-Recently, Fields medallist Peter Scholze asked the verification community to confirm a key lemma of his prior to its publication.
+Recently, Fields medallist Peter Scholze asked the Lean community to confirm a key lemma of his prior to its publication.
 [It was completed](https://leanprover-community.github.io/blog/posts/lte-final/) 
 in 18 months.
 

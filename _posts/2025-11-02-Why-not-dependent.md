@@ -2,7 +2,7 @@
 layout: post
 title:  "\"Why don't you use dependent types?\""
 usemathjax: true 
-tags: [memories, AUTOMATH, LCF, type theory, Martin-Löf type theory, NG de Bruijn, ALEXANDRIA]
+tags: [memories, AUTOMATH, LCF, Lean, type theory, Martin-Löf type theory, NG de Bruijn, ALEXANDRIA]
 ---
 To be fair, nobody asks me this exact question.
 But people have regularly asked why Isabelle dispenses with proof objects.

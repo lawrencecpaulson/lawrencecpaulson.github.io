@@ -58,7 +58,9 @@ The analogous cube dissection is impossible. Here is Littlewood:
 
 This is not much of a proof.
 Floris van Doorn [managed to formalise it](https://florisvandoorn.com/talks/LMF21lean.pdf) within 24 hours, in Lean.
-An Isabelle version is still lacking.
+An Isabelle version is still lacking.[^1]
+
+[^1]: Finally done, by Thomas Holme Surlykke, in November 2024.
 
 This problem is of interest because it belongs to the famous [list of 100 "top" theorems](https://www.cs.ru.nl/~freek/100/), maintained by Freek Wiedijk.
 As of today, 98 of them have been proved in at least one system.
