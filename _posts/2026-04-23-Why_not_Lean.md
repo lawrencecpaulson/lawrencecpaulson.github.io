@@ -222,4 +222,4 @@ you choose.
 Somehow, I forgot Mizar again. No history of the formalisation of mathematics
 is complete without a discussion of [Mizar](https://mizar.uwb.edu.pl) and its extensive [mathematical library](https://mizar.uwb.edu.pl/library/).
 Making the omission worse, Isabelle's Isar language borrows heavily from Mizar.
-My next blogpost will be about Mizar, I promise!
+My [next blogpost]({% post_url 2026-05-07-Mizar %}) will be about Mizar, I promise!
