@@ -188,4 +188,4 @@ And now we are done!
 
 * [Download](/Isabelle-Examples/AckermannM.thy) the Isabelle proof development.
 * Blanchette et al. [describe](https://drops.dagstuhl.de/opus/volltexte/2017/7715/) much more advanced proofs such as [Goodstein’s theorem](https://en.wikipedia.org/wiki/Goodstein%27s_theorem), 
-using their [formalisation](https://www.isa-afp.org/entries/Nested_Multisets_Ordinals.html) of nested multisets.
+using their [formalisation](https://isa-afp.org/entries/Nested_Multisets_Ordinals.html) of nested multisets.

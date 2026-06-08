@@ -187,7 +187,7 @@ It's easy to imagine that dependent types are necessary to handle
 such things as
 
 * [field extensions](https://rdcu.be/cIK3W)
-* [p-adic numbers](https://www.isa-afp.org/entries/Padic_Field.html)
+* [p-adic numbers](https://isa-afp.org/entries/Padic_Field.html)
 * [Grothendieck schemes](https://doi.org/10.1080/10586458.2022.2062073)
 
 But a bunch of us [did some research](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) and learned a lot.

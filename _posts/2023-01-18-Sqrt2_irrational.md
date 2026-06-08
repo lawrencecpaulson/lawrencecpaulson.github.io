@@ -27,7 +27,7 @@ integers, rationals, real numbers (respectively) as **images** embedded in some 
 Here we are mostly going to work within type `real`, where ℕ and ℚ 
 will denote sets of real numbers. Through the magic of [type classes]({% post_url 2022-03-02-Type_classes %}), 
 these symbols denote the right set for other types, such as `complex`, 
-[quaternions](https://www.isa-afp.org/entries/Quaternions.html)
+[quaternions](https://isa-afp.org/entries/Quaternions.html)
 and any other types (including those yet to be defined) that inherit the necessary structure.
 
 We need to be careful with types here. I've used the function `real`, which injects natural numbers into type `real`. Most numeric coercions can be omitted in Isabelle:

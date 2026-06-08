@@ -41,10 +41,10 @@ the Isabelle/HOL analysis library, which had mostly been stolen from [HOL Light]
 But we were also supposed to conduct pilot studies.
 The team set to work enthusiastically, and already in the first year
 they created a number of impressive developments:
-* [Projective Geometry](https://www.isa-afp.org/entries/Projective_Geometry.html), including Hessenberg's theorem and Desargues's theorem
-* [Quaternions](https://www.isa-afp.org/entries/Quaternions.html) and [Octonions](https://www.isa-afp.org/entries/Octonions.html)
-* [Irrational rapidly convergent series](https://www.isa-afp.org/entries/Irrationality_J_Hancl.html), formalising a proof by J. Hančl published in 2002
-* Effectively counting [real](https://www.isa-afp.org/entries/Budan_Fourier.html) and [complex](https://www.isa-afp.org/entries/Count_Complex_Roots.html) roots of polynomials, the Budan-Fourier theorem
+* [Projective Geometry](https://isa-afp.org/entries/Projective_Geometry.html), including Hessenberg's theorem and Desargues's theorem
+* [Quaternions](https://isa-afp.org/entries/Quaternions.html) and [Octonions](https://isa-afp.org/entries/Octonions.html)
+* [Irrational rapidly convergent series](https://isa-afp.org/entries/Irrationality_J_Hancl.html), formalising a proof by J. Hančl published in 2002
+* Effectively counting [real](https://isa-afp.org/entries/Budan_Fourier.html) and [complex](https://isa-afp.org/entries/Count_Complex_Roots.html) roots of polynomials, the Budan-Fourier theorem
 * The first formal proof that [every field contains an algebraically closed extension](https://rdcu.be/cIK3W)
 
 Some mathematical proofs rely on calculations, and these can be extremely difficult
@@ -108,7 +108,7 @@ ALEXANDRIA refers to the famous
 [library of Alexandria](https://en.wikipedia.org/wiki/Library_of_Alexandria).
 Even at the start of the project, Isabelle's Archive of Formal Proofs (AFP)
 held a substantial collection. At the moment there are nearly 4 million lines of formal proofs
-and [741 separate entries](https://www.isa-afp.org/statistics/).
+and [741 separate entries](https://isa-afp.org/statistics/).
 The proposal included the goal of supporting intelligent search of large proof repositories
 and, more speculatively, somehow using the millions of lines of existing proofs
 in conjunction with some sort of machine learning technology to assist in generating

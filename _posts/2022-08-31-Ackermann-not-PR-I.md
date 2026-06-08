@@ -250,7 +250,7 @@ And as stated, the theorem follows quickly from the previous one.
 <span class="keyword1 command">qed</span>
 </pre>
 
-The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be downloaded from Isabelle's Archive of Formal Proofs.
+The [full development](https://isa-afp.org/entries/Ackermanns_not_PR.html) can be downloaded from Isabelle's Archive of Formal Proofs.
 You can confirm that the proofs really are as simple as they appear on this post.
 We'll examine the rest of the proof next week!
 

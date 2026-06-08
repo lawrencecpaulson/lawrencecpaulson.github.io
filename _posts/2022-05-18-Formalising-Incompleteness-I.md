@@ -32,7 +32,7 @@ The stages of the proofs of the first theorem are as follows:
 
 ### On the treatment of bound variables
 
-Formal reasoning about syntax including variable binding is generally fraught with difficulties connected with substitution and variable capture. In Isabelle/HOL we are lucky to have the [nominal package](https://www.isa-afp.org/entries/Nominal2.html), created by [Christian Urban](https://rdcu.be/cNfaC) and based on theoretical work by Andrew Pitts and Jamie Gabbay. The [nominal approach](https://www.cl.cam.ac.uk/~amp12/papers/newaas/newaas-jv.pdf) to variable binding provides a calculus of permutations on variable names, and provides a smooth treatment of syntactic operations that treat bound variables appropriately (which in particular means that all results are independent of which names are chosen for the bound variables). It precisely defines the notion of a variable being fresh and gives you a means of picking fresh variables. You get to assume that variables are magically renamed whenever necessary.
+Formal reasoning about syntax including variable binding is generally fraught with difficulties connected with substitution and variable capture. In Isabelle/HOL we are lucky to have the [nominal package](https://isa-afp.org/entries/Nominal2.html), created by [Christian Urban](https://rdcu.be/cNfaC) and based on theoretical work by Andrew Pitts and Jamie Gabbay. The [nominal approach](https://www.cl.cam.ac.uk/~amp12/papers/newaas/newaas-jv.pdf) to variable binding provides a calculus of permutations on variable names, and provides a smooth treatment of syntactic operations that treat bound variables appropriately (which in particular means that all results are independent of which names are chosen for the bound variables). It precisely defines the notion of a variable being fresh and gives you a means of picking fresh variables. You get to assume that variables are magically renamed whenever necessary.
 
 My formal development of the incompleteness theorems [uses the nominal approach](https://rdcu.be/bpgqj) in formalising the logical calculus: its syntax, syntactic operations and inference rules.
 When it comes to coding formulas of the calculus, we need a different approach to variable binding, as attempting to formalise the nominal approach within the formal calculus itself is not to be imagined. Although Swierczkowski used plain variable names, I felt certain that a nameless representation would work better, and the obvious one is [de Bruijn's](https://doi.org/10.1016/1385-7258(72)90034-0) (explanation [on Wikipedia](https://en.wikipedia.org/wiki/De_Bruijn_index)).
@@ -41,7 +41,7 @@ The proof requires proving that the encoded operations carry out their intended 
 
 ### A formal logic and its Isabelle/HOL formalisation
 
-Now let's see a few highlights of the [Isabelle formalisation of incompleteness](https://www.isa-afp.org/entries/Incompleteness.html).
+Now let's see a few highlights of the [Isabelle formalisation of incompleteness](https://isa-afp.org/entries/Incompleteness.html).
 A bit of magic (omitted here) sets up the nominal package and creates the type `name` to serve as a type of variable names.
 The nominal package provide its own datatype declaration facility.
 We can now declare a type for the terms of our formalism. Terms can be variables, 0 or "eats" ($A \lhd x$ for the set whose elements are those of $A$, plus $x$).
@@ -121,7 +121,7 @@ This sort of proof can be absolutely fiendish with other approaches to variable 
 
 The formal semantics is defined in terms of the existing development of hereditarily finite sets.
 Variables are interpreted with respect to an environment, a [finite function](http://www.andreas-lochbihler.de/pub/lochbihler09tphols.pdf) mapping names to `hf` sets.
-The corresponding [AFP entry](https://www.isa-afp.org/entries/FinFun.html) is among the most heavily used in the entire Archive.
+The corresponding [AFP entry](https://isa-afp.org/entries/FinFun.html) is among the most heavily used in the entire Archive.
 
 As before, the definition for terms has a trivial justification (omitted anyway).
 The semantics of a term map the HF constructors (Zero and Eats) to the corresponding operators, while the meaning of a variable is looked up in the environment.

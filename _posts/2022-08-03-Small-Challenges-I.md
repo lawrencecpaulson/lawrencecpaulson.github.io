@@ -33,12 +33,12 @@ I know that we have two formalisations of the reals already, but who's counting?
 
 ### A simple proof that π is irrational
 
-We know that π is irrational (indeed, transcendental) by the Hermite–Lindemann–Weierstraß transcendence theorem, which has been [formalised in Isabelle](https://www.isa-afp.org/entries/Hermite_Lindemann.html) by [Manuel Eberl](http://cl-informatik.uibk.ac.at/users/meberl/).
+We know that π is irrational (indeed, transcendental) by the Hermite–Lindemann–Weierstraß transcendence theorem, which has been [formalised in Isabelle](https://isa-afp.org/entries/Hermite_Lindemann.html) by [Manuel Eberl](https://pruvisto.org).
 But do you really want to rely on some overblown 19th-century result when a [cute one page proof](https://projecteuclid.org/journals/bulletin-of-the-american-mathematical-society/volume-53/issue-6/A-simple-proof-that-pi-is-irrational/bams/1183510788.full) is available?
 The proof involves assuming the contrary, defining some polynomials, taking an integral and eventually obtaining an integer between 0 and 1.
 This sounds like the same technique used to prove that exponentials were irrational in my [earlier post.]({% post_url 2022-02-16-Irrationals %})
 
-*Note added 2024-09-13*: this challenge has [now been fulfilled](https://www.isa-afp.org/entries/Pi_Irrational.html),
+*Note added 2024-09-13*: this challenge has [now been fulfilled](https://isa-afp.org/entries/Pi_Irrational.html),
 by Manuel himself!
 
 ### Impossibility of cubing the cube

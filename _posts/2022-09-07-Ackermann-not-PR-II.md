@@ -318,7 +318,7 @@ The actual function that is not primitive recursive is Ackermann's function alon
 </pre>
 
 
-The [full development](https://www.isa-afp.org/entries/Ackermanns_not_PR.html) can be found in Isabelle's Archive of Formal Proofs.
+The [full development](https://isa-afp.org/entries/Ackermanns_not_PR.html) can be found in Isabelle's Archive of Formal Proofs.
 I tidied it considerably in the course of writing this blog post. The new version
 will remain hidden in the development branch of the AFP until Isabelle 2022 is released, around October.
 Although the theorem is remarkable and deep, it's formal proof is concise: a mere 300 lines.

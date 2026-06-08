@@ -157,7 +157,7 @@ is that only a few variables can be allowed. This limitation is caused by
 the RCF solvers; Mathematica and Z3 can be substituted for QEPCAD, each with their own
 benefits and drawbacks.
 I also had the idea of trying to integrate MetiTarski with Isabelle.
-I have [verified](https://www.isa-afp.org/entries/Special_Function_Bounds.html) all the upper and lower bounds using Isabelle.
+I have [verified](https://isa-afp.org/entries/Special_Function_Bounds.html) all the upper and lower bounds using Isabelle.
 Nevertheless, integrating the two systems would involve an enormous amount of work,
 and the benefits would not be clear. 
 

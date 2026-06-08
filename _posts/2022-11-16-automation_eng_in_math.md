@@ -83,7 +83,7 @@ arrived yet. Nevertheless, Isabelle-wide tools like `auto` and `blast`
 blog](https://www.cl.cam.ac.uk/~lp15/)) work great.
 
 I would like to discuss to this effect a
-[result](https://www.isa-afp.org/theories/independence_ch/#Forcing_Theorems.html#Forcing_Theorems.forcing_data1.strengthening_eq|fact)
+[result](https://isa-afp.org/theories/independence_ch/#Forcing_Theorems.html#Forcing_Theorems.forcing_data1.strengthening_eq|fact)
 that is part of
 [a development](https://arxiv.org/abs/2210.15609) of
 the set-theoretic technique of *forcing* (a joint work with Gunther,

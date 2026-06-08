@@ -287,11 +287,11 @@ Five necessary properties of the given definition of inner products, such as the
 </pre>
 
 
-Up to this point I have hidden essentially nothing from the [full quaternion development](https://www.isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html).
+Up to this point I have hidden essentially nothing from the [full quaternion development](https://isa-afp.org/browser_info/current/AFP/Quaternions/Quaternions.html).
 There's only one small technical lemma and some commands to prevent syntactic ambiguities between our <span class="keyword1">𝗂</span> and the version of <span class="keyword1">𝗂</span> belonging to the complex numbers. Starting from a few basic definitions, we issued six <span class="keyword1 command">instantiation</span> declarations to put at our disposal the material from three decades of library construction.
 
 That's only the beginning. The quaternion development goes on to derive specific properties and applications of quaternions, all "borrowed" from the HOL Light original.
-There's also a development of [Octonions](https://www.isa-afp.org/entries/Octonions.html) by 
+There's also a development of [Octonions](https://isa-afp.org/entries/Octonions.html) by 
 Angeliki Koutsoukou-Argyraki.
 
 The point of this example is simply to see how much we can accomplish with type classes alone.

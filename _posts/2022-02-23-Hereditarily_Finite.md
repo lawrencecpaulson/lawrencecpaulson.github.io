@@ -72,11 +72,11 @@ If you think doing mathematics in a modern proof assistant is difficult, let me 
 #### Finite automata
 
 The HF sets are a simple route out of the strict typing paradigm that bugs some people so much. Some years ago, Wu, Zhang and Urban [published](https://rdcu.be/cJtCW) 
-an elegant [formalisation](https://www.isa-afp.org/entries/Myhill-Nerode.html)
+an elegant [formalisation](https://isa-afp.org/entries/Myhill-Nerode.html)
 of regular language theory, avoiding the usual approach in terms of finite automata, because of the difficulty of representing state spaces using simple types. But if we use HF sets to denote the state spaces of automata, then we have no problem forming Cartesian products of state spaces when forming the product of two automata, forming the powerset of the state space when transforming a nondeterministic finite automata into a deterministic one, and so forth.
 
 I [demonstrated](https://arxiv.org/pdf/1505.01662.pdf) that such results as the
-Myhill-Nerode theorem could indeed by [formalised](https://www.isa-afp.org/entries/Finite_Automata_HF.html)
+Myhill-Nerode theorem could indeed by [formalised](https://isa-afp.org/entries/Finite_Automata_HF.html)
 in the traditional manner, without any hacks to get past the type system.
 
 ### The HF sets in Isabelle/HOL
@@ -129,7 +129,7 @@ Now that we can convert between an HF set and the finite set of its elements, it
 </pre>
 
 I am grateful to Brian Huffman for the material shown above.
-There is much more to the [full development](https://www.isa-afp.org/entries/HereditarilyFinite.html) of HF sets.
+There is much more to the [full development](https://isa-afp.org/entries/HereditarilyFinite.html) of HF sets.
 
 ### Type class instantiations for type <span class="source">hf</span>
 

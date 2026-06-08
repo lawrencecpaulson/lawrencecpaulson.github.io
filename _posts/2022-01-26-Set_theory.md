@@ -20,7 +20,7 @@ Therefore, a formalism as strong as Zermelo set theory—such as higher-order lo
 for the vast bulk of "ordinary" mathematics. 
 The wide variety of topics [already formalised](https://www.cs.ru.nl/~freek/100/) 
 in Isabelle/HOL and HOL Light is evidence for this view. 
-See also under Mathematics and Logic in the [Archive of Formal Proofs](https://www.isa-afp.org/topics/).
+See also under Mathematics and Logic in the [Archive of Formal Proofs](https://isa-afp.org/topics/).
 
 ### The remaining axioms of ZFC
 

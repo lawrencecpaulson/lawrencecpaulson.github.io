@@ -19,7 +19,7 @@ Since $\exp(\ln x)=x$, it follows that $\ln r$ is irrational for every positive 
 The authors present a simple 19th-century 
 [proof](https://planetmath.org/erisirrationalforrinmathbbqsetminus0) 
 that relies on nothing other than differentiation and integration.
-I have recently [formalised it](https://www.isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs and we can look at some highlights here.
+I have recently [formalised it](https://isa-afp.org/entries/Irrationals_From_THEBOOK.html) for the Archive of Formal Proofs and we can look at some highlights here.
 
 The proof begins by defining the function
 
@@ -234,7 +234,7 @@ $$ \begin{align*}
 F'(x) = -{sF(x)} + s^{2n+1} f(x).
 \end{align*} $$
 
-We put $N = aF(1) − bF(0)$, show $N$ to be an integer, and eventually show by bounding an integral that $0<N<1$, contradiction. A few subproofs of a dozen or so lines are omitted below. The full development is [available online](https://www.isa-afp.org/browser_info/current/AFP/Irrationals_From_THEBOOK/Irrationals_From_THEBOOK.html).
+We put $N = aF(1) − bF(0)$, show $N$ to be an integer, and eventually show by bounding an integral that $0<N<1$, contradiction. A few subproofs of a dozen or so lines are omitted below. The full development is [available online](https://isa-afp.org/browser_info/current/AFP/Irrationals_From_THEBOOK/Irrationals_From_THEBOOK.html).
 
 <pre class="source">
 <span class="keyword1 command entity_def" id="offset_6847..6852">lemma</span> exp_nat_irrational<span class="main">:</span>

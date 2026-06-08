@@ -275,4 +275,4 @@ Every Σ-sentence (ground formula) that evaluates to true in the standard HF mod
             </span>hfthm_sound se_fm_imp_thm subset_empty<span class="main">)</span>
 </pre>
 
-These proofs are remarkably simple. And the final theorem is worth the effort: it is invoked 10 times in the [formal incompleteness development](https://www.isa-afp.org/entries/Incompleteness.html). That's 10 occasions when the alternative would be tedious strings of HF steps, each of them hundreds of lines long and absolutely opaque.
+These proofs are remarkably simple. And the final theorem is worth the effort: it is invoked 10 times in the [formal incompleteness development](https://isa-afp.org/entries/Incompleteness.html). That's 10 occasions when the alternative would be tedious strings of HF steps, each of them hundreds of lines long and absolutely opaque.

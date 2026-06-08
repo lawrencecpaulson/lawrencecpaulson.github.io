@@ -46,7 +46,7 @@ We prove the continuity of $x\ln x$ in separate stages: first, simply for $x=0$.
 Unfolding `continuous_within` reduces the continuity claim to the limit claim
 $x\ln x \longrightarrow 0\ln 0$, which of course is simply 
 $x\ln x\longrightarrow0$. Such limits are trivially proved by
-Manuel Eberl's wonderful [`real_asymp` proof method](http://cl-informatik.uibk.ac.at/users/meberl//pubs/real_asymp.html), 
+Manuel Eberl's wonderful [`real_asymp` proof method](https://pruvisto.org/pubs/real_asymp.html), 
 which will surely be the subject
 of a future blogpost.
 From this result, we can quickly prove continuity for all $x\ge0$.

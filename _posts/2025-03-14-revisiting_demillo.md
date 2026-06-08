@@ -90,7 +90,7 @@ to build a machine-checked encyclopedia of mathematics.
 Today, a vast amount of mathematics has been formalised 
 – in Isabelle, Lean, Rocq
 and other systems – including
-[one of Ramanujan's theorems](https://www.isa-afp.org/entries/Rogers_Ramanujan.html), 
+[one of Ramanujan's theorems](https://isa-afp.org/entries/Rogers_Ramanujan.html), 
 (proved in 20 pages, not 2000).
 The challenge of [formalising the "100 famous theorems"](https://www.cs.ru.nl/~freek/100/)
 has been met – except for Fermat's last theorem,

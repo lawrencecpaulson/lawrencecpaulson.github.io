@@ -238,7 +238,7 @@ If you are in a typed world like higher-order logic,
 you may be tempted to just use the natural numbers 
 along with some encoding of the necessary structures. But that sucks.
 
-The [*hereditarily finite sets*](https://www.isa-afp.org/entries/HereditarilyFinite.html) (type `hf`)
+The [*hereditarily finite sets*](https://isa-afp.org/entries/HereditarilyFinite.html) (type `hf`)
 give us everything that ZF does, with the big exception of infinite sets.
 Hereditarily finite sets are finite all the way down.
 Finitary constructions such as integers, rationals, 
