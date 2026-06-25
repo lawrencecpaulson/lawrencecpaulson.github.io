@@ -147,17 +147,19 @@ So $g(x)<g(y)$ or $g(y)<g(x)$, but both must equal zero.
 
 ### Approximating its value
 
-We pin down the Dottie number to 12 decimal
-  places. Note that $g$ is decreasing. We check that
-  $\cos(lb) &gt; lb$ (so the fixed point is above $lb$) and
-  $\cos(ub) &lt; u$ (so it is below $ub$).
-We are continuing to work in the locale because we need 
-the fact that the derivative of $g$ is negative.
+This is a good example of using untrusted sources
+and validating them by formal proof. 
+We can approximate the Dottie number to many decimal places 
+using a calculator or online sources. 
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">lb</span><span class="main">::</span><span class="tconst">real</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">lb</span> <span class="main">≡</span> <span class="numeral">0.739085133215</span><span>"</span></span><span>
 </span><span class="keyword1 command">definition</span> <span class="entity">ub</span><span class="main">::</span><span class="tconst">real</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">ub</span> <span class="main">≡</span> <span class="numeral">0.739085133216</span><span>"</span></span>
 </pre>
+
+Knowing that the function $g$ is strictly decreasing,
+we can determine whether a given estimate is a lower bound or an upper bound. 
+We use the **approximation** proof method, which is based on interval arithmetic to investigate the ordering relationships. 
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> lb_gt<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">cos</span> <span class="const">lb</span> <span class="main">&gt;</span> <span class="const">lb</span><span>"</span><span>
@@ -166,6 +168,8 @@ the fact that the derivative of $g$ is negative.
 <span class="keyword1 command">lemma</span> ub_lt<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">cos</span> <span class="const">ub</span> <span class="main">&lt;</span> <span class="const">ub</span><span>"</span><span>
   </span><span class="keyword1 command">unfolding</span> ub_def<span> </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 50<span class="main">)</span>
 </pre>
+
+Now we can prove that `lb` is a lower bound. 
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> lb<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">lb</span> <span class="main">&lt;</span> <span class="const">dottie</span><span>"</span><span>
@@ -179,6 +183,8 @@ the fact that the derivative of $g$ is negative.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+And analogously, `ub` is an upper bound. 
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> ub<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">ub</span> <span class="main">&gt;</span> <span class="const">dottie</span><span>"</span><span>
 </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">rule</span> ccontr<span class="main">)</span><span>
@@ -191,19 +197,23 @@ the fact that the derivative of $g$ is negative.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-At this point, we are finished with the function $g$ and leave the locale.
+
+We have pinned down the Dottie number to 12 decimal places. 
+  
+### Something trivial
+
+All this time, we were continuing to work in the locale because we needed 
+the lemma that the derivative of $g$ is negative.
+But now, we are finished with $g$ and leave the locale.
 
 <pre class="source">
 <span class="keyword2 keyword">end</span>
 </pre>
 
 
-### Something trivial
-
-Since $\cos(\mathit{dottie}) = \mathit{dottie}$ and $\mathit{dottie} \in (0,1)$, the
-  Pythagorean identity gives $\sin(\mathit{dottie}) = \sqrt{1 - \mathit{dottie}^2}$.
-Sledgehammer found this proof.
-
+Since $\cos(\mathit{dottie}) = \mathit{dottie}$ and $\mathit{dottie} \in (0,1)$, and since $\sin^2 x+cos^2x = 1$, we easily get 
+$\sin(\mathit{dottie}) = \sqrt{1 - \mathit{dottie}^2}$.
+Sledgehammer found this proof automatically.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> sin_dottie<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">sin</span> <span class="const">dottie</span> <span class="main">=</span> <span class="const">sqrt</span> <span class="main">(</span><span class="main">1</span> <span class="main">-</span> <span class="const">dottie</span><span class="main"><span class="hidden">⇧</span><sup>2</sup></span><span class="main">)</span><span>"</span><span>
