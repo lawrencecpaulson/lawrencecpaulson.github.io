@@ -2,7 +2,7 @@
 layout: post
 title:  Probabilistic reasoning and formal proof
 usemathjax: true 
-tags: [Paul Erdős, examples, Isar]
+tags: [Paul Erdős, examples, Isar, locales]
 ---
 
 Many are the pitfalls awaiting anybody trying to formalise a proof,

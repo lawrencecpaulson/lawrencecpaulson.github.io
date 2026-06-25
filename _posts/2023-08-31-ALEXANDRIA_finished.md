@@ -2,7 +2,7 @@
 layout: post
 title:  "The End (?) of the ALEXANDRIA project"
 usemathjax: true 
-tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs]
+tags: [general, ALEXANDRIA, Isabelle, Archive of Formal Proofs, locales]
 ---
 
 Today marks the final day of the [ALEXANDRIA](https://www.cl.cam.ac.uk/~lp15/Grants/Alexandria/) project.

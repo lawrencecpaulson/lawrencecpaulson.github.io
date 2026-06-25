@@ -2,7 +2,7 @@
 layout: post
 title:  The Dottie Number
 usemathjax: true 
-tags: [examples,Isar,AI]
+tags: [examples, Isar, AI, locales, Archive of Formal Proofs]
 ---
 Once upon a time, [goes the story](/papers/Dottie-Number.pdf), 
 a lady named Dottie got bored and started playing with her calculator,
@@ -11,29 +11,32 @@ At first the numbers fluctuated wildly,
 but over time they always settled down to approximately 0.739085.
 (This only works if your calculator is set to radians, not degrees.)
 She had discovered the unique fixed point of the cosine function.
-The Dottie number has several further properties: it is a global attractor, 
-meaning the limit point is the same no matter what number you start with, 
+The Dottie number has several further properties: it is a *global attractor*, 
+meaning the limit is the same no matter what number you start with, 
 and it is transcendental.
-So it is great for showing off a variety of mathematical techniques in Isabelle, 
-such as differentiation.
-we also calculate its value to 12 decimal places, by proof.
+It is a great example for showing off a variety of mathematical techniques in Isabelle, 
+such as differentiation and unlimited precision real computations.
+We calculate its value to 12 decimal places, by proof.
 
 
 ### Getting started
 
 We begin by defining `dottie` to be *the* unique fixed point of `cos`.
-But a definition using the definite descriptor `THE` is good for nothing 
-until both existence and uniqueness have proved for the specified property.
+But this definition, using the definite descriptor `THE`, will be good for nothing 
+until both existence and uniqueness of a fixed point have proved.
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">dottie</span> <span class="main">::</span> <span class="quoted"><span class="tconst">real</span> <span class="keyword2 keyword">where</span><span>
   </span><span class="quoted"><span class="quoted"><span>"</span><span class="free">dottie</span> <span class="main">≡</span> <span class="keyword1">THE</span></span> <span class="bound">x</span><span class="main">.</span></span> <span class="const">cos</span> <span class="bound">x</span> <span class="main">=</span> <span class="bound">x</span><span>"</span></span>
 </pre>
 
-Those properties will be proved with reference to the function $g(x)=\cos x - x$.
-We need to show that it has a unique root.
-We need a number of facts about $g$ in several different theorems, 
-so to avoid duplication we create a locale where we can work with $g$.
+Those claims will be proved with the help of the function $g(x)=\cos x - x$.
+
+<img src="/images/dottie-g.png" alt="graph of the function cos(x)-x" width="500"/>
+
+We can see that it has a unique root near $\frac{\pi}{4}$, but now we have to prove it.
+Several different theorems need facts about $g$, 
+so to avoid duplication we create a [*locale*]({% post_url 2022-03-23-Locales %}) where we can work with $g$.
 
 <pre class="source">
 <span class="keyword1 command">locale</span> Dottie <span class="main">=</span><span>
@@ -59,22 +62,33 @@ Our first task is to investigate its derivative.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-Isabelle is capable of calculating derivatives automatically.
-But if you know the derivative already (use a computer algebra system if you must), 
-it makes things easier to mention it.
-Here we determine that $g(t)$ has the derivative $-\sin t-1$, 
-which is strictly negative over the given interval $[-1,1]$.
+Isabelle is capable of *calculating* derivatives automatically.
+The trick, as we see above, is to hit the goal repeatedly with `derivative_eq_intros`, 
+which is a collection of facts about derivatives of various operators.
+The effect is practically the same as the schoolbook method.
+If you know the derivative already, as here, it makes things easier to mention it.
+Here we prove that the derivative of $g(t)$, which is $-\sin t-1$, 
+is strictly negative over the given interval $[-1,1]$.
+
+Although computer algebra systems are not always sound, 
+we can use them to write correct Isabelle proofs. 
+Via the fundamental theorem of calculus, we can handle tough integrals. 
+We give the hard work to the computer algebra system; 
+Isabelle merely has to take the derivative of the claimed integral 
+and compare that with the original integrand.
 
 ### Existence
 
-Since $g(0) = 1$ and $g(1) = \cos 1 - 1  < 0$ and $g$ is continuous, 
-the intermediate value theorem gives a point $x \in (0, 1)$ where $g(x) = 0$,
+Existence is proved using the *intermediate value theorem*, which states that 
+a function $g$ that is continuous on a given closed interval $[a,b]$ 
+attains all the points between $g(a)$ and $g(b)$.
+Our $g$ is continuous; since $g(0) = 1$ and $g(1) = \cos 1 - 1 < 0$, 
+the IVT yields a point $x \in (0, 1)$ where $g(x) = 0$,
 which implies $\cos x = x$.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> dottie_exists<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">x</span><span class="main">::</span></span><span class="tconst">real</span><span class="main">.</span> <span class="main">0</span> <span class="main">&lt;</span> <span class="bound">x</span> <span class="main">∧</span> <span class="bound">x</span> <span class="main">&lt;</span> <span class="main">1</span> <span class="main">∧</span> <span class="const">cos</span> <span class="bound">x</span> <span class="main">=</span> <span class="bound">x</span><span>"</span><span>
 </span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
-  </span><span class="comment1"><span>― ‹Apply the IVT to </span><span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted free">g</span><span class="antiquote">}</span></span><span> on the unit interval at 0.›</span></span><span>
   </span><span class="keyword1 command">have</span> g_cont<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">continuous_on</span> <span class="main">{</span><span class="main">0</span><span class="main">..</span><span class="main">1</span><span class="main">}</span> <span class="free">g</span><span>"</span><span>
     </span><span class="keyword1 command">unfolding</span> g_def <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span><span>
   </span><span class="keyword3 command">obtain</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">g</span> <span class="main">0</span></span> <span class="main">=</span></span> <span class="main">1</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">g</span> <span class="main">1</span></span> <span class="main">&lt;</span></span> <span class="main">0</span><span>"</span> <span class="keyword1 command">using</span> cos_1_lt_1 <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> g_def<span class="main">)</span><span>
@@ -87,14 +101,19 @@ which implies $\cos x = x$.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+In the proof above, we see a trick for proving continuity.
+It resembles the trick for taking derivatives, 
+only we hit the goal with a different list of theorems, namely `continuous_intros`.
+Then we show the $g$ crosses 0 to prove the existence of a fixed point
+satisfying $0<x<1$.
+
 ### Uniqueness
 
-The function $g(x) = \cos x - x$ has derivative $g'(x) = -\sin x - 1$, 
-which is strictly negative for $x \in [-1,1]$ (since $\sin x \ge 0$ there).  
-A function with strictly negative derivative is strictly decreasing, 
-so $g$ can have at most one zero. 
-We can extend uniqueness to the entire real line.
-  
+We proved above that the derivative of $g(x) = \cos x - x$
+is strictly negative for $x \in [-1,1]$, i.e. $g$ is strictly decreasing,
+so $g$ can have at most one zero on that interval. 
+And since $[-1,1]$, is the range of the cosine function, 
+uniqueness over the entire real line immediately follows.
   
 <pre class="source">
 <span class="keyword1 command">lemma</span> dottie_unique<span class="main">:</span><span>
@@ -104,7 +123,6 @@ We can extend uniqueness to the entire real line.
 </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">rule</span> ccontr<span class="main">)</span><span>
   </span><span class="keyword3 command">assume</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">≠</span></span> <span class="free">y</span><span>"</span></span><span>
   </span><span class="keyword1 command">have</span> gx<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">g</span> <span class="free">x</span> <span class="main">=</span></span> <span class="main">0</span></span><span>"</span> <span class="keyword2 keyword">and</span> gy<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">g</span> <span class="free">y</span> <span class="main">=</span></span> <span class="main">0</span></span><span>"</span> <span class="keyword1 command">using</span> assms <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> g_def<span class="main">)</span><span>
-  </span><span class="comment1"><span>― ‹The derivative of </span><span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted free">g</span><span class="antiquote">}</span></span> is <span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted"><span>"</span><span class="main">λ</span><span class="bound">x</span><span class="main">.</span> <span class="main">-</span></span> </span></span><span class="const">sin</span> <span class="bound">x</span> <span class="main">-</span> <span class="main">1</span><span>"</span><span class="antiquote">}</span><span>, which is negative on </span><span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted"><span>"</span><span class="main">{</span></span><span class="main">-</span></span><span class="main">1</span><span class="main">..</span><span class="main">1</span><span class="main">}</span><span>"</span><span class="antiquote">}</span><span>.›</span><span>
   </span><span class="keyword3 command">show</span> <span class="const">False</span><span>
   </span><span class="keyword1 command">proof</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">x</span><span class="main">¦</span></span> <span class="main">&gt;</span> <span class="main">1</span> <span class="main">∨</span> <span class="main">¦</span><span class="free">y</span><span class="main">¦</span> <span class="main">&gt;</span> <span class="main">1</span><span>"</span><span class="main">)</span><span>
     </span><span class="keyword3 command">case</span> True<span>
@@ -121,6 +139,10 @@ We can extend uniqueness to the entire real line.
   </span><span class="keyword1 command">qed</span><span>
 </span><span class="keyword1 command">qed</span>
 </pre>
+
+More precisely, given the two claimed fixed points, $x$ and $y$, we first trivially establish that both must be within the interval $[-1,1]$.
+Then, under the assumption $x\not=y$, it follows that one must be less than the other.
+So $g(x)<g(y)$ or $g(y)<g(x)$, but both must equal zero.
 
 
 ### Approximating its value
