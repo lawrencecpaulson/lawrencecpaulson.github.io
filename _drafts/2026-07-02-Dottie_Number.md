@@ -142,7 +142,8 @@ uniqueness over the entire real line immediately follows.
 
 More precisely, given the two claimed fixed points, $x$ and $y$, we first trivially establish that both must be within the interval $[-1,1]$.
 Then, under the assumption $x\not=y$, it follows that one must be less than the other.
-So $g(x)<g(y)$ or $g(y)<g(x)$, but both must equal zero.
+So $g(x)<g(y)$ or $g(y)<g(x)$, because the derivative is strictly negative,
+but $g(x)$ and $g(y)$ must both equal zero.
 
 
 ### Approximating its value
@@ -159,7 +160,7 @@ using a calculator or online sources.
 
 Knowing that the function $g$ is strictly decreasing,
 we can determine whether a given estimate is a lower bound or an upper bound. 
-We use the **approximation** proof method, which is based on interval arithmetic to investigate the ordering relationships. 
+We use the `approximation` proof method, which is based on interval arithmetic to investigate the ordering relationships. 
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> lb_gt<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">cos</span> <span class="const">lb</span> <span class="main">&gt;</span> <span class="const">lb</span><span>"</span><span>
@@ -223,15 +224,20 @@ Sledgehammer found this proof automatically.
 
 ### The Dottie number is a universal attractor
 
-Iterating cosine from *any* real starting point converges to the
-  Dottie number. The key fact is that $\cos$ is a contraction on $[-1,1]$ with
-  Lipschitz constant $\sin 1 &lt; 1$ (since $|\cos' x| = |\sin x| \le \sin 1$ there),
-  and that $\cos$ maps all of $\mathbb{R}$ into $[-1,1]$.
+An [*attractor*](https://en.wikipedia.org/wiki/Attractor) is a set of states towards which a dynamical system tends to evolve if started in some larger set, called the *basin of attraction*.
+Iterates of the cosine function converge to the Dottie number starting from *any* real number,
+so it is a *universal* attractor.
+The key fact is that $\cos$ is a contraction on $[-1,1]$ with
+Lipschitz constant $\sin 1$, or with less jargon: $\lvert\cos x - \cos y\rvert\le\sin 1\cdot \lvert x-y\rvert$.
+
+Crucially, $0 < \sin 1 < 1$. This is easy to prove, and we could also have used the `approximation` method.
   
 <pre class="source">
 <span class="keyword1 command">lemma</span> sin1_bounds<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">0</span></span> <span class="main">&lt;</span></span> <span class="const">sin</span> <span class="main">(</span><span class="main">1</span><span class="main">::</span><span class="tconst">real</span><span class="main">)</span><span>"</span> <span class="quoted quoted">"</span><span class="const">sin</span> <span class="main">(</span><span class="main">1</span><span class="main">::</span><span class="tconst">real</span><span class="main">)</span> <span class="main">&lt;</span> <span class="main">1</span><span>"</span><span>
   </span><span class="keyword1 command">using</span> sin_monotone_2pi<span class="main">[</span><span class="operator">of</span> <span class="quoted main">1</span> <span class="quoted quoted">"</span><span class="const">pi</span><span class="main">/</span><span class="numeral">2</span><span>"</span><span class="main">]</span> pi_gt3 <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> sin_gt_zero_02<span class="main">)</span>
 </pre>
+
+And $\sin 1$ is the Lipschitz constant for $\cos$ because it is an upper bound on all possible values of $\lvert \sin t\rvert$ when $t\in[-1,1]$.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> abs_sin_le_sin1<span class="main">:</span><span>
@@ -243,8 +249,9 @@ Iterating cosine from *any* real starting point converges to the
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-The mean value theorem turns the derivative bound into a Lipschitz bound.
-
+By the mean value theorem, if $x<y$ then there exists $\xi\in(x,y)$ such that 
+$\lvert\cos x - \cos y\rvert\le\lvert\sin \xi\rvert \cdot \lvert x-y\rvert$.
+Moreover, $\lvert\sin \xi\rvert\le \sin 1$.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_contraction_lt<span class="main">:</span><span>
@@ -270,6 +277,8 @@ The mean value theorem turns the derivative bound into a Lipschitz bound.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+Here, by symmetry, we get rid of the assumption $x<y$. 
+This finally establishes $\sin 1$ as the Lipschitz bound.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_contraction<span class="main">:</span><span>
@@ -279,14 +288,6 @@ The mean value theorem turns the derivative bound into a Lipschitz bound.
   </span><span class="keyword1 command">using</span> cos_contraction_lt<span class="main">[</span><span class="operator">of</span> <span class="quoted free">x</span> <span class="quoted free">y</span><span class="main">]</span> cos_contraction_lt<span class="main">[</span><span class="operator">of</span> <span class="quoted free">y</span> <span class="quoted free">x</span><span class="main">]</span> assms<span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted free">x</span> <span class="quoted free">y</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> linorder_cases<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> abs_minus_commute<span class="main">)</span>
 </pre>
-
-<pre class="source">
-<span class="keyword1 command">lemma</span> cos_step_to_dottie<span class="main">:</span><span>
-  </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">w</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span><span>
-  </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">cos</span> <span class="free">w</span> <span class="main">-</span> <span class="const">dottie</span><span class="main">¦</span> <span class="main">≤</span> <span class="const">sin</span> <span class="main">1</span> <span class="main">*</span> <span class="main">¦</span><span class="free">w</span> <span class="main">-</span> <span class="const">dottie</span><span class="main">¦</span><span>"</span><span>
-  </span><span class="keyword1 command">using</span> Dottie.facts <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> abs_cos_le_one assms cos_contraction<span class="main">)</span>
-</pre>
-
 After one step the iteration lands in $[-1,1]$ and stays there.
 
 <pre class="source">
@@ -300,6 +301,13 @@ After one step the iteration lands in $[-1,1]$ and stays there.
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> One_nat_def Suc_diff_le diff_Suc_Suc diff_zero o_apply<span class="main">)</span><span>
   </span><span class="keyword1 command">then</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span> <span class="keyword1 command">by</span> <span class="operator">simp</span><span>
 </span><span class="keyword1 command">qed</span>
+</pre>
+
+<pre class="source">
+<span class="keyword1 command">lemma</span> cos_step_to_dottie<span class="main">:</span><span>
+  </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">w</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span><span>
+  </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">cos</span> <span class="free">w</span> <span class="main">-</span> <span class="const">dottie</span><span class="main">¦</span> <span class="main">≤</span> <span class="const">sin</span> <span class="main">1</span> <span class="main">*</span> <span class="main">¦</span><span class="free">w</span> <span class="main">-</span> <span class="const">dottie</span><span class="main">¦</span><span>"</span><span>
+  </span><span class="keyword1 command">using</span> Dottie.facts <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> abs_cos_le_one assms cos_contraction<span class="main">)</span>
 </pre>
 
 From a start in $[-1,1]$, the distance to the fixed point decays geometrically.
