@@ -23,7 +23,7 @@ We calculate its value to 12 decimal places, by proof.
 
 We begin by defining `dottie` to be *the* unique fixed point of `cos`.
 But this definition, using the definite descriptor `THE`, will be good for nothing 
-until both existence and uniqueness of a fixed point have proved.
+until both existence and uniqueness of a fixed point have been proved.
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">dottie</span> <span class="main">::</span> <span class="quoted"><span class="tconst">real</span> <span class="keyword2 keyword">where</span><span>
@@ -31,6 +31,7 @@ until both existence and uniqueness of a fixed point have proved.
 </pre>
 
 Those claims will be proved with the help of the function $g(x)=\cos x - x$.
+Note that it slopes downwards.
 
 <img src="/images/dottie-g.png" alt="graph of the function cos(x)-x" width="500"/>
 
@@ -79,10 +80,11 @@ and compare that with the original integrand.
 
 ### Existence
 
-Existence is proved using the *intermediate value theorem*, which states that 
+Existence is proved using the [*intermediate value theorem*](https://mathworld.wolfram.com/IntermediateValueTheorem.html), 
+which states that 
 a function $g$ that is continuous on a given closed interval $[a,b]$ 
 attains all the points between $g(a)$ and $g(b)$.
-Our $g$ is continuous; since $g(0) = 1$ and $g(1) = \cos 1 - 1 < 0$, 
+Our $g$ is continuous. Since $g(0) = 1$ and $g(1) = \cos 1 - 1 < 0$, 
 the IVT yields a point $x \in (0, 1)$ where $g(x) = 0$,
 which implies $\cos x = x$.
 
@@ -140,18 +142,16 @@ uniqueness over the entire real line immediately follows.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-More precisely, given the two claimed fixed points, $x$ and $y$, we first trivially establish that both must be within the interval $[-1,1]$.
-Then, under the assumption $x\not=y$, it follows that one must be less than the other.
+More precisely, given the two claimed fixed points, $x$ and $y$, we first trivially establish that both must lie within the interval $[-1,1]$.
+Then, assuming for contradiction that $x\not=y$, one must be less than the other.
 So $g(x)<g(y)$ or $g(y)<g(x)$, because the derivative is strictly negative,
-but $g(x)$ and $g(y)$ must both equal zero.
+but we know $g(x) = g(y) = 0$.
 
 
 ### Approximating its value
 
-This is a good example of using untrusted sources
-and validating them by formal proof. 
-We can approximate the Dottie number to many decimal places 
-using a calculator or online sources. 
+This is a good example of using untrusted sources, such as a calculator, 
+and validating them by formal proof to get an accurate approximation to Dottie.
 
 <pre class="source">
 <span class="keyword1 command">definition</span> <span class="entity">lb</span><span class="main">::</span><span class="tconst">real</span> <span class="keyword2 keyword">where</span> <span class="quoted quoted"><span>"</span><span class="free">lb</span> <span class="main">≡</span> <span class="numeral">0.739085133215</span><span>"</span></span><span>
@@ -170,7 +170,7 @@ We use the `approximation` proof method, which is based on interval arithmetic t
   </span><span class="keyword1 command">unfolding</span> ub_def<span> </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">approximation</span> 50<span class="main">)</span>
 </pre>
 
-Now we can prove that `lb` is a lower bound. 
+Now we can prove that `lb` is a lower bound, by contradiction and monotonicity reasoning. 
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> lb<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">lb</span> <span class="main">&lt;</span> <span class="const">dottie</span><span>"</span><span>
@@ -206,6 +206,7 @@ We have pinned down the Dottie number to 12 decimal places.
 All this time, we were continuing to work in the locale because we needed 
 the lemma that the derivative of $g$ is negative.
 But now, we are finished with $g$ and leave the locale.
+We can refer to facts proved inside the locale using the prefix `Dottie`.
 
 <pre class="source">
 <span class="keyword2 keyword">end</span>
@@ -222,13 +223,12 @@ Sledgehammer found this proof automatically.
 </pre>
 
 
-### The Dottie number is a universal attractor
+### The cosine function is a contraction map
 
-An [*attractor*](https://en.wikipedia.org/wiki/Attractor) is a set of states towards which a dynamical system tends to evolve if started in some larger set, called the *basin of attraction*.
-Iterates of the cosine function converge to the Dottie number starting from *any* real number,
-so it is a *universal* attractor.
-The key fact is that $\cos$ is a contraction on $[-1,1]$ with
-Lipschitz constant $\sin 1$, or with less jargon: $\lvert\cos x - \cos y\rvert\le\sin 1\cdot \lvert x-y\rvert$.
+The next step is to investigate why iterates of the cosine function 
+always converge to the Dottie number.
+It's because $\cos$ is a contraction on $[-1,1]$ with
+*Lipschitz constant* $\sin 1$, or with less jargon, $\lvert\cos x - \cos y\rvert\le\sin 1\cdot \lvert x-y\rvert$.
 
 Crucially, $0 < \sin 1 < 1$. This is easy to prove, and we could also have used the `approximation` method.
   
@@ -249,8 +249,9 @@ And $\sin 1$ is the Lipschitz constant for $\cos$ because it is an upper bound o
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-By the mean value theorem, if $x<y$ then there exists $\xi\in(x,y)$ such that 
-$\lvert\cos x - \cos y\rvert\le\lvert\sin \xi\rvert \cdot \lvert x-y\rvert$.
+If $x<y$ then there exists $\xi\in(x,y)$ such that 
+$\lvert\cos x - \cos y\rvert\le\lvert\sin \xi\rvert \cdot \lvert x-y\rvert$,
+by the [*mean value theorem*](https://mathworld.wolfram.com/Mean-ValueTheorem.html).
 Moreover, $\lvert\sin \xi\rvert\le \sin 1$.
 
 <pre class="source">
@@ -259,19 +260,18 @@ Moreover, $\lvert\sin \xi\rvert\le \sin 1$.
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="free">x</span> <span class="main">&lt;</span></span> <span class="free">y</span><span>"</span></span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">x</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">y</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span><span>
   </span><span class="keyword2 keyword">shows</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">cos</span> <span class="free">x</span> <span class="main">-</span> <span class="const">cos</span> <span class="free">y</span><span class="main">¦</span> <span class="main">≤</span> <span class="const">sin</span> <span class="main">1</span> <span class="main">*</span> <span class="main">¦</span><span class="free">x</span> <span class="main">-</span> <span class="free">y</span><span class="main">¦</span><span>"</span><span>
 </span><span class="keyword1 command">proof</span> <span class="operator">-</span><span>
-  </span><span class="keyword1 command">have</span> cont<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">continuous_on</span> <span class="main">{</span><span class="free">x</span><span class="main">..</span><span class="free">y</span><span class="main">}</span> <span class="const">cos</span><span>"</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span><span>
+  </span><span class="keyword1 command">have</span> cont<span class="main">:</span> <span class="quoted quoted">"</span><span class="const">continuous_on</span> <span class="main">{</span><span class="free">x</span><span class="main">..</span><span class="free">y</span><span class="main">}</span> <span class="const">cos</span><span>"</span><span> 
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">intro</span> <span class="dynamic dynamic">continuous_intros</span><span class="main">)</span><span>
   </span><span class="keyword1 command">have</span> deriv<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">(</span><span class="main">(</span></span><span class="const">cos</span><span class="main">::</span><span class="tconst">real</span><span class="main">⇒</span><span class="tconst">real</span><span class="main">)</span> <span class="keyword1">has_derivative</span> <span class="main">(*)</span> <span class="main">(</span><span class="main">-</span> <span class="const">sin</span> <span class="skolem">u</span><span class="main">)</span><span class="main">)</span> <span class="main">(</span><span class="keyword1">at</span> <span class="skolem">u</span><span class="main">)</span><span>"</span> <span class="keyword2 keyword">for</span> <span class="skolem">u</span> <span class="main">::</span> <span class="tconst">real</span><span>
     </span><span class="keyword1 command">using</span> DERIV_cos<span class="main">[</span><span class="operator">of</span> <span class="quoted skolem">u</span><span class="main">]</span> <span class="keyword1 command">unfolding</span> has_field_derivative_def <span class="keyword1 command">by</span> <span class="operator">simp</span><span>
-  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">∃</span></span><span class="bound">ξ</span> <span class="main">∈</span></span> <span class="main">{</span><span class="free">x</span><span class="main">&lt;..&lt;</span><span class="free">y</span><span class="main">}</span><span class="main">.</span> <span class="const">norm</span> <span class="main">(</span><span class="const">cos</span> <span class="free">y</span> <span class="main">-</span> <span class="const">cos</span> <span class="free">x</span><span class="main">)</span> <span class="main">≤</span> <span class="const">norm</span> <span class="main">(</span><span class="main">(*)</span> <span class="main">(</span><span class="main">-</span> <span class="const">sin</span> <span class="bound">ξ</span><span class="main">)</span> <span class="main">(</span><span class="free">y</span> <span class="main">-</span> <span class="free">x</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
-    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> mvt_general<span class="main main">[</span><span class="operator">OF</span> <span class="quoted"><span class="quoted"><span>‹</span><span class="free">x</span> <span class="main">&lt;</span></span> <span class="free">y</span><span>›</span></span> cont<span class="main main">]</span><span class="main">)</span> <span class="main">(</span><span class="operator">use</span> deriv <span class="keyword2 keyword quasi_keyword">in</span> <span class="operator">blast</span><span class="main">)</span><span>
-  </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">ξ</span> <span class="keyword2 keyword">where</span> ξ<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">ξ</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="free">x</span><span class="main">&lt;..&lt;</span><span class="free">y</span><span class="main">}</span><span>"</span> <span class="quoted quoted">"</span><span class="const">norm</span> <span class="main">(</span><span class="const">cos</span> <span class="free">y</span> <span class="main">-</span> <span class="const">cos</span> <span class="free">x</span><span class="main">)</span> <span class="main">≤</span> <span class="const">norm</span> <span class="main">(</span><span class="main">-</span> <span class="const">sin</span> <span class="skolem">ξ</span> <span class="main">*</span> <span class="main">(</span><span class="free">y</span> <span class="main">-</span> <span class="free">x</span><span class="main">)</span><span class="main">)</span><span>"</span><span>
-    </span><span class="keyword1 command">by</span> <span class="operator">auto</span><span>
-  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="skolem">ξ</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span> <span class="keyword1 command">using</span> ξ assms <span class="keyword1 command">by</span> <span class="operator">auto</span><span>
-  </span><span class="keyword1 command">then</span> <span class="keyword1 command">have</span> absxi<span class="main">:</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">sin</span> <span class="skolem">ξ</span><span class="main">¦</span> <span class="main">≤</span> <span class="const">sin</span> <span class="main">1</span><span>"</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">rule</span> abs_sin_le_sin1<span class="main">)</span><span>
+  </span><span class="keyword1 command">then</span> <span class="keyword3 command">obtain</span> <span class="skolem skolem">ξ</span> <span class="keyword2 keyword">where</span> ξ<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="skolem">ξ</span> <span class="main">∈</span></span> <span class="main">{</span></span><span class="free">x</span><span class="main">&lt;..&lt;</span><span class="free">y</span><span class="main">}</span><span>"</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">cos</span> <span class="free">y</span> <span class="main">-</span> <span class="const">cos</span> <span class="free">x</span><span class="main">¦</span> <span class="main">≤</span> <span class="main">¦</span><span class="const">sin</span> <span class="skolem">ξ</span><span class="main">¦</span> <span class="main">*</span> <span class="main">¦</span><span class="free">y</span> <span class="main">-</span> <span class="free">x</span><span class="main">¦</span><span>"</span><span>
+    </span><span class="keyword1 command">using</span> mvt_general<span class="main">[</span><span class="operator">OF</span> <span class="quoted"><span class="quoted"><span>‹</span><span class="free">x</span> <span class="main">&lt;</span></span> <span class="free">y</span><span>›</span></span> cont deriv<span class="main">]</span> <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> abs_mult<span class="main">)</span><span>
+  </span><span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="skolem">ξ</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span><span> 
+    </span><span class="keyword1 command">using</span> ξ assms <span class="keyword1 command">by</span> <span class="operator">auto</span><span>
   </span><span class="keyword1 command">have</span> <span class="quoted quoted"><span>"</span><span class="main">¦</span></span><span class="const">cos</span> <span class="free">y</span> <span class="main">-</span> <span class="const">cos</span> <span class="free">x</span><span class="main">¦</span> <span class="main">≤</span> <span class="main">¦</span><span class="const">sin</span> <span class="skolem">ξ</span><span class="main">¦</span> <span class="main">*</span> <span class="main">¦</span><span class="free">y</span> <span class="main">-</span> <span class="free">x</span><span class="main">¦</span><span>"</span><span>
     </span><span class="keyword1 command">using</span> ξ <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> abs_mult<span class="main">)</span><span>
   </span><span class="keyword1 command">also</span> <span class="keyword1 command">have</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main var">…</span> <span class="main">≤</span></span> </span><span class="const">sin</span> <span class="main">1</span> <span class="main">*</span> <span class="main">¦</span><span class="free">y</span> <span class="main">-</span> <span class="free">x</span><span class="main">¦</span><span>"</span><span>
-    </span><span class="keyword1 command">using</span> absxi <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> mult_right_mono<span class="main">)</span><span>
+    </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> <span class="quoted"><span class="quoted"><span>‹</span><span class="main">¦</span></span><span class="skolem">ξ</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>›</span> abs_sin_le_sin1 mult_mono'<span class="main">)</span><span>
   </span><span class="keyword1 command">finally</span> <span class="keyword3 command">show</span> <span class="var quoted var">?thesis</span><span>
     </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">simp</span> <span class="quasi_keyword">add</span><span class="main main">:</span> abs_minus_commute<span class="main">)</span><span>
 </span><span class="keyword1 command">qed</span>
@@ -288,7 +288,18 @@ This finally establishes $\sin 1$ as the Lipschitz bound.
   </span><span class="keyword1 command">using</span> cos_contraction_lt<span class="main">[</span><span class="operator">of</span> <span class="quoted free">x</span> <span class="quoted free">y</span><span class="main">]</span> cos_contraction_lt<span class="main">[</span><span class="operator">of</span> <span class="quoted free">y</span> <span class="quoted free">x</span><span class="main">]</span> assms<span>
   </span><span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">cases</span> <span class="quoted free">x</span> <span class="quoted free">y</span> <span class="quasi_keyword">rule</span><span class="main main">:</span> linorder_cases<span class="main">)</span> <span class="main">(</span><span class="operator">auto</span> <span class="quasi_keyword">simp</span><span class="main main">:</span> abs_minus_commute<span class="main">)</span>
 </pre>
-After one step the iteration lands in $[-1,1]$ and stays there.
+
+
+
+### The Dottie number is a universal attractor
+
+An [*attractor*](https://en.wikipedia.org/wiki/Attractor) is a set of states towards which a dynamical system tends to evolve if started in some larger set, called the *basin of attraction*.
+Iterates of the cosine function converge to the Dottie number starting from *any* real number,
+so it is a *universal* attractor.
+Since we have established the Lipschitz bound for cosine, it is just a matter of putting some pieces together.
+
+Most of our theorems are confined to the interval $[-1,1]$, but that is no problem.
+After one step, the iteration lands in $[-1,1]$ and stays there.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_funpow_in_pm1<span class="main">:</span><span>
@@ -303,6 +314,9 @@ After one step the iteration lands in $[-1,1]$ and stays there.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+Once we are within the interval, applying cosine takes us closer to Dottie.
+In fact, not that much closer: since $\sin 1 \approx 0.841$, convergence is sluggish.
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_step_to_dottie<span class="main">:</span><span>
   </span><span class="keyword2 keyword">assumes</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¦</span></span><span class="free">w</span><span class="main">¦</span></span> <span class="main">≤</span> <span class="main">1</span><span>"</span><span>
@@ -310,7 +324,8 @@ After one step the iteration lands in $[-1,1]$ and stays there.
   </span><span class="keyword1 command">using</span> Dottie.facts <span class="keyword1 command">by</span> <span class="main">(</span><span class="operator">metis</span> abs_cos_le_one assms cos_contraction<span class="main">)</span>
 </pre>
 
-From a start in $[-1,1]$, the distance to the fixed point decays geometrically.
+Now we iterate the previous step using the obvious induction.
+The distance to the fixed point, namely Dottie, decays geometrically.
 
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_funpow_bound<span class="main">:</span><span>
@@ -334,6 +349,8 @@ From a start in $[-1,1]$, the distance to the fixed point decays geometrically.
 </span><span class="keyword1 command">qed</span>
 </pre>
 
+Hence, the series of iterates converges to Dottie.
+
 <pre class="source">
 <span class="keyword1 command">lemma</span> cos_iter_tendsto_unit<span class="main">:</span><span>
   </span><span class="keyword2 keyword">fixes</span> <span class="free">y0</span> <span class="main">::</span> <span class="tconst">real</span><span>
@@ -350,6 +367,10 @@ From a start in $[-1,1]$, the distance to the fixed point decays geometrically.
     </span><span class="keyword1 command">using</span> Lim_null tendsto_rabs_zero_iff <span class="keyword1 command">by</span> <span class="operator">blast</span><span>
 </span><span class="keyword1 command">qed</span>
 </pre>
+
+Most of the previous results hold only for an initial value within the interval $[-1,1]$.
+Given an arbitrary initial value $x_0$, noting that $\cos x_0$ lies within that interval 
+yields the desired universal attractor result.
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> cos_iter_tendsto_dottie<span class="main">:</span><span>
@@ -369,9 +390,12 @@ From a start in $[-1,1]$, the distance to the fixed point decays geometrically.
 
 ### Transcendence
 
-By the Hermite--Lindemann--Weierstra\ss\ theorem, $\cos z$ is transcendental
-  for every nonzero algebraic </span><span class="antiquoted"><span class="antiquote">@{</span><span class="operator">term</span> <span class="quoted free">z</span><span class="antiquote">}</span></span><span>. If the Dottie number were algebraic, then
-  $\cos(\mathit{dottie}) = \mathit{dottie}$ would be both algebraic and transcendental.
+Finally, let's note that Dottie is *transcendental*: not a root of any polynomial with 
+integer coefficients. This turns out to be trivial, thanks to the Archive of Formal Proofs.
+By the [Hermite--Lindemann--Weierstraß](https://isa-afp.org/entries/Hermite_Lindemann.html) theorem, $\cos z$ is transcendental
+for every nonzero algebraic $z$. And Dottie is nonzero.
+If Dottie were algebraic, then $\cos(\mathit{dottie}) = \mathit{dottie}$ 
+would be both algebraic and transcendental, contradiction.
 
 <pre class="source">
 <span class="keyword1 command">theorem</span> dottie_transcendental<span class="main">:</span> <span class="quoted"><span class="quoted"><span>"</span><span class="main">¬</span></span> </span><span class="const">algebraic</span> <span class="const">dottie</span><span>"</span><span>
@@ -385,26 +409,15 @@ By the Hermite--Lindemann--Weierstra\ss\ theorem, $\cos z$ is transcendental
 </span><span class="keyword1 command">qed</span>
 </pre>
 
-<pre class="source">
-</pre>
+Sledgehammer can do all this automatically, but the proof above is clearer.
 
+### A remark on AI
 
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-<pre class="source">
-</pre>
-
-  
+The entry resulted from some experiments using Claude.
+Claude suggested the Dottie number as a nice simple example.
+Claude also supplied the first version of the proofs.
+They were correct as far as they went, but were overly detailed and with major omissions.
+Notably, Claude forgot to prove that the Dottie number is unique over the entire real line, 
+not just over the interval $[-1,1]$. 
+So a fair bit of hand polishing has gone into these proofs.
+They can be [downloaded](https://isa-afp.org/entries/Dottie_Number.html) from the AFP.
