@@ -33,7 +33,7 @@ until both existence and uniqueness of a fixed point have been proved.
 Those claims will be proved with the help of the function $g(x)=\cos x - x$.
 Note that it slopes downwards.
 
-<img src="/images/dottie-g.png" alt="graph of the function cos(x)-x" width="500"/>
+<img src="/images/Dottie-g.png" alt="graph of the function cos(x)-x" width="500"/>
 
 We can see that it has a unique root near $\frac{\pi}{4}$, but now we have to prove it.
 Several different theorems need facts about $g$, 
