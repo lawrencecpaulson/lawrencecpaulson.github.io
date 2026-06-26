@@ -14,10 +14,10 @@ She had discovered the unique fixed point of the cosine function.
 The Dottie number has several further properties: it is a *global attractor*, 
 meaning the limit is the same no matter what number you start with, 
 and it is transcendental.
-It is a great example for showing off a variety of mathematical techniques in Isabelle, 
+It is a great example for showing off a range of computer algebra techniques in Isabelle, 
 such as differentiation and unlimited precision real computations.
-We calculate its value to 12 decimal places, by proof.
-
+Let's prove those properties just mentioned 
+and calculate (by proof!) its value to 12 decimal places.
 
 ### Getting started
 
