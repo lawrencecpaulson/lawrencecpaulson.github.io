@@ -2,11 +2,12 @@
 layout: post
 title:  Contradictions and the Principle of Explosion
 usemathjax: true 
-tags: [logic, Bertrand Russell, philosophy]
+tags: [logic, Bertrand Russell, philosophy, AI]
 ---
 
 That logic should be [free from contradiction](https://plato.stanford.edu/entries/contradiction/#) is probably its most fundamental principle, 
-dating back to Aristotle. As described [last time]({% post_url 2024-01-31-Russells_Paradox %}), 
+dating back to Aristotle. 
+As described [last time]({% post_url 2024-01-31-Russells_Paradox %}), 
 the emergence of a contradiction in set theory – in the form of Russell's paradox – was catastrophic. Few question the claim that no statement can be both true and false 
 at the same time.
 But the law of contradiction is widely associated with something else, 

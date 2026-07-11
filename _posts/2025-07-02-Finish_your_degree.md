@@ -2,7 +2,7 @@
 layout: post
 title:  "Finish your degree!"
 usemathjax: true 
-tags: [general, memories]
+tags: [general, memories, AI]
 ---
 Everybody knows that [Bill Gates dropped out of Harvard](https://www.cnbc.com/2025/01/29/bill-gates-harvard-professor-wasnt-surprised-he-dropped-out.html) 
 to found Microsoft. 
