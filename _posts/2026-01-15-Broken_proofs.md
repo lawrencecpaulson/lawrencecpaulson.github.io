@@ -185,3 +185,5 @@ These are all definable within higher order logic, whereas similar capabilities 
 to require extensions to the kernel. 
 And that means, any bugs are kernel bugs.
 In view of the much greater logical strength of dependent type theories, this situation is hard to understand.
+
+[*Note added 2026-07-31*: See my [new post]({% post_url 2026-07-30-Collatz %}) about a kernel bug found in Lean, then reread the paragraph above.]
