@@ -149,7 +149,7 @@ is an indispensable source on this and related topics.
 * Church's simple type theory: the granddaughter of PM, it is equally expressive and a lot simpler.
 * Automath: absolutely not. De Bruijn consistently referred to it as "a *language* for mathematics". He moreover said it was "like a big restaurant that serves all sorts of food: vegetarian, kosher, or anything else the customer wants".[^3] Automath was, by design, neutral to foundational choices. (Isabelle/Pure is in the same spirit.)
 * Martin-Löf type theory: he himself said it was intended as a vehicle for formalising Bishop-style analysis, clearly a foundational claim. But one that rejects the vast majority of modern mathematics.  
-* Calculus of inductive constructions (Coq, Lean): the original paper (describing a weaker system) begins "The calculus of constructions is a higher-order formalism for constructive proofs in natural deduction style," and the paper makes no foundational claims. 
+* Calculus of inductive constructions (Rocq, Lean): the original paper (describing a weaker system) begins "The calculus of constructions is a higher-order formalism for constructive proofs in natural deduction style," and the paper makes no foundational claims. 
 Coquand's [retrospective paper](https://www.cse.chalmers.se/~coquand/v1.pdf) makes no such claims either. 
 Since it turns out to be significantly stronger than ZF set theory, one could even say it makes foundational assumptions. 
 

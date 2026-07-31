@@ -30,7 +30,7 @@ The proofs are simple but polished, hiding the trial and error that a beginner w
 [Isar](/tag/Isar) style,
 where every claim has a single-line proof, although most real proofs (especially big ones)
 involve chains of tactic steps such as one finds in other proof assistants 
-such as Lean, Coq and HOL4: so-called *apply-style* proofs.
+such as Lean, Rocq and HOL4: so-called *apply-style* proofs.
 
 ### Prove something trivial
 

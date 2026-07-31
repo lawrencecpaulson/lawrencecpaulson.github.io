@@ -58,7 +58,7 @@ The $\lambda$-calculus existed for decades with no imagined model.
 
 ### Some thoughts from scientific colleagues
 
-Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Coq and Lean, [stated his view](https://www.cse.chalmers.se/~coquand/v1.pdf) clearly:
+Thierry Coquand, whose *calculus of constructions* evolved into the type theory now used in Rocq and Lean, [stated his view](https://www.cse.chalmers.se/~coquand/v1.pdf) clearly:
 
 > One main theme of this work is the importance of *notations* in mathematics and computer science: new questions were asked and solved only because of the use of AUTOMATH notation, itself a variation of λ-notation introduced by A. Church for representing functions. 
 
@@ -90,7 +90,7 @@ programs to run!)
 
 > In the specific case of dependent types, I most often think of them as
 a subsystem of set theory. If you take a dependent type theory, add an
-impredicative Prop sort à la Coq, and then add axioms for function
+impredicative Prop sort à la Coq [Rocq], and then add axioms for function
 extensionality, quotient types and the axiom of unique choice (i.e.,
 every functional relation gives rise to a function), then the result
 can be interpreted in any topos, in exactly the same way that

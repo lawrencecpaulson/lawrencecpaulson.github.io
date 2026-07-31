@@ -2,7 +2,7 @@
 layout: post
 title:  "\"Why not just use Lean?\""
 usemathjax: true 
-tags: [AUTOMATH, LCF, HOL system, HOL Light, Lean, formalised mathematics]
+tags: [AUTOMATH, LCF, HOL system, HOL Light, Lean, Rocq, formalised mathematics]
 ---
 I have been told that when proposing to formalise mathematics these days, you have to explain why you are not using Lean.
 And that reminds me why I left the dependent-typed world 40 years ago:

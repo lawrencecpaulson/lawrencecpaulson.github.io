@@ -2,10 +2,10 @@
 layout: post
 title:  "Axiomatic type classes: some history, some examples"
 usemathjax: true 
-tags: [Isabelle, type classes, Robin Milner, Coq, HOL Light, Standard ML]
+tags: [Isabelle, type classes, Robin Milner, Rocq, HOL Light, Standard ML]
 ---
 
-Type classes now play a major role in all the leading proof assistants: Coq, Lean and of course Isabelle/HOL. They have come a long way from their origins in the world of functional programming languages.
+Type classes now play a major role in all the leading proof assistants: Rocq, Lean and of course Isabelle/HOL. They have come a long way from their origins in the world of functional programming languages.
 They were mentioned in the [previous post]({% post_url 2022-02-23-Hereditarily_Finite %}), so let's take a closer look.
 
 ### Robin Milner and polymorphic type checking
@@ -53,7 +53,7 @@ The paper is a readable but outdated overview of axiomatic type classes.
 
 It's essential to understand that a type class such as `ring`, though including the ring axioms, will be of no value in reasoning about abstract rings. Type classes constrain types; the carrier of any interesting group or ring is a *set*, unlikely to be formalisable as a type. Believe me, we all knew this, even in the 1990s. When we show that the integers are a ring we do not imagine that the integers are an *interesting* ring; we are simply making a statement about the behaviour of the operators $+$ and $\times$. (And when I say *set* here, I'm just referring to the typed sets of higher-order logic.)
 
-Type classes were introduced to Coq in 2008. Clearly Coq's richer type system makes its type classes more powerful than Isabelle's, but it's worth noting that the tremendous group theory developments done in Coq were based on a [formalisation of finite groups](https://rdcu.be/cJtGQ) where the group carriers were indeed sets, represented by lists.
+Type classes were introduced to Rocq in 2008. Clearly Rocq's richer type system makes its type classes more powerful than Isabelle's, but it's worth noting that the tremendous group theory developments done in Rocq were based on a [formalisation of finite groups](https://rdcu.be/cJtGQ) where the group carriers were indeed sets, represented by lists.
 
 ### Recent history
 

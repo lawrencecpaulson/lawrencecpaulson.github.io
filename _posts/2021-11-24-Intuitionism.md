@@ -43,7 +43,7 @@ The rejection of LEM originated with [L E J Brouwer](https://plato.stanford.edu/
 
 The rejection of LEM implies the rejection of many other familiar laws of Boolean logic, such as $\neg \neg A \to A$ and $\neg(A\land B) \to \neg A \lor \neg B$.
 But for computable properties, LEM continues to hold along with those other Boolean laws.
-Because of this, proofs of simple properties about computable objects such as integers and lists are not impacted by intuitionism. Coq users will be fully aware that type `bool`, which is the type of booleans, enjoys the LEM and must not be confused with the type `prop` of propositions.
+Because of this, proofs of simple properties about computable objects such as integers and lists are not impacted by intuitionism. Rocq users will be fully aware that type `bool`, which is the type of booleans, enjoys the LEM and must not be confused with the type `prop` of propositions.
 
 ### Intuitionistic type theory
 

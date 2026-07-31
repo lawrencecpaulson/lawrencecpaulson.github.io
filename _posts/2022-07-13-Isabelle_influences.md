@@ -101,7 +101,7 @@ The Hilbert approach yields concise presentations of logic:
 fine for developing metatheory, but difficult to use as an actual proof system.
 
 One question asked by every Isabelle newbie is, why are there two versions of "implies" (namely $\Longrightarrow$ and $\to$) and two versions of "for all" ($\bigwedge$ and $\forall$)?
-No other proof assistant does this: at least, not AUTOMATH, HOL or Coq.
+No other proof assistant does this: at least, not AUTOMATH, HOL or Rocq.
 The answer is that a logical framework for natural deduction must have these two levels.
 We cannot even express a rule of inference without a notion of implication:
 $\Phi\Rightarrow\Psi$.

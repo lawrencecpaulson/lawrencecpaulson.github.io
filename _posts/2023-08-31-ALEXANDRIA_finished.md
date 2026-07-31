@@ -34,7 +34,7 @@ and it lists specifically
 A proposal for a programme 
 devoted entirely to [homotopy type theory](https://homotopytypetheory.org) (HoTT)
 had been rejected, but people from that community were invited to *Big Proof*.
-Dependent type theory, whether HoTT or the already established type theory of Coq,
+Dependent type theory, whether HoTT or the already established type theory of Rocq,
 was widely assumed to be the future of the formalisation of mathematics.
 I felt very lucky to get funding for a project involving simple type theory
 and  [Isabelle/HOL](https://isabelle.in.tum.de).

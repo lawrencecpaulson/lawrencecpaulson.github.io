@@ -6,7 +6,7 @@ tags: [general, examples, NG de Bruijn, John Littlewood]
 ---
 
 Novices getting to grips with interactive theorem proving need examples to formalise.
-When Russell O'Connor was getting to grips with Coq, he thought that a nice little exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
+When Russell O'Connor was getting to grips with Coq (Rocq as was), he thought that a nice little exercise would be to [formalise Gödel's incompleteness theorem](https://rdcu.be/cRs1q).
 I hope he will not be offended if I remark that that was a crazy idea, even though he was successful. Below, I list a few proofs that I would like to see formalised. I am not sure how easy they are, but all of them are easier than Gödel's Theorem!
 
 ### Filling boxes with bricks

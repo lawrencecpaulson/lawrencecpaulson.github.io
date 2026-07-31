@@ -2,7 +2,7 @@
 layout: post
 title:  "Memories: Edinburgh LCF, Cambridge LCF, HOL88"
 usemathjax: true 
-tags: [general, Robin Milner, MJC Gordon, LCF, HOL system, memories]
+tags: [general, Robin Milner, MJC Gordon, LCF, HOL system, Rocq, memories]
 ---
 
 Just over 40 years ago, 2 February 1982, I arrived at Heathrow to take up a postdoc under Mike Gordon and Robin Milner to work on Edinburgh LCF.
@@ -108,7 +108,7 @@ Unfortunately, nobody cared about Cambridge LCF because "fixpoint theory" was al
 The code did not die, however: helped by Gerard I had achieved decent performance for ML, source programs now being transformed into *compiled* Lisp.
 Cambridge LCF thus became the basis of many other proof assistants.
 Mike Gordon used it in his hardware verification developments, first [LCF_LSM](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-41.pdf) and then HOL88 ([source code](https://www.repository.cam.ac.uk/handle/1810/265031) available!), keeping the extended tactic library.
-Gerard Huet used it in early experiments with the calculus of constructions, which ultimately become Coq.
+Gerard Huet used it in early experiments with the calculus of constructions, which ultimately become Rocq.
 The ML subsystem, known as Cambridge ML, was also the basis of the [original version of Nuprl](https://nuprl-web.cs.cornell.edu/book/).
 
 ### Postscript

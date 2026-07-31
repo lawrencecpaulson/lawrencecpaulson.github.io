@@ -51,7 +51,7 @@ Your proof text was everything:
 AUTOMATH did not keep track of what you were trying to prove
 and there was no "proof state" to display.
 In this it was quite different from the proof assistants it inspired, 
-such as Coq and Lean.
+such as Rocq and Lean.
 
 ### LCF and its metalanguage
 
@@ -98,7 +98,7 @@ Access to other prover features can also be provided through menus.
 The name Proof General emphasises that this interface is intended to work
 with a variety of proof assistants. For years it was the only way
 to use Isabelle, until jEdit came along.
-It still supports Coq and has in the past supported a dozen other tools. 
+It still supports Rocq and has in the past supported a dozen other tools. 
 
 ### Isabelle/jEdit
 

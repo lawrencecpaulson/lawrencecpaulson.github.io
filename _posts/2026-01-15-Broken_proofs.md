@@ -2,7 +2,7 @@
 layout: post
 title:  Broken proofs and broken provers
 usemathjax: true 
-tags: [general, verification, Isabelle, memories]
+tags: [general, verification, Isabelle, Rocq, memories]
 ---
 People expect perfection. Consider the reaction when someone who has been vaccinated 
 against a particular disease nevertheless dies of it.

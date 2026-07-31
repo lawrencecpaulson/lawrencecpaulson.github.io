@@ -120,7 +120,7 @@ One example is [synthetic computability theory](https://www.sciencedirect.com/sc
 
 Arguably, we should rise to the challenge of dealing with explicit models of computation.
 On the other hand, when textbook proofs themselves invoke the Church-Turing thesis, the synthetic approach allows a faithful formalisation.
-Caution is necessary, because the Church-Turing thesis is inconsistent with many formal systems; however, the approach [works in Coq.](https://drops.dagstuhl.de/opus/volltexte/2021/13455/)
+Caution is necessary, because the Church-Turing thesis is inconsistent with many formal systems; however, the approach [works in Rocq.](https://drops.dagstuhl.de/opus/volltexte/2021/13455/)
 
 
 

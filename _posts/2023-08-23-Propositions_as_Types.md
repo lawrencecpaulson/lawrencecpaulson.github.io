@@ -130,7 +130,7 @@ is *irrelevance of proofs*:
 As de Bruijn and others comment, irrelevance of proofs is 
 mainly pertinent to classical reasoning. For constructivists, it 
 utterly destroys Heyting's conception of intuitionistic truth. 
-But even proof assistants that are mostly used  constructively, such as Agda and Coq, provide
+But even proof assistants that are mostly used  constructively, such as Agda and Rocq, provide
 *definitionally proof-irrelevant propositions*.
 
 ### Intuitionistic predicate logic, continued
