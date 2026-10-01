@@ -5,6 +5,7 @@ usemathjax: true
 tags: [logic, Bertrand Russell, philosophy, AI]
 ---
 
+"*Once you have taken the Impossible into your calculations, its possibilities become practically limitless*."[^1]
 That logic should be [free from contradiction](https://plato.stanford.edu/entries/contradiction/#) is probably its most fundamental principle, 
 dating back to Aristotle. 
 As described [last time]({% post_url 2024-01-31-Russells_Paradox %}), 
@@ -20,6 +21,8 @@ by saying "suppose 1=0; prove that you are the Pope".
 Russell is said to have replied that if 1=0 then 2=1 and therefore 
 the 2-element set consisting of himself and the Pope actually contains only one element. 
 It's an amusing tale, but is the argument rigorous? 
+
+[^1]: Saki, "[The Peace of Mowsle Barton](https://www.cs.cmu.edu/~rgs/sk-barton.html)"
 
 ### Origins
 
@@ -64,9 +67,9 @@ So what happens if we are given that true equals false? Then
 $M = (\lambda x y.x)MN = (\lambda x y.y)MN = N$. Therefore we can show $M=N$
 for any two given λ-terms, $M$ and $N$.
 The same sort of thing happens given 1=0 and the standard representation of natural numbers,
-though the details are complicated.[^1]
+though the details are complicated.[^2]
 
-[^1]: $M = 0(\textbf{K}N)M = 1(\textbf{K}N)M = \textbf{K}NM = N$
+[^2]: $M = 0(\textbf{K}N)M = 1(\textbf{K}N)M = \textbf{K}NM = N$
 
 ### The explosion in axiomatic set theory 
 
@@ -102,11 +105,11 @@ Obviously, if $n=2$, we get the same rule as before.
 If $n=1$, it degenerates to a tautology. 
 And what happens if $n=0$? 
 Then the rule says that $R$ follows from the empty disjunction alone. 
-The empty disjunction is falsity.[^2]
+The empty disjunction is falsity.[^3]
 If our calculus can derive falsity from $P$ and $\neg P$,
 then it has the principle of explosion built in. 
 
-[^2]: I hope you can see this: $P_1\lor \cdots \lor P_n$ is true precisely if some $P_i$ is true, $i=1$, ..., $n$. If $n=0$ then it must always be false.
+[^3]: I hope you can see this: $P_1\lor \cdots \lor P_n$ is true precisely if some $P_i$ is true, $i=1$, ..., $n$. If $n=0$ then it must always be false.
 
 
 ### Final remarks
@@ -128,3 +131,6 @@ And indeed, the symbolic/logical tendency that was so prominent in early AI work
 has pretty much vanished in favour of essentially statistical techniques 
 based on neural networks.
 There, the problem doesn't arise because nothing is being proved. 
+
+*[Remark 2026-10-01]*: added Saki quote
+
