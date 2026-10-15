@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  The Dottie Number
+title:  The Dottie number
 usemathjax: true 
 tags: [examples, Isar, AI, locales, Archive of Formal Proofs]
 ---
