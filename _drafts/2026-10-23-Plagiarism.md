@@ -10,7 +10,7 @@ Later – a couple of years ago – came the campaign to oust Claudine Gay as Pr
 Allegations of plagiarism were flying about on social media.
 Billionaire hedge fund manager Bill Ackman, one of Gay's main opponents, 
 discovered that alleging plagiarism was a game that [anyone could play](https://en.wikipedia.org/wiki/Bill_Ackman). 
-All of this happened shortly before the annual lecture I give at Cambridge, 
+All of this happened shortly before the annual lecture I give at Cambridge
 based on that "how to write a paper" post. 
 And it dawned on me that many of my complaints about the papers I was reviewing were really about plagiarism. 
 It's a tricky concept to pin down, which makes it especially convenient as a tool to ease out people who happen to be the wrong sex or colour. 
@@ -147,10 +147,10 @@ On the other hand, explanations and examples still count as original.
 
 In that bleak time in 2015, I faced again an old enemy:
 two incomprehensible pages of definitions involving low‑level syntax: 
-terms and formulas, occurrences within a term, substitutions, 
-unifiers, literals, clauses and on and on. 
-I was never sure, but it seemed to me that they were the same every time, 
-as if a file of this crap was being shared to everyone who was worried 
+*terms* and *formulas*, *occurrences* (positions) in a term, *substitutions*, 
+*unifiers*, *literals*, *clauses* and on and on. 
+I was never sure, but it seemed to me that they were the exactly same every time, 
+as if a file of this crap were being shared to everyone who was worried 
 about filling their page limit.[^1] 
 Occasionally, I felt like checking how many of the definitions were actually used.
 The paper might still be good, but often I was tempted to grab my mouse and choose *Strong Reject*. 
@@ -170,11 +170,11 @@ Fortunately, it doesn't matter.
 
 ### The penalty
 
-In view of people getting drummed out of their jobs for plagiarism, 
+Since people have been drummed out of their jobs for plagiarism, 
 it's worth thinking about how it should be punished. 
-At Cambridge, for straightforward cases, the rule is simple: the copied work receives zero credit. 
+For Cambridge students in straightforward cases, the rule is simple: the copied work receives zero credit. 
 So the penalty hinges on how much was copied and how important it was, which is fair. 
-Copying someone's useless blather for your introduction may cost you next to nothing beyond the ordeal of the disciplinary tribunal. 
+Copying someone's useless blather for your introduction may cost you nothing beyond the ordeal of the disciplinary tribunal. 
 No one cares about the acknowledgments at all. 
 If, on the other hand, you have copied the heart of the work, you are likely to get a zero. 
 And that could easily mean failing the course. 
@@ -191,19 +191,19 @@ seem to fall silent when other academics are found to be involved in actual, ser
 ### What about AI? 
 
 AI is transforming the world of formal verification, 
-but it is crap at writing and is an automated plagiarism machine to boot. 
-How can you benefit from it in writing? 
+but it sucks at writing and is an automated plagiarism machine to boot. 
+How can you benefit from it as an author? 
 
 I find that AI is helpful at reminding me of things I should know but can't easily recall. 
 It might be good at suggesting things to cover in your introduction or conclusions. 
 Perhaps, with the right prompt, you'll get "the point of this work" (intro)
-as separate from "what has been learned from this work" (conclusions). 
+as separate and distinct from "what has been learned from this work" (conclusions). 
 With the right prompt, you can limit your abstract to five sentences. 
 
-AI can help analyse, manage, and present your data. 
+AI can help analyse, manage, transform and present your experimental data. 
 You still need to check that it did the job right.
 It is good at suggesting relevant references.
-You do have to locate them, 
+You still have to locate them, 
 check their details and actually read them, at least in part. 
 With a well-written paper, the abstract and conclusions should give you the essence. 
 One of my pet hates is too-long abstracts, introductions and conclusions, 
@@ -215,17 +215,18 @@ I suggest trying to resist this impulse:
 you will have to learn to communicate in English eventually. 
 If pressed for time, it may work to write in your native language 
 and then ask a model to perform a literal translation. 
-It will at least be your own voice, and, I hope, blather-free. 
+It will at least be your own voice. 
 
 Finally, a good language model is the best ever proofreader. 
-I've been told about everything from basic typos
+I've been notified of everything from basic typos
 to LaTeX errors (the kind where LaTeX simply gives you the wrong output)
 to duplicate ORCID numbers and inconsistent punctuation. 
-It can even notice mathematical errors. 
+It can even notice mathematical errors and editorial bias. 
 
 Finally, AI is great when you get a pile of reports from not very happy referees. 
 It will digest them for you,
 returning a well-organised summary of things you need to fix, why and for whom. 
+Use AI for what it's good at, not to plagiarise other people's prose for you.
 
 
 
