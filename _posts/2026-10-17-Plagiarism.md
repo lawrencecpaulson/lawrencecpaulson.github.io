@@ -5,7 +5,7 @@ tags: [general]
 ---
 My first ever "[blog post](https://www.cl.cam.ac.uk/~lp15/Pages/Scream.html)" (though not in *this* blog) was about how to write a research paper. 
 I wrote it after reviewing a batch of badly-written papers for a conference, probably ITP or CADE. 
-Later – a couple of years ago – came the campaign to oust Claudine Gay as President of Harvard on the grounds that she had committed plagiarism.
+Later — a couple of years ago — came the campaign to oust Claudine Gay as President of Harvard on the grounds that she had committed plagiarism.
 Allegations of plagiarism were flying about on social media.
 Billionaire hedge fund manager Bill Ackman, one of Gay's main opponents, 
 discovered that alleging plagiarism was a game that [anyone could play](https://www.theguardian.com/education/2024/jan/06/neri-oxman-bill-ackman-plagiarism-accusations). 
@@ -45,10 +45,11 @@ began by mentioning three things.
 
 This is a curious list. The Pentium bug and the Ariane 5 crash were both high profile disasters, but they had happened in the mid-'90s, about 20 years earlier. 
 (Was there really nothing since?)
-Although they triggered a surge in formal verification, its true relevance is unclear.
-The first was reported by Intel to be a fabrication error –  
-missing entries in a lookup table for floating-point division
-– although a recent analysis now disputes this. 
+Although they triggered a surge in formal verification, their true relevance is unclear.
+The first was reported by Intel to be a fabrication error —
+[missing entries](https://en.wikipedia.org/wiki/Pentium_FDIV_bug) 
+in a lookup table for floating-point division
+— although a [recent analysis](https://www.hackster.io/news/ken-shirriff-tracks-down-intel-s-infamous-pentium-fdiv-bug-in-the-silicon-itself-fe6b8be99f30) now disputes this. 
 The second was caused by the use of old code from Ariane 4. 
 The third, that famous (1972) quote by Edsger Dijkstra, 
 is obvious to anyone who ever tried to get a computer to do anything reliably since about 1950. 
@@ -69,8 +70,8 @@ if you don't know whether they back those claims,
 if you don't even know whether those references exist, 
 then (to paraphrase Jesus) you have committed plagiarism in your heart. 
 That's because you have no idea whether anything you have written is actually true. 
+(This also happens when your text has been written by AI.[^1])
 But you will probably get away with it. 
-This is also happens when your text has been written by AI.[^1]
 
 [^1]: As pointed out to me by Claude Opus 5. 
 
@@ -112,7 +113,7 @@ And he offers as evidence
 
 > One can close one’s eyes and imagine how it feels to be standing in an open place, a prairie or a sea shore, while far away a big, reinless horse is approaching at a gallop, one can “see” it approaching and passing. To do the same with a phalanx of a thousand of these big beasts is mentally impossible: your heart would miss a number of beats by pure panic, if you could!
 
-I may be the first person in the world to have quoted these passages.
+Google indicates that I am the first person in the world to quote these passages.
 (For completeness, they are found on page 2.)
 If you can't be bothered to provide the source for your quotation, 
 you should not be quoting it at all. 
@@ -131,12 +132,12 @@ And once people notice you're in the habit of reusing your own material,
 they are likely to give up altogether. 
 I can remember a guy who gave me a bunch of his papers. 
 I read one, then I picked up another, and another, 
-and there were so many verbatim overlaps – whole paragraphs and worked examples — 
+and there were so many verbatim overlaps — whole paragraphs and worked examples — 
 that I threw them all away. 
 
 Self-plagiarism takes another form, which I have been guilty of many times. 
 It's when you publish something in a conference, then submit it to a journal. 
-The point is that journal version will give you more views and more prestige, 
+The point is that a journal version will give you more views and more prestige, 
 but you have to make it significantly longer and better than the conference version. 
 These days you are expected to include a footnote to say that the journal version 
 is based on your earlier work, which you should cite. 
@@ -188,9 +189,9 @@ And that could easily mean failing the course.
 It's remarkable how many media commentators seem to think 
 that plagiarism is some sort of ultimate crime,
 especially for those of the wrong sex or colour.
-But it is not a crime in the legal sense:
-it is a form of academic misconduct, more common than many people realise,
-and the appropriate response depends on how severe it is.
+But it is not a crime in any legal sense:
+it is a form of academic misconduct and more common than many people realise.
+The appropriate response depends on what was copied and why.
 The same pundits who rage about alleged plagiarism 
 seem to fall silent when other academics are implicated in actual and serious crimes. 
 
@@ -198,21 +199,20 @@ seem to fall silent when other academics are implicated in actual and serious cr
 
 Today, journals are overwhelmed by papers generated using AI.
 Some people say they should all be desk-rejected:
-AI it sucks at writing, sometimes fabricates references
+AI sucks at writing, sometimes fabricates references
 and is an automated plagiarism machine to boot. 
 It has been trained on existing texts 
 and has been seen to output known texts verbatim. 
 
-We need to distinguish between papers generated using AI 
-and those written with the assistance of AI. 
-AI is transforming the world of formal verification, 
+We need to distinguish between papers *generated* using AI
+and those *written with the assistance* of AI. 
 How can you benefit from AI as an author? 
 
 I find that AI is helpful at reminding me of things I should know but can't easily recall. 
 It might be good at suggesting things to cover in your introduction or conclusions. 
 Perhaps, with the right prompt, you'll get "the point of this work" (intro)
-as separate and distinct from "what has been learned from this work" (conclusions). 
-With the right prompt, you can limit your abstract to five sentences. 
+as separate and distinct from "what has been learned from this work" (conclusions).
+And you can limit your abstract to five sentences. 
 
 AI can help analyse, manage, transform and present your experimental data. 
 You still need to check that it did the job right.
@@ -225,8 +225,8 @@ so do not allow AI to fill yours with drivel.
 
 For non‑native speakers forced to write in English, 
 the temptation to let AI do the job must be overwhelming. 
-And yet your own English, however poor, 
-will likely be better than anything that AI can write for you.
+And yet your own English will likely more focused and coherent 
+than anything that AI can write for you.
 If pressed for time, it may work to write in your native language 
 and then ask a model to perform a literal translation. 
 It will at least be your own voice. 
