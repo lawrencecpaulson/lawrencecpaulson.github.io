@@ -156,7 +156,7 @@ two incomprehensible pages of definitions involving low‑level syntax:
 *terms* and *formulas*, *occurrences* (positions) in a term, *substitutions*, 
 *unifiers*, *literals*, *clauses* and on and on. 
 I was never sure, but it seemed to me that they were exactly the same every time, 
-as if a file of this crap were being shared to everyone who was worried 
+as if a file of this crap were being shared with everyone who was worried 
 about filling their page limit.[^2]
 Occasionally, I felt like checking how many of the definitions were actually used.
 The paper might still be good, but often I was tempted to grab my mouse and choose *Strong Reject*. 
