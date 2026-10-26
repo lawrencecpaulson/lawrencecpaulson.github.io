@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A Summer with Claude and Relative Arbitrage, by Dmitriy Traytel"
-tags: [AI, Isabelle, formalized mathematics]
+tags: [AI, Isabelle, formalised mathematics]
 # The first paragraph as HTML, without its footnote, for the overview page.
 # Keep it in step with the first paragraph below.
 excerpt: |
