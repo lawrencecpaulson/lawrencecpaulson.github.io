@@ -237,6 +237,7 @@ I've been notified of everything from basic typos
 to LaTeX errors (the kind where LaTeX silently gives you the wrong output)
 to duplicate ORCID numbers and inconsistent punctuation. 
 It can even notice mathematical errors and editorial bias. 
+Just remember that it can sometimes be wrong.
 
 Finally, AI is great when you get a pile of reports from not very happy referees. 
 It will digest them for you,
