@@ -1,0 +1,2010 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 1.1, Unfolded</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --t-ground:#F2F4F8;
+  --t-surface:#FFFFFF;
+  --t-paper:#FBF8F3;
+  --t-ink:#14181F;
+  --t-ink-2:#3D4557;
+  --t-muted:#69718A;
+  --t-rule:#DDE2EC;
+  --t-rule-2:#EAEDF4;
+  --t-accent:#35459B;
+  --t-accent-2:#5566C9;
+  --t-accent-soft:#E7EAF7;
+  --t-signal:#9B5A16;
+  --t-signal-soft:#FAF0E2;
+  --t-signal-rule:#E8CFA8;
+  --t-shadow:14 24 60;
+  --t-shadow-a:0.10;
+  --t-logo-plate:transparent;
+  --t-logo-pad:0px;
+  --t-lib:#3F6E78;
+  --t-lib-soft:#E4EEF0;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --t-ground:#0E1117;
+    --t-surface:#161A23;
+    --t-paper:#1B1915;
+    --t-ink:#E7EAF2;
+    --t-ink-2:#BFC6D6;
+    --t-muted:#98A1B7;
+    --t-rule:#28303E;
+    --t-rule-2:#1F2632;
+    --t-accent:#93A0F2;
+    --t-accent-2:#A9B4F7;
+    --t-accent-soft:#1C2340;
+    --t-signal:#D9A05A;
+    --t-signal-soft:#241C11;
+    --t-signal-rule:#4A3A22;
+    --t-shadow:0 0 0;
+    --t-shadow-a:0.5;
+    --t-logo-plate:#E9ECF2;
+    --t-logo-pad:2px;
+    --t-lib:#84B4C0;
+    --t-lib-soft:#14262B;
+  }
+}
+:root[data-theme="dark"]{
+  --t-ground:#0E1117;
+  --t-surface:#161A23;
+  --t-paper:#1B1915;
+  --t-ink:#E7EAF2;
+  --t-ink-2:#BFC6D6;
+  --t-muted:#98A1B7;
+  --t-rule:#28303E;
+  --t-rule-2:#1F2632;
+  --t-accent:#93A0F2;
+  --t-accent-2:#A9B4F7;
+  --t-accent-soft:#1C2340;
+  --t-signal:#D9A05A;
+  --t-signal-soft:#241C11;
+  --t-signal-rule:#4A3A22;
+  --t-shadow:0 0 0;
+  --t-shadow-a:0.5;
+  --t-logo-plate:#E9ECF2;
+  --t-logo-pad:2px;
+  --t-lib:#84B4C0;
+  --t-lib-soft:#14262B;
+}
+
+body{background:var(--t-ground);margin:0;}
+
+.t-doc{
+  background:var(--t-ground);
+  color:var(--t-ink);
+  font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  padding:clamp(1.25rem,4vw,3.5rem) clamp(1rem,4vw,2rem) 5rem;
+  -webkit-font-smoothing:antialiased;
+}
+.t-wrap{max-width:76rem;margin:0 auto;}
+.t-doc *,.t-cards,.t-cards *{box-sizing:border-box;}
+
+/* ---------- masthead ---------- */
+.t-mast{
+  display:flex;flex-direction:column;gap:1rem;
+  padding-bottom:2rem;margin-bottom:2.5rem;
+  border-bottom:1px solid var(--t-rule);
+}
+.t-eyebrow{
+  font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--t-muted);font-weight:500;
+  display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+}
+.t-eyebrow .sep{opacity:.45;}
+.t-h1{
+  font-family:Spectral,Georgia,serif;
+  font-weight:600;
+  font-size:clamp(2.1rem,5.6vw,3.4rem);
+  line-height:1.06;letter-spacing:-.017em;
+  text-wrap:balance;margin:0;
+}
+.t-h1 em{font-style:italic;font-weight:500;color:var(--t-accent);}
+.t-stand{
+  font-family:Spectral,Georgia,serif;
+  font-size:clamp(1.02rem,2.1vw,1.22rem);
+  line-height:1.52;color:var(--t-ink-2);
+  max-width:47ch;margin:0;
+}
+.t-metas{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.35rem;}
+.t-symchip{
+  display:inline-flex;align-items:center;gap:0;
+  border:1px solid var(--t-rule);border-radius:2px;
+  background:var(--t-surface);text-decoration:none;
+  color:var(--t-accent);overflow:hidden;
+  transition:border-color .15s ease,background-color .15s ease;
+}
+.t-symchip .glyph{
+  display:block;width:27px;height:24px;flex:0 0 auto;
+  margin:.3rem .5rem;border-radius:2px;
+  /* On a dark ground the logo's black lettering would disappear, so it sits
+     on a light plate there; in light mode the plate is the surface itself. */
+  background:var(--t-logo-plate);padding:var(--t-logo-pad);
+  box-sizing:content-box;
+}
+.t-symchip .label{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.71rem;color:var(--t-muted);white-space:nowrap;
+  padding:.34rem .55rem .34rem 0;
+}
+.t-symchip:hover,.t-symchip:focus-visible{
+  border-color:var(--t-accent);background:var(--t-accent-soft);
+}
+.t-symchip:focus-visible{outline:2px solid var(--t-accent);outline-offset:2px;}
+/* Collapse to the bare glyph only where there is a real pointer to hover
+   with; on touch the label stays visible, since a tooltip never fires. */
+@media (hover:hover) and (pointer:fine){
+  .t-symchip .label{
+    max-width:0;opacity:0;padding:.34rem 0;
+    transition:max-width .22s ease,opacity .16s ease,padding .22s ease;
+  }
+  .t-symchip:hover .label,.t-symchip:focus-visible .label{
+    max-width:20rem;opacity:1;padding:.34rem .55rem .34rem 0;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .t-symchip .label{transition:none;}
+}
+
+/* ---------- section furniture ---------- */
+.t-sec{margin-top:3.5rem;}
+.t-sec-head{
+  display:flex;align-items:baseline;gap:.8rem;
+  padding-bottom:.7rem;margin-bottom:1.5rem;
+  border-bottom:1px solid var(--t-rule);
+}
+.t-sec-num{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.72rem;color:var(--t-accent);letter-spacing:.06em;
+  flex:0 0 auto;padding-top:.2rem;
+}
+.t-h2{
+  font-family:Spectral,Georgia,serif;font-weight:600;
+  font-size:clamp(1.3rem,2.7vw,1.65rem);letter-spacing:-.011em;
+  margin:0;text-wrap:balance;
+}
+.t-defines{
+  display:grid;grid-template-columns:auto 1fr;
+  border:1px solid var(--t-accent);border-left-width:2px;border-radius:2px;
+  background:var(--t-accent-soft);margin-bottom:1.4rem;overflow:hidden;
+}
+.t-defines-kw{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--t-accent);padding:1.05rem .9rem;
+  border-right:1px solid var(--t-accent);white-space:nowrap;
+}
+.t-defines-body{padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.55rem;min-width:0;}
+.t-defines-eq{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:1.02rem;line-height:1.45;color:var(--t-ink);
+  white-space:pre;overflow-x:auto;
+}
+.t-defines-note{
+  font-family:Spectral,Georgia,serif;font-size:.93rem;line-height:1.52;
+  color:var(--t-ink-2);margin:0;
+}
+button.t-ref.t-ref-v{font-weight:600;}
+.t-inline-eq,.t-eqn-code{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:.9em;
+}
+.t-conj-inline{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color:var(--t-accent);font-weight:500;
+}
+.t-eqn{
+  border:1px solid var(--t-rule);border-radius:2px;background:var(--t-surface);
+  overflow:hidden;margin-bottom:1.2rem;
+}
+.t-eqn-display{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:clamp(1.3rem,3.4vw,1.9rem);letter-spacing:.01em;
+  padding:1.5rem 1.4rem;text-align:center;color:var(--t-ink);
+  background:var(--t-ground);border-bottom:1px solid var(--t-rule);
+}
+.t-eqn-part{
+  padding:.1em .18em;border-bottom:2px solid var(--t-accent);
+  border-radius:1px;
+}
+.t-eqn-legend{list-style:none;margin:0;padding:0;}
+.t-eqn-legend li{
+  display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;
+  padding:1rem 1.4rem;border-bottom:1px solid var(--t-rule-2);
+  align-items:start;
+}
+.t-eqn-legend li:last-child{border-bottom:0;}
+.t-eqn-chip{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:1rem;color:var(--t-ink);
+  border:1px solid var(--t-accent);border-radius:2px;
+  background:var(--t-accent-soft);
+  padding:.3rem .5rem;text-align:center;white-space:nowrap;
+}
+.t-eqn-legend p{
+  margin:0;font-family:Spectral,Georgia,serif;font-size:.95rem;line-height:1.55;
+  color:var(--t-ink-2);
+}
+.t-eqn-out{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.t-eqn-out-row{
+  border:1px solid var(--t-rule);border-left:2px solid var(--t-accent);
+  border-radius:2px;background:var(--t-surface);padding:1rem 1.15rem;
+  display:flex;flex-direction:column;gap:.55rem;min-width:0;
+}
+.t-eqn-out-tag{
+  font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  font-weight:600;color:var(--t-accent);
+}
+.t-eqn-out-code{font-size:.9rem;}
+.t-eqn-out-note{
+  margin:0;font-family:Spectral,Georgia,serif;font-size:.9rem;
+  line-height:1.5;color:var(--t-muted);
+}
+.t-vmark{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color:var(--t-accent);font-weight:600;
+}
+.t-lede{
+  font-family:Spectral,Georgia,serif;color:var(--t-ink-2);
+  font-size:1.02rem;line-height:1.58;max-width:64ch;margin:0 0 1.5rem;
+}
+
+/* ---------- hint ---------- */
+.t-hint{
+  display:flex;gap:.7rem;align-items:flex-start;
+  background:var(--t-surface);border:1px solid var(--t-rule);
+  border-left:2px solid var(--t-accent);
+  padding:.85rem 1rem;border-radius:2px;
+  font-size:.88rem;color:var(--t-ink-2);max-width:62ch;
+}
+.t-hint b{color:var(--t-ink);font-weight:600;}
+.t-key{font-weight:600;border-bottom:1px dotted currentColor;}
+.t-key-local{color:var(--t-accent);}
+.t-key-lib{color:var(--t-lib);}
+.t-key-signal{color:var(--t-signal);}
+
+/* ---------- hypotheses ---------- */
+.t-hyp{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--t-rule);border-radius:2px;overflow:hidden;
+}
+.t-hyp-cell{padding:1.15rem 1.25rem;}
+.t-hyp-cell.paper{background:var(--t-paper);border-right:1px solid var(--t-rule);}
+.t-hyp-cell.formal{background:var(--t-surface);}
+.t-cell-lbl{
+  font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--t-muted);font-weight:600;margin-bottom:.6rem;
+}
+.t-hyp-cell.paper .t-cell-lbl{color:var(--t-signal);}
+.t-paper-txt{
+  font-family:Spectral,Georgia,serif;font-size:1rem;line-height:1.55;
+  color:var(--t-ink);margin:0;
+}
+.t-hyp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem;}
+.t-hyp-list li{display:flex;gap:.6rem;align-items:baseline;}
+.t-hyp-list .why{font-size:.82rem;color:var(--t-muted);font-family:"IBM Plex Sans",sans-serif;}
+
+/* ---------- code / formal ---------- */
+.t-code{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:.855rem;line-height:1.62;
+  color:var(--t-ink);white-space:pre;margin:0;
+  overflow-x:auto;
+}
+.t-code-wrap{overflow-x:auto;}
+.t-kw{color:var(--t-accent);font-weight:500;}
+.t-var{color:var(--t-ink-2);font-style:italic;}
+.t-dim{color:var(--t-muted);}
+
+button.t-ref{
+  font:inherit;color:var(--t-accent);background:none;
+  border:0;border-bottom:1px dotted var(--t-accent-2);
+  padding:0 .04em;margin:0;cursor:pointer;border-radius:1px;
+  transition:background-color .12s ease,color .12s ease;
+}
+button.t-ref:hover,button.t-ref:focus-visible{
+  background:var(--t-accent-soft);border-bottom-style:solid;outline:none;
+}
+button.t-ref:focus-visible{outline:2px solid var(--t-accent);outline-offset:1px;}
+button.t-ref.flagged{color:var(--t-signal);border-bottom-color:var(--t-signal);}
+button.t-ref.flagged:hover,button.t-ref.flagged:focus-visible{background:var(--t-signal-soft);}
+button.t-ref.lib{color:var(--t-lib);border-bottom-color:var(--t-lib);opacity:.92;}
+button.t-ref.lib:hover,button.t-ref.lib:focus-visible{background:var(--t-lib-soft);opacity:1;}
+button.t-ref.lib:focus-visible{outline-color:var(--t-lib);}
+.t-card.lib{border-left-color:var(--t-lib);}
+.t-card.lib .t-card-name{color:var(--t-lib);}
+
+/* ---------- the spine ---------- */
+.t-spine{display:flex;flex-direction:column;gap:1.1rem;}
+.t-row{
+  display:grid;
+  grid-template-columns:1fr 8.5rem 1fr;
+  border:1px solid var(--t-rule);border-radius:2px;
+  background:var(--t-surface);overflow:hidden;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+.t-row:hover{
+  border-color:var(--t-accent);
+  box-shadow:0 1px 3px rgb(var(--t-shadow)/calc(var(--t-shadow-a)*.6));
+}
+.t-row-paper{
+  background:var(--t-paper);padding:1.3rem 1.4rem;
+  border-right:1px solid var(--t-rule);
+}
+.t-row-gutter{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.45rem;padding:1.3rem .5rem;text-align:center;
+  border-right:1px solid var(--t-rule);
+  background:var(--t-ground);
+}
+.t-conj{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:1.05rem;color:var(--t-accent);font-weight:500;line-height:1;
+}
+.t-claim{
+  font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--t-muted);font-weight:600;line-height:1.3;
+}
+.t-lozenge{width:5px;height:5px;transform:rotate(45deg);background:var(--t-accent);opacity:.5;}
+.t-row-formal{padding:1.3rem 1.4rem;background:var(--t-surface);min-width:0;}
+.t-src-ref{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.7rem;color:var(--t-muted);margin-top:.75rem;
+}
+a.t-srclink{
+  color:var(--t-muted);text-decoration:none;
+  border-bottom:1px dotted var(--t-rule);
+  transition:color .12s ease,border-color .12s ease;
+}
+a.t-srclink:hover{color:var(--t-accent);border-bottom-color:var(--t-accent);}
+a.t-srclink:focus-visible{outline:2px solid var(--t-accent);outline-offset:2px;border-radius:1px;}
+.t-note-toggle{
+  font:inherit;font-size:.78rem;font-family:"IBM Plex Sans",sans-serif;
+  color:var(--t-muted);background:none;border:0;padding:.3rem 0 0;
+  cursor:pointer;text-align:left;display:inline-flex;gap:.35rem;align-items:center;
+}
+.t-note-toggle:hover{color:var(--t-accent);}
+.t-note-toggle:focus-visible{outline:2px solid var(--t-accent);outline-offset:2px;}
+.t-note-toggle .caret{transition:transform .15s ease;display:inline-block;font-size:.65rem;}
+.t-note-toggle[aria-expanded="true"] .caret{transform:rotate(90deg);}
+.t-note{
+  display:none;margin-top:.7rem;padding:.75rem .9rem;
+  background:var(--t-ground);border-left:2px solid var(--t-rule);
+  font-family:Spectral,Georgia,serif;font-size:.92rem;line-height:1.55;
+  color:var(--t-ink-2);border-radius:0 2px 2px 0;
+}
+.t-note.open{display:block;}
+.t-note code{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85em;
+  background:var(--t-surface);padding:.05em .3em;border-radius:2px;
+}
+
+/* ---------- one-formula view ---------- */
+.t-switch{
+  display:inline-flex;align-items:center;gap:.55rem;margin-bottom:1.2rem;
+  font-size:.82rem;color:var(--t-ink-2);background:var(--t-surface);
+  border:1px solid var(--t-rule);border-radius:2px;padding:.45rem .75rem;
+  cursor:pointer;font-family:"IBM Plex Sans",sans-serif;
+}
+.t-switch:hover{border-color:var(--t-accent);color:var(--t-accent);}
+.t-switch:focus-visible{outline:2px solid var(--t-accent);outline-offset:2px;}
+.t-switch .box{
+  width:.85rem;height:.85rem;border:1px solid var(--t-muted);border-radius:1px;
+  display:grid;place-items:center;font-size:.6rem;line-height:1;color:var(--t-surface);
+}
+.t-switch[aria-pressed="true"] .box{background:var(--t-accent);border-color:var(--t-accent);color:#fff;}
+.t-oneform{
+  display:none;background:var(--t-surface);border:1px solid var(--t-rule);
+  border-radius:2px;padding:1.3rem 1.4rem;
+}
+.t-oneform.open{display:block;}
+
+/* ---------- points of clarification ---------- */
+.t-deps{display:grid;grid-template-columns:repeat(auto-fit,minmax(20rem,1fr));gap:1rem;}
+.t-dep{
+  background:var(--t-signal-soft);border:1px solid var(--t-signal-rule);
+  border-left:2px solid var(--t-signal);border-radius:2px;padding:1.15rem 1.25rem;
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.t-dep-tag{
+  font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;font-weight:600;
+  color:var(--t-signal);display:flex;gap:.5rem;align-items:center;
+}
+.t-dep-h{
+  font-family:Spectral,Georgia,serif;font-weight:600;font-size:1.06rem;
+  margin:0;line-height:1.3;text-wrap:balance;
+}
+.t-dep-b{
+  font-family:Spectral,Georgia,serif;font-size:.95rem;line-height:1.56;
+  color:var(--t-ink-2);margin:0;
+}
+.t-dep-b code,.t-paper-txt code{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85em;
+  background:var(--t-surface);padding:.05em .3em;border-radius:2px;
+  border:1px solid var(--t-rule);
+}
+.t-dep-affects{
+  font-size:.78rem;color:var(--t-muted);font-family:"IBM Plex Sans",sans-serif;
+  padding-top:.2rem;border-top:1px solid var(--t-signal-rule);margin-top:.2rem;
+}
+
+/* ---------- index table ---------- */
+.t-table-wrap{overflow-x:auto;border:1px solid var(--t-rule);border-radius:2px;background:var(--t-surface);}
+table.t-index{border-collapse:collapse;width:100%;min-width:44rem;font-size:.86rem;}
+.t-index th{
+  text-align:left;font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--t-muted);font-weight:600;padding:.75rem 1rem;
+  border-bottom:1px solid var(--t-rule);background:var(--t-ground);
+  position:sticky;top:0;
+}
+.t-index td{padding:.6rem 1rem;border-bottom:1px solid var(--t-rule-2);vertical-align:top;}
+.t-index tr:last-child td{border-bottom:0;}
+.t-index tr:hover td{background:var(--t-ground);}
+.t-index td.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.82rem;white-space:nowrap;}
+.t-index td.paper{font-family:Spectral,Georgia,serif;color:var(--t-ink-2);}
+.t-index td.src{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.74rem;color:var(--t-muted);white-space:nowrap;}
+
+/* ---------- colophon ---------- */
+.t-colo{
+  margin-top:4rem;padding-top:1.75rem;border-top:1px solid var(--t-rule);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.5rem;
+  font-size:.85rem;color:var(--t-muted);
+}
+.t-colo h4{
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--t-ink-2);margin:0 0 .5rem;font-weight:600;
+}
+.t-colo p{margin:0;line-height:1.55;}
+.t-colo code{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85em;}
+
+/* ---------- unfold cards ---------- */
+.t-cards{position:fixed;inset:0;pointer-events:none;z-index:70;}
+.t-card{
+  position:fixed;pointer-events:auto;
+  width:min(42rem,calc(100vw - 2rem));
+  max-height:min(40rem,calc(100vh - 2rem));
+  display:flex;flex-direction:column;
+  overflow:hidden;overscroll-behavior:contain;
+  background:var(--t-surface);
+  border:1px solid var(--t-rule);
+  border-left:2px solid var(--t-accent);
+  border-radius:2px;
+  box-shadow:0 6px 28px rgb(var(--t-shadow)/var(--t-shadow-a)),
+             0 1px 3px rgb(var(--t-shadow)/calc(var(--t-shadow-a)*.7));
+  animation:t-pop .13s ease-out;
+}
+.t-card:focus{outline:none;}
+.t-card.flagged{border-left-color:var(--t-signal);}
+.t-card.lib{border-left-color:var(--t-muted);}
+@keyframes t-pop{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){
+  .t-card{animation:none;}
+  .t-note-toggle .caret{transition:none;}
+}
+.t-card-head{
+  display:flex;align-items:center;gap:.6rem;flex:0 0 auto;
+  padding:.6rem .75rem .6rem 1rem;border-bottom:1px solid var(--t-rule-2);
+  background:var(--t-ground);
+}
+@media (min-width:720px){
+  .t-card-head{cursor:grab;touch-action:none;user-select:none;}
+  .t-card.t-dragging .t-card-head{cursor:grabbing;}
+}
+.t-card.t-dragging,.t-card.t-resizing{
+  box-shadow:0 14px 42px rgb(var(--t-shadow)/calc(var(--t-shadow-a)*1.35)),
+             0 1px 3px rgb(var(--t-shadow)/calc(var(--t-shadow-a)*.7));
+  animation:none;
+}
+.t-card.t-dragging *,.t-card.t-resizing *{user-select:none;}
+.t-crumbs{
+  flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:.2rem;align-items:center;
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.7rem;
+}
+.t-crumb{
+  font:inherit;background:none;border:0;padding:.1rem .2rem;cursor:pointer;
+  color:var(--t-muted);border-radius:2px;
+}
+.t-crumb:hover{color:var(--t-accent);background:var(--t-accent-soft);}
+.t-crumb:focus-visible{outline:2px solid var(--t-accent);outline-offset:1px;}
+.t-crumb[aria-current="true"]{color:var(--t-ink);font-weight:600;cursor:default;}
+.t-crumb-sep{color:var(--t-rule);font-size:.7rem;}
+.t-x{
+  flex:0 0 auto;background:none;border:1px solid var(--t-rule);color:var(--t-muted);
+  width:1.4rem;height:1.4rem;border-radius:2px;cursor:pointer;line-height:1;
+  display:grid;place-items:center;font-size:.9rem;padding:0;
+}
+.t-x:hover{color:var(--t-ink);border-color:var(--t-muted);}
+.t-x:focus-visible{outline:2px solid var(--t-accent);outline-offset:1px;}
+.t-card-body{
+  padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.8rem;
+  flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+}
+/* The body scrolls as a whole; its parts must never shrink, or a formula
+   with its own overflow collapses to a sliver when the card runs long. */
+.t-card-body > *{flex-shrink:0;}
+.t-card-name{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:1.02rem;font-weight:600;color:var(--t-ink);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.55rem;
+}
+.t-card-kind{
+  font-family:"IBM Plex Sans",sans-serif;font-size:.63rem;font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--t-muted);
+  border:1px solid var(--t-rule);border-radius:2px;padding:.12rem .38rem;
+}
+.t-card-type{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.75rem;color:var(--t-muted);line-height:1.5;
+  padding-bottom:.7rem;border-bottom:1px solid var(--t-rule-2);
+  overflow-x:auto;white-space:pre;
+}
+.t-card-eq{
+  font-family:"IBM Plex Mono",ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  font-size:.82rem;line-height:1.6;white-space:pre;overflow-x:auto;
+  color:var(--t-ink);margin:0;
+}
+.t-card-gloss{
+  font-family:Spectral,Georgia,serif;font-size:.94rem;line-height:1.55;
+  color:var(--t-ink-2);margin:0;
+}
+.t-card-paper{
+  background:var(--t-paper);border:1px solid var(--t-rule);border-radius:2px;
+  padding:.7rem .85rem;display:flex;flex-direction:column;gap:.35rem;
+}
+.t-card-paper .lbl{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--t-signal);font-weight:600;
+}
+.t-card-paper p{
+  margin:0;font-family:Spectral,Georgia,serif;font-size:.93rem;line-height:1.5;color:var(--t-ink);
+}
+.t-card-paper code{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.85em;
+  background:var(--t-surface);padding:.05em .3em;border-radius:2px;border:1px solid var(--t-rule);
+}
+.t-card-flag{
+  background:var(--t-signal-soft);border:1px solid var(--t-signal-rule);
+  border-left:2px solid var(--t-signal);border-radius:2px;padding:.7rem .85rem;
+}
+.t-card-flag .lbl{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--t-signal);font-weight:600;display:block;margin-bottom:.3rem;
+}
+.t-card-flag p{
+  margin:0;font-family:Spectral,Georgia,serif;font-size:.91rem;line-height:1.52;color:var(--t-ink-2);
+}
+.t-card-src{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  font-size:.7rem;color:var(--t-muted);padding-top:.6rem;
+  border-top:1px solid var(--t-rule-2);
+}
+.t-card-grip{
+  position:absolute;right:0;bottom:0;width:1.15rem;height:1.15rem;
+  cursor:nwse-resize;touch-action:none;z-index:3;
+}
+.t-card-grip::after{
+  content:"";position:absolute;right:.22rem;bottom:.22rem;width:.6rem;height:.6rem;
+  background:repeating-linear-gradient(135deg,
+    var(--t-rule) 0 1.5px, transparent 1.5px 4px);
+}
+.t-card-grip:hover::after{
+  background:repeating-linear-gradient(135deg,
+    var(--t-muted) 0 1.5px, transparent 1.5px 4px);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .t-row{grid-template-columns:1fr;}
+  .t-row-paper{border-right:0;border-bottom:1px solid var(--t-rule);}
+  .t-row-gutter{
+    flex-direction:row;justify-content:flex-start;gap:.65rem;
+    border-right:0;border-bottom:1px solid var(--t-rule);padding:.65rem 1.4rem;
+  }
+  .t-hyp{grid-template-columns:1fr;}
+  .t-defines{grid-template-columns:1fr;}
+  .t-eqn-out{grid-template-columns:1fr;}
+  .t-eqn-legend li{grid-template-columns:1fr;gap:.5rem;}
+  .t-eqn-chip{justify-self:start;}
+  .t-defines-kw{border-right:0;border-bottom:1px solid var(--t-accent);padding:.6rem .9rem;}
+  .t-hyp-cell.paper{border-right:0;border-bottom:1px solid var(--t-rule);}
+}
+@media (max-width:719px){
+  .t-card{
+    position:fixed;left:0;right:0;bottom:0;top:auto;
+    width:100%;max-height:72vh;border-radius:6px 6px 0 0;
+    border-left:1px solid var(--t-rule);border-top:2px solid var(--t-accent);
+    animation:t-sheet .16s ease-out;
+  }
+  .t-card.flagged{border-top-color:var(--t-signal);}
+  .t-card.lib{border-top-color:var(--t-muted);}
+  .t-card-grip{display:none;}
+  @keyframes t-sheet{from{transform:translateY(14px);opacity:0;}to{transform:none;opacity:1;}}
+  .t-card.buried{display:none;}
+}
+</style>
+
+<div class="t-doc">
+<div class="t-wrap">
+
+  <header class="t-mast">
+    <div class="t-eyebrow">
+      <span>Lai &middot; Shkolnikov &middot; Soner</span>
+      <span class="sep">/</span>
+      <span>arXiv:2512.17702</span>
+      <span class="sep">/</span>
+      <span>Isabelle/HOL</span>
+    </div>
+    <h1 class="t-h1">Theorem 1.1, <em>Unfolded</em></h1>
+    <p class="t-stand">The value function of the relative-arbitrage exit-time problem is the unique
+      bounded upper semicontinuous viscosity solution of <span style="font-family:'IBM Plex Mono',monospace;font-size:.92em">F(&nabla;v,&nabla;&sup2;v)=1</span>
+      on <span style="font-family:'IBM Plex Mono',monospace;font-size:.92em">K</span>. Below, the paper's own words sit beside
+      the machine-checked formula &mdash; and every constant in it opens.</p>
+    <div class="t-metas">
+      <a class="t-symchip" id="t-stmt-chip" href="#"
+         aria-label="Open Theorem_1_1_Statement.thy in the repository"
+         title="Theorem_1_1_Statement.thy">
+        <img class="glyph" alt="" width="27" height="24" src="data:image/png;base64,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">
+        <span class="label">Theorem_1_1_Statement.thy</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="t-hint">
+    <span aria-hidden="true" style="color:var(--t-accent);font-weight:600">&#9656;</span>
+    <span><b>Click any underlined constant</b> to unfold its Isabelle definition. Constants inside
+      a definition open too, so you can descend to the primitives; a breadcrumb tracks the path back.
+      <span class="t-key t-key-local">Indigo</span> names a definition of this development,
+      <span class="t-key t-key-lib">teal</span> one from Isabelle's libraries or the AFP, and
+      <span class="t-key t-key-signal">ochre</span> marks a constant carrying one of the three
+      points of clarification below.</span>
+  </div>
+
+  <!-- ============ HYPOTHESES ============ -->
+  <section class="t-sec">
+    <div class="t-sec-head">
+      <span class="t-sec-num">&sect;1</span>
+      <h2 class="t-h2">Standing hypotheses</h2>
+    </div>
+    <div class="t-hyp">
+      <div class="t-hyp-cell paper">
+        <div class="t-cell-lbl">Theorem 1.1, as written</div>
+        <p class="t-paper-txt">&ldquo;Let <em>n</em>&nbsp;&ge;&nbsp;2, <em>k</em>&nbsp;&isin;&nbsp;{1,&thinsp;2,&thinsp;&hellip;,&thinsp;<em>n</em>&minus;1},
+          and <em>L</em>&nbsp;&ge;&nbsp;1. Suppose <em>K</em>&nbsp;&sub;&nbsp;&#8477;<sup>n</sup> is compact.&rdquo;</p>
+      </div>
+      <div class="t-hyp-cell formal">
+        <div class="t-cell-lbl">As formalised</div>
+        <ul class="t-hyp-list" id="t-hyps"></ul>
+      </div>
+    </div>
+    <p class="t-lede" style="margin-top:1rem;margin-bottom:0;font-size:.95rem">
+      The pair <span style="font-family:'IBM Plex Mono',monospace;font-size:.9em">1 &le; k</span> and
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:.9em">k &lt; CARD('n)</span> is exactly
+      <em>k</em>&nbsp;&isin;&nbsp;{1,&hellip;,<em>n</em>&minus;1}, and it forces <em>n</em>&nbsp;&ge;&nbsp;2 on its own,
+      so the paper's dimension hypothesis needs no separate assumption. No clause needs
+      <em>K</em>&nbsp;&ne;&nbsp;&empty;. The paper's further hypothesis, the
+      <code>T<sub>&iota;</sub></code> family, is not a standing one: it serves the uniqueness clause
+      alone, and appears there, as the premise of conjunct
+      <span class="t-conj-inline">&and;<sub>4</sub></span>.
+    </p>
+  </section>
+
+
+  <!-- ============ THE EQUATION ============ -->
+  <section class="t-sec">
+    <div class="t-sec-head">
+      <span class="t-sec-num">&sect;2</span>
+      <h2 class="t-h2">Where the equation comes in</h2>
+    </div>
+    <p class="t-lede">The theorem is about solutions of
+      <span class="t-inline-eq">F(&nabla;v,&nabla;&sup2;v) = 1</span>, yet that equation never appears
+      as an equation in the formal statement &mdash; and it cannot, since <span class="t-vmark">v</span>
+      is merely upper semicontinuous and has no derivatives to speak of. Definition 3.1 is what turns it
+      into something a non-differentiable function can satisfy. Here is each piece, and what becomes
+      of it.</p>
+
+    <div class="t-eqn">
+      <div class="t-eqn-display"><span class="t-eqn-part">F</span>(<span class="t-eqn-part">&nabla;v</span>,&thinsp;<span class="t-eqn-part">&nabla;&sup2;v</span>)&thinsp;<span class="t-eqn-part">= 1</span></div>
+      <ul class="t-eqn-legend">
+        <li>
+          <span class="t-eqn-chip">F</span>
+          <p>The fully nonlinear degenerate elliptic operator of Eq. (1.9), formalised as
+            <span class="t-eqn-code">ell_op k L</span>. It is an infimum of <span class="t-eqn-code">-&frac12; trace (M ** a)</span>
+            over the admissible covariation matrices <span class="t-eqn-code">a</span> &mdash; so the equation
+            is a statement about the worst case the market can present.</p>
+        </li>
+        <li>
+          <span class="t-eqn-chip">&nabla;v</span>
+          <p>Not a gradient of <span class="t-vmark">v</span>, which need not exist. A test function
+            <span class="t-eqn-code">&phi;</span> is brought into contact with <span class="t-vmark">v</span> &mdash; touching it
+            from above for the subsolution half, from below for the supersolution half &mdash; and
+            <span class="t-eqn-code">&nabla;&phi;(x)</span> stands in. In the formal statement that gradient is
+            the <span class="t-eqn-code">g x</span> of <span class="t-eqn-code">test_fun_C2 &phi; g H x</span>.</p>
+        </li>
+        <li>
+          <span class="t-eqn-chip">&nabla;&sup2;v</span>
+          <p>Likewise the Hessian <span class="t-eqn-code">&nabla;&sup2;&phi;(x)</span>, which is the
+            <span class="t-eqn-code">H</span> of the same touching test function. Requiring
+            <span class="t-eqn-code">&phi;</span> to be genuinely <span class="t-eqn-code">C&sup2;</span> matters:
+            the uniqueness clause <em>assumes</em> this property of a competitor, so a laxer class would
+            weaken the theorem.</p>
+        </li>
+        <li>
+          <span class="t-eqn-chip">= 1</span>
+          <p>The equality does not survive the relaxation; it becomes two one-sided bounds, one per
+            touching direction. A function satisfying both <em>is</em> a solution, in the viscosity sense.
+            The envelopes <span class="t-eqn-code">F<sub>*</sub></span> and <span class="t-eqn-code">F<sup>*</sup></span>
+            appear because <span class="t-eqn-code">F</span> itself is not continuous.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="t-eqn-out">
+      <div class="t-eqn-out-row">
+        <span class="t-eqn-out-tag">Subsolution</span>
+        <div class="t-code-wrap"><pre class="t-code t-eqn-out-code">ell_op_lsc k L (g x) H &le; 1</pre></div>
+        <p class="t-eqn-out-note">whenever <span class="t-eqn-code">&phi;</span> touches
+          <span class="t-vmark">v</span> from above across <span class="t-eqn-code">K</span></p>
+      </div>
+      <div class="t-eqn-out-row">
+        <span class="t-eqn-out-tag">Supersolution</span>
+        <div class="t-code-wrap"><pre class="t-code t-eqn-out-code">1 &le; ell_op_usc k L (g x) H</pre></div>
+        <p class="t-eqn-out-note">whenever <span class="t-eqn-code">&phi;</span> touches the lower envelope
+          <span class="t-eqn-code">lsc_envK K v</span> from below</p>
+      </div>
+    </div>
+    <p class="t-lede" style="margin-top:1.1rem;margin-bottom:0;font-size:.95rem">These two inequalities are
+      the whole content of <span class="t-eqn-code">visc_subsol_env2</span> and
+      <span class="t-eqn-code">visc_supersol_env2</span>, which is why conjuncts
+      <span class="t-conj-inline">&and;<sub>2</sub></span> and <span class="t-conj-inline">&and;<sub>3</sub></span>
+      below carry the equation without ever writing it down.</p>
+  </section>
+
+  <!-- ============ THE SPINE ============ -->
+  <section class="t-sec">
+    <div class="t-sec-head">
+      <span class="t-sec-num">&sect;3</span>
+      <h2 class="t-h2">What the theorem asserts</h2>
+    </div>
+    <p class="t-lede">The formal statement is a single formula: a five-fold conjunction, each conjunct
+      carrying one clause of the paper's claim. All five speak about one function, fixed once here.</p>
+
+    <div class="t-defines">
+      <div class="t-defines-kw">defines</div>
+      <div class="t-defines-body">
+        <div class="t-defines-eq">v &equiv; &lambda;z. enn2real (xval k L K z)</div>
+        <p class="t-defines-note">Every <span class="t-vmark">v</span> below is this function: the value
+          function of Eq. (1.6), read as a real number. It is the subject of all five clauses, and the
+          thing the uniqueness clause says nothing else can be.</p>
+      </div>
+    </div>
+
+    <button class="t-switch" id="t-oneform-btn" aria-pressed="false" aria-controls="t-oneform">
+      <span class="box" aria-hidden="true">&#10003;</span>
+      <span>Read as one contiguous formula</span>
+    </button>
+
+    <div class="t-oneform" id="t-oneform">
+      <div class="t-cell-lbl">theorem theorem_1_1 &mdash; shows</div>
+      <div class="t-code-wrap"><pre class="t-code" id="t-oneform-code"></pre></div>
+    </div>
+
+    <div class="t-spine" id="t-spine"></div>
+  </section>
+
+  <!-- ============ DEPARTURES ============ -->
+  <section class="t-sec">
+    <div class="t-sec-head">
+      <span class="t-sec-num">&sect;4</span>
+      <h2 class="t-h2">Points of clarification</h2>
+    </div>
+    <p class="t-lede">Three places where the wording admits more than one reading, or where a step
+      wants restating. In each the formalization had to commit, and in each the intended reading looks
+      plain &mdash; a word from the authors would settle it. Everything else that once looked like a
+      divergence has been closed by proof, and is not listed.</p>
+    <div class="t-deps" id="t-deps"></div>
+  </section>
+
+  <!-- ============ INDEX ============ -->
+  <section class="t-sec">
+    <div class="t-sec-head">
+      <span class="t-sec-num">&sect;5</span>
+      <h2 class="t-h2">Every constant, in one table</h2>
+    </div>
+    <p class="t-lede">The complete vocabulary of the statement. Constant names open their definition;
+      the middle column is the paper's counterpart.</p>
+    <div class="t-table-wrap">
+      <table class="t-index">
+        <thead>
+          <tr><th scope="col">Constant</th><th scope="col">In the paper</th><th scope="col">Defined in</th></tr>
+        </thead>
+        <tbody id="t-index-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="t-colo">
+    <div>
+      <h4>Source</h4>
+      <p>Theorem 1.1 of <em>Relative arbitrage problem under eigenvalue lower bounds</em>,
+        Lai, Shkolnikov &amp; Soner, arXiv:2512.17702. All numbering follows the paper.</p>
+    </div>
+    <div>
+      <h4>Formalization</h4>
+      <p>Isabelle/HOL, session <code>Relative_Arbitrage_Statement</code>, theory
+        <code>Theorem_1_1_Statement</code>. The statement theory restates the formalized results in a
+        form that follows the paper&rsquo;s own formulation, so they can be checked against it directly. Every source reference on this page opens the line that defines it, in
+        <a class="t-srclink" href="https://github.com/dtraytel/relative_arbitrage" target="_blank"
+           rel="noopener noreferrer">dtraytel/relative_arbitrage</a>, pinned to the commit the line
+        numbers were checked against.</p>
+    </div>
+    <div>
+      <h4>Notation</h4>
+      <p><code>**</code> matrix multiplication, <code>*v</code> matrix&ndash;vector application,
+        <code>&bull;</code> inner product, <code>`</code> image, <code>*<sub>R</sub></code> scalar
+        multiplication, <code>&chi;</code> vector former. <code>'n</code> is a finite index type and
+        <code>n = CARD('n)</code>.</p>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<div class="t-cards" id="t-cards" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- repository ----------------
+   Source links resolve against this repository. The ref is pinned to the
+   commit these line numbers were verified against, so the links keep
+   pointing at the right lines as the repository moves on. Set `ref` to
+   'main' instead if you would rather links always track the tip. */
+var REPO = {
+  base: 'https://github.com/dtraytel/relative_arbitrage',
+  ref:  'bf6f5177b4e40a6f469dc16e5aba9ad78d67bfad'
+};
+
+/* Renders a source reference, as a link when it points into the repository
+   and as plain text when it names a library entry we do not host. */
+function srcHTML(src, cls){
+  if(!src) return '';
+  var m = /^([A-Za-z0-9_.\/-]+\.thy)(?::(\d+)(?:-(\d+))?)?$/.exec(src);
+  if(!m || !REPO.base) return src;
+  var url = REPO.base + '/blob/' + REPO.ref + '/' + m[1];
+  if(m[2]) url += '#L' + m[2] + (m[3] ? '-L' + m[3] : '');
+  return '<a class="' + (cls || 't-srclink') + '" href="' + url
+       + '" target="_blank" rel="noopener noreferrer">' + src + '</a>';
+}
+
+/* ---------------- helpers ---------------- */
+var R = function(id, label){
+  return '<button class="t-ref" data-def="' + id + '">' + (label || id) + '</button>';
+};
+var K = function(s){ return '<span class="t-kw">' + s + '</span>'; };
+var D = function(s){ return '<span class="t-dim">' + s + '</span>'; };
+
+/* ---------------- uniform linking ----------------
+   Rather than hand-wrapping every occurrence (which is how the coverage got
+   uneven in the first place), any identifier that names an entry in DEFS is
+   turned into a button wherever it appears in a formula. */
+var AUTO_RE = null;
+/* `v` gets its own pass: a bare 'v' also occurs as the matrix-vector
+   operator `*v`, so it cannot go through the generic sweep. */
+var AUTO_SKIP = { v: 1 };
+function buildAutoRE(){
+  var keys = Object.keys(DEFS).filter(function(k){ return !AUTO_SKIP[k]; })
+                              .sort(function(a,b){ return b.length - a.length; });
+  AUTO_RE = new RegExp('(?:' + keys.join('|') + ')', 'g');
+}
+function autolink(root, selfId){
+  if(!AUTO_RE) buildAutoRE();
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [], n;
+  while((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(function(node){
+    if(node.parentElement.closest('.t-ref')) return;
+    var txt = node.textContent, frag = document.createDocumentFragment(), last = 0, m, hit = false;
+    AUTO_RE.lastIndex = 0;
+    while((m = AUTO_RE.exec(txt))){
+      var id = m[0], i = m.index, before = txt.charAt(i - 1), after = txt.charAt(i + id.length);
+      if(/[A-Za-z0-9_']/.test(before) || /[A-Za-z0-9_']/.test(after)) continue;  /* word boundary */
+      if(id === selfId) continue;
+      hit = true;
+      if(i > last) frag.appendChild(document.createTextNode(txt.slice(last, i)));
+      var b = document.createElement('button');
+      b.className = 't-ref'; b.setAttribute('data-def', id); b.textContent = id;
+      frag.appendChild(b);
+      last = i + id.length;
+    }
+    if(!hit) return;
+    if(last < txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+/* Every free `v` in the statement is the function fixed by the defines
+   clause, so it links back to it; `*v` is skipped. */
+function markV(root){
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [], n;
+  while((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(function(node){
+    if(node.parentElement.closest('.t-ref')) return;
+    var txt = node.textContent, frag = document.createDocumentFragment(), last = 0, hit = false;
+    for(var i = 0; i < txt.length; i++){
+      if(txt.charAt(i) !== 'v') continue;
+      var before = txt.charAt(i - 1), after = txt.charAt(i + 1);
+      if(/[A-Za-z0-9_']/.test(before) || /[A-Za-z0-9_']/.test(after)) continue;
+      if(before === '*') continue;
+      hit = true;
+      if(i > last) frag.appendChild(document.createTextNode(txt.slice(last, i)));
+      var b = document.createElement('button');
+      b.className = 't-ref t-ref-v'; b.setAttribute('data-def', 'v'); b.textContent = 'v';
+      frag.appendChild(b);
+      last = i + 1;
+    }
+    if(!hit) return;
+    if(last < txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+/* Local definitions and library constants are told apart by colour. */
+function markRefs(root){
+  (root || document).querySelectorAll('.t-ref').forEach(function(b){
+    var d = DEFS[b.getAttribute('data-def')];
+    if(d) b.classList.toggle('lib', d.kind === 'library');
+  });
+}
+
+/* ---------------- the definition store ---------------- */
+/* Isabelle source is pre-escaped: &lt; &gt; for < > */
+
+var DEFS = {
+
+/* ---- value function ---- */
+xval: {
+  name:'xval', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) set &rArr; real^'n &rArr; ennreal",
+  eq: 'xval k L K x = Sup ((&lambda;Q. ' + R('ess_inf') + ' Q (' + R('iexit') + ' K)) &#96; ' + R('xclass') + ' k L x)',
+  gloss:'The largest deterministic almost-sure lower bound on the exit time from '
+       + '<code>K</code>, taken across every admissible martingale law started at <code>x</code>.',
+  paper:'Equation (1.6): &ldquo;<code>v(x) := sup<sub>P&isin;<em>P</em><sub>x</sub></sub> P-ess inf &tau;<sub>K</sub></code>&rdquo;. '
+       + '&ldquo;In words: <em>v</em>(<em>x</em>) is the largest, across all martingale laws '
+       + '<code>P &isin; <em>P</em><sub>x</sub></code>, deterministic almost sure lower bound on the exit time '
+       + 'from <em>K</em>.&rdquo;',
+  src:'Relative_Arbitrage/Exit_Class_Marginals.thy:26'
+},
+
+xclass: {
+  name:'xclass', kind:'definition',
+  type:"nat &rArr; real &rArr; real^'n &rArr; ((real &rArr; real^'n) measure) set",
+  eq:
+'xclass k L x = {Q.\n'
++'   prob_space Q &and;\n'
++'   sets Q = sets ' + R('ipath_space') + ' &and;\n'
++'   (AE w in Q. w 0 = x) &and;\n'
++'   ' + R('martingale') + ' Q (' + R('natural_filtration') + ' Q 0 (&lambda;t w. w t)) 0 (&lambda;t w. w t) &and;\n'
++'   (&exist;A. (AE w in Q. A 0 w = 0) &and;\n'
++'        ' + R('martingale') + ' Q (' + R('natural_filtration') + ' Q 0 (&lambda;t w. w t)) 0\n'
++'          (&lambda;t w. ' + R('outerp') + ' (w t) - A t w) &and;\n'
++'        (AE w in Q. ' + R('density_cond') + ' (&lambda;t. A t w) (' + R('sconstraint') + ' k L)))}',
+  gloss:'A law on continuous paths starting at <code>x</code> whose coordinate process is a '
+       + 'martingale, and for which <em>some</em> continuous adapted <code>A</code> compensates '
+       + '<code>X X<sup>&#8868;</sup></code> with covariation density in the constraint set. '
+       + 'The existential is faithful: <code>d&lang;X&rang;/dt &isin; S</code> says exactly that '
+       + '<code>&lang;X&rang;</code> is such an <code>A</code>, and the compensator is unique up to '
+       + 'indistinguishability.',
+  paper:'&ldquo;<code><em>P</em><sub>x</sub></code> is the set of probability measures on '
+       + '<code>&Omega; := C([0,&infin;),&#8477;<sup>n</sup>)</code>, equipped with the Borel &sigma;-algebra '
+       + 'for the topology of locally uniform convergence, under which the coordinate process <em>X</em> is a '
+       + 'martingale starting from <em>x</em> and [(1.7)] hold almost surely&rdquo;',
+  src:'Relative_Arbitrage/Exit_Class_Marginals.thy:13'
+},
+
+/* ---- constraint set ---- */
+density_cond: {
+  name:'density_cond', kind:'definition',
+  type:"(real &rArr; 'a) &rArr; 'a set &rArr; bool",
+  eq:'density_cond g S &longleftrightarrow;\n'
+   + '   (&forall;T. 0 &le; T &longrightarrow; ' + R('absolutely_continuous_on') + ' {0..T} g)\n'
+   + ' &and; (&exist;N. ' + R('negligible') + ' N &and; (&forall;t. 0 &le; t &longrightarrow; t &notin; N &longrightarrow;\n'
+   + '        (&exist;D. (g ' + R('has_vector_derivative') + ' D) (' + R('at') + ' t) &and; D &isin; S)))',
+  gloss:'The covariation is absolutely continuous on every compact interval, and its derivative &mdash; '
+       + 'the instantaneous covariation matrix &mdash; lies in the constraint set at almost every time. '
+       + 'The paper&rsquo;s <code>d&lang;X<sub>i</sub>, X<sub>j</sub>&rang;(t)/dt</code> presupposes the '
+       + 'absolute continuity, which is the first conjunct here.',
+  paper:'Equation (1.7): &ldquo;<code>&Pi;<sub>m</sub>((d&lang;X<sub>i</sub>, X<sub>j</sub>&rang;(t)/dt)<sub>1&le;i,j&le;n</sub>) '
+       + '&ge; m &minus; k</code> for <code>m = k + 1, k + 2, &hellip;, n</code>, a.e. <code>t &ge; 0</code>, '
+       + '<code>&lambda;<sub>(1)</sub>((d&lang;X<sub>i</sub>, X<sub>j</sub>&rang;(t)/dt)<sub>1&le;i,j&le;n</sub>) &le; L</code>, '
+       + 'a.e. <code>t &ge; 0</code>&rdquo;',
+  src:'Covariation_Constrained_Martingales/Covariation_Density.thy:106'
+},
+
+sconstraint: {
+  name:'sconstraint', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n^'n) set",
+  eq:'sconstraint k L = ' + R('Pi_constraint') + ' k &cap; {a. ' + R('eigen_ub') + ' a L}',
+  gloss:'The set of admissible instantaneous covariation matrices: the convexified sufficient-volatility '
+       + 'condition, intersected with the technical eigenvalue ceiling.',
+  paper:'&ldquo;Hence, we study the relative arbitrage problem under the sufficient volatility condition (1.5) '
+       + 'together with the technical condition <code>&lambda;<sub>(1)</sub>((d&lang;&mu;<sub>i</sub>, &mu;<sub>j</sub>&rang;(t)/dt)<sub>1&le;i,j&le;d</sub>) '
+       + '&le; L</code>, a.e. <code>t &ge; 0</code> for some fixed <code>L &ge; 1</code>. [&hellip;] The compactness '
+       + 'of the resulting set of instantaneous covariation matrices allows us to establish the semicontinuity '
+       + 'of the value function and the dynamic programming principle in the ensuing stochastic optimal '
+       + 'control problem.&rdquo;',
+  src:'Relative_Arbitrage/Control_Problem.thy:25'
+},
+
+Pi_constraint: {
+  name:'Pi_constraint', kind:'definition',
+  type:"nat &rArr; (real^'n^'n) set",
+  eq:"Pi_constraint k =\n"
+   + "   {a. " + R('psd') + " a &and; (&forall;m. k &lt; m &longrightarrow; m &le; CARD('n) &longrightarrow; real (m - k) &le; " + R('Pi_proj') + " a m)}",
+  gloss:'Positive semidefinite matrices whose projection infimum is at least <code>m &minus; k</code> for '
+       + 'every rank <code>m</code> with <code>k &lt; m &le; n</code>.',
+  paper:'&ldquo;The &lsquo;null hypothesis&rsquo; (1.4) is not closed with respect to the convergence in '
+       + 'distribution of continuous processes because the lower bound of (1.4) is not preserved under convex '
+       + 'combinations of instantaneous covariation matrices. Therefore, we convexify (1.4) [&hellip;]: '
+       + '<code>&Pi;<sub>m</sub>((d&lang;&mu;<sub>i</sub>, &mu;<sub>j</sub>&rang;(t)/dt)<sub>1&le;i,j&le;d</sub>) &ge; m &minus; k</code> '
+       + 'for <code>m = k + 1, k + 2, &hellip;, n</code>, a.e. <code>t &ge; 0</code>&rdquo; (Equation (1.5)).',
+  src:'Relative_Arbitrage_Equation/Constraint_Set_Convexity.thy:66'
+},
+
+Pi_proj: {
+  name:'Pi_proj', kind:'definition',
+  type:"real^'n^'n &rArr; nat &rArr; real",
+  eq:'Pi_proj a m = Inf {trace (a ** P) | P. ' + R('is_proj') + ' P &and; trace P = real m}',
+  gloss:'The least trace of <code>a</code> against a rank-<code>m</code> orthogonal projection.',
+  paper:'&ldquo;<code>&Pi;<sub>m</sub>(a) := inf{tr(aP) : P&sup2; = P, tr(P) = m}</code> and tr stands for '
+       + 'the trace of a square matrix&rdquo;',
+  flag:'orthogonality',
+  src:'Relative_Arbitrage_Equation/Constraint_Set_Convexity.thy:34'
+},
+
+is_proj: {
+  name:'is_proj', kind:'definition',
+  type:"real^'n^'n &rArr; bool",
+  eq:'is_proj P &longleftrightarrow; transpose P = P &and; P ** P = P',
+  gloss:'An <em>orthogonal</em> projection: idempotent and symmetric. The paper writes only '
+       + '<code>P&sup2; = P</code>; symmetry is added here &mdash; see the flag.',
+  paper:'In the definition of <code>&Pi;<sub>m</sub></code> after (1.5): &ldquo;<code>P&sup2; = P</code>&rdquo;',
+  flag:'orthogonality',
+  src:'Symmetric_Matrix_Spectra/Ky_Fan.thy:36'
+},
+
+psd: {
+  name:'psd', kind:'definition',
+  type:"real^'n^'n &rArr; bool",
+  eq:'psd a &longleftrightarrow; transpose a = a &and; (&forall;x. 0 &le; x &bull; (a *v x))',
+  gloss:'Positive semidefinite: symmetric, with nonnegative quadratic form.',
+  paper:'&ldquo;<code>a &#10928; 0</code>&rdquo; in Equation (1.9). Section 2: &ldquo;Throughout we write '
+       + '<code>S<sub>n</sub><sup>+</sup></code> for the set of <code>n &times; n</code> symmetric positive '
+       + 'semidefinite matrices.&rdquo;',
+  src:'Symmetric_Matrix_Spectra/Symmetric_Spectral.thy:327'
+},
+
+eigen_ub: {
+  name:'eigen_ub', kind:'definition',
+  type:"real^'n^'n &rArr; real &rArr; bool",
+  eq:'eigen_ub a L &longleftrightarrow; (&forall;x. x &bull; (a *v x) &le; L * (x &bull; x))',
+  gloss:'The largest eigenvalue of <code>a</code> is at most <code>L</code>, stated through its '
+       + 'Courant&ndash;Fischer characterisation so that no spectral decomposition is needed.',
+  paper:'&ldquo;<code>&lambda;<sub>(1)</sub>(a) &le; L</code>&rdquo; in Equation (1.9). Of the corresponding '
+       + 'condition on the market: &ldquo;The latter may be chosen large enough to accommodate a confidence '
+       + 'interval around an empirical estimate of '
+       + '<code>&lambda;<sub>(1)</sub>((d&lang;&mu;<sub>i</sub>, &mu;<sub>j</sub>&rang;/dt)<sub>1&le;i,j&le;d</sub>)</code>.&rdquo;',
+  src:'Relative_Arbitrage_Equation/Elliptic_Operator.thy:40'
+},
+
+eigen_lb: {
+  name:'eigen_lb', kind:'definition',
+  type:"real^'n^'n &rArr; nat &rArr; bool",
+  eq:'eigen_lb a m &longleftrightarrow;\n'
+   + '   (&exist;S. subspace S &and; m &le; dim S &and; (&forall;x&isin;S. x &bull; x &le; x &bull; (a *v x)))',
+  gloss:'The <code>m</code>-th largest eigenvalue of <code>a</code> is at least <code>1</code>, again via '
+       + 'Courant&ndash;Fischer: there is an <code>m</code>-dimensional subspace on which the quadratic '
+       + 'form dominates the norm.',
+  paper:'&ldquo;<code>&lambda;<sub>(n&minus;k)</sub>(a) &ge; 1</code>&rdquo; in Equation (1.9), where '
+       + '&ldquo;<code>&lambda;<sub>(n&minus;k)</sub></code> refers to the <code>(n &minus; k)</code>-largest '
+       + 'eigenvalue&rdquo;.',
+  src:'Relative_Arbitrage_Equation/Elliptic_Operator.thy:37'
+},
+
+/* ---- the operator ---- */
+feasible: {
+  name:'feasible', kind:'definition',
+  type:"nat &rArr; real &rArr; real^'n &rArr; (real^'n^'n) set",
+  eq:'feasible k L p =\n'
+   + '   {a. ' + R('psd') + ' a &and; a *v p = 0 &and; ' + R('eigen_lb') + " a (CARD('n) - k) &and; " + R('eigen_ub') + ' a L}',
+  gloss:'The set the operator minimises over, at gradient <code>p</code>.',
+  paper:'The constraints inside Equation (1.9): &ldquo;<code>a &#10928; 0, ap = 0, '
+       + '&lambda;<sub>(n&minus;k)</sub>(a) &ge; 1, &lambda;<sub>(1)</sub>(a) &le; L</code>&rdquo;',
+  src:'Relative_Arbitrage_Equation/Elliptic_Operator.thy:45'
+},
+
+ell_op: {
+  name:'ell_op', kind:'definition',
+  type:"nat &rArr; real &rArr; real^'n &rArr; real^'n^'n &rArr; real",
+  eq:'ell_op k L p M = Inf ((&lambda;a. - trace (M ** a) / 2) &#96; ' + R('feasible') + ' k L p)',
+  gloss:'The fully nonlinear degenerate elliptic operator <code>F</code> driving the equation.',
+  paper:'Equation (1.9): &ldquo;<code>F(p, M) := inf{&minus;&frac12; tr(Ma) : a &#10928; 0, ap = 0, '
+       + '&lambda;<sub>(n&minus;k)</sub>(a) &ge; 1, &lambda;<sub>(1)</sub>(a) &le; L}</code>&rdquo;. '
+       + 'Remark 1.1: &ldquo;(b) The nonlinearity <em>F</em> is &lsquo;geometric&rsquo; [&hellip;] '
+       + '(c) When <code>L = 1</code>, the partial differential equation <code>F(&nabla;v, &nabla;&sup2;v) = 1</code> '
+       + 'with zero boundary condition becomes the arrival time formulation of a co-dimension mean curvature '
+       + 'flow from [AS96].&rdquo;',
+  src:'Relative_Arbitrage_Equation/Elliptic_Operator.thy:51'
+},
+
+ell_op_pair: {
+  name:'ell_op_pair', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) &times; (real^'n^'n) &rArr; ereal",
+  eq:'ell_op_pair k L z = ereal (' + R('ell_op') + ' k L (fst z) (snd z))',
+  gloss:'<code>F</code> repackaged on the product metric space, with values in <code>ereal</code> so the '
+       + 'suprema and infima below are unconditionally defined. Needed because Definition 3.1 takes the '
+       + 'envelopes of <code>F</code> in <code>(p,M)</code> <em>jointly</em>, not separately.',
+  paper:'Section 3: &ldquo;we use upper and lower stars to denote the upper and lower semicontinuous envelopes '
+       + '(<code>lim<sub>&epsilon;&darr;0</sub> sup<sub>y: |y&minus;x|&lt;&epsilon;</sub></code> and '
+       + '<code>lim<sub>&epsilon;&darr;0</sub> inf<sub>y: |y&minus;x|&lt;&epsilon;</sub></code>) of a function, '
+       + 'respectively.&rdquo;',
+  src:'Relative_Arbitrage_Equation/Viscosity_Definitions.thy:18'
+},
+
+ell_op_lsc: {
+  name:'ell_op_lsc', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) &rArr; (real^'n^'n) &rArr; ereal",
+  eq:'ell_op_lsc k L p M =\n'
+   + '   (SUP e &isin; {0&lt;..}. INF w &isin; ball (p, M) e. ' + R('ell_op_pair') + ' k L w)',
+  gloss:'The lower semicontinuous envelope <code>F<sub>*</sub></code>. The limit is monotone in the radius, '
+       + 'so it is a supremum of infima.',
+  paper:'Section 3: &ldquo;we use upper and lower stars to denote the upper and lower semicontinuous envelopes '
+       + '(<code>lim<sub>&epsilon;&darr;0</sub> sup<sub>y: |y&minus;x|&lt;&epsilon;</sub></code> and '
+       + '<code>lim<sub>&epsilon;&darr;0</sub> inf<sub>y: |y&minus;x|&lt;&epsilon;</sub></code>) of a function, '
+       + 'respectively.&rdquo; It appears in (3.2): &ldquo;<code>F<sub>*</sub>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &le; 1</code>&rdquo;',
+  src:'Relative_Arbitrage_Equation/Viscosity_Definitions.thy:26'
+},
+
+ell_op_usc: {
+  name:'ell_op_usc', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) &rArr; (real^'n^'n) &rArr; ereal",
+  eq:'ell_op_usc k L p M =\n'
+   + '   (INF e &isin; {0&lt;..}. SUP w &isin; ball (p, M) e. ' + R('ell_op_pair') + ' k L w)',
+  gloss:'The upper semicontinuous envelope <code>F<sup>*</sup></code>.',
+  paper:'Section 3: &ldquo;we use upper and lower stars to denote the upper and lower semicontinuous envelopes '
+       + '(<code>lim<sub>&epsilon;&darr;0</sub> sup<sub>y: |y&minus;x|&lt;&epsilon;</sub></code> and '
+       + '<code>lim<sub>&epsilon;&darr;0</sub> inf<sub>y: |y&minus;x|&lt;&epsilon;</sub></code>) of a function, '
+       + 'respectively.&rdquo; It appears in (3.3): &ldquo;<code>F<sup>*</sup>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &ge; 1</code>&rdquo;',
+  src:'Relative_Arbitrage_Equation/Viscosity_Definitions.thy:32'
+},
+
+/* ---- viscosity ---- */
+visc_subsol_env2: {
+  name:'visc_subsol_env2', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) set &rArr; (real^'n) set &rArr; (real^'n &rArr; real) &rArr; bool",
+  eq:'visc_subsol_env2 k L K &Omega; u &longleftrightarrow;\n'
+   + '   (&forall;x&isin;&Omega;. &forall;&phi; g H. ' + R('test_fun_C2') + ' &phi; g H x &longrightarrow;\n'
+   + '      (&forall;y&isin;K. u y - &phi; y &le; u x - &phi; x) &longrightarrow;\n'
+   + '      ' + R('ell_op_lsc') + ' k L (g x) H &le; 1)',
+  gloss:'Definition 3.1(a). Touching is taken globally over <code>K</code>; the inequality is demanded on '
+       + '<code>&Omega;</code>. Taking <code>&Omega; = interior K</code> gives the interior clause; adjoining '
+       + 'the boundary points where the function is positive gives it together with the zero boundary condition.',
+  paper:'Definition 3.1(a): &ldquo;A bounded function <code>u : K &rarr; &#8477;</code> is a viscosity '
+       + 'subsolution of <code>F(&nabla;u, &nabla;&sup2;u) = 1</code> in <code>K&#778;</code> if for any '
+       + '<code>x &isin; K&#778;</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+       + '<code>(u<sup>*</sup> &minus; &phi;)(x) = max<sub>K</sub>(u<sup>*</sup> &minus; &phi;)</code>, it holds '
+       + '<code>F<sub>*</sub>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &le; 1</code>. The function <em>u</em> '
+       + 'satisfies the zero boundary condition if for any <code>x &isin; &part;K</code> with '
+       + '<code>u<sup>*</sup>(x) &gt; 0</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+       + '<code>(u<sup>*</sup> &minus; &phi;)(x) = max<sub>K</sub>(u<sup>*</sup> &minus; &phi;)</code>, one has '
+       + 'the inequality (3.2).&rdquo;',
+  src:'Relative_Arbitrage_Equation/Viscosity_Definitions.thy:92'
+},
+
+visc_supersol_env2: {
+  name:'visc_supersol_env2', kind:'definition',
+  type:"nat &rArr; real &rArr; (real^'n) set &rArr; (real^'n) set &rArr; (real^'n &rArr; real) &rArr; bool",
+  eq:'visc_supersol_env2 k L K &Omega; u &longleftrightarrow;\n'
+   + '   (&forall;x&isin;&Omega;. &forall;&phi; g H. ' + R('test_fun_C2') + ' &phi; g H x &longrightarrow;\n'
+   + '      (&forall;y&isin;K. u x - &phi; x &le; u y - &phi; y) &longrightarrow;\n'
+   + '      1 &le; ' + R('ell_op_usc') + ' k L (g x) H)',
+  gloss:'Definition 3.1(b), the mirror image: the test function touches from below, globally on '
+       + '<code>K</code>, and the conclusion is the inequality for the upper envelope <code>F<sup>*</sup></code>.',
+  paper:'Definition 3.1(b): &ldquo;A bounded function <code>u : K &rarr; &#8477;</code> is a viscosity '
+       + 'supersolution of <code>F(&nabla;u, &nabla;&sup2;u) = 1</code> in <code>K&#778;</code> if for any '
+       + '<code>x &isin; K&#778;</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+       + '<code>(u<sub>*</sub> &minus; &phi;)(x) = min<sub>K</sub>(u<sub>*</sub> &minus; &phi;)</code>, it holds '
+       + '<code>F<sup>*</sup>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &ge; 1</code>. The function <em>u</em> '
+       + 'satisfies the zero boundary condition if for any <code>x &isin; &part;K</code> with '
+       + '<code>u<sub>*</sub>(x) &lt; 0</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+       + '<code>(u<sub>*</sub> &minus; &phi;)(x) = min<sub>K</sub>(u<sub>*</sub> &minus; &phi;)</code>, one has '
+       + 'the inequality (3.3).&rdquo;',
+  src:'Relative_Arbitrage_Equation/Viscosity_Definitions.thy:101'
+},
+
+test_fun_C2: {
+  name:'test_fun_C2', kind:'definition',
+  type:"(real^'n &rArr; real) &rArr; (real^'n &rArr; real^'n) &rArr; real^'n^'n &rArr; real^'n &rArr; bool",
+  eq:'test_fun_C2 &phi; g H x &longleftrightarrow;\n'
+   + '   (&exist;G. (&forall;y. (&phi; has_derivative (&lambda;h. g y &bull; h)) (at y)) &and;\n'
+   + '        (&forall;y. (g has_derivative (&lambda;h. G y *v h)) (at y)) &and;\n'
+   + '        (&forall;y. transpose (G y) = G y) &and;\n'
+   + '        continuous_on UNIV G &and; G x = H)',
+  gloss:'The paper&rsquo;s test-function class, spelled out: a gradient field <code>g</code> defined everywhere, '
+       + 'together with a <em>continuous</em> symmetric Hessian field <code>G</code>, whose value at '
+       + '<code>x</code> is <code>H</code>. So <code>g x</code> is <code>&nabla;&phi;(x)</code> and '
+       + '<code>H</code> is <code>&nabla;&sup2;&phi;(x)</code>. The class matters for the uniqueness clause: '
+       + 'there the property is <em>assumed</em> of a competitor, so a larger class would make the hypothesis '
+       + 'stronger and the theorem weaker. Hence the paper&rsquo;s own class is used, not a laxer one.',
+  paper:'Definition 3.1: &ldquo;<code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code>&rdquo;',
+  src:'Second_Order_Viscosity_Analysis/Test_Functions.thy:50'
+},
+
+lsc_envK: {
+  name:'lsc_envK', kind:'definition',
+  type:"'a set &rArr; ('a &rArr; real) &rArr; 'a &rArr; real",
+  eq:'lsc_envK K u x = (SUP e &isin; {0&lt;..}. INF y &isin; (ball x e &cap; K). u y)',
+  gloss:'The lower semicontinuous envelope of <code>u</code>, with the infimum taken over points of '
+       + '<code>K</code> only.',
+  paper:'Section 3: &ldquo;we use upper and lower stars to denote the upper and lower semicontinuous envelopes '
+       + '(<code>lim<sub>&epsilon;&darr;0</sub> sup<sub>y: |y&minus;x|&lt;&epsilon;</sub></code> and '
+       + '<code>lim<sub>&epsilon;&darr;0</sub> inf<sub>y: |y&minus;x|&lt;&epsilon;</sub></code>) of a function, '
+       + 'respectively.&rdquo; Hence <code>u<sub>*</sub></code> in Definition 3.1.',
+  flag:'envelope',
+  src:'Semicontinuous_Analysis/Semicontinuous_Envelopes.thy:355'
+},
+
+expandable: {
+  name:'expandable', kind:'definition',
+  type:"(real^'n) set &rArr; bool",
+  eq:'expandable K &longleftrightarrow;\n'
+   + '   (&forall;e &gt; 0. &exist;R b c. orthogonal_matrix R &and; 1 &lt; c &and; c &lt; 1 + e\n'
+   + '      &and; K &sube; interior ((&lambda;x. c *<sub>R</sub> (R *v x) + b) &#96; K)\n'
+   + '      &and; (&forall;x &isin; K. dist ((1/c) *<sub>R</sub> (transpose R *v (x - b))) x &le; e))',
+  gloss:'For every tolerance there is a rotation&ndash;dilation&ndash;translation that pushes <code>K</code> '
+       + 'strictly inside its own image, while its inverse stays within that tolerance of the identity on '
+       + '<code>K</code>. Every compact convex set with nonempty interior is expandable, so the hypothesis '
+       + 'is not vacuous.',
+  paper:'Theorem 1.1: &ldquo;Suppose, in addition, that there are <code>T<sub>&iota;</sub> : &#8477;<sup>n</sup> '
+       + '&rarr; &#8477;<sup>n</sup></code>, <code>&iota; &isin; (1,2]</code>, each given by a composition of a '
+       + 'rotation, a dilation and a translation, and satisfying <code>K &sub; int T<sub>&iota;</sub>(K)</code>, '
+       + 'for which <code>lim<sub>&iota;&darr;1</sub> T<sub>&iota;</sub> = I</code>.&rdquo;',
+  src:'Second_Order_Viscosity_Analysis/Test_Functions.thy:771'
+},
+
+/* ---- exit times ---- */
+iexit: {
+  name:'iexit', kind:'definition',
+  type:"'b set &rArr; (real &rArr; 'b) &rArr; ennreal",
+  eq:'iexit K f = (SUP T &isin; {0..}. ennreal (' + R('pexit') + ' T K f))',
+  gloss:'The exit time from <code>K</code> over the whole half-line, as the increasing limit in '
+       + '<code>[0,&infin;]</code> of the exit times before each finite horizon.',
+  paper:'Equation (1.8): &ldquo;<code>&tau;<sub>K</sub> := inf{t &ge; 0 : X(t) &notin; K}</code>&rdquo;',
+  src:'Continuous_Path_Spaces/Path_Exit_Times.thy:285'
+},
+
+pexit: {
+  name:'pexit', kind:'definition',
+  type:"real &rArr; 'b set &rArr; (real &rArr; 'b) &rArr; real",
+  eq:'pexit T K f = ' + R('etime') + ' T (- K) (&lambda;r g. g r) f',
+  gloss:'The exit time from <code>K</code> before horizon <code>T</code>: the entry time into the complement.',
+  src:'Continuous_Path_Spaces/Path_Exit_Times.thy:30'
+},
+
+etime: {
+  name:'etime', kind:'definition',
+  type:"real &rArr; 'b set &rArr; (real &rArr; 'a &rArr; 'b) &rArr; 'a &rArr; real",
+  eq:'etime T A X &omega; = Inf ({r. 0 &le; r &and; r &le; T &and; X r &omega; &isin; A} &cup; {T})',
+  gloss:'First entry into <code>A</code> before <code>T</code>, capped at <code>T</code>. Adjoining '
+       + '<code>{T}</code> keeps the infimum well defined when the set is empty.',
+  src:'Continuous_Time_Martingales/Stopping_Times.thy:24'
+},
+
+ess_inf: {
+  name:'ess_inf', kind:'definition',
+  type:"'a measure &rArr; ('a &rArr; ennreal) &rArr; ennreal",
+  eq:'ess_inf M tau = Sup {c. AE &omega; in M. c &le; tau &omega;}',
+  gloss:'The greatest almost-sure lower bound &mdash; the essential infimum.',
+  paper:'Equation (1.6): &ldquo;<code>v(x) := sup<sub>P&isin;<em>P</em><sub>x</sub></sub> P-ess inf &tau;<sub>K</sub></code>&rdquo;',
+  src:'Continuous_Time_Martingales/Essential_Infimum.thy:24'
+},
+
+/* ---- path space ---- */
+outerp: {
+  name:'outerp', kind:'definition',
+  type:"real^'n &rArr; real^'n^'n",
+  eq:'outerp x = (&chi; i j. x $ i * x $ j)',
+  gloss:'The rank-one matrix <code>x x<sup>&#8868;</sup></code>. Applied to the coordinate process it gives '
+       + '<code>X X<sup>&#8868;</sup></code>, whose compensator is the covariation <code>&lang;X&rang;</code>; '
+       + 'the paper uses the covariation directly and never names this process.',
+  src:'Symmetric_Matrix_Spectra/Outer_Products.thy:217'
+},
+
+ipath_space: {
+  name:'ipath_space', kind:'definition',
+  type:"(real &rArr; 'b) measure",
+  eq:'ipath_space = sigma ' + R('ipath') + ' ' + R('ipath_gen'),
+  gloss:'The canonical measurable space of continuous paths on the half-line.',
+  paper:'&ldquo;<code>&Omega; := C([0,&infin;),&#8477;<sup>n</sup>)</code>, equipped with the Borel '
+       + '&sigma;-algebra for the topology of locally uniform convergence&rdquo;',
+  src:'Continuous_Path_Spaces/Path_Space_Infinite.thy:23'
+},
+
+ipath: {
+  name:'ipath', kind:'definition',
+  type:"(real &rArr; 'b) set",
+  eq:'ipath = {f. f = restrict f {0..} &and; continuous_on {0..} f}',
+  gloss:'Continuous functions on <code>[0,&infin;)</code>, made extensional by restriction so that path '
+       + 'equality is decided on the half-line alone.',
+  src:'Continuous_Path_Spaces/Path_Space_Infinite.thy:16'
+},
+
+ipath_gen: {
+  name:'ipath_gen', kind:'definition',
+  type:"((real &rArr; 'b) set) set",
+  eq:'ipath_gen = {S. &exist;t A. 0 &le; t &and; open A &and; S = {f &isin; ' + R('ipath') + '. f t &isin; A}}',
+  gloss:'The generating cylinder sets: one coordinate constrained to an open set.',
+  src:'Continuous_Path_Spaces/Path_Space_Infinite.thy:19'
+},
+
+/* ---- library glosses ---- */
+enn2real: {
+  name:'enn2real', kind:'library',
+  type:'ennreal &rArr; real',
+  gloss:'Converts an extended nonnegative real to a real, sending <code>&#8868;</code> to <code>0</code>. '
+       + 'This is why clause 0 bounds <code>xval</code> itself rather than <code>v</code>: bounding '
+       + '<code>v</code> would not rule out the value being infinite.',
+  src:'HOL-Analysis'
+},
+martingale: {
+  name:'martingale', kind:'library',
+  type:"'a measure &rArr; (real &rArr; 'a set set) &rArr; real &rArr; (real &rArr; 'a &rArr; 'b) &rArr; bool",
+  gloss:'The martingale property of a process with respect to a filtration, from time <code>0</code> onward: '
+       + 'adapted, integrable, and with conditional expectations matching earlier values.',
+  src:'AFP entry Martingales'
+},
+natural_filtration: {
+  name:'natural_filtration', kind:'library',
+  type:"'a measure &rArr; real &rArr; (real &rArr; 'a &rArr; 'b) &rArr; real &rArr; 'a set set",
+  gloss:'The filtration generated by the process itself &mdash; here, by the coordinate process on path space.',
+  src:'AFP entry Martingales &mdash; Stochastic_Process.thy:82'
+},
+interior: {
+  name:'interior', kind:'library',
+  type:"'a set &rArr; 'a set",
+  gloss:'The topological interior. The paper writes <code>K&#778;</code>; <code>K - interior K</code> is '
+       + 'the boundary <code>&part;K</code> where the zero boundary condition bites.',
+  src:'HOL-Analysis'
+},
+ennreal: {
+  name:'ennreal', kind:'library',
+  type:'real &rArr; ennreal',
+  gloss:'Injects a real into the extended nonnegative reals <code>[0,&infin;]</code>, the type the value '
+       + 'function takes its values in.',
+  src:'HOL-Analysis'
+},
+
+/* ---- library constants: everything the definitions above lean on -------- */
+prob_space: { name:'prob_space', kind:'library', type:"'a measure &rArr; bool",
+  gloss:'A measure space whose total mass is <code>1</code>.', src:'HOL-Probability' },
+sets: { name:'sets', kind:'library', type:"'a measure &rArr; 'a set set",
+  gloss:'The &sigma;-algebra of a measure space &mdash; its measurable sets. Two measures with the '
+       + 'same <code>sets</code> live on the same measurable space.', src:'HOL-Analysis' },
+AE: { name:'AE', kind:'library', type:'(binder)',
+  gloss:'<code>AE x in M. P x</code> &mdash; the property <code>P</code> holds almost everywhere: '
+       + 'the set where it fails is contained in a null set.', src:'HOL-Analysis' },
+Sup: { name:'Sup', kind:'library', type:"'a set &rArr; 'a",
+  gloss:'Supremum of a set in a complete lattice. On the reals it is the least upper bound; the '
+       + 'value function takes it over the whole class of admissible laws.', src:'HOL' },
+Inf: { name:'Inf', kind:'library', type:"'a set &rArr; 'a",
+  gloss:'Infimum of a set in a complete lattice.', src:'HOL' },
+SUP: { name:'SUP', kind:'library', type:'(binder)',
+  gloss:'<code>(SUP x &isin; A. f x)</code> is the supremum of <code>f</code> over <code>A</code> &mdash; '
+       + 'the binder form of ' + '<b>Sup</b>' + '.', src:'HOL' },
+INF: { name:'INF', kind:'library', type:'(binder)',
+  gloss:'<code>(INF x &isin; A. f x)</code> is the infimum of <code>f</code> over <code>A</code>.', src:'HOL' },
+trace: { name:'trace', kind:'library', type:"'a^'n^'n &rArr; 'a",
+  gloss:'The sum of the diagonal entries of a square matrix.', src:'HOL-Analysis' },
+transpose: { name:'transpose', kind:'library', type:"'a^'n^'m &rArr; 'a^'m^'n",
+  gloss:'Matrix transpose. <code>transpose a = a</code> says <code>a</code> is symmetric.', src:'HOL-Analysis' },
+ball: { name:'ball', kind:'library', type:"'a &rArr; real &rArr; 'a set",
+  gloss:'The open ball of a given centre and radius in a metric space.', src:'HOL-Analysis' },
+dist: { name:'dist', kind:'library', type:"'a &rArr; 'a &rArr; real",
+  gloss:'The metric of a metric space.', src:'HOL-Analysis' },
+CARD: { name:'CARD', kind:'library', type:'(type cardinality)',
+  gloss:"<code>CARD('n)</code> is the number of elements of the index type <code>'n</code> &mdash; the "
+       + 'dimension the paper calls <code>n</code>.', src:'HOL' },
+ereal: { name:'ereal', kind:'library', type:'real &rArr; ereal',
+  gloss:'Injection of the reals into the extended reals <code>[-&infin;,&infin;]</code>, so that the '
+       + 'envelopes below are defined without a boundedness side condition.', src:'HOL-Analysis' },
+subspace: { name:'subspace', kind:'library', type:"'a set &rArr; bool",
+  gloss:'A linear subspace: closed under addition and scalar multiplication.', src:'HOL-Analysis' },
+dim: { name:'dim', kind:'library', type:"'a set &rArr; nat",
+  gloss:'The dimension of the span of a set.', src:'HOL-Analysis' },
+continuous_on: { name:'continuous_on', kind:'library', type:"'a set &rArr; ('a &rArr; 'b) &rArr; bool",
+  gloss:'Continuity of a function on a set.', src:'HOL-Analysis' },
+has_derivative: { name:'has_derivative', kind:'library', type:"('a &rArr; 'b) &rArr; ('a &rArr; 'b) &rArr; 'a filter &rArr; bool",
+  gloss:'<code>(f has_derivative f&#39;) (at x)</code> &mdash; <code>f&#39;</code> is the Fr&eacute;chet '
+       + 'derivative of <code>f</code> at <code>x</code>, a linear map.', src:'HOL-Analysis' },
+at: { name:'at', kind:'library', type:"'a &rArr; 'a filter",
+  gloss:'The punctured neighbourhood filter at a point: what &ldquo;in the limit as we approach '
+       + '<code>x</code>&rdquo; means, with <code>x</code> itself excluded.', src:'HOL-Analysis' },
+UNIV: { name:'UNIV', kind:'library', type:"'a set",
+  gloss:'The set of all elements of a type.', src:'HOL' },
+orthogonal_matrix: { name:'orthogonal_matrix', kind:'library', type:"real^'n^'n &rArr; bool",
+  gloss:'<code>transpose R ** R = mat 1</code>: the rotations together with the reflections.',
+  src:'HOL-Analysis' },
+sigma: { name:'sigma', kind:'library', type:"'a set &rArr; 'a set set &rArr; 'a measure",
+  gloss:'<code>sigma &Omega; G</code> is the measurable space on <code>&Omega;</code> whose '
+       + '&sigma;-algebra is generated by <code>G</code>.', src:'HOL-Analysis' },
+restrict: { name:'restrict', kind:'library', type:"('a &rArr; 'b) &rArr; 'a set &rArr; 'a &rArr; 'b",
+  gloss:'<code>restrict f A</code> agrees with <code>f</code> on <code>A</code> and is '
+       + '<code>undefined</code> off it. Asking <code>f = restrict f {0..}</code> makes path equality '
+       + 'depend only on the half-line.', src:'HOL' },
+open: { name:'open', kind:'library', type:"'a set &rArr; bool",
+  gloss:'Openness in the topology of the type.', src:'HOL-Analysis' },
+absolutely_continuous_on: { name:'absolutely_continuous_on', kind:'library',
+  type:"real set &rArr; (real &rArr; 'a) &rArr; bool",
+  gloss:'Absolute continuity on a set: for every tolerance there is a total length below which any '
+       + 'finite family of disjoint intervals moves the function by less than that tolerance. It is '
+       + 'exactly the condition under which a function is the integral of its own derivative.',
+  src:'HOL-Analysis' },
+negligible: { name:'negligible', kind:'library', type:"'a set &rArr; bool",
+  gloss:'A set of Lebesgue measure zero &mdash; what &ldquo;almost every&rdquo; quantifies away.',
+  src:'HOL-Analysis' },
+has_vector_derivative: { name:'has_vector_derivative', kind:'library',
+  type:"(real &rArr; 'a) &rArr; 'a &rArr; real filter &rArr; bool",
+  gloss:'<code>(f has_vector_derivative D) (at t)</code> &mdash; <code>f</code> is differentiable at '
+       + '<code>t</code> with derivative the vector <code>D</code>. For a matrix-valued covariation '
+       + 'this is the instantaneous covariation matrix.',
+  src:'HOL-Analysis' },
+fst: { name:'fst', kind:'library', type:"'a &times; 'b &rArr; 'a",
+  gloss:'First component of a pair.', src:'HOL' },
+snd: { name:'snd', kind:'library', type:"'a &times; 'b &rArr; 'b",
+  gloss:'Second component of a pair.', src:'HOL' },
+
+/* ---- the theorem's own abbreviation ------------------------------------ */
+v: { name:'v', kind:'defines',
+  type:"real^'n &rArr; real",
+  eq:'v &equiv; &lambda;z. enn2real (xval k L K z)',
+  gloss:'Not a constant of the development but an abbreviation local to the theorem, introduced by its '
+       + '<code>defines</code> clause. All five conjuncts are about this one function, and the last of '
+       + 'them says nothing else can be it. It is the value function of Eq. (1.6), read as a real number '
+       + 'rather than an element of <code>[0,&infin;]</code>.',
+  paper:'Equation (1.6): &ldquo;<code>v(x) := sup<sub>P&isin;<em>P</em><sub>x</sub></sub> P-ess inf &tau;<sub>K</sub></code>&rdquo;',
+  src:'Statement/Theorem_1_1_Statement.thy:150' },
+
+real: { name:'real', kind:'library',
+  type:'nat &rArr; real   (and the type of the reals)',
+  gloss:'Two readings, both in play above. As a type, <code>real</code> is the reals, and '
+       + "<code>real^'n</code> the real vectors indexed by <code>'n</code>. Applied to a natural "
+       + 'number it is the coercion <code>real :: nat &rArr; real</code> &mdash; which is what '
+       + '<code>real (m - k)</code> does, injecting a count into the reals so that it can be compared '
+       + 'with a trace.',
+  src:'HOL' }
+
+};
+
+/* ---------------- points of clarification ---------------- */
+/* Every entry is a clarification of how the paper is to be read.  What
+   differs is only its status: whether it still wants a word from the
+   authors, has been closed by proof, or never needed anything.
+     status: 'open' | 'settled' | 'none'                                    */
+var FLAGS = {
+  orthogonality:{
+    tag:'Clarification', anchor:'Pi_proj', anchorLabel:'Pi_proj / is_proj',
+    title:'Orthogonality of <em>P</em> is the intended reading',
+    body:'Equation (1.5) writes the infimum over <code>P&sup2; = P</code>, <code>tr(P) = m</code> '
+       + 'without asking <code>P</code> to be symmetric. Read literally the infimum is unbounded '
+       + 'below for every symmetric <code>a</code> that is not a multiple of the identity once '
+       + '<code>k &lt; m &lt; n</code>, so for <code>k &le; n &minus; 2</code> the literal <code>S</code> '
+       + 'shrinks to the multiples <code>cI</code> with <code>1 &minus; k/n &le; c &le; L</code> (not empty: the '
+       + 'identity satisfies the literal constraint) and Lemma 2.1 fails. In three '
+       + 'dimensions with <code>m = 2</code>, take <code>a = uu<sup>&#8868;</sup></code> for '
+       + '<code>u = (1,0,1)</code> and <code>P</code> the rank-2 idempotent with range '
+       + '<code>span{e<sub>1</sub>,e<sub>2</sub>}</code> and kernel '
+       + '<code>span{e<sub>3</sub> + N e<sub>1</sub>}</code>, giving '
+       + '<code>tr(aP) = 1 &minus; N</code>. The orthogonal reading is plainly the one meant: '
+       + 'Lemma 2.1&rsquo;s proof opens by identifying <code>&Pi;<sub>m</sub></code> with the sum of '
+       + 'the <code>m</code> smallest eigenvalues, which holds for orthogonal projections. A word in '
+       + 'Eq. (1.5) would settle it.'
+  },
+  envelope:{
+    tag:'Clarification', anchor:'lsc_envK', anchorLabel:'lsc_envK',
+    title:'The envelope is taken within <em>K</em>',
+    body:'Definition 3.1 writes <code>lim<sub>&epsilon;&darr;0</sub> '
+       + 'inf<sub>|y&minus;x|&lt;&epsilon;</sub></code> without saying whether <code>y</code> ranges '
+       + 'over <code>K</code> or over <code>&#8477;<sup>n</sup></code>. For the value function the '
+       + 'two agree, and both make the boundary clause vacuous. They part in the uniqueness clause, '
+       + 'where the expression is a hypothesis on a competitor that Definition 3.1 supplies only on '
+       + '<code>K</code>: the global reading would make that hypothesis depend on values off '
+       + '<code>K</code> which are never defined, so the <code>K</code>-relative reading is the well '
+       + 'posed one. Both facts are machine-checked.'
+  },
+  lone:{
+    tag:'Clarification', anchor:null,
+    title:'At <em>L</em> = 1 the statement holds, but Case 1 needs another route',
+    body:'Theorem 1.1 assumes <code>L &ge; 1</code>, so <code>L = 1</code> is included &mdash; and it '
+       + 'is the case Remark 1.1(c) singles out, the co-dimension mean curvature flow. Section 3&rsquo;s '
+       + 'Case 1 modifies <code>a</code> so that its top <code>n &minus; k</code> eigenvalues lie in '
+       + 'the <em>open</em> interval <code>(1,L)</code>, which is empty exactly when '
+       + '<code>L = 1</code>; the margin is there to absorb the eigenvalue drift of the covariance '
+       + 'field (3.24) as the touching point moves. The conclusion is nonetheless true at the '
+       + 'boundary, and is proved here with a field that is an exact rotation, whose eigenframe does '
+       + 'not move and so needs no margin at all. The statement stands; only that step of the proof '
+       + 'needs restating.'
+  }
+};
+
+/* ---------------- hypotheses ---------------- */
+var HYPS = [
+  {f:"k &lt; CARD('n)", w:'k is below the dimension'},
+  {f:'1 &le; k',        w:'and at least one'},
+  {f:'1 &le; L',        w:'the eigenvalue ceiling'},
+  {f:'compact K',       w:'K is compact'}
+];
+
+/* ---------------- the five clauses ---------------- */
+var CLAUSES = [
+  {
+    conj:'&and;<sub>0</sub>', thy:'Statement/Theorem_1_1_Statement.thy:151-155', claim:'Bounded',
+    paper:'Definition 3.1(c): &ldquo;A <strong>bounded</strong> function <code>u : K &rarr; &#8477;</code> is a '
+        + 'viscosity solution of <code>F(&nabla;u,&nabla;&sup2;u) = 1</code> on <em>K</em> with zero boundary '
+        + 'condition if &hellip;&rdquo;',
+    formal:'&exist;B::real. &forall;y. ' + R('xval') + ' k L K y &le; ' + R('ennreal') + ' B',
+    note:'For the value function to be such a function at all, it must be finite &mdash; a priori it '
+       + 'takes values in <code>[0,&infin;]</code>. The bound is converted up rather than the value down. <code>ennreal B</code> is finite, so this '
+       + 'also rules out <code>xval y = &#8868;</code>. Bounding <code>v</code> instead would not, since '
+       + '<code>enn2real</code> sends <code>&#8868;</code> to <code>0</code> &mdash; an infinite value would '
+       + 'masquerade as zero.'
+  },
+  {
+    conj:'&and;<sub>1</sub>', thy:'Statement/Theorem_1_1_Statement.thy:156-157', claim:'Upper semicontinuous',
+    paper:'&ldquo;&hellip; the value function <em>v</em> of (1.6) is an <strong>upper semicontinuous</strong> '
+        + 'viscosity solution of the fully nonlinear elliptic partial differential equation '
+        + '<code>F(&nabla;v,&nabla;&sup2;v) = 1</code> on <em>K</em> &hellip;&rdquo;',
+    formal:'&forall;c z. v z &lt; c &longrightarrow; (&exist;e&gt;0. &forall;y. dist z y &lt; e &longrightarrow; v y &lt; c)',
+    note:'The &epsilon;&ndash;&delta; form, quantified over all of <code>&#8477;<sup>n</sup></code> rather '
+       + 'than over <code>K</code>: the value function is defined everywhere, and upper semicontinuity is '
+       + 'proved everywhere, which is the stronger statement.'
+  },
+  {
+    conj:'&and;<sub>2</sub>', thy:'Statement/Theorem_1_1_Statement.thy:158-161', claim:'Subsolution',
+    paper:'Definition 3.1(a): &ldquo;&hellip; for any <code>x &isin; K&#778;</code> and '
+        + '<code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+        + '<code>(u<sup>*</sup> &minus; &phi;)(x) = max<sub>K</sub>(u<sup>*</sup> &minus; &phi;)</code>, it holds '
+        + '<code>F<sub>*</sub>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &le; 1</code>. The function <em>u</em> '
+        + 'satisfies the zero boundary condition if for any <code>x &isin; &part;K</code> with '
+        + '<code>u<sup>*</sup>(x) &gt; 0</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+        + '<code>(u<sup>*</sup> &minus; &phi;)(x) = max<sub>K</sub>(u<sup>*</sup> &minus; &phi;)</code>, one has '
+        + 'the inequality (3.2).&rdquo;',
+    formal: R('visc_subsol_env2') + ' k L K\n'
+          + '   (' + R('interior') + ' K &cup; {x &isin; K - ' + R('interior') + ' K. 0 &lt; v x}) v',
+    note:'One conjunct carries both of the paper&rsquo;s clauses at once: the touching set is the interior '
+       + '<em>together with</em> the boundary points where <code>v</code> is positive. Because <code>v</code> '
+       + 'is already upper semicontinuous, <code>v<sup>*</sup> = v</code> and the envelope in Definition '
+       + '3.1(a) can be dropped.'
+  },
+  {
+    conj:'&and;<sub>3</sub>', thy:'Statement/Theorem_1_1_Statement.thy:162-169', claim:'Supersolution',
+    paper:'Definition 3.1(b): &ldquo;&hellip; for any <code>x &isin; K&#778;</code> and '
+        + '<code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+        + '<code>(u<sub>*</sub> &minus; &phi;)(x) = min<sub>K</sub>(u<sub>*</sub> &minus; &phi;)</code>, it holds '
+        + '<code>F<sup>*</sup>(&nabla;&phi;(x), &nabla;&sup2;&phi;(x)) &ge; 1</code>. The function <em>u</em> '
+        + 'satisfies the zero boundary condition if for any <code>x &isin; &part;K</code> with '
+        + '<code>u<sub>*</sub>(x) &lt; 0</code> and <code>&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)</code> such that '
+        + '<code>(u<sub>*</sub> &minus; &phi;)(x) = min<sub>K</sub>(u<sub>*</sub> &minus; &phi;)</code>, one has '
+        + 'the inequality (3.3).&rdquo;',
+    formal: R('visc_supersol_env2') + ' k L K\n'
+          + '   (' + R('interior') + ' K &cup; {x &isin; K - ' + R('interior') + ' K. ' + R('lsc_envK') + ' K v x &lt; 0})\n'
+          + '   (' + R('lsc_envK') + ' K v)',
+    note:'The asymmetry is Definition 3.1&rsquo;s own: the subsolution property is asked of <code>v</code>, the '
+       + 'supersolution property of its lower envelope. <code>L = 1</code> is included here, though Case 1 of '
+       + 'Section 3 does not reach it as written &mdash; it perturbs eigenvalues into the empty interval '
+       + '<code>(1,L)</code>; an exact-rotation covariance field is used instead.'
+  },
+  {
+    conj:'&and;<sub>4</sub>', thy:'Statement/Theorem_1_1_Statement.thy:170-185', claim:'Unique',
+    paper:'&ldquo;Suppose, in addition, that there are <code>T<sub>&iota;</sub> : &#8477;<sup>n</sup> &rarr; '
+        + '&#8477;<sup>n</sup></code>, <code>&iota; &isin; (1,2]</code>, each given by a composition of a rotation, '
+        + 'a dilation and a translation, and satisfying <code>K &sub; int T<sub>&iota;</sub>(K)</code>, for which '
+        + '<code>lim<sub>&iota;&darr;1</sub> T<sub>&iota;</sub> = I</code>. (Here, <em>I</em> is the identity map '
+        + 'on <code>&#8477;<sup>n</sup></code>.) Then, the upper semicontinuous viscosity solution of '
+        + '<code>F(&nabla;v,&nabla;&sup2;v) = 1</code> on <em>K</em> with zero boundary condition is '
+        + '<strong>unique</strong>.&rdquo;',
+    formal:R('expandable') + ' K &longrightarrow;\n'
+         + '(&forall;u :: real^&#39;n &rArr; real. &forall;Bd.\n'
+         + '   (&forall;c z. z &isin; K &longrightarrow; u z &lt; c &longrightarrow;\n'
+         + '      (&exist;e&gt;0. &forall;y&isin;K. dist z y &lt; e &longrightarrow; u y &lt; c))\n'
+         + '   &longrightarrow; (&forall;y&isin;K. &brvbar;u y&brvbar; &le; Bd)\n'
+         + '   &longrightarrow; ' + R('visc_subsol_env2') + ' k L K\n'
+         + '        (' + R('interior') + ' K &cup; {x &isin; K - ' + R('interior') + ' K. 0 &lt; u x}) u\n'
+         + '   &longrightarrow; ' + R('visc_supersol_env2') + ' k L K\n'
+         + '        (' + R('interior') + ' K &cup; {x &isin; K - ' + R('interior') + ' K. ' + R('lsc_envK') + ' K u x &lt; 0})\n'
+         + '        (' + R('lsc_envK') + ' K u)\n'
+         + '   &longrightarrow; (&forall;x&isin;K. u x = v x))',
+    note:'As in the paper, the expandability hypothesis is attached to this clause alone: clauses 0&ndash;3 hold for '
+       + 'every compact <code>K</code>. The competitor is quantified <em>inside</em> the statement, so the whole of Theorem 1.1 stays one '
+       + 'formula rather than becoming a pair of theorems. Every hypothesis placed on the competitor is about '
+       + '<code>K</code> alone &mdash; semicontinuity and boundedness are demanded only at and between points '
+       + 'of <code>K</code>. Continuity is <em>not</em> assumed, and is not part of Theorem 1.1; boundedness '
+       + 'is, sitting in Definition 3.1.'
+  }
+];
+
+/* ---------------- index table ---------------- */
+var INDEX = [
+  ['xval','Value function, Eq. (1.6)'],
+  ['xclass','The class <em>P</em><sub>x</sub>, Eq. (1.7)'],
+  ['density_cond','The constraint of Eq. (1.7)'],
+  ['sconstraint','Constraint set S, Eq. (1.5)'],
+  ['Pi_constraint','&Pi;<sub>m</sub> &ge; m &minus; k, Eq. (1.5)'],
+  ['Pi_proj','&Pi;<sub>m</sub>(a)'],
+  ['is_proj','P&sup2; = P (with symmetry)'],
+  ['psd','a &#8829; 0'],
+  ['eigen_lb','&lambda;<sub>(n&minus;k)</sub>(a) &ge; 1'],
+  ['eigen_ub','&lambda;<sub>(1)</sub>(a) &le; L'],
+  ['feasible','Constraints inside Eq. (1.9)'],
+  ['ell_op','The operator F, Eq. (1.9)'],
+  ['ell_op_pair','F on the product space'],
+  ['ell_op_lsc','F<sub>*</sub>'],
+  ['ell_op_usc','F<sup>*</sup>'],
+  ['visc_subsol_env2','Definition 3.1(a)'],
+  ['visc_supersol_env2','Definition 3.1(b)'],
+  ['test_fun_C2','&phi; &isin; C&sup2;(&#8477;<sup>n</sup>)'],
+  ['lsc_envK','u<sub>*</sub>'],
+  ['expandable','The T<sub>&iota;</sub> hypothesis'],
+  ['iexit','&tau;<sub>K</sub>'],
+  ['pexit','&tau;<sub>K</sub> before horizon T'],
+  ['etime','First entry time'],
+  ['ess_inf','P-ess inf'],
+  ['outerp','X X<sup>&#8868;</sup>'],
+  ['ipath_space','&Omega; = C([0,&infin;),&#8477;<sup>n</sup>)'],
+  ['ipath','Continuous paths'],
+  ['ipath_gen','Cylinder generators']
+];
+
+/* ---------------- masthead source chip ---------------- */
+(function(){
+  var chip = document.getElementById('t-stmt-chip');
+  if(!chip) return;
+  if(!REPO.base){ chip.replaceWith(chip.textContent); return; }
+  chip.href = REPO.base + '/blob/' + REPO.ref + '/Statement/Theorem_1_1_Statement.thy#L134-L185';
+  chip.target = '_blank';
+  chip.rel = 'noopener noreferrer';
+})();
+
+/* ---------------- render: hypotheses ---------------- */
+(function(){
+  var ul = document.getElementById('t-hyps');
+  ul.innerHTML = HYPS.map(function(h){
+    return '<li><code class="t-code" style="font-size:.84rem">' + h.f + '</code>'
+         + '<span class="why">' + h.w + '</span></li>';
+  }).join('');
+})();
+
+/* ---------------- render: spine ---------------- */
+(function(){
+  var host = document.getElementById('t-spine');
+  host.innerHTML = CLAUSES.map(function(c, i){
+    return '<article class="t-row">'
+      + '<div class="t-row-paper">'
+      +   '<div class="t-cell-lbl">The paper</div>'
+      +   '<p class="t-paper-txt">' + c.paper + '</p>'
+      + '</div>'
+      + '<div class="t-row-gutter">'
+      +   '<span class="t-conj">' + c.conj + '</span>'
+      +   '<span class="t-lozenge" aria-hidden="true"></span>'
+      +   '<span class="t-claim">' + c.claim + '</span>'
+      + '</div>'
+      + '<div class="t-row-formal">'
+      +   '<div class="t-cell-lbl">As formalised</div>'
+      +   '<div class="t-code-wrap"><pre class="t-code">' + c.formal + '</pre></div>'
+      +   '<div class="t-src-ref">' + srcHTML(c.thy) + '</div>'
+      +   '<button class="t-note-toggle" aria-expanded="false" data-note="n' + i + '">'
+      +     '<span class="caret" aria-hidden="true">&#9656;</span> Reading note</button>'
+      +   '<div class="t-note" id="n' + i + '">' + c.note + '</div>'
+      + '</div>'
+    + '</article>';
+  }).join('');
+
+  host.addEventListener('click', function(e){
+    var b = e.target.closest('.t-note-toggle');
+    if(!b) return;
+    var box = document.getElementById(b.getAttribute('data-note'));
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', open ? 'false' : 'true');
+    box.classList.toggle('open', !open);
+  });
+})();
+
+/* ---------------- render: one-formula view ---------------- */
+(function(){
+  var code = CLAUSES.map(function(c){ return c.formal; }).join('\n&and;\n');
+  document.getElementById('t-oneform-code').innerHTML = code;
+  var btn = document.getElementById('t-oneform-btn');
+  var box = document.getElementById('t-oneform');
+  btn.addEventListener('click', function(){
+    var on = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+    box.classList.toggle('open', !on);
+  });
+})();
+
+/* ---------------- render: points of clarification ---------------- */
+(function(){
+  var host = document.getElementById('t-deps');
+  var order = ['orthogonality','envelope','lone'];
+  host.innerHTML = order.map(function(key){
+    var f = FLAGS[key];
+    var affects = f.anchor
+      ? 'Concerns ' + R(f.anchor, f.anchorLabel || f.anchor)
+      : 'Concerns clause &and;<sub>3</sub>, the supersolution';
+    return '<article class="t-dep">'
+      + '<div class="t-dep-tag"><span>' + f.tag + '</span></div>'
+      + '<h3 class="t-dep-h">' + f.title + '</h3>'
+      + '<p class="t-dep-b">' + f.body + '</p>'
+      + '<div class="t-dep-affects">' + affects + '</div>'
+    + '</article>';
+  }).join('');
+})();
+
+/* ---------------- render: index ---------------- */
+(function(){
+  var body = document.getElementById('t-index-body');
+  body.innerHTML = INDEX.map(function(row){
+    var d = DEFS[row[0]];
+    return '<tr>'
+      + '<td class="mono">' + R(row[0]) + '</td>'
+      + '<td class="paper">' + row[1] + '</td>'
+      + '<td class="src">' + (d ? srcHTML(d.src) : '') + '</td>'
+    + '</tr>';
+  }).join('');
+})();
+
+/* ---------------- link the rendered statement ---------------- */
+(function(){
+  document.querySelectorAll('.t-row-formal .t-code, #t-oneform-code, .t-defines-eq, .t-eqn-code, .t-eqn-out-code').forEach(function(el){
+    autolink(el, null);
+  });
+  document.querySelectorAll('.t-row-formal .t-code, #t-oneform-code').forEach(markV);
+  markRefs(document);
+})();
+
+/* ---------------- the unfolding cards ---------------- */
+var layer = document.getElementById('t-cards');
+var stack = [];          /* [{id, el, anchor, returnFocus}] */
+var narrow = function(){ return window.matchMedia('(max-width:719px)').matches; };
+
+function cardHTML(id, depth){
+  var d = DEFS[id];
+  var flag = d.flag ? FLAGS[d.flag] : null;
+  var crumbs = stack.slice(0, depth).map(function(s, i){
+    return '<button class="t-crumb" data-crumb="' + i + '">' + DEFS[s.id].name + '</button>'
+         + '<span class="t-crumb-sep" aria-hidden="true">&rsaquo;</span>';
+  }).join('');
+  crumbs += '<button class="t-crumb" aria-current="true" data-crumb="' + depth + '">' + d.name + '</button>';
+
+  var h = '<div class="t-card-head">'
+        +   '<div class="t-crumbs">' + crumbs + '</div>'
+        +   '<button class="t-x" data-close="1" aria-label="Close">&times;</button>'
+        + '</div>'
+        + '<div class="t-card-body">'
+        +   '<div class="t-card-name">' + d.name
+        +     '<span class="t-card-kind">' + d.kind + '</span></div>';
+  if(d.type) h += '<div class="t-card-type">' + d.type + '</div>';
+  if(d.eq)   h += '<pre class="t-card-eq">' + d.eq + '</pre>';
+  if(d.gloss)h += '<p class="t-card-gloss">' + d.gloss + '</p>';
+  if(d.paper)h += '<div class="t-card-paper"><span class="lbl">In the paper</span><p>' + d.paper + '</p></div>';
+  if(flag)   h += '<div class="t-card-flag"><span class="lbl">' + flag.tag + '</span><p><strong>'
+                + flag.title.replace(/<[^>]+>/g,'') + '.</strong> ' + flag.body + '</p></div>';
+  if(d.src)  h += '<div class="t-card-src">' + srcHTML(d.src) + '</div>';
+  h += '</div>';
+  h += '<div class="t-card-grip" aria-hidden="true" title="Drag to resize"></div>';
+  return h;
+}
+
+function place(entry, depth){
+  var el = entry.el;
+  if(narrow()){
+    resetGeometry(el);
+    stack.forEach(function(s, i){ s.el.classList.toggle('buried', i !== stack.length - 1); });
+    return;
+  }
+  el.classList.remove('buried');
+  if(entry.userPlaced){ clampIntoView(el); return; }
+  var a = entry.anchor.getBoundingClientRect();
+  var w = el.offsetWidth, hgt = el.offsetHeight;
+  var vw = vpW();
+  var vh = vpH();
+  var left = a.left + depth * 16;
+  if(left + w > vw - 12) left = Math.max(12, vw - w - 12);
+  if(left < 12) left = 12;
+  var top = a.bottom + 8;
+  if(top + hgt > vh - 12){
+    var above = a.top - hgt - 8;
+    top = above >= 12 ? above : Math.max(12, vh - hgt - 12);
+  }
+  el.style.left = left + 'px';
+  el.style.top  = top + 'px';
+}
+
+/* --- moving and resizing: cards behave like small windows on wide screens --- */
+var EDGE = 80;           /* px of a card that must stay on screen */
+var MIN_W = 260, MIN_H = 120;
+var zTop = 0;
+/* a drag released over the page would otherwise read as an outside click */
+var gestured = false;
+document.addEventListener('pointerdown', function(){ gestured = false; }, true);
+
+function resetGeometry(el){
+  el.style.left = ''; el.style.top = '';
+  el.style.width = ''; el.style.height = '';
+  el.style.maxWidth = ''; el.style.maxHeight = '';
+}
+
+function vpW(){ return Math.min(document.documentElement.clientWidth, window.innerWidth); }
+function vpH(){ return Math.min(document.documentElement.clientHeight, window.innerHeight); }
+
+function clampIntoView(el){
+  var r = el.getBoundingClientRect();
+  var left = Math.min(Math.max(r.left, EDGE - r.width), vpW() - EDGE);
+  var top  = Math.min(Math.max(r.top, 0), vpH() - 36);
+  el.style.left = left + 'px';
+  el.style.top  = top + 'px';
+}
+
+function raise(el){ el.style.zIndex = ++zTop; }
+
+/* pin the card to its current pixel box, so left/top/width/height are ours */
+function freeze(entry){
+  var el = entry.el, r = el.getBoundingClientRect();
+  entry.userPlaced = true;
+  el.style.left = r.left + 'px';
+  el.style.top  = r.top + 'px';
+  return r;
+}
+
+function track(el, cls, onMove){
+  el.classList.add(cls);
+  var move = function(ev){ gestured = true; onMove(ev); };
+  var up = function(){
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+    window.removeEventListener('pointercancel', up);
+    el.classList.remove(cls);
+  };
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', up);
+  window.addEventListener('pointercancel', up);
+}
+
+function startDrag(entry, e){
+  var el = entry.el, r = freeze(entry);
+  var dx = e.clientX - r.left, dy = e.clientY - r.top;
+  e.preventDefault();
+  track(el, 't-dragging', function(ev){
+    var w = el.offsetWidth;
+    var left = Math.min(Math.max(ev.clientX - dx, EDGE - w), vpW() - EDGE);
+    var top  = Math.min(Math.max(ev.clientY - dy, 0), vpH() - 36);
+    el.style.left = left + 'px';
+    el.style.top  = top + 'px';
+  });
+}
+
+function startResize(entry, e){
+  var el = entry.el, r = freeze(entry);
+  var x0 = e.clientX, y0 = e.clientY, w0 = r.width, h0 = r.height;
+  el.style.maxWidth = 'none'; el.style.maxHeight = 'none';
+  el.style.width = w0 + 'px'; el.style.height = h0 + 'px';
+  e.preventDefault();
+  track(el, 't-resizing', function(ev){
+    el.style.width  = Math.max(MIN_W, Math.min(w0 + ev.clientX - x0, vpW() - r.left - 8)) + 'px';
+    el.style.height = Math.max(MIN_H, Math.min(h0 + ev.clientY - y0, vpH() - r.top - 8)) + 'px';
+  });
+}
+
+function makeWindow(entry, depth){
+  var el = entry.el;
+  var head = el.querySelector('.t-card-head');
+  var grip = el.querySelector('.t-card-grip');
+  el.addEventListener('pointerdown', function(){ raise(el); });
+  head.addEventListener('pointerdown', function(e){
+    if(narrow() || e.button !== 0 || e.target.closest('button')) return;
+    startDrag(entry, e);
+  });
+  head.addEventListener('dblclick', function(e){
+    if(narrow() || e.target.closest('button')) return;
+    entry.userPlaced = false;
+    resetGeometry(el);
+    place(entry, depth);
+  });
+  if(grip) grip.addEventListener('pointerdown', function(e){
+    if(narrow() || e.button !== 0) return;
+    startResize(entry, e);
+  });
+}
+
+function reposition(){
+  stack.forEach(function(s, i){ place(s, i); });
+}
+
+function closeFrom(depth){
+  while(stack.length > depth){
+    var s = stack.pop();
+    s.el.remove();
+  }
+  if(stack.length){
+    stack.forEach(function(s, i){ s.el.classList.toggle('buried', narrow() && i !== stack.length - 1); });
+  }
+}
+
+function openDef(id, anchorEl, depth){
+  if(!DEFS[id]) return;
+  closeFrom(depth);
+  var el = document.createElement('div');
+  el.className = 't-card' + (DEFS[id].flag ? ' flagged' : '')
+               + (DEFS[id].kind === 'library' ? ' lib' : '');
+  el.setAttribute('role','dialog');
+  el.setAttribute('aria-label','Definition of ' + DEFS[id].name);
+  el.setAttribute('tabindex','-1');
+  el.innerHTML = cardHTML(id, depth);
+  var eqEl = el.querySelector('.t-card-eq');
+  if(eqEl){ autolink(eqEl, id); if(id !== 'v') markV(eqEl); }
+  markRefs(el);
+  layer.appendChild(el);
+  var entry = {id:id, el:el, anchor:anchorEl, returnFocus:anchorEl, userPlaced:false};
+  stack.push(entry);
+  place(entry, depth);
+  raise(el);
+  makeWindow(entry, depth);
+  el.focus({preventScroll:true});
+
+  el.addEventListener('click', function(e){
+    if(e.target.closest('[data-close]')){ closeFrom(depth); if(entry.returnFocus) entry.returnFocus.focus(); return; }
+    var crumb = e.target.closest('[data-crumb]');
+    if(crumb){
+      var to = parseInt(crumb.getAttribute('data-crumb'), 10);
+      if(to < depth) closeFrom(to + 1);
+      return;
+    }
+    var ref = e.target.closest('.t-ref');
+    if(ref){ e.preventDefault(); openDef(ref.getAttribute('data-def'), ref, depth + 1); }
+  });
+}
+
+document.addEventListener('click', function(e){
+  if(gestured){ gestured = false; return; }
+  var ref = e.target.closest('.t-ref');
+  if(ref && !e.target.closest('.t-card')){
+    e.preventDefault();
+    openDef(ref.getAttribute('data-def'), ref, 0);
+    return;
+  }
+  if(!e.target.closest('.t-card') && !ref && stack.length) closeFrom(0);
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && stack.length){
+    var top = stack[stack.length - 1];
+    closeFrom(stack.length - 1);
+    if(top.returnFocus) top.returnFocus.focus();
+  }
+});
+
+var raf = null;
+function scheduleReposition(){
+  if(raf) return;
+  raf = requestAnimationFrame(function(){ raf = null; reposition(); });
+}
+window.addEventListener('scroll', scheduleReposition, true);
+window.addEventListener('resize', scheduleReposition);
+
+})();
+</script>
