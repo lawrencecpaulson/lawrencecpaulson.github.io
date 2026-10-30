@@ -5,7 +5,7 @@ tags: [memories,philosophy]
 ---
 Tim Smiley, an Fellow of my Cambridge college (Clare), died about two weeks ago. 
 He had a long and distinguished career, 
-holding major College offices such as Senior Tutor,
+holding [major College offices](https://www.clare.cam.ac.uk/about/news/college-news/tim-smiley-fellow-has-died-age-95) such as Senior Tutor,
 while garnering academic accolades, such as becoming a Fellow of the British Academy.
 Although his specialism was logic, chiefly philosophical logic, 
 we seldom spoke about technical matters, which I now regret. 
