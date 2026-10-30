@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A Summer with Claude and Relative Arbitrage, by Dmitriy Traytel"
+title:  "A Summer with Claude and relative arbitrage, by Dmitriy Traytel"
 tags: [AI, Isabelle, formalised mathematics]
 # The first paragraph as HTML, without its footnote, for the overview page.
 # Keep it in step with the first paragraph below.
@@ -39,7 +39,7 @@ small tour of the city. Knowing before the summer that Misha was coming to visit
 decided to prepare a surprise: I asked Claude to autoformalize, in Isabelle using PIDE MCP,
 the main result of his joint article with Jou-Hua Lai and H. Mete Soner (not-yet-published,
 but in the final stages of the publication process) on the
-[Relative arbitrage problem under eigenvalue lower bounds](https://arxiv.org/abs/2512.17702).
+[relative arbitrage problem under eigenvalue lower bounds](https://arxiv.org/abs/2512.17702).
 
 Mandatory note here: I am quite clueless about financial mathematics and probability
 theory in general, let alone stochastic portfolio theory and relative arbitrage: e.g., I
