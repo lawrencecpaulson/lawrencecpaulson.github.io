@@ -17,7 +17,7 @@ But I do have one little story about him.
 
 As a young Fellow of Clare, 
 I dined in College fairly regularly but never stayed late, 
-not wanting to leave my wife home alone. 
+not wanting to leave my wife at home alone. 
 As I rose to leave, one of the other older Fellows said, 
 “Going back to the lab, are you?” 
 After I set him right, he went on to say, 
